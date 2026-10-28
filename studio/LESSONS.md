@@ -75,3 +75,16 @@ Every rule below comes from something that was rejected, broke, or cost a re-ren
 | Whole part re-rendered (100 s) for a 1-scene fix, 14 times in this project | no per-beat cache | `render_part.py` cache (19 s for a 4-beat fix, 0 s when nothing changed) |
 | Dark scene -> dark scene read as "no cut" | detector blind spot | `cutcheck.py`, lint_story same-scene rule |
 | Toolchain would be lost with the container | scripts only in the temp folder | `studio/` in the repo |
+
+## 9. 16:9 long-form (HOW TO SURVIVE A ZOMBIE APOCALYPSE, studio/long/)
+| Rule | Why (what went wrong) | Guard |
+|---|---|---|
+| Beat length follows the speech: lead 0.08 s + sentences + tail 0.34 s; one sentence per beat; split any beat > 6 s into two different shots | A first draft had beats of 7-10 s (two sentences with commas, a list read with pauses) | `build16.py` prints beats > 6 s; `qa16.py` fails > 8 s |
+| Game vs real life is a rendering switch (pixel pass + HUD vs crisp graded vector), not two drawings | One scene library serves both; the A/B story reads instantly | `beat.skin` |
+| Raw CDP `Page.captureScreenshot` ignores deviceScaleFactor: pass `clip.scale` | The first full render came out 1280x720 although dsf was 1.5 | `qa16.py` checks 1920x1080 |
+| Serialised SVG keeps `visibility:hidden`: reset before the pixel pass | Second game frame in a row was black | engine core16.js |
+| `keeper()` treats x=0 as falsy: pass 0.01 | Actors drawn off-screen | chars16.js actor() |
+| Scale fitted text about its anchor, not its centre | Start-anchored recap lines slid out of the card | cards16.js fitText, lint16.js CROP |
+| Steps per second, not toggles: 2.8 walk / 4.4 run / 1.8 zombie | First cadence (10 toggles/s) jittered | chars16.js |
+| Render chunks must complete beat by beat, only missing frames are queued | A crash after 9600 frames left every beat half-done | render16.py |
+| Never `pkill -f <script name>` from a command that contains the name: it kills its own shell | exit 144 | n/a |

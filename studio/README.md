@@ -35,3 +35,6 @@ Sandbox: `PART_SRC=13 python3 ser/make_part.py 23` builds folder `p23` from part
 
 ## Rules that are enforced for you
 See `LESSONS.md` (why) and `AUDIT.md` (what was measured). Short version: a cut every 3-4 s, 105-128 words, calm voice (auto-rate), nothing cropped or under the caption band, true-peak <= -1.5 dBTP, covers on every platform, repo public until the last post is out.
+
+## 16:9 long-form
+`long/` is the factory for 5-15 minute 1920x1080 videos with several voices, lip-sync, a pixel-art game skin and meme editing (first use: HOW TO SURVIVE A ZOMBIE APOCALYPSE). See `long/README.md`.

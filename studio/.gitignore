@@ -9,3 +9,15 @@ post.env
 zip2/
 ser/scheduled_*.json
 __pycache__/
+# long-form working folders
+long/p/
+long/cache/
+long/frames*/
+long/tts/
+long/shots/
+long/sheets/
+long/thumbs/
+long/release/
+long/*.log
+long/final*.mp4
+long/*.m4a
