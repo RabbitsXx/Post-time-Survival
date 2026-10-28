@@ -1,0 +1,18 @@
+TH2={
+"How do you turn off":"จะปิดตะเกียง","He finds the breaker box.":"เขาเจอตู้เบรกเกอร์","One click.":"คลิกเดียว","The radio dies too.":"วิทยุก็ดับไปด้วย",
+"He can't see the shore anymore.":"เขามองไม่เห็นชายฝั่งอีกต่อไป","Then, before dawn,":"แล้วก่อนรุ่งสาง","the waves go quiet.":"คลื่นก็เงียบลง",
+"The tide is dropping.":"น้ำกำลังลด","Fast.":"เร็วมาก","And a line of pale sand rises,":"แล้วแนวทรายสีซีดก็โผล่ขึ้นมา","straight to the island.":"ตรงไปยังเกาะ",
+"A causeway.":"ทางเดินทราย","Forty feet wide.":"กว้างสี่สิบฟุต","Low tide is at five forty-seven.":"น้ำลงสุดตอน 5:47","Two hours away.":"อีกสองชั่วโมง",
+"The first one steps":"ตัวแรกก้าวขึ้น","onto the sand.":"บนผืนทราย","Forty minutes,":"สี่สิบนาที","maybe less.":"หรืออาจน้อยกว่า","No walls.":"ไม่มีกำแพง","No guns.":"ไม่มีปืน",
+"Eight hundred gallons.":"แปดร้อยแกลลอน","At the edge,":"ที่ขอบเกาะ","the sand narrows.":"ทรายแคบลง","Twelve feet wide.":"กว้างสิบสองฟุต","He digs a trench":"เขาขุดร่อง",
+"and pours two hundred gallons.":"แล้วเทน้ำมันสองร้อยแกลลอน","Then the tide turns,":"แล้วน้ำก็เปลี่ยนทิศ","The causeway is gone.":"ทางเดินทรายหายไป",
+"And the smoke is rising,":"และควันก็พวยพุ่งขึ้น","a thousand feet.":"สูงพันฟุต","Visible from thirty miles.":"มองเห็นได้ไกลสามสิบไมล์","A boat drifts in,":"เรือลำหนึ่งลอยเข้ามา",
+"someone waving a white shirt.":"มีคนโบกเสื้อสีขาว","His rule:":"กฎของเขา:","nobody lands":"ห้ามใครขึ้นฝั่ง","without a check.":"ถ้ายังไม่ตรวจ","on the dock.":"บนท่าเรือ",
+"Alone. Thirsty.":"โดดเดี่ยว กระหายน้ำ","A fever, that night.":"คืนนั้นเธอเป็นไข้","No bites.":"ไม่มีรอยกัด","No scratches.":"ไม่มีรอยข่วน","Except one cut.":"ยกเว้นแผลเดียว",
+"Infected.":"ติดเชื้อ","He has twelve doses.":"เขามียาสิบสองโดส","By morning,":"พอถึงเช้า","the fever breaks.":"ไข้ก็ลด","She came for a radio.":"เธอมาเพราะวิทยุ",
+"Safe zone,":"เขตปลอดภัย","forty miles north.":"ห่างไปทางเหนือสี่สิบไมล์","Then the sky":"แล้วท้องฟ้า","turns green.":"ก็กลายเป็นสีเขียว",
+"A storm is coming. Follow for part five.":"พายุกำลังมา ติดตามตอนที่ห้า","Then, a click.":"แล้วก็มีเสียงคลิก","In the waves,":"ในคลื่น","Water was the wall.":"น้ำคือกำแพง",
+"The sea opened it.":"ทะเลเปิดมันออก","He chains the":"เขาล่ามโซ่","only way up,":"ทางเดียวที่ขึ้นมาได้","and waits.":"แล้วรอ","Four hundred and twelve.":"สี่ร้อยสิบสองตัว",
+"The lamp brought":"ตะเกียงดึงพวกมัน","them here.":"มาที่นี่","Light can lead them.":"แสงก็นำทางพวกมันได้","He turns the lens.":"เขาหมุนเลนส์","The beam swings.":"ลำแสงกวาดไป",
+"They turn,":"พวกมันหันตาม","and follow.":"และเดินตามไป","Then, a boat.":"แล้วก็มีเรือลำหนึ่ง","Then ten.":"แล้วก็สิบลำ","killed him":"เกือบฆ่าเขา","calls them home.":"กำลังเรียกพวกเขากลับบ้าน",
+"The end. Follow for more.":"จบแล้ว ติดตามเรื่องต่อไป"}

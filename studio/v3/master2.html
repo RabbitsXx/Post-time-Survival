@@ -1,0 +1,61 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:720px;height:1280px;overflow:hidden;background:#000;font-family:'Inter','DejaVu Sans',sans-serif}
+#sv{position:absolute;left:0;top:0;width:720px;height:1280px}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,rgba(0,0,0,0) 52%,rgba(0,0,0,.42) 100%)}
+#punch{position:absolute;inset:0;pointer-events:none;background:#eaf2ff;opacity:0}
+#punch{position:absolute;inset:0;pointer-events:none;background:#eaf2ff;opacity:0}
+#grain{position:absolute;inset:-40px;pointer-events:none;background:url(grain.png);opacity:.05;mix-blend-mode:overlay}
+</style></head><body>
+<div id="stage">
+ <svg id="sv" viewBox="0 0 720 1280" width="720" height="1280"><defs id="defs"></defs><g id="far"></g><g id="mid"></g><g id="near"></g><g id="hud"></g></svg>
+ <div id="vig"></div><div id="punch"></div><div id="punch"></div><div id="grain"></div>
+</div>
+<script>document.write('<script src="../ser/p'+new URLSearchParams(location.search).get('part')+'/spec.js"><\/script>')</script>
+<script src="kit.js"></script>
+<script src="kit2.js"></script>
+<script src="kit3.js"></script>
+<script src="lib_env.js"></script>
+<script src="lib_obj.js"></script>
+<script src="lib_sun1.js"></script>
+<script src="lib_sun2.js"></script>
+<script src="lib_sun3.js"></script>
+<script>
+defs();defs3();defsLib();defsSun();defsSun2();
+const BEATS=SPEC.beats, FPS=30;
+const LAY={far:document.getElementById('far'),mid:document.getElementById('mid'),near:document.getElementById('near'),hud:document.getElementById('hud')};
+const FAC={far:.3,mid:1,near:1.6,hud:.45}, BASE={far:1.12,mid:1.1,near:1.12,hud:1.0};
+let curIdx=-1,upd=null;
+const NOBLUR=new Set(['topdown_map','diagram','card_on_surface','endcard']);
+document.getElementById('sv').style.filter='saturate(.9) contrast(1.04)';
+function camera(kind,u,bt){const e=u;let dx=0,dy=0,s=1,rot=0,blur=0;
+ switch(kind){
+  case 'push_in':s=1+.055*e;break; case 'pull_out':s=1.06-.06*e;break;
+  case 'pan_l':dx=lerp(-20,20,e);s=1.01;break; case 'pan_r':dx=lerp(20,-20,e);s=1.01;break;
+  case 'tilt_up':dy=lerp(-20,20,e);s=1.01;break; case 'tilt_down':dy=lerp(20,-20,e);s=1.01;break;
+  case 'drift':dx=Math.sin(e*Math.PI)*10;dy=Math.cos(e*2.2)*5;s=1.02+.015*e;break;
+  case 'parallax_orbit':dx=lerp(-16,16,e);dy=Math.sin(e*Math.PI)*5;rot=lerp(-.4,.4,e);s=1.03;break;
+  case 'whip':{const k=Math.max(0,1-bt/.3);dx=70*k*k;blur=6*k;s=1.02+.04*e;break}
+  case 'static_punch':s=1+.025*Math.max(0,1-bt/.3);break;
+  case 'shake':{const d=Math.exp(-bt*6);dx=Math.sin(bt*60)*3.5*d;dy=Math.cos(bt*50)*2.5*d;s=1.015;break}
+ }
+ // strike bump on the first 5 frames of every beat
+ // (v2: no strike bump on beat starts - it read as a jolt on every cut)
+ return {dx,dy,s,rot,blur}}
+LIB.endcard=(Z)=>{const f=G(Z.far);R(f,-300,-300,1320,1880,'#07080a');const fl=R(Z.near,-300,-300,1320,1880,'#fff');return (u,t,bt)=>{A(fl,{opacity:Math.max(0,1-bt/.25)})}};
+function build(i){for(const k in LAY)LAY[k].innerHTML='';LAY.far.setAttribute('filter',NOBLUR.has(BEATS[i].shot.type)?'':'url(#b2)');const Z={};for(const k in LAY)Z[k]=LAY[k];const sc=BEATS[i].scene||{n:'dark',p:{}};const fn=LIB[sc.n]||LIB.dark;upd=fn(Z,sc.p||{})}
+window.renderFrame=function(f){
+ const t=f/FPS;let i=0;for(let k=0;k<BEATS.length;k++){if(t>=BEATS[k].t[0]-1e-6)i=k}
+ if(i!==curIdx){build(i);curIdx=i}
+ const b=BEATS[i],bt=t-b.t[0],u=clamp(bt/(b.t[1]-b.t[0]));
+ const c=camera(b.shot.camera,u,bt);
+ for(const k in LAY){const fa=FAC[k];const sc=BASE[k]*(1+(c.s-1)*fa);
+  LAY[k].setAttribute('transform',`translate(360 640) translate(${c.dx*fa} ${c.dy*fa}) rotate(${c.rot*fa}) scale(${sc}) translate(-360 -640)`)}
+ document.getElementById('sv').style.filter=(c.blur>.5?`blur(${c.blur}px) `:'')+'saturate(.9) contrast(1.04)';
+ upd(u,t,bt);
+ document.getElementById('punch').style.opacity=0;
+ document.getElementById('grain').style.transform=`translate(${(f*37)%40}px ${(f*53)%40}px)`;
+};
+window.renderFrame(0);
+</script></body></html>

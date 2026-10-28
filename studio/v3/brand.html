@@ -1,0 +1,202 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'RC';src:url('../fonts/RobotoCondensed-Bold.ttf');font-weight:700}
+html,body{margin:0;background:#000}
+svg{display:block}
+text{font-family:'RC','Inter','DejaVu Sans',sans-serif}
+</style></head><body>
+<svg id="root" xmlns="http://www.w3.org/2000/svg"><defs id="defs"></defs></svg>
+<script src="kit.js"></script><script src="kit2.js"></script><script src="kit3.js"></script><script src="lib_env.js"></script>
+<script>
+defs();defs3();defsLib();
+const MODE=location.hash.slice(1)||'thumb916';
+const svg=document.getElementById('root');
+const SIZES={thumb916:[720,1280],thumb169:[1280,720],logo:[400,400],logo2:[400,400],banner:[1280,720],cb916:[720,1280],cb169:[1280,720],cbp2:[720,1280],cbp3:[720,1280],cbp4:[720,1280],cbp5:[720,1280]};
+const [W0,H0]=SIZES[MODE];A(svg,{width:W0,height:H0,viewBox:`0 0 ${W0} ${H0}`});
+const bgDefs=document.getElementById('defs');
+bgDefs.insertAdjacentHTML('beforeend',`
+<radialGradient id="gLogo" cx=".5" cy=".42" r=".75"><stop offset="0" stop-color="#1c4a7a"/><stop offset=".55" stop-color="#0b1f3d"/><stop offset="1" stop-color="#050a18"/></radialGradient>
+<linearGradient id="gBanner" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#26204a"/><stop offset=".35" stop-color="#16264a"/><stop offset="1" stop-color="#050a18"/></linearGradient>
+<linearGradient id="gBannerSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050a18"/><stop offset=".55" stop-color="#17305a"/><stop offset=".86" stop-color="#b0506a"/><stop offset="1" stop-color="#ff9a5a"/></linearGradient>`);
+const OUT=(p,txt,x,y,size,fill,o)=>{const t=T(p,x,y,txt,size,fill,Object.assign({stroke:'#000','stroke-width':size*.16,'paint-order':'stroke fill','stroke-linejoin':'round','letter-spacing':size*.01},o||{}));return t};
+function crowd(g,rows,eyes,W){const zs=[];let k=0;rows.forEach(([y,s,n,x0,x1])=>{for(let i=0;i<n;i++){const x=lerp(x0,x1,(i+.5)/n)+(rnd(k+7)-.5)*40;const z=zombie(g,x,y+rnd(k+3)*10,s,k);updZombie(z,k*.7,eyes,2);zs.push(z);k++}});return zs}
+function glowEyes(g,x,y,s){C(g,x,y,70*s,'url(#gRed)',{opacity:.85});C(g,x-14*s,y,7*s,'#ff2a2a');C(g,x+14*s,y,7*s,'#ff2a2a')}
+
+/* ===================== THUMBNAIL 9:16 (1080x1920 @1.5x) ===================== */
+function thumb916(){
+ R(svg,0,0,720,1280,'url(#gNight)');stars(svg,120,720,3);
+ C(svg,520,210,420,'url(#gGlow)',{opacity:.35});
+ R(svg,0,760,720,520,'url(#gSeaNight)');shimmer(svg,520,780,22,'#cfe6ff',220).forEach(({r,i,cx,mw})=>A(r,{x:cx-mw/2,width:mw}));
+ for(let i=0;i<14;i++)R(svg,rnd(i)*720,780+i*34,60+rnd(i+3)*140,2.5,'#9bc4ff',{opacity:.2,rx:1.2});
+ // beam from the lamp across the sea, down toward the shore
+ const bm=G(svg,{transform:'translate(520 210) rotate(138)'});P(bm,'M0,0 L1200,-210 L1200,210Z','url(#gBeam)',{opacity:.95});
+ C(svg,520,200,150,'url(#gGlow)');
+ rock(svg,520,860,320);lighthouse(svg,520,900,700,{lit:true});
+ C(svg,520,200,90,'url(#gGlow)');
+ // shore + crowd (bottom-left, lit by the beam)
+ P(svg,'M-20,900 Q220,860 470,930 L470,1300 L-20,1300Z','#0d0a14');
+ crowd(svg,[[930,.85,7,-10,430],[1010,1.15,6,-20,470],[1110,1.55,4,0,500]],1);
+ R(svg,-20,1222,760,100,'#05030a');
+ // hero (worried) inset, top-left
+ const insetG=G(svg,{});C(insetG,150,200,128,'#fff');C(insetG,150,200,120,'#7a1612');
+ const cp=E('clipPath',{id:'cpI'},bgDefs);C(cp,150,200,120,'#fff');
+ const hg=G(insetG,{'clip-path':'url(#cpI)'});R(hg,0,60,300,300,'#a8281f');C(hg,150,240,200,'url(#gRed)',{opacity:.9});
+ keeperClose(hg,{x:150,y:215,s:2.2,view:'front',expr:'worried',mood:'warm'});
+ // exclamation burst
+ const ex=G(svg,{transform:'translate(262 92) rotate(12)'});P(ex,'M0,-44 L12,-12 L46,-22 L24,6 L50,34 L16,28 L8,60 L-8,28 L-44,40 L-20,8 L-48,-14 L-10,-14Z',PAL.yel,{stroke:'#000','stroke-width':5,'stroke-linejoin':'round'});T(ex,2,22,'!',60,'#c2181a',{'font-weight':900});
+ // text
+ OUT(svg,'ONE',360,1062,150,'#fff',{'text-anchor':'middle'});
+ OUT(svg,'PROBLEM.',360,1187,150,'#ff3b30',{'text-anchor':'middle'});
+ const ln=R(svg,90,1204,540,10,PAL.yel,{rx:5});
+ // top badge
+ R(svg,200,1222,320,48,'#000',{rx:12,opacity:.85});OUT(svg,'DAY 1 · PART 1',360,1257,36,PAL.yel,{'text-anchor':'middle','stroke-width':0});
+}
+
+/* ===================== THUMBNAIL 16:9 (1280x720) ===================== */
+function thumb169(){
+ R(svg,0,0,1280,720,'url(#gNight)');stars(svg,140,420,9);moon(svg,610,110,54,true);
+ R(svg,0,470,1280,250,'url(#gSeaNight)');for(let i=0;i<10;i++)R(svg,rnd(i)*1280,490+i*24,80+rnd(i+3)*180,2.5,'#9bc4ff',{opacity:.2,rx:1.2});
+ const bm=G(svg,{transform:'translate(1130 150) rotate(163)'});P(bm,'M0,0 L1400,-190 L1400,190Z','url(#gBeam)',{opacity:.95});
+ C(svg,1130,140,180,'url(#gGlow)');
+ rock(svg,1150,560,300);lighthouse(svg,1150,610,520,{lit:true});C(svg,1130,140,80,'url(#gGlow)');
+ P(svg,'M-20,580 Q280,540 560,590 L560,740 L-20,740Z','#0d0a14');
+ crowd(svg,[[640,.9,8,-10,560],[700,1.25,6,-20,600]],1);
+ // hero panic, big
+ const hr=keeper(svg,{x:300,y:740,s:1.9,view:'front',pose:'panic',mood:'warm',expr:'worried'});
+ C(svg,300,300,230,'url(#gRed)',{opacity:.35});svg.appendChild(hr);
+ OUT(svg,'ONE',745,300,175,'#fff',{'text-anchor':'middle'});
+ OUT(svg,'PROBLEM.',765,462,175,'#ff3b30',{'text-anchor':'middle'});
+ R(svg,480,482,560,12,PAL.yel,{rx:6});
+ R(svg,40,36,250,56,'#000',{rx:12,opacity:.75});OUT(svg,'DAY 1 · PART 1',165,78,38,PAL.yel,{'text-anchor':'middle','stroke-width':0});
+}
+
+/* ===================== LOGO (400x400 @2x = 800) ===================== */
+function logo(){
+ R(svg,0,0,400,400,'url(#gLogo)');
+ for(let i=0;i<40;i++)C(svg,rnd(i)*400,rnd(i+9)*400,.8+rnd(i)*1.2,'#fff',{opacity:.5});
+ // clock ring
+ C(svg,200,200,168,'none',{stroke:'#f2ead6','stroke-width':8});C(svg,200,200,156,'none',{stroke:'#f2ead6','stroke-width':2,opacity:.5});
+ for(let i=0;i<12;i++){const a=i*30*Math.PI/180,r1=140,r2=i%3===0?118:128;L(svg,200+r1*Math.sin(a),200-r1*Math.cos(a),200+r2*Math.sin(a),200-r2*Math.cos(a),i%3===0?PAL.yel:'#f2ead6',i%3===0?9:5)}
+ // beam as the clock hand (pointing ~2 o'clock)
+ const bm=G(svg,{transform:'translate(200 168) rotate(-24)'});P(bm,'M0,0 L190,-26 L190,26Z','url(#gBeam)');C(svg,200,150,52,'url(#gGlow)');
+ // lighthouse
+ rock(svg,200,262,120);lighthouse(svg,200,278,150,{lit:true});
+ // zombie eyes at 7 o'clock hint
+ C(svg,290,300,15,'url(#gRed)');C(svg,284,300,3.4,'#ff2a2a');C(svg,296,300,3.4,'#ff2a2a');
+}
+
+
+/* ===================== LOGO v2: channel mark, not tied to any one story ===================== */
+function logo2(){
+ const cx=200,cy=200;
+ R(svg,0,0,400,400,'#060b18');
+ const bgG=E('radialGradient',{id:'gL2',cx:.5,cy:.45,r:.62},bgDefs);E('stop',{offset:0,'stop-color':'#1d3d6b'},bgG);E('stop',{offset:.7,'stop-color':'#0a1730'},bgG);E('stop',{offset:1,'stop-color':'#060b18'},bgG);
+ C(svg,cx,cy,176,'url(#gL2)');
+ const cp=E('clipPath',{id:'dial'},bgDefs);C(cp,cx,cy,154,'#fff');
+ const dial=G(svg,{'clip-path':'url(#dial)'});
+ // warm glow behind the survivor
+ C(dial,cx,cy-6,120,'#ffb347',{opacity:.16,filter:'url(#b24)'});
+ // zombie eyes lurking in the dark of the dial (4:30 and 7:30)
+ for(const [ex,ey] of [[84,262],[316,262]]){C(dial,ex,ey,36,'url(#gRed)',{opacity:.95});C(dial,ex-10,ey,6.4,'#ff2a2a');C(dial,ex+10,ey,6.4,'#ff2a2a')}
+ // shoulders (mustard slicker)
+ P(dial,'M96,360 Q100,282 200,262 Q300,282 304,360Z','#d8a032',{stroke:'#2a1c13','stroke-width':5,'stroke-linejoin':'round'});
+ P(dial,'M162,268 Q200,296 238,268 L232,282 Q200,310 168,282Z','#a9741a');
+ // head: the series mascot, worried
+ const hg=G(dial,{transform:'translate(200 194) scale(2.32)'});khead(hg,palette('day'),{view:'front',expr:'worried'});
+ // clock ring
+ C(svg,cx,cy,170,'none',{stroke:'#f2ead6','stroke-width':10});
+ C(svg,cx,cy,158,'none',{stroke:'#f2ead6','stroke-width':2,opacity:.45});
+ // countdown arc in red: running out of time
+ const a0=-90*Math.PI/180,a1=(-90+112)*Math.PI/180,r=170;
+ P(svg,`M${cx+r*Math.cos(a0)},${cy+r*Math.sin(a0)} A${r},${r} 0 0 1 ${cx+r*Math.cos(a1)},${cy+r*Math.sin(a1)}`,'none',{stroke:'#ff3b30','stroke-width':12,'stroke-linecap':'round'});
+ // ticks
+ for(let i=0;i<12;i++){const a=i*30*Math.PI/180,major=i%3===0,r1=148,r2=major?126:136;if([0,1,2,3,4,5,7,8].includes(i))continue;L(svg,cx+r1*Math.sin(a),cy-r1*Math.cos(a),cx+r2*Math.sin(a),cy-r2*Math.cos(a),major?PAL.yel:'#f2ead6',major?9:5)}
+}
+
+
+/* ===================== COVER BASES (no text; text is added in PIL) ===================== */
+function coverBase(W,H,hx,hy,hs,rayY){
+ const gb=E('radialGradient',{id:'gCB',cx:hx/W,cy:rayY/H,r:.9},bgDefs);E('stop',{offset:0,'stop-color':'#2b5f9a'},gb);E('stop',{offset:.45,'stop-color':'#0f2548'},gb);E('stop',{offset:1,'stop-color':'#04070f'},gb);
+ R(svg,0,0,W,H,'url(#gCB)');
+ const rays=G(svg,{transform:`translate(${hx} ${rayY})`});
+ for(let i=0;i<16;i++)P(rays,'M0,0 L1600,-70 L1600,70Z','#fff2b8',{opacity:.09,transform:`rotate(${i*22.5})`});
+ C(svg,hx,rayY,hs*95,'#ffd978',{opacity:.35,filter:'url(#b24)'});C(svg,hx,rayY,hs*60,'#fff6d0',{opacity:.55,filter:'url(#b24)'});
+ // zombie eyes lurking at the edges (the only red in the picture)
+ const pts=W>H?[[90,560],[190,640],[1190,520],[1100,640],[60,420]]:[[70,880],[640,820],[150,1010],[580,960],[40,720]];
+ pts.forEach(([x,y],i)=>{C(svg,x,y,44,'url(#gRed)',{opacity:.95});C(svg,x-11,y,7,'#ff2a2a');C(svg,x+11,y,7,'#ff2a2a')});
+ keeper(svg,{x:hx,y:hy,s:hs,view:'front',pose:'panic',mood:'warm',expr:'worried',noShadow:true});
+}
+function cb916(){coverBase(720,1280,360,1414,3.0,520)}
+function cb169(){coverBase(1280,720,900,1010,2.9,230)}
+
+
+/* ===================== PER-PART COVER BASES (hero big + the part's symbol) ===================== */
+function headGlow(hx,hy,rr,col){const g=E('radialGradient',{id:'gHG',cx:.5,cy:.5,r:.5},bgDefs);E('stop',{offset:0,'stop-color':col||'#fff2b8','stop-opacity':.85},g);E('stop',{offset:1,'stop-color':col||'#fff2b8','stop-opacity':0},g);C(svg,hx,hy,rr,'url(#gHG)')}
+function rays(hx,hy,col,op){const r=G(svg,{transform:`translate(${hx} ${hy})`});for(let i=0;i<16;i++)P(r,'M0,0 L1600,-70 L1600,70Z',col||'#fff2b8',{opacity:op||.09,transform:`rotate(${i*22.5})`})}
+function cbp2(){ // dawn, the causeway appears
+ R(svg,0,0,720,1280,'url(#gDawn)');sunDisc(svg,360,640,92);R(svg,0,700,720,600,'url(#gSeaDawn)');
+ P(svg,'M170,1280 L550,1280 L410,740 L320,740Z','url(#gSand)');P(svg,'M170,1280 L550,1280 L520,1180 L200,1180Z','#fff',{opacity:.12});
+ rock(svg,360,722,120);lighthouse(svg,360,732,110,{});
+ for(let i=0;i<14;i++){const q=(i+1)/15,y=lerp(1180,760,q),x=360+(rnd(i)-.5)*lerp(220,30,q),z=zombie(svg,x,y,lerp(.7,.2,q),i);updZombie(z,0,1,0)}
+ headGlow(360,520,260,'#ffd9a0');rays(360,520,'#fff2b8',.07);
+ keeper(svg,{x:360,y:1414,s:3.0,view:'front',pose:'reach',mood:'warm',expr:'worried',noShadow:true});
+}
+function cbp3(){ // fire line
+ R(svg,0,0,720,1280,'url(#gSunset)');const sm=smokeCols(svg,0,720,900,6,'#1a1218',.75);updSmoke(sm,1.3,600);
+ R(svg,0,860,720,420,'url(#gSand)');R(svg,0,860,720,420,'#2a1608',{opacity:.6});
+ for(let i=0;i<12;i++){const z=zombie(svg,30+i*60,880+rnd(i)*14,.5,i);updZombie(z,0,1,0)}
+ const fl=flames(svg,360,1000,760,36,4);C(svg,360,940,520,'url(#gFire)',{opacity:.7});updFlames(fl,1.1,1.5);
+ headGlow(540,590,240,'#ffb05a');rays(540,590,'#ffcf8a',.06);
+ const hero=keeper(svg,{x:300,y:1414,s:3.0,view:'side',pose:'hold',mood:'warm',expr:'worried',noShadow:true});
+ // lit flare in his hand
+ C(svg,300+44*3,1414-196*3,70,'url(#gRed)',{opacity:.9});C(svg,300+44*3+4,1414-196*3,16,'#fff2b8');L(svg,300+44*3+4,1414-196*3,300+44*3+70,1414-196*3-90,'#ff5a2a',10);
+}
+function cbp4(){ // the stranger (feverish)
+ R(svg,0,0,720,1280,'url(#gDay)');R(svg,0,700,720,600,'url(#gSeaDay)');for(let i=0;i<10;i++)R(svg,rnd(i)*720,720+i*40,160,3,'#fff',{opacity:.35});
+ boatShape(svg,520,780,.9,'#242430');
+ const sm=smokeCols(svg,60,200,700,2,'#d9d9d9',.4);updSmoke(sm,1.2,200);
+ headGlow(360,520,260,'#fff');rays(360,520,'#ffffff',.06);
+ keeper(svg,{who:'wren',x:360,y:1414,s:3.0,view:'front',pose:'stand',mood:'warm',expr:'worried',noShadow:true});
+ // fever flush + sweat
+ C(svg,296,540,24,'#e83e36',{opacity:.35});C(svg,424,540,24,'#e83e36',{opacity:.35});
+ for(let i=0;i<4;i++)P(svg,'M0,0 q12,18 0,30 q-12,-12 0,-30Z','#bfe8ff',{opacity:.9,transform:`translate(${300+i*40} ${430+i*14})`});
+}
+function cbp5(){ // the last light
+ R(svg,0,0,720,1280,'url(#gStorm)');stars(svg,50,400,3);
+ R(svg,0,760,720,520,'url(#gSeaStorm)');for(let i=0;i<10;i++)R(svg,rnd(i)*720,780+i*44,180,4,'#cfe6ff',{opacity:.25});
+ rock(svg,560,820,260);lighthouse(svg,560,850,520,{lit:true});C(svg,560,350,200,'url(#gGlow)');
+ const bm=G(svg,{transform:'translate(560 345) rotate(170)'});P(bm,'M0,0 L1500,-210 L1500,210Z','url(#gBeam)',{opacity:.85});
+ for(let i=0;i<6;i++){const g=G(svg,{transform:`translate(${70+i*70} ${900+(i%3)*30})`});P(g,'M-18,0 L18,0 L12,8 L-12,8Z','#08080e');C(g,0,-8,3,'#ffd27a');C(g,0,-8,22,'url(#gGlow)',{opacity:.9})}
+ headGlow(260,540,260,'#fff2b8');
+ keeper(svg,{x:260,y:1414,s:3.0,view:'front',pose:'cross',mood:'warm',expr:'calm',noShadow:true});
+}
+
+/* ===================== BANNER (1280x720 @2x = 2560x1440; safe 773x211 centred) ===================== */
+function banner(){
+ /* YouTube zones (base 1280x720): TV = full; desktop = full width x band y 255..466; all-devices = x 253..1026 within the band */
+ bgDefs.insertAdjacentHTML('beforeend','<linearGradient id="gBSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#040813"/><stop offset=".5" stop-color="#14294f"/><stop offset=".85" stop-color="#7a3f66"/><stop offset="1" stop-color="#e08a5c"/></linearGradient>');
+ R(svg,0,0,1280,414,'url(#gBSky)');stars(svg,170,400,21);
+ moon(svg,1120,318,40,true);
+ R(svg,0,413,1280,307,'url(#gSeaNight)');
+ shimmer(svg,1120,428,14,'#cfe6ff',160).forEach(({r,i,cx,mw})=>A(r,{x:cx-mw/2,width:mw}));
+ for(let i=0;i<22;i++)R(svg,rnd(i)*1280,424+i*14,80+rnd(i+3)*220,2.2,'#9bc4ff',{opacity:.22,rx:1});
+ // beam from the lantern across the band
+ const bm=G(svg,{transform:'translate(160 310) rotate(3)'});P(bm,'M0,0 L1250,-90 L1250,90Z','url(#gBeam)',{opacity:.5});
+ C(svg,160,308,120,'url(#gGlow)');
+ rock(svg,160,632,300);lighthouse(svg,160,642,300,{lit:true});
+ keeper(svg,{x:214,y:612,s:.5,view:'side',pose:'binoc',mood:'night',noShadow:true});
+ // far shore + crowd, heads sit inside the desktop band
+ P(svg,'M840,740 Q880,500 1010,458 Q1150,440 1290,458 L1290,740Z','#0d0a14');
+ crowd(svg,[[500,.62,7,930,1270],[556,.85,6,920,1280],[626,1.15,4,940,1270]],1);
+ // text — inside the all-devices safe area
+ OUT(svg,'POST TIME',640,336,86,'#fff',{'text-anchor':'middle'});
+ OUT(svg,'SURVIVAL',640,412,86,PAL.yel,{'text-anchor':'middle'});
+ R(svg,470,424,340,5,'#ff3b30',{rx:2.5});
+ T(svg,640,452,'ZOMBIE SURVIVAL STORIES · ONE PROBLEM AT A TIME',22,'#fff',{'letter-spacing':2.5,'font-weight':700,opacity:.95,stroke:'#000','stroke-width':4,'paint-order':'stroke fill'});
+}
+
+({thumb916,thumb169,logo,logo2,banner,cb916,cb169,cbp2,cbp3,cbp4,cbp5})[MODE]();
+// vignette
+if(MODE!=='logo'){const v=E('radialGradient',{id:'gV',cx:.5,cy:.5,r:.75},bgDefs);E('stop',{offset:.6,'stop-color':'#000','stop-opacity':0},v);E('stop',{offset:1,'stop-color':'#000','stop-opacity':.5},v);R(svg,0,0,W0,H0,'url(#gV)')}
+window.READY=true;
+</script></body></html>

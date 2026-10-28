@@ -1,0 +1,11 @@
+# outputs and secrets never go in git
+ser/p*/
+ser/cache/
+chk/
+deliver/
+bench/
+*.env
+post.env
+zip2/
+ser/scheduled_*.json
+__pycache__/

@@ -1,0 +1,117 @@
+# THE LAST SUNRISE (series 2) - internal part ids 11..15 = Part 1..5.   One shot per sentence, 2-3 caption chunks per shot.
+# bt(scene, params, role, caps, hud, sfx)   caps = [(caption<=5 words, spoken_fragment), ...]
+# role: H hook, S setup, V solve, P problem, E escalate, F payoff, R rule, C cliff
+def S(*beats): return list(beats)
+def bt(scene,params,role,caps,hud=None,sfx=None): return dict(scene=scene,params=params or {},role=role,caps=caps,hud=hud or [],sfx=sfx or [])
+
+PARTS={}
+
+PARTS[11]=dict(rate=0.86,title="THE EIGHT MINUTES",series_hook="THE FIRST WEEK",next_spoken="Part two. The first week. Follow for part two.",
+ end=dict(title="PART 2",subtitle="THE FIRST WEEK",small="FOLLOW FOR PART 2"),
+ yt_title="The Sun Just Went Out. Earth Has 8 Minutes Left — The Last Sunrise, Part 1",
+ sentences=[
+ S(bt("spaceViz",{"kind":"dark"},"H",[("RIGHT NOW, THE <y>SUN</y>","Right now, the sun"),("JUST <r>WENT OUT.</r>","just went out.")],["diagram_callout"],["whoosh"])),
+ S(bt("spaceViz",{"kind":"travel","view":"earth","count":[500,300]},"S",[("BUT ITS <y>LAST LIGHT</y>","But its last light"),("IS STILL FLYING <y>TO EARTH.</y>","is still flying toward Earth.")],["diagram_callout","timer_chip"],["pop"])),
+ S(bt("sunSky",{"stage":0,"count":[300,70]},"E",[("FOR <y>EIGHT MINUTES,</y>","For eight minutes,"),("NOTHING SEEMS <y>WRONG.</y>","nothing seems wrong.")],["timer_chip"])),
+ S(bt("schar",{"bg":"station","sky":"day","who":"mara","dog":"sit","pose":"stand","x":330,"dogX":190,"s":1.5},"S",[("MARA RUNS A <y>WEATHER</y>","Mara runs a weather"),("STATION IN THE <y>MOUNTAINS.</y>","station in the mountains.")])),
+ S(bt("spaceViz",{"kind":"arrive","view":"earth","count":[40,0]},"E",[("AT <y>12:08,</y>","At twelve oh eight,"),("THE LAST LIGHT <r>ARRIVES.</r>","the last light arrives.")],["diagram_callout","timer_chip"],["hit"])),
+ S(bt("sobj",{"kind":"sensor"},"P",[("HER <y>SUN SENSOR</y>","Her sunlight sensor"),("DROPS TO <r>ZERO.</r>","drops straight to zero.")],["pill_label"],["hit"])),
+ S(bt("sunSky",{"stage":[0.6,2.2]},"E",[("THEN THE <y>SKY</y>","Then the sky"),("TURNS <r>BLACK</r> AT NOON.","turns black at noon.")],sfx=["hit"])),
+ S(bt("town",{"snow":0,"lights":"on","lit":0.25,"people":7,"cars":1},"P",[("STREETLIGHTS <y>SWITCH ON.</y>","Streetlights switch on,"),("THE TOWN GOES <r>QUIET.</r>","and the town goes quiet.")])),
+ S(bt("schar",{"bg":"station","sky":"dark","who":"mara","dog":"sit","pose":"reach","x":330,"dogX":190,"s":1.5},"E",[("EVERYONE <r>PANICS.</r>","Everyone panics."),("MARA <y>PACKS.</y>","Mara packs.")])),
+ S(bt("scard",{"kind":"pack"},"V",[("A WARM <y>COAT,</y>","A warm coat,"),("A <y>RADIO,</y>","a radio,"),("A JAR OF <y>SEEDS.</y>","and a jar of seeds.")],["checklist_card"],["click"])),
+ S(bt("schar",{"bg":"house","who":"mara","pose":"reach","dog":"sit","dogFlip":True,"x":200,"dogX":445,"s":1.6,"dogS":1.7,"hearts":1},"V",[("AND HER <y>DOG,</y>","And her dog,"),("<y>EMBER.</y>","Ember,"),("HE'S COMING <y>TOO.</y>","comes too.")])),
+ S(bt("thermo",{"from":1,"to":1.6},"P",[("SHE CHECKS THE","She checks the"),("<y>THERMOMETER.</y>","thermometer."),("15° AND <r>FALLING.</r>","Fifteen, and falling.")],["counter_chip"],["click"])),
+ S(bt("schar",{"bg":"house","frost":1,"who":"mara","pose":"stand","dog":"sit","x":190,"dogX":330,"s":1.5,"dogS":1.4},"E",[("<y>FROST</y> IS ALREADY","Frost is already"),("CREEPING ACROSS THE <y>WINDOW.</y>","creeping across the window.")],sfx=["pop"])),
+ S(bt("thermo",{"from":1,"to":7,"label":"THIS WEEK"},"E",[("IN <y>SEVEN DAYS,</y>","In seven days,"),("IT'S <r>MINUS 17.</r>","it will be minus seventeen.")],["counter_chip"],["hit"])),
+ S(bt("scard",{"kind":"rule","n":1,"text":"HEAT IS THE REAL CLOCK"},"R",[("RULE <y>#1:</y>","Rule number one:"),("HEAT IS THE <r>REAL CLOCK.</r>","heat is the real clock.")],["rule_card"],["stamp"])),
+ S(bt("town",{"snow":0.3,"lights":"dying","lit":0.1,"frost":0.5,"people":3,"fires":1},"C",[("SHE HAS <y>SEVEN DAYS</y>","She has seven days"),("TO FIND <r>HEAT.</r>","to find a warm place.")],sfx=["hit"])),
+ ])
+
+PARTS[12]=dict(rate=0.8,title="THE FIRST WEEK",series_hook="THE HOT SPRING",next_spoken="Part three. The hot spring. Follow for part three.",
+ end=dict(title="PART 3",subtitle="THE HOT SPRING",small="FOLLOW FOR PART 3"),
+ yt_title="How Fast Does A Town Freeze Without The Sun? Day By Day — The Last Sunrise, Part 2",
+ sentences=[
+ S(bt("town",{"snow":0.15,"lights":"flicker","lit":0.3,"frost":0.3,"people":0},"H",[("HOW FAST CAN","How fast can"),("A WHOLE TOWN <r>FREEZE?</r>","a whole town freeze?")],sfx=["whoosh"])),
+ S(bt("town",{"snow":0.7,"lights":"dead","lit":0,"people":5,"chip":"DAY 3 · −1°C"},"S",[("DAY THREE.","Day three."),("SNOW FALLS IN THE <y>DARK.</y>","Snow falls in the dark.")],["pill_label"])),
+ S(bt("gridMap",{},"P",[("THE <r>POWER GRID</r>","The power grid"),("DIES, <y>STATE</y> BY STATE.","dies, state by state.")],["radar_map","counter_chip"],["hit"])),
+ S(bt("town",{"snow":0.85,"lights":"dead","lit":0,"fires":2,"frost":0.4,"chip":"DAY 4 · −7°C"},"E",[("PEOPLE <y>BURN</y> FURNITURE","People burn their furniture"),("TO STAY <y>WARM.</y>","to stay warm.")],["pill_label"])),
+ S(bt("scard",{"kind":"meter","label":"WOOD LEFT","from":7,"to":4,"unit":"DAYS","art":"wood","warn":1,"icon":"log"},"P",[("MARA'S <y>WOODPILE</y>","Mara's woodpile"),("LASTS <r>FOUR DAYS.</r>","lasts four more days.")],["meter_card"],["click"])),
+ S(bt("sface",{"who":"mara","expr":"worried","mood":"warm"},"P",[("BUT <y>FOUR DAYS</y>","But four days"),("IS NOT <r>SEVEN.</r>","is not seven.")],sfx=["hit"])),
+ S(bt("schar",{"bg":"station","sky":"dark","who":"mara","dog":"sit","pose":"reach","x":340,"dogX":190,"s":1.5},"V",[("THEN SHE CHECKS","Then she checks the ground"),("THE <y>GROUND SENSOR.</y>","sensor under the station.")])),
+ S(bt("sobj",{"kind":"probe"},"V",[("<y>FORTY FEET</y> DOWN,","Forty feet down,"),("IT'S STILL <y>38 DEGREES.</y>","it's still thirty-eight degrees.")],["diagram_callout"],["pop"])),
+ S(bt("sobj",{"kind":"core"},"V",[("DEEP DOWN, THE <y>EARTH</y>","Deep down, the Earth"),("KEEPS ITS OWN <y>HEAT.</y>","keeps its own heat.")],["diagram_callout"])),
+ S(bt("scard",{"kind":"rule","n":2,"text":"FOLLOW THE HEAT"},"R",[("RULE <y>#2:</y>","Rule number two:"),("FOLLOW THE <y>HEAT.</y>","follow the heat.")],["rule_card"],["stamp"])),
+ S(bt("scard",{"kind":"map"},"E",[("ONE PLACE <y>GLOWS:</y>","On her map, one place glows:"),("<y>EAGLE HOT SPRING.</y>","Eagle Hot Spring.")],["radar_map","pill_label"],["pop"])),
+ S(bt("trek",{"mode":"walk","chip":"12 MILES"},"P",[("<y>TWELVE MILES</y>","Twelve miles"),("OF <r>DEEP SNOW.</r>","of deep snow.")],["pill_label"])),
+ S(bt("sobj",{"kind":"sled"},"V",[("SHE BUILDS A <y>SLED</y>","She builds a sled"),("FROM AN OLD <y>DOOR.</y>","from an old door.")],["diagram_callout"],["click"])),
+ S(bt("schar",{"bg":"house","who":"mara","pose":"stand","dog":"stand","boots":1,"x":250,"dogX":470,"s":1.55,"dogS":1.7},"P",[("EMBER'S PAWS <r>FREEZE.</r>","Ember's paws are freezing,"),("SO SHE MAKES <y>BOOTS.</y>","so she makes him boots.")],sfx=["pop"])),
+ S(bt("thermo",{"from":6,"to":7,"dur":1.4},"E",[("DAY <y>SEVEN</y> ARRIVES.","Day seven arrives."),("IT'S <r>MINUS 17.</r>","It's minus seventeen.")],["counter_chip"],["hit"])),
+ S(bt("trek",{"mode":"walk","frost":0.5,"chip":"6:00 AM"},"C",[("THEY SET OUT <y>AT SIX,</y>","They set out at six,"),("INTO A <r>BLIZZARD.</r>","into a blizzard.")],["pill_label"],["whoosh"])),
+ ])
+
+PARTS[13]=dict(rate=0.86,title="THE HOT SPRING",series_hook="A GARDEN IN THE DARK",next_spoken="Part four. A garden in the dark. Follow for part four.",
+ end=dict(title="PART 4",subtitle="A GARDEN IN THE DARK",small="FOLLOW FOR PART 4"),
+ yt_title="12 Miles At -20°C To Reach The Only Warm Place On Earth — The Last Sunrise, Part 3",
+ sentences=[
+ S(bt("trek",{"mode":"walk"},"H",[("CAN SHE <y>SURVIVE</y>","Can she survive"),("<y>12 MILES</y> AT <r>MINUS 20?</r>","twelve miles at minus twenty?")],sfx=["whoosh"])),
+ S(bt("sface",{"who":"mara","expr":"worried","mood":"night","frost":1,"breath":1},"P",[("WITHIN AN HOUR,","Within an hour,"),("HER <r>EYELASHES</r> FREEZE.","her eyelashes freeze.")],sfx=["hit"])),
+ S(bt("scard",{"kind":"rule","n":3,"text":"CHECK YOUR TOES"},"R",[("RULE <y>#3:</y>","Rule number three:"),("CHECK YOUR <y>TOES,</y>","check your toes,"),("EVERY <y>HOUR.</y>","every hour.")],["rule_card"],["stamp"])),
+ S(bt("sobj",{"kind":"foot"},"P",[("AT <y>HOUR SIX,</y>","At hour six,"),("THREE TOES TURN <r>WHITE.</r>","three toes turn white.")],["pill_label"],["hit"])),
+ S(bt("sobj",{"kind":"warm"},"V",[("SHE WARMS THEM ON","She warms them on"),("<y>EMBER'S BELLY.</y>","Ember's belly.")],["pill_label"],["pop"])),
+ S(bt("trek",{"mode":"ice"},"E",[("TO SAVE <y>TWO HOURS,</y>","To save two hours,"),("THEY CROSS A <y>FROZEN LAKE.</y>","they cross a frozen lake.")])),
+ S(bt("trek",{"mode":"ice","crack":1},"P",[("THE ICE IS <y>4 INCHES THICK.</y>","The ice is four inches thick,"),("THEN IT <r>CRACKS.</r>","and then it cracks.")],["pill_label"],["hit"])),
+ S(bt("trek",{"mode":"ice","crack":1,"lie":1},"V",[("SHE <y>DROPS FLAT,</y>","She drops flat,"),("TO SPREAD HER <y>WEIGHT.</y>","to spread her weight.")],sfx=["click"])),
+ S(bt("trek",{"mode":"steam"},"E",[("THEN, A <y>WHITE COLUMN</y>","Then, a white column"),("OF <y>STEAM</y> AHEAD.","of steam, dead ahead.")],sfx=["pop"])),
+ S(bt("spring",{"kind":"mouth"},"F",[("<y>EAGLE HOT SPRING.</y>","Eagle Hot Spring."),("<y>38°C</y> INSIDE.","Thirty-eight degrees inside.")],sfx=["pop"])),
+ S(bt("spring",{"kind":"pool","people":14},"P",[("BUT SOMEBODY IS","But somebody is"),("ALREADY <r>THERE.</r>","already there.")],sfx=["hit"])),
+ S(bt("spring",{"kind":"pool","people":36,"count":"40","countLabel":"PEOPLE"},"E",[("<r>FORTY PEOPLE,</r> CROWDED","Forty people, crowded"),("AROUND ONE <y>SMALL POOL.</y>","around one small pool.")],["counter_chip"])),
+ S(bt("spring",{"kind":"door"},"P",[("THEIR LEADER STEPS OUT,","Their leader steps out,"),("AND <r>BLOCKS THE DOOR.</r>","and blocks the door.")],sfx=["hit"])),
+ S(bt("sface",{"who":"cole","expr":"grim","mood":"warm"},"P",[("“NO ROOM FOR","“We have no room for"),("MORE <r>MOUTHS,”</r> HE SAYS.","more mouths,” he says.")])),
+ S(bt("sobj",{"kind":"seedJar"},"V",[("MARA <y>HOLDS UP</y>","Mara holds up"),("HER JAR OF <y>SEEDS.</y>","her jar of seeds.")],sfx=["pop"])),
+ S(bt("garden",{"stage":0,"lamps":"off","chip":"NO LIGHT"},"C",[("“SEEDS NEED <y>LIGHT.”</y>","“Seeds need light.”"),("<r>“WE HAVE NONE.”</r>","“We have none.”")],["pill_label"],["hit"])),
+ ])
+
+PARTS[14]=dict(rate=0.8,title="A GARDEN IN THE DARK",series_hook="THE LAST SUNRISE",next_spoken="Part five. The last sunrise. Follow for part five.",
+ end=dict(title="PART 5",subtitle="THE LAST SUNRISE",small="FOLLOW FOR PART 5"),
+ yt_title="Can You Grow Food With No Sun? She Built A Garden Powered By Steam — The Last Sunrise, Part 4",
+ sentences=[
+ S(bt("garden",{"stage":0,"lamps":"off"},"H",[("HOW DO YOU <y>GROW FOOD</y>","How do you grow food"),("WITH NO <r>SUN?</r>","with no sun?")],sfx=["whoosh"])),
+ S(bt("scard",{"kind":"meter","label":"FOOD LEFT","from":20,"to":9,"unit":"DAYS","art":"food","warn":1,"icon":"bag"},"S",[("THEIR FOOD LASTS","Their food lasts"),("<r>NINE DAYS.</r>","nine days.")],["meter_card"],["click"])),
+ S(bt("scard",{"kind":"foodgap","show":"both"},"P",[("A <y>RADISH</y> NEEDS","A radish needs"),("<r>25 DAYS.</r>","twenty-five days.")],["diagram_callout"],["hit"])),
+ S(bt("scard",{"kind":"needs","marks":[0,0,0]},"S",[("PLANTS NEED HEAT,","Plants need heat,"),("WATER, AND <y>LIGHT.</y>","water, and light.")],["checklist_card"])),
+ S(bt("sobj",{"kind":"vent","clog":0,"labels":1},"V",[("THE SPRING GIVES","The spring gives them"),("HEAT AND <y>WATER.</y>","heat and water.")],["diagram_callout"],["pop"])),
+ S(bt("sobj",{"kind":"lamp"},"P",[("BUT LIGHT NEEDS","But light needs"),("<r>ELECTRICITY.</r>","electricity.")],["pill_label"],["hit"])),
+ S(bt("sobj",{"kind":"alternator"},"V",[("IN A JUNKYARD,","In a junkyard,"),("SHE FINDS AN <y>ALTERNATOR.</y>","she finds an alternator.")],["diagram_callout"],["click"])),
+ S(bt("sobj",{"kind":"turbine"},"V",[("STEAM SPINS A <y>FAN.</y>","Steam spins a fan,"),("THE FAN SPINS <y>POWER.</y>","and the fan makes power.")],["diagram_callout"],["pop"])),
+ S(bt("garden",{"stage":0,"lamps":"blaze"},"F",[("ONE <y>BULB</y> LIGHTS.","One bulb lights up,"),("THEN <y>TWELVE.</y>","then twelve more.")],sfx=["pop"])),
+ S(bt("sobj",{"kind":"sprout","chip":"DAY 4"},"E",[("DAY FOUR:","By day four,"),("A <y>GREEN SPROUT.</y>","a green sprout appears.")],["pill_label"],["pop"])),
+ S(bt("sface",{"who":"pip","expr":"smile","mood":"warm","glow":"gold","chip":"DAY 8"},"V",[("DAY EIGHT:","By day eight,"),("<y>PIP</y> WATERS THEM DAILY.","little Pip waters them daily.")],["pill_label"],["click"])),
+ S(bt("sobj",{"kind":"bowl","chip":"FIRST MEAL"},"F",[("THEY EAT THE <y>FIRST</y>","They eat the first"),("SPROUTS. NOBODY <y>STARVES.</y>","sprouts. Nobody starves.")],sfx=["pop"])),
+ S(bt("garden",{"stage":3,"lamps":"dim"},"P",[("THEN THE LAMPS","Then the lamps"),("BEGIN TO <r>FLICKER.</r>","begin to flicker.")],sfx=["hit"])),
+ S(bt("sobj",{"kind":"vent","clog":[0,1]},"P",[("THE VENT IS <r>CLOGGING</r>","The vent is clogging"),("WITH <r>WHITE ROCK.</r>","with white rock.")],["diagram_callout"],["hit"])),
+ S(bt("sobj",{"kind":"turbine","slow":1},"E",[("THE FAN <r>SLOWS.</r>","The fan slows."),("PRESSURE: <r>40%.</r>","Pressure: forty percent.")],["diagram_callout","counter_chip"],["hit"])),
+ S(bt("garden",{"stage":3,"lamps":"dim","chip":"ONE NIGHT LEFT"},"C",[("THE LAMPS HAVE","The lamps have"),("ONE <r>NIGHT</r> LEFT.","one night left.")],["pill_label"],["hit"])),
+ ])
+
+PARTS[15]=dict(rate=0.78,title="THE LAST SUNRISE",series_hook="THE SUN IS GONE. MORNING ISN'T.",next_spoken="The end. Follow for more.",
+ end=dict(title="THE END",subtitle="THE SUN IS GONE. MORNING ISN'T.",small="FOLLOW FOR THE NEXT STORY"),
+ yt_title="The Sun Is Gone. Here's How The Last Humans Made A New Sunrise — Part 5 Finale",
+ sentences=[
+ S(bt("sobj",{"kind":"vent","clog":[0.7,0.95]},"H",[("CAN ONE <y>VENT</y> SAVE","Can one vent save"),("<r>FORTY PEOPLE?</r>","forty people?")],["diagram_callout"],["whoosh"])),
+ S(bt("spring",{"kind":"pool","people":30},"P",[("HALF THE CAMP","Half the camp"),("WANTS TO <r>LEAVE.</r>","wants to leave.")],sfx=["hit"])),
+ S(bt("thermo",{"kind":"outside","from":-40,"to":-60,"label":"OUTSIDE"},"E",[("OUTSIDE, IT'S","Outside, it's"),("<r>SIXTY BELOW.</r>","sixty below.")],["counter_chip"],["hit"])),
+ S(bt("sobj",{"kind":"rod"},"V",[("MARA'S PLAN:","Mara has a plan:"),("A <y>STEEL ROD,</y> 8 FEET.","a steel rod, eight feet long.")],["diagram_callout"],["click"])),
+ S(bt("sobj",{"kind":"vent","clog":[0.95,0.95]},"P",[("BUT BREAKING IT","But breaking the crust"),("RELEASES <r>SCALDING STEAM.</r>","releases scalding steam.")],["diagram_callout"],["hit"])),
+ S(bt("sface",{"who":"cole","expr":"worried","mood":"warm"},"E",[("SOMEONE HAS","Someone has to hold"),("THE <y>OTHER END.</y>","the other end of the rod.")])),
+ S(bt("scard",{"kind":"rule","n":4,"text":"NOBODY SURVIVES ALONE"},"R",[("RULE <y>#4:</y>","Rule number four:"),("NOBODY <y>SURVIVES</y> ALONE.","nobody survives alone.")],["rule_card"],["stamp"])),
+ S(bt("sobj",{"kind":"vent","clog":[0.95,0.95],"team":1},"V",[("ON <y>THREE,</y>","On three,"),("THEY <y>PUSH</y> TOGETHER.","they push together.")],["diagram_callout"],["click"])),
+ S(bt("scard",{"kind":"count"},"E",[("<y>THREE.</y> TWO.","Three. Two."),("<r>ONE.</r>","One.")],["counter_chip","timer_chip"],["click"])),
+ S(bt("sobj",{"kind":"vent","clog":[0.95,0],"burst":1},"E",[("THE CRUST <r>CRACKS.</r>","The crust cracks,"),("STEAM <y>ROARS</y> UP.","and steam roars upward.")],["diagram_callout"],["hit"])),
+ S(bt("sobj",{"kind":"turbine","fast":1},"V",[("THE FAN SPINS","The fan spins"),("<y>FASTER</y> THAN EVER.","faster than ever.")],["diagram_callout"],["pop"])),
+ S(bt("garden",{"stage":3,"lamps":"blaze","crowd":10},"F",[("EVERY <y>LAMP</y> BLAZES","Every lamp in the garden"),("AT <y>ONCE.</y>","blazes at once.")],sfx=["pop"])),
+ S(bt("sunrise",{"crowd":10},"F",[("SHE RAISES THE <y>LIGHT</y>","She raises the light"),("LIKE A <y>SUNRISE.</y>","like a sunrise.")],sfx=["riser"])),
+ S(bt("sface",{"who":"pip","expr":"awe","mood":"warm","glow":"gold","sparkle":1},"F",[("PIP HAS <y>NEVER</y>","Pip has never"),("SEEN A <y>SUNRISE.</y>","seen a sunrise.")],sfx=["pop"])),
+ S(bt("garden",{"stage":3,"lamps":"on","dawn":1,"crowd":12},"F",[("NOW, EVERY MORNING,","Now, every morning,"),("THEY MAKE A <y>NEW ONE.</y>","they make a new one.")])),
+ S(bt("valley",{},"C",[("THE SUN IS <r>GONE.</r>","The sun is gone,"),("BUT <y>MORNING</y> ISN'T.","but morning isn't.")],sfx=["hit"])),
+ ])
