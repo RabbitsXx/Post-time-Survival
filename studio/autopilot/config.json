@@ -1,0 +1,17 @@
+{
+ "channel": "Post Time Survival",
+ "focus": "zombie post-apocalypse, short vertical story clips (a topic can run any number of parts)",
+ "clips_per_day": 10,
+ "slot_tz_offset_hours": 7,
+ "first_slot_local": "10:00",
+ "step_minutes": 120,
+ "min_lead_minutes": 45,
+ "keep_ahead_hours": 30,
+ "yt_quota_daily_limit": 9000,
+ "ai_generated_flag": true,
+ "owner_decisions": {
+  "2026-10-29": "Owner chose: produce AND schedule without asking for approval first; 10 clips/day, one every 2 hours from 10:00 (Thailand time); topics may have any number of parts, prefer short clips; connect the YouTube API so tags/thumbnail/subtitles/playlist are set automatically."
+ },
+ "not_before_utc": "2026-10-30T03:00:00Z",
+ "not_before_note": "THE LAST BUS is still posting until 2026-10-29 23:59 Thailand; the autopilot grid starts after it"
+}
