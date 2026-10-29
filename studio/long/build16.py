@@ -54,20 +54,21 @@ def fmt(ws):
         else:groups.append([c,[w]])
     return ' '.join((f'<{c}>'+' '.join(g)+f'</{c}>') if c else ' '.join(g) for c,g in groups)
 STOP={'a','an','the','and','or','but','to','of','in','on','at','for','with','by','from','as','is','are','was','you','your','it','that','this','not','no','i','we','they','he','she','his','her','its','then','than','so','if','do','does','can','will','just'}
-def chunk(cap,maxw=5,maxc=30):
+def chunk(cap,maxw=None,maxc=None):
+    maxw=maxw or int(os.environ.get('CAP_MAXW',5));maxc=maxc or int(os.environ.get('CAP_MAXC',30))   # shorts: CAP_MAXW=3 CAP_MAXC=17
     ws=tokens(cap);n=len(ws)
     if n<=maxw and sum(len(w)+1 for w,_ in ws)<=maxc+4:return [ws]
     best=None  # dynamic split into k balanced pieces, prefer breaking after punctuation
     def cost(parts):
         c=0
         for p in parts:
-            L=sum(len(w)+1 for w,_ in p);c+=abs(len(p)-n/len(parts))*2+max(0,L-maxc)*3+(100 if len(p)>maxw else 0)
+            L=sum(len(w)+1 for w,_ in p);c+=abs(len(p)-n/len(parts))*2+max(0,L-maxc)*3+max(0,len(p)-maxw)*40
         return c
     import itertools
-    for k in range(2,min(5,n)+1):
+    for k in range(2,min(max(5,-(-n//maxw)+1),n,7)+1):
         for cuts in itertools.combinations(range(1,n),k-1):
             idx=[0,*cuts,n];parts=[ws[idx[i]:idx[i+1]] for i in range(k)]
-            c=cost(parts)-sum(5 for p in parts[:-1] if p[-1][0][-1] in ',.:;?!')+sum(7 for p in parts[:-1] if p[-1][0].lower().strip(',.:;?!') in STOP)+k*3
+            c=cost(parts)+sum(7 for p in parts if len(p)==1)-sum(5 for p in parts[:-1] if p[-1][0][-1] in ',.:;?!')+sum(7 for p in parts[:-1] if p[-1][0].lower().strip(',.:;?!') in STOP)+k*3
             if best is None or c<best[0]:best=(c,parts)
         if best and best[0]<20:break
     return best[1]
@@ -83,12 +84,14 @@ def rt(v,starts,dur):
 def main():
     name=sys.argv[1] if len(sys.argv)>1 else 'script_how';out=sys.argv[2] if len(sys.argv)>2 else 'p'
     M=load_script(name);OUT=f'{R}/{out}';os.makedirs(OUT,exist_ok=True);os.makedirs(f'{R}/tts',exist_ok=True);key=_key()
+    VOICES.update(getattr(M,'VOICES',{}));FILT.update(getattr(M,'FILT',{}))      # scripts with a bigger cast (THE LAST BUS) bring their own voices / filters
+    SPK=sorted({sp for b in M.BEATS for sp,_ in b['say']})
     jobs={}
     for bi,b in enumerate(M.BEATS):
         radio=any(f.get('k')=='pip' for f in b['fx'])
         for si,(sp,tx) in enumerate(b['say']):
             spk=sp+('_radio' if (sp=='maya' and radio) else '')
-            vname,rate=VOICES[sp];txt=plain(tx).replace('™','').replace('*','')
+            vname,rate=VOICES[sp][:2];txt=plain(tx).replace('™','').replace('*','')
             h=hashlib.md5(f'{vname}|{rate}|{txt}'.encode()).hexdigest()[:16]
             jobs[(bi,si)]=dict(sp=sp,spk=spk,text=txt,raw=f'{R}/tts/{h}.wav',trim=f'{R}/tts/{h}_{spk}.wav',vname=vname,rate=rate)
     with cf.ThreadPoolExecutor(6) as ex:
@@ -102,7 +105,7 @@ def main():
         for si,(sp,tx) in enumerate(b['say']):
             j=jobs[(bi,si)];a=rd(j['trim']);d=len(a)/SR
             sents.append(dict(sp=sp,spk=j['spk'],t0=cur,t1=cur+d,cap=tx,audio=a,text=j['text']));cur+=d+(GAP if si<len(b['say'])-1 else 0)
-            if sp=='dex':words+=len(j['text'].split());wsum+=d
+            if sp==getattr(M,'PACE_SPEAKER','dex') or getattr(M,'ALL_WORDS',False):words+=len(j['text'].split());wsum+=d
         dur=max(cur+(TAIL if b['say'] else 0.0)+b['pause'],b['dur'] or 0,1.6)
         starts=[s['t0'] for s in sents]or[0.0]
         # captions
@@ -110,7 +113,7 @@ def main():
         for s in sents:
             ch=chunk(s['cap']);wts=[sum(len(w)+1 for w,_ in c)+ (3 if c[-1][0][-1] in ',.:;?!' else 0) for c in ch];tot=sum(wts);a0=s['t0'];span=s['t1']-s['t0']+0.10;x=a0
             for c,w in zip(ch,wts):
-                dd=span*w/tot;caps.append(dict(t=[round(t0+x,3),round(t0+x+dd,3)],h=fmt(c).upper() if False else fmt([(w_.upper(),col) for w_,col in c]),sp=('game' if s['sp']=='game' else 'maya' if s['sp']=='maya' else 'steve' if s['sp']=='steve' else 'dex')));x+=dd
+                dd=span*w/tot;caps.append(dict(t=[round(t0+x,3),round(t0+x+dd,3)],h=fmt(c).upper() if False else fmt([(w_.upper(),col) for w_,col in c]),sp=(s['sp'] if s['sp'] in ('game','maya','steve') or getattr(M,'SPEAKERS',None) else 'dex')));x+=dd
             cues.append(dict(t=[round(t0+s['t0'],3),round(t0+s['t1']+.1,3)],text=plain(s['cap']),sp=s['sp']))
             voice_events.append(dict(t=t0+s['t0'],a=s['audio'],sp=s['sp'],spk=s['spk']))
         # captions stay until the next chunk begins (no flicker between chunks of one sentence), but never cross the beat end
@@ -126,8 +129,13 @@ def main():
             if g.get('k') in('zoom','shake') and 'at' in g:pass
             fx.append(g)
         for nm,at in b['sfx']:sfx.append(dict(k=nm,t=round(t0+rt(at,starts,dur),3)))
-        sc=b['scene'];cam=b['cam'] or ('static' if (b['skin']=='game' or sc['n']=='card') else 'hand')
-        beats.append(dict(t=[round(t0,3),round(t0+dur,3)],scene=sc,skin=b['skin'],cam=cam,caps=caps,fx=fx,mood=b['mood'],i=bi))
+        sc=b['scene']
+        if sc and isinstance(sc.get('p',{}).get('at'),list):sc=dict(sc,p=dict(sc['p'],at=[round(rt(v,starts,dur),3) for v in sc['p']['at']]))      # card reveals timed to the speech
+        cam=b['cam'] or ('static' if (b['skin']=='game' or sc['n']=='card') else 'hand')
+        bd=dict(t=[round(t0,3),round(t0+dur,3)],scene=sc,skin=b['skin'],cam=cam,caps=caps,fx=fx,mood=b['mood'],i=bi)
+        if b.get('view'):bd['view']=b['view']        # 9:16 engine: window onto the 1280x720 world
+        if b.get('nofade'):bd['nofade']=True
+        beats.append(bd)
         moods.append((round(t0,3),round(t0+dur,3),b['mood']));t=t0+dur
     # frame-quantise beat boundaries so the engine and the audio agree
     q=lambda x:round(x*FPS)/FPS
@@ -136,7 +144,7 @@ def main():
         bt['t']=[round(q(bt['t'][0]),4),round(q(bt['t'][1]),4)]
     total=beats[-1]['t'][1];nfr=int(round(total*FPS))
     # ---- lip-sync envelopes per speaker (digit 0-9 per frame)
-    env={k:np.zeros(nfr+4) for k in('dex','game','maya','steve')}
+    env={k:np.zeros(nfr+4) for k in sorted(set(('dex','game','maya','steve'))|set(SPK))}
     voice=np.zeros(int((total+1)*SR),np.float32)
     for ev in voice_events:
         a=ev['a'];i0=int(round(ev['t']*SR));voice[i0:i0+len(a)]+=a[:len(voice)-i0]
@@ -148,6 +156,7 @@ def main():
     mouth={k:''.join(str(int(round(min(1,x)*9))) for x in v[:nfr+2]) for k,v in env.items()}
     wr(f'{OUT}/voice.wav',voice/(max(1e-6,np.abs(voice).max())/.95) if np.abs(voice).max()>.95 else voice)
     spec=dict(title=M.TITLE,duration=round(total,3),fps=FPS,beats=beats,mouth=mouth)
+    if getattr(M,'SPEAKERS',None):spec['speakers']=M.SPEAKERS
     json.dump(dict(spec,mouth=None),open(f'{OUT}/spec.json','w'),ensure_ascii=False,indent=0)
     json.dump({k:[int(c) for c in v] for k,v in mouth.items()},open(f'{OUT}/spec.mouth.json','w'))
     open(f'{OUT}/spec.js','w').write('var SPEC='+json.dumps(spec,ensure_ascii=False)+';')

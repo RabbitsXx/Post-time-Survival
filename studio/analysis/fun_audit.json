@@ -1,0 +1,524 @@
+{
+ "p2": {
+  "series": "LH",
+  "dur": 60,
+  "text": {
+   "sentences": 28,
+   "words": 130,
+   "mean_len": 4.6,
+   "sd_len": 2.5,
+   "numbers": 8.5,
+   "emo": 2.3,
+   "banter": 0.0,
+   "you": 0.8,
+   "contractions": 2.3,
+   "questions": 1,
+   "excl": 0,
+   "names": []
+  },
+  "roles": {
+   "hook": 1,
+   "setup": 2,
+   "problem": 3,
+   "solve": 2,
+   "escalate": 5,
+   "rule": 1,
+   "cliff": 1,
+   "endcard": 1
+  },
+  "char_share": 6,
+  "sfx_per_min": 13.0,
+  "motion": {
+   "mean": 2.07,
+   "med": 0.41,
+   "still": 48.0,
+   "spikes_per_min": 34.0
+  },
+  "lra": 3.7,
+  "gaps": {
+   "silence": 32.0,
+   "long_pauses": 4,
+   "longest": 1.6
+  }
+ },
+ "p3": {
+  "series": "LH",
+  "dur": 60,
+  "text": {
+   "sentences": 28,
+   "words": 130,
+   "mean_len": 4.6,
+   "sd_len": 2.4,
+   "numbers": 8.5,
+   "emo": 2.3,
+   "banter": 0.0,
+   "you": 0.0,
+   "contractions": 0.0,
+   "questions": 1,
+   "excl": 0,
+   "names": []
+  },
+  "roles": {
+   "hook": 1,
+   "escalate": 4,
+   "problem": 3,
+   "solve": 5,
+   "payoff": 1,
+   "cliff": 1,
+   "endcard": 1
+  },
+  "char_share": 25,
+  "sfx_per_min": 8.0,
+  "motion": {
+   "mean": 2.25,
+   "med": 0.52,
+   "still": 29.0,
+   "spikes_per_min": 22.0
+  },
+  "lra": 2.6,
+  "gaps": {
+   "silence": 30.0,
+   "long_pauses": 6,
+   "longest": 1.0
+  }
+ },
+ "p4": {
+  "series": "LH",
+  "dur": 60,
+  "text": {
+   "sentences": 30,
+   "words": 112,
+   "mean_len": 3.7,
+   "sd_len": 1.8,
+   "numbers": 8.0,
+   "emo": 4.5,
+   "banter": 0.0,
+   "you": 0.0,
+   "contractions": 0.9,
+   "questions": 3,
+   "excl": 0,
+   "names": []
+  },
+  "roles": {
+   "hook": 1,
+   "escalate": 4,
+   "problem": 4,
+   "rule": 1,
+   "solve": 4,
+   "payoff": 1,
+   "cliff": 1,
+   "endcard": 1
+  },
+  "char_share": 24,
+  "sfx_per_min": 13.0,
+  "motion": {
+   "mean": 2.6,
+   "med": 0.41,
+   "still": 42.0,
+   "spikes_per_min": 23.0
+  },
+  "lra": 4.0,
+  "gaps": {
+   "silence": 34.0,
+   "long_pauses": 6,
+   "longest": 1.1
+  }
+ },
+ "p5": {
+  "series": "LH",
+  "dur": 60,
+  "text": {
+   "sentences": 32,
+   "words": 121,
+   "mean_len": 3.8,
+   "sd_len": 1.8,
+   "numbers": 4.1,
+   "emo": 1.7,
+   "banter": 0.0,
+   "you": 0.0,
+   "contractions": 2.5,
+   "questions": 1,
+   "excl": 0,
+   "names": []
+  },
+  "roles": {
+   "hook": 1,
+   "problem": 3,
+   "escalate": 5,
+   "rule": 1,
+   "solve": 3,
+   "payoff": 3,
+   "cliff": 1,
+   "endcard": 1
+  },
+  "char_share": 0,
+  "sfx_per_min": 13.0,
+  "motion": {
+   "mean": 3.14,
+   "med": 1.22,
+   "still": 22.0,
+   "spikes_per_min": 66.0
+  },
+  "lra": 3.1,
+  "gaps": {
+   "silence": 31.0,
+   "long_pauses": 6,
+   "longest": 1.1
+  }
+ },
+ "p11": {
+  "series": "SUN",
+  "dur": 60,
+  "text": {
+   "sentences": 21,
+   "words": 128,
+   "mean_len": 6.1,
+   "sd_len": 2.5,
+   "numbers": 8.6,
+   "emo": 1.6,
+   "banter": 1.6,
+   "you": 0.0,
+   "contractions": 0.0,
+   "questions": 0,
+   "excl": 0,
+   "names": [
+    "Earth",
+    "Ember"
+   ]
+  },
+  "roles": {
+   "hook": 1,
+   "setup": 2,
+   "escalate": 6,
+   "problem": 3,
+   "solve": 2,
+   "rule": 1,
+   "cliff": 1,
+   "endcard": 1
+  },
+  "char_share": 24,
+  "sfx_per_min": 12.0,
+  "motion": {
+   "mean": 2.51,
+   "med": 0.73,
+   "still": 24.0,
+   "spikes_per_min": 24.0
+  },
+  "lra": 2.5,
+  "gaps": {
+   "silence": 26.0,
+   "long_pauses": 0,
+   "longest": 0.7
+  }
+ },
+ "p12": {
+  "series": "SUN",
+  "dur": 60,
+  "text": {
+   "sentences": 21,
+   "words": 125,
+   "mean_len": 6.0,
+   "sd_len": 2.3,
+   "numbers": 12.8,
+   "emo": 4.0,
+   "banter": 0.0,
+   "you": 0.0,
+   "contractions": 3.2,
+   "questions": 1,
+   "excl": 0,
+   "names": [
+    "Eagle",
+    "Earth",
+    "Hot",
+    "Spring"
+   ]
+  },
+  "roles": {
+   "hook": 1,
+   "setup": 1,
+   "problem": 4,
+   "escalate": 4,
+   "solve": 4,
+   "rule": 1,
+   "cliff": 1,
+   "endcard": 1
+  },
+  "char_share": 18,
+  "sfx_per_min": 12.0,
+  "motion": {
+   "mean": 2.48,
+   "med": 0.78,
+   "still": 21.0,
+   "spikes_per_min": 22.0
+  },
+  "lra": 1.7,
+  "gaps": {
+   "silence": 25.0,
+   "long_pauses": 2,
+   "longest": 0.8
+  }
+ },
+ "p13": {
+  "series": "SUN",
+  "dur": 60,
+  "text": {
+   "sentences": 19,
+   "words": 129,
+   "mean_len": 6.8,
+   "sd_len": 1.9,
+   "numbers": 10.9,
+   "emo": 3.9,
+   "banter": 0.0,
+   "you": 0.8,
+   "contractions": 0.8,
+   "questions": 1,
+   "excl": 0,
+   "names": [
+    "Ember's",
+    "Hot",
+    "Part",
+    "Spring",
+    "We"
+   ]
+  },
+  "roles": {
+   "hook": 1,
+   "problem": 5,
+   "rule": 1,
+   "solve": 3,
+   "escalate": 4,
+   "payoff": 1,
+   "cliff": 1,
+   "endcard": 1
+  },
+  "char_share": 12,
+  "sfx_per_min": 14.0,
+  "motion": {
+   "mean": 2.65,
+   "med": 0.95,
+   "still": 27.0,
+   "spikes_per_min": 21.0
+  },
+  "lra": 2.9,
+  "gaps": {
+   "silence": 29.0,
+   "long_pauses": 1,
+   "longest": 0.8
+  }
+ },
+ "p14": {
+  "series": "SUN",
+  "dur": 60,
+  "text": {
+   "sentences": 21,
+   "words": 115,
+   "mean_len": 5.5,
+   "sd_len": 2.0,
+   "numbers": 9.6,
+   "emo": 0.0,
+   "banter": 0.0,
+   "you": 0.9,
+   "contractions": 0.0,
+   "questions": 1,
+   "excl": 0,
+   "names": [
+    "Pip"
+   ]
+  },
+  "roles": {
+   "hook": 1,
+   "setup": 1,
+   "problem": 3,
+   "escalate": 4,
+   "solve": 4,
+   "payoff": 2,
+   "cliff": 1,
+   "endcard": 1
+  },
+  "char_share": 6,
+  "sfx_per_min": 16.0,
+  "motion": {
+   "mean": 2.56,
+   "med": 0.64,
+   "still": 20.0,
+   "spikes_per_min": 22.0
+  },
+  "lra": 2.5,
+  "gaps": {
+   "silence": 26.0,
+   "long_pauses": 14,
+   "longest": 0.8
+  }
+ },
+ "p15": {
+  "series": "SUN",
+  "dur": 60,
+  "text": {
+   "sentences": 20,
+   "words": 111,
+   "mean_len": 5.5,
+   "sd_len": 2.7,
+   "numbers": 8.1,
+   "emo": 1.8,
+   "banter": 0.0,
+   "you": 0.0,
+   "contractions": 1.8,
+   "questions": 1,
+   "excl": 0,
+   "names": []
+  },
+  "roles": {
+   "hook": 1,
+   "problem": 2,
+   "escalate": 4,
+   "solve": 3,
+   "rule": 1,
+   "payoff": 4,
+   "cliff": 1,
+   "endcard": 1
+  },
+  "char_share": 12,
+  "sfx_per_min": 15.0,
+  "motion": {
+   "mean": 2.48,
+   "med": 0.72,
+   "still": 27.0,
+   "spikes_per_min": 24.0
+  },
+  "lra": 4.2,
+  "gaps": {
+   "silence": 29.0,
+   "long_pauses": 17,
+   "longest": 0.9
+  }
+ },
+ "long": {
+  "dur": 597,
+  "text": {
+   "sentences": 156,
+   "words": 1386,
+   "mean_len": 8.9,
+   "sd_len": 3.7,
+   "numbers": 5.6,
+   "emo": 1.6,
+   "banter": 1.1,
+   "you": 4.0,
+   "contractions": 0.6,
+   "questions": 13,
+   "excl": 5,
+   "names": [
+    "About",
+    "Again",
+    "Also",
+    "Always",
+    "An",
+    "And",
+    "At",
+    "Backpack",
+    "Bags",
+    "Be",
+    "Behind",
+    "Boring",
+    "But",
+    "Choice",
+    "Coach",
+    "Combo",
+    "Continue",
+    "Dex",
+    "Did",
+    "Dog",
+    "Dying",
+    "Each",
+    "Easy",
+    "Eight",
+    "Every",
+    "Final",
+    "Floor",
+    "Full",
+    "Game",
+    "He",
+    "Health",
+    "Hi",
+    "If",
+    "In",
+    "Infinite",
+    "It",
+    "Leave",
+    "Let",
+    "Lie",
+    "Light",
+    "Lock",
+    "Long",
+    "Magic",
+    "Night",
+    "Nine",
+    "Nobody",
+    "Not",
+    "Nothing",
+    "Now",
+    "One",
+    "Pick",
+    "Please",
+    "Politely",
+    "Probably",
+    "Real",
+    "Respawn",
+    "Run",
+    "Seven",
+    "Six",
+    "Sleep",
+    "Sound",
+    "Sprinting",
+    "Stamina",
+    "Steady",
+    "Steve",
+    "Straight",
+    "Swing",
+    "The",
+    "They",
+    "Time",
+    "Today",
+    "Traffic",
+    "Two",
+    "Untouched",
+    "Walk",
+    "Water",
+    "We",
+    "Weight",
+    "Who",
+    "With",
+    "You",
+    "You're",
+    "Your",
+    "Zombie",
+    "Zombies"
+   ]
+  },
+  "speakers": {
+   "dex": 135,
+   "maya": 4,
+   "steve": 1,
+   "game": 16
+  },
+  "sfx_per_min": 16.2,
+  "fx_per_min": 11.8,
+  "motion_first": {
+   "mean": 2.63,
+   "med": 0.71,
+   "still": 36.0,
+   "spikes_per_min": 38.0
+  },
+  "motion_mid": {
+   "mean": 3.11,
+   "med": 0.58,
+   "still": 45.0,
+   "spikes_per_min": 45.0
+  },
+  "lra": 6.0,
+  "gaps": {
+   "silence": 30.0,
+   "long_pauses": 34,
+   "longest": 2.2
+  }
+ }
+}

@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'RC';src:url(RobotoCondensed-Bold.ttf)}
+html,body{margin:0;background:#000}
+#stage{position:relative;width:450px;height:800px;overflow:hidden;background:#000;font-family:'Inter','DejaVu Sans',sans-serif}
+#sv{position:absolute;left:0;top:0;width:450px;height:800px}
+#pix{position:absolute;left:0;top:0;width:450px;height:800px;image-rendering:pixelated;display:none}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,rgba(0,0,0,0) 54%,rgba(0,0,0,.5) 100%)}
+#grade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(20,60,80,.20),rgba(255,140,60,.10));mix-blend-mode:soft-light}
+#grain{position:absolute;inset:-40px;pointer-events:none;background:url(grain.png);opacity:.07;mix-blend-mode:overlay}
+#bfade{position:absolute;left:0;right:0;bottom:0;height:300px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.55) 46%,rgba(0,0,0,.92) 100%)}
+#ov{position:absolute;left:0;top:0;width:450px;height:800px;pointer-events:none}
+#stage.game #vig,#stage.game #grain,#stage.game #grade{display:none}
+</style></head><body>
+<div id="stage" class="real">
+ <svg id="sv" viewBox="0 0 450 800" width="450" height="800" xmlns="http://www.w3.org/2000/svg"><defs id="defs"></defs><g id="far"></g><g id="mid"></g><g id="near"></g><g id="hud"></g></svg>
+ <canvas id="pix" width="144" height="256"></canvas>
+ <div id="grade"></div><div id="vig"></div><div id="grain"></div><div id="bfade"></div>
+ <svg id="ov" viewBox="0 0 450 800" width="450" height="800"><defs id="ovdefs"></defs><g id="fxg"></g><g id="capg"></g></svg>
+</div>
+<script>document.write('<script src="p9/'+(new URLSearchParams(location.search).get('spec')||'spec')+'.js"><\/script>')</script>
+<script src="kit.js"></script>
+<script src="kit9.js"></script>
+<script src="dog16.js"></script>
+<script src="chars16.js"></script>
+<script src="pax9.js"></script>
+<script src="locs16.js"></script>
+<script src="scenes16.js"></script>
+<script src="scenes9.js"></script>
+<script src="locs9.js"></script>
+<script src="cards16.js"></script>
+<script src="cards9.js"></script>
+<script src="fx16.js"></script>
+<script src="fx9.js"></script>
+<script src="core9.js"></script>
+</body></html>

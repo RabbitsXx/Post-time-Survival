@@ -1,0 +1,21 @@
+from buslib import *
+P=Part(8,'THE TOLL','3:40 AM','TOLL ROAD 9');BEATS=P.BEATS;TITLE=P.TITLE
+ALLW=lambda e:{w:e for w in SEATX}
+RD=lambda x,y=655,s=.9,flip=False,**k:dict(k='raider',view='front',pose='stand',expr='smug',x=x,y=y,s=s,bob=1.5,ph=x*.01,**k)
+SLIM=lambda x=720,y=670,s=1.1,**k:dict(k='slim',view='front',pose='hands' if False else 'stand',expr='smug',x=x,y=y,s=s,talk='slim',bob=1.2,held=dict(t='bat',ox=-70,oy=-120,rot=-16,s=1.1),**k)
+P.B([('slim',"Welcome to the toll road. The toll is everything you own.")],loc('ext',[SLIM(720),RD(560),RD(880,y=665,s=.95),RD(430,y=660,s=.85)],x=700,y=460,z=1.15,v='toll',bus=False),mood='creep',cam='push_in',fx=[P.announce()],sfx=[('riser',0),('stab','e-0.5')])
+P.B([('bus',"Ding dong! This is the Last Bus. Part eight of ten: the toll.")],card('pa',mode='open',part=8,of=10,title='THE TOLL',time='3:40 AM'),mood='idle',sfx=[('chime',0)])
+P.B([('rosa',"Brake. Slowly. Nobody speak.")],cab('worried',z=1.3,sweat=1.0,red=.5,zom=4,out='toll'),mood='creep',sfx=[('brake',.2)])
+P.B([('slim',"Food, fuel, medicine. And that lovely bus.")],loc('ext',[SLIM(700,s=1.3,y=700)],x=700,y=500,z=1.35,v='toll',bus=False),mood='creep')
+P.B([('dante',"Gentlemen. I have a legendary sword in my inventory.")],bus(980,crew(ex=ALLW('worried'),talk=True,skip=('dante',))+[pax('dante','smug',talk=True,stand=True,x=800,y=790,pose='finger')],z=1.1,y=cy(1.1,300),out='toll'),mood='comic')
+P.B([('slim',"Your what?"),('dante',"...A big stick."),('slim',"That's not a sword.")],loc('ext',[SLIM(900,s=1.1),RD(1060,s=.9)],x=860,y=470,z=1.2,v='toll',bx=420,bs=.85),mood='comic',sfx=[('rimshot','e-0.2')])
+P.B([('slim',"And nobody bitten crosses my road. Everybody out. Sleeves up."),('priya',"Not again.")],wide(870,1.1,ex={'priya':'deadpan','marcus':'scared'},out='toll'),mood='creep',sfx=[('stab',.2)])
+P.B([('june',"Young man, have you eaten?"),('slim',"...Is that cherry?"),('june',"Fresh this morning.")],cu('june','smug',z=1.6,extra=[prop('pie',560,500,1.9)],out='toll'),mood='comic',sfx=[('pop',.2)])
+P.B([('raider',"This one's dead, boss."),('walt',"I'm retired.")],cu('walt','sleep',z=1.8,out='toll',extra=[dict(k='raider',view='front',pose='stand',expr='smug',x=884,y=548,s=.9,layer='far',talk='raider')]),mood='comic',sfx=[('boing','e-0.5'),('stab','e-0.9')])
+P.B([('priya',"Noise is a weapon, if you aim it."),('rosa',"Aim.")],cab('angry',z=1.35,sweat=1.0,red=.5,out='toll'),mood='chase',sfx=[('hornlong',.9)])
+P.B([('slim',"Is that...? My pie! RUN!")],loc('ext',[SLIM(720),RD(560),RD(880),RD(430),hz(12,1100,1500,y=655,s=.95,to=-900,flip=True),steve(1000,y=655,view='front',pose='zombie',s=.95,flip=True,to=[760,655],held=dict(t='pie',ox=60,oy=-170,rot=0,s=1.6)),prop('barrier',640,590,1.2,rot=0)],x=700,y=460,z=1.1,v='toll',bus=False),mood='chase',cam='hand',sfx=[('hornlong',0),('horde',.4),('splat','e-0.5')])
+P.B([],ext('toll',[hz(8,500,800,y=655,s=.9,to=-700,flip=True),prop('barrier',900,590,1.2,rot=0,spin=-70)],bx=300,bto=1150,bs=.85,x=720,y=470,roadSp=1300,scroll=700),dur=2.6,mood='chase',cam='whip',sfx=[('crack',.9),('cheer',1.4)])
+P.B([('bus',"Toll paid. Thank you for choosing the Last Bus.")],card('pa',mode='text',lines=['TOLL PAID','THANK YOU','FOR CHOOSING','THE LAST BUS'][:3],time='NO CHANGE GIVEN'),mood='comic',sfx=[('chime',0),('rimshot','e-0.2')])
+P.B([('priya',"Rosa? Rosa!"),('rosa',"Not now.")],cab('tired',z=1.8,sweat=1.0,red=.7,pale=.3,hy=290,x=1215,out='road'),mood='sad',sfx=[('heartbeat',.2),('gasp',.3)])
+P.B([('priya',"Pull over. I need to see your hand."),('rosa',"...Okay.")],cab('sad',z=1.5,sweat=1.0,red=.7,out='road'),mood='sad',sfx=[('brake','s1'),('sigh','e-0.5')])
+P.B([('bus',"Part eight of ten, The Last Bus. Next: the glove. Follow for part nine.")],card('pa',mode='close',part=8,of=10,next='THE GLOVE',time='4:47 AM'),mood='idle',sfx=[('chime',0)])

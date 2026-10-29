@@ -1,0 +1,18 @@
+from buslib import *
+P=Part(7,'THE DRAWBRIDGE','2:30 AM','HARLOW BRIDGE');BEATS=P.BEATS;TITLE=P.TITLE
+ALLW=lambda e:{w:e for w in SEATX}
+P.B([('rosa',"The bridge is up. And it won't come down.")],pov('bridge',speed=.35,gauge=False),mood='creep',cam='push_in',fx=[P.announce()],sfx=[('riser',0),('brake','e-1.0')])
+P.B([('bus',"Ding dong! This is the Last Bus. Part seven of ten: the drawbridge.")],card('pa',mode='open',part=7,of=10,title='THE DRAWBRIDGE',time='2:30 AM'),mood='idle',sfx=[('chime',0)])
+P.B([('dante',"There's always a hidden lever. Or a ramp."),('priya',"It's a forty-meter gap."),('dante',"I've made longer jumps in games.")],wide(790,1.15,ex={'dante':'smug','priya':'deadpan'},out='bridge'),mood='comic',sfx=[('rimshot','e-0.2')])
+P.B([('rosa',"Control tower. Left side. Someone climbs up and pulls the lever.")],ext('bridge',[hz(5,340,520,y=650,s=.9,to=60)],bx=300,bto=300,bs=.8,x=520,y=430,z=1.0,leaf=[-38,-38]),mood='creep',cam='push_in')
+P.B([('marcus',"Why is everyone looking at me?"),('priya',"Because you're brave."),('marcus',"I'm aggressively cautious."),('priya',"That's brave, with extra steps.")],wide(850,1.25,ex={'marcus':'scared','priya':'smile','dante':'smug'},out='bridge'),mood='comic',sfx=[('rimshot','e-0.2')])
+P.B([('teddy',"Take Gary. He's brave."),('marcus',"He's green plastic."),('teddy',"He's brave plastic.")],two('teddy','marcus',ex={'teddy':'worried','marcus':'sad'},z=1.5,extra=[prop('gary',930,560,1.8)]),mood='warm',sfx=[('sigh','e-0.5')])
+P.B([('rosa',"Where's the... left. Left!"),('priya',"Rosa?"),('rosa',"Long night.")],cab('worried',z=1.5,sweat=1.0,red=.5,out='bridge'),mood='creep',sfx=[('heartbeat',.2),('stab','s1')])
+P.B([('marcus',"Aggressively cautious. Aggressively cautious.")],ext('bridge',[dict(k='marcus',view='side',pose='climb',x=552,y=640,s=.85,to=[552,330],talk='marcus',bob=2.5,held=dict(t='gary',ox=40,oy=-250,rot=0,s=1.0)),hz(6,500,600,y=655,s=.9)],bx=200,bto=200,bs=.7,x=560,y=430,z=1.15,leaf=[-38,-38]),mood='chase',sfx=[('ratchet',0),('groan',.6)],cam='tilt_up')
+P.B([('marcus',"Okay, Gary. On three. One. Two..."),('marcus',"Three!")],loc('ext',[dict(k='marcus',view='side',pose='reach',x=600,y=545,s=.9,talk='marcus',tremble=1.0),prop('lever',705,335,1.4)],x=650,y=330,z=1.5,v='bridge',bus=False,leaf=[-38,-38]),mood='creep',sfx=[('click',.3),('lever','s1+0.1')])
+P.B([],ext('bridge',[hz(6,500,600,y=655,s=.9)],bx=200,bto=200,bs=.7,x=720,y=430,z=1.0,leaf=[-38,0],ease=True),dur=3.4,mood='chase',sfx=[('bridge',0)],cam='static')
+P.B([('marcus',"Nope! Nope! Nope!")],ext('bridge',[dict(k='marcus',view='side',pose='panic',x=630,y=250,s=.85,talk='marcus',to=[430,470],ease=True),prop('gary',700,300,1.0,to=[440,380])],bx=430,bto=430,bs=.9,x=520,y=430,z=1.1,leaf=[0,0]),mood='chase',fx=[shake('e-0.5',10,.5)],sfx=[('boing',0),('thud','e-0.5')])
+P.B([('marcus',"I'm okay! I have Gary!"),('teddy',"Marcus is a hero!")],cu('teddy','grin',z=1.7,out='bridge'),mood='warm',sfx=[('cheer',.5)])
+P.B([('steve',"After you.")],ext('bridge',[steve(900,y=565,view='front',pose='zombie',s=.9,talk='steve',held=dict(t='ticket',ox=70,oy=-180,rot=0,s=1.2))],bx=300,bto=1000,bs=.8,x=640,y=430,leaf=[0,0],roadSp=0,scroll=40,rumble=2),mood='comic',sfx=[('engstart',0),('rimshot','e-0.3')])
+P.B([('priya',"Rosa. Your hands are shaking."),('rosa',"Cold."),('priya',"It's twenty-six degrees in here.")],cab('tired',z=1.9,sweat=1.0,red=.5,hy=290,x=1215,out='bridge'),mood='creep',sfx=[('heartbeat',.2)])
+P.B([('bus',"Part seven of ten, The Last Bus. Next: the toll. Follow for part eight. Mind the gap.")],card('pa',mode='close',part=7,of=10,next='THE TOLL',time='3:40 AM'),mood='idle',sfx=[('chime',0)])

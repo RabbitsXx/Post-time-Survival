@@ -92,3 +92,9 @@ Every rule below comes from something that was rejected, broke, or cost a re-ren
 | Steps per second, not toggles: 2.8 walk / 4.4 run / 1.8 zombie | First cadence (10 toggles/s) jittered | chars16.js |
 | Render chunks must complete beat by beat, only missing frames are queued | A crash after 9600 frames left every beat half-done | render16.py |
 | Never `pkill -f <script name>` from a command that contains the name: it kills its own shell | exit 144 | n/a |
+
+## THE LAST BUS (vertical story engine, v9)
+* Diagnose before building: the first shorts were narration over empty scenes (character on screen 14 %, 0.3 viewer addresses/min). `analysis/fun_audit.py` measures it; THE LAST BUS scores 96 % on screen, 8 voices, 23 speaker changes per part.
+* Shorts = Story (character-driven, a complete mini-story per part plus one step of a serial mystery); long videos = questions / how-to.
+* The series announcement (chip in the first 0.5 s + BUS-E speaking series, part and topic + sign-off with the next stop + route line all the time) is built into the script helpers and gated by qa9.py (gate S).
+* Votes and comments cannot change a pre-produced series: ask viewers to guess (engagement only).
