@@ -7,9 +7,18 @@ R=os.path.dirname(os.path.abspath(__file__));STATE=R+'/state';os.makedirs(STATE,
 COST=dict(list=1,update=50,insert=50,thumb=50,caption=400,upload=1600)   # quota units per call (Google's quota calculator; check it when the numbers matter)
 class NoCredential(SystemExit):pass
 _tok={}
+def _envfile():
+    """ENV_FILE=/path/to/.env : KEY=VALUE lines used as secrets when the session's environment does not have them (never printed, never committed)"""
+    out={}
+    p=os.environ.get('ENV_FILE')
+    if p and os.path.exists(p):
+        for l in open(p,encoding='utf-8'):
+            l=l.strip()
+            if l and not l.startswith('#') and '=' in l:k,v=l.split('=',1);out[k.strip()]=v.strip().strip('"').strip("'")
+    return out
 def _env(*names):
     low=[n.lower() for n in names]
-    for k,v in os.environ.items():
+    for k,v in list(os.environ.items())+list(_envfile().items()):
         if k.lower() in low and v.strip():return v.strip()
 def creds():
     """Either one JSON in Youtube_API, or three separate secrets Client_ID + Client_secret + Refresh_token (any capitalisation; Youtube_refresh_token also accepted)"""
@@ -25,6 +34,7 @@ def creds():
     if miss:
         hint=' (Youtube_API is a plain API key AIza..., which can only read public data)' if (raw or '').startswith('AIza') else ''
         raise NoCredential('missing '+', '.join(miss)+hint+'. A client id + secret alone cannot touch the channel: the owner must also authorise once (OAuth Playground, scope https://www.googleapis.com/auth/youtube) and store the Refresh token as secret Refresh_token')
+    import re;cid=re.sub(r'^(\d{12})(?!-)(?=[a-z0-9]{20,}\.apps\.googleusercontent\.com$)',r'\1-',cid)   # a copied client id often loses the hyphen after the 12-digit project number
     return dict(client_id=cid,client_secret=sec,refresh_token=rt)
 def token():
     if _tok.get('exp',0)>time.time()+60:return _tok['t']
