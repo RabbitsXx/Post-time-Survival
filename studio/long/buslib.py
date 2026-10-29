@@ -60,9 +60,9 @@ class Part(Script):
     def pa_open(s,extra=None,**k):
         """BUS-E opens every part: series name + part n of N + topic (standing rule: said out loud within 8 s, and the same words are on the card)"""
         return s.B([('bus',f"Ding dong! This is {s.say}. Part {NUMW[s.part]} of {NUMW[s.of]}: {s.topic.lower()}.")],card('pa',mode='open',part=s.part,of=s.of,title=s.topic.upper(),time=s.time),mood='idle',sfx=[('chime',0)],**k)
-    def pa_close(s,nxt=None,quip='',**k):
+    def pa_close(s,nxt=None,quip='',nxt_time=None,**k):
         """BUS-E signs off: series + part + next stop + follow (the last part of an arc says: follow for the next series)"""
-        if s.part<s.of:t=f"Part {NUMW[s.part]} of {NUMW[s.of]}, {s.say}. Next: {nxt.lower()}. Follow for part {NUMW[s.part+1]}. {quip}".strip();c=card('pa',mode='close',part=s.part,of=s.of,next=(nxt or '').upper(),time=s.time)
+        if s.part<s.of:t=f"Part {NUMW[s.part]} of {NUMW[s.of]}, {s.say}. Next: {nxt.lower()}. Follow for part {NUMW[s.part+1]}. {quip}".strip();c=card('pa',mode='close',part=s.part,of=s.of,next=(nxt or '').upper(),time=nxt_time or s.time)
         else:t=f"Part {NUMW[s.of]} of {NUMW[s.of]}, the end of {s.say}. Follow for the next series.";c=card('finale')
         return s.B([('bus',t)],c,mood='idle' if s.part<s.of else 'sad',nofade=s.part>=s.of,sfx=[('chime',0)],**k)
     def B(s,say,shot,fx=None,time=None,place=None,**k):

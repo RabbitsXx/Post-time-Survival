@@ -46,7 +46,7 @@ def myth_part(P,d):
         P.B(L([ln]),cu(ln[0],d.get('punch_ex',['worried','smug'])[min(i,1)],z=1.8,out=out),mood='comic',sfx=[('cheer',.3)] if i==len(d['punch'])-1 else [])
     lines3,spoken=d['clue']
     P.B(L(spoken),card('pa',mode='text',lines=lines3,time='SENSOR'),mood='creep',sfx=[('ping',.1),('stab','e-0.4')])
-    P.pa_close(d['nxt'],d.get('quip',''))
+    P.pa_close(d.get('nxt'),d.get('quip',''),nxt_time=d.get('nxt_time'))
     if P.part<P.of:th.append(f"ตอนที่{THN[P.part]}จาก{THN[P.of]} {d['th_series']} ป้ายต่อไป {d['th_nxt']} ติดตามตอนที่{THN[P.part+1]} {d.get('th_quip','')}".strip())
     else:th.append(f"ตอนที่{THN[P.of]}จาก{THN[P.of]} จบเรื่อง{d['th_series']} ติดตามซีรีส์ใหม่")
     return th

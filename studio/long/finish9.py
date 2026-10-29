@@ -21,7 +21,10 @@ def audio_chain(P,dur,out_m4a,tmp,err):
         log=ff(['-i',mixed,'-af','loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json','-f','null','-'])
         m=json.loads(re.search(r'\{[^{}]*"input_i"[^{}]*\}',log,re.S).group(0))
         af=("loudnorm=I=-14:TP=-1.5:LRA=9:measured_I={input_i}:measured_TP={input_tp}:measured_LRA={input_lra}:measured_thresh={input_thresh}:offset={target_offset}:linear=true").format(**m)
-        ff(['-i',mixed,'-af',af+','+LIMIT,'-c:a','aac','-b:a','256k','-ar','48000','-t',str(dur),out_m4a])
+        for lim in(0.78,0.70,0.62,0.55,0.48):     # AAC can overshoot the limiter: re-encode with a lower ceiling until the true peak of the FILE is <= -1.3 dBTP
+            ff(['-i',mixed,'-af',af+','+LIMIT.replace('limit=0.78',f'limit={lim}'),'-c:a','aac','-b:a','256k','-ar','48000','-t',str(dur),out_m4a])
+            lg=ff(['-i',out_m4a,'-af','ebur128=peak=true','-vn','-f','null','-']);tp=re.findall(r'Peak:\s+(-?[\d.]+) dBFS',lg)
+            if not tp or float(tp[-1])<=-1.3:break
     except BaseException as e:err.append(e)
 def main():
     a=sys.argv[1:];g=lambda k,d:a[a.index(k)+1] if k in a else d
