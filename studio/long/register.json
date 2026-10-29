@@ -1,0 +1,162 @@
+{
+ "rules": {
+  "owner_rule": "2026-10-29: a LIBRARY (engine, rig, icons, SFX, formats) may be reused, but every topic must also bring NEW things that follow from the topic. Reusing the library alone is not allowed.",
+  "min_new": {
+   "locs": 2,
+   "cast": 3,
+   "props": 2,
+   "devices": 1,
+   "gags": 1
+  },
+  "unique_vs_other_worlds": [
+   "world",
+   "setting",
+   "structure",
+   "announcer",
+   "palette",
+   "gags",
+   "tips",
+   "cast",
+   "locs",
+   "props",
+   "devices"
+  ],
+  "tied_to_topic_min_chars": 60
+ },
+ "worlds": [
+  {
+   "id": "lighthouse",
+   "status": "posted",
+   "name": "THE LIGHTHOUSE (v1 shorts, parts 2-5; part 1 and old part 2 are legacy)",
+   "setting": "a lighthouse and its coast",
+   "locs": [
+    "lighthouse"
+   ],
+   "cast": [],
+   "structure": "narrated serial shorts (v1)",
+   "announcer": "narrator",
+   "palette": "v1 teal/white",
+   "gags": [],
+   "tips": [],
+   "props": [],
+   "devices": [],
+   "note": "older v1 engine; cast and props were not catalogued - fill in if ever reused"
+  },
+  {
+   "id": "sunrise",
+   "status": "posted",
+   "name": "THE LAST SUNRISE (parts 11-15)",
+   "setting": "a last-sunrise survival story",
+   "locs": [
+    "sunrise"
+   ],
+   "cast": [],
+   "structure": "narrated serial shorts (v1/v3)",
+   "announcer": "narrator",
+   "palette": "v3 dawn",
+   "gags": [],
+   "tips": [],
+   "props": [],
+   "devices": [],
+   "note": "older v3 engine; cast and props were not catalogued - fill in if ever reused"
+  },
+  {
+   "id": "lastbus",
+   "status": "posted",
+   "name": "THE LAST BUS (10 parts, Oct 29 2026) - Route 12 re-skin was rejected and deleted",
+   "setting": "a city bus on a night route during the outbreak",
+   "locs": [
+    "bus",
+    "ext",
+    "pov"
+   ],
+   "cast": [
+    "rosa",
+    "priya",
+    "marcus",
+    "teddy",
+    "june",
+    "vic",
+    "lena",
+    "benny",
+    "park",
+    "dante",
+    "amara",
+    "walt",
+    "steve",
+    "slim",
+    "dex",
+    "maya",
+    "raider"
+   ],
+   "structure": "myth-buster Q&A + one stop per part of a serial mystery",
+   "announcer": "bus-e-pa",
+   "palette": "night city, sodium orange",
+   "gags": [
+    "steve-the-polite-zombie-with-a-ticket"
+   ],
+   "tips": [
+    "stairs-vs-elevator",
+    "bag-load",
+    "noise",
+    "water",
+    "stay-or-run"
+   ],
+   "props": [
+    "bus-seat",
+    "garys-dinosaur",
+    "chicken-suit",
+    "briefcase",
+    "handbag"
+   ],
+   "devices": [
+    "pa",
+    "rules",
+    "symptoms",
+    "mirror",
+    "bitevs",
+    "ab",
+    "rule",
+    "route"
+   ]
+  },
+  {
+   "id": "harvest",
+   "status": "pilot",
+   "name": "THE LAST HARVEST (3 nights; part 1 = pilot, not posted)",
+   "setting": "a family farm at dusk, three nights before the last corn harvest",
+   "locs": [
+    "farm:yard",
+    "farm:field",
+    "farm:porch",
+    "farm:barn"
+   ],
+   "cast": [
+    "ruth",
+    "eli",
+    "junie",
+    "hank"
+   ],
+   "structure": "countdown: three nights, one farm rule per night, cliffhanger to the next place on the farm",
+   "announcer": "farm-radio",
+   "palette": "dusk gold, corn green, barn red",
+   "gags": [
+    "polka-scarecrow-lures-zombies"
+   ],
+   "tips": [
+    "sound-leads-them"
+   ],
+   "props": [
+    "scarecrow",
+    "corn-rows",
+    "barn-door",
+    "radio"
+   ],
+   "devices": [
+    "radio",
+    "farmend",
+    "nightline"
+   ]
+  }
+ ]
+}

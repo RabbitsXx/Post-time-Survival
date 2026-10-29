@@ -104,3 +104,7 @@ Every rule below comes from something that was rejected, broke, or cost a re-ren
 Reusing one world (the bus, its 12 passengers, one template) for the next series is NOT acceptable to the owner, even when it is fast and passes every QA gate.
 Each new topic/series gets its own setting, its own characters and its own story structure. Volume (10 clips a day) never justifies re-skinning the previous series.
 Show a pilot of a new world to the owner before mass-producing it. studio/long/formats.py + arcs/route12 stay only as an example of the template mechanism.
+
+## Owner rule (2026-10-29, later): library is fine, library-only is not
+A prepared library (engine, rig, icons, SFX, formats) may be reused, but each topic must bring new things that follow from its subject: new world and locations, new cast, new props, a new announcer/device, a new story structure, a new gag and a real tip nobody taught before, 2-3 parts per topic.
+Guard: `studio/long/newness.py` against `register.json` (human view `WORLD_REGISTER.md`, rules in `LIBRARY.md`); `autopilot/build_clip.py` runs it before and after the spec step. A clip without a `NEW` block, or whose cast/locations/announcer/gag/tip clash with an earlier world, does not build.
