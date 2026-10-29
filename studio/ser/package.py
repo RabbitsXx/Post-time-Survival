@@ -5,7 +5,9 @@ import sys,os,shutil,importlib
 R=os.path.dirname(os.path.abspath(__file__));S=os.path.abspath(R+'/..');sys.path.insert(0,R)
 import series
 a=sys.argv[1:];key=a[0];cfg=series.SERIES[key];repo=a[a.index('--repo')+1] if '--repo' in a else '/home/user/Post-time-Survival'
-M=importlib.import_module(cfg['meta']).M;kit=[f"# {cfg['title']} - publish kit (review copy)\n"]
+MOD=importlib.import_module(cfg['meta']);M=MOD.M;TAGS=getattr(MOD,'YT_TAGS','').strip()
+if not TAGS:sys.exit(f'no YT_TAGS in {cfg["meta"]}.py - every video needs YouTube tags (standing rule)')
+kit=[f"# {cfg['title']} - publish kit (review copy)\n\n**YouTube tags (paste in Studio, {len(TAGS)} chars):**\n\n```\n{TAGS}\n```\n"]
 for n,N in zip(range(1,99),cfg['ids']) if key!='lighthouse' else zip(range(2,99),cfg['ids']):
     rel=os.path.dirname(cfg['release'].format(n=n));d=f'{repo}/{rel}';os.makedirs(d,exist_ok=True)
     name=os.path.basename(cfg['release'].format(n=n))

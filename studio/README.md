@@ -38,3 +38,6 @@ See `LESSONS.md` (why) and `AUDIT.md` (what was measured). Short version: a cut 
 
 ## 16:9 long-form
 `long/` is the factory for 5-15 minute 1920x1080 videos with several voices, lip-sync, a pixel-art game skin and meme editing (first use: HOW TO SURVIVE A ZOMBIE APOCALYPSE). See `long/README.md`.
+
+## Standing rule: YouTube tags
+Every video gets YouTube tags. Buffer cannot set them, so `publish.py` checks `YT_TAGS` in the series meta (>= 8 tags, <= 500 chars), refuses to schedule without it and writes `ser/youtube_tags_<series>.md` to paste in Studio after the post.

@@ -62,6 +62,8 @@ Every rule below comes from something that was rejected, broke, or cost a re-ren
 * **Persist the toolchain**: the working folder of a cloud session is ephemeral. The whole studio (engine, scripts, scene catalogue, docs) is committed under `studio/` in the repo. Secrets (`post.env`: TTS key, Buffer token; OAuth files) are never committed.
 * Never test on shipped parts: `PART_SRC=13 python3 ser/make_part.py 23` builds a sandbox folder from part 13's script and writes no deliverable (a test of mine once overwrote a shipped subtitle file; it was restored and verified byte-identical, and the script now refuses to).
 
+* **Every video gets YouTube tags (standing rule from the owner, 2026-10-29).** Buffer's YouTube metadata has no tags field (checked by schema introspection), so the first 10 YouTube videos went out without tags. Now: each series meta defines `YT_TAGS` (>= 8 tags, <= 500 chars), `publish.py` refuses to schedule without them and prints/saves `ser/youtube_tags_<series>.md` for pasting in Studio, `package.py` puts them at the top of PUBLISH_KIT.md, `kit16.py` (long-form) writes them into PUBLISH.md. They still have to be pasted by hand (or via the YouTube API once an OAuth client exists).
+
 ## 8. Incidents -> guards
 
 | Incident | Cause | Guard now |
