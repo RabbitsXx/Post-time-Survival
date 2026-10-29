@@ -41,3 +41,6 @@ See `LESSONS.md` (why) and `AUDIT.md` (what was measured). Short version: a cut 
 
 ## Standing rule: YouTube tags
 Every video gets YouTube tags. Buffer cannot set them, so `publish.py` checks `YT_TAGS` in the series meta (>= 8 tags, <= 500 chars), refuses to schedule without it and writes `ser/youtube_tags_<series>.md` to paste in Studio after the post.
+
+## Standing rule: every short announces itself
+Series name, topic and part are shown for the first 3 s (`announce=True`, see `ser/announce.py`) and said in the sign-off (`announce.signoff()`). `python3 ser/announce.py check SERIES` lints a whole series.

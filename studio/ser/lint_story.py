@@ -12,6 +12,12 @@ for f in os.listdir(V):
     if f.startswith(('lib_','kit')) and f.endswith('.js') and 'backup' not in f:
         scenes|=set(re.findall(r'^LIB\.(\w+)\s*=',open(f'{V}/{f}').read(),re.M))
 errs,warns=[],[]
+# standing rule: a part that announces itself on screen also says series name + part in its sign-off (announce.py)
+import series as _SR,announce as _AN
+_k,_pn=_SR.of(N if SRC==N else SRC);_cfg=_SR.SERIES[_k]
+if P.get('announce',_cfg.get('announce',False)):
+    _sp=P['next_spoken'].lower()
+    if _cfg['title'].lower() not in _sp or f'part {_AN.NUM[_pn]}' not in _sp:errs.append(f'sign-off "{P["next_spoken"]}" must say the series name and the part: use announce.signoff()')
 beats=[(si,b) for si,s in enumerate(P['sentences']) for b in s]
 spoken=[" ".join(sp for b in s for _,sp in b['caps']) for s in P['sentences']]
 words=sum(len(t.split()) for t in spoken)+len(P['next_spoken'].split())

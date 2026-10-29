@@ -81,7 +81,7 @@ def main():
     plan=[];keys=set()
     for i,(f0,f1) in sorted(rng.items()):
         b=spec['beats'][i];n=b['scene']['n']
-        key=hashlib.sha1(json.dumps(dict(v=2,scene=b['scene'],shot=b['shot'],t=b['t'],f=[f0,f1],h=scene_h.get(n,base)),sort_keys=True).encode()).hexdigest()[:20]
+        key=hashlib.sha1(json.dumps(dict(v=2,scene=b['scene'],shot=b['shot'],t=b['t'],f=[f0,f1],h=scene_h.get(n,base),ann=(spec.get('series') if f0<100 else None)),sort_keys=True).encode()).hexdigest()[:20]
         keys.add(key);d=f'{cache}/{key}';have=len([x for x in os.listdir(d) if x.endswith('.jpg')]) if os.path.isdir(d) else 0
         plan.append((i,key,d,f0,f1,have==f1-f0 and not force))
     todo=[p for p in plan if not p[5]];t0=time.time()

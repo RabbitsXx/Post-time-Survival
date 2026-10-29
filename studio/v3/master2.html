@@ -7,10 +7,15 @@ html,body{margin:0;background:#000}
 #punch{position:absolute;inset:0;pointer-events:none;background:#eaf2ff;opacity:0}
 #punch{position:absolute;inset:0;pointer-events:none;background:#eaf2ff;opacity:0}
 #grain{position:absolute;inset:-40px;pointer-events:none;background:url(grain.png);opacity:.05;mix-blend-mode:overlay}
+/* series announcement (name / part n of N / topic): first 3 s of every part of a series that sets series.announce; x 100-620, y 176-306 = inside every platform's safe zone, above the caption band */
+#sertag{position:absolute;left:50%;top:176px;width:520px;box-sizing:border-box;padding:14px 22px 16px 26px;border-radius:16px;border-left:8px solid #ffd23a;background:rgba(6,8,14,.64);color:#fff;font-family:'Inter','DejaVu Sans',sans-serif;opacity:0;pointer-events:none;transform:translateX(-50%)}
+#sertag .s{font-weight:800;font-size:21px;letter-spacing:6px;text-transform:uppercase;white-space:nowrap;transform-origin:left center}
+#sertag .p{font-weight:900;font-size:56px;line-height:1.04;margin-top:3px;white-space:nowrap}
+#sertag .t{font-weight:700;font-size:28px;letter-spacing:2px;text-transform:uppercase;margin-top:5px;opacity:.94;white-space:nowrap;transform-origin:left center}
 </style></head><body>
 <div id="stage">
  <svg id="sv" viewBox="0 0 720 1280" width="720" height="1280"><defs id="defs"></defs><g id="far"></g><g id="mid"></g><g id="near"></g><g id="hud"></g></svg>
- <div id="vig"></div><div id="punch"></div><div id="punch"></div><div id="grain"></div>
+ <div id="vig"></div><div id="punch"></div><div id="punch"></div><div id="grain"></div><div id="sertag"></div>
 </div>
 <script>document.write('<script src="../ser/p'+new URLSearchParams(location.search).get('part')+'/spec.js"><\/script>')</script>
 <script src="kit.js"></script>
@@ -45,6 +50,13 @@ function camera(kind,u,bt){const e=u;let dx=0,dy=0,s=1,rot=0,blur=0;
  return {dx,dy,s,rot,blur}}
 LIB.endcard=(Z)=>{const f=G(Z.far);R(f,-300,-300,1320,1880,'#07080a');const fl=R(Z.near,-300,-300,1320,1880,'#fff');return (u,t,bt)=>{A(fl,{opacity:Math.max(0,1-bt/.25)})}};
 function build(i){for(const k in LAY)LAY[k].innerHTML='';LAY.far.setAttribute('filter',NOBLUR.has(BEATS[i].shot.type)?'':'url(#b2)');const Z={};for(const k in LAY)Z[k]=LAY[k];const sc=BEATS[i].scene||{n:'dark',p:{}};const fn=LIB[sc.n]||LIB.dark;upd=fn(Z,sc.p||{})}
+function serTag(t){const S=SPEC.series,el=document.getElementById('sertag');
+ if(!S||!S.announce){el.style.opacity=0;return}
+ if(!el._init){el._init=1;const ac=S.accent||'#ffd23a';el.style.borderLeftColor=ac;
+  el.innerHTML=`<div class="s" style="color:${ac}"></div><div class="p"></div><div class="t"></div>`;
+  el.querySelector('.s').textContent=S.name;el.querySelector('.p').innerHTML=`PART <span style="color:${ac}">${S.part}</span> / ${S.of}`;el.querySelector('.t').textContent=S.topic;
+  for(const q of ['.s','.t']){const n=el.querySelector(q),w=el.clientWidth-56;if(n.scrollWidth>w)n.style.transform=`scaleX(${w/n.scrollWidth})`}}
+ const a=clamp((t-.15)/.25)*(1-clamp((t-2.95)/.3));el.style.opacity=a;el.style.transform=`translateX(-50%) translateY(${(1-eo(clamp((t-.15)/.35)))*-18}px)`}
 window.renderFrame=function(f){
  const t=f/FPS;let i=0;for(let k=0;k<BEATS.length;k++){if(t>=BEATS[k].t[0]-1e-6)i=k}
  if(i!==curIdx){build(i);curIdx=i}
@@ -54,7 +66,7 @@ window.renderFrame=function(f){
   LAY[k].setAttribute('transform',`translate(360 640) translate(${c.dx*fa} ${c.dy*fa}) rotate(${c.rot*fa}) scale(${sc}) translate(-360 -640)`)}
  document.getElementById('sv').style.filter=(c.blur>.5?`blur(${c.blur}px) `:'')+'saturate(.9) contrast(1.04)';
  upd(u,t,bt);
- document.getElementById('punch').style.opacity=0;
+ document.getElementById('punch').style.opacity=0;serTag(t);
  document.getElementById('grain').style.transform=`translate(${(f*37)%40}px ${(f*53)%40}px)`;
 };
 window.renderFrame(0);

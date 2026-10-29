@@ -64,6 +64,8 @@ Every rule below comes from something that was rejected, broke, or cost a re-ren
 
 * **Every video gets YouTube tags (standing rule from the owner, 2026-10-29).** Buffer's YouTube metadata has no tags field (checked by schema introspection), so the first 10 YouTube videos went out without tags. Now: each series meta defines `YT_TAGS` (>= 8 tags, <= 500 chars), `publish.py` refuses to schedule without them and prints/saves `ser/youtube_tags_<series>.md` for pasting in Studio, `package.py` puts them at the top of PUBLISH_KIT.md, `kit16.py` (long-form) writes them into PUBLISH.md. They still have to be pasted by hand (or via the YouTube API once an OAuth client exists).
 
+* **Every short announces its series name, topic and part (standing rule from the owner, 2026-10-29).** On screen for the first 3 s (`#sertag` in master2.html: SERIES NAME / PART n / N / TOPIC, x 100-620, y 176-306, inside the platform safe zones) and spoken in the sign-off at the end (`announce.signoff()`: "Part two of five, The Last Sunrise. Next: the hot spring. Follow for part three."), so the hook stays the first thing a new viewer hears. Opt in with `announce=True` on a part or `announce` in the series entry of series.py; `announce.py check SERIES` and lint_story enforce it. The five shipped LAST SUNRISE parts and the Lighthouse parts were made before the rule and are unchanged.
+
 ## 8. Incidents -> guards
 
 | Incident | Cause | Guard now |

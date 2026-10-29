@@ -198,7 +198,10 @@ for i,b in enumerate(beats):
     b['shot']['camera']=c
 beats.append(dict(id=f"b{len(beats)+1:02d}",t=[round(start[-1]-0.04,3),60.0],role="endcard",info=f"End card: "+P['series_hook'].lower(),
     shot=dict(type="endcard",camera="static_punch",hud=["end_card"]),sfx=["riser"],captions=[],scene=dict(n="endcard",p={})))
-spec=dict(title=f"{SERIES} — Part {PN}: {P['title']}",series=dict(part=PN,next_hook=P['series_hook']),format=dict(w=720,h=1280,fps=30),duration=60.0,
+import series as _SR
+_key,_pn=_SR.of(SRC);_cfg=_SR.SERIES[_key]
+# announcement shown in the first 3 s (name / part n of N / topic). Opt-in per part with announce=True so already published parts re-render identically.
+spec=dict(title=f"{SERIES} — Part {PN}: {P['title']}",series=dict(part=PN,next_hook=P['series_hook'],name=SERIES,of=len(_cfg['ids']),topic=P['title'],announce=bool(os.environ.get('ANNOUNCE') or P.get('announce',_cfg.get('announce',False))),accent=_cfg.get('accent','#ffd23a')),format=dict(w=720,h=1280,fps=30),duration=60.0,
   chain_note="problem -> solution -> new problem",beats=beats,end_card=P['end'])
 json.dump(spec,open(f'{OUT}/spec.json','w'),indent=1);open(f'{OUT}/spec.js','w').write('window.SPEC='+json.dumps(spec)+';')
 voice=np.zeros(int(60*SR),dtype=np.float32)
