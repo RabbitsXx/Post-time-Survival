@@ -1,26 +1,31 @@
 """yt_api.py : the part of YouTube that Buffer cannot do (tags, custom thumbnail, subtitles, playlist), through the YouTube Data API v3.
-Credential: environment variable  Youtube_API  (any capitalisation) holding JSON  {"client_id":..,"client_secret":..,"refresh_token":..}
-(an OAuth client's JSON with a refresh_token added is fine too).  A bare API key (AIza...) can only READ public data: it cannot edit a video, so it is rejected with a clear message.
+Credential: secrets Client_ID + Client_secret + Refresh_token, or one JSON in Youtube_API {"client_id":..,"client_secret":..,"refresh_token":..}.
+A bare API key (AIza...) can only READ public data: it cannot edit a video, so it is rejected with a clear message.
 Needs the scope  https://www.googleapis.com/auth/youtube  (manage the account).  Never print the credential."""
 import os,json,time,datetime as dt,re,uuid,requests
 R=os.path.dirname(os.path.abspath(__file__));STATE=R+'/state';os.makedirs(STATE,exist_ok=True)
 COST=dict(list=1,update=50,insert=50,thumb=50,caption=400,upload=1600)   # quota units per call (Google's quota calculator; check it when the numbers matter)
 class NoCredential(SystemExit):pass
 _tok={}
-def _raw():
+def _env(*names):
+    low=[n.lower() for n in names]
     for k,v in os.environ.items():
-        if k.lower()=='youtube_api' and v.strip():return v.strip()
-    raise NoCredential('no Youtube_API environment variable in this session (add it under the cloud environment settings > secrets; a new session picks it up)')
+        if k.lower() in low and v.strip():return v.strip()
 def creds():
-    v=_raw()
-    if v.startswith('AIza'):raise NoCredential('Youtube_API is a plain API key (AIza...). A key can only read public data. Editing a video needs an OAuth client id + secret + refresh token for the channel (scope youtube). See studio/autopilot/AUTOPILOT.md')
-    try:j=json.loads(v)
-    except Exception:raise NoCredential('Youtube_API is not JSON. Expected {"client_id":..,"client_secret":..,"refresh_token":..}')
-    for k in('installed','web'):
-        if isinstance(j.get(k),dict):j={**j[k],**{x:y for x,y in j.items() if x!=k}}
-    miss=[k for k in('client_id','client_secret','refresh_token') if not j.get(k)]
-    if miss:raise NoCredential('Youtube_API JSON lacks '+', '.join(miss))
-    return j
+    """Either one JSON in Youtube_API, or three separate secrets Client_ID + Client_secret + Refresh_token (any capitalisation; Youtube_refresh_token also accepted)"""
+    cid,sec,rt=_env('client_id','youtube_client_id'),_env('client_secret','youtube_client_secret'),_env('refresh_token','youtube_refresh_token')
+    raw=_env('youtube_api')
+    if raw and raw.startswith('{'):
+        try:j=json.loads(raw)
+        except Exception:raise NoCredential('Youtube_API looks like JSON but does not parse')
+        for k in('installed','web'):
+            if isinstance(j.get(k),dict):j={**j[k],**{x:y for x,y in j.items() if x!=k}}
+        cid,sec,rt=j.get('client_id') or cid,j.get('client_secret') or sec,j.get('refresh_token') or rt
+    miss=[n for n,v in(('client_id',cid),('client_secret',sec),('refresh_token',rt)) if not v]
+    if miss:
+        hint=' (Youtube_API is a plain API key AIza..., which can only read public data)' if (raw or '').startswith('AIza') else ''
+        raise NoCredential('missing '+', '.join(miss)+hint+'. A client id + secret alone cannot touch the channel: the owner must also authorise once (OAuth Playground, scope https://www.googleapis.com/auth/youtube) and store the Refresh token as secret Refresh_token')
+    return dict(client_id=cid,client_secret=sec,refresh_token=rt)
 def token():
     if _tok.get('exp',0)>time.time()+60:return _tok['t']
     c=creds();r=requests.post('https://oauth2.googleapis.com/token',data=dict(client_id=c['client_id'],client_secret=c['client_secret'],refresh_token=c['refresh_token'],grant_type='refresh_token'),timeout=60)
@@ -81,3 +86,18 @@ def add_to_playlist(pl,vid):
     call('POST',API+'playlistItems?part=snippet','insert',json=dict(snippet=dict(playlistId=pl,resourceId=dict(kind='youtube#video',videoId=vid))))
 def video_id_from_url(u):
     m=re.search(r'(?:shorts/|watch\?v=|youtu\.be/)([A-Za-z0-9_-]{11})',u or '');return m.group(1) if m else None
+
+def upload_video(path,title,description,tags,publish_at_iso=None,category='1',language='en',synthetic=True):
+    """upload a finished clip as PRIVATE and let YouTube publish it by itself at publish_at_iso (UTC, 'YYYY-MM-DDTHH:MM:00.000Z'): no job is needed after the post.
+    tags, description, title and the synthetic-content label are set in the same call.  Costs 1600 quota units (see COST).  Returns the video id."""
+    spend(COST['upload'],LIMIT)
+    st=dict(privacyStatus='private',selfDeclaredMadeForKids=False,containsSyntheticMedia=bool(synthetic))
+    if publish_at_iso:st['publishAt']=publish_at_iso
+    body=dict(snippet=dict(title=title,description=description,tags=tags,categoryId=category,defaultLanguage=language,defaultAudioLanguage=language),status=st)
+    size=os.path.getsize(path);h={'Authorization':'Bearer '+token(),'Content-Type':'application/json; charset=UTF-8','X-Upload-Content-Length':str(size),'X-Upload-Content-Type':'video/mp4'}
+    r=requests.post(UP+'videos?uploadType=resumable&part=snippet,status',headers=h,data=json.dumps(body).encode(),timeout=120)
+    if r.status_code>=300:raise SystemExit(f'YouTube upload start -> HTTP {r.status_code}: {r.text[:300]}')
+    loc=r.headers['Location']
+    with open(path,'rb') as f:r=requests.put(loc,headers={'Content-Type':'video/mp4','Content-Length':str(size)},data=f,timeout=1800)
+    if r.status_code>=300:raise SystemExit(f'YouTube upload -> HTTP {r.status_code}: {r.text[:300]}')
+    return r.json()['id']

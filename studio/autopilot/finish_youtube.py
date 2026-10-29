@@ -18,7 +18,7 @@ ST_PL={}
 s=ST.load();n_done=0
 for c in s['clips']:
     if only and c['id']!=only:continue
-    if c.get('status')=='finished' or not c.get('posts',{}).get('yt'):continue
+    if c.get('status')=='finished' or not (c.get('posts',{}).get('yt') or c.get('yt_video_id')):continue
     c.setdefault('done',{})
     if not c.get('yt_video_id'):
         st=B.status(c['posts']['yt']);
