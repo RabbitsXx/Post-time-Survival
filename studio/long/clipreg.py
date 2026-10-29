@@ -26,8 +26,11 @@ def series(n):
 def th(n):
     if legacy(n):import th_bus;return th_bus.TH[int(n)]
     return module(n).TH
-def th_names():
-    import th_bus;return th_bus.NAMES_EN,th_bus.NAMES_TH
+def names(n):
+    """(English, Thai) speaker names for the subtitles"""
+    import th_bus
+    if legacy(n):return th_bus.NAMES_EN,th_bus.NAMES_TH
+    m=module(n);return getattr(m,'NAMES_EN',th_bus.NAMES_EN),getattr(m,'NAMES_TH',th_bus.NAMES_TH)
 def tags(n):
     if legacy(n):import meta_lb;return meta_lb.YT_TAGS
     return module(n).META['tags']

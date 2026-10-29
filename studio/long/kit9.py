@@ -26,7 +26,7 @@ def main():
         d=f'{R}/{CR.release(n)}';os.makedirs(d,exist_ok=True);si=CR.series(n);pn,of=si['part'],si['of']
         cues=json.load(open(f'{R}/p9/{CR.pid(n)}/cues_en.json'));th=CR.th(n)
         assert len(cues)==len(th),(n,len(cues),len(th))
-        srt(f'{d}/captions_en.srt',cues,[c['text'] for c in cues],th_bus.NAMES_EN,42);srt(f'{d}/captions_th.srt',cues,th,th_bus.NAMES_TH,38)
+        NE,NT=CR.names(n);srt(f'{d}/captions_en.srt',cues,[c['text'] for c in cues],NE,42);srt(f'{d}/captions_th.srt',cues,th,NT,38)
         for k in('9x16','16x9'):
             src=f'{R}/'+CR.cover(n,k)
             if os.path.exists(src):shutil.copy(src,f'{d}/cover_{k}.png')

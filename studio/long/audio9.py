@@ -130,10 +130,28 @@ def s_cheer():
     for i in range(8):
         f=rg.uniform(200,330);g=voiced(glide([f,f*1.25,f*1.1],.6),.6,10);g=fft_filter(g,400,3000)*np.sin(np.pi*tt(.6)/.6)*.2;j=int(rg.uniform(0,.5)*SR);x[j:j+len(g)]+=g
     return fade(x,.05,.2)
-NEW={'chime':s_chime,'doorhiss':s_doorhiss,'horn':s_horn,'hornlong':s_hornlong,'brake':s_brake,'crank':s_crank,'engfail':s_engfail,'engstart':s_engstart,'glass':s_glass,'slap':s_slap,'clunk':s_clunk,'creak':s_creak,'gurgle':s_gurgle,
+def s_rustle():
+    d=1.4;n=np.random.RandomState(7).randn(int(d*SR));x=fft_filter(n,1800,7000)*(.5+.5*np.sin(2*np.pi*7*tt(d)))*np.sin(np.pi*tt(d)/d)*.35;return fade(x,.05,.3)
+def s_cricket():
+    d=1.6;x=np.zeros(int(d*SR))
+    for k in range(6):
+        for j in range(3):
+            t0=int((k*.24+j*.045)*SR);n=int(.03*SR);w=np.sin(2*np.pi*4300*np.arange(n)/SR)*np.hanning(n)*.12;x[t0:t0+n]+=w[:max(0,len(x)-t0)]
+    return fade(x,.02,.1)
+def s_bell():
+    d=1.8;t=tt(d);x=(np.sin(2*np.pi*880*t)+.6*np.sin(2*np.pi*1320*t)+.4*np.sin(2*np.pi*2110*t))*np.exp(-t*3.2)*.3;return fade(x,.005,.3)
+def s_polka():
+    d=3.0;x=np.zeros(int(d*SR));bpm=132;step=60/bpm
+    for i in range(int(d/step)):
+        t0=int(i*step*SR);n=int(.18*SR);tn=np.arange(n)/SR;f=[196,294][i%2]*(1 if i%4<2 else 1.122)
+        w=(np.sign(np.sin(2*np.pi*f*tn))*.5+np.sin(2*np.pi*f*2*tn)*.3)*np.exp(-tn*14)*.25;x[t0:t0+n]+=w[:max(0,len(x)-t0)]
+        if i%2==1:
+            m=int(.1*SR);tm=np.arange(m)/SR;w2=(np.sign(np.sin(2*np.pi*392*tm))*.4+np.sin(2*np.pi*784*tm)*.3)*np.exp(-tm*18)*.2;x[t0:t0+m]+=w2[:max(0,len(x)-t0)]
+    return fade(fft_filter(x,300,3400),.01,.1)
+NEW={'rustle':s_rustle,'cricket':s_cricket,'bell':s_bell,'polka':s_polka,'chime':s_chime,'doorhiss':s_doorhiss,'horn':s_horn,'hornlong':s_hornlong,'brake':s_brake,'crank':s_crank,'engfail':s_engfail,'engstart':s_engstart,'glass':s_glass,'slap':s_slap,'clunk':s_clunk,'creak':s_creak,'gurgle':s_gurgle,
  'boing':s_boing,'rimshot':s_rimshot,'stab':s_stab,'riser':s_riser,'swell':s_swell,'gasp':s_gasp,'sigh':s_sigh,'heartbeat':s_heartbeat,'snore':s_snore,'cluck':s_cluck,'meow':s_meow,'baby':s_baby,'horde':s_horde,'ping':s_ping,
  'sneak':s_sneak,'whisper':s_whisper,'zip':s_zip,'pour':s_pour,'ratchet':s_ratchet,'bridge':s_bridge,'purr':s_purr,'lever':s_lever,'splat':s_splat,'cheer':s_cheer}
-GN={'chime':.7,'doorhiss':.7,'horn':.6,'hornlong':.55,'brake':.45,'crank':.7,'engfail':.8,'engstart':.8,'glass':.6,'slap':.9,'clunk':.8,'creak':.5,'gurgle':.6,'boing':.7,'rimshot':.7,'stab':.65,'riser':.6,'swell':.7,'gasp':.6,'sigh':.6,
+GN={'rustle':.7,'cricket':.6,'bell':.7,'polka':.9,'chime':.7,'doorhiss':.7,'horn':.6,'hornlong':.55,'brake':.45,'crank':.7,'engfail':.8,'engstart':.8,'glass':.6,'slap':.9,'clunk':.8,'creak':.5,'gurgle':.6,'boing':.7,'rimshot':.7,'stab':.65,'riser':.6,'swell':.7,'gasp':.6,'sigh':.6,
  'heartbeat':.95,'snore':.8,'cluck':.8,'meow':.8,'baby':.7,'horde':.8,'ping':.7,'sneak':.8,'whisper':.8,'zip':.7,'pour':.7,'ratchet':.7,'bridge':.7,'purr':.9,'lever':.8,'splat':.8,'cheer':.7}
 A.SFX.update(NEW);A.GAIN.update(GN)
 # ------------------------------------------------------------------ moods that carry the engine
