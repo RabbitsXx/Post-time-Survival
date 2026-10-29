@@ -4,6 +4,7 @@
 import sys,os,json,subprocess
 R=os.path.dirname(os.path.abspath(__file__));S=os.path.abspath(R+'/..');sys.path.insert(0,S+'/ser')
 import cover
+import clipreg as CR
 from PIL import Image
 # (beat, fraction, main, box, accent line)
 CFG={1:(0,.6,"ONE OF THEM|IS BITTEN","12 STRANGERS · 10 HOURS",1),
@@ -17,18 +18,22 @@ CFG={1:(0,.6,"ONE OF THEM|IS BITTEN","12 STRANGERS · 10 HOURS",1),
  9:(0,.5,"TAKE OFF|THE GLOVE","THE TRUTH",1),
  10:(0,.6,"THE LAST|MILE","FINALE · PIER 8",1)}
 def base(n,out_dir):
-    B=json.load(open(f'{R}/p9/covers/spec.json'))['beats'];bi,fr,*_=CFG[n];b=B[n-1];f=int(round((b['t'][0]+(b['t'][1]-b['t'][0])*fr)*30))
+    """clean engine still: THE LAST BUS parts use the dedicated cover shots (p9/covers), autopilot clips use a beat of their own spec (COVER=dict(beat,frac,main,box))"""
+    bi,fr,*_=CR.cover_cfg(n)
+    if CR.legacy(n):B=json.load(open(f'{R}/p9/covers/spec.json'))['beats'];b=B[int(n)-1];sn='covers/spec'
+    else:B=json.load(open(f'{R}/p9/{n}/spec.json'))['beats'];b=B[bi];sn=f'{n}/spec'
+    f=int(round((b['t'][0]+(b['t'][1]-b['t'][0])*fr)*30))
     env=dict(os.environ,NODE_PATH=subprocess.check_output(['npm','root','-g'],text=True).strip(),CLEAN='1')
-    subprocess.check_call(['node','snapbeats9.js','covers/spec',out_dir]+[str(f)],cwd=R,env=env)
+    subprocess.check_call(['node','snapbeats9.js',sn,out_dir]+[str(f)],cwd=R,env=env)
     os.replace(f'{out_dir}/{f}.png',f'{out_dir}/base_{n}.png');return f'{out_dir}/base_{n}.png'
 if __name__=='__main__':
     a=sys.argv[1:];os.makedirs(R+'/covers9',exist_ok=True)
     if a and a[0]=='--bases':
         for n in range(1,11):print(n,base(n,R+'/covers9/base'))
         sys.exit(0)
-    for n in [int(x) for x in a]:
-        bp=base(n,R+'/covers9/base');_,_,main,box,acc=CFG[n]
-        out9=f'{R}/covers9/cover_{n}_9x16.png';out169=f'{R}/covers9/cover_{n}_16x9.png'
-        cover.make(bp,out9,'916',f'PART {n}',main,box,acc,tag='THE LAST BUS')
-        cover.make169_from916(bp,out169,f'PART {n}',main,box,acc,tag='THE LAST BUS')
+    for n in [int(x) if x.isdigit() else x for x in a]:
+        bp=base(n,R+'/covers9/base');_,_,main,box,acc=CR.cover_cfg(n);si=CR.series(n)
+        out9=f'{R}/'+CR.cover(n,'9x16');out169=f'{R}/'+CR.cover(n,'16x9')
+        cover.make(bp,out9,'916',f"PART {si['part']}",main,box,acc,tag=si['name'])
+        cover.make169_from916(bp,out169,f"PART {si['part']}",main,box,acc,tag=si['name'])
         print('cover',n,out9)

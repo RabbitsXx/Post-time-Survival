@@ -49,16 +49,26 @@ SPEAKERS=dict(rosa=_sp('ROSA','#ffb36b'),priya=_sp('PRIYA','#7ff0e0'),marcus=_sp
  lena=_sp('LENA','#ff9bf0'),benny=_sp('BENNY','#ffffff'),benny2=_sp('BENNY','#ffffff'),raider=_sp('RAIDER','#ffa070'),park=_sp('MR. PARK','#a0c4ff'),dante=_sp('DANTE','#d4e157'),amara=_sp('AMARA','#ff9ec7'),walt=_sp('WALT','#e0c0a0'),
  bus=_sp('BUS-E','#7dffb0',True),buswh=_sp('BUS-E (whisper)','#7dffb0',True),steve=_sp('STEVE','#d9f5c4'),slim=_sp('SLIM','#ff6b5a'),radio=_sp('RADIO','#ffe066'),dex=_sp('COACH DEX','#ffd23a'),maya=_sp('MAYA','#ffe3f1'))
 ALL_WORDS=True
+NUMW=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty']
 
 class Part(Script):
     """one episode: P=Part(3,'THE LAST DROP','10:02 PM','GHOST GAS STATION');  P.B(say,shot,fx=[],sfx=[],...)  shot = bus()/ext()/pov() tuple or a card() dict.
     Every non-card beat gets the route line (stop n of 10, clock, place) - the part number is always on screen."""
-    def __init__(s,n,topic,time,place):
-        Script.__init__(s,f'THE LAST BUS - PART {n}: {topic}','THE LAST BUS',n,10,topic,'#ffb020');s.time=time;s.place=place
+    def __init__(s,n,topic,time,place,series='THE LAST BUS',of=10,say=None,accent='#ffb020'):
+        """series = the name shown on screen (an arc of the bus universe may be 'THE LAST BUS: ROUTE 12'); say = how BUS-E says it ('the Last Bus, Route twelve'); of = number of parts in this arc"""
+        Script.__init__(s,f'{series} - PART {n}: {topic}',series,n,of,topic,accent);s.time=time;s.place=place;s.say=say or ('the Last Bus' if series=='THE LAST BUS' else series.title())
+    def pa_open(s,extra=None,**k):
+        """BUS-E opens every part: series name + part n of N + topic (standing rule: said out loud within 8 s, and the same words are on the card)"""
+        return s.B([('bus',f"Ding dong! This is {s.say}. Part {NUMW[s.part]} of {NUMW[s.of]}: {s.topic.lower()}.")],card('pa',mode='open',part=s.part,of=s.of,title=s.topic.upper(),time=s.time),mood='idle',sfx=[('chime',0)],**k)
+    def pa_close(s,nxt=None,quip='',**k):
+        """BUS-E signs off: series + part + next stop + follow (the last part of an arc says: follow for the next series)"""
+        if s.part<s.of:t=f"Part {NUMW[s.part]} of {NUMW[s.of]}, {s.say}. Next: {nxt.lower()}. Follow for part {NUMW[s.part+1]}. {quip}".strip();c=card('pa',mode='close',part=s.part,of=s.of,next=(nxt or '').upper(),time=s.time)
+        else:t=f"Part {NUMW[s.of]} of {NUMW[s.of]}, the end of {s.say}. Follow for the next series.";c=card('finale')
+        return s.B([('bus',t)],c,mood='idle' if s.part<s.of else 'sad',nofade=s.part>=s.of,sfx=[('chime',0)],**k)
     def B(s,say,shot,fx=None,time=None,place=None,**k):
         fx=list(fx or [])
         if isinstance(shot,tuple):
-            sc,view=shot;fx.append(dict(k='route',at=0,stop=s.part,of=10,time=time or s.time,place=place or s.place));return s.beat(say,sc,view=view,fx=fx,**k)
+            sc,view=shot;fx.append(dict(k='route',at=0,stop=s.part,of=s.of,time=time or s.time,place=place or s.place));return s.beat(say,sc,view=view,fx=fx,**k)
         return s.beat(say,shot,fx=fx,**k)
 
 # ---------------- shot helpers ----------------

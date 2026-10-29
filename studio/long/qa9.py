@@ -12,12 +12,13 @@ import sys,os,json,re,subprocess,tempfile,collections
 import numpy as np
 from PIL import Image
 R=os.path.dirname(os.path.abspath(__file__));S=os.path.abspath(R+'/..');sys.path.insert(0,R);sys.path.insert(0,S+'/ser')
-import meta_lb,th_bus
-NUM=['zero','one','two','three','four','five','six','seven','eight','nine','ten']
+import clipreg as CR
+NUM=CR.NUMW
 def run(n):
     rows=[];FPS=30
     def row(g,l,m):rows.append((g,l,m))
-    P=f'{R}/p9/part{n}';sp=json.load(open(f'{P}/spec.json'));B=sp['beats'];cues=json.load(open(f'{P}/cues_en.json'));video=f'{R}/final9_p{n}.mp4';dur=sp['duration']
+    SI=CR.series(n);ME=CR.meta(n);TH=CR.th(n);np_,of=SI['part'],SI['of'];uni=SI['name'].split(':')[0].lower().replace('the ','').strip()
+    P=f'{R}/p9/{CR.pid(n)}';sp=json.load(open(f'{P}/spec.json'));B=sp['beats'];cues=json.load(open(f'{P}/cues_en.json'));video=f'{R}/{CR.final(n)}';dur=sp['duration']
     ln=[b['t'][1]-b['t'][0] for b in B];avg=float(np.mean(ln))
     row('A','PASS' if 3.0<=avg<=4.8 else 'WARN',f'{len(B)} beats, average {avg:.2f} s (target 3-4.8), longest {max(ln):.1f} s, shortest {min(ln):.1f} s')
     long=[(i,round(l,1)) for i,l in enumerate(ln) if l>9.5];row('A','FAIL' if long else 'PASS',f'beats > 9.5 s: {long}' if long else 'no beat > 9.5 s')
@@ -29,18 +30,17 @@ def run(n):
     chip=[f for f in B[0]['fx'] if f.get('k')=='series'];row('S','PASS' if chip and chip[0]['at']<=.5 else 'FAIL','on-screen series chip (name / part / topic) in the first 0.5 s' if chip else 'NO on-screen series chip in beat 0')
     # S: the PA says it
     pa=[c for c in cues if c['sp']=='bus'];first=pa[0]['text'].lower() if pa else '';last=pa[-1]['text'].lower() if pa else ''
-    topic=meta_lb.M[n]['yt_title'].split('—')[-1]
-    ok1=('last bus' in first) and (f'part {NUM[n]} of ten' in first);row('S','PASS' if ok1 else 'FAIL',f'PA opening: "{pa[0]["text"] if pa else None}"')
+    ok1=(uni in first) and (f'part {NUM[np_]} of {NUM[of]}' in first);row('S','PASS' if ok1 else 'FAIL',f'PA opening: "{pa[0]["text"] if pa else None}"')
     t0=pa[0]['t'][0] if pa else 99;row('S','PASS' if t0<=8 else 'FAIL',f'the PA opening is spoken at {t0:.1f} s (series + part + topic within the first 8 s)')
-    if n<10:ok2=('last bus' in last) and (f'part {NUM[n]} of ten' in last) and ('follow' in last or 'next' in last)
-    else:ok2=('last bus' in last) and ('part ten of ten' in last) and ('follow' in last)
+    if np_<of:ok2=(uni in last) and (f'part {NUM[np_]} of {NUM[of]}' in last) and ('follow' in last or 'next' in last)
+    else:ok2=(uni in last) and (f'part {NUM[of]} of {NUM[of]}' in last) and ('follow' in last)
     row('S','PASS' if ok2 else 'FAIL',f'PA sign-off: "{pa[-1]["text"] if pa else None}"')
     rt=[i for i,b in enumerate(B) if b['scene']['n']!='card' and not any(f.get('k')=='route' for f in b['fx'])]
-    row('S','PASS' if not rt else 'FAIL','route line (part n of 10) on every non-card beat' if not rt else f'beats without the route line: {rt}')
-    m=meta_lb.M[n];row('S','PASS' if f'Part {n}' in m['yt_title'] and len(m['yt_title'])<=100 else 'FAIL',f'YouTube title ({len(m["yt_title"])} chars): {m["yt_title"]}')
-    tl=[t.strip() for t in meta_lb.YT_TAGS.split(',') if t.strip()];row('S','PASS' if len(tl)>=8 and len(meta_lb.YT_TAGS)<=500 else 'FAIL',f'{len(tl)} YouTube tags, {len(meta_lb.YT_TAGS)} chars')
-    cn=len(cues);row('S','PASS' if len(th_bus.TH[n])==cn else 'FAIL',f'{cn} cues, {len(th_bus.TH[n])} Thai lines')
-    rel=f'{R}/release9/part{n}';miss=[f for f in('captions_en.srt','captions_th.srt','cover_9x16.png','cover_16x9.png','PUBLISH.md') if not os.path.exists(f'{rel}/{f}')];row('S','PASS' if not miss else 'FAIL','release kit complete' if not miss else f'missing {miss}')
+    row('S','PASS' if not rt else 'FAIL',f'route line (part n of {of}) on every non-card beat' if not rt else f'beats without the route line: {rt}')
+    m=ME;row('S','PASS' if f'Part {np_}' in m['yt_title'] and len(m['yt_title'])<=100 else 'FAIL',f'YouTube title ({len(m["yt_title"])} chars): {m["yt_title"]}')
+    tl=[t.strip() for t in m['tags'].split(',') if t.strip()];row('S','PASS' if len(tl)>=8 and len(m['tags'])<=500 else 'FAIL',f'{len(tl)} YouTube tags, {len(m["tags"])} chars')
+    cn=len(cues);row('S','PASS' if len(TH)==cn else 'FAIL',f'{cn} cues, {len(TH)} Thai lines')
+    rel=f'{R}/{CR.release(n)}';miss=[f for f in('captions_en.srt','captions_th.srt','cover_9x16.png','cover_16x9.png','PUBLISH.md') if not os.path.exists(f'{rel}/{f}')];row('S','PASS' if not miss else 'FAIL','release kit complete' if not miss else f'missing {miss}')
     # F fun audit
     spk=collections.Counter(c['sp'] for c in cues);chars=[k for k in spk if k not in('bus','buswh')];narr=sum(c['t'][1]-c['t'][0] for c in cues if c['sp'] in('bus','buswh'))/max(.1,sum(c['t'][1]-c['t'][0] for c in cues))
     row('F','PASS' if len(chars)>=6 else 'WARN',f'{len(chars)} character voices: {dict(spk)}')
@@ -53,7 +53,7 @@ def run(n):
     q=sum(1 for c in cues if '?' in c['text'] or re.search(r'\b(chat|you)\b',c['text'].lower()));row('F','PASS' if q>=1 else 'WARN',f'{q} lines with a question or talking to the viewer')
     # B layout
     env=dict(os.environ,NODE_PATH=subprocess.check_output(['npm','root','-g'],text=True).strip())
-    r=subprocess.run(['node','lint9.js',f'part{n}/spec'],cwd=R,capture_output=True,text=True,env=env);out=r.stdout+r.stderr;mm=re.search(r'lint9: (\d+) CROP, (\d+) OVERLAP, (\d+) BAND, (\d+) EDGE',out)
+    r=subprocess.run(['node','lint9.js',f'{CR.pid(n)}/spec'],cwd=R,capture_output=True,text=True,env=env);out=r.stdout+r.stderr;mm=re.search(r'lint9: (\d+) CROP, (\d+) OVERLAP, (\d+) BAND, (\d+) EDGE',out)
     if mm:
         c,o,b_,e=map(int,mm.groups());row('B','FAIL' if c+o else 'PASS',f'layout: {c} CROP, {o} OVERLAP');row('B','WARN' if b_+e else 'PASS',f'layout: {b_} BAND, {e} EDGE')
         for l in out.splitlines():
@@ -86,9 +86,9 @@ def run(n):
             dd=float(np.abs(np.asarray(Image.open(p).convert('L'),np.float32)-np.asarray(Image.open(cv).convert('L').resize((180,320)),np.float32)).mean());row('H','PASS' if dd<12 else 'FAIL',f'cover embedded in the first frames (diff {dd:.1f}/255)')
     else:row('C','WARN','video not found, skipped C-H')
     res='PASS' if not any(l=='FAIL' for _,l,_ in rows) else 'FAIL'
-    return [f'QA report: THE LAST BUS part {n}']+[f'  [{l}] {g}: {m}' for g,l,m in rows]+[f'\n  RESULT: {res}\n'],res
+    return [f'QA report: {SI["name"]} part {np_}/{of} ({n})']+[f'  [{l}] {g}: {m}' for g,l,m in rows]+[f'\n  RESULT: {res}\n'],res
 if __name__=='__main__':
-    ns=[int(x) for x in sys.argv[1:]] or range(1,11);allt=[];bad=[]
+    ns=[int(x) if x.isdigit() else x for x in sys.argv[1:]] or list(range(1,11));allt=[];bad=[]
     for n in ns:
         t,r=run(n);allt+=t;print('\n'.join(t))
         if r!='PASS':bad.append(n)
