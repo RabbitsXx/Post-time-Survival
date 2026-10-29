@@ -10,8 +10,11 @@
  "yt_quota_daily_limit": 9000,
  "ai_generated_flag": true,
  "owner_decisions": {
-  "2026-10-29": "Owner chose: produce AND schedule without asking for approval first; 10 clips/day, one every 2 hours from 10:00 (Thailand time); topics may have any number of parts, prefer short clips; connect the YouTube API so tags/thumbnail/subtitles/playlist are set automatically."
+  "2026-10-29": "Owner chose: produce AND schedule without asking for approval first; 10 clips/day, one every 2 hours from 10:00 (Thailand time); topics may have any number of parts, prefer short clips; connect the YouTube API so tags/thumbnail/subtitles/playlist are set automatically.",
+  "2026-10-29b": "Owner rejected THE LAST BUS: ROUTE 12 (same bus, same cast, same template). Rule: each topic is made all new - new setting, new characters, new story structure. First new worlds to consider: farm, building/rooftop, school. Delete the scheduled Route 12 posts (done). Pause the 10-a-day schedule until the new style exists."
  },
  "not_before_utc": "2026-10-30T03:00:00Z",
- "not_before_note": "THE LAST BUS is still posting until 2026-10-29 23:59 Thailand; the autopilot grid starts after it"
+ "not_before_note": "THE LAST BUS is still posting until 2026-10-29 23:59 Thailand; the autopilot grid starts after it",
+ "paused": true,
+ "pause_reason": "Owner wants EVERY topic/series to be new: new world, new characters, new structure (not the Last Bus bus/cast re-used). No new posts are scheduled until a new-world pilot is approved."
 }

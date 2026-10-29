@@ -75,7 +75,9 @@ def run(n):
             if dd<10:weak.append((i,round(dd,1)))
         row('E','WARN' if weak else 'PASS',f'weak cuts (mean diff < 10/255): {weak}' if weak else 'every beat boundary changes the picture clearly')
         dark=[]
+        bnd=[b['t'][0] for b in B]
         for t in np.arange(1,dur-1,2.5):
+            if any(0<=t-x<=.35 for x in bnd):continue     # the 0.2 s dip at a card cut is the engine's transition, not a black frame
             p=f'{tmp}/f.png';grab(t,p)
             if float(np.asarray(Image.open(p).convert('L')).mean())<3:dark.append(round(float(t),1))
         row('E','FAIL' if dark else 'PASS',f'near-black frames at {dark}' if dark else 'no black frames in the scan')

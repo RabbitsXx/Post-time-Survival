@@ -1,0 +1,83 @@
+1
+00:00:00,080 --> 00:00:03,785
+June: Dear, the river is crystal clear.
+Let's have a drink.
+
+2
+00:00:04,105 --> 00:00:09,128
+BUS-E: Ding dong! This is the Last Bus,
+Route twelve. Part eight of ten: the water.
+
+3
+00:00:09,448 --> 00:00:11,636
+Priya: Clear is not clean, June.
+
+4
+00:00:11,956 --> 00:00:14,572
+June: I drank river water in 1962.
+
+5
+00:00:14,692 --> 00:00:16,333
+Priya: And how was 1963?
+
+6
+00:00:16,653 --> 00:00:17,993
+Dante: ...Nobody drinks the river.
+
+7
+00:00:18,313 --> 00:00:22,727
+Rosa: River Crossing. Water everywhere.
+Nothing safe to drink.
+
+8
+00:00:23,047 --> 00:00:25,942
+Dante: Vic. Taste the water. For chat.
+
+9
+00:00:26,062 --> 00:00:27,463
+Vic: Chat, I'm doing this for you.
+
+10
+00:00:27,783 --> 00:00:30,123
+Vic: It tastes like a swamp. And regret.
+
+11
+00:00:30,243 --> 00:00:31,338
+Dante: Is it clean?
+
+12
+00:00:31,658 --> 00:00:34,050
+Teddy: Gary says boil it. Gary is a chef
+now.
+
+13
+00:00:34,370 --> 00:00:38,418
+Priya: Real rule. Boil water for one full
+minute before you drink it.
+
+14
+00:00:38,738 --> 00:00:41,203
+Steve: Excuse me. Do you have a straw?
+
+15
+00:00:41,323 --> 00:00:43,697
+Rosa: Yes, Steve. Take two.
+
+16
+00:00:44,017 --> 00:00:45,174
+Vic: Chat, I'm cancelled.
+
+17
+00:00:45,617 --> 00:00:46,706
+Lena: You drank a swamp.
+
+18
+00:00:47,217 --> 00:00:51,877
+BUS-E: Passenger count: twelve. Tickets
+sold: thirteen. Cozy!
+
+19
+00:00:52,197 --> 00:00:58,526
+BUS-E: Part eight of ten, the Last Bus,
+Route twelve. Next: the split. Follow for part nine.
+

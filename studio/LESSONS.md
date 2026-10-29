@@ -99,3 +99,8 @@ Every rule below comes from something that was rejected, broke, or cost a re-ren
 * The series announcement (chip in the first 0.5 s + BUS-E speaking series, part and topic + sign-off with the next stop + route line all the time) is built into the script helpers and gated by qa9.py (gate S).
 * Votes and comments cannot change a pre-produced series: ask viewers to guess (engagement only).
 * YouTube thumbnails cannot be set through Buffer, checked again 2026-10-29: the schema has `VideoAssetInput.thumbnailUrl`, but createPost/editPost reject it ("social networks do not accept custom video thumbnail images ... thumbnailOffset is supported for Instagram, TikTok and Pinterest only"). IG/TikTok take the embedded first frames; YouTube covers are uploaded by hand in Studio. `YoutubePostMetadataInput.isAiGenerated` does exist (default false), the owner decides what to answer.
+
+## Owner rule (2026-10-29): every topic is made all new
+Reusing one world (the bus, its 12 passengers, one template) for the next series is NOT acceptable to the owner, even when it is fast and passes every QA gate.
+Each new topic/series gets its own setting, its own characters and its own story structure. Volume (10 clips a day) never justifies re-skinning the previous series.
+Show a pilot of a new world to the owner before mass-producing it. studio/long/formats.py + arcs/route12 stay only as an example of the template mechanism.
