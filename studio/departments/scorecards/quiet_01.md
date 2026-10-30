@@ -1,9 +1,9 @@
-# Scorecard quiet_01  (2026-10-30 12:33 UTC)
+# Scorecard quiet_01  (2026-10-30 12:43 UTC)
 
 | department | score | bar | verdict |
 |---|---:|---:|---|
 | story | 97 | 70 | PASS |
-| art | 79 | 70 | PASS |
+| art | 82 | 70 | PASS |
 | sound | 96 | 60 | PASS |
 | editorial | 80 | 70 | PASS |
 | marketing | 100 | 75 | PASS |
@@ -17,7 +17,7 @@
 
 ## art
 * ART: two locations have almost the same colour world (distance 10 < 14): give each place its own colour key
-* LAYOUT: 6 person(s) cut by the frame edge, e.g. [(16, 'z_hoodie', 494), (18, 'z_dress', 478), (18, 'z_hoodie', 579), (19, 'z_hoodie', 685)]: reframe or move them inside x 40-410
+* LAYOUT: 4 person(s) cut by the frame edge, e.g. [(18, 'z_hoodie', 441), (19, 'z_hoodie', 547), (23, 'ren', 5), (23, 'z_porter', 478)]: reframe or move them inside x 40-410
 
 ## sound
 * dead air 1.9 s between lines
@@ -35,4 +35,4 @@
 * WRITING: ren talks 3 lines in a row: break it with a reaction or action
 
 ## qc
-* QC: total bitrate 4.5 Mbps (3-14)
+* QC: total bitrate 4.6 Mbps (3-14)

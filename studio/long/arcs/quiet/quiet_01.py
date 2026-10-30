@@ -55,7 +55,7 @@ S1=Scene(W,'stair',x=600,y=450,z=.7);S1.put('ren',stp(0)[0]-40,stp(0)[1]+40,expr
 P.B(S([('ren',"Never take the elevator on day one.","อย่าใช้ลิฟต์ในวันแรก")]),S1.shot(moves={'ren':(stp(5)[0],'walk',stp(5)[1])}),mood='warm',cam='drift',sfx=[('sigh',.2)],
  intent=I('Ren','Ren climbs the back stairs quietly, one hand on the rail','back stairs, diagonal flight','side view, slow climb','What waits at the top?'))
 Lb=Scene(W,'lobby',x=620,y=470,z=.66)
-Lb.put('ren',560,expr='worried').zput('z1',690,var='porter',face='back').zput('z2',900,var='dress',face='back').zput('z3',1010,var='hoodie',face='back')
+Lb.put('ren',560,expr='worried').zput('z1',690,var='porter',face='back').zput('z2',790,var='dress',face='back').zput('z3',860,var='hoodie',face='back')
 P.B(S([('ren',"Three at the door. They cannot see.","สามตัวที่ประตู พวกมันมองไม่เห็น")]),Lb.shot(extra=gear(Lb,'wrench')),mood='creep',cam='push_in',sfx=[('horde',.1),('heartbeat',.5)],
  intent=I('Ren, three zombies','Ren peeks into the lobby where three zombies wander blindly near the glass doors','hotel lobby, sofa at the left, glass doors at the right','wide shot, Ren small at the left, zombies right','Can he slip past?'))
 P.B(S([('ren',"They only hear.","พวกมันได้ยินเท่านั้น")]),card('chain',title='THE RULE',bg=dict(loc='w_quiet',v='lobby',z=1.8,x=640,y=430),nodes=[dict(i='1',l='ANY NOISE'),dict(i='2',l='ZOMBIES HEAR IT'),dict(i='3',l='THEY COME')]),mood='creep',sfx=[('heartbeat',.1),('stab',.7)],

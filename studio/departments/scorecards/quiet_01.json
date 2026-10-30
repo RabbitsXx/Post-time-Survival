@@ -9,37 +9,27 @@
  },
  "art": {
   "dept": "art-layout-animation",
-  "score": 79,
+  "score": 82,
   "issues": [
    "ART: two locations have almost the same colour world (distance 10 < 14): give each place its own colour key",
-   "LAYOUT: 6 person(s) cut by the frame edge, e.g. [(16, 'z_hoodie', 494), (18, 'z_dress', 478), (18, 'z_hoodie', 579), (19, 'z_hoodie', 685)]: reframe or move them inside x 40-410"
+   "LAYOUT: 4 person(s) cut by the frame edge, e.g. [(18, 'z_hoodie', 441), (19, 'z_hoodie', 547), (23, 'ren', 5), (23, 'z_porter', 478)]: reframe or move them inside x 40-410"
   ],
   "metrics": {
    "dead_black_bottom_beats": "0/18",
    "dark_beats": 0,
-   "mean_saturation": 0.262,
-   "min_palette_distance": 10.3,
+   "mean_saturation": 0.263,
+   "min_palette_distance": 10.2,
    "static_beats": [],
    "cut_by_edge": [
     [
-     16,
-     "z_hoodie",
-     494
-    ],
-    [
-     18,
-     "z_dress",
-     478
-    ],
-    [
      18,
      "z_hoodie",
-     579
+     441
     ],
     [
      19,
      "z_hoodie",
-     685
+     547
     ],
     [
      23,
@@ -268,12 +258,12 @@
   "dept": "qc",
   "score": 92,
   "issues": [
-   "QC: total bitrate 4.5 Mbps (3-14)"
+   "QC: total bitrate 4.6 Mbps (3-14)"
   ],
   "metrics": {
    "size": "1080x1920",
    "fps": "30/1",
-   "mbps": 4.5,
+   "mbps": 4.6,
    "duration": 74.8,
    "vcodec": "h264",
    "profile": "High",

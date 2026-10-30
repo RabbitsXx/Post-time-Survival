@@ -200,9 +200,9 @@
   "service": {
    "kind": "lane",
    "indoor": true,
-   "wall": "#d4e08c",
-   "ground": "#8a9a64",
-   "roadc": "#a0aaa4",
+   "wall": "#f0c890",
+   "ground": "#b08a60",
+   "roadc": "#c09a70",
    "road": 240,
    "vpy": 398,
    "sides": [
@@ -238,8 +238,8 @@
     }
    ],
    "tint": [
-    "#d8f060",
-    0.12
+    "#ffb060",
+    0.14
    ],
    "label": "service corridor"
   },
@@ -279,6 +279,13 @@
      "x": 1100,
      "y": 700,
      "w": 600,
+     "z": 2
+    },
+    {
+     "t": "pipe",
+     "x": 200,
+     "y": 90,
+     "w": 520,
      "z": 2
     }
    ],
@@ -412,6 +419,20 @@
      "r": 380,
      "a": 0.3,
      "z": 0
+    },
+    {
+     "t": "barricade",
+     "x": 140,
+     "y": 730,
+     "s": 2.2,
+     "z": 2
+    },
+    {
+     "t": "rubble",
+     "x": 1180,
+     "y": 740,
+     "s": 2.0,
+     "z": 2
     }
    ],
    "label": "city street"
