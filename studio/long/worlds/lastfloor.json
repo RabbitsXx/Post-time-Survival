@@ -1,0 +1,433 @@
+{
+ "id": "lastfloor",
+ "series": "THE LAST FLOOR",
+ "say": "The Last Floor",
+ "accent": "#7dffb0",
+ "time": "night",
+ "moon": false,
+ "clouds": false,
+ "stars": false,
+ "pal": {
+  "sky": [
+   "#0a1022",
+   "#1b2a4a",
+   "#3a4f78"
+  ],
+  "ground": "#1f2430",
+  "wall": "#2b3340",
+  "floor": "#1b2028",
+  "hills": "#0d1428",
+  "ink": "#12161f",
+  "glow": "#ffd98a",
+  "rim": "rgba(125,255,176,.45)",
+  "cloud": "#3a4f78",
+  "cloud2": "#2a3a5a"
+ },
+ "ann": {
+  "name": "ALDER TOWER INTERCOM",
+  "voice": "en-US-Chirp3-HD-Rasalgethi",
+  "rate": 1.0,
+  "hello": "Attention, residents.",
+  "c": "#7dffb0",
+  "sub": "BUILDING ANNOUNCEMENT",
+  "tag": "ALDER TOWER \u00b7 12 FLOORS",
+  "th": "\u0e23\u0e30\u0e1a\u0e1a\u0e2d\u0e34\u0e19\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e04\u0e2d\u0e21\u0e15\u0e36\u0e01\u0e2d\u0e31\u0e25\u0e40\u0e14\u0e2d\u0e23\u0e4c"
+ },
+ "cast": {
+  "bell": {
+   "name": "Bell",
+   "th": "\u0e40\u0e1a\u0e25\u0e25\u0e4c",
+   "voice": "en-US-Chirp3-HD-Schedar",
+   "rate": 0.9,
+   "filt": "asetrate=44100*0.96,aresample=44100",
+   "scale": 0.9,
+   "cap": "#ffb36b",
+   "pal": {
+    "skin": "#d8a888",
+    "coat": "#6a6a52",
+    "coatS": "#4a4a38",
+    "pants": "#3a3a40"
+   },
+   "look": {
+    "hair": "bald",
+    "flatcap": "#3a3a40",
+    "beard": "#9a9a9a",
+    "glasses": "round",
+    "brow": "thick",
+    "bags": 1
+   }
+  },
+  "zara": {
+   "name": "Zara",
+   "th": "\u0e0b\u0e32\u0e23\u0e48\u0e32",
+   "voice": "en-US-Chirp3-HD-Zephyr",
+   "rate": 1.0,
+   "filt": "asetrate=44100*1.1,aresample=44100",
+   "scale": 0.76,
+   "cap": "#ff8ad8",
+   "pal": {
+    "skin": "#c98e6a",
+    "coat": "#e0463a",
+    "coatS": "#b03028",
+    "pants": "#2a2e44",
+    "boot": "#f2f0ea"
+   },
+   "look": {
+    "hair": "pony",
+    "hc": "#7a3aa8"
+   }
+  },
+  "omar": {
+   "name": "Omar",
+   "th": "\u0e42\u0e2d\u0e21\u0e32\u0e23\u0e4c",
+   "voice": "en-US-Chirp3-HD-Achird",
+   "rate": 0.95,
+   "scale": 0.94,
+   "cap": "#8fd0ff",
+   "pal": {
+    "skin": "#b98a68",
+    "coat": "#f2f0ea",
+    "coatS": "#c9c5b8",
+    "pants": "#3a3f4d"
+   },
+   "look": {
+    "hair": "bun",
+    "hc": "#1a120c",
+    "beard": "#2a1a10",
+    "brow": "thick"
+   }
+  },
+  "pip": {
+   "name": "Pip",
+   "th": "\u0e1e\u0e34\u0e1e",
+   "voice": "en-US-Chirp3-HD-Puck",
+   "rate": 1.1,
+   "filt": "asetrate=44100*1.45,aresample=44100,volume=.95",
+   "scale": 0.5,
+   "cap": "#ffe14a",
+   "pal": {
+    "coat": "#5ac85a"
+   },
+   "look": {
+    "hair": "bald"
+   }
+  }
+ },
+ "locs": {
+  "lobby": {
+   "kind": "in",
+   "wall": "#2b3340",
+   "floor": "#1b2028",
+   "items": [
+    {
+     "t": "cabinet",
+     "x": 150,
+     "y": 590,
+     "s": 1.3,
+     "c": "#6a7a88"
+    },
+    {
+     "t": "poster",
+     "x": 330,
+     "y": 470,
+     "s": 1.2,
+     "label": "NO PETS"
+    },
+    {
+     "t": "table",
+     "x": 860,
+     "y": 590,
+     "s": 1.2
+    },
+    {
+     "t": "bush",
+     "x": 1090,
+     "y": 590,
+     "s": 1.1,
+     "c": "#2f5a44"
+    },
+    {
+     "t": "door",
+     "x": 520,
+     "y": 590,
+     "s": 1.9,
+     "c": "#8a9aa8"
+    },
+    {
+     "t": "lamp",
+     "x": 700,
+     "y": 590,
+     "h": 330,
+     "r": 220,
+     "z": 1
+    }
+   ]
+  },
+  "hall": {
+   "kind": "lane",
+   "indoor": true,
+   "wall": "#2a2f38",
+   "ground": "#2a2530",
+   "roadc": "#3a3442",
+   "road": 250,
+   "vpy": 398,
+   "sides": [
+    {
+     "x": 250,
+     "side": -1,
+     "item": {
+      "t": "door",
+      "s": 1.2,
+      "c": "#6a4a30"
+     }
+    },
+    {
+     "x": 250,
+     "side": 1,
+     "item": {
+      "t": "door",
+      "s": 1.2,
+      "c": "#5a4a6a"
+     }
+    }
+   ],
+   "end": {
+    "t": "window",
+    "s": 3.2
+   },
+   "fg": [
+    {
+     "t": "lamp",
+     "x": -30,
+     "y": 800,
+     "s": 2.2,
+     "h": 300
+    }
+   ]
+  },
+  "stair": {
+   "kind": "in",
+   "wall": "#2a2f38",
+   "floor": "#1a1d24",
+   "items": [
+    {
+     "t": "stairs",
+     "x": 420,
+     "y": 590,
+     "s": 1.8
+    },
+    {
+     "t": "pipe",
+     "x": 900,
+     "y": 420,
+     "w": 500
+    },
+    {
+     "t": "door",
+     "x": 1000,
+     "y": 590,
+     "s": 1.6,
+     "c": "#a8332b"
+    },
+    {
+     "t": "lamp",
+     "x": 640,
+     "y": 590,
+     "h": 360,
+     "r": 200
+    }
+   ]
+  },
+  "flat": {
+   "kind": "in",
+   "wall": "#3a3530",
+   "floor": "#241e1a",
+   "items": [
+    {
+     "t": "window",
+     "x": 300,
+     "y": 520,
+     "s": 2
+    },
+    {
+     "t": "table",
+     "x": 760,
+     "y": 590,
+     "s": 1.5
+    },
+    {
+     "t": "cabinet",
+     "x": 1050,
+     "y": 590,
+     "s": 1.3,
+     "c": "#8a7a6a"
+    },
+    {
+     "t": "bed",
+     "x": 1180,
+     "y": 590,
+     "s": 1
+    }
+   ]
+  },
+  "street": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#1f2430",
+   "items": [
+    {
+     "t": "building",
+     "x": 140,
+     "y": 590,
+     "w": 240,
+     "h": 420,
+     "c": "#2a3550",
+     "z": 0
+    },
+    {
+     "t": "building",
+     "x": 440,
+     "y": 590,
+     "w": 200,
+     "h": 330,
+     "c": "#34406a",
+     "z": 0,
+     "lit": 0.5
+    },
+    {
+     "t": "building",
+     "x": 1080,
+     "y": 590,
+     "w": 260,
+     "h": 460,
+     "c": "#2a3550",
+     "z": 0
+    },
+    {
+     "t": "car",
+     "x": 300,
+     "y": 640,
+     "s": 1.2,
+     "c": "#8a3a3a"
+    },
+    {
+     "t": "lamp",
+     "x": 640,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    },
+    {
+     "t": "car",
+     "x": 960,
+     "y": 650,
+     "s": 1.3,
+     "c": "#3a6a8a"
+    },
+    {
+     "t": "rubble",
+     "x": 1200,
+     "y": 640,
+     "s": 1
+    }
+   ]
+  },
+  "roof": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#2a2e38",
+   "items": [
+    {
+     "t": "building",
+     "x": 80,
+     "y": 720,
+     "w": 300,
+     "h": 360,
+     "c": "#1d2640",
+     "z": 0,
+     "lit": 0.5
+    },
+    {
+     "t": "building",
+     "x": 1100,
+     "y": 720,
+     "w": 340,
+     "h": 420,
+     "c": "#1d2640",
+     "z": 0
+    },
+    {
+     "t": "tank",
+     "x": 300,
+     "y": 600,
+     "s": 1.8
+    },
+    {
+     "t": "generator",
+     "x": 760,
+     "y": 620,
+     "s": 1.4
+    },
+    {
+     "t": "tower",
+     "x": 1060,
+     "y": 620,
+     "h": 420
+    },
+    {
+     "t": "fence",
+     "x": 640,
+     "y": 660,
+     "w": 1500,
+     "s": 1.2
+    },
+    {
+     "t": "flag",
+     "x": 520,
+     "y": 620,
+     "c": "#e0463a"
+    }
+   ]
+  }
+ },
+ "new": {
+  "setting": "a twelve-floor apartment tower on its last night, climbed floor by floor from lobby to roof",
+  "structure": "ascent: one floor per scene, a neighbour behind every door, the climb ends on the roof",
+  "announcer": "tower-intercom",
+  "palette": "storm navy, mint green, window amber",
+  "props": [
+   "elevator",
+   "keyring",
+   "frying-pan",
+   "parrot-cage",
+   "fire-door",
+   "roof-tank"
+  ],
+  "devices": [],
+  "gags": [
+   "parrot-repeats-the-worst-line"
+  ],
+  "tips": [
+   "go-up-seal-the-fire-doors"
+  ],
+  "tied_to_topic": "Topic = surviving inside a tall building, so the world is a lobby, a stairwell, a corridor of doors, a flat and a roof; the cast are the super, a teen, a night chef and a parrot; the tip is to go up and seal the fire doors behind you.",
+  "setting_tags": [
+   "urban",
+   "indoor",
+   "building",
+   "roof",
+   "street"
+  ],
+  "props_reused": [
+   "lamp",
+   "door",
+   "stairs",
+   "cabinet",
+   "tank",
+   "generator",
+   "fence",
+   "car",
+   "building"
+  ]
+ }
+}

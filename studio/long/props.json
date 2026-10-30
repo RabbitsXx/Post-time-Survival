@@ -1,0 +1,324 @@
+{
+ "rule": "A prop in this library may be reused by any world whose setting tags overlap its fit tags (a bed in a hospital, never a barrel in a bedroom). Reuse is declared in NEW[props_reused]; newness.py checks the tags. Signature props (a topic's own gag/story items) must still be new.",
+ "items": {
+  "building": {
+   "fit": [
+    "urban",
+    "city"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "house": {
+   "fit": [
+    "rural",
+    "suburb",
+    "farm"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "tree": {
+   "fit": [
+    "outdoor",
+    "rural",
+    "park",
+    "forest"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "pine": {
+   "fit": [
+    "forest",
+    "outdoor",
+    "mountain"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "lamp": {
+   "fit": [
+    "urban",
+    "outdoor",
+    "indoor",
+    "street",
+    "farm"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "crate": {
+   "fit": [
+    "indoor",
+    "warehouse",
+    "urban",
+    "dock",
+    "farm"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "barrel": {
+   "fit": [
+    "indoor",
+    "warehouse",
+    "dock",
+    "farm",
+    "outdoor"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "car": {
+   "fit": [
+    "urban",
+    "street",
+    "road",
+    "suburb"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "sign": {
+   "fit": [
+    "urban",
+    "outdoor",
+    "street",
+    "road"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "door": {
+   "fit": [
+    "indoor",
+    "urban",
+    "building"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "window": {
+   "fit": [
+    "indoor",
+    "urban",
+    "building"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "fence": {
+   "fit": [
+    "outdoor",
+    "farm",
+    "rural",
+    "suburb",
+    "roof"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "shelf": {
+   "fit": [
+    "indoor",
+    "shop",
+    "warehouse",
+    "home"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "table": {
+   "fit": [
+    "indoor",
+    "home",
+    "shop"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "bed": {
+   "fit": [
+    "indoor",
+    "home",
+    "hospital"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "tent": {
+   "fit": [
+    "outdoor",
+    "camp",
+    "forest"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "tower": {
+   "fit": [
+    "roof",
+    "outdoor",
+    "urban",
+    "radio"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "hill": {
+   "fit": [
+    "outdoor",
+    "rural",
+    "mountain"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "rock": {
+   "fit": [
+    "outdoor",
+    "forest",
+    "mountain"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "stairs": {
+   "fit": [
+    "indoor",
+    "building",
+    "urban"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "ladder": {
+   "fit": [
+    "indoor",
+    "outdoor",
+    "farm",
+    "roof"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "rubble": {
+   "fit": [
+    "urban",
+    "outdoor",
+    "ruin"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "bush": {
+   "fit": [
+    "outdoor",
+    "park",
+    "rural",
+    "indoor-plant"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "cabinet": {
+   "fit": [
+    "indoor",
+    "home",
+    "building",
+    "office"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "poster": {
+   "fit": [
+    "indoor",
+    "urban",
+    "building",
+    "shop"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "glow": {
+   "fit": [
+    "any"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "pipe": {
+   "fit": [
+    "indoor",
+    "roof",
+    "industrial",
+    "building"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "tank": {
+   "fit": [
+    "roof",
+    "industrial",
+    "farm",
+    "outdoor"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "generator": {
+   "fit": [
+    "roof",
+    "industrial",
+    "outdoor",
+    "building"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "flag": {
+   "fit": [
+    "outdoor",
+    "roof",
+    "camp"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "rails": {
+   "fit": [
+    "outdoor",
+    "station",
+    "industrial"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "bus": {
+   "fit": [
+    "urban",
+    "street",
+    "road"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "boat": {
+   "fit": [
+    "dock",
+    "sea",
+    "lake"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "cart": {
+   "fit": [
+    "shop",
+    "warehouse",
+    "indoor"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "barricade": {
+   "fit": [
+    "any"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "scarecrow": {
+   "fit": [
+    "farm",
+    "rural",
+    "field"
+   ],
+   "drawn_in": "farm9.js"
+  },
+  "pitchfork": {
+   "fit": [
+    "farm",
+    "rural"
+   ],
+   "drawn_in": "farm9.js"
+  },
+  "bucket": {
+   "fit": [
+    "farm",
+    "rural",
+    "indoor",
+    "home"
+   ],
+   "drawn_in": "farm9.js"
+  }
+ }
+}

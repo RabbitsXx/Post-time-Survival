@@ -157,6 +157,7 @@ def main():
     wr(f'{OUT}/voice.wav',voice/(max(1e-6,np.abs(voice).max())/.95) if np.abs(voice).max()>.95 else voice)
     spec=dict(title=M.TITLE,duration=round(total,3),fps=FPS,beats=beats,mouth=mouth)
     if getattr(M,'SPEAKERS',None):spec['speakers']=M.SPEAKERS
+    if getattr(M,'WORLD',None):spec['world']=M.WORLD      # data-driven world (worldlib / world9.js)
     json.dump(dict(spec,mouth=None),open(f'{OUT}/spec.json','w'),ensure_ascii=False,indent=0)
     json.dump({k:[int(c) for c in v] for k,v in mouth.items()},open(f'{OUT}/spec.mouth.json','w'))
     open(f'{OUT}/spec.js','w').write('var SPEC='+json.dumps(spec,ensure_ascii=False)+';')

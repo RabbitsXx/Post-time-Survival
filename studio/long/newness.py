@@ -11,7 +11,7 @@ import sys,os,json,collections
 R=os.path.dirname(os.path.abspath(__file__));sys.path.insert(0,R)
 import clipreg as CR
 REG=R+'/register.json';MD=R+'/WORLD_REGISTER.md'
-GENERIC={'series','sticker','text','end','list','stat','phone','board','zoom','shake'}   # library devices: never count as "new"
+GENERIC={'series','sticker','text','end','list','stat','phone','board','zoom','shake','alert','rulecard','macro','areamap'}   # library devices: never count as "new"
 SCALAR=['world','setting','structure','announcer','palette']
 LISTS=['cast','locs','props','devices','gags','tips']
 def load():return json.load(open(REG))
@@ -45,9 +45,13 @@ def check(cid):
     for k in SCALAR:
         clash=[w['id'] for w in O if norm(w.get(k,''))==norm(N[k])]
         rec(not clash,f"{k} is new: '{N[k][:60]}'"+(f" (same as world {clash})" if clash else ''))
+    PL=json.load(open(R+'/props.json'))['items'];tags={norm(t) for t in N.get('setting_tags',[])}
+    for pr in N.get('props_reused',[]):
+        ok=norm(pr) in PL and (tags&{norm(t) for t in PL[norm(pr)]['fit']} or 'any' in PL[norm(pr)]['fit'])
+        rec(bool(ok),f"reused prop '{pr}' exists in the prop library and fits this setting (tags {sorted(tags)}; fit {PL.get(norm(pr),{}).get('fit')})")
     for k in LISTS:
         mine=[norm(x) for x in N[k]];fn=base if k=='locs' else norm
-        used={fn(x):w['id'] for w in O for x in w.get(k,[])}
+        used={fn(x):w['id'] for w in O for x in w.get(k,[])} if k!='props' else {fn(x):w['id'] for w in O for x in w.get(k,[]) if norm(x) not in PL}   # library props may be reused (see props.json)
         clash=[f"{x} (world {used[fn(x)]})" for x in N[k] if fn(x) in used]
         rec(not clash,f"{k} not used by another world ({len(mine)}): {', '.join(N[k])[:90]}"+(f"  CLASH: {clash}" if clash else ''))
         mn=R_['min_new'].get(k)
