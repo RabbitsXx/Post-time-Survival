@@ -34,7 +34,7 @@ COVER=dict(beat=4,frac=.55,main="THE CORN|IS WALKING",box="NIGHT 1 · THE LAST H
 NEW=dict(world='harvest',setting='a family farm at dusk, three nights before the last corn harvest',
  structure='countdown: three nights, one farm rule per night, cliffhanger to the next place on the farm',
  announcer='farm-radio',announcer_voice='radio',palette='dusk gold, corn green, barn red',
- locs=['farm:yard','farm:field','farm:porch','farm:barn'],cast=['ruth','eli','junie','hank'],
+ locs=['farm:yard','farm:field','farm:porch','farm:barn','farm:lane'],cast=['ruth','eli','junie','hank'],
  props=['scarecrow','corn-rows','barn-door','radio'],devices=['radio','nightline'],gags=['polka-scarecrow-lures-zombies'],tips=['sound-leads-them'],
  tied_to_topic='Topic = a farm under siege at harvest time, so the world is a yard, a corn field, a porch and a barn; the props are a scarecrow and a stolen radio; the real tip is that sound leads zombies.',
  library_used=['pax body rig and hair styles (new heads/palettes)','caption engine','SFX base','card/zoom/shake helpers','finish9 audio chain'])

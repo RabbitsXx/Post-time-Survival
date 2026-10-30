@@ -129,7 +129,8 @@
     "farm:yard",
     "farm:field",
     "farm:porch",
-    "farm:barn"
+    "farm:barn",
+    "farm:lane"
    ],
    "cast": [
     "ruth",
