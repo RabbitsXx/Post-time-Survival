@@ -48,7 +48,8 @@ class World:
         return sorted(out,key=lambda a:a['y'])
     def hz(s,n,x0,x1,y=FOOT,sc=1.0,seed=5,**k):
         """n human zombies between x0..x1 at ground y; sc 1.0 = as tall as a cast member"""
-        return _hz(n,x0,x1,y=y,s=1.6*sc,seed=seed,jit=30,yj=10,human=True,**k)
+        k.setdefault('jit',30);k.setdefault('yj',10)
+        return _hz(n,x0,x1,y=y,s=1.6*sc,seed=seed,human=True,**k)
     def horde(s,n,x0,x1,y=650,sc=1.6,seed=5,**k):return _hz(n,x0,x1,y=y,s=sc,seed=seed,jit=50,human=True,**k)
     def hold(s,act,item,dx=46,dy=-120,sc=.5,**k):
         """a person holding a prop: returns [person, prop] (the prop follows the person when it walks)"""
@@ -59,13 +60,13 @@ class World:
     def set(s,v,acts=None,x=640,y=480,z=1.0,**p):p['v']=v;return stage(s.loc,acts or [],**p),dict(x=x,y=y,z=z)
     lane=set
     def _cy(s,z,hy,head):return head+(400-hy)/(z*1.045)
-    def cuf(s,who,expr,v=None,x=640,z=1.9,hy=250,dx=0,extra=None,**p):
+    def cuf(s,who,expr,v=None,x=640,z=2.7,hy=250,dx=0,extra=None,**p):
         sc=s.sc(who);a=s.person(who,expr,x,FOOT,sc,talk=True,**{k:p.pop(k) for k in list(p) if k in('view','flip','headView','headFlip','seq')});head=FOOT-297*sc
         return s.set(v or s.default_loc(),[a]+(extra or []),x=x+dx,y=s._cy(z,hy,head),z=z,**p)
-    def duo(s,a,b,ea='calm',eb='calm',v=None,xa=560,xb=730,z=1.45,hy=270,extra=None,**p):
+    def duo(s,a,b,ea='calm',eb='calm',v=None,xa=560,xb=730,z=2.0,hy=270,extra=None,**p):
         sa,sb=s.sc(a),s.sc(b);acts=[s.person(a,ea,xa,FOOT,sa,talk=True),s.person(b,eb,xb,FOOT,sb,talk=True,flip=True)]+(extra or []);head=FOOT-297*(sa+sb)/2
         return s.set(v or s.default_loc(),acts,x=(xa+xb)/2,y=s._cy(z,hy,head),z=z,**p)
-    def trio(s,who,ex=None,v=None,z=1.1,hy=300,extra=None,x0=470,gap=115,**p):
+    def trio(s,who,ex=None,v=None,z=1.5,hy=300,extra=None,x0=470,gap=115,**p):
         ex=ex or {};acts=[s.person(w,ex.get(w,'calm'),x0+i*gap,FOOT,talk=True) for i,w in enumerate(who)]+(extra or [])
         return s.set(v or s.default_loc(),acts,x=x0+gap*(len(who)-1)/2,y=s._cy(z,hy,FOOT-297*.8),z=z,**p)
     def default_loc(s):return next(iter(s.spec['locs']))
@@ -84,6 +85,57 @@ class World:
         return V,F,SP,NE,NT,True,S,ne
     def meta(s,hook,premise,body,nxt,ask,tags,tt,ig,pin,cast=''):
         return dict(hook=hook,premise=premise,body=body,nxt=nxt,ask=ask,steve=False,cast=cast or ', '.join(c['name'] for c in s.cast.values()),tt=tt,ig=ig,pin=pin,tags=tags)
+class Scene:
+    """continuity keeper for one location: remembers where every person / zombie stands, so the next shot starts where the last one ended.
+    sc=Scene(W,'lobby',x=620,y=470,z=.62,add=[...]);  sc.put('zara',700,expr='shock');  sc.zput('courier',420,seed=2,held='pizza')
+    sc.shot(moves={'bell':(640,'walk')},zmoves={'courier':540},expr={'zara':'scared'},extra=[...])  -> (scene, view) for Part.B
+    A person who moves is drawn walking (side view, facing the way they go) and stands at the end point afterwards; a zombie drifts toward its new x during the beat."""
+    def __init__(s,W,loc,x=620,y=470,z=.62,add=None):
+        s.W=W;s.loc=loc;s.view=dict(x=x,y=y,z=z);s.add=add or [];s.p={};s.z={}
+    def put(s,who,x,y=FOOT,expr='calm',sc=None,face='front',flip=False,pose='stand'):
+        s.p[who]=dict(x=x,y=y,expr=expr,sc=sc or s.W.sc(who),face=face,flip=flip,pose=pose);return s
+    def out(s,*who):
+        for w in who:s.p.pop(w,None)
+        return s
+    def zput(s,name,x,y=FOOT,seed=3,sc=1.0,held=None,flip=False):
+        s.z[name]=dict(x=x,y=y,seed=seed,sc=sc,held=held,flip=flip);return s
+    def zout(s,*n):
+        for k in n:s.z.pop(k,None)
+        return s
+    def shot(s,moves=None,zmoves=None,expr=None,pose=None,face=None,extra=None,add=None,z=None,hide=(),**kw):
+        moves=moves or {};zmoves=zmoves or {};expr=expr or {};pose=pose or {};face=face or {};acts=[];after={}
+        for who,st in s.p.items():
+            if who in hide:continue
+            e=expr.get(who,st['expr']);st['expr']=e;x0=st['x']
+            if who in moves:
+                m=moves[who];x1=m[0];anim=m[1] if len(m)>1 else 'walk';y1=m[2] if len(m)>2 else st['y']
+                a=s.W.person(who,e,x0,st['y'],st['sc'],view='side',flip=x1<x0,pose='walk' if anim!='run' else 'run',anim=anim,to=(x1,y1))
+                if st.get('held'):a['held']=st['held']
+                st['x'],st['y']=x1,y1;st['face']='front';st['flip']=False
+            else:
+                v=face.get(who,st['face']);a=s.W.person(who,e,x0,st['y'],st['sc'],view=v if v in('front','side','back') else 'front',flip=st['flip'],pose=pose.get(who,st['pose']))
+                if st.get('held'):a['held']=st['held']
+                if v=='backhead':a=s.W.person(who,e,x0,st['y'],st['sc'],view='back',headView='side',flip=st['flip'])
+            acts.append(a)
+        for n,zb in s.z.items():
+            zm=zmoves.get(n);fl=None
+            if isinstance(zm,tuple):zm,fl=zm
+            dx=(zm-zb['x']) if zm is not None else 0
+            fv=fl if fl is not None else ((dx<0) if dx else zb['flip'])
+            h=s.W.hz(1,zb['x'],zb['x'],y=zb['y'],sc=zb['sc'],seed=zb['seed'],to=dx,flip=fv,jit=0,yj=0);acts.append(h)
+            if zb.get('held'):
+                pr=dict(k='prop',t=zb['held'],x=zb['x']+(70 if not fv else -70),y=zb['y']-140,s=1.4)
+                if dx:pr['to']=(pr['x']+dx,pr['y'])
+                acts.append(pr)
+            if dx:zb['x']+=dx
+            zb['flip']=fv
+        v=dict(s.view)
+        if z:v['z']=z
+        if kw.get('vx') is not None:v['x']=kw['vx']
+        if kw.get('vy') is not None:v['y']=kw['vy']
+        return s.W.set(s.loc,acts+(extra or []),add=(add if add is not None else s.add),**v)
+    def hold(s,who,item,ox=60,oy=-130,sc=1.0):
+        s.p[who]['held']=dict(t=item,ox=ox,oy=oy,s=sc);return s
 class WorldPart(Script):
     def __init__(s,W,n,topic,of):
         Script.__init__(s,f'{W.name} - PART {n}: {topic}',W.name,n,of,topic,W.accent);s.W=W;s.say=W.say

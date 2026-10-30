@@ -62,6 +62,20 @@ rec(not wr,'"where" names the location that is drawn'+(f' - beats {wr[:8]}' if w
 arc=getattr(M.P,'arc',None) or {}
 rec(all(len(str(arc.get(k,'')))>=8 for k in('hook','goal','obstacle','twist','payoff')),'the part has a story arc (hook, goal, obstacle, twist, payoff)')
 
+
+# ---- continuity: a person who is in two consecutive shots of the same place (same camera) must start where he or she ended (no teleporting), and nobody swaps sides ----
+jumps=[]
+for i in range(1,len(B)):
+    a,b=B[i-1],B[i]
+    if a['scene']['n']!='stage' or b['scene']['n']!='stage':continue
+    pa,pb=a['scene']['p'],b['scene']['p']
+    if (pa.get('loc'),pa.get('v'))!=(pb.get('loc'),pb.get('v')):continue
+    if (a.get('view') or {})!=(b.get('view') or {}):continue
+    ea={x['k']:(x['to'][0] if x.get('to') else x['x']) for x in pa.get('acts',[]) if x.get('k') not in('prop','horde','dog','sticker')}
+    sb={x['k']:x['x'] for x in pb.get('acts',[]) if x.get('k') not in('prop','horde','dog','sticker')}
+    for k in ea:
+        if k in sb and abs(ea[k]-sb[k])>70:jumps.append((i,k,round(ea[k]),round(sb[k])))
+rec(not jumps,'continuity: people start each shot where they ended the last one in the same place'+(f' - jumps {jumps[:6]}' if jumps else ''))
 mv=[1 for b in st for a in (b['scene']['p'].get('acts') or []) if a.get('anim') or a.get('to') or a.get('seq')]
 rec(bool(mv),'actors move on screen (walk / turn)',warn=True)
 rec(any((b['scene']['p'].get('v') or '')=='hall' or 'lane' in str(b['scene']['p'].get('v')) for b in st),'a 2.5D lane location is used',warn=True)
