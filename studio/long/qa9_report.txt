@@ -1,33 +1,33 @@
-QA report: THE QUIET HAND part 5/10 (quiet_05)
-  [PASS] A: 18 beats, average 3.63 s (target 3-4.8), longest 6.5 s, shortest 1.7 s
+QA report: THE QUIET HAND part 6/10 (quiet_06)
+  [PASS] A: 17 beats, average 3.68 s (target 3-4.8), longest 7.8 s, shortest 2.0 s
   [PASS] A: no beat > 9.5 s
-  [PASS] A: no beat > 7.5 s
+  [WARN] A: beats 7.5-9.5 s (long static shots): [(16, 7.8)]
   [PASS] A: no beat < 1.5 s
-  [PASS] A: speech pace 142 wpm (118 words, 65 s)
-  [PASS] A: the hook starts at 0.08 s: "If you have a fever, check one thing first."
+  [PASS] A: speech pace 136 wpm (108 words, 62 s)
+  [PASS] A: the hook starts at 0.08 s: "If someone begs for help in a silent place, stop"
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
-  [PASS] S: PA opening: "The Quiet Hand. Part five of ten: 92 percent."
-  [PASS] S: the PA opening is spoken at 4.0 s (series + part + topic within the first 8 s)
-  [PASS] S: PA sign-off: "Part five of ten, The Quiet Hand. Next: gus list. Follow for part six."
+  [PASS] S: PA opening: "The Quiet Hand. Part six of ten: gus's list."
+  [PASS] S: the PA opening is spoken at 4.2 s (series + part + topic within the first 8 s)
+  [PASS] S: PA sign-off: "Part six of ten, The Quiet Hand. Next: the tower. Follow for part seven."
   [PASS] S: route line (part n of 10) on every non-card beat
-  [PASS] S: YouTube title (55 chars): Fever Is NOT A Bite: Check This | The Quiet Hand Part 5
-  [PASS] S: 15 YouTube tags, 252 chars
-  [PASS] S: 18 cues, 18 Thai lines
+  [PASS] S: YouTube title (54 chars): Never Answer This Cry For Help | The Quiet Hand Part 6
+  [PASS] S: 15 YouTube tags, 242 chars
+  [PASS] S: 17 cues, 17 Thai lines
   [PASS] S: release kit complete
-  [WARN] F: 3 character voices: {'ren': 12, 'ann': 2, 'gus': 3, 'noor': 1}
-  [PASS] F: BUS-E/PA = 18 % of speech time (target <= 25 %)
-  [WARN] F: 8 speaker changes (conversation, not narration)
-  [WARN] F: 27 kinds of sound effect: ['bell', 'body_fall', 'click', 'groan', 'heartbeat', 'horde', 'radio', 'rustle', 'sigh', 'stab', 'step_gravel_a', 'step_gravel_b', 'step_gravel_c', 'step_stair_a', 'step_stair_b', 'step_stair_c', 'step_tile_a', 'step_tile_b', 'step_tile_c', 'swing', 'thud_wood', 'wrench_hit', 'zhurt_b', 'zhurt_c', 'zmoan_a', 'zmoan_b', 'zmoan_c']; comedy stings: []
-  [PASS] F: characters visible in 14/14 non-card beats
-  [PASS] F: 4 lines with a question or talking to the viewer
+  [WARN] F: 3 character voices: {'ren': 13, 'ann': 2, 'marlow': 1, 'gus': 1}
+  [PASS] F: BUS-E/PA = 23 % of speech time (target <= 25 %)
+  [WARN] F: 6 speaker changes (conversation, not narration)
+  [WARN] F: 21 kinds of sound effect: ['bell', 'body_fall', 'click', 'groan', 'heartbeat', 'horde', 'radio', 'rustle', 'sigh', 'stab', 'step_gravel_a', 'step_gravel_b', 'step_gravel_c', 'swing', 'thud_wood', 'wrench_hit', 'zhurt_b', 'zhurt_c', 'zmoan_a', 'zmoan_b', 'zmoan_c']; comedy stings: []
+  [PASS] F: characters visible in 12/12 non-card beats
+  [PASS] F: 1 lines with a question or talking to the viewer
   [PASS] B: layout: 0 CROP, 0 OVERLAP
   [PASS] B: layout: 0 BAND, 0 EDGE
   [PASS] C: 1080x1920 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 65.30 s vs spec 65.30 s; 35.1 MB; audio aac 48000 Hz
-  [PASS] D: integrated -14.0 LUFS, LRA 3.5 LU
-  [PASS] D: true peak -2.1 dBTP
-  [WARN] E: weak cuts (mean diff < 10/255): [(11, 8.3)]
+  [PASS] C: duration 62.50 s vs spec 62.50 s; 31.0 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.1 LUFS, LRA 3.8 LU
+  [PASS] D: true peak -2.0 dBTP
+  [PASS] E: every beat boundary changes the picture clearly
   [PASS] E: no black frames in the scan
-  [PASS] H: cover embedded in the first frames (diff 3.3/255)
+  [PASS] H: cover embedded in the first frames (diff 3.1/255)
 
   RESULT: PASS
