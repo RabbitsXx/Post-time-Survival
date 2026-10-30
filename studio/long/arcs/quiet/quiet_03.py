@@ -61,7 +61,7 @@ P.B(S([('noor',"Wait. How do you know the name The Quiet?","เดี๋ยว �
  intent=I('Noor','Noor asks him why the old name The Quiet is on her lips','gas station, the store roof','mid shot, Noor staring down','How does she know?'))
 P.close('the tunnel');TH.append("ตอนที่สามจากสิบ เดอะ ไควเอท แฮนด์ ต่อไป: อุโมงค์ ติดตามตอนที่สี่")
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
-META=W.meta(hook='A Kid Stuck On A Roof For 5 Hours: 3 Zombies Below',premise='An exterminator who swore never to kill again meets a kid on a roof who trades a shortcut for a way down.',
+META=W.meta(hook='Kid Stuck On A Roof 5 Hours: 3 Zombies Below',premise='An exterminator who swore never to kill again meets a kid on a roof who trades a shortcut for a way down.',
  body='Part 3 of 10: the kid on the roof. Real tip: silence your phone, a ring is a dinner bell for zombies.',nxt='the tunnel',ask='Would YOU trust the kid on the roof? Tell me in the comments.',
  tags='the quiet hand, zombie apocalypse, zombie animation, retired assassin, zombie story, zombie survival tips, animated zombie series, zombie shorts, post time survival, gas station, silence your phone, survival tips, action animation, zombie fight, stickman, apocalypse',
  tt='If your phone rings now, you just rang a dinner bell. 🧟 5 hours, 3 zombies.',ig='If your phone rings now, you just rang a dinner bell. 🧟 5 hours, 3 zombies. Real survival tip inside.',pin='Would you trust her? 👇 Next: the tunnel.')

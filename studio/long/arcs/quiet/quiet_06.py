@@ -66,7 +66,7 @@ P.B(S([('ren','One hundred thirty-one. Walk. Do not run.','หนึ่งร้
  intent=I('Ren','Ren and Gus leave the RV park along the street','city street, a walk','side view walk, wrench hanging in his hand','Whose hand crossed out his name?'))
 P.close('the tower');TH.append('ตอนที่หกจากสิบ เดอะ ไควเอท แฮนด์ ต่อไป: หอคอย ติดตามตอนที่เจ็ด')
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
-META=W.meta(hook='A Cry For Help In A Silent Place: Do NOT Go',premise='An exterminator who swore never to kill again tracks a missing man to an RV park where his own name is on a list.',
+META=W.meta(hook='A Cry For Help In Silence: Do NOT Go',premise='An exterminator who swore never to kill again tracks a missing man to an RV park where his own name is on a list.',
  body='Part 6 of 10: Gus list. Real tip: never rush toward a cry for help in a place that is otherwise silent.',nxt='the tower',ask='Would YOU follow the voice? Tell me in the comments.',
  tags='the quiet hand, zombie apocalypse, zombie animation, retired assassin, zombie story, zombie survival tips, animated zombie series, zombie shorts, post time survival, rv park, survival tips, action animation, zombie fight, stickman, apocalypse',
  tt='If someone begs for help in a silent place... 🧟 6 names, 3 crossed out.',ig='If someone begs for help in a silent place... 🧟 6 names, 3 crossed out. Real survival tip inside.',pin='Whose name is crossed out? 👇 Next: the tower.')

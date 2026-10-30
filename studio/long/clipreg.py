@@ -47,9 +47,9 @@ def meta(n):
         hook=cut+('!' if M['hook'].rstrip().endswith('!') else '')
     title=hook+sfx
     hs=lambda base:base+(' #'+nm.lower().replace(':','').replace(' ','') if M.get('hash_series',True) else '')
-    desc=(f"{nm} — Part {p} of {of}, from Post Time Survival\n{M['premise']}\n\n{M['body']}\n\n"+(f"🔔 Part {p+1} next: {nxt}.\n" if not fin else f"🔔 That's the end of {nm}. A new series is coming.\n")
+    desc=(f"{M['premise']} Part {p} of {of}.\n\n🧠 {M['body']}\n\n"+(f"▶ Next: Part {p+1}, {nxt.upper()}. New parts keep coming, follow so you do not miss them.\n" if not fin else f"🔔 That's the end of {nm}. A new series is coming.\n")
           +f"\n{M['ask']}\n"+("Where was Steve (the polite zombie with the ticket) in this part? Tell me in the comments.\n" if M.get('steve',True) else '')+"\n"+(M.get('cast',CAST)+"\n\n" if M.get('cast',CAST) else '')
-          +f"Fiction and comedy. Voices are AI-generated; the animation is original.\nWatch the whole series in order: {nm}, Parts 1-{of}, from Post Time Survival.\n\n"+hs('#shorts #zombie #zombieapocalypse #animation '+M.get('hashtag','#survival')))
+          +f"{nm} is an original animated series by Post Time Survival. Fiction and comedy; voices are AI-generated.\nWatch the whole series in order: {nm}, Parts 1-{of}.\n\n"+hs('#zombie #zombieapocalypse #animation #shorts '+M.get('hashtag','#survival')))
     tt=f"{M['tt']} Part {p} of {of}.\n"+hs('#zombie #zombieapocalypse #animatedstory #fyp')
     ig=f"{M['ig']} Part {p} of {of}"+(f" — Part {p+1} next." if not fin else " — the finale.")+"\n"+hs('#zombie #zombieapocalypse #animation #animatedstory #reels')
     return dict(yt_title=title,yt_desc=desc,tt=tt,ig=ig,pin=M['pin'],tags=M['tags'])

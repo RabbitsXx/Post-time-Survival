@@ -64,7 +64,7 @@ P.B(S([('ren',"Then a knock. From the back of the other van.","แล้วก�
  intent=I('First-person view, the other van','Through Ren eyes: three slow knocks come from the back of a blue van','gas station, seen from Ren eyes','first-person: wrench in his fist, a blue van ahead','Who is knocking?'))
 P.close('the kid on the roof');TH.append("ตอนที่สองจากสิบ เดอะ ไควเอท แฮนด์ ต่อไป: เด็กบนหลังคา ติดตามตอนที่สาม")
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
-META=W.meta(hook='If Traffic Stops You Are Already Dead: 14 Cars, 1 Exit',premise='An exterminator who swore never to kill again must get the company van out of a gridlocked city.',
+META=W.meta(hook='Traffic Stops? You Are Dead: 14 Cars, 1 Exit',premise='An exterminator who swore never to kill again must get the company van out of a gridlocked city.',
  body='Part 2 of 10: the van. Real tip: a stopped engine makes no noise, so turn it off and the horde cannot follow it.',nxt='the kid on the roof',ask='Would YOU honk the horn or turn the engine off? Tell me in the comments.',
  tags='the quiet hand, zombie apocalypse, zombie animation, retired assassin, zombie story, zombie survival tips, animated zombie series, zombie shorts, post time survival, traffic jam, car survival, survival tips, action animation, zombie fight, stickman, apocalypse',
  tt='If traffic stops, you are already late. 🧟 14 cars, 1 exit.',ig='If traffic stops, you are already late. 🧟 14 cars, 1 exit. Real survival tip inside.',pin='Honk or engine off? 👇 Next: the kid on the roof.')

@@ -55,7 +55,7 @@ P.B(S([('ren',"Zombies do not sleep. Someone woke them.","ซอมบี้ไ�
  intent=I('First-person view, the field','Through Ren eyes: the empty field, a distant sound from the tunnel behind him','open field, seen from Ren eyes','first-person: wrench in his fist, empty field ahead','Who woke them?'))
 P.close('92 percent');TH.append("ตอนที่สี่จากสิบ เดอะ ไควเอท แฮนด์ ต่อไป: เก้าสิบสองเปอร์เซ็นต์ ติดตามตอนที่ห้า")
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
-META=W.meta(hook='1.1 KM Of Pitch Black Tunnel: Do Not Use Your Eyes',premise='An exterminator who swore never to kill again crosses a black rail tunnel alone while a kid waits at the far end.',
+META=W.meta(hook='1.1 KM Of Pitch Black: Never Use Your Eyes',premise='An exterminator who swore never to kill again crosses a black rail tunnel alone while a kid waits at the far end.',
  body='Part 4 of 10: the tunnel. Real tip: in the dark keep the torch low on the floor or wall, never straight ahead.',nxt='92 percent',ask='Would YOU walk into the tunnel? Tell me in the comments.',
  tags='the quiet hand, zombie apocalypse, zombie animation, retired assassin, zombie story, zombie survival tips, animated zombie series, zombie shorts, post time survival, dark tunnel, flashlight tips, survival tips, action animation, zombie fight, stickman, apocalypse',
  tt='If it is dark, do not use your eyes. 🧟 1.1 km tunnel.',ig='If it is dark, do not use your eyes. 🧟 1.1 km tunnel. Real survival tip inside.',pin='Would you go in? 👇 Next: 92 percent.')

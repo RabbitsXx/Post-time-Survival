@@ -24,3 +24,10 @@ Zombie-apocalypse story shorts (9:16, ~60 s, AI-made and flagged as such) that a
 * 2026-10-30: THE LAST BUS (10 parts) views by part [1423, 1120, 62, 41, 45, 24, 18, 11, 19, 25]: a retention cliff after part 2.
 * Niche leaders: Stickocalypse (stick-figure chapters, ~300k views/day on a Shorts episode), Stickman Extinction "Day 1 of the Outbreak: What Nobody Tells You" (~140k/day). Outbreak day-one framing + a number in the title is rewarded.
 * YouTube OAuth refresh_token is missing: no native upload / tags / thumbnails / captions via API; Buffer posts to YT + TikTok + IG. Public stats work with the API key.
+
+## Packaging rules (owner 2026-10-30: learn naming from top clips)
+* TITLE (<= 70 chars, no cut on phones): front-load the hook (number / stakes / twist), series + part at the end ("| The Quiet Hand Part N"). Examples: "Ex-Assassin vs Zombies: 240 km In 72 Hours". Avoid empty hype ("240!").
+* DESCRIPTION: line 1 = the premise as a sentence (this is what search and the feed preview show), then the survival tip, then "Next: Part N" + the schedule promise, then one comment question, then credits/AI note, then hashtags (first three are shown above the title: #zombie #zombieapocalypse #animation).
+* TAGS: >= 8 required, aim 15-20, mix broad (zombie apocalypse) + long tail (how to survive zombies, ex assassin zombie) + series name.
+* COVER: 2-4 big words or a number, high contrast, one face with emotion, same series strip on every part; check it at phone-thumbnail size.
+* Re-check with `daily.py insight`: titles/covers with the best retention and CTR become the next pattern.

@@ -65,7 +65,7 @@ P.B(S([('ren','Three moves. That is all anyone needs.','สามท่า เ�
  intent=I('Ren','Ren smiles at last, the wrench gone, hands open','Harrow Farm, close-up of Ren','close-up, steady eyes','Is the war finally over?'))
 P.close(None);TH.append('ตอนที่สิบจากสิบ เดอะ ไควเอท แฮนด์: จบ ติดตามซีรีส์ใหม่')
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
-META=W.meta(hook='If You Finish With One Move: Was It Ever A Fight?',premise='An exterminator who swore never to kill again finally opens the cache he buried and chooses what to take.',
+META=W.meta(hook='Finish In One Move: Was It A Fight?',premise='An exterminator who swore never to kill again finally opens the cache he buried and chooses what to take.',
  body='Part 10 of 10: the quiet hand. Real tip: use what is around you before you reach for what you hid.',nxt=None,ask='Would YOU have taken the weapons? Tell me in the comments.',
  tags='the quiet hand, zombie apocalypse, zombie animation, retired assassin, zombie story, zombie survival tips, animated zombie series, zombie shorts, post time survival, series finale, survival tips, action animation, zombie fight, stickman, apocalypse',
  tt='If you finish with one move, was it ever a fight? 🧟 0 km, 72 hours.',ig='If you finish with one move, was it ever a fight? 🧟 0 km, 72 hours. Real survival tip inside.',pin='What did Mara find? 👇 Follow for the next series.')
