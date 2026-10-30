@@ -19,6 +19,8 @@ go=False
 if frm=='newness':
     try:os.remove(f'{LONG}/p9/{cid}/spec.json')   # a stale spec from an earlier build must not be judged by the newness gate
     except OSError:pass
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)));import notify
+notify.say(f'🔧 {cid}: เริ่ม build')
 for name,cmd in STEPS:
     if name==frm:go=True
     if not go:continue
@@ -26,10 +28,12 @@ for name,cmd in STEPS:
     t=time.time();p=subprocess.run(cmd,cwd=LONG,env=env,capture_output=True,text=True)
     tail=(p.stdout+p.stderr).strip().splitlines()[-4:]
     print(f'[{name}] {"ok" if p.returncode==0 else "FAILED"} {time.time()-t:.0f}s'+('' if p.returncode==0 and name!='qa' else '\n  '+'\n  '.join(tail)))
+    if name in('spec','render','finish','qa') or p.returncode:notify.say(f'{cid}: [{name}] {"ok" if p.returncode==0 else "FAILED"} {time.time()-t:.0f}s')
     if p.returncode:
         if name=='qa':print('\n'.join(l for l in (p.stdout).splitlines() if '[FAIL]' in l or '[WARN]' in l))
         sys.exit(1)
     if name=='qa':print('\n'.join(l for l in p.stdout.splitlines() if '[WARN]' in l))
     if name in('story',) and p.returncode:print('\n'.join(l for l in p.stdout.splitlines() if '[FAIL]' in l))
     if name.startswith('newness') and p.returncode:print('\n'.join(l for l in p.stdout.splitlines() if '[FAIL]' in l))
+notify.say(f'✅ {cid}: พร้อมแล้ว (QA ผ่าน)')
 print('CLIP READY:',f'{LONG}/final9_{cid}.mp4')

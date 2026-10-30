@@ -48,6 +48,7 @@ def status():
     return topics
 def build(arcs):
     bad=0
+    import notify
     for arc in arcs:
         for cid in arcs_on_disk().get(arc,[]):
             if os.path.exists(f'{LONG}/final9_{cid}.mp4') and ST.find(ST.load(),cid):print(cid,'already built + packaged');continue
@@ -55,7 +56,7 @@ def build(arcs):
                 import time as _t;_t0=_t.time()
                 rc,out=sh([py,R+'/build_clip.py',cid]);open(R+'/build_log.jsonl','a').write(json.dumps(dict(clip=cid,at=_t.strftime('%Y-%m-%dT%H:%M:%SZ',_t.gmtime()),secs=round(_t.time()-_t0),rc=rc))+'\n');print(out.strip().splitlines()[-1] if out.strip() else '',f'[{cid}]')
                 if rc:print(out[-1500:]);bad+=1;continue
-            rc,out=sh([py,R+'/../departments/studio_review.py',cid]);print(out.strip().splitlines()[0] if out.strip() else '')
+            rc,out=sh([py,R+'/../departments/studio_review.py',cid]);print(out.strip().splitlines()[0] if out.strip() else '');notify.say('📋 review '+(out.strip().splitlines()[0] if out.strip() else cid)[:300])
             try:
                 sc=json.load(open(f'{R}/../departments/scorecards/{cid}.json'))
                 hard=[k for k,min_ in (('legal',95),('story',80),('qc',85)) if sc[k]['score']<min_]
