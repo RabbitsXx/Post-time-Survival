@@ -19,7 +19,7 @@ P.B(S([('hank',"Why am I carrying it?","ทำไมผมต้องเป็�
 P.B(S([('eli',"Three. Two. One. Polka.","สาม สอง หนึ่ง โพลก้า")]),farm('field',[HORDE(8,260,1020,to=40),prop('scarecrow',640,655,1.15)],x=640,y=470,z=.92,fgh=120),mood='comic',sfx=[('polka',.5),('rimshot','e-0.3')],fx=[sticker(1.0,'POLKA!',x=225,y=170,rot=-6,size=58,c='#ffcf6a',dur=1.6)])
 P.B(S([('junie',"They're dancing.","พวกมันกำลังเต้นรำ")]),cuf('junie','shock',v='yard'),mood='comic',sfx=[('polka',.0)])
 P.B(S([('eli',"...They're dancing?!","...พวกมันเต้นจริงเหรอ?!")]),cuf('eli','shock',v='yard'),mood='comic',sfx=[('boing',.2)])
-P.B(S([('ruth',"Rule one. Sound leads them. So we lead the sound.","กฎข้อแรก เสียงนำทางพวกมัน เราก็เลยนำเสียงไปทางอื่น")]),card('text',lines=['FARM RULE #1','SOUND LEADS THEM','SO WE LEAD IT'],size=62,bg='#1a120a',c='#ffcf6a',c2='#fff'),mood='warm',sfx=[('bell',0)])
+P.B(S([('ruth',"Rule one. Sound leads them. So we lead the sound.","กฎข้อแรก เสียงนำทางพวกมัน เราก็เลยนำเสียงไปทางอื่น")]),card('rulecard',n=1,head='FARM RULE',lines=['SOUND','LEADS THEM','SO WE LEAD IT'],bg=dict(loc='farm',v='yard',z=1.6,x=500,y=430)),mood='warm',sfx=[('bell',0)])
 P.B(S([('ruth',"Your grandfather planted this corn. We pick it. Every ear.","ปู่ของเด็กๆ ปลูกข้าวโพดนี้ไว้ เราจะเก็บมัน ทุกฝัก"),('hank',"Every ear.","ทุกฝักครับ")]),duo('ruth','hank','calm','smile',v='porch'),mood='sad',sfx=[('swell',0)])
 P.B(S([('radio',"...Hollow Creek, if you can hear this: the barn door is open.","...ฮอลโลว์ครีก ถ้าได้ยินเสียงนี้ ประตูโรงนาเปิดอยู่")]),farm('yard',[],x=250,y=430,z=1.0,ajar=True),mood='creep',cam='push_in',sfx=[('stab',.2),('radio',0),('creak','e-1.2')])
 P.radio_close('the barn');TH.append("ตอนที่หนึ่งจากสาม เก็บเกี่ยวครั้งสุดท้าย คืนต่อไป: โรงนา ติดตามตอนที่สอง")
