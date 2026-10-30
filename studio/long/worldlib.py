@@ -60,12 +60,17 @@ class World:
         """FIRST-PERSON view (the hero's eyes): the set seen through his eyes at hand-held camera, zombies in front of him drawn BIG (they are close), his two forearms and the tool at the bottom of the frame.
         zombies: list of (var, x, floor_y, face) ; the camera sits at world x; scale of a zombie grows with closeness"""
         acts=[s.zed(v,zx,zy,sc=max(.3,(zy-430)/210.0),face=fc) for v,zx,zy,fc in zombies]      # depth: a zombie whose feet are lower on the floor is closer, so it is drawn bigger
-        fg=[dict(k='prop',t='hands',x=x+4,y=y+400/z+210/z,s=1.3/z,gap=100)]
-        if hands:fg.append(dict(k='prop',t=hands,x=x+8,y=y+250/z,s=(.62 if hands=='wrench' else .75)/z*1.1,rot=-14,flip=False))
+        fg=[dict(k='prop',t='hands',x=x+4,y=y+400/z+300/z,s=1.0/z,gap=92)]
+        if hands:fg.append(dict(k='prop',t=hands,x=x+8,y=y+330/z,s=(.5 if hands=='wrench' else .62)/z*1.1,rot=-10,flip=False))
         return s.set(loc,acts+fg+(extra or []),x=x,y=y,z=z,**p)
     def zat(s,var,X,z,face='front',**k):
         """a zombie in a lane / corridor at lateral X and depth z (same projection as W.at, so size follows distance)"""
         L=s.lane_pos(X,z);return s.zed(var,L['x'],L['y'],1.5/z,face=face,**k)
+    def grip(s,who_act,item='wrench',view='side'):
+        """a tool held in the hand of a standing actor (jaw hanging down); returns a prop act attached at the hand position"""
+        sc_=who_act['s'];sg=-1 if who_act.get('flip') else 1
+        hx,hy=(24,-132) if view=='side' else (34,-128)
+        return dict(k='prop',t=item,x=who_act['x']+sg*hx*sc_,y=who_act['y']+hy*sc_,s=sc_*.55,rot=sg*172,flip=False)
     def hold(s,act,item,dx=46,dy=-120,sc=.5,**k):
         """a person holding a prop: returns [person, prop] (the prop follows the person when it walks)"""
         p=dict(k='prop',t=item,x=act['x']+dx*act['s']/.8,y=act['y']+dy*act['s']/.8,s=sc*act['s']/.8);p.update(k)
@@ -178,8 +183,8 @@ def strike(sc,who,zname,word,held=None,wind=.5,kill=True,fall_dx=34,**kw):
             a['shake']=dict(at=wind+.12,dur=.3,amp=7)
             if kill:a['fall']=dict(at=wind+.12,dur=.6,rot=-88,dx=fall_dx*(1 if a.get('flip') else -1))
     if held:
-        x,y=st['x'],st['y'];k=lambda at,dx,dy,r:dict(at=at,x=x+sg*dx,y=y+dy*sc_/.72,rot=sg*r)
-        scn['p']['acts'].append(dict(k='prop',t=held,s=sc_*.55,flip=False,x=x,y=y,keys=[k(0,24,-150,-72),k(wind*.9,12,-168,-86),k(wind+.1,86,-96,66),k(wind+.5,70,-104,40)]))
+        x,y=st['x'],st['y'];hk=lambda at,hx,hy,r:dict(at=at,x=x+sg*hx*sc_,y=y+hy*sc_,rot=sg*r)      # hand positions come from the pose tables (windup / punch / follow), scaled by the actor
+        scn['p']['acts'].append(dict(k='prop',t=held,s=sc_*.55,flip=False,x=x,y=y,keys=[hk(0,-62,-320,-28),hk(wind*.9,-70,-330,-40),hk(wind-.06,10,-300,18),hk(wind,100,-250,82),hk(wind+.1,100,-228,96),hk(wind+.45,96,-160,128)]))
     if kill:sc.zdown(zname,dx0=fall_dx)
     fx=[sticker(wind+.1,word,x=225,y=170,rot=-6,size=62,c='#ffcf6a',dur=.9),shake(wind+.1,7,.35)]
     return shot,fx

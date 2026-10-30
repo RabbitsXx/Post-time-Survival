@@ -1,9 +1,9 @@
 QA report: THE QUIET HAND part 1/10 (quiet_01)
-  [WARN] A: 26 beats, average 2.96 s (target 3-4.8), longest 5.7 s, shortest 2.0 s
+  [WARN] A: 28 beats, average 2.80 s (target 3-4.8), longest 5.7 s, shortest 1.6 s
   [PASS] A: no beat > 9.5 s
   [PASS] A: no beat > 7.5 s
   [PASS] A: no beat < 1.5 s
-  [PASS] A: speech pace 156 wpm (131 words, 77 s)
+  [PASS] A: speech pace 156 wpm (131 words, 78 s)
   [PASS] A: the hook starts at 0.08 s: "If you hear screaming above you, don't go up."
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
   [PASS] S: PA opening: "The Quiet Hand. Part one of ten: hour zero."
@@ -18,13 +18,13 @@ QA report: THE QUIET HAND part 1/10 (quiet_01)
   [PASS] F: BUS-E/PA = 16 % of speech time (target <= 25 %)
   [WARN] F: 3 speaker changes (conversation, not narration)
   [PASS] F: 30 kinds of sound effect: ['bell', 'body_fall', 'click', 'creak', 'groan', 'heartbeat', 'horde', 'punch_hit', 'radio', 'rimshot', 'rustle', 'sigh', 'stab', 'step_gravel_a', 'step_gravel_b', 'step_gravel_c', 'step_stair_a', 'step_stair_b', 'step_stair_c', 'step_tile_a', 'step_tile_b', 'step_tile_c', 'swing', 'thud_wood', 'wrench_hit', 'zhurt_a', 'zhurt_b', 'zmoan_a', 'zmoan_b', 'zmoan_c']; comedy stings: ['rimshot']
-  [PASS] F: characters visible in 19/19 non-card beats
+  [PASS] F: characters visible in 21/21 non-card beats
   [PASS] F: 2 lines with a question or talking to the viewer
   [PASS] B: layout: 0 CROP, 0 OVERLAP
   [PASS] B: layout: 0 BAND, 0 EDGE
   [PASS] C: 1080x1920 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 76.97 s vs spec 76.97 s; 46.2 MB; audio aac 48000 Hz
-  [PASS] D: integrated -14.0 LUFS, LRA 3.4 LU
+  [PASS] C: duration 78.37 s vs spec 78.37 s; 47.0 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.0 LUFS, LRA 3.6 LU
   [PASS] D: true peak -2.0 dBTP
   [PASS] E: every beat boundary changes the picture clearly
   [PASS] E: no black frames in the scan

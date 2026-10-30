@@ -11,13 +11,13 @@
   "dept": "art-layout-animation",
   "score": 85,
   "issues": [
-   "LAYOUT: 8 person(s) cut by the frame edge, e.g. [(6, 'z_hoodie', 592), (18, 'z_dress', 451), (18, 'z_hoodie', 634), (19, 'z_hoodie', 441)]: reframe or move them inside x 40-410"
+   "LAYOUT: 10 person(s) cut by the frame edge, e.g. [(6, 'z_hoodie', 592), (14, 'ren', 468), (19, 'z_dress', 451), (19, 'z_hoodie', 634)]: reframe or move them inside x 40-410"
   ],
   "metrics": {
-   "dead_black_bottom_beats": "0/19",
+   "dead_black_bottom_beats": "0/21",
    "dark_beats": 0,
-   "mean_saturation": 0.279,
-   "min_palette_distance": 23.5,
+   "mean_saturation": 0.274,
+   "min_palette_distance": 20.9,
    "static_beats": [],
    "cut_by_edge": [
     [
@@ -26,37 +26,47 @@
      592
     ],
     [
-     18,
+     14,
+     "ren",
+     468
+    ],
+    [
+     19,
      "z_dress",
      451
     ],
     [
-     18,
+     19,
      "z_hoodie",
      634
     ],
     [
-     19,
+     20,
      "z_hoodie",
      441
     ],
     [
-     20,
+     21,
      "z_hoodie",
      547
     ],
     [
-     24,
+     23,
+     "z_dress",
+     -26
+    ],
+    [
+     26,
      "z_dress",
      524
     ],
     [
-     24,
+     26,
      "z_porter",
      619
     ],
     [
-     24,
+     26,
      "z_hoodie",
      728
     ]
@@ -69,7 +79,7 @@
   "dept": "sound",
   "score": 96,
   "issues": [
-   "dead air 1.9 s between lines"
+   "dead air 3.2 s between lines"
   ],
   "metrics": {
    "lufs": -14.0,
@@ -80,7 +90,7 @@
      "f0": 134.0,
      "wpm": 146,
      "share": 0.84,
-     "bed_minus_voice_db": -6.9
+     "bed_minus_voice_db": -6.8
     },
     "ann": {
      "db": -21.7,
@@ -96,7 +106,7 @@
    },
    "music_moods": {
     "creep": {
-     "rms_db": -20.9,
+     "rms_db": -20.8,
      "centroid": 2468
     },
     "idle": {
@@ -104,28 +114,28 @@
      "centroid": 636
     },
     "warm": {
-     "rms_db": -24.9,
-     "centroid": 1484
+     "rms_db": -24.3,
+     "centroid": 1477
     },
     "comic": {
-     "rms_db": -28.1,
-     "centroid": 2555
+     "rms_db": -29.6,
+     "centroid": 2687
     },
     "chase": {
-     "rms_db": -20.7,
-     "centroid": 2400
+     "rms_db": -20.2,
+     "centroid": 2256
     },
     "sad": {
-     "rms_db": -25.1,
-     "centroid": 1565
+     "rms_db": -25.0,
+     "centroid": 1502
     }
    },
    "foley": {
-    "events": 112,
-    "moving_beats": 3,
+    "events": 129,
+    "moving_beats": 7,
     "without_steps": 0
    },
-   "sfx": 112
+   "sfx": 129
   }
  },
  "editorial": {
@@ -133,7 +143,7 @@
   "score": 80,
   "issues": [
    "EDITORIAL: 1 caption chunk(s) stop on a dangling word, e.g. ['SCREAMING ABOVE YOU,']: break captions at phrase boundaries",
-   "EDITORIAL: 5 caption(s) on screen < 0.6 s [('IF YOU HEAR', 0.51), ('TWO.', 0.58), ('THREE.', 0.56)]",
+   "EDITORIAL: 5 caption(s) on screen < 0.6 s [('IF YOU HEAR', 0.51), ('TWO.', 0.58), ('THREE.', 0.57)]",
    "EDITORIAL: 6 caption(s) read faster than 17 characters/s [('IF YOU HEAR', 21.4), ('SCREAMING ABOVE YOU,', 19.5), (\"DON'T GO UP.\", 17.5)]"
   ],
   "metrics": {
@@ -175,7 +185,7 @@
     ],
     [
      "THREE.",
-     0.56
+     0.57
     ],
     [
      "TWO.",
@@ -186,7 +196,7 @@
      0.56
     ]
    ],
-   "shot_len_std": 0.79,
+   "shot_len_std": 0.87,
    "srt": [
     26,
     26
@@ -214,16 +224,16 @@
      1080,
      1920
     ],
-    "detail": 10.1,
-    "colourful": 76.7
+    "detail": 11.0,
+    "colourful": 56.2
    },
    "cover_16x9.png": {
     "size": [
      1280,
      720
     ],
-    "detail": 5.1,
-    "colourful": 54.7
+    "detail": 5.2,
+    "colourful": 42.3
    }
   }
  },
@@ -243,15 +253,15 @@
   "dept": "direction",
   "score": 88,
   "issues": [
-   "DIRECTION: more than 3 shots of the same size in a row (beats [22]): vary wide / medium / close",
-   "DIRECTION: the same picture (place + size) holds for 7.5 s (> 6.5 s): cut, move the camera or change the subject"
+   "DIRECTION: more than 3 shots of the same size in a row (beats [17, 23, 24]): vary wide / medium / close",
+   "DIRECTION: the same picture (place + size) holds for 8.2 s (> 6.5 s): cut, move the camera or change the subject"
   ],
   "metrics": {
-   "sizes": "wwmcmwwwmwwwmwwwwmm",
+   "sizes": "wwmcmwwwmwwwwmwwwwwmm",
    "headroom": [],
    "side_swaps": [],
    "eyeline_flips": [],
-   "longest_same_picture_s": 7.5
+   "longest_same_picture_s": 8.2
   }
  },
  "writing": {
@@ -278,7 +288,7 @@
    "size": "1080x1920",
    "fps": "30/1",
    "mbps": 4.8,
-   "duration": 77.0,
+   "duration": 78.4,
    "vcodec": "h264",
    "profile": "High",
    "acodec": "aac",

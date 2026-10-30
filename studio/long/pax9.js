@@ -177,7 +177,8 @@ actor=function(g,o){
   if(o.squash){const lt=bt-o.squash.at;if(lt>0&&lt<.25){const p=Math.sin(lt/.25*Math.PI);sy=1-.12*p;sx=1+.1*p}}
   if(o.snore){const br=Math.sin(t*2.2);sy*=1+.012*br;bob+=br*1.5}else{sy*=1+.010*Math.sin(t*2.3+(o.ph||0))}   // breathing
   if(!root.__th&&window.__thin){root.__th=1;if(window.SPEC&&SPEC.world&&SPEC.world.line)window.__thin(root)}
-  A(root,{transform:`translate(${x} ${y+bob}) rotate(${rot}) scale(${base.s*base.fl*base.sx*sx} ${base.s*sy})`});
+  const bs=o.sto!=null?lerp(base.s,o.sto,k):base.s;
+  A(root,{transform:`translate(${x} ${y+bob}) rotate(${rot}) scale(${bs*base.fl*base.sx*sx} ${bs*sy})`});
   const talk=o.talk===true?who:o.talk;const m=talk?mouth(talk):(o.mouth||0);hds.forEach(h=>{if(h&&h._mouth)h._mouth(m);if(h&&h._blink)h._blink(t,(o.ph||0)*3.1)})},root,A1,A2}};
 
 /* Amara's baby sling: the baby's head + hat peeks out (front view only) */
