@@ -7,15 +7,13 @@
  },
  "art": {
   "dept": "art-layout-animation",
-  "score": 94,
-  "issues": [
-   "ART: two locations have almost the same colour world (distance 5 < 14): give each place its own colour key"
-  ],
+  "score": 100,
+  "issues": [],
   "metrics": {
    "dead_black_bottom_beats": "0/13",
    "dark_beats": 0,
-   "mean_saturation": 0.248,
-   "min_palette_distance": 5.3,
+   "mean_saturation": 0.376,
+   "min_palette_distance": 28.5,
    "static_beats": [],
    "cut_by_edge": [],
    "zoom_jumps": [],
@@ -24,51 +22,50 @@
  },
  "sound": {
   "dept": "sound",
-  "score": 76,
+  "score": 84,
   "issues": [
-   "voices omar and ann sound alike (f0 132 vs 137 Hz): recast or pitch-shift one",
-   "voices lin and zara sound alike (f0 225 vs 218 Hz): recast or pitch-shift one",
-   "omar: 180 wpm (115-170)",
-   "zara: during speech the bed (music+sfx) is -5.1 dB relative to the voice (must be <= -6): the voice is not on top"
+   "voices omar and ann sound alike (f0 158 vs 173 Hz): recast or pitch-shift one",
+   "voices ann and lin sound alike (f0 173 vs 191 Hz): recast or pitch-shift one",
+   "bell: 112 wpm (115-170)"
   ],
   "metrics": {
    "lufs": -14.0,
-   "true_peak": -1.9,
+   "true_peak": -2.1,
    "speakers": {
     "omar": {
-     "db": -20.8,
-     "f0": 132.0,
-     "wpm": 180,
-     "share": 0.16,
-     "bed_minus_voice_db": -8.8
+     "db": -20.2,
+     "f0": 158.0,
+     "wpm": 147,
+     "share": 0.18,
+     "bed_minus_voice_db": -11.4
     },
     "ann": {
-     "db": -23.3,
-     "f0": 137.0,
-     "wpm": 136,
-     "share": 0.22,
-     "bed_minus_voice_db": -6.8
-    },
-    "lin": {
-     "db": -20.0,
-     "f0": 225.0,
-     "wpm": 139,
-     "share": 0.24,
-     "bed_minus_voice_db": -8.0
-    },
-    "bell": {
-     "db": -20.0,
-     "f0": 163.0,
-     "wpm": 156,
-     "share": 0.21,
+     "db": -21.3,
+     "f0": 173.0,
+     "wpm": 143,
+     "share": 0.19,
      "bed_minus_voice_db": -10.2
     },
+    "lin": {
+     "db": -21.0,
+     "f0": 191.0,
+     "wpm": 141,
+     "share": 0.21,
+     "bed_minus_voice_db": -6.9
+    },
+    "bell": {
+     "db": -20.8,
+     "f0": 104.0,
+     "wpm": 112,
+     "share": 0.27,
+     "bed_minus_voice_db": -6.2
+    },
     "zara": {
-     "db": -21.6,
-     "f0": 218.0,
-     "wpm": 129,
-     "share": 0.16,
-     "bed_minus_voice_db": -5.1
+     "db": -20.7,
+     "f0": 235.0,
+     "wpm": 135,
+     "share": 0.14,
+     "bed_minus_voice_db": -8.9
     }
    },
    "sfx": 26
@@ -76,44 +73,22 @@
  },
  "editorial": {
   "dept": "editorial",
-  "score": 88,
+  "score": 98,
   "issues": [
-   "EDITORIAL: 2 caption(s) on screen < 0.6 s [('...FAIR.', 0.56), ('GO UP.', 0.59)]",
-   "EDITORIAL: 4 caption(s) read faster than 17 characters/s [(\"THAT'S A LOT\", 17.2), ('THE STAIRS ARE BLOCKED!', 17.1), ('MY LEGS FILED', 20.2)]"
+   "EDITORIAL: 1 caption(s) on screen < 0.6 s [('...FAIR.', 0.56)]"
   ],
   "metrics": {
-   "chunks": 44,
+   "chunks": 46,
    "dangling": [],
    "orphans": [],
-   "fast": [
-    [
-     "THAT'S A LOT",
-     17.2
-    ],
-    [
-     "THE STAIRS ARE BLOCKED!",
-     17.1
-    ],
-    [
-     "MY LEGS FILED",
-     20.2
-    ],
-    [
-     "SHORTCUT! THROUGH",
-     17.3
-    ]
-   ],
+   "fast": [],
    "short": [
     [
      "...FAIR.",
      0.56
-    ],
-    [
-     "GO UP.",
-     0.59
     ]
    ],
-   "shot_len_std": 1.24,
+   "shot_len_std": 1.21,
    "srt": [
     19,
     19
@@ -122,10 +97,8 @@
  },
  "marketing": {
   "dept": "marketing",
-  "score": 96,
-  "issues": [
-   "MARKETING: cover_16x9.png is dull (colourfulness 28 < 30): thumbnails need a strong colour accent"
-  ],
+  "score": 100,
+  "issues": [],
   "metrics": {
    "title": "Never Open The Red Door! A Sofa Smashes The | The Last Floor Part 2",
    "title_len": 67,
@@ -143,8 +116,8 @@
      720,
      1280
     ],
-    "detail": 9.3,
-    "colourful": 36.0
+    "detail": 9.2,
+    "colourful": 45.3
    },
    "cover_16x9.png": {
     "size": [
@@ -152,7 +125,7 @@
      720
     ],
     "detail": 5.2,
-    "colourful": 28.1
+    "colourful": 36.2
    }
   }
  },
