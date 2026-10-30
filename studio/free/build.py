@@ -4,9 +4,9 @@ import sys,os,json,math,subprocess,base64,hashlib,time,wave,struct,requests,impo
 import numpy as np
 R=os.path.dirname(os.path.abspath(__file__));FPS=30;GY=700
 OUT=R+'/out';os.makedirs(OUT,exist_ok=True);os.makedirs(R+'/tts',exist_ok=True)
-VOICES={'okafor':('en-US-Chirp3-HD-Rasalgethi',.92),'bea':('en-US-Chirp3-HD-Gacrux',1.0),'theo':('en-US-Chirp3-HD-Puck',1.08),'priya':('en-US-Chirp3-HD-Vindemiatrix',.95),'dunn':('en-US-Chirp3-HD-Orus',.95),'ann':('en-US-Chirp3-HD-Achird',1.0),'narrator':('en-US-Chirp3-HD-Algenib',.9),'radio':('en-US-Chirp3-HD-Leda',.95),'keeper':('en-US-Chirp3-HD-Algenib',.9)}
-NAMECOL={'okafor':'#c9a8ff','bea':'#ff9ab8','theo':'#7affc0','priya':'#9ad0ff','dunn':'#ffa878','ann':'#ffd98a','narrator':'#ffffff','radio':'#8aff9a','keeper':'#ffffff'}
-NAMES={'okafor':'OKAFOR','bea':'BEA','theo':'THEO','priya':'PRIYA','dunn':'DUNN','ann':'INTERCOM','narrator':'','radio':'RADIO','keeper':'TOM'}
+VOICES={'okafor':('en-US-Chirp3-HD-Rasalgethi',.92),'bea':('en-US-Chirp3-HD-Gacrux',1.0),'theo':('en-US-Chirp3-HD-Puck',1.08),'priya':('en-US-Chirp3-HD-Vindemiatrix',.95),'dunn':('en-US-Chirp3-HD-Orus',.95),'ann':('en-US-Chirp3-HD-Achird',1.0),'narrator':('en-US-Chirp3-HD-Algenib',.9),'radio':('en-US-Chirp3-HD-Leda',.95),'keeper':('en-US-Chirp3-HD-Algenib',.9),'nell':('en-US-Chirp3-HD-Vindemiatrix',.95),'mayor':('en-US-Chirp3-HD-Rasalgethi',.92),'gran':('en-US-Chirp3-HD-Gacrux',.9),'timo':('en-US-Chirp3-HD-Puck',1.05),'doc':('en-US-Chirp3-HD-Charon',.95),'hale':('en-US-Chirp3-HD-Orus',.88)}
+NAMECOL={'okafor':'#c9a8ff','bea':'#ff9ab8','theo':'#7affc0','priya':'#9ad0ff','dunn':'#ffa878','ann':'#ffd98a','narrator':'#ffffff','radio':'#8aff9a','keeper':'#ffffff','nell':'#7affc0','mayor':'#ff9a8a','gran':'#d8a8ff','timo':'#ffe070','doc':'#9ad0ff','hale':'#ffc890'}
+NAMES={'okafor':'OKAFOR','bea':'BEA','theo':'THEO','priya':'PRIYA','dunn':'DUNN','ann':'INTERCOM','narrator':'','radio':'RADIO','keeper':'TOM','nell':'NELL','mayor':'MAYOR','gran':'GRAN ODA','timo':'TIMO','doc':'DOC','hale':'HALE'}
 def key():
     k=os.environ.get('GEMINI_API_KEY')
     if k:return k
@@ -32,8 +32,8 @@ def A(who,x,y=GY,face=1,expr='calm',path=None,acts=None,prop=None,hold=None,fall
     a=dict(who=who,face=face,expr=expr,path=path or [[0,x,y],[99,x,y]],acts=acts or [],prop=prop,hold=hold,z=z,sc=sc);a['mouthKey']=None if z else who;return a
 def WALK(x0,x1,dur,y=GY,t0=0):return [[0,x0,y],[t0,x0,y],[t0+dur,x1,y]]
 class Shot:
-    def __init__(s,bg,cx=640,cy=560,z=.8,cx2=None,cy2=None,z2=None,min=2.0,tint=None,actors=None,lines=None,fx=None,props=None,card=None,sfx=None,pad=.35,fadeIn=True):
-        s.bg=bg;s.cam=[[0,cx,cy,z],[99,cx if cx2 is None else cx2,cy if cy2 is None else cy2,z if z2 is None else z2]];s.min=min;s.tint=tint;s.actors=actors or [];s.lines=lines or [];s.fx=fx or [];s.props=props or [];s.card=card;s.sfx=sfx or [];s.pad=pad;s.fadeIn=fadeIn
+    def __init__(s,bg,cx=640,cy=560,z=.8,cx2=None,cy2=None,z2=None,min=2.0,place='',tint=None,actors=None,lines=None,fx=None,props=None,card=None,sfx=None,pad=.35,fadeIn=True):
+        s.place=place;s.bg=bg;s.cam=[[0,cx,cy,z],[99,cx if cx2 is None else cx2,cy if cy2 is None else cy2,z if z2 is None else z2]];s.min=min;s.tint=tint;s.actors=actors or [];s.lines=lines or [];s.fx=fx or [];s.props=props or [];s.card=card;s.sfx=sfx or [];s.pad=pad;s.fadeIn=fadeIn
 def say(who,en,th):return (who,en,th)
 def HIT(att,tar,t,word,prop,att_acts,tar_acts,fx,sfx,kill=True,dirx=1):
     att_acts.append([t-.45,t+.3,'swing',dict(prop=prop)]);tar_acts.append([t+.02,t+.3,'flinch']);
@@ -57,7 +57,7 @@ def build_spec(ep):
                 if fi<len(arr):arr[fi]=min(1.0,v*7)
         sfx_all+=[[t0+s[0],s[1]] for s in sh.sfx]
         cam=[[c[0] if c[0]<99 else dur]+c[1:] for c in sh.cam]
-        shots.append(dict(t0=t0,t1=t1,bg=sh.bg,cam=cam,actors=sh.actors,lines=LN,fx=sh.fx,props=sh.props,tint=sh.tint,card=sh.card,fadeIn=sh.fadeIn));lines_all+=LN;t=t1
+        shots.append(dict(place=getattr(sh,'place',''),t0=t0,t1=t1,bg=sh.bg,cam=cam,actors=sh.actors,lines=LN,fx=sh.fx,props=sh.props,tint=sh.tint,card=sh.card,fadeIn=sh.fadeIn));lines_all+=LN;t=t1
     spec=dict(series=ep['series'],title=ep['title'],part=ep['part'],of=ep['of'],style=ep.get('style',{}),shots=shots,mouth={k:[round(v,2) for v in a] for k,a in mouth.items()},dur=t+.6)
     return spec,lines_all,sfx_all
 # ---------------- sound ----------------

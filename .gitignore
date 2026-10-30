@@ -2,3 +2,7 @@ studio/long/cache9/
 studio/long/p9/
 studio/long/frames9_*/
 studio/long/final9_*.mp4
+node_modules/
+studio/free3d/frames/
+studio/free/out/
+studio/free/tts/
