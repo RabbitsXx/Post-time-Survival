@@ -64,7 +64,7 @@ P.B(S([('ren','Sixty-four to go.','เหลืออีกหกสิบสี
  intent=I('Ren','Ren walks into the field with Noor at his side','open field, a walk','side view walk, wrench hanging in his hand','What is waiting at the cache?'))
 P.close('the broker');TH.append('ตอนที่แปดจากสิบ เดอะ ไควเอท แฮนด์ ต่อไป: โบรกเกอร์ ติดตามตอนที่เก้า')
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
-META=W.meta(hook='Road Closed? Find The Pipe: Checkpoint 9',premise='An exterminator who swore never to kill again must cross a military checkpoint without firing a single shot.',
+META=W.meta(hook='Road Closed? Find The Pipe',premise='An exterminator who swore never to kill again must cross a military checkpoint without firing a single shot.',
  body='Part 8 of 10: checkpoint nine. Real tip: avoid noisy crowds, look for a way around instead of through.',nxt='the broker',ask='Would YOU cross the checkpoint or crawl the pipe? Tell me in the comments.',
  tags='the quiet hand, zombie apocalypse, zombie animation, retired assassin, zombie story, zombie survival tips, animated zombie series, zombie shorts, post time survival, checkpoint, survival tips, action animation, zombie fight, stickman, apocalypse',
  tt='If a road is closed, find the pipe. 🧟 9 gates, 300 m of drain.',ig='If a road is closed, find the pipe. 🧟 9 gates, 300 m of drain. Real survival tip inside.',pin='Who is the commander? 👇 Next: the broker.')

@@ -63,7 +63,7 @@ P.B(S([('ren','Fake. Someone wants us at the coast.','ของปลอม ม�
  intent=I('Ren','Ren walks away from the tower at dawn, Noor behind him','city street, a walk','side view walk, wrench hanging in his hand','Who sent it?'))
 P.close('checkpoint nine');TH.append('ตอนที่เจ็ดจากสิบ เดอะ ไควเอท แฮนด์ ต่อไป: ด่านเก้า ติดตามตอนที่แปด')
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
-META=W.meta(hook='40 Floors Up: The Evacuation Is FAKE',premise='An exterminator who swore never to kill again climbs a radio tower alone to catch the last military broadcast.',
+META=W.meta(hook='40 Floors Up: The Signal Is FAKE',premise='An exterminator who swore never to kill again climbs a radio tower alone to catch the last military broadcast.',
  body='Part 7 of 10: the tower. Real tip: high ground is safe only for a while, never stay up there.',nxt='checkpoint nine',ask='Would YOU climb the tower? Tell me in the comments.',
  tags='the quiet hand, zombie apocalypse, zombie animation, retired assassin, zombie story, zombie survival tips, animated zombie series, zombie shorts, post time survival, radio tower, survival tips, action animation, zombie fight, stickman, apocalypse',
  tt='If you can see the top, you cannot hear the ground. 🧟 40 floors, 2 hours.',ig='If you can see the top, you cannot hear the ground. 🧟 40 floors, 2 hours. Real survival tip inside.',pin='Who sent the signal? 👇 Next: checkpoint nine.')

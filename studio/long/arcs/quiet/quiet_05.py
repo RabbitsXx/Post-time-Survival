@@ -68,7 +68,7 @@ P.B(S([('ren','One hundred forty-eight to go.','เหลืออีกหน�
  intent=I('Ren','Ren walks on with the wrench, Noor and Gus behind him','city street, a walk','side view walk, wrench hanging in his hand','What does Gus know?'))
 P.close('gus list');TH.append('ตอนที่ห้าจากสิบ เดอะ ไควเอท แฮนด์ ต่อไป: รายชื่อของกัส ติดตามตอนที่หก')
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
-META=W.meta(hook='A Fever Is NOT A Bite: Check This First',premise='An exterminator who swore never to kill again searches a dark hospital for fever medicine and finds a man locked in a fridge.',
+META=W.meta(hook='Fever Is NOT A Bite: Check This',premise='An exterminator who swore never to kill again searches a dark hospital for fever medicine and finds a man locked in a fridge.',
  body='Part 5 of 10: 92 percent. Real tip: a fever is not a bite, wash the wound with clean water and check the skin before you decide.',nxt='gus list',ask='Would YOU have left her behind? Tell me in the comments.',
  tags='the quiet hand, zombie apocalypse, zombie animation, retired assassin, zombie story, zombie survival tips, animated zombie series, zombie shorts, post time survival, hospital survival, survival tips, action animation, zombie fight, stickman, apocalypse',
  tt='If you have a fever, check one thing first. 🧟 92 percent.',ig='If you have a fever, check one thing first. 🧟 92 percent. Real survival tip inside.',pin='Would you leave her? 👇 Next: Gus list.')

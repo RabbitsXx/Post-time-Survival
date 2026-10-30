@@ -62,7 +62,7 @@ P.B(S([('ren','Twenty-one kilometres. One move left.','ยี่สิบเอ�
  intent=I('Ren','Ren walks toward the farm without his wrench','Harrow Farm, a walk','side view walk, wrench hanging in his hand','Can he win with one move?'))
 P.close('the quiet hand');TH.append('ตอนที่เก้าจากสิบ เดอะ ไควเอท แฮนด์ ต่อไป: ตอนจบ ติดตามตอนที่สิบ')
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
-META=W.meta(hook='A Stranger Knows Your Old Name: RUN',premise='An exterminator who swore never to kill again faces the broker who made him, with a kid held hostage.',
+META=W.meta(hook='He Knows Your Old Name. Run.',premise='An exterminator who swore never to kill again faces the broker who made him, with a kid held hostage.',
  body='Part 9 of 10: the broker. Real tip: never bargain when the other side already holds your last card.',nxt='the quiet hand',ask='Would YOU trade for her? Tell me in the comments.',
  tags='the quiet hand, zombie apocalypse, zombie animation, retired assassin, zombie story, zombie survival tips, animated zombie series, zombie shorts, post time survival, the broker, survival tips, action animation, zombie fight, stickman, apocalypse',
  tt='If a stranger knows your old name, run. 🧟 21 km to go.',ig='If a stranger knows your old name, run. 🧟 21 km to go. Real survival tip inside.',pin='How many moves are left? 👇 Next: the finale.')
