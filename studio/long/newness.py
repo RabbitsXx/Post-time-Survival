@@ -58,7 +58,7 @@ def check(cid):
         if mn:rec(len(mine)>=mn,f"at least {mn} new {k} (has {len(mine)})")
     w0=next((w for w in reg['worlds'] if w['id']==wid),None);P=CR.series(cid)['part'] if not CR.legacy(cid) else 1
     if P>1 and w0:
-        seen=set(norm(x) for x in w0.get('parts_log',{}).get('all',[]))
+        seen=set(norm(x) for k,v in w0.get('parts_log',{}).items() if k not in('all',str(P)) and str(k).isdigit() and int(k)<P for x in v)   # things used by EARLIER parts only (a re-run after --record must still pass)
         pn=[norm(x) for x in N.get('part_new',[])];fresh=[x for x in pn if x not in seen]
         rec(len(fresh)>=2,f"part {P} adds >=2 things not in earlier parts (new: {fresh})")
     elif P>1:rec(False,f"world '{wid}' is not in register.json: record part 1 first (newness.py <part1> --record)")
