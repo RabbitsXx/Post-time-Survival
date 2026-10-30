@@ -36,7 +36,7 @@ P.B(S([('ren',"Three.","สาม")]),sh,fx=fx,mood='chase',sfx=[('stab',.1),('b
 K.zout('cook');K.p['ren']['flip']=False;K.p['ren']['expr']='calm'
 P.B(S([('ren',"Three moves. That is all anyone needs.","สามท่า เท่านี้ก็พอแล้ว")]),K.shot(extra=gear(K,'wrench'),vx=640),mood='warm',cam='drift',sfx=[('sigh',.2)],
  intent=I('Ren','Ren shakes out his wrist, wrench hanging, calm after the fight','hotel kitchen, the cook lying out of frame','medium shot, relaxed shoulders','What is he hiding?'))
-P.B(S([('ren',"Cache opened? Nobody can open that but me.","คลังเปิดแล้วเหรอ ไม่มีใครเปิดได้นอกจากฉัน")]),card('alert',bg=dict(loc='w_quiet',v='kitchen',z=1.7,x=640,y=430),title='HARROW FARM',lines=['CACHE OPENED','240 KM AWAY'],tag='UNKNOWN SENDER'),mood='creep',sfx=[('radio',0),('stab',.6)],
+P.B(S([('ren',"Cache opened? Nobody can open that but me.","คลังเปิดแล้วเหรอ ไม่มีใครเปิดได้นอกจากฉัน")]),card('alert',bg=dict(loc='w_quiet',v='kitchen',z=1.7,x=640,y=430),title='HARROW FARM',lines=['CACHE OPENED'],tag='UNKNOWN SENDER'),mood='creep',sfx=[('radio',0),('stab',.6)],
  intent=I('Ren','His phone buzzes with a message from his old farm: the cache is open','kitchen, phone alert card','phone card over a blurred kitchen','Who opened the box only he can open?'))
 P.B(S([('ren',"Seventy-two hours. Two hundred forty kilometres.","เจ็ดสิบสองชั่วโมง สองร้อยสี่สิบกิโลเมตร")]),card('macro',obj='walkie',label='240 KM',sub='72 H',bg=dict(loc='w_quiet',v='kitchen',z=1.7,x=620,y=430)),mood='warm',sfx=[('radio',0)],
  intent=I('Ren','Ren reads the distance and the clock on his old dispatch radio','kitchen, close-up of the radio','macro card, 240 KM and 72 H on the radio screen','Can he make it in time?'))
