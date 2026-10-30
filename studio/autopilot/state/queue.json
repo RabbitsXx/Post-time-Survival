@@ -7,7 +7,7 @@
    "of": 10,
    "yt_title": "12 Strangers On The Last Bus. 1 Is Hiding A Zombie Bite — The Last Bus, Part 1",
    "due": "2026-10-29T03:29:00.000Z",
-   "status": "scheduled",
+   "status": "finished",
    "posts": {
     "yt": "6ae2bd9bc2255f48b9c37cd2",
     "tt": "6ae2bd9ec4bbd0de4b488808",
@@ -19,7 +19,13 @@
    "thumb": "releases/last-bus/part1/thumbnail_9x16.png",
    "caps_en": "releases/last-bus/part1/captions_en.srt",
    "caps_th": "releases/last-bus/part1/captions_th.srt",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "en": true,
+    "th": true,
+    "playlist": true
+   },
    "yt_video_id": "zsAB6Tz3_cE"
   },
   {
@@ -29,7 +35,7 @@
    "of": 10,
    "yt_title": "The Bus Engine Is Off. One Sound Means Death — The Last Bus, Part 2 (The Tunnel)",
    "due": "2026-10-29T04:59:00.000Z",
-   "status": "scheduled",
+   "status": "finished",
    "posts": {
     "yt": "6ae2bdb36ffb9bb0dcc9d642",
     "tt": "6ae2bdb47d94db46db315b76",
@@ -41,7 +47,13 @@
    "thumb": "releases/last-bus/part2/thumbnail_9x16.png",
    "caps_en": "releases/last-bus/part2/captions_en.srt",
    "caps_th": "releases/last-bus/part2/captions_th.srt",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "en": true,
+    "th": true,
+    "playlist": true
+   },
    "yt_video_id": "mqirINsHXCI"
   },
   {
@@ -51,7 +63,7 @@
    "of": 10,
    "yt_title": "A Zombie Apocalypse, Six Miles Of Fuel, And One Giant Chicken — The Last Bus, Part 3",
    "due": "2026-10-29T06:29:00.000Z",
-   "status": "scheduled",
+   "status": "finished",
    "posts": {
     "yt": "6ae2bdb67d94db46db315be2",
     "tt": "6ae2bdb77d94db46db315c10",
@@ -63,7 +75,13 @@
    "thumb": "releases/last-bus/part3/thumbnail_9x16.png",
    "caps_en": "releases/last-bus/part3/captions_en.srt",
    "caps_th": "releases/last-bus/part3/captions_th.srt",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "en": true,
+    "th": true,
+    "playlist": true
+   },
    "yt_video_id": "Ua_RoAZ3Kv0"
   },
   {
@@ -73,7 +91,7 @@
    "of": 10,
    "yt_title": "Is The Chicken Bitten? Or Is That Just Ketchup? — The Last Bus, Part 4",
    "due": "2026-10-29T07:59:00.000Z",
-   "status": "scheduled",
+   "status": "finished",
    "posts": {
     "yt": "6ae2bdb87d94db46db315c75",
     "tt": "6ae2bdb96ffb9bb0dcc9d7b2",
@@ -85,7 +103,13 @@
    "thumb": "releases/last-bus/part4/thumbnail_9x16.png",
    "caps_en": "releases/last-bus/part4/captions_en.srt",
    "caps_th": "releases/last-bus/part4/captions_th.srt",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "en": true,
+    "th": true,
+    "playlist": true
+   },
    "yt_video_id": "I3v6qV2ZbBo"
   },
   {
@@ -95,7 +119,7 @@
    "of": 10,
    "yt_title": "Everybody Roll Up Your Sleeves. Someone Is Lying — The Last Bus, Part 5",
    "due": "2026-10-29T09:29:00.000Z",
-   "status": "scheduled",
+   "status": "finished",
    "posts": {
     "yt": "6ae2bdbcc2255f48b9c38633",
     "tt": "6ae2bdbe6ffb9bb0dcc9dc66",
@@ -107,7 +131,13 @@
    "thumb": "releases/last-bus/part5/thumbnail_9x16.png",
    "caps_en": "releases/last-bus/part5/captions_en.srt",
    "caps_th": "releases/last-bus/part5/captions_th.srt",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "en": true,
+    "th": true,
+    "playlist": true
+   },
    "yt_video_id": "_xyyi-kiWKI"
   },
   {
@@ -117,7 +147,7 @@
    "of": 10,
    "yt_title": "He's Sweating, Shaking, Confused. Zombie… Or Something Else? — The Last Bus, Part 6",
    "due": "2026-10-29T10:59:00.000Z",
-   "status": "scheduled",
+   "status": "finished",
    "posts": {
     "yt": "6ae2bdc07d94db46db316771",
     "tt": "6ae2bdc07d94db46db3167ee",
@@ -129,7 +159,13 @@
    "thumb": "releases/last-bus/part6/thumbnail_9x16.png",
    "caps_en": "releases/last-bus/part6/captions_en.srt",
    "caps_th": "releases/last-bus/part6/captions_th.srt",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "en": true,
+    "th": true,
+    "playlist": true
+   },
    "yt_video_id": "4-aPE1GBcJA"
   },
   {
@@ -139,7 +175,7 @@
    "of": 10,
    "yt_title": "The Drawbridge Is Up. One (Scared) Man Must Climb The Tower — The Last Bus, Part 7",
    "due": "2026-10-29T12:29:00.000Z",
-   "status": "scheduled",
+   "status": "finished",
    "posts": {
     "yt": "6ae2bdc36ffb9bb0dcc9e4c7",
     "tt": "6ae2bdc5cc91be5434c5b420",
@@ -151,7 +187,13 @@
    "thumb": "releases/last-bus/part7/thumbnail_9x16.png",
    "caps_en": "releases/last-bus/part7/captions_en.srt",
    "caps_th": "releases/last-bus/part7/captions_th.srt",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "en": true,
+    "th": true,
+    "playlist": true
+   },
    "yt_video_id": "DTf4JyGy3vw"
   },
   {
@@ -173,8 +215,13 @@
    "thumb": "releases/last-bus/part8/thumbnail_9x16.png",
    "caps_en": "releases/last-bus/part8/captions_en.srt",
    "caps_th": "releases/last-bus/part8/captions_th.srt",
-   "done": {},
-   "yt_video_id": "Umhk4JJcp4M"
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "en": true
+   },
+   "yt_video_id": "Umhk4JJcp4M",
+   "last_error": "th: YouTube quota guard: 8616+400 would pass the daily limit 9000; try again after midnight Pacific"
   },
   {
    "id": "lb09",
@@ -557,7 +604,7 @@
    "thumb": "releases/quiet/quiet_01/cover_9x16.jpg",
    "caps_en": "releases/quiet/quiet_01/captions_en.srt",
    "caps_th": "releases/quiet/quiet_01/captions_th.srt",
-   "status": "scheduled",
+   "status": "finished",
    "due": "2026-10-30T16:40:00.000Z",
    "posts": {
     "yt": "6ae4c6be2a4d923bf40b3d1d",
@@ -569,9 +616,11 @@
    "yt_video_id": "4Unw7OiTyQ4",
    "done": {
     "tags": true,
-    "thumb": true
-   },
-   "last_error": "en: YouTube POST captions -> HTTP 403: The request cannot be completed because you have exceeded your <a href=\"/youtube/data/getting-started#quota\">quota</a>."
+    "thumb": true,
+    "en": true,
+    "th": true,
+    "playlist": true
+   }
   }
  ]
 }
