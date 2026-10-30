@@ -1,33 +1,35 @@
-QA report: THE QUIET HAND part 2/10 (quiet_02)
-  [PASS] A: 17 beats, average 3.46 s (target 3-4.8), longest 6.2 s, shortest 2.0 s
+QA report: THE QUIET HAND part 3/10 (quiet_03)
+  [PASS] A: 18 beats, average 3.65 s (target 3-4.8), longest 7.0 s, shortest 2.0 s
   [PASS] A: no beat > 9.5 s
   [PASS] A: no beat > 7.5 s
   [PASS] A: no beat < 1.5 s
-  [PASS] A: speech pace 147 wpm (108 words, 59 s)
-  [PASS] A: the hook starts at 0.08 s: "If traffic stops, you are already late."
+  [PASS] A: speech pace 134 wpm (113 words, 66 s)
+  [PASS] A: the hook starts at 0.08 s: "If your phone rings now, you just rang a dinner "
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
-  [PASS] S: PA opening: "The Quiet Hand. Part two of ten: the van."
-  [PASS] S: the PA opening is spoken at 3.4 s (series + part + topic within the first 8 s)
-  [PASS] S: PA sign-off: "Part two of ten, The Quiet Hand. Next: the kid on the roof. Follow for part three."
+  [PASS] S: PA opening: "The Quiet Hand. Part three of ten: the kid on the roof."
+  [PASS] S: the PA opening is spoken at 4.7 s (series + part + topic within the first 8 s)
+  [PASS] S: PA sign-off: "Part three of ten, The Quiet Hand. Next: the tunnel. Follow for part four."
   [PASS] S: route line (part n of 10) on every non-card beat
-  [PASS] S: YouTube title (65 chars): If Traffic Stops You Are Already Dead: 14 | The Quiet Hand Part 2
-  [PASS] S: 16 YouTube tags, 260 chars
-  [PASS] S: 17 cues, 17 Thai lines
+  [PASS] S: YouTube title (68 chars): A Kid Stuck On A Roof For 5 Hours: 3 Zombies | The Quiet Hand Part 3
+  [PASS] S: 16 YouTube tags, 266 chars
+  [PASS] S: 18 cues, 18 Thai lines
   [PASS] S: release kit complete
-  [WARN] F: 1 character voices: {'ren': 14, 'ann': 3}
-  [WARN] F: BUS-E/PA = 29 % of speech time (target <= 25 %)
-  [WARN] F: 5 speaker changes (conversation, not narration)
-  [WARN] F: 25 kinds of sound effect: ['bell', 'body_fall', 'click', 'creak', 'groan', 'heartbeat', 'horde', 'radio', 'rustle', 'sigh', 'stab', 'step_gravel_a', 'step_gravel_b', 'step_gravel_c', 'step_tile_a', 'step_tile_b', 'step_tile_c', 'swing', 'thud_wood', 'wrench_hit', 'zhurt_b', 'zhurt_c', 'zmoan_a', 'zmoan_b', 'zmoan_c']; comedy stings: []
-  [PASS] F: characters visible in 12/12 non-card beats
-  [PASS] F: 1 lines with a question or talking to the viewer
-  [PASS] B: layout: 0 CROP, 0 OVERLAP
+  [WARN] F: 2 character voices: {'ren': 12, 'ann': 2, 'noor': 4}
+  [PASS] F: BUS-E/PA = 23 % of speech time (target <= 25 %)
+  [WARN] F: 6 speaker changes (conversation, not narration)
+  [WARN] F: 24 kinds of sound effect: ['bell', 'body_fall', 'click', 'creak', 'groan', 'heartbeat', 'horde', 'radio', 'rustle', 'sigh', 'stab', 'step_gravel_a', 'step_gravel_b', 'step_gravel_c', 'step_tile_a', 'step_tile_b', 'step_tile_c', 'swing', 'thud_wood', 'wrench_hit', 'zhurt_b', 'zmoan_a', 'zmoan_b', 'zmoan_c']; comedy stings: []
+  [PASS] F: characters visible in 13/13 non-card beats
+  [PASS] F: 3 lines with a question or talking to the viewer
+  [FAIL] B: layout: 2 CROP, 0 OVERLAP
   [PASS] B: layout: 0 BAND, 0 EDGE
+  [FAIL] B: [CROP   ] b010 card/macro     scene "GAS" is cut by the frame (x 212..315, y -17..54)
+  [FAIL] B: [CROP   ] b011 card/chain     scene "GAS" is cut by the frame (x 173..277, y -17..54)
   [PASS] C: 1080x1920 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 58.77 s vs spec 58.77 s; 32.8 MB; audio aac 48000 Hz
-  [PASS] D: integrated -14.0 LUFS, LRA 3.2 LU
+  [PASS] C: duration 65.73 s vs spec 65.73 s; 33.4 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.0 LUFS, LRA 4.1 LU
   [PASS] D: true peak -2.0 dBTP
   [PASS] E: every beat boundary changes the picture clearly
   [PASS] E: no black frames in the scan
-  [PASS] H: cover embedded in the first frames (diff 3.4/255)
+  [PASS] H: cover embedded in the first frames (diff 3.3/255)
 
-  RESULT: PASS
+  RESULT: FAIL
