@@ -319,6 +319,16 @@
     "home"
    ],
    "drawn_in": "farm9.js"
+  },
+  "heli": {
+   "fit": [
+    "roof",
+    "sky",
+    "urban",
+    "outdoor",
+    "rescue"
+   ],
+   "drawn_in": "world9.js"
   }
  }
 }

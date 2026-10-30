@@ -42,8 +42,10 @@ const IT={
  bus:(g,o)=>{R(g,-150,-120,300,100,o.c||'#d9a030',S());for(let i=0;i<5;i++)R(g,-136+i*56,-104,44,36,'#9fc3d8',S({'stroke-width':2}));for(const x of[-96,96])C(g,x,-20,26,'#1a1a20',S())},
  boat:(g,o)=>{P(g,'M-120,-30 L120,-30 L90,10 L-90,10Z',o.c||'#8a5a3a',S());L(g,0,-30,0,-180,'#5a4a3a',6);P(g,'M6,-176 L90,-60 L6,-60Z','#e8e2cf',S({'stroke-width':2.4}))},
  cart:(g,o)=>{R(g,-50,-70,100,44,o.c||'#aab2bb',S({'stroke-width':2.4}));for(const x of[-34,34])C(g,x,-14,12,'#1a1a20');L(g,50,-70,76,-110,'#aab2bb',5)},
+ heli:(g,o)=>{R(g,-70,-40,140,56,o.c||'#4a5a6a',S());P(g,'M70,-30 L190,-26 L190,-14 L70,-6Z','#3a4a5a',S({'stroke-width':2.4}));R(g,-52,-34,60,30,'#9fc3d8',S({'stroke-width':2}));L(g,-100,-62,100,-62,'#2a2a34',6);L(g,0,-62,0,-40,'#2a2a34',6);L(g,-60,24,60,24,'#2a2a34',5);P(g,'M-30,18 L-150,300 L110,300Z','url(#gCone)',{opacity:.4})},
  barricade:(g,o)=>{const w=o.w||260;for(let i=0;i<5;i++){const a=(i%2?1:-1)*14;L(g,-w/2+i*w/4,0,-w/2+i*w/4+a,-110,'#7a5a38',14)}L(g,-w/2,-60,w/2,-70,'#5a4028',12)}
 };
+Object.keys(IT).forEach(k=>{if(!PROP[k])PROP[k]=(g,o)=>IT[k](g,o)});
 function item(g,it){const f=IT[it.t];if(!f)return;const q=G(g,{transform:`translate(${it.x||0} ${it.y==null?600:it.y}) scale(${(it.flip?-1:1)*(it.s||1)} ${it.s||1})`});f(q,it);return q}
 const P_=W.pal||{};
 function skyDraw(f,L){const sk=P_.sky||['#3d3a6e','#c2677a','#f1a477'];const id='gW_'+W.id;document.getElementById('defs').insertAdjacentHTML('beforeend',`<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sk[0]}"/><stop offset=".55" stop-color="${sk[1]}"/><stop offset="1" stop-color="${sk[2]}"/></linearGradient>`);
