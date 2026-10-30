@@ -565,7 +565,13 @@
     "ig": "6ae4c6c0cd8290b9b9fe1372"
    },
    "media_day": "2026-10-30",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "yt_video_id": "4Unw7OiTyQ4",
+   "done": {
+    "tags": true,
+    "thumb": true
+   },
+   "last_error": "en: YouTube POST captions -> HTTP 403: The request cannot be completed because you have exceeded your <a href=\"/youtube/data/getting-started#quota\">quota</a>."
   }
  ]
 }
