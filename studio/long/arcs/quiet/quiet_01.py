@@ -26,8 +26,10 @@ P.B(S([('ren',"Then the screaming started.","แล้วเสียงกร�
 P.B(S([('ren',"Above me. Rats do not scream.","เหนือหัวฉัน หนูไม่ร้อง")]),W.set('kitchen',[],x=640,y=250,z=1.6,add=[]),mood='creep',cam='push_in',sfx=[('creak',.1),('horde',.6)],
  intent=I('Ceiling pipes','Dust shakes off the ceiling pipes as a heavy thud lands above','hotel kitchen ceiling pipes','low angle on pipes and hanging lamp, dust','What made that sound?'))
 K.zput('cook',900,var='cook')
-P.B(S([('ren',"Listen first. Look second.","ฟังก่อน มองทีหลัง")]),K.shot(zmoves={'cook':(760,True)},expr={'ren':'scared'},extra=gear(K,'sprayer')),mood='creep',cam='push_in',sfx=[('creak',.1),('horde',.4)],
- intent=I('Ren, zombie cook','The kitchen door bursts open and a zombie cook shuffles toward Ren','hotel kitchen, steel door at the right','Ren backs one step, the cook walks in','Can Ren stay quiet and win?'))
+P.B(S([('ren',"Listen first. Look second.","ฟังก่อน มองทีหลัง")]),W.pov('kitchen',[('cook',720,700,'side'),('hoodie',900,610,'side')],hands='sprayer',x=640,y=430,z=1.35),mood='creep',cam='hand',sfx=[('creak',.1)],
+ intent=I('First-person view, zombie cook','Through Ren eyes: the kitchen door bursts open and a zombie cook shuffles toward us, a second zombie small and far behind him','hotel kitchen, seen from Ren eyes','first-person: his hands and the sprayer at the bottom, a big zombie close, a small one far','Can he stay quiet and win?'))
+K.zout('hoodie')
+K.shot(zmoves={'cook':(760,True)},expr={'ren':'scared'})   # keep the scene tracker in step: the cook ends at 760
 sh,fx=strike(K,'ren','cook','WHACK!',held=None)
 P.B(S([('ren',"One.","หนึ่ง")]),sh,fx=fx,mood='chase',cam='push_in',sfx=[],pause=.2,dur=2.5,
  intent=I('Ren, zombie cook','Ren drives an elbow into the cook jaw, WHACK!','hotel kitchen, in front of the steel table','wind-up, elbow strike, the cook staggers and drops','Will one hit be enough?'))
@@ -44,15 +46,15 @@ P.B(S([('ren',"Three moves. That is all anyone needs.","สามท่า เ�
  intent=I('Ren','Ren breathes out, calm, wrench hanging by his side','hotel kitchen, close-up of Ren','close-up, steady eyes, soft light','What is he hiding?'))
 P.B(S([('ren',"Then my phone buzzed.","แล้วโทรศัพท์ก็สั่น")]),card('macro',obj='phone',label='HARROW FARM',sub='CACHE OPENED',bg=dict(loc='w_quiet',v='kitchen',z=1.8,x=620,y=430),s=.8),mood='creep',sfx=[('radio',0),('stab',.6)],
  intent=I('Ren','His phone lights up: the cache at the farm is open','hotel kitchen, macro of the phone screen','macro card of a phone with an alert','Who opened the box only he can open?'))
-P.B(S([('ren',"Nobody can open that cache but me.","ไม่มีใครเปิดคลังนั้นได้นอกจากฉัน")]),card('areamap',place='240 KM TO HARROW FARM',home=dict(x=225,y=620,l='HOTEL'),pins=[dict(x=290,y=190,l='HARROW',c='#e0463a')],rings=4),mood='creep',sfx=[('radio',0)],
+P.B(S([('ren',"Nobody can open that cache but me.","ไม่มีใครเปิดคลังนั้นได้นอกจากฉัน")]),card('areamap',place='240 KM TO HARROW FARM',bg='#e8dcc0',ink='#4a3418',dot='#d4c49c',home=dict(x=225,y=620,l='HOTEL'),pins=[dict(x=290,y=190,l='HARROW',c='#c0392b')],rings=4),mood='creep',sfx=[('radio',0)],
  intent=I('Ren','A route map draws a line from the hotel to Harrow Farm, far away','map card, hotel at the bottom, farm at the top','map with a dashed route and radar rings','Can he cross that distance?'))
-P.B(S([('ren',"Seventy-two hours. Two hundred forty kilometres.","เจ็ดสิบสองชั่วโมง สองร้อยสี่สิบกิโลเมตร")]),card('stat',title='HOUR ZERO',rows=[dict(l='KM LEFT',v=240,c='#ffcf6a'),dict(l='HOURS LEFT',v=72,c='#ff6a5a')]),mood='warm',sfx=[('radio',0)],
+P.B(S([('ren',"Seventy-two hours. Two hundred forty kilometres.","เจ็ดสิบสองชั่วโมง สองร้อยสี่สิบกิโลเมตร")]),card('chain',title='HOUR ZERO',bg=dict(loc='w_quiet',v='street',z=1.8,x=640,y=430),nodes=[dict(i='KM',l='240 KM LEFT'),dict(i='H',l='72 HOURS LEFT')]),mood='warm',sfx=[('radio',0)],
  intent=I('Ren','Two bars count up: 240 kilometres and 72 hours','stat card, KM LEFT and HOURS LEFT','animated bars filling with numbers','Can he make it in time?'))
-P.B(S([('ren',"Twenty doors. Touch none.","ประตูยี่สิบบาน ห้ามแตะสักบาน")]),W.lane('service',W.crowd(4,-100,100,6,13,seed=21)+[W.at('ren',0,2.4,'worried',view='back')],x=640,y=430,z=1.0),mood='creep',cam='travel',sfx=[('creak',.2),('heartbeat',.5)],
- intent=I('Ren','Ren walks away from us down a service corridor, tiny zombies at the far end','hotel service corridor, 2.5D lane of doors','back view of Ren, zombies at the vanishing point','Will they hear him?'))
-def stp(i):return (360+i*64+32,650-(i+1)*46)
+P.B(S([('ren',"Twenty doors. Touch none.","ประตูยี่สิบบาน ห้ามแตะสักบาน")]),W.lane('service',[W.zat('hoodie',-150,5.5),W.zat('porter',130,7),W.zat('suit',-90,9),W.zat('dress',70,12)]+[W.at('ren',0,2.4,'worried',view='back')],x=640,y=430,z=1.0),mood='creep',cam='travel',sfx=[('creak',.2),('heartbeat',.5)],
+ intent=I('Ren','Ren walks away from us down a service corridor, tiny zombies at the far end','hotel service corridor, one-point perspective corridor, doors shrinking toward the far end','back view of Ren, four zombies at 6, 8, 11 and 13 units of depth, each smaller than the last','Will they hear him?'))
+def stp(i):return (420+i*44+22,650-(i+1)*30)
 S1=Scene(W,'stair',x=600,y=450,z=.7);S1.put('ren',stp(0)[0]-40,stp(0)[1]+40,expr='calm',sc=.6)
-P.B(S([('ren',"Never take the elevator on day one.","อย่าใช้ลิฟต์ในวันแรก")]),S1.shot(moves={'ren':(stp(5)[0],'walk',stp(5)[1])}),mood='warm',cam='drift',sfx=[('sigh',.2)],
+P.B(S([('ren',"Never take the elevator on day one.","อย่าใช้ลิฟต์ในวันแรก")]),S1.shot(moves={'ren':(stp(8)[0],'walk',stp(8)[1])}),mood='warm',cam='drift',sfx=[('sigh',.2)],
  intent=I('Ren','Ren climbs the back stairs quietly, one hand on the rail','back stairs, diagonal flight','side view, slow climb','What waits at the top?'))
 Lb=Scene(W,'lobby',x=620,y=470,z=.66)
 Lb.put('ren',560,expr='worried').zput('z1',690,var='porter',face='back').zput('z2',790,var='dress',face='back').zput('z3',860,var='hoodie',face='back')
@@ -60,6 +62,8 @@ P.B(S([('ren',"Three at the door. They cannot see.","สามตัวที่
  intent=I('Ren, three zombies','Ren peeks into the lobby where three zombies wander blindly near the glass doors','hotel lobby, sofa at the left, glass doors at the right','wide shot, Ren small at the left, zombies right','Can he slip past?'))
 P.B(S([('ren',"They only hear.","พวกมันได้ยินเท่านั้น")]),card('chain',title='THE RULE',bg=dict(loc='w_quiet',v='lobby',z=1.8,x=640,y=430),nodes=[dict(i='1',l='ANY NOISE'),dict(i='2',l='ZOMBIES HEAR IT'),dict(i='3',l='THEY COME')]),mood='creep',sfx=[('heartbeat',.1),('stab',.7)],
  intent=I('Ren','A three-step diagram shows the rule: noise, zombies hear it, they come','hotel lobby, rule diagram card','chain card with three labelled steps and arrows','Can he stay silent?'))
+P.B(S([('ren',"One step at a time.","ทีละก้าว")]),W.pov('lobby',[('porter',620,700,'back'),('dress',800,620,'back'),('hoodie',930,570,'back')],hands='wrench',x=640,y=430,z=1.35),mood='creep',cam='hand',sfx=[('heartbeat',.1)],
+ intent=I('First-person view, three zombies','Through Ren eyes: three zombies stand with their backs to us, the nearest big, the farthest small at the glass door','hotel lobby, seen from Ren eyes','first-person: wrench in his fist, three backs at three distances','Which one will turn first?'))
 sh,fx=strike(Lb,'ren','z1','THWACK!',held='wrench')
 P.B(S([('ren',"One.","หนึ่ง")]),sh,fx=fx,mood='chase',sfx=[],pause=.2,dur=2.5,
  intent=I('Ren, zombie one','Ren steps out of the shadows and thwacks the nearest zombie','hotel lobby, in front of the sofa','side swing, THWACK! sticker','Did the others hear it?'))
@@ -76,9 +80,8 @@ P.B(S([('ren',"Day one. Two hundred thirty-nine to go.","วันแรก เ�
 St3=Scene(W,'street',x=640,y=470,z=.7);St3.put('ren',560,expr='sad',sc=.72,face='back')
 P.B(S([('ren',"I swore I would never kill again.","ฉันสาบานว่าจะไม่ฆ่าอีก")]),St3.shot(z=1.2,vy=420,vx=600),mood='sad',cam='push_in',sfx=[('heartbeat',.1)],
  intent=I('Ren','Ren stares ahead, the fire reflecting in his eyes, remembering his promise','city street, close-up of Ren','close-up, warm fire light on his face','Will he keep that promise?'))
-St2=Scene(W,'street',x=640,y=470,z=.62);St2.put('ren',300,expr='worried',sc=.7).zput('h1',900,var='suit').zput('h2',990,var='dress').zput('h3',1080,var='porter')
-P.B(S([('ren',"These are not people. Are they?","พวกนี้ไม่ใช่คน ใช่ไหม")]),St2.shot(zmoves={'h1':870,'h2':950,'h3':1030},extra=gear(St2,'wrench')),mood='creep',cam='push_in',sfx=[('horde',.1),('heartbeat',.5)],
- intent=I('Ren, a horde','A horde shuffles toward Ren down the street while he grips the wrench','city street at night, horde at the right','wide shot, Ren small at the left, zombies approaching','Will he break his promise?'))
+P.B(S([('ren',"These are not people. Are they?","พวกนี้ไม่ใช่คน ใช่ไหม")]),W.pov('street',[('suit',760,690,'side'),('dress',860,620,'side'),('porter',930,585,'side'),('hoodie',1010,565,'side')],hands='wrench',x=640,y=440,z=1.3),mood='creep',cam='hand',sfx=[('horde',.1),('heartbeat',.5)],
+ intent=I('First-person view, a horde','Through Ren eyes: a horde walks toward us down the street, the near one big, the far ones smaller and smaller','city street, seen from Ren eyes','first-person: his hands on the wrench, zombies at four distances','Will he break his promise?'))
 P.close('the van');TH.append("ตอนที่หนึ่งจากสิบ เดอะ ไควเอท แฮนด์ ต่อไป: รถตู้ ติดตามตอนที่สอง")
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces what comes next','dispatch radio card','amber terminal card','What happens next?')
 META=W.meta(hook='Retired Assassin vs First Hour Zombies: 240 KM To Go!',premise='An exterminator who swore never to kill again has 72 hours to reach his buried weapons.',

@@ -9,46 +9,59 @@
  },
  "art": {
   "dept": "art-layout-animation",
-  "score": 82,
+  "score": 85,
   "issues": [
-   "ART: two locations have almost the same colour world (distance 12 < 14): give each place its own colour key",
-   "LAYOUT: 4 person(s) cut by the frame edge, e.g. [(18, 'z_hoodie', 441), (19, 'z_hoodie', 547), (23, 'ren', 5), (23, 'z_porter', 478)]: reframe or move them inside x 40-410"
+   "LAYOUT: 8 person(s) cut by the frame edge, e.g. [(6, 'z_hoodie', 592), (18, 'z_dress', 451), (18, 'z_hoodie', 634), (19, 'z_hoodie', 441)]: reframe or move them inside x 40-410"
   ],
   "metrics": {
-   "dead_black_bottom_beats": "0/18",
+   "dead_black_bottom_beats": "0/19",
    "dark_beats": 0,
-   "mean_saturation": 0.264,
-   "min_palette_distance": 12.1,
+   "mean_saturation": 0.279,
+   "min_palette_distance": 23.5,
    "static_beats": [],
    "cut_by_edge": [
     [
+     6,
+     "z_hoodie",
+     592
+    ],
+    [
+     18,
+     "z_dress",
+     451
+    ],
+    [
      18,
      "z_hoodie",
-     441
+     634
     ],
     [
      19,
      "z_hoodie",
+     441
+    ],
+    [
+     20,
+     "z_hoodie",
      547
     ],
     [
-     23,
-     "ren",
-     5
+     24,
+     "z_dress",
+     524
     ],
     [
-     23,
+     24,
      "z_porter",
-     478
-    ]
-   ],
-   "zoom_jumps": [
+     619
+    ],
     [
-     6,
-     1.6,
-     0.66
+     24,
+     "z_hoodie",
+     728
     ]
    ],
+   "zoom_jumps": [],
    "empty_beats": []
   }
  },
@@ -60,21 +73,21 @@
   ],
   "metrics": {
    "lufs": -14.0,
-   "true_peak": -2.1,
+   "true_peak": -2.0,
    "speakers": {
     "ren": {
      "db": -20.4,
-     "f0": 133.0,
-     "wpm": 144,
-     "share": 0.83,
+     "f0": 134.0,
+     "wpm": 146,
+     "share": 0.84,
      "bed_minus_voice_db": -6.9
     },
     "ann": {
      "db": -21.7,
      "f0": 111.0,
      "wpm": 160,
-     "share": 0.17,
-     "bed_minus_voice_db": -15.4
+     "share": 0.16,
+     "bed_minus_voice_db": -15.6
     }
    },
    "fight_sound": {
@@ -83,36 +96,36 @@
    },
    "music_moods": {
     "creep": {
-     "rms_db": -21.0,
-     "centroid": 2591
+     "rms_db": -20.9,
+     "centroid": 2468
     },
     "idle": {
-     "rms_db": -30.6,
+     "rms_db": -30.7,
      "centroid": 636
     },
     "warm": {
-     "rms_db": -24.7,
-     "centroid": 1521
+     "rms_db": -24.9,
+     "centroid": 1484
     },
     "comic": {
-     "rms_db": -28.2,
-     "centroid": 2589
+     "rms_db": -28.1,
+     "centroid": 2555
     },
     "chase": {
-     "rms_db": -20.5,
-     "centroid": 2415
+     "rms_db": -20.7,
+     "centroid": 2400
     },
     "sad": {
-     "rms_db": -25.0,
-     "centroid": 1492
+     "rms_db": -25.1,
+     "centroid": 1565
     }
    },
    "foley": {
-    "events": 110,
-    "moving_beats": 5,
+    "events": 112,
+    "moving_beats": 3,
     "without_steps": 0
    },
-   "sfx": 110
+   "sfx": 112
   }
  },
  "editorial": {
@@ -124,7 +137,7 @@
    "EDITORIAL: 6 caption(s) read faster than 17 characters/s [('IF YOU HEAR', 21.4), ('SCREAMING ABOVE YOU,', 19.5), (\"DON'T GO UP.\", 17.5)]"
   ],
   "metrics": {
-   "chunks": 51,
+   "chunks": 53,
    "dangling": [
     "SCREAMING ABOVE YOU,"
    ],
@@ -175,8 +188,8 @@
    ],
    "shot_len_std": 0.79,
    "srt": [
-    25,
-    25
+    26,
+    26
    ]
   }
  },
@@ -201,16 +214,16 @@
      1080,
      1920
     ],
-    "detail": 8.9,
-    "colourful": 50.7
+    "detail": 10.1,
+    "colourful": 76.7
    },
    "cover_16x9.png": {
     "size": [
      1280,
      720
     ],
-    "detail": 5.0,
-    "colourful": 43.2
+    "detail": 5.1,
+    "colourful": 54.7
    }
   }
  },
@@ -220,6 +233,7 @@
   "issues": [],
   "metrics": {
    "props": [
+    "hands",
     "sprayer",
     "wrench"
    ]
@@ -229,15 +243,15 @@
   "dept": "direction",
   "score": 88,
   "issues": [
-   "DIRECTION: more than 3 shots of the same size in a row (beats [9, 18, 19, 20, 21]): vary wide / medium / close",
-   "DIRECTION: the same picture (place + size) holds for 10.4 s (> 6.5 s): cut, move the camera or change the subject"
+   "DIRECTION: more than 3 shots of the same size in a row (beats [22]): vary wide / medium / close",
+   "DIRECTION: the same picture (place + size) holds for 7.5 s (> 6.5 s): cut, move the camera or change the subject"
   ],
   "metrics": {
-   "sizes": "wwmcwwwwmwwwwwwwmw",
+   "sizes": "wwmcmwwwmwwwmwwwwmm",
    "headroom": [],
    "side_swaps": [],
    "eyeline_flips": [],
-   "longest_same_picture_s": 10.4
+   "longest_same_picture_s": 7.5
   }
  },
  "writing": {
@@ -249,7 +263,7 @@
   "metrics": {
    "mean_words": 4.5,
    "word_length": {
-    "ren": 4.25
+    "ren": 4.18
    },
    "reading_grade": 3.3
   }
@@ -258,19 +272,19 @@
   "dept": "qc",
   "score": 92,
   "issues": [
-   "QC: total bitrate 4.7 Mbps (3-14)"
+   "QC: total bitrate 4.8 Mbps (3-14)"
   ],
   "metrics": {
    "size": "1080x1920",
    "fps": "30/1",
-   "mbps": 4.7,
-   "duration": 74.8,
+   "mbps": 4.8,
+   "duration": 77.0,
    "vcodec": "h264",
    "profile": "High",
    "acodec": "aac",
    "arate": "48000",
    "lufs": -14.0,
-   "true_peak": -2.1,
+   "true_peak": -2.0,
    "black_segments": [],
    "frozen_s": []
   }

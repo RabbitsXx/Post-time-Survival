@@ -1,9 +1,9 @@
-# Scorecard quiet_01  (2026-10-30 13:35 UTC)
+# Scorecard quiet_01  (2026-10-30 14:25 UTC)
 
 | department | score | bar | verdict |
 |---|---:|---:|---|
 | story | 97 | 70 | PASS |
-| art | 82 | 70 | PASS |
+| art | 85 | 70 | PASS |
 | sound | 96 | 60 | PASS |
 | editorial | 80 | 70 | PASS |
 | marketing | 100 | 75 | PASS |
@@ -16,8 +16,7 @@
 * STORY/storylint(warn): a 2.5D lane location is used
 
 ## art
-* ART: two locations have almost the same colour world (distance 12 < 14): give each place its own colour key
-* LAYOUT: 4 person(s) cut by the frame edge, e.g. [(18, 'z_hoodie', 441), (19, 'z_hoodie', 547), (23, 'ren', 5), (23, 'z_porter', 478)]: reframe or move them inside x 40-410
+* LAYOUT: 8 person(s) cut by the frame edge, e.g. [(6, 'z_hoodie', 592), (18, 'z_dress', 451), (18, 'z_hoodie', 634), (19, 'z_hoodie', 441)]: reframe or move them inside x 40-410
 
 ## sound
 * dead air 1.9 s between lines
@@ -28,11 +27,11 @@
 * EDITORIAL: 6 caption(s) read faster than 17 characters/s [('IF YOU HEAR', 21.4), ('SCREAMING ABOVE YOU,', 19.5), ("DON'T GO UP.", 17.5)]
 
 ## direction
-* DIRECTION: more than 3 shots of the same size in a row (beats [9, 18, 19, 20, 21]): vary wide / medium / close
-* DIRECTION: the same picture (place + size) holds for 10.4 s (> 6.5 s): cut, move the camera or change the subject
+* DIRECTION: more than 3 shots of the same size in a row (beats [22]): vary wide / medium / close
+* DIRECTION: the same picture (place + size) holds for 7.5 s (> 6.5 s): cut, move the camera or change the subject
 
 ## writing
 * WRITING: ren talks 3 lines in a row: break it with a reaction or action
 
 ## qc
-* QC: total bitrate 4.7 Mbps (3-14)
+* QC: total bitrate 4.8 Mbps (3-14)
