@@ -1,23 +1,23 @@
-# THE LAST FLOOR - Part 1 of 2 - publish kit
+# THE LAST FLOOR - Part 1 of 3 - publish kit
 
-**YouTube title** (87 chars)
-`Don't Touch The Elevator! A Tower, A Parrot And One Frying Pan — The Last Floor, Part 1`
+**YouTube title** (86 chars)
+`A Zombie Delivers Pizza To The Elevator! 12 Floors To Survive — The Last Floor, Part 1`
 
 **YouTube description**
 ```
-THE LAST FLOOR — Part 1 of 2, from Post Time Survival
-Twelve floors. One stairwell. And a parrot that repeats the worst possible line.
+THE LAST FLOOR — Part 1 of 3, from Post Time Survival
+Twelve floors. One stairwell. A pizza zombie, a chef with a pan and a parrot.
 
-The super, a teen, a night chef and a very loud parrot climb a zombie-filled apartment tower. Real tip: go up and lock the fire doors behind you.
+The super and a teen must climb a zombie-filled tower to the roof before the 6 a.m. rescue helicopter. Real tip: never take the elevator, use the stairs and lock the fire doors behind you.
 
-🔔 Part 2 next: the roof.
+🔔 Part 2 next: the stairs.
 
-Which floor would YOU run to? Tell me in the comments.
+Which floor would YOU stop on? Tell me in the comments.
 
-Bell, Zara, Omar, Pip
+Bell, Zara, Omar, Pip, Mrs. Lin
 
 Fiction and comedy. Voices are AI-generated; the animation is original.
-Watch the whole series in order: THE LAST FLOOR, Parts 1-2, from Post Time Survival.
+Watch the whole series in order: THE LAST FLOOR, Parts 1-3, from Post Time Survival.
 
 #shorts #zombie #zombieapocalypse #animation #mystery #thelastfloor
 ```
@@ -29,19 +29,19 @@ the last floor, zombie apartment, zombie apocalypse animation, zombie story, apa
 
 **TikTok caption**
 ```
-Don't touch the elevator. 🏢🧟 A super, a teen, a chef and a very loud parrot. Part 1 of 2.
+A zombie delivered pizza to the elevator. 🍕🧟 12 floors, one parrot, one pan. Part 1 of 3.
 #zombie #zombieapocalypse #animatedstory #fyp #thelastfloor
 ```
 
 **Instagram caption**
 ```
-Don't touch the elevator. 🏢 A super, a teen, a chef and a very loud parrot. Real survival tip inside. Part 1 of 2 — Part 2 next.
+A zombie delivered pizza to the elevator. 🍕 12 floors, one parrot, one pan. Real survival tip inside. Part 1 of 3 — Part 2 next.
 #zombie #zombieapocalypse #animation #animatedstory #reels #thelastfloor
 ```
 
 **Pinned comment**
 ```
-Which floor would YOU run to? 👇 Next: the roof.
+Which floor would YOU stop on? 👇 Next: the stairs.
 ```
 
 **Settings**: audience "No, it's not made for kids"; altered/synthetic content: YES (AI voices + generated animation); category Entertainment; language English;

@@ -1,33 +1,33 @@
-QA report: THE LAST FLOOR part 1/3 (lastfloor_01)
-  [PASS] A: 16 beats, average 3.52 s (target 3-4.8), longest 6.4 s, shortest 2.0 s
+QA report: THE LAST FLOOR part 3/3 (lastfloor_03)
+  [PASS] A: 17 beats, average 3.47 s (target 3-4.8), longest 6.1 s, shortest 1.7 s
   [PASS] A: no beat > 9.5 s
   [PASS] A: no beat > 7.5 s
   [PASS] A: no beat < 1.5 s
-  [PASS] A: speech pace 165 wpm (119 words, 56 s)
-  [PASS] A: the hook starts at 0.08 s: "I ordered a pizza. I did NOT order that."
+  [PASS] A: speech pace 167 wpm (125 words, 59 s)
+  [PASS] A: the hook starts at 0.08 s: "Floor twelve. The roof door. Locked."
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
-  [PASS] S: PA opening: "Attention, residents. This is The Last Floor. Part one of three: the lobby."
-  [PASS] S: the PA opening is spoken at 3.3 s (series + part + topic within the first 8 s)
-  [PASS] S: PA sign-off: "Part one of three, The Last Floor. Next: the stairs. Follow for part two."
+  [PASS] S: PA opening: "Attention, residents. This is The Last Floor. Part three of three: the roof."
+  [PASS] S: the PA opening is spoken at 4.0 s (series + part + topic within the first 8 s)
+  [PASS] S: PA sign-off: "Part three of three, the end of The Last Floor. Follow for the next series."
   [PASS] S: route line (part n of 3) on every non-card beat
-  [PASS] S: YouTube title (86 chars): A Zombie Delivers Pizza To The Elevator! 12 Floors To Survive — The Last Floor, Part 1
+  [PASS] S: YouTube title (91 chars): Three Flashes Saved Us On The Roof! A Parrot Yells MAYDAY — The Last Floor, Part 3 (Finale)
   [PASS] S: 17 YouTube tags, 291 chars
-  [PASS] S: 19 cues, 19 Thai lines
+  [PASS] S: 21 cues, 21 Thai lines
   [PASS] S: release kit complete
-  [PASS] F: 4 character voices: {'zara': 6, 'ann': 2, 'bell': 7, 'omar': 3, 'pip': 1}
-  [PASS] F: BUS-E/PA = 24 % of speech time (target <= 25 %)
-  [PASS] F: 14 speaker changes (conversation, not narration)
-  [PASS] F: 10 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'heartbeat', 'horde', 'radio', 'rimshot', 'sigh', 'stab']; comedy stings: ['boing', 'rimshot']
-  [PASS] F: characters visible in 12/12 non-card beats
-  [WARN] F: 0 lines with a question or talking to the viewer
+  [PASS] F: 5 character voices: {'bell': 6, 'ann': 3, 'zara': 5, 'lin': 3, 'omar': 3, 'pip': 1}
+  [WARN] F: BUS-E/PA = 25 % of speech time (target <= 25 %)
+  [PASS] F: 17 speaker changes (conversation, not narration)
+  [PASS] F: 10 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'heartbeat', 'horde', 'radio', 'rimshot', 'stab', 'swell']; comedy stings: ['boing', 'rimshot']
+  [PASS] F: characters visible in 13/13 non-card beats
+  [PASS] F: 1 lines with a question or talking to the viewer
   [PASS] B: layout: 0 CROP, 0 OVERLAP
-  [PASS] B: layout: 0 BAND, 0 EDGE
+  [WARN] B: layout: 1 BAND, 0 EDGE
   [PASS] C: 720x1280 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 56.37 s vs spec 56.37 s; 16.3 MB; audio aac 48000 Hz
-  [PASS] D: integrated -14.0 LUFS, LRA 5.8 LU
+  [PASS] C: duration 59.00 s vs spec 59.00 s; 17.8 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.1 LUFS, LRA 5.8 LU
   [PASS] D: true peak -1.9 dBTP
   [PASS] E: every beat boundary changes the picture clearly
   [PASS] E: no black frames in the scan
-  [PASS] H: cover embedded in the first frames (diff 2.8/255)
+  [PASS] H: cover embedded in the first frames (diff 3.4/255)
 
   RESULT: PASS
