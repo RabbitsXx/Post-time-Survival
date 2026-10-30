@@ -142,7 +142,7 @@ def strike(sc,who,zname,word,held=None,dx=70,knock=70,face_left=True,sx=None,**k
     st=sc.p[who];zb=sc.z[zname];flip=zb['x']<st['x'];st['flip']=flip
     ex=list(kw.pop('extra',None) or [])
     if held:ex.append(dict(k='prop',t=held,x=st['x']+(-dx if flip else dx),y=st['y']-20,s=sc.W.sc(who)*1.4/.8*.8,flip=flip))
-    shot=sc.shot(pose={who:'punch'},zmoves={zname:zb['x']+(knock if not flip else -knock)},extra=ex,**kw)
+    shot=sc.shot(pose={who:'punch'},face={who:'side'},zmoves={zname:zb['x']+(knock if not flip else -knock)},extra=ex,**kw)
     fx=[sticker(.15,word,x=225,y=170,rot=-6,size=62,c='#ffcf6a',dur=.9),shake(.15,6,.35)]
     return shot,fx
 class WorldPart(Script):
