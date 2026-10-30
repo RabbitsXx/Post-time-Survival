@@ -1,0 +1,16 @@
+import sys,os;sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from build3d import *
+sh=[];A=sh.append
+N=lambda en:say('narrator',en)
+A(SQW([ch('gran',-1.0,2.4,'smile'),ch('timo',.9,2.8,'smile')],[N("If you only have one mirror, you have a signal you can see for miles.")],'DAY 15 · 9:00 AM · THE ROOF',min=4.6))
+A(TITLE('THE|SIGNAL','THE MIRROR',2,4,"The Signal. Part two of four. The mirror."))
+A(SHP([ch('gran',.3,-2.8,'smug')],[say('gran',"Eighty years old. This compact has never lied about my age.")],"DAY 15 · 9:10 AM · GRAN ODA'S KITCHEN",min=4.6))
+A(C(dict(type='rules',top='SIGNAL MIRROR',items=['HOLD UP A V WITH YOUR FINGERS','CATCH THE SUN, AIM AT THE V','THREE FLASHES: HELP']),[N("Make a V with your fingers. Aim the flash into the V. Three flashes mean help.")],min=7.0,sfx=[[0.3,'click'],[0.9,'click'],[1.5,'click']]))
+A(SQW([ch('timo',-.6,2.4,'smile',prop='none'),ch('nell',1.2,2.6,'calm')],[say('timo',"Am I doing it right?"),say('nell',"You are blinding the pigeons.")],'DAY 15 · 10:00 AM · THE ROOF',min=5.4))
+A(C(dict(type='stat',g='light',c='#c8902a',label='MIRROR FLASH',v0=0,v=15,unit='KM+',note=['ON A SUNNY DAY.']),[N("A mirror flash can be seen from fifteen kilometers or more on a sunny day.")],min=5.4))
+A(SQW([ch('nell',-.6,2.2,'worried'),ch('doc',1.0,2.6,'calm')],[say('doc',"Cloud is coming."),say('nell',"Then we signal now.")],'DAY 15 · 1:00 PM · THE ROOF',min=4.8))
+A(SQW([ch('timo',-.4,2.2,'scared')],[N("Flash. Flash. Flash.")],'DAY 15 · 1:05 PM · THE ROOF',min=3.4,sfx=[[0.5,'click'],[1.1,'click'],[1.7,'click']],fx=[[0.5,'sticker','FLASH!',270,330]]))
+A(SQW([ch('timo',-.4,2.2,'worried')],[N("Nothing. Only wind. Hours of nothing.")],'DAY 15 · 4:00 PM · THE ROOF',min=4.0))
+A(SQW([ch('timo',-.4,2.2,'shock')],[say('timo',"Wait. Something flashed back!")],'DAY 15 · 5:10 PM · THE ROOF',min=3.8,sfx=[[0.4,'sting']]))
+A(TITLE('THE|SIGNAL','THREE FIRES',2,4,"Part two of four, The Signal. Next: three fires.",nxt=True))
+EP=dict(id='signal_02',series='THE SIGNAL',title='THE MIRROR',part=2,of=4,shots=sh,minscale=.9)

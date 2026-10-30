@@ -8,7 +8,16 @@ OUT=R+'/out';os.makedirs(OUT,exist_ok=True)
 def S3(env,cam,chars,lines=(),place='',min=3.0,fx=None,sfx=None,fov=38,zombies=True,pad=.35):return dict(kind='3d',env=env,cam=cam,chars=chars,lines=list(lines),place=place,min=min,fx=fx or [],sfx=sfx or [],fov=fov,zombies=zombies,pad=pad)
 def C(card,lines=(),min=3.0,sfx=None,pad=.35):return dict(kind='card',card=card,lines=list(lines),min=min,sfx=sfx or [],pad=pad)
 def ch(who,x,z,expr='calm',**k):return dict(who=who,pos=[x,z],expr=expr,**k)
-def say(who,en,th=''):return (who,en,th)
+TH=json.load(open(R+'/thai.json')) if os.path.exists(R+'/thai.json') else {}
+def say(who,en,th=''):return (who,en,th or TH.get(en,''))
+CAMW=[[-3.0,1.6,10.5],[0.2,1.35,2.5],[-1.8,1.6,8.6],[0.2,1.35,2.5]]
+def SQW(chars,lines,place,env='day',min=4.0,cam=None,**k):return S3(env,cam or CAMW,chars,lines,place=place,min=min,**k)
+def BRN(chars,lines,place,min=4.0,**k):return S3('barn',[[2.0,1.6,6.4],[0,1.4,-4],[1.0,1.6,5.2],[0,1.4,-4]],chars,lines,place=place,min=min,**k)
+def SHP(chars,lines,place,min=4.0,**k):return S3('shop',[[1.0,1.55,5.0],[.5,1.35,-2.4],[.8,1.55,3.8],[.5,1.4,-2.4]],chars,lines,place=place,min=min,**k)
+def NGT(chars,lines,place,min=4.0,**k):return S3('night',[[-4.4,1.6,8.2],[0,1.4,.8],[-3.2,1.6,6.8],[0,1.4,.8]],chars,lines,place=place,min=min,**k)
+def TITLE(series,topic,part,of,line,nxt=False,end=False):
+    if nxt:return C(dict(type='title',bg='#0b1224',bg2='#05080f',fg='#ffd98a',top='NEXT',big=topic.split('|'),sub=f'PART {part+1} OF {of}',lamp=0),[say('narrator',line)],min=4.0,sfx=[[0,'chime']])
+    return C(dict(type='title',bg='#0b1224',bg2='#05080f',fg='#ffd98a',top='A SURVIVAL STORY',big=series.split('|'),sub=f'PART {part} OF {of}  \u00b7  {topic}',lamp=1),[say('narrator',line)],min=3.8,sfx=[[0,'chime']])
 def build_spec(ep):
     t=0;shots=[];mouth={};lines_all=[];sfx_all=[]
     for sh in ep['shots']:

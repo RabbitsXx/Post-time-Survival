@@ -621,6 +621,34 @@
     "th": true,
     "playlist": true
    }
+  },
+  {
+   "id": "well_01",
+   "series": "THE WELL",
+   "part": 1,
+   "of": 3,
+   "topic": "SIX SICK",
+   "yt_title": "The Well Part 1: Six Sick | It Was Not A Bite",
+   "yt_desc": "THE WELL · Part 1 of 3 · SIX SICK\n\nA village of 41 people has one well. When six people fall sick at once, everyone blames the dead. Only the water tester knows to check the water.\n\n🧠 Real tip: sickness in many people at once, with no wound, points to bad water. Boil suspect water for at least 1 minute (3 minutes above 2,000 m).\n\n▶ Next: Part 2, THE BOILING POINT. Follow so you do not miss it.\n\nWould you have opened the barn or kept the sick locked in? Tell me below.\n\nTHE WELL is an original animated survival story by Post Time Survival. Fiction.\n\n#zombie #zombieapocalypse #survival #animation #shorts #thewell",
+   "tt": "THE WELL · Part 1/3 · SIX SICK. If six people get sick on the same morning, don't look for a bite. 🧟 #zombie #survival #thewell #fyp",
+   "ig": "THE WELL · Part 1/3 · SIX SICK. If six people get sick on the same morning, don't look for a bite. 🧟 Real survival tip inside. #zombie #survival #animation #reels #thewell",
+   "pin": "Would you have opened the barn or kept the sick locked in? Tell me below.",
+   "tags": "the well, zombie apocalypse, survival story, water purification, how to purify water, survival tips, zombie animation, animated survival, well water, post time survival, zombie story, emergency water, survival animation, prepper tips, apocalypse",
+   "playlist": "THE WELL",
+   "video": "/home/user/Post-time-Survival/studio/free3d/out/well_01.mp4",
+   "thumb": "releases/well/well_01/cover_9x16.jpg",
+   "caps_en": "releases/well/well_01/captions_en.srt",
+   "caps_th": "releases/well/well_01/captions_th.srt",
+   "status": "scheduled",
+   "done": {},
+   "due": "2026-10-30T18:34:00.000Z",
+   "posts": {
+    "yt": "6ae4e14834702c2daac5946f",
+    "tt": "6ae4e14998505e7f5229fb4e",
+    "ig": "6ae4e14aa351214acfa1b330"
+   },
+   "media_day": "2026-10-31",
+   "yt_mode": "buffer"
   }
  ]
 }
