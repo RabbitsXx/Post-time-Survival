@@ -20,12 +20,13 @@
   "2026-10-30f": "Owner cancelled THE LAST FLOOR parts 1-3 (never post them). Files stay in git, state status 'dropped', arc listed in retired_arcs so the autopilot never rebuilds or schedules it.",
   "2026-10-30g": "Owner: release THE QUIET HAND part 1 now (publish_mode live), build the remaining 9 parts automatically, post one every 2 hours after part 1, report progress to Discord.",
   "2026-10-30h": "Owner: CANCEL ALL POSTING. paused=true, publish_mode=stage, scheduled Buffer posts removed, automatic runs disabled.",
-  "2026-10-30i": "Owner: POST part 1 now (live), build the other 9 parts, schedule one every 1h30 at suitable times."
+  "2026-10-30i": "Owner: POST part 1 now (live), build the other 9 parts, schedule one every 1h30 at suitable times.",
+  "2026-10-30j": "Owner: STOP building episodes 2-10 (story feels odd, only numbers). Part 1 is live. paused=true until the owner decides."
  },
  "not_before_note": "autopilot grid starts after the trial; publish_mode stage = build, QA, package and plan slots but do NOT post; set to \"live\" to let the daily run schedule on Buffer",
- "paused": false,
+ "paused": true,
  "min_clips_per_day": 0,
- "publish_mode": "live",
+ "publish_mode": "stage",
  "topics_per_day": 2,
  "parts_per_topic": 3,
  "schedule": {
