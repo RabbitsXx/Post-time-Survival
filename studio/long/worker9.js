@@ -16,7 +16,7 @@ readline.createInterface({input:process.stdin}).on('line',line=>{
   chain=chain.then(async()=>{
     const j=JSON.parse(line);if(j.quit){if(browser)await browser.close();process.exit(0)}
     const t0=Date.now();await ensure(j.spec,j.dsf);
-    for(const [f,path] of j.jobs){await page.evaluate(f=>window.renderFrame(f),f);
+    for(const [f,path] of j.jobs){await page.evaluate(f=>{window.renderFrame(f);return new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))},f);
       const r=await cdp.send('Page.captureScreenshot',{format:'jpeg',quality:92,optimizeForSpeed:true,clip:CLIP});
       fs.writeFileSync(path+'.tmp',Buffer.from(r.data,'base64'));fs.renameSync(path+'.tmp',path)}
     process.stdout.write(JSON.stringify({id:j.id,n:j.jobs.length,ms:Date.now()-t0})+'\n');
