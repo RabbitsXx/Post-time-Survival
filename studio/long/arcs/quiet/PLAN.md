@@ -1,0 +1,48 @@
+# THE QUIET HAND  (10 ตอน, outbreak วัน 0 → ชั่วโมงที่ 72)
+
+**Share line:** An exterminator who swore never to kill again must cross 240 km of the first 72 hours of a zombie outbreak to reach the weapons he buried.
+
+**WHAT IF:** ... the deadliest person in the city is the one who spent six years making sure nobody ever found out?
+
+## ตัวละคร
+- **REN VALE (41)** ตัวเอก: อดีตมือสังหารรหัส "The Quiet" ตอนนี้เป็นพนักงานกำจัดแมลง (Exterminator) ชื่อบริษัท "Vale & Son Pest Control" ทั้งที่ไม่มี Son
+  - WANT: ถึงบ้านที่ Harrow Farm (240 km) เอา cache อาวุธ แล้วรับ "ลูกสาว" มาดู (ดู twist)
+  - FLAW: สาบานกับภรรยาที่เสียไปว่าจะไม่ฆ่าอีก, ร่างกายยังจำได้ก่อนใจจะตัดสิน
+  - SIGNATURE FIGHT: เงียบ ประหยัด ใช้ของในตัว (สเปรย์, ท่อ, ประแจ) ชนะในสามท่า แล้วนับ "Three." ทุกครั้ง
+  - CATCHPHRASE: "Three moves. That's all anyone needs."
+- **NOOR (14)** เด็กส่งของจักรยานไฟฟ้า: ปากไว พึ่งเมือง รู้ทางลัด/ตรอก, เป็นตัวตลกที่ Ren ไม่ยอมรับว่าชอบ. Gag: ตั้งชื่อซอมบี้ทุกตัวตาม Pizza Topping
+- **GUS (58)** อดีตผู้ประเมินความเสี่ยงประกัน: พูดเป็นตัวเลขตลอด ("92 percent chance that's a bad idea"), ขี้กลัวแต่คำนวณแม่น. ตัวช่วยฮุก "ตัวเลข"
+- **MARLOW (50)** อดีต handler ของ Ren ("The Broker"): สุภาพ ใจเย็น ตามล่า cache เพื่อเอาไปขาย. ตัวร้ายคนจริงของเรื่อง
+- **ซอมบี้ระยะแรก:** ยังเดินโซเซ เร็วขึ้นเมื่อได้ยินเสียง (กฎของโลก: ตอบสนองต่อเสียง ไม่ใช่สายตา) → ทำให้ Ren ที่ "เงียบ" ได้เปรียบ
+
+## โลก + กฎ
+เมืองใหญ่ → ชานเมือง → ทางด่วน → ทุ่ง → Harrow Farm. ตัวนับ **KM LEFT** บนจอทุกตอน (240 → 0) และนาฬิกา **HOUR** (0 → 72) = ฮุกตัวเลขประจำเรื่อง
+กฎ: ซอมบี้ตามเสียง, ติดเชื้อด้วยการกัด 10-20 นาที, ไม่มีกฎฟื้นกลางทาง
+
+## ธีมใหญ่ + TWIST ของซีรีส์
+Cache ไม่ได้มีแค่ปืน: ข้างในคือ **หลักฐานของงานสุดท้ายที่ Marlow สั่ง** และ "ลูกสาว" Mara (17) ที่ Ren เคยซ่อนไว้ที่ฟาร์มภายใต้นามสมมติ. Ren ต้องเลือกระหว่างกลับเป็น The Quiet หรือเป็นพ่อ. ชนะด้วย **ไม่ใช้อาวุธใน cache** (ตอนที่ 10)
+
+## 10 ตอน (แต่ละตอน 45-65 วินาที: 3 solo-beats, ≥2 fights สั้น ๆ, END QUESTION)
+| ตอน | ชื่อ | KM/HOUR | เหตุการณ์ | FIGHT / SOLO | TIP จริง | HOOK (YOU / NUMBER / TWIST / LOOP) |
+|---|---|---|---|---|---|---|
+| 1 | **HOUR ZERO** | 240 km / h0 | Ren กำลังพ่นยาในห้องใต้ดินโรงแรม เสียงตะโกนบนชั้นบน; ออกมาเจอการระบาดวันแรก; ได้แค่เครื่องมือพ่นยา | SOLO: ฝ่าครัวมืดด้วยท่อพ่น; FIGHT: 3 ท่าแรก "Three." | ถึงที่ใหม่ให้ฟังก่อนมอง ซอมบี้ตอบสนองต่อเสียง | "If you hear screaming above you, don't go up." / 240 km, 72 hours / ข้อความเก่าเด้งในมือถือ "Cache opened" → / LOOP: ใครเปิด cache? |
+| 2 | **THE VAN** | 226 km / h2 | ขโมยรถตู้บริษัท; Noor โดดเข้ามาหลังรถ; ติดจราจรแน่น | FIGHT: ตัดกลางรถติด 1 vs 5; SOLO: ลงไปเปิดทางคนเดียว | อย่าใช้ทางด่วนช่วงแรก รถจะกลายเป็นกับดัก | "If traffic stops, you're already late." / 14 cars, 1 exit / twist: Noor มีกุญแจรถอีกคัน / LOOP: ใครตามเรามา? |
+| 3 | **92 PERCENT** | 198 km / h6 | ปั๊มน้ำมัน: พบ Gus ล็อกตัวเองในตู้เย็นห้องเก็บของ; Gus คำนวณทางรอดให้ | SOLO: Ren เข้าไปปั๊มตอนมืดสุด; FIGHT: ห้องเก็บของ 1 vs 3 | เงียบมือถือ ปิดเสียงทุกอย่าง | "If your phone rings now, you just rang a dinner bell." / 92 percent / twist: Gus รู้จัก Marlow / LOOP: Gus ทำงานให้ใคร? |
+| 4 | **THE TUNNEL** | 171 km / h12 | อุโมงค์รถไฟ มืดสนิท ต้องเดินเสียงเงียบ 1.1 km | SOLO แบบเต็ม (Noor/Gus รอปลายอุโมงค์); FIGHT x3 ในที่มืดด้วยไฟฉายกะพริบ | อย่าส่องไฟตรงหน้า ใช้ไฟต่ำแล้วชิดผนัง | "If it's dark, don't use your eyes." / 1.1 km / twist: ซอมบี้ในอุโมงค์ "หลับ" / LOOP: ใครปลุกมัน? |
+| 5 | **TRIAGE** | 148 km / h20 | โรงพยาบาลเล็ก; Noor เป็นไข้; Ren ต้องหายาเอง | SOLO: ค้นห้องยาด้วยถุงมือเท่านั้น; FIGHT x2 กับแพทย์ติดเชื้อ | ล้างแผลด้วยน้ำสะอาด อย่ากลัวมากเกินจนไม่ตรวจ (ไข้ ≠ กัด) | "If you have a fever, check for 1 thing first." / 4 hours of pills / twist: ไข้ธรรมดา ไม่ได้ติดเชื้อ แต่ Ren เกือบทิ้งเธอ / LOOP: Gus หายไป |
+| 6 | **GUS'S LIST** | 131 km / h28 | พบ Gus เขียนรายชื่อ "คนที่รู้เรื่อง cache" ตาม Marlow ส่ง; Gus ถูกบังคับ | FIGHT: ลาน RV 1 vs 6 พร้อม Noor ช่วย; SOLO: ตามรอย Gus | อย่าไว้ใจเสียงขอความช่วยเหลือในที่ไร้คน | "If someone begs for help in a silent place..." / 6 names, 3 crossed out / twist: ชื่อ Ren ถูกขีดฆ่า / LOOP: ใครขีด? |
+| 7 | **THE TOWER** | 98 km / h40 | หอวิทยุ; ต้องรับคำสั่งทหาร แต่ถูกเตือนว่า "อพยพแค่ 2 ชั่วโมง" | SOLO: ปีนหอ 40 ชั้นบันไดเหล็ก; FIGHT บนแพลตฟอร์มแคบ | ที่สูงปลอดภัยชั่วคราว ไม่ใช่ถาวร | "If you can see the top, you can't hear the ground." / 40 floors, 2 hours / twist: สัญญาณอพยพปลอม / LOOP: ใครส่ง? |
+| 8 | **CHECKPOINT 9** | 64 km / h52 | ด่านทหารปิดถนน; Ren ต้องข้ามโดยไม่ยิง; Noor ใช้ทางลัดท่อระบายน้ำ | SOLO: ท่อระบายน้ำ 300 m; FIGHT: ทหารติดเชื้อ | อย่าเข้าหาการรวมกลุ่มเสียงดัง ตรวจหาทางอ้อม | "If a road is closed, find the pipe." / 9 gates / twist: ผู้บัญชาการด่านคือคนที่ Marlow จ้าง / LOOP: Marlow ถึง cache ก่อนแล้ว? |
+| 9 | **THE BROKER** | 21 km / h66 | เผชิญหน้า Marlow ที่ทุ่ง; เปิดเผยว่า Mara คือลูกสาว; Marlow จับ Noor | FIGHT ใหญ่ (3 ท่า แต่ Ren พลาดครั้งแรก); SOLO: Ren ต้องไปคนเดียว | อย่าต่อรองเมื่ออีกฝ่ายถือไพ่ใบสุดท้าย | "If a stranger knows your old name, run." / 21 km / twist: Marlow ไม่ได้ต้องการอาวุธ ต้องการชื่อ / LOOP: Ren เหลือกี่ท่า? |
+| 10 | **THE QUIET HAND** | 0 km / h72 | Harrow Farm; Ren เปิด cache แล้วเลือกไม่หยิบ; ชนะ Marlow ด้วยท่อพ่นเดิม "Three."; Mara ออกมา | FIGHT สุดท้าย + SOLO ในโรงนา | ใช้ของรอบตัวก่อนแล้วจึงใช้ของที่ซ่อนไว้ (preparedness ไม่ใช่อาวุธ) | "If you finish with 1 move, was it ever a fight?" / 0 km, 72 hours / twist: cache ว่างเปล่าตั้งแต่ต้น (Ren ทำเอง) / LOOP: ซีรีส์ใหม่ "อะไรคือสิ่งที่ Mara ค้นพบ?" |
+
+## กฎการผลิต (ตามที่ owner สั่ง)
+- ทุกตอนประกาศ series + part + topic (พูด + บนจอ) ผ่านเครื่อง announcer; ตัวนับ KM/HOUR เป็นการ์ดบนจอ
+- Ren ต้องมี SOLO ≥30%, FIGHT ≥3 ต่อตอน (storylint v2); Noor/Gus ห้ามอยู่ในฉาก solo ของ Ren
+- ไม่ใช้ trademark; ตัวละครสมมติ; ความรุนแรงแบบการ์ตูนเส้น (stickman), ไม่มีเลือดเกินเรทแพลตฟอร์ม
+
+## งานวิศวกรรมที่ต้องทำก่อนสร้าง (ตามที่ค้างไว้)
+1. storylint/pitchlint/newness รองรับ **10 parts** (ตอนนี้ตายตัว 3) + `parts` ใน world JSON
+2. Fight helper (3-move choreography + count "Three."), zombie fall/KO, held weapons (ท่อพ่น/ประแจ/ไฟฉาย), รถตู้/รถ lane, ไฟฉายสแกนในที่มืด, phone voice, KM/HOUR card
+3. World: city/hotel basement/highway/gas station/tunnel/hospital/RV park/radio tower/checkpoint/field/farm (11 locs) + cast ใน worlds/quiet.json
+4. Hook formula ถูกใส่ในทุกตอนแล้วด้านบน (YOU/NUMBER/TWIST/LOOP) และจะผ่าน dialoguelint
