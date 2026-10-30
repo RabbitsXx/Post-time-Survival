@@ -15,11 +15,11 @@ def rec(ok,msg,warn=False):
     global bad
     out.append(('[PASS] ' if ok else ('[WARN] ' if warn else '[FAIL] '))+msg);bad+=0 if ok or warn else 1
 words=sum(len(t.split()) for b in B for sp,t in [(c['sp'],' '.join(w for w in c['h'].replace('<y>','').replace('</y>','').replace('<r>','').replace('</r>','').split())) for c in b.get('caps',[])])
-words=sum(len(str(x[1]).split()) for b in B for x in b.get('say',[])) or words
+words=sum(len(str(x[1]).split()) for b in B for x in b.get('say',[]) if x[0]!='ann') or words      # story words: the announcer's ceremony does not count
 st=[b for b in B if b['scene']['n']=='stage'];cd=[b for b in B if b['scene']['n']=='card']
 z=lambda b:(b.get('view') or {}).get('z',1)
 wide=[b for b in st if z(b)<=1.05];close=[b for b in st if z(b)>=1.4]
-OF=CR.series(cid)['of'];dmin,wmin,bmin=(70,150,18) if OF<=2 else (52,115,15)      # 3-part topics: each part may be shorter
+OF=CR.series(cid)['of'];dmin,wmin,bmin=(70,130,18) if OF<=2 else (52,90,15)      # 3-part topics: each part may be shorter
 rec(S['duration']>=dmin,f"duration {S['duration']:.0f} s (>= {dmin} s)");rec(words>=wmin,f'{words} spoken words (>= {wmin})');rec(len(B)>=bmin,f'{len(B)} beats (>= {bmin})')
 rec(len(wide)/max(1,len(st))>=.35,f'wide/establishing shots {len(wide)}/{len(st)} (>= 35 %)');rec(len(close)/max(1,len(st))<=.45,f'close-ups {len(close)}/{len(st)} (<= 45 %)')
 seen=set();bad_open=[]

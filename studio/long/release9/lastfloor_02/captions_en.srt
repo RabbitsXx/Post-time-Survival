@@ -1,66 +1,83 @@
 1
-00:00:00,080 --> 00:00:03,508
-Bell: Roof door sealed. We made it.
-Almost.
+00:00:00,080 --> 00:00:03,467
+Omar: Floor four. Mrs. Lin lives here.
 
 2
-00:00:03,828 --> 00:00:08,562
+00:00:04,137 --> 00:00:09,648
 ALDER TOWER INTERCOM: Attention, residents. This is The
-Last Floor. Part two of two: the roof.
+Last Floor. Part two of three: the stairs.
 
 3
-00:00:08,882 --> 00:00:11,860
+00:00:10,318 --> 00:00:13,661
+Mrs. Lin: Pip! There you are! Who locked
+my stairs?
+
+4
+00:00:14,331 --> 00:00:15,676
+Bell: I did. Rule one.
+
+5
+00:00:15,796 --> 00:00:16,359
+Mrs. Lin: ...Fair.
+
+6
+00:00:17,029 --> 00:00:19,311
+Bell: Go up. Seal the door behind you.
+
+7
+00:00:19,981 --> 00:00:26,085
+Omar: Floor four, five, six... that's a
+lot of floors.
+
+8
+00:00:26,205 --> 00:00:27,707
+Zara: Keep climbing. Don't count.
+
+9
+00:00:28,377 --> 00:00:30,041
+Zara: Floor five. The stairs are blocked!
+
+10
+00:00:30,711 --> 00:00:32,681
+Bell: Push! Everyone push!
+
+11
+00:00:33,351 --> 00:00:34,188
+Zara: ...Direct hit.
+
+12
+00:00:34,951 --> 00:00:38,077
+Mrs. Lin: That's my sister's flat. She
+says never open it.
+
+13
+00:00:38,747 --> 00:00:40,754
+Mrs. Lin: Dot, you're not well.
+
+14
+00:00:41,424 --> 00:00:43,185
+Bell: Leave her. Lock the door.
+
+15
+00:00:43,855 --> 00:00:45,617
+Mrs. Lin: Goodbye, Dot. Click.
+
+16
+00:00:46,287 --> 00:00:48,388
+Zara: They're gaining. Floor seven.
+
+17
+00:00:49,058 --> 00:00:52,036
 Omar: Twelve floors. My legs filed a
 complaint.
 
-4
-00:00:12,180 --> 00:00:12,914
-Zara: Now what?
+18
+00:00:52,706 --> 00:00:54,951
+Bell: Shortcut! Through the floor ten
+hall!
 
-5
-00:00:13,034 --> 00:00:15,783
-Bell: Now we signal. Three of anything.
-
-6
-00:00:16,103 --> 00:00:19,466
-Bell: Three flashes. Pause. Repeat.
-
-7
-00:00:19,786 --> 00:00:21,138
-Omar: My pan is a mirror.
-
-8
-00:00:21,258 --> 00:00:22,545
-Zara: Your pan is a plan?!
-
-9
-00:00:22,865 --> 00:00:25,459
-Bell: Rule two. Signal in threes.
-
-10
-00:00:25,779 --> 00:00:28,736
-Bell: The fire door. It's holding. Please
-keep holding.
-
-11
-00:00:29,056 --> 00:00:30,873
-Pip: Mayday! Mayday! Open the door!
-
-12
-00:00:31,193 --> 00:00:32,746
-Omar: I taught him that. Yesterday.
-
-13
-00:00:33,066 --> 00:00:34,739
-Zara: Look. Lights in the sky.
-
-14
-00:00:35,059 --> 00:00:40,656
-ALDER TOWER INTERCOM: Alder Tower. Rescue helicopter, landing
-on the roof. Everyone lives. Even the parrot.
-
-15
-00:00:40,976 --> 00:00:45,593
-ALDER TOWER INTERCOM: Part two of two, the end
-of The Last Floor. Follow for the next series.
+19
+00:00:55,621 --> 00:01:02,252
+ALDER TOWER INTERCOM: Part two of three, The
+Last Floor. Next: the roof. Follow for part three.
 

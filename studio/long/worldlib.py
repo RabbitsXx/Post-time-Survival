@@ -76,7 +76,7 @@ class World:
         S=s.spec;V={};F={};SP={};NE={};NT={}
         for i,c in s.cast.items():
             V[i]=(c['voice'],c.get('rate',.95));F[i]=c.get('filt','');SP[i]=dict(label=c['name'].upper(),fill=c.get('cap','#ffd23a'),stroke='#000',mono=False);NE[i]=c['name'];NT[i]=c.get('th',c['name'])
-        a=S['ann'];V['ann']=(a.get('voice','en-US-Chirp3-HD-Enceladus'),a.get('rate',1.0));F['ann']=a.get('filt','highpass=f=300,lowpass=f=3400,acompressor=threshold=-24dB:ratio=6,volume=1.2')
+        a=S['ann'];V['ann']=(a.get('voice','en-US-Chirp3-HD-Enceladus'),a.get('rate',1.0));F['ann']=a.get('filt','asetrate=44100*0.86,aresample=44100,highpass=f=220,lowpass=f=3400,acompressor=threshold=-24dB:ratio=6,volume=1.2')
         SP['ann']=dict(label=a['name'].upper(),fill=a.get('c','#7dffb0'),stroke='#02170c',mono=True);NE['ann']=a['name'];NT['ann']=a.get('th',a['name'])
         N=S['new'];ne=dict(world=s.id,setting=N['setting'],structure=N['structure'],announcer=N['announcer'],announcer_voice='ann',palette=N['palette'],
             locs=[f'{s.loc}:{k}' for k in S['locs']],cast=list(s.cast),props=N['props'],devices=N['devices']+[s.id+'_ann',s.id+'_route'],gags=N['gags'],tips=N['tips'],tied_to_topic=N['tied_to_topic'],setting_tags=N.get('setting_tags',[]),props_reused=N.get('props_reused',[]),
@@ -146,8 +146,8 @@ class WorldPart(Script):
             fx.append(dict(k=s.W.id+'_route',at=0,stop=s.part,of=s.of,label=f'{s.say}  ·  {lab}'));return s.beat(say,sc,view=view,fx=fx,**k)
         return s.beat(say,shot,fx=fx,**k)
     def open(s,**k):
-        a=s.W.spec['ann'];return s.B([('ann',f"{a.get('hello','Attention.')} This is {s.say}. Part {NUMW[s.part]} of {NUMW[s.of]}: {s.topic.lower()}.")],card(s.W.id+'_ann',mode='open',part=s.part,of=s.of,title=s.topic.upper()),mood='idle',sfx=[('radio',0)],**k)
+        a=s.W.spec['ann'];return s.B([('ann',f"{s.say}. Part {NUMW[s.part]}: {s.topic.lower()}.")],card(s.W.id+'_ann',mode='open',part=s.part,of=s.of,title=s.topic.upper()),mood='idle',sfx=[('radio',0)],**k)
     def close(s,nxt=None,**k):
-        if s.part<s.of:t=f"Part {NUMW[s.part]} of {NUMW[s.of]}, {s.say}. Next: {(nxt or '').lower()}. Follow for part {NUMW[s.part+1]}.";c=card(s.W.id+'_ann',mode='close',part=s.part,of=s.of,next=(nxt or '').upper())
-        else:t=f"Part {NUMW[s.of]} of {NUMW[s.of]}, the end of {s.say}. Follow for the next series.";c=card(s.W.id+'_ann',mode='end',part=s.part,of=s.of)
+        if s.part<s.of:t=f"Next: {(nxt or '').lower()}. Follow for part {NUMW[s.part+1]}.";c=card(s.W.id+'_ann',mode='close',part=s.part,of=s.of,next=(nxt or '').upper())
+        else:t=f"The end. Follow for the next series.";c=card(s.W.id+'_ann',mode='end',part=s.part,of=s.of)
         return s.B([('ann',t)],c,mood='idle' if s.part<s.of else 'sad',nofade=s.part>=s.of,sfx=[('radio',0)],**k)

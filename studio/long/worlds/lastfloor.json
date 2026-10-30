@@ -61,7 +61,7 @@
    "name": "Zara",
    "th": "\u0e0b\u0e32\u0e23\u0e48\u0e32",
    "voice": "en-US-Chirp3-HD-Zephyr",
-   "rate": 1.0,
+   "rate": 0.9,
    "filt": "asetrate=44100*1.1,aresample=44100",
    "scale": 0.578,
    "cap": "#ff8ad8",
@@ -95,13 +95,14 @@
     "hc": "#1a120c",
     "beard": "#2a1a10",
     "brow": "thick"
-   }
+   },
+   "filt": "asetrate=44100*1.07,aresample=44100"
   },
   "pip": {
    "name": "Pip",
    "th": "\u0e1e\u0e34\u0e1e",
    "voice": "en-US-Chirp3-HD-Puck",
-   "rate": 1.1,
+   "rate": 0.85,
    "filt": "asetrate=44100*1.45,aresample=44100,volume=.95",
    "scale": 0.381,
    "cap": "#ffe14a",
@@ -187,6 +188,10 @@
      "y": 600,
      "s": 1.0
     }
+   ],
+   "tint": [
+    "#e8a050",
+    0.1
    ]
   },
   "hall": {
@@ -219,7 +224,7 @@
    ],
    "end": {
     "t": "window",
-    "s": 3.2
+    "s": 1.5
    },
    "fg": [
     {
@@ -229,6 +234,10 @@
      "s": 2.2,
      "h": 300
     }
+   ],
+   "tint": [
+    "#b04ac0",
+    0.11
    ]
   },
   "stair": {
@@ -262,6 +271,10 @@
      "s": 0.9,
      "label": "STAIRS"
     }
+   ],
+   "tint": [
+    "#4a78c8",
+    0.13
    ]
   },
   "flat": {
@@ -294,6 +307,10 @@
      "y": 590,
      "s": 1
     }
+   ],
+   "tint": [
+    "#e08838",
+    0.13
    ]
   },
   "street": {
@@ -400,6 +417,10 @@
      "y": 630,
      "c": "#e0463a"
     }
+   ],
+   "tint": [
+    "#ff9a70",
+    0.08
    ]
   }
  },

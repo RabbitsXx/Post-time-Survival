@@ -74,19 +74,20 @@ function skyDraw(f,L){const sk=P_.sky||['#3d3a6e','#c2677a','#f1a477'];const id=
 function lanePos(vpx,vpy,gy){return {x:(X,z)=>vpx+X/z,y:z=>vpy+(gy-vpy)/z}}
 LOC['w_'+W.id]=(Z,p)=>{const LC=(W.locs||{})[p.v||Object.keys(W.locs)[0]]||{};const f=G(Z.far),m=G(Z.mid),n=G(Z.near);const upd=[];const kind=LC.kind||'out';
  const layers=[G(f),G(m),G(n)];
- if(kind==='in'){R(f,-200,-100,1680,900,LC.wall||P_.wall||'#3a3530');for(let i=0;i<64;i++)R(f,i*24-60,-100,2,900,'rgba(0,0,0,.18)');R(f,-200,590,1680,300,LC.floor||P_.floor||'#2a2420');L(f,-200,590,1480,590,'rgba(0,0,0,.4)',4);
+ if(kind==='in'){R(f,-200,-700,1680,2400,LC.wall||P_.wall||'#3a3530');for(let i=0;i<64;i++)R(f,i*24-60,-700,2,2400,'rgba(0,0,0,.18)');R(f,-200,590,1680,900,LC.floor||P_.floor||'#2a2420');R(f,-200,590,1680,420,'url(#gGroundShade)',{opacity:.8});L(f,-200,590,1480,590,'rgba(0,0,0,.4)',4);
   if(LC.light!==false)P(f,'M520,-100 L760,-100 L980,640 L300,640Z','url(#gCone)',{opacity:.12});R(f,-200,-100,1680,900,'url(#gWallShade)',{opacity:.8});A(f,{style:'filter:blur(2.4px)'})}
  else if(kind==='lane'){const LP=lanePos(640,LC.vpy||398,720),vpy=LC.vpy||398;if(LC.indoor){R(f,-200,-100,1680,900,LC.wall||P_.wall||'#2a2f38');P(f,`M-200,-100 L1480,-100 L1480,40 L${640+120},${vpy-40} L${640-120},${vpy-40} L-200,40Z`,'#14171d');R(f,-200,vpy-60,1680,120,'url(#gWallShade)',{opacity:.5});A(f,{style:'filter:blur(2px)'})}else{skyDraw(f,LC);P(f,'M-200,404 Q100,340 380,396 T800,376 T1200,398 T1500,384 L1500,420 L-200,420Z',P_.hills||'#2a2744');R(f,-200,360,1680,70,'url(#gHaze)');A(f,{style:'filter:blur(3px)'})}
-  R(m,-200,vpy-2,1680,500,LC.ground||P_.ground||'#33281a');R(m,-200,vpy-2,1680,500,'url(#gGroundShade)',{opacity:.7});
+  R(m,-200,vpy-2,1680,1300,LC.ground||P_.ground||'#33281a');R(m,-200,vpy-2,1680,900,'url(#gGroundShade)',{opacity:.7});
   if(LC.end)item(G(m,{style:'filter:blur(1.6px)'}),Object.assign({x:640,y:vpy+2,s:.3},LC.end));R(m,-200,vpy-6,1680,18,'url(#gHaze)',{opacity:.8});
-  const rw=LC.road||360;P(m,`M${634},${vpy} L${646},${vpy} L${640+rw},780 L${640-rw},780Z`,LC.roadc||'#5a4630');
+  const rw=LC.road||360;P(m,`M${634},${vpy} L${646},${vpy} L${640+rw*3},1500 L${640-rw*3},1500Z`,LC.roadc||'#5a4630');
   const zs=[];for(let z=15;z>=1.15;z/=1.22)zs.push(z);
   for(const z of zs){for(const sd of(LC.sides||[])){const k=1/z,X=sd.x*(sd.side||1),x=LP.x(X,z),y=LP.y(z);if(x<-160||x>1440)continue;const itm=Object.assign({},sd.item,{x,y,s:(sd.item.s||1)*k*(sd.scale||1)});if(sd.jit)itm.y+=rr(z*9+sd.x)*sd.jit*k;item(m,itm)}}
   const nr=G(n,{style:'filter:blur(6px)'});for(const q of(LC.fg||[]))item(nr,q);upd.push((u,t)=>A(nr,{transform:`translate(${Math.sin(t*1.2)*5} 0)`}))}
  else{skyDraw(f,LC);P(f,'M-200,470 Q100,380 380,450 T800,420 T1200,450 T1500,420 L1500,640 L-200,640Z',P_.hills||'#2a2744');R(f,-200,400,1680,160,'url(#gHaze)');A(f,{style:'filter:blur(3.2px)'});
-  R(m,-200,LC.gy||590,1680,300,LC.ground||P_.ground||'#2a2118');R(m,-200,(LC.gy||590)+10,1680,140,'url(#gGroundShade)')}
+  R(m,-200,LC.gy||590,1680,1000,LC.ground||P_.ground||'#2a2118');R(m,-200,(LC.gy||590)+10,1680,500,'url(#gGroundShade)')}
  for(const it of((LC.items||[]).concat(p.add||[]))){const z=it.z==null?1:it.z;const tgt=kind==='lane'?(z===2?n:m):(z===0?f:z===2?n:m);let q;if(z===0&&kind!=='lane'){q=item(G(f,{style:'filter:blur(2px)'}),it)}else if(z===2){q=item(G(n,{style:'filter:blur(5px)'}),it)}else q=item(tgt,it)}
  if(LC.fog)R(m,-200,300,1680,320,'url(#gHaze)',{opacity:LC.fog});
+ if(LC.tint)R(G(n),-600,-900,2600,3000,LC.tint[0],{opacity:LC.tint[1],style:'mix-blend-mode:soft-light;pointer-events:none'});
  if(LC.fireflies!==false&&kind!=='in'){const ff=fFirefly(G(m),LC.ff||8);upd.push((u,t)=>ff(t))}
  return (u,t,bt)=>upd.forEach(fn=>fn(u,t,bt))};
 

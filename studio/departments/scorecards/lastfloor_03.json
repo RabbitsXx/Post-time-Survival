@@ -1,0 +1,207 @@
+{
+ "story": {
+  "dept": "story",
+  "score": 100,
+  "issues": [],
+  "metrics": {}
+ },
+ "art": {
+  "dept": "art-layout-animation",
+  "score": 88,
+  "issues": [
+   "ART: the bottom fifth of the picture is a flat black band in 7/12 scene beats (the set stops at y=720 of the 800 px window): extend floors / ground / walls below the horizon"
+  ],
+  "metrics": {
+   "dead_black_bottom_beats": "7/12",
+   "dark_beats": 0,
+   "mean_saturation": 0.297,
+   "min_palette_distance": 19.1,
+   "static_beats": [],
+   "cut_by_edge": [],
+   "zoom_jumps": [],
+   "empty_beats": []
+  }
+ },
+ "sound": {
+  "dept": "sound",
+  "score": 56,
+  "issues": [
+   "true peak -1.4 dBTP (> -1.5)",
+   "speaker loudness spread 4.0 dB (> 4): one voice is much quieter/louder than another",
+   "voices ann and lin sound alike (f0 170 vs 178 Hz): recast or pitch-shift one",
+   "voices ann and omar sound alike (f0 170 vs 155 Hz): recast or pitch-shift one",
+   "ann: 176 wpm (115-170)",
+   "zara: 207 wpm (115-170)",
+   "announcer is 27% of the speech (<= 25 %)"
+  ],
+  "metrics": {
+   "lufs": -14.0,
+   "true_peak": -1.4,
+   "speakers": {
+    "bell": {
+     "db": -20.7,
+     "f0": 125.0,
+     "wpm": 134,
+     "share": 0.32,
+     "bed_minus_voice_db": -12.1
+    },
+    "ann": {
+     "db": -23.9,
+     "f0": 170.0,
+     "wpm": 176,
+     "share": 0.27,
+     "bed_minus_voice_db": -6.1
+    },
+    "zara": {
+     "db": -21.5,
+     "f0": 242.0,
+     "wpm": 207,
+     "share": 0.17,
+     "bed_minus_voice_db": -7.7
+    },
+    "lin": {
+     "db": -20.5,
+     "f0": 178.0,
+     "wpm": 141,
+     "share": 0.13,
+     "bed_minus_voice_db": -6.4
+    },
+    "omar": {
+     "db": -19.9,
+     "f0": 155.0,
+     "wpm": 180,
+     "share": 0.07,
+     "bed_minus_voice_db": -13.2
+    },
+    "pip": {
+     "db": -20.3,
+     "f0": 205.0,
+     "wpm": 165,
+     "share": 0.04,
+     "bed_minus_voice_db": -12.9
+    }
+   },
+   "sfx": 28
+  }
+ },
+ "editorial": {
+  "dept": "editorial",
+  "score": 58,
+  "issues": [
+   "EDITORIAL: 6 caption chunk(s) stop on a dangling word, e.g. ['THIS IS', 'WHAT IF', 'HELICOPTER IN', 'THEY CLIMBED THE']: break captions at phrase boundaries",
+   "EDITORIAL: 10 caption(s) on screen < 0.6 s [('THIS IS', 0.48), ('FLOOR ELEVEN', 0.52), ('IS POURING', 0.44)]",
+   "EDITORIAL: 15 caption(s) read faster than 17 characters/s [('FLOOR ELEVEN', 23.2), ('IS POURING', 22.8), ('OUT ZOMBIES!', 18.8)]",
+   "EDITORIAL: announcer card beat 1 is 6.1 s (> 4 s) of a static screen: shorten the announcement or animate the card"
+  ],
+  "metrics": {
+   "chunks": 52,
+   "dangling": [
+    "THIS IS",
+    "WHAT IF",
+    "HELICOPTER IN",
+    "THEY CLIMBED THE",
+    "THE END OF",
+    "FOLLOW FOR"
+   ],
+   "orphans": [],
+   "fast": [
+    [
+     "FLOOR ELEVEN",
+     23.2
+    ],
+    [
+     "IS POURING",
+     22.8
+    ],
+    [
+     "OUT ZOMBIES!",
+     18.8
+    ],
+    [
+     "THEY'RE ONE",
+     21.5
+    ],
+    [
+     "FLIGHT BEHIND!",
+     18.2
+    ]
+   ],
+   "short": [
+    [
+     "THIS IS",
+     0.48
+    ],
+    [
+     "FLOOR ELEVEN",
+     0.52
+    ],
+    [
+     "IS POURING",
+     0.44
+    ],
+    [
+     "THEY'RE ONE",
+     0.51
+    ],
+    [
+     "WHAT IF",
+     0.32
+    ]
+   ],
+   "shot_len_std": 1.1,
+   "srt": [
+    20,
+    20
+   ]
+  }
+ },
+ "marketing": {
+  "dept": "marketing",
+  "score": 94,
+  "issues": [
+   "MARKETING: YouTube title is 91 chars (> 70): it will be cut on phones"
+  ],
+  "metrics": {
+   "title": "Three Flashes Saved Us On The Roof! A Parrot Yells MAYDAY — The Last Floor, Part 3 (Finale)",
+   "title_len": 91,
+   "tags": 17,
+   "hashtags": [
+    "#shorts",
+    "#zombie",
+    "#zombieapocalypse",
+    "#animation",
+    "#mystery",
+    "#thelastfloor"
+   ],
+   "cover_9x16.png": {
+    "size": [
+     720,
+     1280
+    ],
+    "detail": 8.7,
+    "colourful": 46.5
+   },
+   "cover_16x9.png": {
+    "size": [
+     1280,
+     720
+    ],
+    "detail": 5.0,
+    "colourful": 35.1
+   }
+  }
+ },
+ "legal": {
+  "dept": "legal-brand",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "props": [
+    "door",
+    "floorsign",
+    "heli",
+    "ladder"
+   ]
+  }
+ }
+}

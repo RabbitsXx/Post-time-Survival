@@ -26,6 +26,10 @@ def tts(text,voice,rate,path,key):
 def trim(src,dst,extra=''):
     f='silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.02,areverse,silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.02,areverse,aresample=44100'+extra
     subprocess.check_call(['ffmpeg','-y','-hide_banner','-loglevel','error','-i',src,'-af',f,'-ac','1',dst])
+    try:                                    # every spoken line is levelled to the same RMS (-23 dBFS) so no character is louder than another (sound department)
+        x=rd(dst);rms=float(np.sqrt(np.mean(x**2))+1e-9);g=min(4.0,max(.25,10**((-23-20*np.log10(rms))/20)))
+        wr(dst,np.clip(x*g,-.98,.98),44100)
+    except Exception:pass
 def rd(f):
     w=wave.open(f);n=w.getnframes();a=np.frombuffer(w.readframes(n),dtype=np.int16).astype(np.float32)/32768;return a.reshape(-1,w.getnchannels()).mean(1)
 def wr(path,x,sr=SR):
@@ -68,7 +72,7 @@ def chunk(cap,maxw=None,maxc=None):
     for k in range(2,min(max(5,-(-n//maxw)+1),n,7)+1):
         for cuts in itertools.combinations(range(1,n),k-1):
             idx=[0,*cuts,n];parts=[ws[idx[i]:idx[i+1]] for i in range(k)]
-            c=cost(parts)+sum(7 for p in parts if len(p)==1)-sum(5 for p in parts[:-1] if p[-1][0][-1] in ',.:;?!')+sum(7 for p in parts[:-1] if p[-1][0].lower().strip(',.:;?!') in STOP)+k*3
+            c=cost(parts)+sum(7 for p in parts if len(p)==1)-sum(5 for p in parts[:-1] if p[-1][0][-1] in ',.:;?!')+sum(45 for p in parts[:-1] if p[-1][0].lower().strip(',.:;?!') in STOP and p[-1][0][-1] not in ',.:;?!')+sum(12 for p in parts if len(p)==1 and n>2)+k*3
             if best is None or c<best[0]:best=(c,parts)
         if best and best[0]<20:break
     return best[1]

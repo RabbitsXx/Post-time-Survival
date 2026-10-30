@@ -1,0 +1,221 @@
+{
+ "story": {
+  "dept": "story",
+  "score": 100,
+  "issues": [],
+  "metrics": {}
+ },
+ "art": {
+  "dept": "art-layout-animation",
+  "score": 82,
+  "issues": [
+   "ART: two locations have almost the same colour world (distance 10 < 14): give each place its own colour key",
+   "LAYOUT: 4 person(s) cut by the frame edge, e.g. [(5, 'lin', 0), (10, 'bell', -15), (11, 'bell', -15), (13, 'lin', 0)]: reframe or move them inside x 40-410"
+  ],
+  "metrics": {
+   "dead_black_bottom_beats": "2/13",
+   "dark_beats": 0,
+   "mean_saturation": 0.219,
+   "min_palette_distance": 9.8,
+   "static_beats": [],
+   "cut_by_edge": [
+    [
+     5,
+     "lin",
+     0
+    ],
+    [
+     10,
+     "bell",
+     -15
+    ],
+    [
+     11,
+     "bell",
+     -15
+    ],
+    [
+     13,
+     "lin",
+     0
+    ]
+   ],
+   "zoom_jumps": [],
+   "empty_beats": []
+  }
+ },
+ "sound": {
+  "dept": "sound",
+  "score": 60,
+  "issues": [
+   "speaker loudness spread 4.8 dB (> 4): one voice is much quieter/louder than another",
+   "voices ann and bell sound alike (f0 162 vs 162 Hz): recast or pitch-shift one",
+   "voices lin and zara sound alike (f0 224 vs 213 Hz): recast or pitch-shift one",
+   "omar: 106 wpm (115-170)",
+   "ann: during speech the bed (music+sfx) is -3.6 dB relative to the voice (must be <= -6): the voice is not on top",
+   "zara: during speech the bed (music+sfx) is -2.4 dB relative to the voice (must be <= -6): the voice is not on top"
+  ],
+  "metrics": {
+   "lufs": -14.1,
+   "true_peak": -2.0,
+   "speakers": {
+    "omar": {
+     "db": -21.0,
+     "f0": 123.0,
+     "wpm": 106,
+     "share": 0.24,
+     "bed_minus_voice_db": -8.3
+    },
+    "ann": {
+     "db": -24.8,
+     "f0": 162.0,
+     "wpm": 133,
+     "share": 0.24,
+     "bed_minus_voice_db": -3.6
+    },
+    "lin": {
+     "db": -20.0,
+     "f0": 224.0,
+     "wpm": 139,
+     "share": 0.21,
+     "bed_minus_voice_db": -7.7
+    },
+    "bell": {
+     "db": -20.0,
+     "f0": 162.0,
+     "wpm": 156,
+     "share": 0.19,
+     "bed_minus_voice_db": -10.7
+    },
+    "zara": {
+     "db": -23.6,
+     "f0": 213.0,
+     "wpm": 157,
+     "share": 0.12,
+     "bed_minus_voice_db": -2.4
+    }
+   },
+   "sfx": 26
+  }
+ },
+ "editorial": {
+  "dept": "editorial",
+  "score": 67,
+  "issues": [
+   "EDITORIAL: 2 caption chunk(s) stop on a dangling word, e.g. ['THIS IS', \"SIX... THAT'S A\"]: break captions at phrase boundaries",
+   "EDITORIAL: 8 caption(s) on screen < 0.6 s [('THIS IS', 0.5), ('PART TWO', 0.56), ('I DID.', 0.59)]",
+   "EDITORIAL: 5 caption(s) read faster than 17 characters/s [('KEEP CLIMBING.', 17.6), ('FLOOR FIVE.', 18.5), ('THE STAIRS', 22.9)]",
+   "EDITORIAL: announcer card beat 1 is 6.2 s (> 4 s) of a static screen: shorten the announcement or animate the card",
+   "EDITORIAL: scene beat 5 lasts 8.4 s (> 6.5 s)"
+  ],
+  "metrics": {
+   "chunks": 49,
+   "dangling": [
+    "THIS IS",
+    "SIX... THAT'S A"
+   ],
+   "orphans": [],
+   "fast": [
+    [
+     "KEEP CLIMBING.",
+     17.6
+    ],
+    [
+     "FLOOR FIVE.",
+     18.5
+    ],
+    [
+     "THE STAIRS",
+     22.9
+    ],
+    [
+     "ARE BLOCKED!",
+     18.9
+    ],
+    [
+     "SHORTCUT! THROUGH",
+     17.3
+    ]
+   ],
+   "short": [
+    [
+     "THIS IS",
+     0.5
+    ],
+    [
+     "PART TWO",
+     0.56
+    ],
+    [
+     "I DID.",
+     0.59
+    ],
+    [
+     "...FAIR.",
+     0.56
+    ],
+    [
+     "GO UP.",
+     0.59
+    ]
+   ],
+   "shot_len_std": 1.82,
+   "srt": [
+    19,
+    19
+   ]
+  }
+ },
+ "marketing": {
+  "dept": "marketing",
+  "score": 90,
+  "issues": [
+   "MARKETING: YouTube title is 76 chars (> 70): it will be cut on phones",
+   "MARKETING: cover_16x9.png is dull (colourfulness 29 < 30): thumbnails need a strong colour accent"
+  ],
+  "metrics": {
+   "title": "Never Open The Red Door! A Sofa Smashes The Zombies — The Last Floor, Part 2",
+   "title_len": 76,
+   "tags": 17,
+   "hashtags": [
+    "#shorts",
+    "#zombie",
+    "#zombieapocalypse",
+    "#animation",
+    "#mystery",
+    "#thelastfloor"
+   ],
+   "cover_9x16.png": {
+    "size": [
+     720,
+     1280
+    ],
+    "detail": 11.2,
+    "colourful": 32.0
+   },
+   "cover_16x9.png": {
+    "size": [
+     1280,
+     720
+    ],
+    "detail": 5.8,
+    "colourful": 28.5
+   }
+  }
+ },
+ "legal": {
+  "dept": "legal-brand",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "props": [
+    "barrel",
+    "crate",
+    "door",
+    "floorsign",
+    "poster",
+    "sofa"
+   ]
+  }
+ }
+}

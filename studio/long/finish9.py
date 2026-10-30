@@ -11,11 +11,21 @@ def ff(a,capture=True):
     return r.stderr
 def audio_chain(P,dur,out_m4a,tmp,err):
     try:
-        graph=("[0:a]highpass=f=70,acompressor=threshold=0.09:ratio=3:attack=5:release=90:makeup=2.2,aformat=sample_rates=44100:channel_layouts=stereo,asplit=2[v1][v2];"
-               "[1:a]volume=0.95,aformat=sample_rates=44100:channel_layouts=stereo[mus];"
-               "[mus][v1]sidechaincompress=threshold=0.028:ratio=9:attack=12:release=380[duck];"
-               "[2:a]volume=0.9,aformat=sample_rates=44100:channel_layouts=stereo[sx];"
-               "[duck][sx][v2]amix=inputs=3:normalize=0:duration=longest[mix]")
+        import json as _j
+        try:world='world' in _j.load(open(f'{P}/spec.json'))
+        except Exception:world=False
+        if world:     # data-driven worlds: the voice is always on top (owner: studio-level sound): sfx at 0.5 and ducked by the voice too, music ducked harder
+            graph=("[0:a]highpass=f=70,acompressor=threshold=0.09:ratio=3:attack=5:release=90:makeup=2.2,aformat=sample_rates=44100:channel_layouts=stereo,asplit=3[v1][v2][v3];"
+                   "[1:a]volume=0.8,aformat=sample_rates=44100:channel_layouts=stereo[mus];"
+                   "[mus][v1]sidechaincompress=threshold=0.02:ratio=14:attack=10:release=420[duck];"
+                   "[2:a]volume=0.5,aformat=sample_rates=44100:channel_layouts=stereo[sx0];[sx0][v3]sidechaincompress=threshold=0.03:ratio=5:attack=8:release=220[sx];"
+                   "[duck][sx][v2]amix=inputs=3:normalize=0:duration=longest[mix]")
+        else:
+            graph=("[0:a]highpass=f=70,acompressor=threshold=0.09:ratio=3:attack=5:release=90:makeup=2.2,aformat=sample_rates=44100:channel_layouts=stereo,asplit=2[v1][v2];"
+                   "[1:a]volume=0.95,aformat=sample_rates=44100:channel_layouts=stereo[mus];"
+                   "[mus][v1]sidechaincompress=threshold=0.028:ratio=9:attack=12:release=380[duck];"
+                   "[2:a]volume=0.9,aformat=sample_rates=44100:channel_layouts=stereo[sx];"
+                   "[duck][sx][v2]amix=inputs=3:normalize=0:duration=longest[mix]")
         mixed=f'{tmp}/mixed.wav'
         ff(['-i',f'{P}/voice.wav','-i',f'{P}/music.wav','-i',f'{P}/sfx.wav','-filter_complex',graph,'-map','[mix]','-t',str(dur),'-ar','44100','-ac','2',mixed])
         log=ff(['-i',mixed,'-af','loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json','-f','null','-'])

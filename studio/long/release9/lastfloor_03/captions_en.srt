@@ -57,32 +57,28 @@ Omar: My pan is a mirror.
 Zara: Your pan IS a plan!
 
 15
-00:00:37,823 --> 00:00:41,021
-Omar: Three flashes. Pause. Repeat.
-
-16
-00:00:41,691 --> 00:00:44,285
+00:00:37,823 --> 00:00:40,417
 Bell: Rule two. Signal in threes.
 
-17
-00:00:44,955 --> 00:00:45,969
-Zara: The door is bending!
+16
+00:00:41,087 --> 00:00:43,070
+Zara: They climbed the outside ladder!
 
-18
-00:00:46,639 --> 00:00:48,566
+17
+00:00:43,740 --> 00:00:45,668
 Mrs. Lin: Listen. Rotor blades.
 
-19
-00:00:49,236 --> 00:00:51,053
+18
+00:00:46,338 --> 00:00:48,154
 Pip: Mayday! Mayday! Open the door!
 
-20
-00:00:51,173 --> 00:00:53,324
+19
+00:00:48,274 --> 00:00:50,425
 ALDER TOWER INTERCOM: ...Please stop
 saying that. We are landing.
 
-21
-00:00:53,994 --> 00:00:58,420
+20
+00:00:51,095 --> 00:00:55,522
 ALDER TOWER INTERCOM: Part three of three, the end
 of The Last Floor. Follow for the next series.
 

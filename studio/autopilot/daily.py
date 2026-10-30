@@ -49,6 +49,12 @@ def build(arcs):
             if not os.path.exists(f'{LONG}/final9_{cid}.mp4'):
                 rc,out=sh([py,R+'/build_clip.py',cid]);print(out.strip().splitlines()[-1] if out.strip() else '',f'[{cid}]')
                 if rc:print(out[-1500:]);bad+=1;continue
+            rc,out=sh([py,R+'/../departments/studio_review.py',cid]);print(out.strip().splitlines()[0] if out.strip() else '')
+            try:
+                sc=json.load(open(f'{R}/../departments/scorecards/{cid}.json'))
+                hard=[k for k,min_ in (('legal',95),('story',80)) if sc[k]['score']<min_]
+                if hard:print(f'{cid}: NOT packaged, departments below the hard bar: {hard} (see departments/scorecards/{cid}.md)');bad+=1;continue
+            except Exception as e:print('review failed:',e)
             rc,out=sh([py,R+'/package_clip.py',cid]);print(out.strip())
             if rc:print(out[-800:]);bad+=1
     return bad
