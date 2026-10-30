@@ -1,0 +1,33 @@
+QA report: THE LAST HARVEST part 1/3 (harvest_01)
+  [PASS] A: 16 beats, average 4.22 s (target 3-4.8), longest 8.8 s, shortest 1.6 s
+  [PASS] A: no beat > 9.5 s
+  [WARN] A: beats 7.5-9.5 s (long static shots): [(13, 8.8)]
+  [PASS] A: no beat < 1.5 s
+  [PASS] A: speech pace 136 wpm (133 words, 68 s)
+  [PASS] A: the hook starts at 0.08 s: "Grandma. The corn is whispering again."
+  [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
+  [PASS] S: PA opening: "Evening, Hollow Creek. This is The Last Harvest. Part one of three: the corn."
+  [PASS] S: the PA opening is spoken at 2.5 s (series + part + topic within the first 8 s)
+  [PASS] S: PA sign-off: "Part one of three, The Last Harvest. Next night: the barn. Follow for part two."
+  [PASS] S: route line (part n of 3) on every non-card beat
+  [PASS] S: YouTube title (89 chars): The Corn Is Whispering. A Family Farm Fights Back With A Polka — The Last Harvest, Part 1
+  [PASS] S: 20 YouTube tags, 351 chars
+  [PASS] S: 22 cues, 22 Thai lines
+  [PASS] S: release kit complete
+  [PASS] F: 4 character voices: {'junie': 3, 'radio': 3, 'ruth': 5, 'hank': 5, 'eli': 6}
+  [WARN] F: BUS-E/PA = 28 % of speech time (target <= 25 %)
+  [PASS] F: 18 speaker changes (conversation, not narration)
+  [PASS] F: 14 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'cricket', 'heartbeat', 'horde', 'polka', 'radio', 'rimshot', 'rustle', 'sigh', 'stab', 'swell']; comedy stings: ['boing', 'rimshot']
+  [PASS] F: characters visible in 13/13 non-card beats
+  [PASS] F: 7 lines with a question or talking to the viewer
+  [PASS] B: layout: 0 CROP, 0 OVERLAP
+  [PASS] B: layout: 0 BAND, 0 EDGE
+  [PASS] C: 720x1280 h264 yuv420p 30.00 fps; colour bt709
+  [PASS] C: duration 67.57 s vs spec 67.57 s; 20.2 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.0 LUFS, LRA 5.0 LU
+  [PASS] D: true peak -2.1 dBTP
+  [PASS] E: every beat boundary changes the picture clearly
+  [PASS] E: no black frames in the scan
+  [PASS] H: cover embedded in the first frames (diff 2.9/255)
+
+  RESULT: PASS
