@@ -1,4 +1,4 @@
-# Scorecard quiet_01  (2026-10-30 15:26 UTC)
+# Scorecard quiet_01  (2026-10-30 15:32 UTC)
 
 | department | score | bar | verdict |
 |---|---:|---:|---|
@@ -16,7 +16,7 @@
 * STORY/storylint(warn): a 2.5D lane location is used
 
 ## art
-* LAYOUT: 10 person(s) cut by the frame edge, e.g. [(6, 'z_hoodie', 592), (14, 'ren', 468), (19, 'z_dress', 451), (19, 'z_hoodie', 634)]: reframe or move them inside x 40-410
+* LAYOUT: 7 person(s) cut by the frame edge, e.g. [(6, 'z_hoodie', 437), (14, 'ren', 468), (19, 'z_hoodie', 444), (20, 'z_hoodie', 441)]: reframe or move them inside x 40-410
 
 ## sound
 * dead air 3.0 s between lines
