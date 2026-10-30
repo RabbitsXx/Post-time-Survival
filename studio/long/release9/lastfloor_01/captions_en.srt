@@ -1,85 +1,85 @@
 1
-00:00:00,080 --> 00:00:02,674
+00:00:00,080 --> 00:00:02,851
 Zara: I ordered a pizza. I did NOT order
 that.
 
 2
-00:00:03,344 --> 00:00:08,664
-ALDER TOWER INTERCOM: Attention, residents. This is The
-Last Floor. Part one of three: the lobby.
+00:00:03,521 --> 00:00:06,274
+ALDER TOWER INTERCOM: The Last Floor. Part
+one: the lobby.
 
 3
-00:00:09,334 --> 00:00:10,664
+00:00:06,944 --> 00:00:09,303
 Zara: Nope. Nope. Nope.
 
 4
-00:00:11,334 --> 00:00:12,835
+00:00:09,973 --> 00:00:11,474
 Bell: Zara! Behind me!
 
 5
-00:00:13,505 --> 00:00:16,771
+00:00:12,144 --> 00:00:15,410
 Bell: Elevators beep and open. Zombies
 love that.
 
 6
-00:00:17,441 --> 00:00:20,011
+00:00:16,080 --> 00:00:18,650
 Bell: Ding. Going down. Basement.
 
 7
-00:00:20,681 --> 00:00:23,900
+00:00:19,320 --> 00:00:22,539
 Bell: Evac helicopter. Roof. Six a.m.
 
 8
-00:00:24,570 --> 00:00:26,680
+00:00:23,209 --> 00:00:25,287
 Zara: Twelve floors. In the dark.
 
 9
-00:00:26,800 --> 00:00:27,988
+00:00:25,407 --> 00:00:26,595
 Bell: Then we start now.
 
 10
-00:00:28,658 --> 00:00:32,294
+00:00:27,265 --> 00:00:30,901
 Bell: Zombies hate stairs. No hands for
 the rail.
 
 11
-00:00:32,964 --> 00:00:35,046
+00:00:31,571 --> 00:00:33,786
 Zara: Floor two. Every door is open.
 
 12
-00:00:35,716 --> 00:00:37,342
+00:00:34,456 --> 00:00:36,082
 Bell: Close them. One by one.
 
 13
-00:00:38,012 --> 00:00:39,726
+00:00:36,752 --> 00:00:38,465
 Omar: Don't hurt me! I'm a chef!
 
 14
-00:00:40,396 --> 00:00:41,546
+00:00:39,135 --> 00:00:40,285
 Omar: I brought my pan.
 
 15
-00:00:41,666 --> 00:00:43,049
+00:00:40,405 --> 00:00:41,904
 Zara: A pan is not a plan.
 
 16
-00:00:43,719 --> 00:00:46,508
+00:00:42,574 --> 00:00:45,363
 Omar: Also, meet Pip. Mrs. Lin's parrot.
 
 17
-00:00:47,178 --> 00:00:48,308
+00:00:46,033 --> 00:00:47,497
 Pip: Open the door! Open the door!
 
 18
-00:00:48,428 --> 00:00:50,495
+00:00:47,617 --> 00:00:49,684
 Bell: Pip. Not that sentence.
 
 19
-00:00:51,165 --> 00:00:52,594
+00:00:50,354 --> 00:00:52,013
 Zara: Something is climbing after us.
 
 20
-00:00:53,264 --> 00:00:59,018
-ALDER TOWER INTERCOM: Part one of three, The
-Last Floor. Next: the stairs. Follow for part two.
+00:00:52,683 --> 00:00:56,026
+ALDER TOWER INTERCOM: Next: the stairs.
+Follow for part two.
 

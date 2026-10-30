@@ -26,11 +26,11 @@ const PEXP={ // eye type, brow [x1,y1,x2,y2] for the +x brow (mirrored for -x), 
  sleep:{eye:'closed',br:[5,-12,19,-12],mo:'snore'}, wince:{eye:'closed',br:[5,-15,19,-9],mo:'grit'},   deadpan:{eye:'half',br:[5,-12,19,-12],mo:'flat'},
  scared:{eye:'wide',br:[5,-20,19,-11],mo:'grit'},   cry:{eye:'wide',br:[5,-18,19,-9],mo:'frown'}};
 const MOUTH={flat:'M-8,28 L8,28',smile:'M-10,26 Q0,34 10,26',grin:'M-11,25 Q0,38 11,25 Z',wavy:'M-9,29 Q-4,25 0,29 T9,29',frown:'M-9,31 Q0,24 9,31',grit:'M-9,27 L9,27',smirk:'M-9,29 Q2,30 11,24',o:'M0,0',snore:'M-5,28 Q0,32 5,28'};
-function pEyes(q,ex,P,o,ink){const look=o.look||0;const red=o.red||0;
+function pEyes(q,ex,P,o,ink){const look=o.look||0;const red=o.red||0;q._lids=[];
  for(const s of[-1,1]){const cx=s*12,e=G(q,{});
   if(ex.eye==='closed'){E('path',{d:`M${cx-7},3 Q${cx},8 ${cx+7},3`,fill:'none',stroke:ink,'stroke-width':3,'stroke-linecap':'round'},e);continue}
   if(ex.eye==='happy'){E('path',{d:`M${cx-7},5 Q${cx},-4 ${cx+7},5`,fill:'none',stroke:ink,'stroke-width':3.2,'stroke-linecap':'round'},e);continue}
-  const r=ex.eye==='wide'?7.2:ex.eye==='wide2'?8.6:5.8;C(e,cx,2,r,red>0?`rgb(255,${Math.round(255-130*red)},${Math.round(255-150*red)})`:'#fff',{stroke:ink,'stroke-width':2});
+  const r=ex.eye==='wide'?7.2:ex.eye==='wide2'?8.6:5.8;if(!q._lids)q._lids=[];q._lids.push({cx,r,e});C(e,cx,2,r,red>0?`rgb(255,${Math.round(255-130*red)},${Math.round(255-150*red)})`:'#fff',{stroke:ink,'stroke-width':2});
   if(red>0)for(let k=0;k<4;k++){const a=k*1.7+s;L(e,cx+Math.cos(a)*r*.95,2+Math.sin(a)*r*.95,cx+Math.cos(a)*r*.45,2+Math.sin(a)*r*.45,'#d02020',1.2*red+.4,{opacity:.9})}
   C(e,cx+look,3,ex.eye==='wide2'?2.4:ex.eye==='wide'?3.2:2.9,P.eye);C(e,cx+look+1.4,1.2,1,'#fff');
   if(ex.eye==='half'){R(e,cx-8,-6,16,8.4,P.skin)&&L(e,cx-7,2.4,cx+7,2.4,ink,3)}}
@@ -118,7 +118,8 @@ function paxHead(g,P,o){
   q._mouth=m=>A(mo,{opacity:m>.08?1:0,ry:1+6*m});return q}
  for(const s of[-1,1])C(q,s*33,6,6.4,P.skin,{stroke:ink,'stroke-width':2.5});
  C(q,0,0,32,P.skin,{stroke:ink,'stroke-width':3});
- pPale(q,o);pEyes(q,ex,P,o,ink);pBrows(q,ex,D,ink);
+ pPale(q,o);pEyes(q,ex,P,o,ink);
+ const lids=(q._lids||[]).map(l=>E('ellipse',{cx:l.cx,cy:2,rx:l.r+1.3,ry:l.r+1.3,fill:P.skin,stroke:ink,'stroke-width':2,opacity:0},q));q._blink=(t,ph)=>{const b=((t*.8+ph)%3.4)<.13;lids.forEach(l=>A(l,{opacity:b?1:0}))};pBrows(q,ex,D,ink);
  E('ellipse',{cx:0,cy:10,rx:5,ry:4.4,fill:P.skinS,stroke:ink,'stroke-width':2},q);
  if(o.blush)for(const s of[-1,1])C(q,s*20,14,6,'#ff7a7a',{opacity:.35});
  pFaceExtras(q,D,P,v,ink,ex);
@@ -171,9 +172,9 @@ actor=function(g,o){
   if(o.shake){const lt=bt-o.shake.at;if(lt>0&&lt<o.shake.dur){x+=Math.sin(lt*60)*o.shake.amp}}
   if(o.tremble){x+=Math.sin(t*47+(o.ph||0))*o.tremble;y+=Math.cos(t*53)*o.tremble*.6}
   if(o.squash){const lt=bt-o.squash.at;if(lt>0&&lt<.25){const p=Math.sin(lt/.25*Math.PI);sy=1-.12*p;sx=1+.1*p}}
-  if(o.snore){const br=Math.sin(t*2.2);sy*=1+.012*br;bob+=br*1.5}
+  if(o.snore){const br=Math.sin(t*2.2);sy*=1+.012*br;bob+=br*1.5}else{sy*=1+.010*Math.sin(t*2.3+(o.ph||0))}   // breathing
   A(root,{transform:`translate(${x} ${y+bob}) rotate(${rot}) scale(${base.s*base.fl*base.sx*sx} ${base.s*sy})`});
-  const talk=o.talk===true?who:o.talk;const m=talk?mouth(talk):(o.mouth||0);hds.forEach(h=>h&&h._mouth&&h._mouth(m))},root,A1,A2}};
+  const talk=o.talk===true?who:o.talk;const m=talk?mouth(talk):(o.mouth||0);hds.forEach(h=>{if(h&&h._mouth)h._mouth(m);if(h&&h._blink)h._blink(t,(o.ph||0)*3.1)})},root,A1,A2}};
 
 /* Amara's baby sling: the baby's head + hat peeks out (front view only) */
 function slingDeco(g,v){if(v!=='front')return;blob(g,'M-30,-226 Q0,-204 30,-226 L24,-160 Q0,-146 -24,-160Z','#e8d8b8','#241810');const b=G(g,{transform:'translate(0 -212)'});C(b,0,0,15,'#8d5a3b',{stroke:'#241810','stroke-width':2.4});C(b,0,-9,11,'#ffd0e0',{stroke:'#241810','stroke-width':2});C(b,-5,2,2,'#241810');C(b,5,2,2,'#241810');C(b,0,9,3.4,'#ffd23a',{stroke:'#241810','stroke-width':1.6})}

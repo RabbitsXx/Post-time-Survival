@@ -66,5 +66,5 @@ META=W.meta(hook='Three Flashes Saved Us On The Roof! A Parrot Yells MAYDAY',pre
  body='Finale of THE LAST FLOOR. The survivors find the roof key and signal the helicopter with a frying pan. Real tip: three of anything (flashes, fires, whistle blasts) is the international distress signal.',nxt='',ask='What would YOU use to signal for help? Tell me in the comments.',
  tags='the last floor, zombie apartment, zombie apocalypse animation, zombie story, apartment survival, zombie survival tips, funny zombie animation, animated zombie series, zombie shorts, post time survival, zombie comedy, parrot, tower, stairwell, survival tips, apocalypse story, animated comedy',
  tt='Three flashes. 🚁🧟 The roof, the rescue and a parrot yelling MAYDAY.',ig='Three flashes. 🚁 The finale: the roof, the rescue and a parrot yelling MAYDAY. Real survival tip inside.',pin='What would YOU use to signal for help? 👇')
-COVER=dict(beat=9,frac=.55,main='A PAN SAVED|THE ROOF',box='PART 3 · THE LAST FLOOR')
+COVER=dict(beat=9,frac=.55,main='A PAN SAVED|THE ROOF',box='THE ROOF')
 VOICES,FILT,SPEAKERS,NAMES_EN,NAMES_TH,ALL_WORDS,WORLD,NEW=W.exports(part_new=['signal-in-threes','pan-mirror','key-roof','helicopter-rescue'])

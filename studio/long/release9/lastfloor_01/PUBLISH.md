@@ -1,7 +1,7 @@
 # THE LAST FLOOR - Part 1 of 3 - publish kit
 
-**YouTube title** (86 chars)
-`A Zombie Delivers Pizza To The Elevator! 12 Floors To Survive — The Last Floor, Part 1`
+**YouTube title** (63 chars)
+`A Zombie Delivers Pizza To The Elevator! 12 | The Last Floor P1`
 
 **YouTube description**
 ```
@@ -19,7 +19,7 @@ Bell, Zara, Omar, Pip, Mrs. Lin
 Fiction and comedy. Voices are AI-generated; the animation is original.
 Watch the whole series in order: THE LAST FLOOR, Parts 1-3, from Post Time Survival.
 
-#shorts #zombie #zombieapocalypse #animation #mystery #thelastfloor
+#shorts #zombie #zombieapocalypse #animation #survival #thelastfloor
 ```
 
 **Tags** (paste in Studio > Details > Show more > Tags; Buffer has no tags field)

@@ -18,7 +18,7 @@ def shadowbox(img,box,fill,radius,outline=None):
     sh=Image.new('RGBA',img.size,(0,0,0,0));ImageDraw.Draw(sh).rounded_rectangle([box[0]+0,box[1]+10,box[2],box[3]+10],radius,fill=(0,0,0,150))
     img.alpha_composite(sh.filter(ImageFilter.GaussianBlur(8)))
     d=ImageDraw.Draw(img);d.rounded_rectangle(box,radius,fill=fill,outline=outline,width=6 if outline else 0)
-def make(base,out,aspect,part,main,box,accent=0,tag="THE LIGHTHOUSE"):
+def make(base,out,aspect,part,main,box,accent=0,tag="THE LIGHTHOUSE",top=False):
     im=Image.open(base).convert('RGBA')
     # contrast / saturation pop + vignette
     from PIL import ImageEnhance
@@ -38,7 +38,7 @@ def make(base,out,aspect,part,main,box,accent=0,tag="THE LIGHTHOUSE"):
         bsz=fit(box,W-2*m-70,int(W*.10));bw=F(bsz).getlength(box)+70;bh=int(bsz*1.35)
         msz=[fit(ln,W-2*m,int(W*.165)) for ln in lines]
         block=sum(int(z*1.0) for z in msz)+18+bh
-        y=yb-block
+        y=(y0+th+34) if top else yb-block      # top=True: the headline sits in the upper third so it never covers the cast standing in the lower half
         for i,ln in enumerate(lines):
             outlined(d,(W/2,y),ln,msz[i],YEL if i==accent else WHITE,'ma');y+=int(msz[i]*1.0)
         shadowbox(im,[W/2-bw/2,y+18,W/2+bw/2,y+18+bh],RED,28,outline=WHITE);d=ImageDraw.Draw(im)

@@ -41,7 +41,7 @@ def meta(n):
     if legacy(n):
         import meta_lb;m=dict(meta_lb.M[int(n)]);m['tags']=meta_lb.YT_TAGS;return m
     M=module(n).META;s=series(n);nm=s['name'];p=s['part'];of=s['of'];fin=p>=of;nxt=M.get('nxt','')
-    sfx=f" | {nm.title() if nm.isupper() else nm} P{p}"+(' Finale' if fin else '');hook=M['hook'].strip()
+    sfx=f" | {nm.title() if nm.isupper() else nm} Part {p}"+(' Finale' if fin else '');hook=M['hook'].strip()
     if len(hook)+len(sfx)>70:            # marketing: <= 70 characters so phones do not cut the title; shorten the hook at a word boundary
         cut=hook[:70-len(sfx)-1].rsplit(' ',1)[0].rstrip(' ,;:-—!?')
         hook=cut+('!' if M['hook'].rstrip().endswith('!') else '')

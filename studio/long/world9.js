@@ -8,12 +8,13 @@ const sh=(c,a)=>c; const rr=(n)=>rnd(n);
 /* ---- cast ---- */
 for(const id in (W.cast||{})){const c=W.cast[id];defPax(id,Object.assign({ink:'#241810',boot:'#2a2118',skinS:'#c99a74'},c.pal||{}),Object.assign({},c.look||{}))}
 /* ---- item catalogue: draw(g,o) with the ground point at (0,0), facing the viewer ---- */
+const FLK=[];
 const IT={
  building:(g,o)=>{const w=o.w||180,h=o.h||300,c=o.c||'#4a5068';R(g,-w/2,-h,w,h,c,S());R(g,-w/2-6,-h-10,w+12,14,o.c2||'#2f3345',S());const rows=Math.floor(h/58),cols=Math.max(2,Math.floor(w/52));for(let r=0;r<rows;r++)for(let k=0;k<cols;k++){const lit=rr(r*7+k*3+(o.x||0))<(o.lit==null?.35:o.lit);R(g,-w/2+14+k*(w-28)/cols,-h+22+r*58,(w-28)/cols-10,34,lit?GL:'#1d2233',{rx:2,opacity:lit?.95:.9})}R(g,-18,-52,36,52,'#1d2233',S())},
  house:(g,o)=>{const w=o.w||200,h=o.h||130;R(g,-w/2,-h,w,h,o.c||'#b98a5a',S());P(g,`M${-w/2-14},${-h} L0,${-h-80} L${w/2+14},${-h}Z`,o.c2||'#6a2e26',S());R(g,-18,-64,36,64,'#3a2418',S());R(g,w/2-70,-96,44,40,GL,S());R(g,-w/2+26,-96,44,40,GL,S())},
  tree:(g,o)=>{const h=o.h||240;R(g,-8,-h*.5,16,h*.5,'#4a3520',S({'stroke-width':2.5}));C(g,0,-h*.66,h*.34,o.c||'#2f5a34',S());C(g,-h*.2,-h*.52,h*.22,o.c2||'#3a6a3c',S({'stroke-width':0}));C(g,h*.18,-h*.78,h*.2,o.c2||'#3a6a3c',S({'stroke-width':0}))},
  pine:(g,o)=>{const h=o.h||260;R(g,-6,-30,12,30,'#4a3520');for(let i=0;i<4;i++)P(g,`M${-70+i*10},${-30-i*h*.2} L0,${-h*.4-i*h*.2-30} L${70-i*10},${-30-i*h*.2}Z`,o.c||'#1f4a36',S({'stroke-width':2.5}))},
- lamp:(g,o)=>{const h=o.h||260;R(g,-5,-h,10,h,'#3a3a44',S({'stroke-width':2}));R(g,-34,-h-6,68,12,'#2a2a34',S({'stroke-width':2.5}));C(g,0,-h+4,o.r||150,'url(#gLamp)',{opacity:.45});C(g,0,-h+2,8,'#fff3c0')},
+ lamp:(g,o)=>{const h=o.h||260;R(g,-5,-h,10,h,'#3a3a44',S({'stroke-width':2}));R(g,-34,-h-6,68,12,'#2a2a34',S({'stroke-width':2.5}));FLK.push(C(g,0,-h+4,o.r||150,'url(#gLamp)',{opacity:.45}));C(g,0,-h+2,8,'#fff3c0')},
  crate:(g,o)=>{const w=o.w||80;R(g,-w/2,-w,w,w,o.c||'#a67c46',S());L(g,-w/2,-w,w/2,0,'#6a4a26',4);L(g,w/2,-w,-w/2,0,'#6a4a26',4)},
  barrel:(g,o)=>{R(g,-30,-76,60,76,o.c||'#5a6a7a',S({rx:10}));L(g,-30,-52,30,-52,'#2a343e',4);L(g,-30,-24,30,-24,'#2a343e',4)},
  car:(g,o)=>{const c=o.c||'#9a3a3a';P(g,'M-110,-30 L-100,-70 L-60,-76 L-34,-112 L50,-112 L84,-76 L112,-66 L116,-30Z',c,S());P(g,'M-28,-104 L-52,-76 L-10,-76 L-10,-104Z M2,-104 L2,-76 L76,-76 L46,-104Z','#9fc3d8',S({'stroke-width':2.4}));for(const x of[-68,72]){C(g,x,-24,24,'#1a1a20',S());C(g,x,-24,10,'#8a8a94')}},
@@ -72,7 +73,7 @@ function skyDraw(f,L){const sk=P_.sky||['#3d3a6e','#c2677a','#f1a477'];const id=
  if(W.clouds!==false){fCloud(f,260,170,520,P_.cloud||'#ffc9a8',.36);fCloud(f,940,240,620,P_.cloud2||'#e79a9a',.3)}
  if(W.sun)C(f,L.sunx||920,L.suny||190,60,'#fff3c0',{opacity:.9})}
 function lanePos(vpx,vpy,gy){return {x:(X,z)=>vpx+X/z,y:z=>vpy+(gy-vpy)/z}}
-LOC['w_'+W.id]=(Z,p)=>{const LC=(W.locs||{})[p.v||Object.keys(W.locs)[0]]||{};const f=G(Z.far),m=G(Z.mid),n=G(Z.near);const upd=[];const kind=LC.kind||'out';
+LOC['w_'+W.id]=(Z,p)=>{FLK.length=0;const LC=(W.locs||{})[p.v||Object.keys(W.locs)[0]]||{};const f=G(Z.far),m=G(Z.mid),n=G(Z.near);const upd=[];const kind=LC.kind||'out';
  const layers=[G(f),G(m),G(n)];
  if(kind==='in'){R(f,-200,-700,1680,2400,LC.wall||P_.wall||'#3a3530');for(let i=0;i<64;i++)R(f,i*24-60,-700,2,2400,'rgba(0,0,0,.18)');R(f,-200,590,1680,900,LC.floor||P_.floor||'#2a2420');R(f,-200,590,1680,420,'url(#gGroundShade)',{opacity:.8});L(f,-200,590,1480,590,'rgba(0,0,0,.4)',4);
   if(LC.light!==false)P(f,'M520,-100 L760,-100 L980,640 L300,640Z','url(#gCone)',{opacity:.12});R(f,-200,-100,1680,900,'url(#gWallShade)',{opacity:.8});A(f,{style:'filter:blur(2.4px)'})}

@@ -37,7 +37,7 @@ P.B(S([('bell',"Evac helicopter. Roof. Six a.m.","เฮลิคอปเตอ
 P.B(S([('zara',"Twelve floors. In the dark.","สิบสองชั้น ในความมืด"),('bell',"Then we start now.","งั้นเริ่มเดี๋ยวนี้")]),L.shot(moves={'bell':(775,'run'),'zara':(810,'run')},expr={'zara':'scared'},add=ELV('B',False)),mood='creep',cam='push_in',fx=[sticker(.4,'BANG!',x=300,y=170,rot=6,size=56,c='#ffcf6a',dur=1.0),shake(.4,5,.5)],sfx=[('horde',.1),('stab',.5)],
  intent=I('Bell, Zara','Zombies slam the glass front door while Bell and Zara run for the red stair door','lobby, glass door at the right, stair door in the middle','both run to the stair door, BANG! on the glass','Will the glass hold?'))
 # ============ STAIRS: floor 1 -> 2 ============
-S1=Scene(W,'stair',x=640,y=450,z=.7,add=fl(2))
+S1=Scene(W,'stair',x=600,y=450,z=.7,add=fl(2))
 S1.put('bell',stp(0)[0]-40,stp(0)[1]+40,expr='calm').put('zara',stp(0)[0]-90,stp(0)[1]+50,expr='worried')
 P.B(S([('bell',"Zombies hate stairs. No hands for the rail.","ซอมบี้เกลียดบันได ไม่มีมือจับราว")]),S1.shot(moves={'bell':(stp(4)[0],'walk',stp(4)[1]),'zara':(stp(3)[0],'walk',stp(3)[1])}),mood='warm',cam='drift',sfx=[('sigh',.2)],
  intent=I('Bell, Zara','Bell and Zara come through the stair door and climb the first flight','stair, floor 2 sign on the wall','side view, both walk up the diagonal steps','Is the stairwell really safer?'))
@@ -47,18 +47,18 @@ P.B(S([('zara',"Floor two. Every door is open.","ชั้นสอง ทุก
 P.B(S([('bell',"Close them. One by one.","ปิดมัน ทีละบาน")]),card('macro',obj='lock',bg=dict(loc='w_lastfloor',v='stair',z=1.7,x=640,y=430)),mood='warm',sfx=[('click',.3),('bell',.8)],
  intent=I('Bell','Bell clicks a fire-door lock shut behind them','stair, close-up of the lock','macro card of the padlock and chain, click sound','Is one lock enough?'))
 # ============ STAIRS, floor 3 landing: Omar ============
-S2=Scene(W,'stair',x=640,y=450,z=.7,add=fl(3))
+S2=Scene(W,'stair',x=700,y=450,z=.7,add=fl(3))
 S2.put('bell',470,expr='calm').put('zara',590,expr='worried')
 DOOR3=dict(k='prop',t='door',x=940,y=600,s=1.3)
 P.B(S([('omar',"Don't hurt me! I'm a chef!","อย่าทำร้ายผม! ผมเป็นเชฟ")]),S2.shot(extra=[DOOR3,W.person('omar','scared',940,FOOT,view='front',pose='panic')]),mood='comic',sfx=[('creak',.1),('boing',.7)],
  intent=I('Omar, Zara, Bell','Omar flings his flat door open and waves a frying pan at them','stair, floor 3 landing, door at the right','panic pose, pan raised, door open','Can a chef fight zombies?'))
 S2.put('omar',940,expr='smile')
-P.B(S([('omar',"I brought my pan.","ผมเอากระทะมาด้วย"),('zara',"A pan is not a plan.","กระทะไม่ใช่แผน")]),S2.shot(moves={'omar':(800,'walk')},vx=720,z=.85,expr={'zara':'angry'},extra=[DOOR3]),mood='comic',sfx=[('rimshot',.9)],
+P.B(S([('omar',"I brought my pan.","ผมเอากระทะมาด้วย"),('zara',"A pan is not a plan.","กระทะไม่ใช่แผน")]),S2.shot(moves={'omar':(800,'walk')},vx=680,z=.85,expr={'zara':'angry'},extra=[DOOR3]),mood='comic',sfx=[('rimshot',.9)],
  intent=I('Omar, Zara','Omar walks toward them lifting the pan proudly while Zara rolls her eyes','stair, floor 3 landing','medium shot of the group at the landing','Does the pan do anything useful?'))
 S2.hold('omar','cage',ox=62,oy=-120,sc=1.0)
 P.B(S([('omar',"Also, meet Pip. Mrs. Lin's parrot.","และนี่พิพ นกแก้วของคุณนายลิน")]),S2.shot(moves={'omar':(690,'walk')},expr={'omar':'grin'},extra=[DOOR3]),mood='comic',sfx=[('boing',.1)],
  intent=I('Omar, Bell, Zara','Omar walks over carrying a birdcage with a parrot inside','stair, floor 3 landing','Omar carries the cage across the shot toward the others','What will the parrot do?'))
-P.B(S([('pip',"Open the door! Open the door!","เปิดประตู! เปิดประตู!"),('bell',"Pip. Not that sentence.","พิพ ไม่ใช่ประโยคนั้น")]),S2.shot(vx=640,z=1.1,expr={'bell':'angry'},extra=[DOOR3]),mood='comic',fx=[sticker(.2,'SQUAWK!',x=225,y=170,rot=-6,size=56,c='#ffe14a',dur=1.5)],sfx=[('boing',.1)],
+P.B(S([('pip',"Open the door! Open the door!","เปิดประตู! เปิดประตู!"),('bell',"Pip. Not that sentence.","พิพ ไม่ใช่ประโยคนั้น")]),S2.shot(vx=680,z=1.1,expr={'bell':'angry'},extra=[DOOR3]),mood='comic',fx=[sticker(.2,'SQUAWK!',x=225,y=170,rot=-6,size=56,c='#ffe14a',dur=1.5)],sfx=[('boing',.1)],
  intent=I('Bell, Omar, Pip','The parrot squawks and Bell winces beside Omar and the cage','stair, floor 3 landing, closer shot','medium shot, sticker SQUAWK!','Who else heard that?'))
 S2.zput('z1',250,seed=9).zput('z2',340,seed=12).zput('z3',170,seed=15)
 S2.p['zara']['face']='backhead'
@@ -70,5 +70,5 @@ META=W.meta(hook='A Zombie Delivers Pizza To The Elevator! 12 Floors To Survive'
  body='The super and a teen must climb a zombie-filled tower to the roof before the 6 a.m. rescue helicopter. Real tip: never take the elevator, use the stairs and lock the fire doors behind you.',nxt='the stairs',ask='Which floor would YOU stop on? Tell me in the comments.',
  tags='the last floor, zombie apartment, zombie apocalypse animation, zombie story, apartment survival, zombie survival tips, funny zombie animation, animated zombie series, zombie shorts, post time survival, zombie comedy, parrot, tower, stairwell, survival tips, apocalypse story, animated comedy',
  tt='A zombie delivered pizza to the elevator. 🍕🧟 12 floors, one parrot, one pan.',ig='A zombie delivered pizza to the elevator. 🍕 12 floors, one parrot, one pan. Real survival tip inside.',pin='Which floor would YOU stop on? 👇 Next: the stairs.')
-COVER=dict(beat=0,frac=.55,main='ZOMBIE PIZZA|DELIVERY',box='PART 1 · THE LAST FLOOR')
+COVER=dict(beat=0,frac=.55,main='ZOMBIE PIZZA|DELIVERY',box='THE LOBBY')
 VOICES,FILT,SPEAKERS,NAMES_EN,NAMES_TH,ALL_WORDS,WORLD,NEW=W.exports()

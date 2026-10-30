@@ -55,7 +55,7 @@ def audit(cid):
         vx=vx[0] if isinstance(vx,list) else vx
         for a in p.get('acts',[]):
             if a.get('k') in('prop','horde','dog','sticker') or a.get('x') is None:continue
-            xs=[a['x']]+([a['to'][0]] if a.get('to') else [])
+            xs=[a['to'][0]] if a.get('to') else [a['x']]      # a person who walks may enter the frame from outside; only the end point counts
             for x in xs:
                 sx=225+(x-vx)*z*1.045;hw=38*a.get('s',.7)*z*1.045*(a.get('sx',1))
                 if sx-hw<-4 or sx+hw>454:cut.append((i,a['k'],round(sx)));break
