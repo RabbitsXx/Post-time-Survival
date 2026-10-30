@@ -23,11 +23,11 @@ QA report: THE LAST HARVEST part 1/3 (harvest_01)
   [PASS] B: layout: 0 CROP, 0 OVERLAP
   [PASS] B: layout: 0 BAND, 0 EDGE
   [PASS] C: 720x1280 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 67.57 s vs spec 67.57 s; 20.0 MB; audio aac 48000 Hz
+  [PASS] C: duration 67.57 s vs spec 67.57 s; 20.7 MB; audio aac 48000 Hz
   [PASS] D: integrated -14.0 LUFS, LRA 5.0 LU
   [PASS] D: true peak -2.1 dBTP
   [PASS] E: every beat boundary changes the picture clearly
   [PASS] E: no black frames in the scan
-  [PASS] H: cover embedded in the first frames (diff 2.9/255)
+  [PASS] H: cover embedded in the first frames (diff 3.0/255)
 
   RESULT: PASS

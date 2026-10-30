@@ -15,6 +15,17 @@ NAMES_EN=dict(ruth='Ruth',eli='Eli',junie='Junie',hank='Hank',radio='Radio');NAM
 SC=dict(ruth=.86,eli=.74,junie=.6,hank=.98)
 def hz(n,x0,x1,y=590,s=.9,**k):
     k.setdefault('human',True);return _hz(n,x0,x1,y=y,s=s,**k)
+def lane(X,z):
+    """2.5D lane (farm v='lane'): lateral offset X (world px at z=1), depth z (1 near .. 15 far) -> dict(x,y,s) for person()/prop()/hz"""
+    return dict(x=640+X/z,y=398+(720-398)/z,s=1.0/z)
+def at(who,X,z,expr='calm',**k):
+    L=lane(X,z);return person(who,expr,L['x'],L['y'],SC[who]*1.0/z*1.5,**k)
+def crowd(n,X0,X1,z0,z1,seed=3,**k):
+    """n zombies spread in depth between z0 (near) and z1 (far) and laterally X0..X1"""
+    out=[]
+    for i in range(n):
+        t=i/max(1,n-1);z=z0+(z1-z0)*((i*0.618)%1);X=X0+(X1-X0)*t;L=lane(X,z);out.append(hz(1,L['x'],L['x'],y=L['y'],s=2.7/z,seed=seed+i*7,jit=0,yj=0,**k))
+    return sorted(out,key=lambda a:a['y'])
 FOOT=640
 def person(who,expr='calm',x=640,y=FOOT,s=None,talk=False,pose='stand',**k):
     a=dict(k=who,view='front',pose=pose,expr=expr,x=x,y=y,s=s or SC[who],talk=who if talk else False,bob=1.1,ph=x*.011,shadow=1,rim='rgba(255,190,120,.55)')
