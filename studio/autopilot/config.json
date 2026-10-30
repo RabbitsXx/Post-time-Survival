@@ -8,7 +8,7 @@
  "min_lead_minutes": 10,
  "keep_ahead_hours": 24,
  "yt_quota_daily_limit": 9000,
- "ai_generated_flag": true,
+ "ai_generated_flag": false,
  "owner_decisions": {
   "2026-10-29": "Owner chose: produce AND schedule without asking for approval first; 10 clips/day, one every 2 hours from 10:00 (Thailand time); topics may have any number of parts, prefer short clips; connect the YouTube API so tags/thumbnail/subtitles/playlist are set automatically.",
   "2026-10-29b": "Owner rejected THE LAST BUS: ROUTE 12 (same bus, same cast, same template). Rule: each topic is made all new - new setting, new characters, new story structure. First new worlds to consider: farm, building/rooftop, school. Delete the scheduled Route 12 posts (done). Pause the 10-a-day schedule until the new style exists.",
@@ -21,7 +21,8 @@
   "2026-10-30g": "Owner: release THE QUIET HAND part 1 now (publish_mode live), build the remaining 9 parts automatically, post one every 2 hours after part 1, report progress to Discord.",
   "2026-10-30h": "Owner: CANCEL ALL POSTING. paused=true, publish_mode=stage, scheduled Buffer posts removed, automatic runs disabled.",
   "2026-10-30i": "Owner: POST part 1 now (live), build the other 9 parts, schedule one every 1h30 at suitable times.",
-  "2026-10-30j": "Owner: STOP building episodes 2-10 (story feels odd, only numbers). Part 1 is live. paused=true until the owner decides."
+  "2026-10-30j": "Owner: STOP building episodes 2-10 (story feels odd, only numbers). Part 1 is live. paused=true until the owner decides.",
+  "2026-10-30k": "Owner: do NOT use the AI-generated tag on posts. Old THE QUIET HAND parts 2-10 are cancelled (part 1 stays). Owner wants a NEW topic, 3 episodes, free hand (rules relaxed), delivered for review before posting."
  },
  "not_before_note": "autopilot grid starts after the trial; publish_mode stage = build, QA, package and plan slots but do NOT post; set to \"live\" to let the daily run schedule on Buffer",
  "paused": true,
@@ -41,6 +42,7 @@
   "THE QUIET HAND"
  ],
  "retired_arcs": [
-  "lastfloor"
+  "lastfloor",
+  "quiet_rest"
  ]
 }

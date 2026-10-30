@@ -93,7 +93,7 @@ if cid.rsplit('_',1)[0] not in LEGACY and not CR.legacy(cid):
         swing=any(a.get('k') in cast_ and (a.get('pose') in('punch','swing') or a.get('held')) for a in acts)
         return z and (hit or swing) and hit
     fights=[i for i,b in enumerate(B) if b['scene']['n']=='stage' and fight(b)]
-    rec(len(fights)>=3,f'{len(fights)} fight beats (a hero hits a zombie: weapon / pose + impact sticker, zombie on screen) (>= 3 per part)')
+    rec(len(fights)>=2,f'{len(fights)} fight beats (a hero hits a zombie: weapon / pose + impact sticker, zombie on screen) (>= 2 per part; owner 2026-10-30: story first)')
 mv=[1 for b in st for a in (b['scene']['p'].get('acts') or []) if a.get('anim') or a.get('to') or a.get('seq')]
 rec(bool(mv),'actors move on screen (walk / turn)',warn=True)
 rec(any((b['scene']['p'].get('v') or '')=='hall' or 'lane' in str(b['scene']['p'].get('v')) for b in st),'a 2.5D lane location is used',warn=True)
