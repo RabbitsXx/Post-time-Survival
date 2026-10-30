@@ -2,6 +2,7 @@
  farm(v,...)  yard | field | porch | barn      person(who,...)  a standing character      cuf(who,...)  close-up      duo(a,b,...)  two-shot      FarmPart  one episode (the farm radio announces it)
  cast: ruth (the grandmother) eli (12, inventor) junie (7, talks to the corn) hank (the hired hand, huge, gentle)   announcer: radio (Hollow Creek Farm Radio)"""
 from zlib9 import *
+from zlib9 import hz as _hz
 import re
 NUMW=['zero','one','two','three','four','five','six','seven','eight','nine','ten']
 VOICES=dict(ruth=('en-US-Chirp3-HD-Sulafat',.9),eli=('en-US-Chirp3-HD-Orus',1.0),junie=('en-US-Chirp3-HD-Aoede',1.0),hank=('en-US-Chirp3-HD-Alnilam',.88),radio=('en-US-Chirp3-HD-Enceladus',1.06))
@@ -12,6 +13,8 @@ SPEAKERS=dict(ruth=_sp('RUTH','#ffb36b'),eli=_sp('ELI','#8fe0a8'),junie=_sp('JUN
 ALL_WORDS=True
 NAMES_EN=dict(ruth='Ruth',eli='Eli',junie='Junie',hank='Hank',radio='Radio');NAMES_TH=dict(ruth='รูธ',eli='เอลี',junie='จูนี่',hank='แฮงก์',radio='วิทยุ')
 SC=dict(ruth=.86,eli=.74,junie=.6,hank=.98)
+def hz(n,x0,x1,y=590,s=.9,**k):
+    k.setdefault('human',True);return _hz(n,x0,x1,y=y,s=s,**k)
 FOOT=640
 def person(who,expr='calm',x=640,y=FOOT,s=None,talk=False,pose='stand',**k):
     a=dict(k=who,view='front',pose=pose,expr=expr,x=x,y=y,s=s or SC[who],talk=who if talk else False,bob=1.1,ph=x*.011,shadow=1,rim='rgba(255,190,120,.55)')

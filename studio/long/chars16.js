@@ -170,8 +170,36 @@ function zomb(g,x,y,s,seed,col,eye){col=col||'#05040a';const z=G(g,{});const bod
  const head=G(body,{});C(head,3,-122,15,col);
  const e1=C(head,-1,-124,3.2,eye||'#ff2a2a',{opacity:1}),e2=C(head,8,-124,3.2,eye||'#ff2a2a',{opacity:1}),gl=C(head,3,-124,17,'url(#gRed)',{opacity:eye?0:.8});
  const o={z,body,head,e1,e2,gl,x,y,s,seed};A(z,{transform:`translate(${x} ${y}) scale(${s})`});return o}
+
+/* ---------- human-shaped zombies (o.human): proper proportions, neck/shoulders/hips, shuffling legs, reaching arms, torn clothes, variety by seed ---------- */
+function zomb2(g,x,y,s,seed,col,eye){col=col||'#05040a';const dark=/^#0[0-9a-f]/i.test(col);
+ const shirt=dark?['#4a5668','#6a4f46','#3f5a52','#5a4a62','#6b6a52'][Math.floor(rnd(seed+5)*5)]:col,pant=dark?['#2a2d3a','#33303a','#2a3430'][Math.floor(rnd(seed+4)*3)]:col,sk=dark?'#7d8f6c':col,skS=dark?'#5a6a4e':col,ink=dark?'#14100e':'#0c0a08';
+ const z=G(g,{}),inner=G(z,{transform:'scale(.9)'});const tall=.94+rnd(seed+6)*.14,fat=.9+rnd(seed+7)*.25,lean=7+rnd(seed+8)*9,hand=rnd(seed+9);
+ E('ellipse',{cx:0,cy:2,rx:34,ry:5,fill:'#000',opacity:.3,style:'filter:blur(2px)'},inner);const body=G(inner,{transform:`scale(${fat} ${tall})`});
+ const SW=3;const lim=(g2,pts,w,c)=>{limb(g2,pts,w+SW*1.6,ink);return limb(g2,pts,w,c)};
+ const mk=(sd)=>{const q=G(body,{});lim(q,[[0,0],[sd*3,34],[sd*1,68]],14,pant);E('ellipse',{cx:sd*1+5,cy:69,rx:12,ry:5.5,fill:'#2a1c14',stroke:ink,'stroke-width':2.4},q);return q};
+ const legB=mk(-1),legF=mk(1);
+ const tor=G(body,{transform:`rotate(${lean} 0 -70)`});
+ P(tor,'M-16,-70 L16,-70 L21,-100 L24,-118 Q0,-128 -24,-118 L-21,-100Z',shirt,{stroke:ink,'stroke-width':3,'stroke-linejoin':'round'});
+ P(tor,'M-16,-70 L-19,-58 L-11,-64 L-7,-54 L0,-65 L6,-53 L12,-64 L19,-56 L16,-70Z',shirt,{stroke:ink,'stroke-width':2.4,'stroke-linejoin':'round'});
+ P(tor,'M-12,-122 L-4,-100 L-14,-96Z',skS,{opacity:.75});L(tor,6,-114,10,-84,ink,2.2,{opacity:.5});C(tor,10,-96,5,skS,{opacity:.8});
+ const nk=lim(tor,[[0,-120],[1,-130]],10,sk);
+ const armF=G(tor,{transform:'translate(21 -116)'}),armB=G(tor,{transform:'translate(-21 -116)'});
+ const a1=hand<.34?[[0,0],[24,-2],[50,-6]]:hand<.67?[[0,0],[22,9],[48,2]]:[[0,0],[16,18],[34,34]];
+ lim(armF,[a1[0],a1[1]],13,shirt);lim(armF,[a1[1],a1[2]],10,sk);C(armF,a1[2][0]+4,a1[2][1],6.5,sk,{stroke:ink,'stroke-width':2.2});for(const d of[-5,0,5])L(armF,a1[2][0]+6,a1[2][1],a1[2][0]+14,a1[2][1]+d,ink,2.6);
+ const a2=hand<.5?[[0,0],[-14,14],[-34,12]]:[[0,0],[-8,22],[-6,46]];
+ lim(armB,[a2[0],a2[1]],13,shirt);lim(armB,[a2[1],a2[2]],10,sk);C(armB,a2[2][0]-3,a2[2][1],6.5,sk,{stroke:ink,'stroke-width':2.2});
+ const head=G(tor,{transform:'translate(3 -144)'});const hd=G(head,{});
+ E('ellipse',{cx:0,cy:0,rx:15,ry:17,fill:sk,stroke:ink,'stroke-width':3},hd);P(hd,'M-11,8 Q0,26 11,8 Q0,14 -11,8Z',skS,{stroke:ink,'stroke-width':2});
+ if(rnd(seed+10)>.45){P(hd,'M-15,-4 Q-16,-22 0,-21 Q16,-22 15,-4 Q8,-14 0,-12 Q-8,-14 -15,-4Z','#2a1e16',{stroke:ink,'stroke-width':2})}else{for(const [a,b2,c,d2] of[[-9,-15,-14,-27],[0,-17,2,-30],[9,-15,14,-26]])L(hd,a,b2,c,d2,'#2a1e16',3)}
+ for(const sx of[-1,1]){E('ellipse',{cx:sx*6,cy:-2,rx:4.4,ry:5,fill:'#1a1210'},hd)}
+ L(hd,-11,-9,-2,-6,ink,2.4);L(hd,11,-9,2,-6,ink,2.4);
+ E('ellipse',{cx:0,cy:12,rx:5,ry:6,fill:'#2a0a0a',stroke:ink,'stroke-width':1.8},hd);for(const sx of[-2.5,0.5])R(hd,sx-1.2,8,2.4,3,'#e8e0c8');
+ const e1=C(hd,-6,-2,2.6,eye||'#ff3a2a'),e2=C(hd,6,-2,2.6,eye||'#ff3a2a'),gl=C(hd,0,-2,12,'url(#gRed)',{opacity:eye?0:.35});
+ A(z,{transform:`translate(${x} ${y}) scale(${s})`});
+ return {z,body,head,e1,e2,gl,x,y,s,seed,legB,legF,armF,armB,tor,human:1}}
 function horde(g,o){/* {n,x0,x1,y,s,seed,col,eye,jit,to:dx} -> {upd} ; zombies drift toward -x (or +x with dir) */
  const n=o.n||6,zs=[];for(let i=0;i<n;i++){const k=n>1?i/(n-1):.5;const sd=(o.seed||0)+i*3.7;const x=lerp(o.x0,o.x1,k)+(rnd(sd)-.5)*(o.jit==null?40:o.jit);const y=o.y+(rnd(sd+1)-.5)*(o.yj==null?24:o.yj);
-  zs.push({z:zomb(g,x,y,(o.s||1)*(.9+rnd(sd+2)*.25),sd,o.col,o.eye),x,y,sd})}
+  zs.push({z:(o.human?zomb2:zomb)(g,x,y,(o.s||1)*(.9+rnd(sd+2)*.25),sd,o.col,o.eye),x,y,sd})}
  return {upd(u,t,bt){const dx=(o.to||0)*u;zs.forEach(q=>{const sw=Math.sin(t*1.6+q.sd)*3,hop=Math.abs(Math.sin(t*3+q.sd))*-3;
-   A(q.z.z,{transform:`translate(${q.x+dx+sw} ${q.y+hop}) scale(${q.z.s*(o.flip?-1:1)} ${q.z.s})`});A(q.z.head,{transform:`rotate(${Math.sin(t*2.3+q.sd)*4+8} 3 -108)`})})}}}
+   A(q.z.z,{transform:`translate(${q.x+dx+sw} ${q.y+hop}) scale(${q.z.s*(o.flip?-1:1)} ${q.z.s})`});if(q.z.human){const w=Math.sin(t*2.2+q.sd);A(q.z.legF,{transform:`translate(11 -70) rotate(${w*16} 0 0)`});A(q.z.legB,{transform:`translate(-11 -70) rotate(${-w*16} 0 0)`});A(q.z.armF,{transform:`translate(26 -120) rotate(${Math.sin(t*1.7+q.sd)*5} 0 0)`});A(q.z.head,{transform:`translate(3 -150) rotate(${Math.sin(t*1.3+q.sd)*5+9})`})}else A(q.z.head,{transform:`rotate(${Math.sin(t*2.3+q.sd)*4+8} 3 -108)`})})}}}
