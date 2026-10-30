@@ -10,14 +10,8 @@ def pcm(p,sr=16000):
     r=subprocess.run(['ffmpeg','-v','error','-i',p,'-ac','1','-ar',str(sr),'-f','f32le','-'],capture_output=True);return np.frombuffer(r.stdout,dtype=np.float32)
 def db(x):return float(20*np.log10(np.sqrt(np.mean(x**2))+1e-9))
 def f0(x,sr=16000):
-    x=x[:sr*12]; best=[]
-    for i in range(0,len(x)-1024,512):
-        w=x[i:i+1024]
-        if np.sqrt(np.mean(w**2))<0.02:continue
-        ac=np.correlate(w,w,'full')[1023:];lo,hi=int(sr/400),int(sr/70)
-        k=lo+int(np.argmax(ac[lo:hi]))
-        if ac[k]>0.4*ac[0]:best.append(sr/k)
-    return float(np.median(best)) if len(best)>5 else None
+    import pitch
+    return pitch.f0_of(x,sr)
 def audit(cid):
     d=f'{LONG}/p9/{CR.pid(cid)}';fin=f'{LONG}/{CR.final(cid)}';issues=[];M={};score=100
     r=subprocess.run(['ffmpeg','-hide_banner','-nostats','-i',fin,'-af','ebur128=peak=true','-f','null','-'],capture_output=True,text=True).stderr

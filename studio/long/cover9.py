@@ -35,5 +35,5 @@ if __name__=='__main__':
         bp=base(n,R+'/covers9/base');_,_,main,box,acc=CR.cover_cfg(n);si=CR.series(n)
         out9=f'{R}/'+CR.cover(n,'9x16');out169=f'{R}/'+CR.cover(n,'16x9')
         cover.make(bp,out9,'916',f"PART {si['part']}",main,box,acc,tag=si['name'],top=(not CR.legacy(n) and hasattr(CR.module(n),'WORLD')))
-        cover.make169_from916(bp,out169,f"PART {si['part']}",main,box,acc,tag=si['name'])
+        cover.make169_from916(bp,out169,f"PART {si['part']}",main,box,acc,tag=si['name'],top=(not CR.legacy(n) and hasattr(CR.module(n),'WORLD')))
         print('cover',n,out9)

@@ -58,12 +58,12 @@ def make(base,out,aspect,part,main,box,accent=0,tag="THE LIGHTHOUSE",top=False):
         shadowbox(im,[m,y+16,m+bw,y+16+bh],RED,22,outline=WHITE);d=ImageDraw.Draw(im)
         d.text((m+bw/2,y+16+bh/2+3),box,font=F(bsz),fill=WHITE,anchor='mm')
     im.convert('RGB').save(out,quality=95)
-def make169_from916(base916,out,part,main,box,accent=0,tag="THE LIGHTHOUSE"):
+def make169_from916(base916,out,part,main,box,accent=0,tag="THE LIGHTHOUSE",top=False):
     src=Image.open(base916).convert('RGB');W,H=1280,720
     bg=src.resize((W,int(W*src.height/src.width))).crop((0,(int(W*src.height/src.width)-H)//2,W,(int(W*src.height/src.width)-H)//2+H)).filter(ImageFilter.GaussianBlur(24))
     from PIL import ImageEnhance
     bg=ImageEnhance.Brightness(bg).enhance(.55)
     fr=src.resize((int(H*src.width/src.height),H));bg.paste(fr,(W-fr.width-20,0))
-    tmp=out+'.tmp.png';bg.save(tmp);make(tmp,out,'169',part,main,box,accent,tag)
+    tmp=out+'.tmp.png';bg.save(tmp);make(tmp,out,'169',part,main,box,accent,tag,top=top)
 if __name__=='__main__':
     a=sys.argv;make(a[1],a[2],a[3],a[4],a[5],a[6],int(a[7]) if len(a)>7 else 0)

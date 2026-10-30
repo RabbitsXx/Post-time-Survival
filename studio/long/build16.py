@@ -90,18 +90,45 @@ def main():
     M=load_script(name);OUT=f'{R}/{out}';os.makedirs(OUT,exist_ok=True);os.makedirs(f'{R}/tts',exist_ok=True);key=_key()
     VOICES.update(getattr(M,'VOICES',{}));FILT.update(getattr(M,'FILT',{}))      # scripts with a bigger cast (THE LAST BUS) bring their own voices / filters
     SPK=sorted({sp for b in M.BEATS for sp,_ in b['say']})
-    jobs={}
-    for bi,b in enumerate(M.BEATS):
-        radio=any(f.get('k')=='pip' for f in b['fx'])
-        for si,(sp,tx) in enumerate(b['say']):
-            spk=sp+('_radio' if (sp=='maya' and radio) else '')
-            vname,rate=VOICES[sp][:2];txt=plain(tx).replace('™','').replace('*','')
-            h=hashlib.md5(f'{vname}|{rate}|{txt}'.encode()).hexdigest()[:16]
-            jobs[(bi,si)]=dict(sp=sp,spk=spk,text=txt,raw=f'{R}/tts/{h}.wav',trim=f'{R}/tts/{h}_{spk}.wav',vname=vname,rate=rate)
-    with cf.ThreadPoolExecutor(6) as ex:
-        list(ex.map(lambda j:tts(j['text'],j['vname'],j['rate'],j['raw'],key),jobs.values()))
-    for j in jobs.values():
-        if not os.path.exists(j['trim']):trim(j['raw'],j['trim'],(','+FILT[j['spk']]) if j['spk'] in FILT else '')
+    import pitch
+    def build_jobs():
+        jobs={}
+        for bi,b in enumerate(M.BEATS):
+            radio=any(f.get('k')=='pip' for f in b['fx'])
+            for si,(sp,tx) in enumerate(b['say']):
+                spk=sp+('_radio' if (sp=='maya' and radio) else '')
+                vname,rate=VOICES[sp][:2];txt=plain(tx).replace('™','').replace('*','')
+                h=hashlib.md5(f'{vname}|{rate}|{txt}'.encode()).hexdigest()[:16]
+                jobs[(bi,si)]=dict(sp=sp,spk=spk,text=txt,raw=f'{R}/tts/{h}.wav',vname=vname,rate=rate,h=h)
+        return jobs
+    def synth(jobs):
+        with cf.ThreadPoolExecutor(6) as ex:
+            list(ex.map(lambda j:tts(j['text'],j['vname'],j['rate'],j['raw'],key),jobs.values()))
+    def cast_pitch(jobs):
+        """FILT value '@pitch:<Hz>|<extra filter>' = cast this speaker at that fundamental: measure the raw TTS voice, shift by the ratio WITHOUT changing duration (asetrate + atempo)"""
+        for sp in SPK:
+            f=FILT.get(sp,'')
+            if not f.startswith('@pitch:'):continue
+            tgt,_,extra=f[7:].partition('|');tgt=float(tgt)
+            xs=[rd(j['raw']) for j in jobs.values() if j['sp']==sp][:6]
+            f0=pitch.f0_of(np.concatenate(xs),24000) if xs else None
+            k=min(1.8,max(.6,tgt/f0)) if f0 else 1.0
+            FILT[sp]=f'asetrate=44100*{k:.4f},aresample=44100,atempo={1/k:.4f}'+(','+extra if extra else '')
+            print(f'  casting {sp}: raw {f0 and round(f0)} Hz -> target {tgt:.0f} Hz (x{k:.2f})')
+    def do_trim(jobs):
+        for j in jobs.values():
+            filt=FILT.get(j['spk'],'');fh=hashlib.md5(filt.encode()).hexdigest()[:6];j['trim']=f"{R}/tts/{j['h']}_{j['spk']}_{fh}.wav"
+            if not os.path.exists(j['trim']):trim(j['raw'],j['trim'],(','+filt) if filt else '')
+    jobs=build_jobs();synth(jobs);cast_pitch(jobs);do_trim(jobs)
+    # auto speaking rate: a speaker whose pace leaves 125-165 wpm is re-synthesised at a corrected rate (one correction pass)
+    redo=False
+    for sp in SPK:
+        js=[j for j in jobs.values() if j['sp']==sp];wd=sum(len(j['text'].split()) for j in js);du=sum(len(rd(j['trim']))/SR for j in js)
+        if wd>=8 and du>0 and getattr(M,'WORLD',None):      # auto-rate: data-driven worlds only (shipped series keep their hand-tuned rates)
+            wpm=wd/(du/60)
+            if not 125<=wpm<=165:
+                v,r=VOICES[sp][:2];nr=min(1.35,max(.55,r*145/wpm));VOICES[sp]=(v,round(nr,3))+tuple(VOICES[sp][2:]);redo=True;print(f'  pace {sp}: {wpm:.0f} wpm -> rate {r:.2f} -> {nr:.2f}')
+    if redo:jobs=build_jobs();synth(jobs);do_trim(jobs)
     # ---- timeline
     t=0.0;beats=[];voice_events=[];sfx=[];moods=[];cues=[];words=0;wsum=0.0
     for bi,b in enumerate(M.BEATS):
@@ -127,7 +154,7 @@ def main():
             c=caps[k]
             if c['t'][1]-c['t'][0]<.6:
                 for nb in(k+1,k-1):
-                    if 0<=nb<len(caps) and caps[nb]['sp']==c['sp'] and _w(c)+_w(caps[nb])<=4:
+                    if 0<=nb<len(caps) and caps[nb]['sp']==c['sp'] and _w(c)+_w(caps[nb])<=5:
                         lo,hi=(k,nb) if k<nb else (nb,k);A_,B_=caps[lo],caps[hi]
                         caps[lo]=dict(A_,t=[A_['t'][0],B_['t'][1]],h=A_['h']+' '+B_['h']);del caps[hi];k=max(0,lo-1);break
                 else:k+=1

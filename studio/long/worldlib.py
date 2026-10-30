@@ -75,8 +75,8 @@ class World:
     def exports(s,part_new=None):
         S=s.spec;V={};F={};SP={};NE={};NT={}
         for i,c in s.cast.items():
-            V[i]=(c['voice'],c.get('rate',.95));F[i]=c.get('filt','');SP[i]=dict(label=c['name'].upper(),fill=c.get('cap','#ffd23a'),stroke='#000',mono=False);NE[i]=c['name'];NT[i]=c.get('th',c['name'])
-        a=S['ann'];V['ann']=(a.get('voice','en-US-Chirp3-HD-Enceladus'),a.get('rate',1.0));F['ann']=a.get('filt','asetrate=44100*0.86,aresample=44100,highpass=f=220,lowpass=f=3400,acompressor=threshold=-24dB:ratio=6,volume=1.2')
+            V[i]=(c['voice'],c.get('rate',.95));F[i]=('@pitch:%s|%s'%(c['f0'],c.get('filt',''))) if c.get('f0') else c.get('filt','');SP[i]=dict(label=c['name'].upper(),fill=c.get('cap','#ffd23a'),stroke='#000',mono=False);NE[i]=c['name'];NT[i]=c.get('th',c['name'])
+        a=S['ann'];V['ann']=(a.get('voice','en-US-Chirp3-HD-Enceladus'),a.get('rate',1.0));F['ann']=('@pitch:%s|highpass=f=120,lowpass=f=3400,acompressor=threshold=-24dB:ratio=6,volume=%s'%(a['f0'],a.get('vol',1.6))) if a.get('f0') else a.get('filt','highpass=f=200,lowpass=f=3400,acompressor=threshold=-24dB:ratio=6,volume=1.3')
         SP['ann']=dict(label=a['name'].upper(),fill=a.get('c','#7dffb0'),stroke='#02170c',mono=True);NE['ann']=a['name'];NT['ann']=a.get('th',a['name'])
         N=S['new'];ne=dict(world=s.id,setting=N['setting'],structure=N['structure'],announcer=N['announcer'],announcer_voice='ann',palette=N['palette'],
             locs=[f'{s.loc}:{k}' for k in S['locs']],cast=list(s.cast),props=N['props'],devices=N['devices']+[s.id+'_ann',s.id+'_route'],gags=N['gags'],tips=N['tips'],tied_to_topic=N['tied_to_topic'],setting_tags=N.get('setting_tags',[]),props_reused=N.get('props_reused',[]),

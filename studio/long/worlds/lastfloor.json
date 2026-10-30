@@ -32,7 +32,7 @@
   "sub": "BUILDING ANNOUNCEMENT",
   "tag": "ALDER TOWER \u00b7 12 FLOORS",
   "th": "\u0e23\u0e30\u0e1a\u0e1a\u0e2d\u0e34\u0e19\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e04\u0e2d\u0e21\u0e15\u0e36\u0e01\u0e2d\u0e31\u0e25\u0e40\u0e14\u0e2d\u0e23\u0e4c",
-  "filt": "asetrate=44100*0.64,aresample=44100,atempo=1.5625,highpass=f=120,lowpass=f=3400,acompressor=threshold=-24dB:ratio=6,volume=1.7"
+  "f0": 82
  },
  "cast": {
   "bell": {
@@ -40,7 +40,6 @@
    "th": "\u0e40\u0e1a\u0e25\u0e25\u0e4c",
    "voice": "en-US-Chirp3-HD-Schedar",
    "rate": 0.9,
-   "filt": "asetrate=44100*0.96,aresample=44100",
    "scale": 0.687,
    "cap": "#ffb36b",
    "pal": {
@@ -56,14 +55,14 @@
     "glasses": "round",
     "brow": "thick",
     "bags": 1
-   }
+   },
+   "f0": 105
   },
   "zara": {
    "name": "Zara",
    "th": "\u0e0b\u0e32\u0e23\u0e48\u0e32",
    "voice": "en-US-Chirp3-HD-Zephyr",
    "rate": 0.78,
-   "filt": "asetrate=44100*1.1,aresample=44100",
    "scale": 0.578,
    "cap": "#ff8ad8",
    "pal": {
@@ -76,7 +75,8 @@
    "look": {
     "hair": "pony",
     "hc": "#7a3aa8"
-   }
+   },
+   "f0": 240
   },
   "omar": {
    "name": "Omar",
@@ -97,14 +97,13 @@
     "beard": "#2a1a10",
     "brow": "thick"
    },
-   "filt": "asetrate=44100*1.07,aresample=44100"
+   "f0": 140
   },
   "pip": {
    "name": "Pip",
    "th": "\u0e1e\u0e34\u0e1e",
    "voice": "en-US-Chirp3-HD-Puck",
    "rate": 0.85,
-   "filt": "asetrate=44100*1.45,aresample=44100,volume=.95",
    "scale": 0.381,
    "cap": "#ffe14a",
    "pal": {
@@ -112,14 +111,14 @@
    },
    "look": {
     "hair": "bald"
-   }
+   },
+   "f0": 330
   },
   "lin": {
    "name": "Mrs. Lin",
    "th": "\u0e04\u0e38\u0e13\u0e19\u0e32\u0e22\u0e25\u0e34\u0e19",
    "voice": "en-US-Chirp3-HD-Vindemiatrix",
    "rate": 0.92,
-   "filt": "asetrate=44100*0.98,aresample=44100",
    "scale": 0.626,
    "cap": "#d9b3ff",
    "pal": {
@@ -133,14 +132,15 @@
     "hair": "curls",
     "hc": "#e8e8f0",
     "glasses": "round"
-   }
+   },
+   "f0": 190
   }
  },
  "locs": {
   "lobby": {
    "kind": "in",
-   "wall": "#56627a",
-   "floor": "#3c3e4c",
+   "wall": "#5b5a4c",
+   "floor": "#463f36",
    "items": [
     {
      "t": "floorsign",
@@ -198,9 +198,9 @@
   "hall": {
    "kind": "lane",
    "indoor": true,
-   "wall": "#56627a",
-   "ground": "#3a3a48",
-   "roadc": "#4a4658",
+   "wall": "#573f68",
+   "ground": "#3a2c48",
+   "roadc": "#4c3a5c",
    "road": 250,
    "vpy": 398,
    "sides": [
@@ -243,8 +243,8 @@
   },
   "stair": {
    "kind": "in",
-   "wall": "#56627a",
-   "floor": "#3c3e4c",
+   "wall": "#3e5178",
+   "floor": "#2a3248",
    "items": [
     {
      "t": "pipe",
@@ -280,8 +280,8 @@
   },
   "flat": {
    "kind": "in",
-   "wall": "#56627a",
-   "floor": "#3c3e4c",
+   "wall": "#7a5238",
+   "floor": "#4a3022",
    "items": [
     {
      "t": "window",
