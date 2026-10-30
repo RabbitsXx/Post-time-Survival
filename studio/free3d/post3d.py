@@ -13,7 +13,7 @@ def entry(cid,m,series,of,part,due):
     return dict(id=cid,series=series,part=part,of=of,topic=m['topic'],yt_title=m['title'],yt_desc=desc,tt=f"{series} · Part {part}/{of} · {m['topic']}. {m['hook']} 🧟 #zombie #survival #{sl} #fyp",ig=f"{series} · Part {part}/{of} · {m['topic']}. {m['hook']} 🧟 Real survival tip inside. #zombie #survival #animation #reels #{sl}",pin=m['ask'],tags=tags,playlist=m.get('playlist',series),
         video=f'{R}/out/{cid}.mp4',thumb=f'releases/well/{cid}/cover_9x16.jpg',caps_en=f'releases/well/{cid}/captions_en.srt',caps_th=f'releases/well/{cid}/captions_th.srt',status='ready',done={},due=slots.iso(due))
 def main():
-    a=sys.argv[1:];ids=[x for x in a if not x.startswith('--') and not x.isdigit()];mins=int(a[a.index('--in')+1]) if '--in' in a else 0;gap=int(a[a.index('--gap')+1]) if '--gap' in a else 6
+    a=sys.argv[1:];ids=[x for i,x in enumerate(a) if not x.startswith('--') and not x.isdigit() and not (i>0 and a[i-1] in('--at','--in','--gap'))];mins=int(a[a.index('--in')+1]) if '--in' in a else 0;gap=int(a[a.index('--gap')+1]) if '--gap' in a else 6
     s=ST.load();base=dt.datetime.utcnow().replace(second=0,microsecond=0)
     for i,cid in enumerate(ids):
         m=META[cid];of=m.get('of',3);part=m.get('part',int(cid.split('_')[1]));series=m.get('series','THE WELL')
