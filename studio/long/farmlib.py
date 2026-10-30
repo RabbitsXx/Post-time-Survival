@@ -27,6 +27,15 @@ def crowd(n,X0,X1,z0,z1,seed=3,**k):
         t=i/max(1,n-1);z=z0+(z1-z0)*((i*0.618)%1);X=X0+(X1-X0)*t;L=lane(X,z);out.append(hz(1,L['x'],L['x'],y=L['y'],s=2.7/z,seed=seed+i*7,jit=0,yj=0,**k))
     return sorted(out,key=lambda a:a['y'])
 FOOT=640
+def turn(*steps):
+    """facing changes during a beat: turn((0,'front'),(1.2,'back','side')) = (at seconds, body view, head view).  Views: front | side (faces right; flip=True faces left) | back.  Head view lets a character glance over a shoulder."""
+    out=[]
+    for st in steps:
+        d=dict(at=st[0],view=st[1])
+        if len(st)>2 and st[2]:d['headView']=st[2]
+        if len(st)>3:d.update(st[3])
+        out.append(d)
+    return out
 def person(who,expr='calm',x=640,y=FOOT,s=None,talk=False,pose='stand',**k):
     a=dict(k=who,view='front',pose=pose,expr=expr,x=x,y=y,s=s or SC[who],talk=who if talk else False,bob=1.1,ph=x*.011,shadow=1,rim='rgba(255,190,120,.55)')
     if who=='hank':a['sx']=1.18

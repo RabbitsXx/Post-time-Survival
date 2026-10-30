@@ -86,10 +86,26 @@ function chickenHead(g,P,o,v,ink){ // the mascot head: big white head, red comb,
  q._mouth=m=>{if(mouthEls.lo)A(mouthEls.lo,{transform:`translate(0 ${m*7})`})};return q}
 const P_=(g,d,fill,o)=>P(g,d,fill,Object.assign({stroke:'#2a1c13','stroke-width':2.6,'stroke-linejoin':'round'},o||{}));
 
+
+/* ---- back of the head (view 'back'): no face; hair / hat from behind ---- */
+function paxBack(g,P,D,o,ink){const q=G(g,{transform:`scale(${D.kid?1.18:1.1})`});const hc=D.hc||'#2a1e16',h=D.hair;
+ for(const s of[-1,1])C(q,s*31,8,6.2,P.skin,{stroke:ink,'stroke-width':2.5});
+ if(h==='pigtails'){for(const s of[-1,1]){blob(q,`M${s*30},-6 Q${s*58},4 ${s*52},46 Q${s*40},32 ${s*28},8Z`,hc,ink);C(q,s*38,10,5,'#e0463a',{stroke:ink,'stroke-width':2})}}
+ const skull=h==='straw'?(D.bun||'#d4d4dc'):(h==='bald'&&!D.hc?P.skin:hc);
+ C(q,0,0,32,skull,{stroke:ink,'stroke-width':3});for(const dx of[-12,0,12])L(q,dx,-2,dx+(dx?dx*.2:0),18,ink,1.6,{opacity:.18});
+ if(h==='straw'){C(q,0,6,14,D.bun||'#d4d4dc',{stroke:ink,'stroke-width':2.4});E('ellipse',{cx:0,cy:-8,rx:50,ry:11,fill:hc,stroke:ink,'stroke-width':3},q);blob(q,'M-30,-8 C-34,-46 34,-46 30,-8Z',hc,ink);R(q,-31,-22,62,8,'#a8332b',{stroke:ink,'stroke-width':2})}
+ else if(h==='seedcap'){blob(q,'M-34,2 C-40,-48 40,-48 34,2 Q0,-8 -34,2Z',hc,ink);R(q,-16,-8,32,9,'#ffd23a',{rx:3,stroke:ink,'stroke-width':1.8});L(q,-30,0,30,0,'#1e4f2c',2.4);C(q,0,-40,3.4,'#1e4f2c')}
+ else if(h==='pigtails'){blob(q,'M-33,-2 C-38,-46 38,-46 33,-2 Q22,-16 0,-14 Q-22,-16 -33,-2Z',hc,ink)}
+ else if(h==='messy'){blob(q,'M-33,0 C-40,-40 -24,-50 -12,-44 L-6,-58 L2,-44 L12,-56 L16,-42 C34,-50 40,-30 33,0 Q20,-8 0,-6 Q-20,-8 -33,0Z',hc,ink);if(D.goggles){R(q,-33,-24,66,8,'#3a3a46',{rx:4,stroke:ink,'stroke-width':2.2})}}
+ else if(h==='beanie'){blob(q,'M-34,-2 C-40,-52 40,-52 34,-2Z','#2c2c34',ink);R(q,-35,-12,70,13,'#3d3d48',{rx:6,stroke:ink,'stroke-width':3})}
+ else{blob(q,'M-33,-4 C-38,-44 38,-44 33,-4 Q0,10 -33,-4Z',hc,ink)}
+ q._mouth=()=>{};return q}
+
 function paxHead(g,P,o){
  let D=PAXH[o.who];if(o.who==='benny'&&o.bare)D=PAXH.benny2;
  if(D.skin)P=Object.assign({},P,{skin:D.skin,skinS:D.skinS||P.skinS});const ink=P.ink,v=o.view||'front';
  if(D.hair==='chicken')return chickenHead(g,P,o,v,ink);
+ if(v==='back')return paxBack(g,P,D,o,ink);
  const q=G(g,{transform:`scale(${D.kid?1.18:1.1})`});const ex=PEXP[o.expr||'calm']||PEXP.calm;
  pHairBack(q,D,P,v,ink);
  if(v==='side'){
@@ -137,12 +153,18 @@ actor=function(g,o){
  const who=o.k,view=o.view||'front';const root=G(g,{});if(o.shadow)E('ellipse',{cx:0,cy:6,rx:78,ry:11,fill:'#1a0d05',opacity:.42,style:'filter:blur(3px)'},root);if(o.rim)root.style.filter=`drop-shadow(-2px -1px 0 ${o.rim})`;const base={x:o.x||0,y:o.y||0,s:o.s||1,fl:o.flip?-1:1,sx:o.sx||1};
  const dec=(gg,T,P,v)=>{if(DECO[who])DECO[who](gg,T,P,v,o);if(o.wound)woundDeco(gg,T,P,v);if(o.stain)P_(gg,v==='side'?'M-6,-200 q10,-8 16,2 q4,14 -8,18 q-14,-2 -8,-20Z':'M-6,-210 q14,-10 24,2 q6,18 -10,26 q-20,-4 -14,-28Z','#d9302a',{'stroke-width':1.4,opacity:.95});if(o.sling)slingDeco(gg,v);if(o.sleeveUp&&v==='front'){const a=o.sleeveUp==='R'?T.ra:T.la;tube(gg,[a[1],a[2]],15,P.skin,P.ink);C(gg,a[2][0],a[2][1],8.5,P.skin,{stroke:P.ink,'stroke-width':2.5})}};
  const mk=pose=>keeper(root,{who,view,pose,expr:o.expr,mood:o.mood,x:.01,y:.01,s:1,pack:o.pack,col:o.col,mouth:0,tilt:o.tilt,noShadow:true,deco:dec,sweat:o.sweat,red:o.red,pale:o.pale,look:o.look,blush:o.blush,bare:o.bare,tear:o.tear});
- const anim=o.anim||'none';const pp=ANIMPOSE[anim];const A1=mk(pp?pp[0]:(o.pose||'stand')),A2=pp?mk(pp[1]):null;
- const hds=[A1._hd,A2&&A2._hd].filter(Boolean);const spd=o.spd||(anim==='run'?4.4:anim==='zwalk'?1.8:2.8);
+ const anim=o.anim||'none';const pp=ANIMPOSE[anim];
+ /* o.seq = [{at,view,headView,flip,headFlip}] : the character turns during the beat (front <-> back goes through a quick side step) */
+ let SQ=null;if(o.seq){const raw=o.seq.slice().sort((a,b)=>a.at-b.at),ex=[];raw.forEach((st,i)=>{const pv=i?raw[i-1].view||view:null,nv=st.view||view;if(pv&&((pv==='front'&&nv==='back')||(pv==='back'&&nv==='front')))ex.push({at:st.at-.14,view:'side',flip:st.flip,headView:'side',headFlip:st.headFlip});ex.push(st)});
+  SQ=ex.map(st=>{const kv=Object.assign({},st);const r=G(root,{});const one=keeper(r,{who,view:st.view||view,pose:o.pose||'stand',expr:o.expr,mood:o.mood,x:.01,y:.01,s:1,pack:o.pack,col:o.col,mouth:0,tilt:o.tilt,noShadow:true,deco:dec,sweat:o.sweat,red:o.red,pale:o.pale,look:o.look,blush:o.blush,bare:o.bare,tear:o.tear,headView:st.headView,headFlip:st.headFlip});
+   A(r,{transform:`scale(${st.flip?-1:1} 1)`});return {at:st.at,g:r,hd:one._hd}})}
+ const A1=SQ?SQ[0].g:mk(pp?pp[0]:(o.pose||'stand')),A2=pp&&!SQ?mk(pp[1]):null;
+ const hds=SQ?SQ.map(q=>q.hd).filter(Boolean):[A1._hd,A2&&A2._hd].filter(Boolean);const spd=o.spd||(anim==='run'?4.4:anim==='zwalk'?1.8:2.8);
  return {root,upd(u,t,bt){
   const to=o.to,k=o.ease?ease(u):u;let x=base.x,y=base.y;if(to){x=lerp(base.x,to[0],k);y=lerp(base.y,to[1]!=null?to[1]:base.y,k)}
   let bob=0,rot=0,sx=1,sy=1;
-  if(pp){const ph=Math.floor(t*spd)%2;A(A1,{display:ph?'none':'inline'});A(A2,{display:ph?'inline':'none'});bob=-Math.abs(Math.sin(t*spd*Math.PI))*(anim==='run'?9:5)}
+  if(SQ){let ai=0;SQ.forEach((q,i)=>{if(bt>=q.at-1e-6)ai=i});SQ.forEach((q,i)=>A(q.g,{display:i===ai?'inline':'none'}))}
+  if(pp&&!SQ){const ph=Math.floor(t*spd)%2;A(A1,{display:ph?'none':'inline'});A(A2,{display:ph?'inline':'none'});bob=-Math.abs(Math.sin(t*spd*Math.PI))*(anim==='run'?9:5)}
   else{bob=Math.sin(t*(o.bobSp||1.9)+(o.ph||0))*(o.bob==null?1.4:o.bob)}
   if(o.jump){const j=o.jump;const lt=bt-j.at;if(lt>0&&lt<j.dur){const p=lt/j.dur;bob-=Math.sin(p*Math.PI)*j.h}}
   if(o.fall){const f=o.fall;const lt=bt-f.at;if(lt>0){const p=clamp(lt/f.dur);rot=(f.rot||90)*p*p*(o.flip?-1:1);y+=(f.dy||0)*p*p;x+=(f.dx||0)*p}}
