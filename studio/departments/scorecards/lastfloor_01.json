@@ -31,48 +31,49 @@
  },
  "sound": {
   "dept": "sound",
-  "score": 94,
+  "score": 88,
   "issues": [
-   "voices ann and bell sound alike (f0 117 vs 113 Hz): recast or pitch-shift one"
+   "ann: during speech the bed (music+sfx) is -5.7 dB relative to the voice (must be <= -6): the voice is not on top",
+   "omar: 210 wpm (115-170)"
   ],
   "metrics": {
    "lufs": -14.1,
-   "true_peak": -2.1,
+   "true_peak": -2.0,
    "speakers": {
     "zara": {
-     "db": -21.0,
-     "f0": 205.0,
-     "wpm": 163,
-     "share": 0.25,
-     "bed_minus_voice_db": -7.8
+     "db": -20.7,
+     "f0": 232.0,
+     "wpm": 134,
+     "share": 0.31,
+     "bed_minus_voice_db": -6.5
     },
     "ann": {
-     "db": -21.1,
-     "f0": 117.0,
-     "wpm": 128,
-     "share": 0.22,
-     "bed_minus_voice_db": -10.0
+     "db": -23.6,
+     "f0": 131.0,
+     "wpm": 151,
+     "share": 0.18,
+     "bed_minus_voice_db": -5.7
     },
     "bell": {
      "db": -20.7,
      "f0": 113.0,
      "wpm": 126,
      "share": 0.39,
-     "bed_minus_voice_db": -9.6
+     "bed_minus_voice_db": -9.8
     },
     "omar": {
-     "db": -20.7,
-     "f0": 146.0,
-     "wpm": 170,
-     "share": 0.11,
-     "bed_minus_voice_db": -8.3
+     "db": -20.9,
+     "f0": 151.0,
+     "wpm": 210,
+     "share": 0.09,
+     "bed_minus_voice_db": -10.2
     },
     "pip": {
      "db": -20.1,
      "f0": 281.0,
      "wpm": 246,
      "share": 0.03,
-     "bed_minus_voice_db": -15.0
+     "bed_minus_voice_db": -14.8
     }
    },
    "sfx": 24
@@ -80,33 +81,28 @@
  },
  "editorial": {
   "dept": "editorial",
-  "score": 88,
+  "score": 96,
   "issues": [
-   "EDITORIAL: 1 caption(s) on screen < 0.6 s [('A PAN', 0.43)]",
-   "EDITORIAL: 2 caption(s) read faster than 17 characters/s [('OPEN THE DOOR!', 19.1), ('SOMETHING IS CLIMBING', 20.0)]",
-   "EDITORIAL: announcer card beat 16 is 7.3 s (> 4 s) of a static screen: shorten the announcement or animate the card"
+   "EDITORIAL: 1 caption(s) on screen < 0.6 s [('A PAN', 0.46)]",
+   "EDITORIAL: 1 caption(s) read faster than 17 characters/s [('OPEN THE DOOR!', 19.1)]"
   ],
   "metrics": {
-   "chunks": 44,
+   "chunks": 43,
    "dangling": [],
    "orphans": [],
    "fast": [
     [
      "OPEN THE DOOR!",
      19.1
-    ],
-    [
-     "SOMETHING IS CLIMBING",
-     20.0
     ]
    ],
    "short": [
     [
      "A PAN",
-     0.43
+     0.46
     ]
    ],
-   "shot_len_std": 1.21,
+   "shot_len_std": 0.96,
    "srt": [
     20,
     20
@@ -135,7 +131,7 @@
      1280
     ],
     "detail": 8.7,
-    "colourful": 33.5
+    "colourful": 33.6
    },
    "cover_16x9.png": {
     "size": [

@@ -1,83 +1,83 @@
 1
-00:00:00,080 --> 00:00:03,467
+00:00:00,080 --> 00:00:02,120
 Omar: Floor four. Mrs. Lin lives here.
 
 2
-00:00:04,137 --> 00:00:08,304
+00:00:02,790 --> 00:00:06,302
 ALDER TOWER INTERCOM: The Last Floor. Part
 two of three: the stairs.
 
 3
-00:00:08,624 --> 00:00:11,968
+00:00:06,622 --> 00:00:09,966
 Mrs. Lin: Pip! There you are! Who locked
 my stairs?
 
 4
-00:00:12,638 --> 00:00:13,982
+00:00:10,636 --> 00:00:11,980
 Bell: I did. Rule one.
 
 5
-00:00:14,102 --> 00:00:14,666
+00:00:12,100 --> 00:00:12,664
 Mrs. Lin: ...Fair.
 
 6
-00:00:15,336 --> 00:00:17,617
+00:00:13,334 --> 00:00:15,615
 Bell: Go up. Seal the door behind you.
 
 7
-00:00:18,287 --> 00:00:24,392
+00:00:16,285 --> 00:00:19,388
 Omar: Floor four, five, six... that's a
 lot of floors.
 
 8
-00:00:24,512 --> 00:00:26,377
+00:00:19,508 --> 00:00:21,173
 Zara: Keep climbing. Don't count.
 
 9
-00:00:27,047 --> 00:00:29,950
+00:00:21,843 --> 00:00:23,936
 Zara: Floor five. The stairs are blocked!
 
 10
-00:00:30,620 --> 00:00:32,589
+00:00:24,606 --> 00:00:26,575
 Bell: Push! Everyone push!
 
 11
-00:00:33,259 --> 00:00:33,886
+00:00:27,245 --> 00:00:28,251
 Zara: ...Direct hit.
 
 12
-00:00:34,859 --> 00:00:37,985
+00:00:28,921 --> 00:00:32,047
 Mrs. Lin: That's my sister's flat. She
 says never open it.
 
 13
-00:00:38,655 --> 00:00:40,662
+00:00:32,717 --> 00:00:34,724
 Mrs. Lin: Dot, you're not well.
 
 14
-00:00:41,332 --> 00:00:43,093
+00:00:35,394 --> 00:00:37,155
 Bell: Leave her. Lock the door.
 
 15
-00:00:43,763 --> 00:00:45,525
+00:00:37,825 --> 00:00:39,588
 Mrs. Lin: Goodbye, Dot. Click.
 
 16
-00:00:46,195 --> 00:00:48,464
+00:00:40,258 --> 00:00:42,960
 Zara: They're gaining. Floor seven.
 
 17
-00:00:49,134 --> 00:00:52,112
+00:00:43,630 --> 00:00:45,831
 Omar: Twelve floors. My legs filed a
 complaint.
 
 18
-00:00:52,782 --> 00:00:55,026
+00:00:46,501 --> 00:00:48,745
 Bell: Shortcut! Through the floor ten
 hall!
 
 19
-00:00:55,696 --> 00:01:02,692
+00:00:49,415 --> 00:00:56,047
 ALDER TOWER INTERCOM: Part two of three, The
 Last Floor. Next: the roof. Follow for part three.
 

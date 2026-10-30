@@ -14,8 +14,8 @@
   "metrics": {
    "dead_black_bottom_beats": "0/13",
    "dark_beats": 0,
-   "mean_saturation": 0.247,
-   "min_palette_distance": 5.2,
+   "mean_saturation": 0.248,
+   "min_palette_distance": 5.3,
    "static_beats": [],
    "cut_by_edge": [],
    "zoom_jumps": [],
@@ -24,49 +24,51 @@
  },
  "sound": {
   "dept": "sound",
-  "score": 90,
+  "score": 76,
   "issues": [
-   "voices omar and ann sound alike (f0 123 vs 124 Hz): recast or pitch-shift one",
-   "omar: 106 wpm (115-170)"
+   "voices omar and ann sound alike (f0 132 vs 137 Hz): recast or pitch-shift one",
+   "voices lin and zara sound alike (f0 225 vs 218 Hz): recast or pitch-shift one",
+   "omar: 180 wpm (115-170)",
+   "zara: during speech the bed (music+sfx) is -5.1 dB relative to the voice (must be <= -6): the voice is not on top"
   ],
   "metrics": {
    "lufs": -14.0,
    "true_peak": -1.9,
    "speakers": {
     "omar": {
-     "db": -21.0,
-     "f0": 123.0,
-     "wpm": 106,
-     "share": 0.24,
-     "bed_minus_voice_db": -8.1
+     "db": -20.8,
+     "f0": 132.0,
+     "wpm": 180,
+     "share": 0.16,
+     "bed_minus_voice_db": -8.8
     },
     "ann": {
-     "db": -20.9,
-     "f0": 124.0,
-     "wpm": 124,
+     "db": -23.3,
+     "f0": 137.0,
+     "wpm": 136,
      "share": 0.22,
-     "bed_minus_voice_db": -9.4
+     "bed_minus_voice_db": -6.8
     },
     "lin": {
      "db": -20.0,
      "f0": 225.0,
      "wpm": 139,
-     "share": 0.21,
-     "bed_minus_voice_db": -7.8
+     "share": 0.24,
+     "bed_minus_voice_db": -8.0
     },
     "bell": {
      "db": -20.0,
      "f0": 163.0,
      "wpm": 156,
-     "share": 0.19,
-     "bed_minus_voice_db": -10.9
+     "share": 0.21,
+     "bed_minus_voice_db": -10.2
     },
     "zara": {
-     "db": -20.9,
-     "f0": 258.0,
-     "wpm": 125,
-     "share": 0.15,
-     "bed_minus_voice_db": -6.5
+     "db": -21.6,
+     "f0": 218.0,
+     "wpm": 129,
+     "share": 0.16,
+     "bed_minus_voice_db": -5.1
     }
    },
    "sfx": 26
@@ -74,21 +76,27 @@
  },
  "editorial": {
   "dept": "editorial",
-  "score": 83,
+  "score": 88,
   "issues": [
-   "EDITORIAL: 2 caption(s) on screen < 0.6 s [('...FAIR.', 0.56), ('GO UP.', 0.58)]",
-   "EDITORIAL: 2 caption(s) read faster than 17 characters/s [('...DIRECT HIT.', 22.3), ('SHORTCUT! THROUGH', 17.3)]",
-   "EDITORIAL: announcer card beat 1 is 4.5 s (> 4 s) of a static screen: shorten the announcement or animate the card",
-   "EDITORIAL: scene beat 5 lasts 8.8 s (> 6.5 s)"
+   "EDITORIAL: 2 caption(s) on screen < 0.6 s [('...FAIR.', 0.56), ('GO UP.', 0.59)]",
+   "EDITORIAL: 4 caption(s) read faster than 17 characters/s [(\"THAT'S A LOT\", 17.2), ('THE STAIRS ARE BLOCKED!', 17.1), ('MY LEGS FILED', 20.2)]"
   ],
   "metrics": {
-   "chunks": 46,
+   "chunks": 44,
    "dangling": [],
    "orphans": [],
    "fast": [
     [
-     "...DIRECT HIT.",
-     22.3
+     "THAT'S A LOT",
+     17.2
+    ],
+    [
+     "THE STAIRS ARE BLOCKED!",
+     17.1
+    ],
+    [
+     "MY LEGS FILED",
+     20.2
     ],
     [
      "SHORTCUT! THROUGH",
@@ -102,10 +110,10 @@
     ],
     [
      "GO UP.",
-     0.58
+     0.59
     ]
    ],
-   "shot_len_std": 1.75,
+   "shot_len_std": 1.24,
    "srt": [
     19,
     19
@@ -136,7 +144,7 @@
      1280
     ],
     "detail": 9.3,
-    "colourful": 36.1
+    "colourful": 36.0
    },
    "cover_16x9.png": {
     "size": [

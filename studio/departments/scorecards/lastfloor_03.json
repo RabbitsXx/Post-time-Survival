@@ -7,13 +7,15 @@
  },
  "art": {
   "dept": "art-layout-animation",
-  "score": 100,
-  "issues": [],
+  "score": 94,
+  "issues": [
+   "ART: two locations have almost the same colour world (distance 13 < 14): give each place its own colour key"
+  ],
   "metrics": {
    "dead_black_bottom_beats": "0/12",
    "dark_beats": 0,
    "mean_saturation": 0.317,
-   "min_palette_distance": 14.6,
+   "min_palette_distance": 13.4,
    "static_beats": [],
    "cut_by_edge": [],
    "zoom_jumps": [],
@@ -22,11 +24,12 @@
  },
  "sound": {
   "dept": "sound",
-  "score": 84,
+  "score": 78,
   "issues": [
-   "voices bell and ann sound alike (f0 125 vs 114 Hz): recast or pitch-shift one",
-   "zara: 176 wpm (115-170)",
-   "announcer is 26% of the speech (<= 25 %)"
+   "voices ann and lin sound alike (f0 156 vs 177 Hz): recast or pitch-shift one",
+   "voices ann and omar sound alike (f0 156 vs 165 Hz): recast or pitch-shift one",
+   "voices lin and omar sound alike (f0 177 vs 165 Hz): recast or pitch-shift one",
+   "ann: 184 wpm (115-170)"
   ],
   "metrics": {
    "lufs": -14.0,
@@ -36,43 +39,43 @@
      "db": -20.7,
      "f0": 125.0,
      "wpm": 134,
-     "share": 0.3,
-     "bed_minus_voice_db": -12.3
+     "share": 0.31,
+     "bed_minus_voice_db": -12.5
     },
     "ann": {
-     "db": -20.2,
-     "f0": 114.0,
-     "wpm": 151,
-     "share": 0.26,
-     "bed_minus_voice_db": -12.4
+     "db": -22.5,
+     "f0": 156.0,
+     "wpm": 184,
+     "share": 0.22,
+     "bed_minus_voice_db": -8.0
     },
     "zara": {
-     "db": -20.0,
-     "f0": 250.0,
-     "wpm": 176,
-     "share": 0.2,
-     "bed_minus_voice_db": -10.6
+     "db": -20.1,
+     "f0": 235.0,
+     "wpm": 150,
+     "share": 0.24,
+     "bed_minus_voice_db": -8.7
     },
     "lin": {
      "db": -20.5,
-     "f0": 178.0,
+     "f0": 177.0,
      "wpm": 141,
      "share": 0.13,
-     "bed_minus_voice_db": -7.2
+     "bed_minus_voice_db": -7.9
     },
     "omar": {
-     "db": -19.9,
-     "f0": 155.0,
-     "wpm": 180,
-     "share": 0.06,
-     "bed_minus_voice_db": -13.4
+     "db": -20.4,
+     "f0": 165.0,
+     "wpm": 252,
+     "share": 0.05,
+     "bed_minus_voice_db": -13.5
     },
     "pip": {
      "db": -20.6,
-     "f0": 314.0,
+     "f0": 317.0,
      "wpm": 137,
      "share": 0.05,
-     "bed_minus_voice_db": -11.9
+     "bed_minus_voice_db": -11.6
     }
    },
    "sfx": 28
@@ -80,48 +83,51 @@
  },
  "editorial": {
   "dept": "editorial",
-  "score": 80,
+  "score": 84,
   "issues": [
    "EDITORIAL: 1 caption chunk(s) stop on a dangling word, e.g. ['FLOOR. FOLLOW FOR']: break captions at phrase boundaries",
-   "EDITORIAL: 1 caption(s) on screen < 0.6 s [('MY PAN', 0.41)]",
-   "EDITORIAL: 5 caption(s) read faster than 17 characters/s [('FLOOR ELEVEN', 18.5), ('IS POURING OUT ZOMBIES!', 17.0), (\"THEY'RE ONE FLIGHT BEHIND!\", 17.7)]",
-   "EDITORIAL: announcer card beat 1 is 4.5 s (> 4 s) of a static screen: shorten the announcement or animate the card"
+   "EDITORIAL: 2 caption(s) on screen < 0.6 s [('MY PAN', 0.3), ('THE END', 0.43)]",
+   "EDITORIAL: 9 caption(s) read faster than 17 characters/s [(\"THEY'RE ONE\", 17.2), ('EVERYBODY OUT! SHUT IT!', 19.8), ('WHAT IF THE PILOT', 19.7)]"
   ],
   "metrics": {
-   "chunks": 46,
+   "chunks": 47,
    "dangling": [
     "FLOOR. FOLLOW FOR"
    ],
    "orphans": [],
    "fast": [
     [
-     "FLOOR ELEVEN",
-     18.5
+     "THEY'RE ONE",
+     17.2
     ],
     [
-     "IS POURING OUT ZOMBIES!",
-     17.0
-    ],
-    [
-     "THEY'RE ONE FLIGHT BEHIND!",
-     17.7
+     "EVERYBODY OUT! SHUT IT!",
+     19.8
     ],
     [
      "WHAT IF THE PILOT",
-     20.3
+     19.7
     ],
     [
      "THEN WE BECOME",
      17.5
+    ],
+    [
+     "MY PAN",
+     20.0
     ]
    ],
    "short": [
     [
      "MY PAN",
-     0.41
+     0.3
+    ],
+    [
+     "THE END",
+     0.43
     ]
    ],
-   "shot_len_std": 1.1,
+   "shot_len_std": 0.9,
    "srt": [
     20,
     20
@@ -157,7 +163,7 @@
      1280,
      720
     ],
-    "detail": 4.3,
+    "detail": 4.2,
     "colourful": 32.9
    }
   }
