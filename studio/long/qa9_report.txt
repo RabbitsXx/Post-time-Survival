@@ -1,33 +1,33 @@
-QA report: THE LAST FLOOR part 1/3 (lastfloor_01)
-  [PASS] A: 17 beats, average 3.76 s (target 3-4.8), longest 6.1 s, shortest 2.1 s
+QA report: THE LAST FLOOR part 2/3 (lastfloor_02)
+  [PASS] A: 17 beats, average 3.57 s (target 3-4.8), longest 6.9 s, shortest 1.7 s
   [PASS] A: no beat > 9.5 s
   [PASS] A: no beat > 7.5 s
   [PASS] A: no beat < 1.5 s
-  [PASS] A: speech pace 140 wpm (119 words, 64 s)
-  [PASS] A: the hook starts at 0.08 s: "I ordered a pizza. I did NOT order that."
+  [PASS] A: speech pace 139 wpm (111 words, 61 s)
+  [PASS] A: the hook starts at 0.08 s: "Floor four. Mrs. Lin lives here."
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
-  [PASS] S: PA opening: "The Last Floor. Part one of three: the lobby."
-  [PASS] S: the PA opening is spoken at 3.9 s (series + part + topic within the first 8 s)
-  [PASS] S: PA sign-off: "Part one of three, The Last Floor. Next: the stairs. Follow for part two."
+  [PASS] S: PA opening: "The Last Floor. Part two of three: the stairs."
+  [PASS] S: the PA opening is spoken at 3.4 s (series + part + topic within the first 8 s)
+  [PASS] S: PA sign-off: "Part two of three, The Last Floor. Next: the roof. Follow for part three."
   [PASS] S: route line (part n of 3) on every non-card beat
-  [PASS] S: YouTube title (67 chars): A Zombie Delivers Pizza To The Elevator! 12 | The Last Floor Part 1
+  [PASS] S: YouTube title (67 chars): Never Open The Red Door! A Sofa Smashes The | The Last Floor Part 2
   [PASS] S: 17 YouTube tags, 291 chars
-  [PASS] S: 20 cues, 20 Thai lines
+  [PASS] S: 19 cues, 19 Thai lines
   [PASS] S: release kit complete
-  [PASS] F: 4 character voices: {'zara': 6, 'ann': 2, 'bell': 8, 'omar': 3, 'pip': 1}
-  [PASS] F: BUS-E/PA = 16 % of speech time (target <= 25 %)
-  [PASS] F: 14 speaker changes (conversation, not narration)
-  [PASS] F: 32 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'ding', 'elev_door', 'glass_thump', 'groan', 'grunt', 'heartbeat', 'hit', 'horde', 'lock_chain', 'radio', 'rattle', 'rimshot', 'run_tile_a', 'run_tile_b', 'run_tile_c', 'shuffle_a', 'shuffle_b', 'shuffle_c', 'sigh', 'squawk', 'stab', 'step_stair_a', 'step_stair_b', 'step_stair_c', 'step_tile_a', 'step_tile_b', 'step_tile_c', 'thud_wood']; comedy stings: ['boing', 'rimshot']
+  [PASS] F: 4 character voices: {'omar': 3, 'ann': 2, 'lin': 5, 'bell': 5, 'zara': 4}
+  [PASS] F: BUS-E/PA = 19 % of speech time (target <= 25 %)
+  [PASS] F: 16 speaker changes (conversation, not narration)
+  [PASS] F: 27 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'groan', 'grunt', 'heartbeat', 'horde', 'lock_chain', 'paper', 'radio', 'rimshot', 'run_stair_a', 'run_stair_b', 'run_stair_c', 'scrape', 'shuffle_a', 'shuffle_b', 'shuffle_c', 'sigh', 'sofa_fall', 'stab', 'step_stair_a', 'step_stair_b', 'step_stair_c', 'swell', 'thud_wood']; comedy stings: ['boing', 'rimshot']
   [PASS] F: characters visible in 13/13 non-card beats
-  [WARN] F: 0 lines with a question or talking to the viewer
+  [PASS] F: 3 lines with a question or talking to the viewer
   [PASS] B: layout: 0 CROP, 0 OVERLAP
   [PASS] B: layout: 0 BAND, 0 EDGE
-  [FAIL] C: 1080x1920 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 63.97 s vs spec 63.97 s; 39.4 MB; audio aac 48000 Hz
-  [PASS] D: integrated -14.1 LUFS, LRA 2.8 LU
-  [PASS] D: true peak -2.9 dBTP
-  [WARN] E: weak cuts (mean diff < 10/255): [(4, 7.3)]
+  [PASS] C: 1080x1920 h264 yuv420p 30.00 fps; colour bt709
+  [PASS] C: duration 60.70 s vs spec 60.70 s; 38.8 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.0 LUFS, LRA 2.6 LU
+  [PASS] D: true peak -2.0 dBTP
+  [WARN] E: weak cuts (mean diff < 10/255): [(6, 9.3), (11, 7.6)]
   [PASS] E: no black frames in the scan
-  [PASS] H: cover embedded in the first frames (diff 3.2/255)
+  [PASS] H: cover embedded in the first frames (diff 3.4/255)
 
-  RESULT: FAIL
+  RESULT: PASS
