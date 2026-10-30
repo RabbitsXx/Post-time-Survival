@@ -30,7 +30,7 @@ for i,b in enumerate(B):
         seen.add(loc)
         if z(b)>1.05:bad_open.append((i,loc))
 rec(not bad_open,'every location is entered with a wide establishing shot'+(f' (close-up first in: {bad_open})' if bad_open else ''))
-zb=[i for i,b in enumerate(B) if any(a.get('k')=='horde' for a in (b['scene'].get('p') or {}).get('acts',[]))]
+zb=[i for i,b in enumerate(B) if any((a.get('k')=='horde' or str(a.get('k')).startswith('z_')) for a in (b['scene'].get('p') or {}).get('acts',[]))]
 rec(len(zb)>=4,f'zombies visible in {len(zb)} beats (>= 4)');rec(len(seen)>=3,f'{len(seen)} locations (>= 3)');rec(len(cd)/max(1,len(B))<=.3,f'card beats {len(cd)}/{len(B)} (<= 30 %)')
 
 # ---- storyboard: who / does / where / how / why-watch on every beat (owner rule 2026-10-30: a visual story must answer who, doing what, where, how, and why keep watching) ----
@@ -71,8 +71,8 @@ for i in range(1,len(B)):
     pa,pb=a['scene']['p'],b['scene']['p']
     if (pa.get('loc'),pa.get('v'))!=(pb.get('loc'),pb.get('v')):continue
     if (a.get('view') or {})!=(b.get('view') or {}):continue
-    ea={x['k']:(x['to'][0] if x.get('to') else x['x']) for x in pa.get('acts',[]) if x.get('k') not in('prop','horde','dog','sticker')}
-    sb={x['k']:x['x'] for x in pb.get('acts',[]) if x.get('k') not in('prop','horde','dog','sticker')}
+    ea={x['k']:(x['to'][0] if x.get('to') else x['x']) for x in pa.get('acts',[]) if x.get('k') not in('prop','horde','dog','sticker') and not str(x.get('k')).startswith('z_')}
+    sb={x['k']:x['x'] for x in pb.get('acts',[]) if x.get('k') not in('prop','horde','dog','sticker') and not str(x.get('k')).startswith('z_')}
     for k in ea:
         if k in sb and abs(ea[k]-sb[k])>70:jumps.append((i,k,round(ea[k]),round(sb[k])))
 rec(not jumps,'continuity: people start each shot where they ended the last one in the same place'+(f' - jumps {jumps[:6]}' if jumps else ''))
@@ -89,7 +89,7 @@ if cid.rsplit('_',1)[0] not in LEGACY and not CR.legacy(cid):
     HIT=('WHACK','SMASH','THWACK','BONK','SHOVE','KO','CRASH','SWING','CLANG','SPLAT')
     def fight(b):
         p=b['scene'].get('p') or {};acts=p.get('acts') or []
-        z=any(a.get('k')=='horde' for a in acts);hit=any(f.get('k')=='sticker' and any(h in str(f.get('txt','')).upper() for h in HIT) for f in b.get('fx',[]))
+        z=any(a.get('k')=='horde' or str(a.get('k')).startswith('z_') for a in acts);hit=any(f.get('k')=='sticker' and any(h in str(f.get('txt','')).upper() for h in HIT) for f in b.get('fx',[]))
         swing=any(a.get('k') in cast_ and (a.get('pose') in('punch','swing') or a.get('held')) for a in acts)
         return z and (hit or swing) and hit
     fights=[i for i,b in enumerate(B) if b['scene']['n']=='stage' and fight(b)]

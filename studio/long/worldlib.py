@@ -51,6 +51,11 @@ class World:
         k.setdefault('jit',30);k.setdefault('yj',10)
         return _hz(n,x0,x1,y=y,s=1.6*sc,seed=seed,human=True,**k)
     def horde(s,n,x0,x1,y=650,sc=1.6,seed=5,**k):return _hz(n,x0,x1,y=y,s=sc,seed=seed,jit=50,human=True,**k)
+    def zed(s,var,x,y=FOOT,sc=1.0,face='side',flip=False,to=None,**k):
+        """a zombie rig actor: pale green skin, bloodshot eyes, torn clothes, slack mouth, arms reaching; walks (zwalk) when `to` is given"""
+        a=dict(k='z_'+str(var),view='back' if face=='back' else 'side',pose='stand' if face=='back' else 'reach',expr='tired',x=x,y=y,s=.72*sc,flip=flip,pale=.9,red=.7,wound=1,stain=1,mouth=.55,bob=2.2,ph=x*.013,shadow=1,rim=s.spec['pal'].get('rim','rgba(255,190,120,.4)'))
+        if to is not None and abs(to-x)>1:a.update(pose='walk',anim='zwalk',to=(to,y),spd=1.6)
+        a.update(k);return a
     def hold(s,act,item,dx=46,dy=-120,sc=.5,**k):
         """a person holding a prop: returns [person, prop] (the prop follows the person when it walks)"""
         p=dict(k='prop',t=item,x=act['x']+dx*act['s']/.8,y=act['y']+dy*act['s']/.8,s=sc*act['s']/.8);p.update(k)
@@ -97,8 +102,14 @@ class Scene:
     def out(s,*who):
         for w in who:s.p.pop(w,None)
         return s
-    def zput(s,name,x,y=FOOT,seed=3,sc=1.0,held=None,flip=False):
-        s.z[name]=dict(x=x,y=y,seed=seed,sc=sc,held=held,flip=flip);return s
+    def zput(s,name,x,y=FOOT,seed=3,sc=1.0,held=None,flip=False,var=None,face='side',turn=None):
+        """a zombie = a real rig character (var: cook|suit|dress|hoodie|porter ...): it has side / back views, turns to look at a target and walks like a person.
+        face: 'side' (toward flip) | 'back' ; turn=(at_seconds,'side') makes it turn around during the first shot it is in"""
+        names=list((s.W.spec.get('zombies') or {}));var=var or (names[seed%len(names)] if names else None)
+        s.z[name]=dict(x=x,y=y,seed=seed,sc=sc,held=held,flip=flip,var=var,face=face,turn=turn);return s
+    def zdown(s,name,dx0=70):
+        """the zombie stays lying on the floor (a corpse) in every later shot of this scene"""
+        s.z[name]['down']=True;s.z[name]['dx0']=dx0;s.z[name].pop('fx',None);return s
     def zout(s,*n):
         for k in n:s.z.pop(k,None)
         return s
@@ -122,11 +133,12 @@ class Scene:
             if isinstance(zm,tuple):zm,fl=zm
             dx=(zm-zb['x']) if zm is not None else 0
             fv=fl if fl is not None else ((dx<0) if dx else zb['flip'])
-            h=s.W.hz(1,zb['x'],zb['x'],y=zb['y'],sc=zb['sc'],seed=zb['seed'],to=dx,flip=fv,jit=0,yj=0);acts.append(h)
-            if zb.get('held'):
-                pr=dict(k='prop',t=zb['held'],x=zb['x']+(70 if not fv else -70),y=zb['y']-140,s=1.4)
-                if dx:pr['to']=(pr['x']+dx,pr['y'])
-                acts.append(pr)
+            a=s.W.zed(zb['var'],zb['x'],zb['y'],zb['sc'],face=zb['face'],flip=fv,to=(zb['x']+dx if dx else None))
+            a['nm']=n
+            if zb.get('turn') and not zb.get('turned'):
+                at,fv2=zb['turn'];a['seq']=turn((0,'back'),(at,'side',None,{'flip':fv}));zb['turned']=True;zb['face']='side'
+            if zb.get('down'):a['fall']=dict(at=0,dur=.01,rot=-88,dx=zb.get('dx0',34)*(1 if fv else -1));a['pose']='stand';a.pop('anim',None);a.pop('to',None)
+            acts.append(a)
             if dx:zb['x']+=dx
             zb['flip']=fv
         v=dict(s.view)
@@ -136,14 +148,30 @@ class Scene:
         return s.W.set(s.loc,acts+(extra or []),add=(add if add is not None else s.add),**v)
     def hold(s,who,item,ox=60,oy=-130,sc=1.0):
         s.p[who]['held']=dict(t=item,ox=ox,oy=oy,s=sc);return s
-def strike(sc,who,zname,word,held=None,dx=70,knock=70,face_left=True,sx=None,**kw):
-    """fight beat helper (owner: real fights): the hero swings (pose punch + the weapon in hand), an impact sticker pops, the zombie is knocked back.
-    Returns (shot, fx) ; pass as   P.B(say, shot, fx=fx, ...).  The weapon is drawn as a prop next to the hero."""
-    st=sc.p[who];zb=sc.z[zname];flip=zb['x']<st['x'];st['flip']=flip
-    ex=list(kw.pop('extra',None) or [])
-    if held:ex.append(dict(k='prop',t=held,x=st['x']+(-dx if flip else dx),y=st['y']-20,s=sc.W.sc(who)*1.4/.8*.8,flip=flip))
-    shot=sc.shot(pose={who:'punch'},face={who:'side'},zmoves={zname:zb['x']+(knock if not flip else -knock)},extra=ex,**kw)
-    fx=[sticker(.15,word,x=225,y=170,rot=-6,size=62,c='#ffcf6a',dur=.9),shake(.15,6,.35)]
+def strike(sc,who,zname,word,held=None,wind=.5,kill=True,fall_dx=34,**kw):
+    """fight beat helper (owner: realistic fights).  One swing in 3 acted stages inside ONE beat:
+       0 .. wind    ANTICIPATION: the hero leans back with the weapon raised (pose windup)
+       wind         SWING: pose punch, the weapon sweeps through an arc (prop keyframes)
+       wind+.12     IMPACT: sticker + camera shake, the zombie staggers (hit) or falls (kill=True) and then LIES on the floor (Scene.zdown) for the rest of the scene
+       wind+.45     FOLLOW-THROUGH: the hero's body carries on (pose follow)
+    Returns (shot, fx) for  P.B(say, shot, fx=fx, ...).  The weapon is a prop with keyframes; every hit has a visible consequence."""
+    st=sc.p[who];zb=sc.z[zname];flip=zb['x']<st['x'];st['flip']=flip;zb['flip']=zb['x']>st['x']
+    if zb.get('face')=='back':zb['turn']=(.2,'side')
+    sg=-1 if flip else 1;sc_=sc.W.sc(who)
+    kw.setdefault('vx',(st['x']+zb['x'])/2);kw.setdefault('z',.88)
+    shot=sc.shot(face={who:'side'},**kw)
+    scn,view=shot
+    for a in scn['p']['acts']:
+        if a.get('k')==who:
+            a['view']='side';a['flip']=flip;a['seq']=turn((0,'side',None,{'pose':'windup','flip':flip}),(wind,'side',None,{'pose':'punch','flip':flip}),(wind+.45,'side',None,{'pose':'follow','flip':flip}))
+        if a.get('nm')==zname:
+            a['shake']=dict(at=wind+.12,dur=.3,amp=7)
+            if kill:a['fall']=dict(at=wind+.12,dur=.6,rot=-88,dx=fall_dx*(1 if a.get('flip') else -1))
+    if held:
+        x,y=st['x'],st['y'];k=lambda at,dx,dy,r:dict(at=at,x=x+sg*dx,y=y+dy*sc_/.72,rot=sg*r)
+        scn['p']['acts'].append(dict(k='prop',t=held,s=sc_*.82,flip=False,x=x,y=y,keys=[k(0,24,-150,-72),k(wind*.9,12,-168,-86),k(wind+.1,86,-96,66),k(wind+.5,70,-104,40)]))
+    if kill:sc.zdown(zname,dx0=fall_dx)
+    fx=[sticker(wind+.1,word,x=225,y=170,rot=-6,size=62,c='#ffcf6a',dur=.9),shake(wind+.1,7,.35)]
     return shot,fx
 class WorldPart(Script):
     def __init__(s,W,n,topic,of):

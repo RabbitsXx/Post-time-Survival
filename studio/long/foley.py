@@ -38,7 +38,7 @@ def main():
         loc=p.get('v');kind=((W.get('locs') or {}).get(loc) or {}).get('kind','in');surf=SURF.get(kind,'tile')
         if loc in('stair',):surf='stair'
         if loc in('flat',):surf='wood'
-        hordes=[a for a in p.get('acts',[]) if a.get('k')=='horde'];props=[a for a in p.get('acts',[]) if a.get('k')=='prop']
+        hordes=[a for a in p.get('acts',[]) if a.get('k')=='horde' or str(a.get('k')).startswith('z_')];props=[a for a in p.get('acts',[]) if a.get('k')=='prop']
         if hordes and not last_horde:
             add('groan',t0+.15,pan(hordes[0].get('x0',hordes[0].get('x',640)),v),.8)
             if sum(h.get('n',1) for h in hordes)>=3:add('horde',t0+.25,0,.6)
@@ -48,7 +48,7 @@ def main():
                 for i in range(n):add('shuffle_'+'abc'[i%3],t0+.2+i*.8,pan(h.get('x0',h.get('x',640)),v),.7)
         last_horde=bool(hordes)
         for a in p.get('acts',[]):
-            if a.get('k') in('prop','horde','dog','sticker') or a.get('x') is None:continue
+            if a.get('k') in('prop','horde','dog','sticker') or str(a.get('k')).startswith('z_') or a.get('x') is None:continue
             who=a['k'];mv=a.get('to') and abs(a['to'][0]-a['x'])+abs((a['to'][1] if a['to'][1] is not None else a['y'])-a['y'])>40
             if mv:
                 run=a.get('anim')=='run';rate=4.0 if run else 2.2;n=max(2,int(D*rate*.9))

@@ -88,7 +88,7 @@ const P_=(g,d,fill,o)=>P(g,d,fill,Object.assign({stroke:'#2a1c13','stroke-width'
 
 
 /* ---- back of the head (view 'back'): no face; hair / hat from behind ---- */
-function paxBack(g,P,D,o,ink){const q=G(g,{transform:`scale(${D.kid?1.18:1.1})`});const hc=D.hc||'#2a1e16',h=D.hair;
+function paxBack(g,P,D,o,ink){const q=G(g,{transform:`scale(${D.hs||(D.kid?1.18:1.1)})`});const hc=D.hc||'#2a1e16',h=D.hair;
  for(const s of[-1,1])C(q,s*31,8,6.2,P.skin,{stroke:ink,'stroke-width':2.5});
  if(h==='pigtails'){for(const s of[-1,1]){blob(q,`M${s*30},-6 Q${s*58},4 ${s*52},46 Q${s*40},32 ${s*28},8Z`,hc,ink);C(q,s*38,10,5,'#e0463a',{stroke:ink,'stroke-width':2})}}
  const skull=h==='straw'?(D.bun||'#d4d4dc'):(h==='bald'&&!D.hc?P.skin:hc);
@@ -157,7 +157,7 @@ actor=function(g,o){
  const anim=o.anim||'none';const pp=ANIMPOSE[anim];
  /* o.seq = [{at,view,headView,flip,headFlip}] : the character turns during the beat (front <-> back goes through a quick side step) */
  let SQ=null;if(o.seq){const raw=o.seq.slice().sort((a,b)=>a.at-b.at),ex=[];raw.forEach((st,i)=>{const pv=i?raw[i-1].view||view:null,nv=st.view||view;if(pv&&((pv==='front'&&nv==='back')||(pv==='back'&&nv==='front')))ex.push({at:st.at-.14,view:'side',flip:st.flip,headView:'side',headFlip:st.headFlip});ex.push(st)});
-  SQ=ex.map(st=>{const kv=Object.assign({},st);const r=G(root,{});const one=keeper(r,{who,view:st.view||view,pose:o.pose||'stand',expr:o.expr,mood:o.mood,x:.01,y:.01,s:1,pack:o.pack,col:o.col,mouth:0,tilt:o.tilt,noShadow:true,deco:dec,sweat:o.sweat,red:o.red,pale:o.pale,look:o.look,blush:o.blush,bare:o.bare,tear:o.tear,headView:st.headView,headFlip:st.headFlip});
+  SQ=ex.map(st=>{const kv=Object.assign({},st);const r=G(root,{});const one=keeper(r,{who,view:st.view||view,pose:st.pose||o.pose||'stand',expr:o.expr,mood:o.mood,x:.01,y:.01,s:1,pack:o.pack,col:o.col,mouth:0,tilt:o.tilt,noShadow:true,deco:dec,sweat:o.sweat,red:o.red,pale:o.pale,look:o.look,blush:o.blush,bare:o.bare,tear:o.tear,headView:st.headView,headFlip:st.headFlip});
    A(r,{transform:`scale(${st.flip?-1:1} 1)`});return {at:st.at,g:r,hd:one._hd}})}
  const A1=SQ?SQ[0].g:mk(pp?pp[0]:(o.pose||'stand')),A2=pp&&!SQ?mk(pp[1]):null;
  const hds=SQ?SQ.map(q=>q.hd).filter(Boolean):[A1._hd,A2&&A2._hd].filter(Boolean);const spd=o.spd||(anim==='run'?4.4:anim==='zwalk'?1.8:2.8);
@@ -185,4 +185,6 @@ Object.assign(FRONT,{
 Object.assign(SIDE,{
  climb:{lean:6,n:{l:[[2,-140],[16,-100],[8,-40]],a:[[2,-250],[22,-300],[26,-350]]},f:{l:[[-2,-140],[-14,-72],[-10,-14]],a:[[-2,-250],[14,-330],[20,-380]]}},
  drive:{lean:2,n:{l:[[2,-140],[24,-96],[44,-40]],a:[[2,-250],[30,-206],[58,-196]]},f:{l:[[-2,-140],[22,-100],[40,-50]],a:[[-2,-250],[26,-210],[56,-200]]}},
+ windup:{lean:-12,n:{l:[[2,-140],[14,-76],[8,-14]],a:[[2,-250],[-34,-262],[-62,-320]]},f:{l:[[-2,-140],[-18,-72],[-24,-14]],a:[[-2,-250],[-26,-236],[-48,-290]]}},
+ follow:{lean:20,n:{l:[[2,-140],[24,-80],[14,-14]],a:[[2,-250],[56,-214],[96,-160]]},f:{l:[[-2,-140],[-20,-72],[-26,-14]],a:[[-2,-250],[-8,-196],[18,-150]]}},
  punch:{lean:12,n:{l:[[2,-140],[18,-76],[10,-14]],a:[[2,-250],[50,-248],[100,-250]]},f:{l:[[-2,-140],[-16,-72],[-20,-14]],a:[[-2,-250],[-20,-200],[-8,-160]]}}});

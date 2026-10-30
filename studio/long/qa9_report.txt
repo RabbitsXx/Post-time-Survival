@@ -1,9 +1,9 @@
 QA report: THE QUIET HAND part 1/10 (quiet_01)
-  [PASS] A: 19 beats, average 3.14 s (target 3-4.8), longest 5.7 s, shortest 1.6 s
+  [WARN] A: 25 beats, average 2.99 s (target 3-4.8), longest 5.7 s, shortest 2.0 s
   [PASS] A: no beat > 9.5 s
   [PASS] A: no beat > 7.5 s
   [PASS] A: no beat < 1.5 s
-  [PASS] A: speech pace 153 wpm (112 words, 60 s)
+  [PASS] A: speech pace 154 wpm (126 words, 75 s)
   [PASS] A: the hook starts at 0.08 s: "If you hear screaming above you, don't go up."
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
   [PASS] S: PA opening: "The Quiet Hand. Part one of ten: hour zero."
@@ -12,22 +12,22 @@ QA report: THE QUIET HAND part 1/10 (quiet_01)
   [PASS] S: route line (part n of 10) on every non-card beat
   [PASS] S: YouTube title (68 chars): Retired Assassin vs First Hour Zombies: 240! | The Quiet Hand Part 1
   [PASS] S: 17 YouTube tags, 280 chars
-  [PASS] S: 19 cues, 19 Thai lines
+  [PASS] S: 25 cues, 25 Thai lines
   [PASS] S: release kit complete
-  [WARN] F: 1 character voices: {'ren': 17, 'ann': 2}
-  [PASS] F: BUS-E/PA = 19 % of speech time (target <= 25 %)
+  [WARN] F: 1 character voices: {'ren': 23, 'ann': 2}
+  [PASS] F: BUS-E/PA = 17 % of speech time (target <= 25 %)
   [WARN] F: 3 speaker changes (conversation, not narration)
-  [PASS] F: 24 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'groan', 'heartbeat', 'horde', 'radio', 'rimshot', 'shuffle_a', 'shuffle_b', 'shuffle_c', 'sigh', 'stab', 'step_gravel_a', 'step_gravel_b', 'step_gravel_c', 'step_stair_a', 'step_stair_b', 'step_stair_c', 'step_tile_a', 'step_tile_b', 'step_tile_c', 'thud_wood']; comedy stings: ['boing', 'rimshot']
-  [PASS] F: characters visible in 15/15 non-card beats
-  [PASS] F: 3 lines with a question or talking to the viewer
+  [PASS] F: 25 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'groan', 'heartbeat', 'horde', 'radio', 'rimshot', 'rustle', 'shuffle_a', 'shuffle_b', 'shuffle_c', 'sigh', 'stab', 'step_gravel_a', 'step_gravel_b', 'step_gravel_c', 'step_stair_a', 'step_stair_b', 'step_stair_c', 'step_tile_a', 'step_tile_b', 'step_tile_c', 'thud_wood']; comedy stings: ['boing', 'rimshot']
+  [PASS] F: characters visible in 18/18 non-card beats
+  [PASS] F: 2 lines with a question or talking to the viewer
   [PASS] B: layout: 0 CROP, 0 OVERLAP
   [PASS] B: layout: 0 BAND, 0 EDGE
   [PASS] C: 1080x1920 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 59.63 s vs spec 59.63 s; 32.2 MB; audio aac 48000 Hz
-  [PASS] D: integrated -14.0 LUFS, LRA 3.2 LU
+  [PASS] C: duration 74.77 s vs spec 74.77 s; 39.6 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.0 LUFS, LRA 2.6 LU
   [PASS] D: true peak -2.1 dBTP
-  [WARN] E: weak cuts (mean diff < 10/255): [(6, 7.0), (7, 5.9), (15, 7.9), (16, 8.0)]
+  [PASS] E: every beat boundary changes the picture clearly
   [PASS] E: no black frames in the scan
-  [PASS] H: cover embedded in the first frames (diff 3.3/255)
+  [PASS] H: cover embedded in the first frames (diff 3.4/255)
 
   RESULT: PASS

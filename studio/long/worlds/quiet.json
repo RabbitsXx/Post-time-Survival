@@ -3,25 +3,25 @@
  "series": "THE QUIET HAND",
  "say": "The Quiet Hand",
  "accent": "#ffcf6a",
- "time": "night",
- "moon": true,
+ "time": "day",
+ "moon": false,
  "clouds": true,
  "stars": false,
  "pal": {
   "sky": [
-   "#10182c",
-   "#2a3a5c",
-   "#6a5a68"
+   "#7fb0dc",
+   "#c4dcec",
+   "#f6dcb8"
   ],
-  "ground": "#2c2e36",
-  "wall": "#4a4f60",
-  "floor": "#34363f",
-  "hills": "#1a2238",
-  "ink": "#10121a",
-  "glow": "#ffcf6a",
-  "rim": "rgba(255,207,106,.45)",
-  "cloud": "#8a96b8",
-  "cloud2": "#c0a0a8"
+  "ground": "#8a8a84",
+  "wall": "#d8d4c4",
+  "floor": "#9a9486",
+  "hills": "#8fa3a0",
+  "ink": "#241a12",
+  "glow": "#ffe2a0",
+  "rim": "rgba(255,226,160,.55)",
+  "cloud": "#fff4e0",
+  "cloud2": "#f4cfae"
  },
  "ann": {
   "name": "VALE & SON DISPATCH",
@@ -54,7 +54,8 @@
     "hc": "#2a2018",
     "brow": "thick",
     "beard": "#3a2e24",
-    "bags": 1
+    "bags": 1,
+    "hs": 0.9
    },
    "f0": 115
   },
@@ -74,7 +75,8 @@
    },
    "look": {
     "hair": "pony",
-    "hc": "#1a120c"
+    "hc": "#1a120c",
+    "hs": 0.9
    },
    "f0": 300
   },
@@ -95,7 +97,8 @@
     "hair": "bald",
     "glasses": "round",
     "beard": "#8a8a8a",
-    "bags": 1
+    "bags": 1,
+    "hs": 0.9
    },
    "f0": 150
   },
@@ -115,7 +118,8 @@
    "look": {
     "hair": "short",
     "hc": "#9a9a9a",
-    "brow": "thick"
+    "brow": "thick",
+    "hs": 0.9
    },
    "f0": 90
   }
@@ -123,51 +127,71 @@
  "locs": {
   "kitchen": {
    "kind": "in",
-   "wall": "#5a5c52",
-   "floor": "#3a3a36",
+   "wall": "#dfe6dc",
+   "floor": "#a8a69a",
    "items": [
     {
+     "t": "window",
+     "x": 330,
+     "y": 470,
+     "s": 2.2
+    },
+    {
+     "t": "glow",
+     "x": 330,
+     "y": 330,
+     "r": 420,
+     "a": 0.38
+    },
+    {
      "t": "shelf",
-     "x": 250,
+     "x": 170,
      "y": 600,
      "s": 1.4
     },
     {
      "t": "table",
-     "x": 640,
+     "x": 700,
      "y": 610,
      "s": 1.5,
-     "c": "#8a8f98"
+     "c": "#b8bcc2"
     },
     {
      "t": "pipe",
      "x": 900,
-     "y": 240,
+     "y": 210,
      "w": 480
     },
     {
-     "t": "lamp",
-     "x": 470,
-     "y": 600,
-     "h": 330,
-     "r": 200
-    },
-    {
      "t": "door",
-     "x": 1030,
+     "x": 1060,
      "y": 600,
      "s": 1.35,
-     "c": "#6a6a70"
+     "c": "#7a7a80"
     },
     {
      "t": "crate",
-     "x": 830,
+     "x": 880,
      "y": 620,
      "s": 1.1
+    },
+    {
+     "t": "pipe",
+     "x": 300,
+     "y": 110,
+     "w": 700,
+     "z": 2
+    },
+    {
+     "t": "crate",
+     "x": 1190,
+     "y": 720,
+     "s": 2.3,
+     "z": 2
     }
    ],
    "tint": [
-    "#c8d8a8",
+    "#ffd890",
     0.1
    ],
    "label": "hotel kitchen"
@@ -175,9 +199,9 @@
   "service": {
    "kind": "lane",
    "indoor": true,
-   "wall": "#3a4a50",
-   "ground": "#26303a",
-   "roadc": "#2e3a44",
+   "wall": "#c8d0cc",
+   "ground": "#8a9490",
+   "roadc": "#a0aaa4",
    "road": 240,
    "vpy": 398,
    "sides": [
@@ -213,21 +237,21 @@
     }
    ],
    "tint": [
-    "#58b0c0",
-    0.11
+    "#ffe0a0",
+    0.08
    ],
    "label": "service corridor"
   },
   "stair": {
    "kind": "in",
-   "wall": "#3e4a5c",
-   "floor": "#2a3040",
+   "wall": "#cfd2d0",
+   "floor": "#8a8c8a",
    "items": [
     {
-     "t": "pipe",
+     "t": "window",
      "x": 900,
-     "y": 250,
-     "w": 420
+     "y": 420,
+     "s": 1.6
     },
     {
      "t": "stairs",
@@ -236,50 +260,56 @@
      "s": 1.0
     },
     {
-     "t": "lamp",
-     "x": 250,
-     "y": 600,
-     "h": 340,
-     "r": 200
-    },
-    {
      "t": "poster",
      "x": 250,
      "y": 360,
      "s": 0.9,
      "label": "EXIT"
+    },
+    {
+     "t": "glow",
+     "x": 900,
+     "y": 300,
+     "r": 380,
+     "a": 0.3
+    },
+    {
+     "t": "rail",
+     "x": 1100,
+     "y": 700,
+     "w": 600,
+     "z": 2
     }
    ],
    "tint": [
-    "#4a78c8",
-    0.13
+    "#ffe0a0",
+    0.08
    ],
    "label": "back stairs"
   },
   "lobby": {
    "kind": "in",
-   "wall": "#5a4a48",
-   "floor": "#3a2e2c",
+   "wall": "#e6d6b8",
+   "floor": "#b09a7a",
    "items": [
     {
+     "t": "window",
+     "x": 300,
+     "y": 470,
+     "s": 2.0
+    },
+    {
      "t": "sofa",
-     "x": 360,
+     "x": 520,
      "y": 610,
      "s": 1.4
     },
     {
      "t": "table",
-     "x": 640,
+     "x": 760,
      "y": 610,
      "s": 1.2,
-     "c": "#6a4a30"
-    },
-    {
-     "t": "lamp",
-     "x": 520,
-     "y": 600,
-     "h": 330,
-     "r": 200
+     "c": "#8a5a38"
     },
     {
      "t": "glassdoor",
@@ -288,31 +318,44 @@
      "s": 1.0
     },
     {
-     "t": "poster",
-     "x": 780,
-     "y": 410,
-     "s": 0.7,
-     "label": "HOTEL"
+     "t": "glow",
+     "x": 1010,
+     "y": 300,
+     "r": 420,
+     "a": 0.34
+    },
+    {
+     "t": "sofa",
+     "x": 90,
+     "y": 730,
+     "s": 2.4,
+     "z": 2
     }
    ],
    "tint": [
-    "#e8803c",
-    0.12
+    "#ffcf80",
+    0.1
    ],
    "label": "hotel lobby"
   },
   "street": {
    "kind": "out",
    "gy": 590,
-   "ground": "#1c202a",
+   "ground": "#8a8a88",
    "items": [
+    {
+     "t": "skyline",
+     "x": 640,
+     "y": 600,
+     "z": 0
+    },
     {
      "t": "building",
      "x": 140,
      "y": 590,
      "w": 240,
      "h": 420,
-     "c": "#2a3248",
+     "c": "#8a96a8",
      "z": 0
     },
     {
@@ -321,9 +364,9 @@
      "y": 590,
      "w": 200,
      "h": 330,
-     "c": "#343c5a",
+     "c": "#a89a90",
      "z": 0,
-     "lit": 0.5
+     "lit": 0.2
     },
     {
      "t": "building",
@@ -331,7 +374,7 @@
      "y": 590,
      "w": 260,
      "h": 460,
-     "c": "#2a3248",
+     "c": "#8a96a8",
      "z": 0
     },
     {
@@ -339,14 +382,14 @@
      "x": 320,
      "y": 640,
      "s": 1.2,
-     "c": "#8a3a3a"
+     "c": "#c0504a"
     },
     {
      "t": "lamp",
      "x": 640,
      "y": 600,
      "h": 330,
-     "r": 200
+     "r": 120
     },
     {
      "t": "barricade",
@@ -359,6 +402,14 @@
      "x": 1200,
      "y": 640,
      "s": 1
+    },
+    {
+     "t": "glow",
+     "x": 900,
+     "y": 400,
+     "r": 380,
+     "a": 0.3,
+     "z": 0
     }
    ],
    "label": "city street"
@@ -919,5 +970,64 @@
    "tower",
    "tree"
   ]
+ },
+ "sun": true,
+ "zombies": {
+  "cook": {
+   "pal": {
+    "coat": "#d8d4c8",
+    "coatS": "#a8a498",
+    "pants": "#3a3a3e"
+   },
+   "look": {
+    "hair": "bald",
+    "brow": "thick"
+   }
+  },
+  "suit": {
+   "pal": {
+    "coat": "#3a4252",
+    "coatS": "#2a3040",
+    "pants": "#2a2e3a"
+   },
+   "look": {
+    "hair": "short",
+    "hc": "#2a2018"
+   }
+  },
+  "dress": {
+   "pal": {
+    "coat": "#8a4a5a",
+    "coatS": "#6a3040",
+    "pants": "#4a3a40",
+    "skin": "#a8b89a"
+   },
+   "look": {
+    "hair": "pony",
+    "hc": "#3a2a20"
+   }
+  },
+  "hoodie": {
+   "pal": {
+    "coat": "#4a6a8a",
+    "coatS": "#34506a",
+    "pants": "#2e3440"
+   },
+   "look": {
+    "hair": "short",
+    "hc": "#1a1410"
+   }
+  },
+  "porter": {
+   "pal": {
+    "coat": "#7a3a30",
+    "coatS": "#5a2a22",
+    "pants": "#2e2e34"
+   },
+   "look": {
+    "hair": "bald",
+    "beard": "#4a4a44"
+   }
+  }
  }
 }
