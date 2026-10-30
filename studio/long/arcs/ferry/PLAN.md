@@ -1,4 +1,6 @@
-# THE LAST FERRY : story plan (3 parts, heist structure)
+# THE LAST FERRY : story plan v2 (3 parts, four solo missions + a radio)
+
+> v2 after owner feedback: v1 was a planning story with a crowd in every shot. v2 has no briefing scene (one card only), at least 4 fights per part, and the heroes are mostly ALONE: each has a solo mission, they talk over walkie-talkies (voice only) and meet again only at the end of part 3.
 
 **Logline.** A car ferry is crossing a wide bay when the dead start to walk. The only lifeboat key is in the locked captain's cabin and the only people left to get it are a retired captain, a nervous teen engineer, a food-truck owner and a tourist who films everything. They plan a heist on their own ship. Everything goes wrong, a seagull makes it worse, and the real survival tip (cold-water shock: float, do not swim) is what finally saves them.
 
@@ -6,7 +8,7 @@
 | item | THE LAST FERRY | already used |
 |---|---|---|
 | setting | a car ferry crossing a bay in full daylight | farm at dusk, bus at night, tower at night |
-| structure | HEIST: part 1 the plan, part 2 the job (it goes wrong), part 3 the getaway | countdown, myth-buster serial, ascent |
+| structure | RELAY OF SOLO MISSIONS: four heroes alone, linked by walkie, the key is the baton | countdown, myth-buster serial, ascent |
 | announcer device | the captain's log: handwritten pages, ink writing itself, ship's horn between entries (`ferry_ann`) | farm radio, BUS-E, tower intercom |
 | signature gag | Gary the gull steals one object per part and always returns it at the worst moment (`gull-steals-the-key`) | polka scarecrow, steve with ticket, parrot line |
 | real tip | cold-water shock: life jacket first, then float on your back for 60-90 seconds before doing anything else; never swim for shore | sound leads them, stairs vs elevator, seal the fire doors, signal in threes |
@@ -32,42 +34,54 @@
 | lifeboat | out | davit, orange lifeboat hanging over the water | part 3 getaway |
 New catalogue items to add (props.json with fit tags ship/sea/industrial): lifebuoy, ship wheel, wrench, lifeboat + davit, funnel, deck rail, porthole, anchor chain, food truck, camera, gull. Reused where they truly fit: car, pipe, tank, generator, crate, barrel, table, door, window, cabinet, tower (mast), boat (far ferry), skyline (far shore).
 
-## Part 1 : THE PLAN (55-65 s)
-Arc: hook = the ferry is silent and the gull is carrying a dead man's hat; goal = the lifeboat key in the captain's cabin; obstacle = the cabin is on the other side of two decks of zombies; twist = Hugo's footage shows the route; payoff = the plan is made, and it is terrible.
-1. [topdeck, wide] Hugo films the sea, a gull lands holding a captain's hat; "For the vlog: this is fine." (who: Hugo, Gary; why: where is the crew?)
-2. Captain's Log card: "THE LAST FERRY, part one of three: the plan."
-3. [lounge, wide] Mags, Dev, Nina, Hugo barricade the lounge doors; zombies bang on the glass (fixed positions, Scene tracker).
-4. [macro] ship's brass key on a hook in the cabin, seen on Hugo's camera screen zoomed in: the goal and the clock (the ferry reaches the mainland in 40 minutes, the dock is full).
-5. [areamap card] heist blueprint: deck map with 3 pins (CAR DECK, ENGINE, BRIDGE) and the route; Mags draws it with a marker (devices: new `deckmap` card kind per world).
-6-8. [lounge, medium] roles: Dev = engine distraction (the horn), Nina = bait with the food truck, Hugo = eyes with the zoom lens, Mags = the key. Each role gets a one-line gag and a prop held up (wrench, ladle, camera, hat).
-9. [rule card] FERRY RULE #1: LIFE JACKET ON BEFORE YOU NEED IT (tip part A: you will not have time to find one in the water).
-10. everyone puts on an orange life jacket (acting beat: pose + rustle foley), Hugo's too small.
-11. [lounge, wide] Mags counts "three, two, one" at the door; zombies wait outside; Gary steals the marker through the broken window (gag 1).
-12. cliffhanger: the door opens and the car deck is full of zombies in tourist shirts. Log: "Next: the job."
+## Structure: the key is a baton, four solo missions
+The ferry's lifeboat release key hangs in the captain's cabin. The crew is split across the ship when the dead rise. **Each hero is alone** in a different place and has to fight their own way toward the next hero, passing the key along like a baton (Mags -> Dev -> Nina -> Hugo -> the lifeboat). The only thing they share is a channel on the ship's walkie-talkies, which gives us voices without bodies, running jokes and fast cutting between solo scenes.
 
-## Part 2 : THE JOB (55-65 s)
-Arc: hook = the plan starts perfectly; goal = reach the bridge; obstacle = car deck, engine room, locked cabin; twist = the plan only works because everything goes wrong in the right order; payoff = the cabin opens but the key is not on the hook (Gary has it).
-1. [cardeck, lane] Nina's truck rolls forward as bait, ladle out; zombies follow (2.5D chase, crowd(), real motion).
-2. [cardeck] Dev sneaks along the cars (back views, creeping), a car alarm goes off (his fault); music turns to chase.
-3. [engine, wide] Dev reaches the horn lever, pulls it: the ship's horn blasts; zombies turn toward the sound (foley: horn, clang).
-4. Nina's truck jams against a pillar; she improvises: opens the serving hatch, ladle versus a zombie in a chef hat (joke).
-5. [lane] Hugo and Mags run to the bridge stairs; Hugo keeps filming ("this is my best take").
-6. [bridge, wide] the locked cabin door with a brass lock; Mags uses a hairpin; she has done this before (twist on her backstory).
-7. [macro lock] click; door opens; empty hook; Gary is on the roof rail with the key in its beak.
-8. rule card: FERRY RULE #2: NEVER SWIM FOR SHORE (tip part B: the shore is farther than it looks).
-9. [topdeck, wide] Gary flies to the lifeboat davit; the four chase along the rail.
-10. cliffhanger: a zombie wave comes up the stairs behind them, the lifeboat is still locked in its davit.
+**Fight styles (each hero fights differently, each fight must read as an action)**
+* **Captain Mags:** boat hook and fire extinguisher, calm, precise, ends fights in two moves ("Down.").
+* **Dev:** huge wrench, panicky, wins by accident (steam valve, slipping on oil).
+* **Nina:** ladle + frying pan from her truck, wild swings, kitchen sounds.
+* **Hugo:** selfie stick / tripod and the camera flash that blinds zombies for two seconds, narrates his own fights for the vlog.
+Fight beat = hero + zombie in one wide shot, a swing (pose punch / swing with the weapon held), an impact sticker (WHACK! CLANG! BONK! SMASH!), the zombie knocked back or down, a reaction line. No gore: cartoon knock-downs, zombies flop and fade.
 
-## Part 3 : THE GETAWAY (55-65 s)
-Arc: hook = Gary drops the key into the sea; goal = launch the lifeboat; obstacle = the key is gone and the zombies are 10 seconds away; twist = they jump in on purpose, wearing the life jackets, and use the cold-water-shock tip; payoff = they float on their backs, the lifeboat is released from below, and Gary hands over the key at last.
-1. [lifeboat] Gary drops the key; it falls into the water (macro + splash foley).
-2. [topdeck] the zombie wave arrives; Mags decides "We go in. Life jackets on, I said it first."
-3. Dev: "It's freezing!" Mags explains cold-water shock: gasp, panic, swim for shore, sink; the right move is float on your back for 60-90 seconds (areamap / stat card with a 90 s timer: a real tip shown, not told).
-4. all four jump (top view -> splash), everyone floats on their back, calm music turns warm; zombies fall in and sink (cartoon, no gore).
-5. Hugo's camera floats; its flash lights the key sinking; Gary dives for it.
-6. Gary surfaces with the key, drops it in Nina's ladle.
-7. Mags unlocks the lifeboat from the water with the key through a release hatch; they climb in.
-8. closing: the mainland far away; Hugo "Subscribe." Log: "The end. Follow for the next series."
+## Part 1 : THE DECK (55-65 s) - four solo scenes, one card of planning
+Arc: hook = a lone gull with a captain's hat; goal = get the key from the cabin; obstacle = the crew are zombies; twist = Hugo's camera flash works; payoff = the key falls off Mags' belt into the car deck.
+1. [topdeck, WIDE then solo] **Hugo alone** films the sea; Gary the gull drops a captain's hat on his head. A zombie deckhand lurches in. **FIGHT 1:** Hugo swings the selfie stick (BONK!), then the camera flash stops the zombie dead; "That's the thumbnail."
+2. Captain's Log card: "The Last Ferry. Part one of three: the deck."
+3. [bridge, solo] **Mags alone** locks the bridge door; a zombie first mate rams it. **FIGHT 2:** boat hook through the door handles, shove, "Down." Walkie crackle: Dev's voice.
+4. [areamap card, the ONLY planning beat] deck map with four pins and the key's route (the baton).
+5. [engine, solo, dark] **Dev alone** hears the banging, sneaks along the pipes with his wrench held like a sword; stealth shot (back view, red light flicker); a zombie engineer rises behind him; he screams, swings blind. **FIGHT 3:** wrench CLANG on a pipe, zombie dazed, Dev runs.
+6. [cardeck lane, solo] **Nina alone** in the food truck; zombie tourists rock it; she opens the serving hatch. **FIGHT 4:** ladle + frying pan WHACK-WHACK-CLANG through the hatch; "No. Refunds."
+7. Mags on the radio: "Whoever reaches the cabin first gets the key." (stakes + deadline: the dock in 40 minutes.)
+8. [bridge] Mags opens the cabin with a hairpin and takes the key; a zombie captain steps out of the cabin: **FIGHT 5:** extinguisher blast (white foam), Mags runs, the key falls off her belt and bounces down the stairs.
+9. [cardeck lane] the key slides under Nina's truck; Gary lands on it (gag 1).
+10. cliffhanger: the truck engine starts by itself.
+
+## Part 2 : THE ENGINE (55-65 s) - the baton moves
+Arc: hook = the truck is moving; goal = get the key from under the truck to the lifeboat deck; obstacle = every route is a fight; twist = Dev's blind luck (steam valve) opens the way; payoff = the key reaches Hugo, but he is cornered on the lifeboat rail.
+1. [cardeck lane] **Nina alone** hangs from the moving truck's step, fights a zombie on the hood with the frying pan (**FIGHT 1**), brakes against a pillar; the truck stops, the key is under the front wheel.
+2. Captain's Log card.
+3. [engine] **Dev alone** is cornered by the zombie engineer: **FIGHT 2** wrench vs wrench, Dev slips on oil, the zombie slides into the steam valve (accident), PSSSHHH: the zombie is cooked (cartoon: flies out of frame). Dev: "I meant to do that."
+4. [cardeck] Dev, still alone, runs the corridor of cars (2.5D chase) and trips the alarms; zombies pour toward the noise; he leaps onto a car roof (**FIGHT 3:** kicks a zombie off, BONK!).
+5. radio banter: Hugo: "Is anybody else filming this?" Nina: "No." (gag)
+6. [stairs] **Hugo alone** on the stairs with the key (Nina threw it up); three zombies climb; **FIGHT 4** tripod swing + camera flash; one falls, two keep coming; he backs onto the open deck.
+7. [topdeck] Gary snatches the key from Hugo's hand; **chase**: Hugo runs along the rail after the gull, a zombie behind him (solo chase, 2.5D rail).
+8. **Mags alone** on the bridge sees it through the window; she comes out with the boat hook: **FIGHT 5:** she vaults, hooks a zombie off the rail; "Down."
+9. rule card: FERRY RULE #1: LIFE JACKET ON BEFORE YOU NEED IT; Mags tosses Hugo a jacket mid-fight (acted, not told).
+10. cliffhanger: a zombie wave comes up from the car deck, the lifeboat is jammed.
+
+## Part 3 : THE WATER (55-65 s) - the only time they are together
+Arc: hook = Gary drops the key into the sea; goal = launch the lifeboat; obstacle = ten seconds of zombies; twist = jumping into the water is the right move; payoff = all four float, Gary returns the key.
+1. [lifeboat] Gary drops the key; it spins and splashes (macro + foley).
+2. [topdeck, solo] **Mags alone** holds the stairs against the wave with the boat hook and the extinguisher: **FIGHT 1-2** (hook, foam blast), then radio: "Everyone to the rail. We go in."
+3. one by one the other three arrive at the rail (a reunion beat, 4 people, the only group shot of the part).
+4. Dev: "It's freezing!" **cold-water shock card** (stat card with a 90 second timer): gasp, panic, swim = sink; float on your back 60-90 seconds. Mags: "Life jackets on. Float."
+5. all four jump (high shot, splash), float on their backs, music turns warm; the zombies jump after them and sink.
+6. [water, solo cuts] each hero alone in the water for a beat of silence: Hugo (camera floats), Nina (ladle floats), Dev (counts), Mags (calm).
+7. **FIGHT 3:** one last zombie swimmer reaches Dev; Dev hits it with the wrench from the water (BONK!, splash).
+8. Gary dives, comes up with the key in its beak, drops it into Nina's ladle.
+9. Mags releases the lifeboat from the water with the key; they climb in.
+10. closing: the mainland far away; Hugo: "Subscribe." Log: "The end. Follow for the next series."
 
 ## Staging / continuity plan (Scene tracker)
 Each location has one fixed camera; people are placed once and move with `moves`, zombies with `zmoves`; every wide shot first, close-ups only after. Walking foley by surface: steel deck = `stair` clang, cars deck = `tile`, topdeck = `wood`, engine = `stair`. Lane shots keep the same vanishing point so the chase reads as one corridor.
@@ -78,10 +92,19 @@ Each location has one fixed camera; people are placed once and move with `moves`
 * Foley additions: gull screech/wing flap, wave wash, splash, horn, ratchet (lifeboat winch), car alarm, ladle clang.
 
 ## Department gates (must pass before packaging)
-story >= 80 (storylint: 24+ shots, wide first, zombies visible >= 4 beats, continuity), art >= 90 (no black bands, per-place colour key, nobody cut by the edge), sound >= 85, editorial >= 85, marketing >= 90, legal = 100 (no real brand: avoid ferry-company names, life-jacket brands, camera brands, truck logos).
+story >= 80 (storylint v2: someone ALONE in >= 30 % of scene beats, <= 35 % beats with 4+ people, >= 3 fight beats per part, wide first, zombies visible >= 4 beats, continuity), art >= 90 (no black bands, per-place colour key, nobody cut by the edge), sound >= 85, editorial >= 85, marketing >= 90, legal = 100 (no real brand: avoid ferry-company names, life-jacket brands, camera brands, truck logos).
 
 ## Build plan (about 2 hours of production time, mostly rendering)
 1. `worlds/ferry.json` + 11 new catalogue items + `deckmap` areamap variant (30 min)
 2. three scripts with intent lines and Scene continuity (45 min)
 3. `daily.py build ferry` (3 x ~4 min render + review)
 4. fix whatever the scorecards list, rebuild, hand over; stage plan: 3 clips at 1 h spacing after THE LAST FLOOR.
+
+## Engine work needed BEFORE building (checklist; each item gets its own audit line)
+1. **Fight helper** in `worldlib.Scene`: `fight(hero, zombie, weapon, hits=2)` = hero walks in, swings (pose punch/swing + weapon held), impact sticker, zombie knock-back along x and a fall/fade (cartoon, no gore).
+2. **Zombie fall / KO animation** (`fall` on human zombies: rotate to the ground, shrink shadow, fade).
+3. **Weapons catalogue** (held props): boat hook, wrench, ladle, frying pan, fire extinguisher (with foam puff), tripod/selfie stick, camera flash (screen flash).
+4. **Walkie voices** (voice-only speaker with radio filter + static foley) so solo heroes can talk.
+5. **Fight foley:** swing whoosh, weapon impact by material (metal clang, wood bonk, pan ring), zombie grunt, foam hiss, steam hiss.
+6. **Water set** (topdeck / lifeboat / water surface with floating props) and the new catalogue props (lifebuoy, wheel, lifeboat, funnel, rail, porthole, food truck, camera, gull).
+7. Re-cut THE LAST FLOOR with fights and solo scenes later (it currently fails the v2 rules: no real fights, always a crowd).

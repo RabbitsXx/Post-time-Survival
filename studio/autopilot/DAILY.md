@@ -25,6 +25,9 @@ You work alone and unattended, every day. Goal: a **continuous stream with no da
 7. Commit + push everything (branch `claude/sharp-turing-ft08ro`): new worlds, scripts, releases, state, reports. Do not commit render caches or mp4 (gitignored).
 8. Finish with a 5-line report: topics made, clips ready/scheduled, problems, what you would improve tomorrow. Also append one line of learning to `studio/LESSONS.md` if something broke.
 
+## Action and solitude (owner feedback 2026-10-30)
+Planning scenes are never the story. Every part must contain: >= 3 FIGHT beats (a hero hits a zombie with a weapon or pose + impact sticker, zombie on screen, zombie reacts), and >= 30 % of the scene beats with ONE person alone on screen (a solo set piece: sneaking, a duel, a repair under pressure, a decision) with the rest of the team heard on a radio / walkie or seen later. No more than 35 % of beats may be 4+ person line-ups. A plan or briefing is at most one beat per part, shown as a card, not as a scene. `storylint.py` enforces this for every new topic.
+
 ## Visual storytelling standard (owner feedback 2026-10-30: "the scenes make no sense")
 Every beat carries a storyboard line `intent=I(who, does, where, how, why)` and `storylint.py` (run inside build_clip) fails the clip if it is missing or weak:
 * WHO is on screen (named people really are in the shot), DOES an action the camera can show (walk, climb, push, hold up a prop, turn around; never "talks"), WHERE is a place the viewer can read (floor signs, steps, rail, elevator display, skyline), HOW it is shown (pose, prop, sticker, camera move), WHY keep watching (an open question or a threat; >= 50 % of beats end with a question mark).

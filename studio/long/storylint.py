@@ -76,6 +76,24 @@ for i in range(1,len(B)):
     for k in ea:
         if k in sb and abs(ea[k]-sb[k])>70:jumps.append((i,k,round(ea[k]),round(sb[k])))
 rec(not jumps,'continuity: people start each shot where they ended the last one in the same place'+(f' - jumps {jumps[:6]}' if jumps else ''))
+
+# ---- v2 rules (owner feedback 2026-10-30: "no fighting, only planning" and "always a crowd, never anyone alone"): action and solitude are required ----
+LEGACY={'lastfloor','harvest','route12'}
+if cid.rsplit('_',1)[0] not in LEGACY and not CR.legacy(cid):
+    cast_=set((getattr(M,'WORLD',{}) or {}).get('cast',{}))
+    def people(b):return [a for a in (b['scene'].get('p') or {}).get('acts',[]) if a.get('k') in cast_]
+    solo=[i for i in st_idx if len(people(B[i]))==1] if (st_idx:=[i for i,b in enumerate(B) if b['scene']['n']=='stage']) else []
+    rec(len(solo)/max(1,len(st_idx))>=.3,f'someone is ALONE on screen in {len(solo)}/{len(st_idx)} scene beats (>= 30 %): solo tension / courage / comedy, not only a group')
+    crowd=[i for i in st_idx if len(people(B[i]))>=4]
+    rec(len(crowd)/max(1,len(st_idx))<=.35,f'group line-ups (4+ people) in {len(crowd)}/{len(st_idx)} scene beats (<= 35 %)')
+    HIT=('WHACK','SMASH','THWACK','BONK','SHOVE','KO','CRASH','SWING','CLANG','SPLAT')
+    def fight(b):
+        p=b['scene'].get('p') or {};acts=p.get('acts') or []
+        z=any(a.get('k')=='horde' for a in acts);hit=any(f.get('k')=='sticker' and any(h in str(f.get('txt','')).upper() for h in HIT) for f in b.get('fx',[]))
+        swing=any(a.get('k') in cast_ and (a.get('pose') in('punch','swing') or a.get('held')) for a in acts)
+        return z and (hit or swing) and hit
+    fights=[i for i,b in enumerate(B) if b['scene']['n']=='stage' and fight(b)]
+    rec(len(fights)>=3,f'{len(fights)} fight beats (a hero hits a zombie: weapon / pose + impact sticker, zombie on screen) (>= 3 per part)')
 mv=[1 for b in st for a in (b['scene']['p'].get('acts') or []) if a.get('anim') or a.get('to') or a.get('seq')]
 rec(bool(mv),'actors move on screen (walk / turn)',warn=True)
 rec(any((b['scene']['p'].get('v') or '')=='hall' or 'lane' in str(b['scene']['p'].get('v')) for b in st),'a 2.5D lane location is used',warn=True)
