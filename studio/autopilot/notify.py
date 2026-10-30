@@ -5,8 +5,8 @@ Use from code:  import notify; notify.say('built quiet_01')"""
 import os,sys,json,urllib.request
 R=os.path.dirname(os.path.abspath(__file__))
 def hook():
-    h=os.environ.get('DISCORD_WEBHOOK')
-    if h:return h
+    for k,v in os.environ.items():
+        if k.lower() in('discord_webhook','discord_webhook_url') and v.strip():return v.strip()
     try:
         for l in open(R+'/discord.env'):
             if l.startswith('DISCORD_WEBHOOK='):return l.split('=',1)[1].strip()
