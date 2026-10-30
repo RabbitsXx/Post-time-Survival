@@ -1,7 +1,7 @@
 """worldlib.py : the data-driven world kit (studio/long/world9.js draws it).  A topic = worlds/<id>.json (setting, palette, locations made of catalogue items, cast with palettes + voices,
 announcer device, what is NEW) + arcs/<id>/<id>_NN.py (the beats).  Nothing else has to be drawn by hand, so a new world is data.
 
-    W=World('worlds/<id>.json'); P=W.part(1,'TOPIC',of=2); BEATS=P.BEATS; TITLE=P.TITLE; TH=[]
+    W=World('worlds/<id>.json'); P=W.part(1,'TOPIC',of=3); BEATS=P.BEATS; TITLE=P.TITLE; TH=[]
     P.open(); P.B(say, shot, ...); P.close('next topic')
     shots: W.cuf(who,expr,v='key') | W.duo(a,b,...) | W.trio([...]) | W.set('key',[acts],x,y,z) | W.lane('key',[...]) ; acts: W.person(...), W.at(...), W.crowd(...), zlib9.prop/hz/sticker/card
     end of the clip file:   VOICES,FILT,SPEAKERS,NAMES_EN,NAMES_TH,ALL_WORDS,WORLD,NEW = W.exports(part_new=[...])
@@ -69,7 +69,7 @@ class World:
         ex=ex or {};acts=[s.person(w,ex.get(w,'calm'),x0+i*gap,FOOT,talk=True) for i,w in enumerate(who)]+(extra or [])
         return s.set(v or s.default_loc(),acts,x=x0+gap*(len(who)-1)/2,y=s._cy(z,hy,FOOT-297*.8),z=z,**p)
     def default_loc(s):return next(iter(s.spec['locs']))
-    def part(s,n,topic,of=2,time=''):return WorldPart(s,n,topic,of)
+    def part(s,n,topic,of=3,time=''):return WorldPart(s,n,topic,of)
     # ---- exports for the clip file ----
     def exports(s,part_new=None):
         S=s.spec;V={};F={};SP={};NE={};NT={}

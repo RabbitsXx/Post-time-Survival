@@ -19,7 +19,8 @@ words=sum(len(str(x[1]).split()) for b in B for x in b.get('say',[])) or words
 st=[b for b in B if b['scene']['n']=='stage'];cd=[b for b in B if b['scene']['n']=='card']
 z=lambda b:(b.get('view') or {}).get('z',1)
 wide=[b for b in st if z(b)<=1.05];close=[b for b in st if z(b)>=1.4]
-rec(S['duration']>=70,f"duration {S['duration']:.0f} s (>= 70 s)");rec(words>=150,f'{words} spoken words (>= 150)');rec(len(B)>=18,f'{len(B)} beats (>= 18)')
+OF=CR.series(cid)['of'];dmin,wmin,bmin=(70,150,18) if OF<=2 else (52,115,15)      # 3-part topics: each part may be shorter
+rec(S['duration']>=dmin,f"duration {S['duration']:.0f} s (>= {dmin} s)");rec(words>=wmin,f'{words} spoken words (>= {wmin})');rec(len(B)>=bmin,f'{len(B)} beats (>= {bmin})')
 rec(len(wide)/max(1,len(st))>=.35,f'wide/establishing shots {len(wide)}/{len(st)} (>= 35 %)');rec(len(close)/max(1,len(st))<=.45,f'close-ups {len(close)}/{len(st)} (<= 45 %)')
 seen=set();bad_open=[]
 for i,b in enumerate(B):

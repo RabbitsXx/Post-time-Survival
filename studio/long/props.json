@@ -408,6 +408,16 @@
     "camp"
    ],
    "drawn_in": "world9.js"
+  },
+  "keys": {
+   "fit": [
+    "indoor",
+    "building",
+    "home",
+    "office",
+    "urban"
+   ],
+   "drawn_in": "world9.js"
   }
  }
 }
