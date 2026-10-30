@@ -7,6 +7,7 @@
 **Other characters (max 3):** name, role, how they are heard/seen, a signature.
 **Antagonist / threat:** what makes THIS zombie threat different in this place (a rule, a quirk, a look).
 **World:** the 4-6 places, each with a colour key and one memorable object.
+**Hook plan (HOOK_FORMULA.md):** per part -> YOU line ("If you ...") / NUMBER (figure in title + first 5 s) / TWIST (flip at ~70%) / LOOP (end question or cliffhanger) / other device.
 **Running gag (three beats):** set-up / repeat / twist.
 **Real survival tip and where it WINS the story:** the fact (true, safe), and the exact beat in part 3 where it decides the outcome.
 **Part 1 / Part 2 / Part 3:** for each: *Poster moments* (3, visual), *Reversal* (the moment the plan flips), *Fights* (>= 4, each with the move and the joke), *Solo set piece* (who is alone, doing what), *End question* (what the viewer is waiting for), *Open* (how the next part starts with a surprise).

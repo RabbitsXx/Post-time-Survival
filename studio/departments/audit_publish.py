@@ -29,7 +29,7 @@ def audit(cid):
         if len(m[k])>2200:issues.append(f'MARKETING: {k} copy > 2200 chars');score-=4
         if not re.search(r'[\U0001F300-\U0001FAFF]',m[k]):issues.append(f'MARKETING: {k} copy has no emoji hook');score-=2
     rel=f'{LONG}/{CR.release(cid)}'
-    for nm,exp in(('cover_9x16.png',(720,1280)),('cover_16x9.png',(1280,720))):
+    for nm,exp in(('cover_9x16.png',(1080,1920)),('cover_16x9.png',(1280,720))):
         p=f'{rel}/{nm}'
         if not os.path.exists(p):issues.append(f'MARKETING: {nm} missing');score-=8;continue
         im=Image.open(p).convert('RGB')

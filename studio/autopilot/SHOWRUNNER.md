@@ -27,3 +27,6 @@ The result passed every gate and was still a planning story with a crowd in ever
 
 ## What each department asks of the pitch
 Art: 3 poster moments per part with a clear silhouette. Animation: each fight move named. Sound: a musical idea (key, tempo, a theme for the hero). Editorial: where the pattern interrupts are. Marketing: the share line becomes the title. Legal: no real brands or people.
+
+## Hook formula (owner rule)
+Read HOOK_FORMULA.md: YOU / NUMBERS / TWIST / OPEN LOOP (+ others) in every pitch, script, title and cover. pitchlint and dialoguelint enforce it.

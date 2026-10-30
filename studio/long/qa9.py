@@ -6,7 +6,7 @@
  F fun audit      : the gates above measure compliance, none of them measures fun.  This one does:  >= 6 distinct character voices, narrator/PA <= 25 % of speech time, >= 14 speaker changes,
                     >= 6 kinds of sound effect incl. a comedy sting, characters visible in >= 60 % of the non-card beats, >= 1 line that talks to the viewer or a question
  B layout         : lint9.js (CROP / OVERLAP = FAIL, BAND / EDGE = WARN)
- C video          : 720x1280 @30, H.264 yuv420p BT.709, duration = spec          D audio : -14 +-1 LUFS, true peak <= -1.0 dBTP
+ C video          : 720x1280 or 1080x1920 @30, H.264 yuv420p BT.709, duration = spec          D audio : -14 +-1 LUFS, true peak <= -1.0 dBTP
  E cuts / blanks  : picture changes at every beat boundary (warn), no black frames"""
 import sys,os,json,re,subprocess,tempfile,collections
 import numpy as np
@@ -62,7 +62,7 @@ def run(n):
     if os.path.exists(video):
         pr=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',video],text=True))
         vs=[s for s in pr['streams'] if s['codec_type']=='video'][0];as_=[s for s in pr['streams'] if s['codec_type']=='audio'][0];d=float(pr['format']['duration'])
-        row('C','PASS' if (vs['width'],vs['height'])==(720,1280) else 'FAIL',f"{vs['width']}x{vs['height']} {vs['codec_name']} {vs['pix_fmt']} {eval(vs['avg_frame_rate']):.2f} fps; colour {vs.get('color_space')}")
+        row('C','PASS' if (vs['width'],vs['height'])in((720,1280),(1080,1920)) else 'FAIL',f"{vs['width']}x{vs['height']} {vs['codec_name']} {vs['pix_fmt']} {eval(vs['avg_frame_rate']):.2f} fps; colour {vs.get('color_space')}")
         row('C','PASS' if abs(d-dur)<.5 else 'FAIL',f'duration {d:.2f} s vs spec {dur:.2f} s; {os.path.getsize(video)/1e6:.1f} MB; audio {as_["codec_name"]} {as_["sample_rate"]} Hz')
         lg=subprocess.run(['ffmpeg','-hide_banner','-i',video,'-af','ebur128=peak=true','-vn','-f','null','-'],capture_output=True,text=True).stderr
         I=float(re.findall(r'I:\s+(-?[\d.]+) LUFS',lg)[-1]);TP=float(re.findall(r'Peak:\s+(-?[\d.]+) dBFS',lg)[-1]);LRA=float(re.findall(r'LRA:\s+([\d.]+) LU',lg)[-1])

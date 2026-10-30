@@ -1,33 +1,33 @@
-QA report: THE LAST FLOOR part 3/3 (lastfloor_03)
-  [PASS] A: 16 beats, average 3.90 s (target 3-4.8), longest 7.3 s, shortest 2.4 s
+QA report: THE LAST FLOOR part 1/3 (lastfloor_01)
+  [PASS] A: 17 beats, average 3.76 s (target 3-4.8), longest 6.1 s, shortest 2.1 s
   [PASS] A: no beat > 9.5 s
   [PASS] A: no beat > 7.5 s
   [PASS] A: no beat < 1.5 s
-  [PASS] A: speech pace 142 wpm (118 words, 62 s)
-  [PASS] A: the hook starts at 0.08 s: "Floor twelve. The roof door. Locked."
+  [PASS] A: speech pace 140 wpm (119 words, 64 s)
+  [PASS] A: the hook starts at 0.08 s: "I ordered a pizza. I did NOT order that."
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
-  [PASS] S: PA opening: "The Last Floor. Part three of three: the roof."
+  [PASS] S: PA opening: "The Last Floor. Part one of three: the lobby."
   [PASS] S: the PA opening is spoken at 3.9 s (series + part + topic within the first 8 s)
-  [PASS] S: PA sign-off: "Part three of three, the end of The Last Floor. Follow for the next series."
+  [PASS] S: PA sign-off: "Part one of three, The Last Floor. Next: the stairs. Follow for part two."
   [PASS] S: route line (part n of 3) on every non-card beat
-  [PASS] S: YouTube title (68 chars): Three Flashes Saved Us On The Roof! A | The Last Floor Part 3 Finale
+  [PASS] S: YouTube title (67 chars): A Zombie Delivers Pizza To The Elevator! 12 | The Last Floor Part 1
   [PASS] S: 17 YouTube tags, 291 chars
   [PASS] S: 20 cues, 20 Thai lines
   [PASS] S: release kit complete
-  [PASS] F: 5 character voices: {'bell': 6, 'ann': 3, 'zara': 5, 'lin': 3, 'omar': 2, 'pip': 1}
-  [PASS] F: BUS-E/PA = 25 % of speech time (target <= 25 %)
-  [PASS] F: 16 speaker changes (conversation, not narration)
-  [PASS] F: 27 kinds of sound effect: ['bell', 'boing', 'clang', 'click', 'creak', 'flash_ting', 'glass_thump', 'groan', 'heartbeat', 'heli', 'horde', 'paper', 'radio', 'rimshot', 'run_gravel_a', 'run_gravel_b', 'run_gravel_c', 'shuffle_a', 'shuffle_b', 'shuffle_c', 'squawk', 'stab', 'step_gravel_a', 'step_gravel_b', 'step_gravel_c', 'swell', 'thud_wood']; comedy stings: ['boing', 'rimshot']
-  [PASS] F: characters visible in 12/12 non-card beats
-  [PASS] F: 1 lines with a question or talking to the viewer
+  [PASS] F: 4 character voices: {'zara': 6, 'ann': 2, 'bell': 8, 'omar': 3, 'pip': 1}
+  [PASS] F: BUS-E/PA = 16 % of speech time (target <= 25 %)
+  [PASS] F: 14 speaker changes (conversation, not narration)
+  [PASS] F: 32 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'ding', 'elev_door', 'glass_thump', 'groan', 'grunt', 'heartbeat', 'hit', 'horde', 'lock_chain', 'radio', 'rattle', 'rimshot', 'run_tile_a', 'run_tile_b', 'run_tile_c', 'shuffle_a', 'shuffle_b', 'shuffle_c', 'sigh', 'squawk', 'stab', 'step_stair_a', 'step_stair_b', 'step_stair_c', 'step_tile_a', 'step_tile_b', 'step_tile_c', 'thud_wood']; comedy stings: ['boing', 'rimshot']
+  [PASS] F: characters visible in 13/13 non-card beats
+  [WARN] F: 0 lines with a question or talking to the viewer
   [PASS] B: layout: 0 CROP, 0 OVERLAP
-  [WARN] B: layout: 1 BAND, 0 EDGE
-  [PASS] C: 720x1280 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 62.37 s vs spec 62.37 s; 17.9 MB; audio aac 48000 Hz
-  [PASS] D: integrated -14.0 LUFS, LRA 2.4 LU
-  [PASS] D: true peak -2.1 dBTP
-  [WARN] E: weak cuts (mean diff < 10/255): [(7, 7.9), (8, 8.1)]
+  [PASS] B: layout: 0 BAND, 0 EDGE
+  [FAIL] C: 1080x1920 h264 yuv420p 30.00 fps; colour bt709
+  [PASS] C: duration 63.97 s vs spec 63.97 s; 39.4 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.1 LUFS, LRA 2.8 LU
+  [PASS] D: true peak -2.9 dBTP
+  [WARN] E: weak cuts (mean diff < 10/255): [(4, 7.3)]
   [PASS] E: no black frames in the scan
-  [PASS] H: cover embedded in the first frames (diff 3.4/255)
+  [PASS] H: cover embedded in the first frames (diff 3.2/255)
 
-  RESULT: PASS
+  RESULT: FAIL

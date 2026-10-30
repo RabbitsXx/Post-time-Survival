@@ -4,5 +4,8 @@
  "sound": 60,
  "editorial": 70,
  "marketing": 75,
- "legal": 95
+ "legal": 95,
+ "direction": 65,
+ "writing": 65,
+ "qc": 85
 }

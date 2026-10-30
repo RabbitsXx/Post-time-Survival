@@ -14,7 +14,7 @@
   "metrics": {
    "dead_black_bottom_beats": "0/13",
    "dark_beats": 0,
-   "mean_saturation": 0.32,
+   "mean_saturation": 0.319,
    "min_palette_distance": 25.5,
    "static_beats": [],
    "cut_by_edge": [
@@ -147,11 +147,11 @@
    ],
    "cover_9x16.png": {
     "size": [
-     720,
-     1280
+     1080,
+     1920
     ],
-    "detail": 8.4,
-    "colourful": 42.5
+    "detail": 8.0,
+    "colourful": 42.8
    },
    "cover_16x9.png": {
     "size": [
@@ -159,7 +159,7 @@
      720
     ],
     "detail": 4.8,
-    "colourful": 41.9
+    "colourful": 41.8
    }
   }
  },
@@ -174,6 +174,58 @@
     "floorsign",
     "pizza"
    ]
+  }
+ },
+ "direction": {
+  "dept": "direction",
+  "score": 88,
+  "issues": [
+   "DIRECTION: more than 3 shots of the same size in a row (beats [4, 5, 7, 8, 9]): vary wide / medium / close",
+   "DIRECTION: the same picture (place + size) holds for 12.7 s (> 6.5 s): cut, move the camera or change the subject"
+  ],
+  "metrics": {
+   "sizes": "wwwwwwwwwwwmw",
+   "headroom": [],
+   "side_swaps": [],
+   "eyeline_flips": [],
+   "longest_same_picture_s": 12.7
+  }
+ },
+ "writing": {
+  "dept": "writing",
+  "score": 96,
+  "issues": [
+   "WRITING: bell talks 3 lines in a row: break it with a reaction or action"
+  ],
+  "metrics": {
+   "mean_words": 5.3,
+   "word_length": {
+    "zara": 3.71,
+    "bell": 4.24,
+    "omar": 3.56
+   },
+   "reading_grade": 2.1
+  }
+ },
+ "qc": {
+  "dept": "qc",
+  "score": 92,
+  "issues": [
+   "QC: total bitrate 4.9 Mbps (3-14)"
+  ],
+  "metrics": {
+   "size": "1080x1920",
+   "fps": "30/1",
+   "mbps": 4.9,
+   "duration": 64.0,
+   "vcodec": "h264",
+   "profile": "High",
+   "acodec": "aac",
+   "arate": "48000",
+   "lufs": -14.1,
+   "true_peak": -2.9,
+   "black_segments": [],
+   "frozen_s": []
   }
  }
 }

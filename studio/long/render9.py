@@ -42,7 +42,7 @@ class Pool:
         for p in self.p:p.wait(timeout=30)
 def main():
     a=sys.argv[1:];g=lambda k,d:a[a.index(k)+1] if k in a else d
-    specf=g('--spec','p9/part1/spec.json');spec_name=specf[len('p9/'):-len('.json')];dsf=float(g('--dsf','1.6'));W=int(g('--workers',os.cpu_count() or 4))    # spec_name e.g. part1/spec -> engine9.html?spec=part1/spec
+    specf=g('--spec','p9/part1/spec.json');spec_name=specf[len('p9/'):-len('.json')];dsf=float(g('--dsf',str(json.load(open(R+'/delivery.json'))['dsf'])));W=int(g('--workers',os.cpu_count() or 4))    # spec_name e.g. part1/spec -> engine9.html?spec=part1/spec
     out=g('--out','frames9');trust='--trust' in a;force='--force' in a;redo=parse_beats(g('--redo',''),0) if '--redo' in a else set()
     sp=json.load(open(f'{R}/{specf}'));mouth=json.load(open(f'{R}/'+specf.replace('.json','.mouth.json')))
     B=sp['beats'];nfr=int(round(sp['duration']*FPS));eh=engine_hash();want=parse_beats(g('--beats',''),len(B))

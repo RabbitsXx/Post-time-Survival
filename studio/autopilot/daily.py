@@ -47,12 +47,13 @@ def build(arcs):
         for cid in arcs_on_disk().get(arc,[]):
             if os.path.exists(f'{LONG}/final9_{cid}.mp4') and ST.find(ST.load(),cid):print(cid,'already built + packaged');continue
             if not os.path.exists(f'{LONG}/final9_{cid}.mp4'):
-                rc,out=sh([py,R+'/build_clip.py',cid]);print(out.strip().splitlines()[-1] if out.strip() else '',f'[{cid}]')
+                import time as _t;_t0=_t.time()
+                rc,out=sh([py,R+'/build_clip.py',cid]);open(R+'/build_log.jsonl','a').write(json.dumps(dict(clip=cid,at=_t.strftime('%Y-%m-%dT%H:%M:%SZ',_t.gmtime()),secs=round(_t.time()-_t0),rc=rc))+'\n');print(out.strip().splitlines()[-1] if out.strip() else '',f'[{cid}]')
                 if rc:print(out[-1500:]);bad+=1;continue
             rc,out=sh([py,R+'/../departments/studio_review.py',cid]);print(out.strip().splitlines()[0] if out.strip() else '')
             try:
                 sc=json.load(open(f'{R}/../departments/scorecards/{cid}.json'))
-                hard=[k for k,min_ in (('legal',95),('story',80)) if sc[k]['score']<min_]
+                hard=[k for k,min_ in (('legal',95),('story',80),('qc',85)) if sc[k]['score']<min_]
                 if hard:print(f'{cid}: NOT packaged, departments below the hard bar: {hard} (see departments/scorecards/{cid}.md)');bad+=1;continue
             except Exception as e:print('review failed:',e)
             rc,out=sh([py,R+'/package_clip.py',cid]);print(out.strip())

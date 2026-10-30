@@ -38,13 +38,13 @@ def audio_chain(P,dur,out_m4a,tmp,err):
     except BaseException as e:err.append(e)
 def main():
     a=sys.argv[1:];g=lambda k,d:a[a.index(k)+1] if k in a else d
-    P=f'{R}/'+g('--p','p9/part1');frames=f'{R}/'+g('--frames','frames9');out=g('--out',f'{R}/final9.mp4');preset=g('--preset','medium');crf=g('--crf','18')
+    P=f'{R}/'+g('--p','p9/part1');frames=f'{R}/'+g('--frames','frames9');out=g('--out',f'{R}/final9.mp4');preset=g('--preset','medium');crf=g('--crf',str(json.load(open(R+'/delivery.json'))['crf']))
     spec=json.load(open(f'{P}/spec.json'));dur=spec['duration'];nfr=int(round(dur*FPS))
     with tempfile.TemporaryDirectory() as tmp:
         m4a=f'{tmp}/a.m4a';err=[];th=threading.Thread(target=audio_chain,args=(P,dur,m4a,tmp,err));th.start()
         vid=f'{tmp}/v.mp4'
-        vf='scale=720:1280:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p'
-        r=subprocess.run(['ffmpeg','-hide_banner','-y','-framerate',str(FPS),'-i',f'{frames}/%05d.jpg','-frames:v',str(nfr),'-vf',vf,'-c:v','libx264','-preset',preset,'-crf',crf,'-g','60','-bf','2',
+        DL=json.load(open(f'{R}/delivery.json'));vf=f"scale={DL['width']}:{DL['height']}:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p"
+        r=subprocess.run(['ffmpeg','-hide_banner','-y','-framerate',str(FPS),'-i',f'{frames}/%05d.jpg','-frames:v',str(nfr),'-vf',vf,'-c:v','libx264','-preset',preset,'-crf',crf,'-maxrate',DL['maxrate'],'-bufsize',DL['bufsize'],'-profile:v','high','-g','60','-bf','2',
                           '-colorspace','bt709','-color_primaries','bt709','-color_trc','bt709','-color_range','tv','-an',vid],capture_output=True,text=True)
         if r.returncode:sys.exit('video encode failed: '+r.stderr[-1500:])
         th.join()

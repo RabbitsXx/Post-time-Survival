@@ -5,7 +5,7 @@ the tip must say where it wins; rubric total >= 32/45; no banned cliches; the he
 import sys,re
 t=open(sys.argv[1]).read();bad=[];low=t.lower()
 def has(f):return re.search(r'\*\*'+re.escape(f)+r'[^*]*\*\*',t,re.I) is not None
-need=['Share line','WHAT IF','Audience feeling map','Hero','Other characters','Antagonist','World','Running gag','Real survival tip','Part 1','Part 2','Part 3','Music idea','Title + thumbnail','Rubric scores','Why this beats']
+need=['Share line','WHAT IF','Audience feeling map','Hero','Other characters','Antagonist','World','Running gag','Hook plan','Real survival tip','Part 1','Part 2','Part 3','Music idea','Title + thumbnail','Rubric scores','Why this beats']
 for f in need:
     if not has(f):bad.append(f'missing field: {f}')
 m=re.search(r'\*\*Share line[^*]*\*\*\s*(.+)',t,re.I)
@@ -24,6 +24,11 @@ for p in('1','2','3'):
         if w in s:break
     else:bad.append(f'part {p}: no solo set piece (someone ALONE)')
     if 'end question' not in s:bad.append(f'part {p}: no END QUESTION')
+hp=re.search(r'\*\*Hook plan.*?(?=\n\*\*[A-Z]|\Z)',t,re.S|re.I)
+if hp:
+    h=hp.group(0).lower()
+    for w in('you','number','twist','loop'):
+        if w not in h:bad.append(f'hook plan lacks {w.upper()} (see HOOK_FORMULA.md)')
 hero=re.search(r'\*\*Hero.*?(?=\*\*Other characters)',t,re.S|re.I)
 if hero:
     h=hero.group(0).lower()

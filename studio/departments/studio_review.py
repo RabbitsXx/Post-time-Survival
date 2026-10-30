@@ -6,10 +6,10 @@ when the last 5 reviewed clips all beat a department's bar by >= 6 points, the b
 import sys,os,json,subprocess,datetime as dt,importlib
 R=os.path.dirname(os.path.abspath(__file__));LONG=os.path.abspath(R+'/../long');sys.path.insert(0,R);sys.path.insert(0,LONG)
 TH=R+'/thresholds.json';HIST=R+'/kpi/history.jsonl'
-DEPTS=['story','art','sound','editorial','marketing','legal']
+DEPTS=['story','art','sound','editorial','marketing','legal','direction','writing','qc']
 def thresholds():
     if os.path.exists(TH):return json.load(open(TH))
-    t=dict(story=70,art=70,sound=60,editorial=70,marketing=75,legal=95);json.dump(t,open(TH,'w'),indent=1);return t
+    t=dict(story=70,art=70,sound=60,editorial=70,marketing=75,legal=95,direction=65,writing=65,qc=85);json.dump(t,open(TH,'w'),indent=1);return t
 def story(cid):
     iss=[];sc=100
     for nm,cmd in(('storylint',['python3','storylint.py',cid]),('newness',['python3','newness.py',cid])):
@@ -19,9 +19,9 @@ def story(cid):
             if '[WARN]' in l and nm=='storylint':iss.append(f'STORY/{nm}(warn): '+l.split('[WARN]')[1].strip()[:200]);sc-=3
     return dict(dept='story',score=max(0,sc),issues=iss,metrics={})
 def run(cid):
-    out={};import audit_visual,audit_sound,audit_editorial,audit_publish,audit_brand
+    out={};import audit_visual,audit_sound,audit_editorial,audit_publish,audit_brand,shotlint,dialoguelint,qc_final
     out['story']=story(cid)
-    for k,mod in(('art',audit_visual),('sound',audit_sound),('editorial',audit_editorial),('marketing',audit_publish),('legal',audit_brand)):
+    for k,mod in(('art',audit_visual),('sound',audit_sound),('editorial',audit_editorial),('marketing',audit_publish),('legal',audit_brand),('direction',shotlint),('writing',dialoguelint),('qc',qc_final)):
         try:out[k]=mod.audit(cid)
         except Exception as e:out[k]=dict(dept=k,score=0,issues=[f'AUDIT CRASHED: {e}'],metrics={})
     return out
