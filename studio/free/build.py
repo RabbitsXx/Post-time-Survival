@@ -103,7 +103,8 @@ def S_wave():n=int(3.2*SR);t=np.arange(n)/SR;return lp(noise(n,23),900)*np.sin(n
 def S_lock():n=int(.5*SR);t=np.arange(n)/SR;x=noise(n,24)*np.exp(-t/.008)*.5;i=int(.18*SR);y=np.zeros(n,dtype=np.float32);y[:n]+=x;z=np.sin(2*math.pi*180*t)*np.exp(-t/.06)*.5;y[i:]+=z[:n-i];return y
 def S_gull():n=int(.8*SR);t=np.arange(n)/SR;f=1500+700*np.sin(2*math.pi*3*t)*np.exp(-t/.4);ph=2*math.pi*np.cumsum(f)/SR;return np.sin(ph)*.2*np.exp(-t/.35)
 def S_foot():n=int(.25*SR);t=np.arange(n)/SR;return lp(noise(n,25),600)*np.exp(-t/.05)*.6
-SFXLIB={'static':S_static,'gen':S_gen,'wave':S_wave,'lock':S_lock,'gull':S_gull,'foot':S_foot,'hit_pan':S_hit_pan,'hit_metal':S_hit_metal,'hit_soft':S_hit_soft,'bodyfall':S_bodyfall,'groan':S_groan,'groan_hurt':S_groan_hurt,'alarm':S_alarm,'bell':S_bell,'sting':S_sting,'creak':S_creak,'jingle':S_jingle,'whoosh':S_whoosh,'exhale':S_exhale,'click':S_click,'thump':S_thump,'chime':S_chime}
+def S_splash():n=int(.9*SR);t=np.arange(n)/SR;return lp(noise(n,31),3200)*np.exp(-t/.12)*.9+lp(noise(n,32),900)*np.exp(-t/.3)*.5
+SFXLIB={'splash':S_splash,'static':S_static,'gen':S_gen,'wave':S_wave,'lock':S_lock,'gull':S_gull,'foot':S_foot,'hit_pan':S_hit_pan,'hit_metal':S_hit_metal,'hit_soft':S_hit_soft,'bodyfall':S_bodyfall,'groan':S_groan,'groan_hurt':S_groan_hurt,'alarm':S_alarm,'bell':S_bell,'sting':S_sting,'creak':S_creak,'jingle':S_jingle,'whoosh':S_whoosh,'exhale':S_exhale,'click':S_click,'thump':S_thump,'chime':S_chime}
 def music(dur,mood=0):
     n=int(dur*SR);t=np.arange(n)/SR;x=np.zeros(n,dtype=np.float32)
     for f,a in((55,.5),(82.4,.3),(110,.2),(130.8,.12)):x+=np.sin(2*math.pi*f*t+np.sin(t*.3))*a

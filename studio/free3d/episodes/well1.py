@@ -1,0 +1,21 @@
+import sys,os;sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from build3d import *
+sh=[];A=sh.append
+N=lambda en:say('narrator',en)
+P1='DAY 9 · 6:40 AM · HOLLIS FORD'
+A(S3('square',[[14,10,16],[0,1.2,0],[6,5.2,10.5],[0,1.2,0]],[ch('gran',-3.4,.8,'calm'),ch('timo',.6,3.6,'worried'),ch('biscuit',1.9,4.0,'sad'),ch('nell',-1.5,2.3,'worried'),ch('mayor',2.4,1.4,'angry')],[N("Hollis Ford. Forty-one people. One well.")],place=P1,min=4.2,sfx=[[0.2,'sting']]))
+A(S3('square',[[2.6,1.7,4.2],[0,1.3,0],[1.4,1.55,3.0],[0,1.45,0]],[],[N("Since day one, everyone drinks from it.")],place='DAY 9 · 6:41 AM · THE WELL',min=3.2,zombies=False,sfx=[[0.4,'click']]))
+A(S3('square',[[-4.4,1.55,7.0],[-1.5,1.4,2.3],[-3.0,1.5,5.2],[-1.5,1.45,2.3]],[ch('nell',-1.5,2.3,'worried')],[N("If six people get sick on the same morning, don't look for a bite. Look at what they drank.")],place='DAY 9 · 6:45 AM · THE WELL',min=5.5))
+A(C(dict(type='title',bg='#0b1224',bg2='#05080f',fg='#ffd98a',top='A SURVIVAL STORY',big=['THE','WELL'],sub='PART 1 OF 3  ·  SIX SICK',lamp=1),[say('narrator',"The Well. Part one of three. Six sick.")],min=3.6,sfx=[[0,'chime']]))
+A(S3('shop',[[0.1,1.55,4.2],[0.6,1.35,-2.3],[0.5,1.55,3.0],[0.6,1.4,-2.3]],[ch('nell',.7,-2.9,'calm')],[N("Nell Varga tested water for the county. Now she tests it for everyone.")],place='DAY 9 · 6:52 AM · NELL\'S WORKSHOP',min=4.6,sfx=[[1.0,'click']]))
+A(S3('barn',[[0,1.55,5.2],[0,1.4,-4],[0,1.55,3.6],[0,1.4,-4]],[ch('mayor',-1.9,-4.0,'angry'),ch('doc',.1,-4.3,'calm'),ch('nell',2.0,-4.0,'worried')],[say('mayor',"Sick ones stay in the barn. Nobody opens it.")],place='DAY 9 · 7:15 AM · THE BARN',min=3.8,sfx=[[0.3,'creak'],[1.5,'groan']]))
+A(S3('barn',[[2.4,1.55,4.4],[0,1.4,-4],[1.4,1.55,3.5],[0.1,1.4,-4]],[ch('mayor',-2.1,-4.3,'angry'),ch('doc',-.3,-3.8,'calm'),ch('nell',1.5,-3.6,'worried')],[say('doc',"Fever. Cramps. No bite marks."),say('nell',"Then it isn't them. It's us.")],place='DAY 9 · 7:20 AM · THE BARN',min=5.0))
+A(C(dict(type='rules',top='A BITE OR BAD WATER?',items=['A BITE HITS ONE PERSON','BAD WATER HITS EVERYONE','LOOK FOR A WOUND FIRST']),[N("A bite hits one person. Bad water hits everyone at once.")],min=5.2,sfx=[[0.3,'click'],[0.9,'click'],[1.5,'click']]))
+A(S3('square',[[-1.6,1.65,11.5],[0.2,1.35,1.8],[-1.0,1.6,9.0],[0.2,1.4,1.8]],[ch('mayor',-1.3,1.7,'angry'),ch('nell',.5,2.2,'angry'),ch('gran',2.2,2.5,'smug'),ch('timo',-2.7,2.7,'scared')],[say('mayor',"Panic kills faster than thirst."),say('nell',"So does cholera.")],place='DAY 9 · 8:30 AM · THE WELL QUEUE',min=5.0,sfx=[[0.2,'groan']]))
+A(C(dict(type='macro',obj='strip',top='THE STRIP DOES NOT LIE',big='E. COLI: PRESENT'),[N("The strip does not lie.")],min=3.6,sfx=[[1.2,'sting']]))
+A(C(dict(type='stat',g='drop',c='#2a6a9a',label='DAILY NEED',v0=0,v=123,unit='L',note=['41 PEOPLE × 3 L']),[N("Forty-one people. Three liters each. One hundred twenty-three liters a day.")],min=4.8))
+A(S3('square',[[-3.6,1.4,7.2],[0.4,1.1,3.3],[-3.0,1.35,6.4],[0.4,1.15,3.3]],[ch('nell',-.5,3.0,'angry'),ch('timo',1.2,3.7,'scared'),ch('biscuit',2.5,4.3,'sad')],[say('nell',"Do not drink that.")],place='DAY 9 · 8:40 AM · THE WELL QUEUE',min=3.0,fx=[[0.7,'sticker','SPLASH!',270,330]],sfx=[[0.7,'splash'],[1.6,'sting']]))
+A(S3('night',[[-3.8,1.35,5.2],[0,1.4,.3],[-2.5,1.3,3.7],[0,1.45,.3]],[ch('nell',-1.1,1.9,'worried',prop='flash')],[say('nell',"Someone opened this well last night.")],place='DAY 9 · 2:10 AM · THE WELL',min=3.4,zombies=True,sfx=[[0.2,'creak']]))
+A(C(dict(type='paper',top='TIED TO THE ROPE',text="I'm sorry.  -T"),[N("I'm sorry. T.")],min=3.4,sfx=[[0,'sting']]))
+A(C(dict(type='title',bg='#0b1224',bg2='#05080f',fg='#ffd98a',top='NEXT',big=['THE BOILING','POINT'],sub='PART 2 OF 3',lamp=0),[say('narrator',"Part one of three, The Well. Next: the boiling point.")],min=4.0,sfx=[[0,'chime']]))
+EP=dict(id='well_01',series='THE WELL',title='SIX SICK',part=1,of=3,shots=sh,minscale=.9)

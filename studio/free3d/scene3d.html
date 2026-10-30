@@ -1,13 +1,15 @@
 <!doctype html><body style="margin:0;background:#000"><canvas id="c"></canvas>
 <script src="node_modules/three/build/three.min.js"></script>
 <script src="chars2d.js"></script>
+<script>const BG={};</script>
+<script src="overlay.js"></script>
 <script>
 // THE WELL - 3D set (Hollis Ford square at night). Deterministic: renderAt(t) -> jpeg
-const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);
+const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d');let SPEC=null;
 const cv=document.getElementById('c');const R=new THREE.WebGLRenderer({canvas:cv,antialias:true,preserveDrawingBuffer:true});R.setSize(W,H,false);R.setPixelRatio(1);
 R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.35;
 const S=new THREE.Scene();S.background=new THREE.Color(0x0a1226);S.fog=new THREE.FogExp2(0x101c3c,.02);
-const cam=new THREE.PerspectiveCamera(38,W/H,.1,300);
+const cam=new THREE.PerspectiveCamera(38,W/H,.1,420);
 // ---------- procedural textures ----------
 function tex(w,h,draw,rep){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);t.anisotropy=4;t.encoding=THREE.sRGBEncoding;return t}
 function speckle(x,w,h,n,cols,r0,r1,seed){for(let i=0;i<n;i++){x.fillStyle=cols[Math.floor(rnd(seed+i)*cols.length)];const r=r0+rnd(seed+i*3)*(r1-r0);x.globalAlpha=.25+rnd(seed+i*7)*.5;x.beginPath();x.arc(rnd(seed+i*5)*w,rnd(seed+i*11)*h,r,0,7);x.fill()}x.globalAlpha=1}
@@ -73,42 +75,27 @@ function person(cfg){const g=new THREE.Group();const sk=new THREE.MeshStandardMa
  if(cfg.stache){const st=new THREE.Mesh(new THREE.BoxGeometry(.08*k,.016*k,.02*k),new THREE.MeshStandardMaterial({color:cfg.stache,roughness:.95}));st.position.set(0,-.034*k,.12*k);head.add(st)}
  if(cfg.glasses){for(const sx of[-1,1]){const gl=new THREE.Mesh(new THREE.TorusGeometry(.03*k,.003*k,6,20),new THREE.MeshStandardMaterial({color:0x222222}));gl.position.set(sx*.047*k,.015*k,.125*k);head.add(gl)}}
  g.userData=Object.assign({hip,legs,torso,arms,head,mouth,eyes,brows,k,cfg});return g}
+const SQ=new THREE.Group();[...S.children].forEach(ch=>SQ.add(ch));S.add(SQ);
+// ---------- interiors ----------
+__INTERIORS__
 // ---------- 2D characters as billboards in the 3D set ----------
-const CW=360,CH_=620;
+const CW=720,CH_=1240,RS=2;
 function sprite(who,hm,pos,opt={}){const cvs=document.createElement('canvas');cvs.width=CW;cvs.height=CH_;const cx=cvs.getContext('2d');const tx=new THREE.CanvasTexture(cvs);tx.encoding=THREE.sRGBEncoding;tx.anisotropy=4;
- const ch=CH[who];const sc=opt.sc||(ch.z?1.6:2.0);const hPx=(ch.z?210:254)*sc*ch.h;const ph=CH_/hPx*hm,pw=ph*CW/CH_;
+ const ch=CH[who];const sc=opt.sc||(ch.z?1.6:(ch.dog?1.5:2.0));const hPx=(ch.z?210:(ch.dog?150:254))*sc*ch.h*RS;const ph=CH_/hPx*hm,pw=ph*CW/CH_;
  const mat=new THREE.MeshBasicMaterial({map:tx,transparent:true,alphaTest:.04,side:THREE.DoubleSide,toneMapped:false});const m=new THREE.Mesh(new THREE.PlaneGeometry(pw,ph),mat);m.position.set(pos[0],ph/2-.02,pos[1]);S.add(m);
  const sh=new THREE.Mesh(new THREE.CircleGeometry(.55*(hm/1.7)*(ch.w||1),24),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.42,depthWrite:false}));sh.rotation.x=-Math.PI/2;sh.position.set(pos[0],.02,pos[1]);sh.scale.y=.6;S.add(sh);
- return {who,mesh:m,mat,cx,tx,sc,ch,hm,pos,face:opt.face||1,expr:opt.expr||'calm',prop:opt.prop,z:!!ch.z,seed:opt.seed||pos[0]*3.1}}
+ return {who,mesh:m,sh,mat,cx,tx,sc,ch,hm,pos,face:opt.face||1,expr:opt.expr||'calm',prop:opt.prop,z:!!ch.z,seed:opt.seed||pos[0]*3.1}}
 const CAST={},Z=[];
-const CAST_DEF={nell:[1.68,[-1.5,2.3],'worried'],mayor:[1.8,[2.4,1.4],'angry'],gran:[1.55,[-3.4,.8],'calm'],timo:[1.42,[.6,3.6],'worried'],doc:[1.75,[3.9,3.0],'calm']};
-for(const k in CAST_DEF){const d=CAST_DEF[k];CAST[k]=sprite(k,d[0],d[1],{expr:d[2],face:1})}
+const HM={nell:1.68,mayor:1.8,gran:1.55,timo:1.42,doc:1.75,biscuit:.62};
+for(const k in HM){CAST[k]=sprite(k,HM[k],[0,0],{expr:'calm',face:1});CAST[k].mesh.visible=false;CAST[k].sh.visible=false}
+CH.biscuit={dog:1,h:1,w:1};
 const ZV=['z_robe','z_postman','z_jogger','z_suit','z_pyjama'];
 for(let i=0;i<9;i++){const a=Math.PI*(.7+i*.075),r=27+rnd(i+4)*5;const z=sprite(ZV[i%5],1.7,[Math.cos(a)*r,-Math.abs(Math.sin(a))*r*.9-9],{face:-1,seed:i*7.3});Z.push(z)}
-function drawSprite(sp,t,speaking){const cx=sp.cx;cx.setTransform(1,0,0,1,0,0);cx.clearRect(0,0,CW,CH_);cx.setTransform(1,0,0,1,CW/2,CH_-18);
+function drawSprite(sp,t,speaking){const cx=sp.cx;cx.setTransform(1,0,0,1,0,0);cx.clearRect(0,0,CW,CH_);cx.setTransform(RS,0,0,RS,CW/2,CH_-36);
  const ph=sp.seed;let P={x:0,y:0,s:sp.sc,face:sp.face,expr:sp.expr,look:Math.sin(t*.6+ph)*.5,mouth:0,prop:sp.prop,bob:0,lean:0,tilt:0,legA:[0,0],legB:[0,0],armF:[8,8],armN:[8,10]};
  if(sp.z){P.lean=14;P.armN=[82+Math.sin(t*2+ph)*7,-8];P.armF=[76+Math.sin(t*2.3+ph)*7,-6];P.tilt=10+Math.sin(t*1.2+ph)*5;P.bob=Math.sin(t*1.5+ph)*3;drawChar(cx,{who:sp.who},P,t)}
+ else if(sp.ch.dog){drawDog(cx,{who:sp.who,expr:sp.expr},P,t)}
  else{P.bob=Math.sin(t*2+ph)*2;P.mouth=speaking?Math.max(0,Math.abs(Math.sin(t*11+ph))*(.5+.5*Math.sin(t*3))):0;P.armLift=speaking?20:0;drawFront(cx,{who:sp.who},P,t)}
  sp.tx.needsUpdate=true}
-// ---------- animation ----------
-function animate(t){for(const k in CAST){const sp=CAST[k];drawSprite(sp,t,!!SPEAK[k]);sp.mesh.quaternion.copy(cam.quaternion);
-  const L=Math.min(1,.65+.0);sp.mat.color.setRGB(.86,.84,.92)}
- for(const sp of Z){drawSprite(sp,t,false);sp.mesh.quaternion.copy(cam.quaternion);sp.mat.color.setRGB(.55,.58,.7)}
- warm.forEach((L,i)=>{L.intensity=150+Math.sin(t*.9+i*2)*6})}
-let SPEAK={};
-// ---------- shots ----------
-const SHOTS=[
- {t0:0,t1:5,name:'crane',a:[[0,14,10,16],[0,1.2,0]],b:[[0,6,5.2,10.5],[0,1.2,0]],speak:{}},
- {t0:5,t1:9.5,name:'push-in Nell',a:[[-4.4,1.55,7.0],[-1.5,1.35,2.3]],b:[[-3.0,1.5,5.2],[-1.5,1.4,2.3]],speak:{nell:1}},
- {t0:9.5,t1:14,name:'mayor low',a:[[5.2,.8,4.4],[2.4,1.4,1.4]],b:[[4.4,1.0,3.8],[2.4,1.5,1.4]],speak:{mayor:1}},
- {t0:14,t1:18.5,name:'wall + zombies',a:[[-2,1.4,-1],[2,1.5,-22]],b:[[-1,1.4,-2],[3,1.4,-22]],speak:{}},
- {t0:18.5,t1:23,name:'close Nell',a:[[-3.0,1.62,4.9],[-1.5,1.55,2.3]],b:[[-2.5,1.6,4.0],[-1.5,1.58,2.3]],speak:{nell:1}}
-];
-
-window.DUR=SHOTS[SHOTS.length-1].t1;
-window.renderAt=t=>{const s=SHOTS.find(x=>t>=x.t0&&t<x.t1)||SHOTS[SHOTS.length-1];const u=ease(Math.min(1,Math.max(0,(t-s.t0)/(s.t1-s.t0))));
- SPEAK=s.speak||{};animate(t);cam.position.set(lerp(s.a[0][0],s.b[0][0],u),lerp(s.a[0][1],s.b[0][1],u),lerp(s.a[0][2],s.b[0][2],u));cam.lookAt(lerp(s.a[1][0],s.b[1][0],u),lerp(s.a[1][1],s.b[1][1],u),lerp(s.a[1][2],s.b[1][2],u));
- // handheld
- cam.position.x+=Math.sin(t*1.7)*.012;cam.position.y+=Math.sin(t*2.3)*.008;
- R.render(S,cam);return cv.toDataURL('image/jpeg',.93).slice(23)};
+__RENDER__
 </script>

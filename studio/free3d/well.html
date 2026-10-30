@@ -1,0 +1,155 @@
+<!doctype html><style>@font-face{font-family:'Roboto Condensed';src:url('../fonts/RobotoCondensed-Bold.ttf');font-weight:100 900}</style><body style="margin:0;background:#000"><canvas id="c"></canvas>
+<script src="node_modules/three/build/three.min.js"></script>
+<script src="chars2d.js"></script>
+<script>const BG={};</script>
+<script src="overlay.js"></script>
+<script>
+// THE WELL - 3D set (Hollis Ford square at night). Deterministic: renderAt(t) -> jpeg
+const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d');
+const cv=document.getElementById('c');const R=new THREE.WebGLRenderer({canvas:cv,antialias:true,preserveDrawingBuffer:true});R.setSize(W,H,false);R.setPixelRatio(1);
+R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.35;
+const S=new THREE.Scene();S.background=new THREE.Color(0x0a1226);S.fog=new THREE.FogExp2(0x101c3c,.02);
+const cam=new THREE.PerspectiveCamera(38,W/H,.1,420);
+// ---------- procedural textures ----------
+function tex(w,h,draw,rep){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);t.anisotropy=4;t.encoding=THREE.sRGBEncoding;return t}
+function speckle(x,w,h,n,cols,r0,r1,seed){for(let i=0;i<n;i++){x.fillStyle=cols[Math.floor(rnd(seed+i)*cols.length)];const r=r0+rnd(seed+i*3)*(r1-r0);x.globalAlpha=.25+rnd(seed+i*7)*.5;x.beginPath();x.arc(rnd(seed+i*5)*w,rnd(seed+i*11)*h,r,0,7);x.fill()}x.globalAlpha=1}
+const T={
+ dirt:tex(512,512,(x,w,h)=>{x.fillStyle='#5b4733';x.fillRect(0,0,w,h);speckle(x,w,h,2600,['#6e5740','#463525','#7b6448','#3a2c20'],1,5,1)},[14,14]),
+ stone:tex(512,256,(x,w,h)=>{x.fillStyle='#6d6a64';x.fillRect(0,0,w,h);for(let r=0;r<4;r++){const off=(r%2)*64;for(let c0=-1;c0<5;c0++){const bx=c0*128+off+2,by=r*64+2;x.fillStyle=['#8a867e','#7a766e','#948f86','#6e6a62'][(r*7+c0*3+9)%4];x.fillRect(bx,by,124,60);x.fillStyle='rgba(0,0,0,.18)';x.fillRect(bx,by+50,124,10)}}speckle(x,w,h,900,['#3a3832','#a8a398'],1,3,5)},[6,1]),
+ wood:tex(256,256,(x,w,h)=>{for(let i=0;i<8;i++){x.fillStyle=['#7a5636','#6e4c30','#835e3a'][i%3];x.fillRect(i*32,0,31,h);x.fillStyle='rgba(0,0,0,.28)';x.fillRect(i*32+30,0,2,h)}for(let i=0;i<260;i++){x.fillStyle='rgba(40,24,10,.18)';x.fillRect(rnd(i)*w,rnd(i+9)*h,1+rnd(i+3)*2,14+rnd(i+5)*40)}},[2,2]),
+ hay:tex(256,256,(x,w,h)=>{x.fillStyle='#c4a04a';x.fillRect(0,0,w,h);for(let i=0;i<700;i++){x.strokeStyle=['#e0c060','#a8842e','#d8b458'][i%3];x.lineWidth=1.4;x.beginPath();const a=rnd(i)*w,b=rnd(i+3)*h;x.moveTo(a,b);x.lineTo(a+(rnd(i+5)-.5)*40,b+(rnd(i+7)-.5)*40);x.stroke()}},[1,1]),
+ roof:tex(256,256,(x,w,h)=>{x.fillStyle='#4a2c28';x.fillRect(0,0,w,h);for(let r=0;r<8;r++)for(let c=0;c<8;c++){x.fillStyle=['#5a3430','#4a2a26','#663a34'][(r*3+c)%3];x.fillRect(c*32+(r%2)*16-16,r*32,30,28);x.fillStyle='rgba(0,0,0,.3)';x.fillRect(c*32+(r%2)*16-16,r*32+26,30,4)}},[3,2]),
+ plaster:tex(256,256,(x,w,h)=>{x.fillStyle='#b9a68a';x.fillRect(0,0,w,h);speckle(x,w,h,900,['#a6937a','#c8b698','#8f7d66'],1,4,3)},[2,1]),
+ metal:tex(128,128,(x,w,h)=>{x.fillStyle='#5a6a7a';x.fillRect(0,0,w,h);speckle(x,w,h,300,['#7a8a9a','#3a4654','#8a5a3a'],1,3,8)},[1,1])
+};
+const M=(map,rough=.9,col=0xffffff,extra={})=>new THREE.MeshStandardMaterial(Object.assign({map,roughness:rough,color:col},extra));
+// ---------- sky / ground ----------
+(()=>{const g=new THREE.SphereGeometry(180,32,16);const cols=[];const p=g.attributes.position;for(let i=0;i<p.count;i++){const y=p.getY(i)/180,k=Math.max(0,Math.min(1,y*1.6));const c1=new THREE.Color(0x1a2646),c2=new THREE.Color(0x070c1c),c3=new THREE.Color(0x3a2a40);const c=y<0?c3:c1.clone().lerp(c2,k);cols.push(c.r,c.g,c.b)}g.setAttribute('color',new THREE.Float32BufferAttribute(cols,3));S.add(new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.BackSide,fog:false})))})();
+(()=>{const pts=[];for(let i=0;i<500;i++){const a=rnd(i)*6.28,e=.12+rnd(i+3)*1.2,r=170;pts.push(Math.cos(a)*Math.cos(e)*r,Math.sin(e)*r,Math.sin(a)*Math.cos(e)*r)}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));S.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xffffff,size:1.6,sizeAttenuation:false,fog:false})))})();
+const moon=new THREE.Mesh(new THREE.SphereGeometry(5,24,16),new THREE.MeshBasicMaterial({color:0xeaf0ff,fog:false}));moon.position.set(-60,70,-120);S.add(moon);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(240,240),M(T.dirt,1));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;S.add(ground);
+// ---------- lights ----------
+const HEMI=new THREE.HemisphereLight(0x6a7cc0,0x3a2a1c,1.5);S.add(HEMI);
+const moonL=new THREE.DirectionalLight(0xa8b8ff,2.6);moonL.position.set(-18,26,-16);moonL.castShadow=true;moonL.shadow.mapSize.set(2048,2048);Object.assign(moonL.shadow.camera,{left:-26,right:26,top:26,bottom:-26,near:1,far:80});moonL.shadow.bias=-.0004;S.add(moonL);
+const warm=[];function lamp(x,z,h=3.4){const g=new THREE.Group();const pole=new THREE.Mesh(new THREE.CylinderGeometry(.06,.08,h,10),M(T.metal,.6,0x2a2a30));pole.position.y=h/2;pole.castShadow=true;g.add(pole);const head=new THREE.Mesh(new THREE.BoxGeometry(.5,.34,.5),M(null,.5,0x26262e));head.position.y=h+.1;g.add(head);const bulb=new THREE.Mesh(new THREE.SphereGeometry(.14,16,12),new THREE.MeshBasicMaterial({color:0xffd27a,fog:false}));bulb.position.y=h;g.add(bulb);
+ const L=new THREE.PointLight(0xffb866,150,26,2);L.position.set(0,h-.1,0);L.castShadow=true;L.shadow.mapSize.set(512,512);L.shadow.bias=-.002;g.add(L);warm.push(L);g.position.set(x,0,z);S.add(g)}
+lamp(-6.5,5,3.6);lamp(7,3.5,3.6);
+// ---------- well ----------
+(()=>{const g=new THREE.Group();const pts=[];pts.push(new THREE.Vector2(1.02,0),new THREE.Vector2(1.08,.05),new THREE.Vector2(1.08,.95),new THREE.Vector2(.9,1.0),new THREE.Vector2(.78,.95),new THREE.Vector2(.78,.2));const ring=new THREE.Mesh(new THREE.LatheGeometry(pts,40),M(T.stone,.95));ring.castShadow=ring.receiveShadow=true;g.add(ring);
+ const water=new THREE.Mesh(new THREE.CircleGeometry(.78,32),new THREE.MeshStandardMaterial({color:0x0a1a24,roughness:.1,metalness:.3}));water.rotation.x=-Math.PI/2;water.position.y=.18;g.add(water);
+ for(const sx of[-1,1]){const post=new THREE.Mesh(new THREE.BoxGeometry(.18,2.3,.18),M(T.wood,.85));post.position.set(sx*1.0,1.15+.5,0);post.castShadow=true;g.add(post)}
+ const roof=new THREE.Mesh(new THREE.ConeGeometry(1.9,1.0,4,1),M(T.roof,.9));roof.position.y=3.35;roof.rotation.y=Math.PI/4;roof.castShadow=true;g.add(roof);
+ const beam=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,2.1,10),M(T.wood));beam.rotation.z=Math.PI/2;beam.position.y=2.55;g.add(beam);
+ const rope=new THREE.Mesh(new THREE.CylinderGeometry(.015,.015,1.1,6),new THREE.MeshStandardMaterial({color:0xcdb27a}));rope.position.y=1.95;g.add(rope);
+ const bucket=new THREE.Mesh(new THREE.CylinderGeometry(.16,.13,.26,16),M(T.wood,.8));bucket.position.y=1.35;bucket.castShadow=true;g.add(bucket);S.add(g)})();
+// ---------- houses ----------
+function house(x,z,ry,w=6,d=5,h=3.2,lit=true){const g=new THREE.Group();const body=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),M(T.plaster,.95));body.position.y=h/2;body.castShadow=body.receiveShadow=true;g.add(body);
+ const sh=new THREE.Shape();sh.moveTo(-w/2-.3,0);sh.lineTo(0,2.0);sh.lineTo(w/2+.3,0);sh.closePath();const roof=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:d+.6,bevelEnabled:false}),M(T.roof,.9));roof.position.set(0,h,-(d+.6)/2);roof.castShadow=true;g.add(roof);
+ const door=new THREE.Mesh(new THREE.BoxGeometry(1.0,2.0,.1),M(T.wood,.8));door.position.set(0,1.0,d/2+.03);g.add(door);
+ for(const wx of[-w*.3,w*.3]){const win=new THREE.Mesh(new THREE.BoxGeometry(1.1,1.0,.08),lit?new THREE.MeshBasicMaterial({color:0xffcf7a,fog:true}):new THREE.MeshStandardMaterial({color:0x1a2236,roughness:.2}));win.position.set(wx,1.9,d/2+.03);g.add(win);const fr=new THREE.Mesh(new THREE.BoxGeometry(1.3,1.2,.06),M(T.wood,.8));fr.position.set(wx,1.9,d/2+.0);g.add(fr)}
+ g.position.set(x,0,z);g.rotation.y=ry;S.add(g)}
+house(-11,-4,.35,6,5,3.2,true);house(-5,-12,.1,7,5,3.4,false);house(6,-12,-.15,6,5,3.2,true);house(12,-4,-.45,6,5.5,3.4,true);house(-13,5,1.2,5,5,3,false);
+// ---------- hay / car wall + zombies beyond ----------
+const bales=new THREE.InstancedMesh(new THREE.BoxGeometry(1.4,.9,.9),M(T.hay,1),90);const m4=new THREE.Matrix4(),q=new THREE.Quaternion(),e=new THREE.Euler();let bi=0;
+for(let i=0;i<46&&bi<90;i++){const a=Math.PI*(.62+i*.025)+.3,rad=21+(i%2)*.2;const x=Math.cos(a)*rad,z=-Math.abs(Math.sin(a))*rad*.9-3;for(let l=0;l<2;l++){e.set(0,-a+Math.PI/2+rnd(i)*.15,0);q.setFromEuler(e);m4.compose(new THREE.Vector3(x,.45+l*.9,z),q,new THREE.Vector3(1,1,1));bales.setMatrixAt(bi++,m4)}}bales.castShadow=bales.receiveShadow=true;S.add(bales);
+function car(x,z,ry,col){const g=new THREE.Group();const b=new THREE.Mesh(new THREE.BoxGeometry(4.2,.9,1.8),new THREE.MeshStandardMaterial({color:col,roughness:.5,metalness:.4}));b.position.y=.75;b.castShadow=true;g.add(b);const t=new THREE.Mesh(new THREE.BoxGeometry(2.2,.8,1.6),new THREE.MeshStandardMaterial({color:0x1a2230,roughness:.2,metalness:.6}));t.position.set(-.2,1.5,0);t.castShadow=true;g.add(t);for(const [wx,wz] of[[-1.3,.9],[1.3,.9],[-1.3,-.9],[1.3,-.9]]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.38,.38,.3,16),new THREE.MeshStandardMaterial({color:0x111,roughness:.9}));w.rotation.x=Math.PI/2;w.position.set(wx,.38,wz);g.add(w)}g.position.set(x,0,z);g.rotation.y=ry;S.add(g)}
+car(-8,-17,.2,0x8a3028);car(9,-18,-.3,0x2a4a7a);car(0,-20,0,0x6a6a40);
+// ---------- people ----------
+function capsule(r,l,col,rough=.85){const m=new THREE.Mesh(new THREE.CapsuleGeometry(r,l,6,14),new THREE.MeshStandardMaterial({color:col,roughness:rough}));m.castShadow=true;return m}
+function person(cfg){const g=new THREE.Group();const sk=new THREE.MeshStandardMaterial({color:cfg.skin,roughness:.7});const H=cfg.h||1.7,k=H/1.7;
+ const hip=new THREE.Group();hip.position.y=.95*k;g.add(hip);
+ const legs=[];for(const sx of[-1,1]){const lg=new THREE.Group();lg.position.set(sx*.1*k,0,0);const th=capsule(.085*k,.34*k,cfg.pants);th.position.y=-.24*k;lg.add(th);const sn=capsule(.07*k,.34*k,cfg.pants);sn.position.y=-.6*k;lg.add(sn);const sh=new THREE.Mesh(new THREE.BoxGeometry(.12*k,.07*k,.28*k),new THREE.MeshStandardMaterial({color:cfg.shoe||0x1c1814,roughness:.7}));sh.position.set(0,-.94*k,.05*k);sh.castShadow=true;lg.add(sh);hip.add(lg);legs.push(lg)}
+ const torso=new THREE.Group();torso.position.y=.08*k;hip.add(torso);const tb=capsule(.17*k*(cfg.w||1),.36*k,cfg.shirt);tb.scale.set(1,1,.72);tb.position.y=.24*k;torso.add(tb);
+ if(cfg.vest){const v=capsule(.18*k*(cfg.w||1),.32*k,cfg.vest,.9);v.scale.set(1.02,.98,.76);v.position.y=.24*k;v.position.z=.01;torso.add(v)}
+ if(cfg.sash){const s=new THREE.Mesh(new THREE.BoxGeometry(.07*k,.6*k,.02*k),new THREE.MeshStandardMaterial({color:cfg.sash,roughness:.6}));s.position.set(0,.3*k,.14*k);s.rotation.z=-.7;torso.add(s)}
+ const arms=[];for(const sx of[-1,1]){const sh=new THREE.Group();sh.position.set(sx*.23*k*(cfg.w||1),.5*k,0);const ua=capsule(.05*k,.26*k,cfg.shirt);ua.position.y=-.17*k;sh.add(ua);const el=new THREE.Group();el.position.y=-.32*k;sh.add(el);const fa=capsule(.045*k,.24*k,cfg.shirt);fa.position.y=-.15*k;el.add(fa);const hd=new THREE.Mesh(new THREE.SphereGeometry(.06*k,12,10),sk);hd.position.y=-.32*k;hd.castShadow=true;el.add(hd);torso.add(sh);arms.push({sh,el})}
+ const neck=new THREE.Mesh(new THREE.CylinderGeometry(.06*k,.07*k,.12*k,12),sk);neck.position.y=.62*k;torso.add(neck);
+ const head=new THREE.Group();head.position.y=.76*k;torso.add(head);const sk2=new THREE.Mesh(new THREE.SphereGeometry(.125*k,28,22),sk);sk2.scale.set(.92,1.1,1.0);sk2.castShadow=true;head.add(sk2);
+ const eyeW=new THREE.MeshStandardMaterial({color:0xf4f1ea,roughness:.3}),iris=new THREE.MeshBasicMaterial({color:cfg.iris||0x2a1c10}),brow=new THREE.MeshStandardMaterial({color:cfg.hairc||0x2a1a10,roughness:.9});const eyes=[],brows=[];
+ for(const sx of[-1,1]){const ew=new THREE.Mesh(new THREE.SphereGeometry(.026*k,14,10),eyeW);ew.scale.set(1.2,1,.6);ew.position.set(sx*.047*k,.015*k,.112*k);head.add(ew);const ir=new THREE.Mesh(new THREE.SphereGeometry(.014*k,10,8),iris);ir.position.set(sx*.047*k,.015*k,.12*k);head.add(ir);eyes.push({ew,ir});const br=new THREE.Mesh(new THREE.BoxGeometry(.06*k,.011*k,.012*k),brow);br.position.set(sx*.049*k,.058*k,.115*k);head.add(br);brows.push(br)}
+ const nose=new THREE.Mesh(new THREE.SphereGeometry(.022*k,10,8),sk);nose.scale.set(.9,1.2,1);nose.position.set(0,-.012*k,.128*k);head.add(nose);
+ const mouth=new THREE.Mesh(new THREE.SphereGeometry(.03*k,14,10),new THREE.MeshStandardMaterial({color:0x4a1414,roughness:.6}));mouth.scale.set(1.2,.2,.5);mouth.position.set(0,-.06*k,.112*k);head.add(mouth);
+ if(cfg.hair==='bun'){const hh=new THREE.Mesh(new THREE.SphereGeometry(.13*k,24,16,0,Math.PI*2,0,Math.PI*.46),brow);hh.scale.set(.96,1.12,1.04);hh.position.set(0,.02*k,-.012*k);hh.rotation.x=-.5;head.add(hh);const bun=new THREE.Mesh(new THREE.SphereGeometry(.06*k,14,10),brow);bun.position.set(0,.14*k,-.07*k);head.add(bun)}
+ else if(cfg.hair==='cap'){const c=new THREE.Mesh(new THREE.SphereGeometry(.132*k,24,16,0,Math.PI*2,0,Math.PI*.5),new THREE.MeshStandardMaterial({color:cfg.hairc,roughness:.8}));c.scale.set(.95,1.1,1.02);c.position.set(0,.03*k,-.008*k);c.rotation.x=-.35;c.castShadow=true;head.add(c);const bill=new THREE.Mesh(new THREE.BoxGeometry(.16*k,.012*k,.12*k),new THREE.MeshStandardMaterial({color:cfg.hairc,roughness:.8}));bill.position.set(0,.045*k,.14*k);bill.rotation.x=.12;head.add(bill)}
+ else if(cfg.hair==='white'||cfg.hair==='grey'){const hh=new THREE.Mesh(new THREE.SphereGeometry(.13*k,24,16,0,Math.PI*2,0,Math.PI*.46),new THREE.MeshStandardMaterial({color:cfg.hairc,roughness:.95}));hh.scale.set(.96,1.12,1.04);hh.position.set(0,.02*k,-.012*k);hh.rotation.x=-.5;head.add(hh);if(cfg.hair==='white'){const bun=new THREE.Mesh(new THREE.SphereGeometry(.06*k,14,10),hh.material);bun.position.set(0,.15*k,-.06*k);head.add(bun)}}
+ if(cfg.stache){const st=new THREE.Mesh(new THREE.BoxGeometry(.08*k,.016*k,.02*k),new THREE.MeshStandardMaterial({color:cfg.stache,roughness:.95}));st.position.set(0,-.034*k,.12*k);head.add(st)}
+ if(cfg.glasses){for(const sx of[-1,1]){const gl=new THREE.Mesh(new THREE.TorusGeometry(.03*k,.003*k,6,20),new THREE.MeshStandardMaterial({color:0x222222}));gl.position.set(sx*.047*k,.015*k,.125*k);head.add(gl)}}
+ g.userData=Object.assign({hip,legs,torso,arms,head,mouth,eyes,brows,k,cfg});return g}
+const SQ=new THREE.Group();[...S.children].forEach(ch=>SQ.add(ch));S.add(SQ);
+// ---------- interiors ----------
+function texClone(t,rx,ry){const c=t.clone();c.repeat.set(rx,ry);c.needsUpdate=true;return c}
+function box(w,h,d,mat,x,y,z,cast=true){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=cast;m.receiveShadow=true;return m}
+function mkBarn(){const g=new THREE.Group();g.position.set(300,0,0);const wm=()=>M(texClone(T.wood,6,3),.9,0xa89888);
+ const fl=new THREE.Mesh(new THREE.PlaneGeometry(18,16),M(texClone(T.wood,8,8),.85,0x8a7a68));fl.rotation.x=-Math.PI/2;fl.receiveShadow=true;g.add(fl);
+ g.add(box(18,5,.3,wm(),0,2.5,-7,false));g.add(box(.3,5,16,wm(),-9,2.5,0,false));g.add(box(.3,5,16,wm(),9,2.5,0,false));g.add(box(18,5,.3,wm(),0,2.5,8,false));
+ const roof=new THREE.Mesh(new THREE.PlaneGeometry(18,16),M(null,1,0x1c130c));roof.rotation.x=Math.PI/2;roof.position.y=4.8;g.add(roof);
+ for(let i=-3;i<=3;i++)g.add(box(.25,.3,16,M(T.wood,.9,0x6a5238),i*2.6,4.3,0));
+ const door=box(3.4,3.8,.18,M(texClone(T.wood,3,3),.9,0x5a4430),0,1.9,-6.8);g.add(door);for(let i=-1;i<=1;i++)g.add(box(.12,3.8,.2,M(null,.9,0x2a1c10),i*1.1,1.9,-6.68,false));
+ const gap=new THREE.Mesh(new THREE.PlaneGeometry(.06,3.6),new THREE.MeshBasicMaterial({color:0xfff0c0}));gap.position.set(0,1.9,-6.9);g.add(gap);
+ for(let i=0;i<6;i++){const cx=-6.6+(i%3)*0+ (i<3?-6:0);const z=-4.5+ (i%3)*3.1;const x=i<3?-7.2:7.2;g.add(box(1.0,.3,2.0,M(T.wood,.9,0x6a4a2a),x,.32,z));g.add(box(.95,.2,1.5,M(null,1,[0x8a3a3a,0x3a5a8a,0x6a6a3a][i%3]),x,.55,z+.15));const hd=new THREE.Mesh(new THREE.SphereGeometry(.15,14,10),M(null,.8,0xc89a78));hd.position.set(x,.66,z-.78);g.add(hd)}
+ for(let i=0;i<7;i++)g.add(box(1.4,.9,.9,M(T.hay,1),-6+i*1.5,.45+(i%2)*.9,-6.2));
+ const lan=new THREE.Mesh(new THREE.CylinderGeometry(.14,.14,.34,10),new THREE.MeshBasicMaterial({color:0xffd27a}));lan.position.set(0,3.7,-1.5);g.add(lan);const L=new THREE.PointLight(0xffb866,140,28,2);L.position.set(0,3.5,-1.5);L.castShadow=true;L.shadow.mapSize.set(1024,1024);L.shadow.bias=-.002;g.add(L);
+ const L2=new THREE.PointLight(0xffe8b0,40,14,2);L2.position.set(0,1.9,-6.0);g.add(L2);
+ g.userData.lights=[L,L2];g.visible=false;S.add(g);return g}
+function mkShop(){const g=new THREE.Group();g.position.set(-300,0,0);const pm=()=>M(texClone(T.plaster,4,2),.95,0xc8b8a0);
+ const fl=new THREE.Mesh(new THREE.PlaneGeometry(12,10),M(texClone(T.wood,5,5),.8,0x8a7058));fl.rotation.x=-Math.PI/2;fl.receiveShadow=true;g.add(fl);
+ g.add(box(12,4,.3,pm(),0,2,-3.8,false));g.add(box(.3,4,10,pm(),-6,2,0,false));g.add(box(.3,4,10,pm(),6,2,0,false));g.add(box(12,4,.3,pm(),0,2,5,false));const rf=new THREE.Mesh(new THREE.PlaneGeometry(12,10),M(null,1,0x2a2018));rf.rotation.x=Math.PI/2;rf.position.y=4;g.add(rf);
+ const win=new THREE.Mesh(new THREE.PlaneGeometry(1.8,1.5),new THREE.MeshBasicMaterial({color:0x182a52}));win.position.set(-2.4,2.2,-3.6);g.add(win);for(const [w,h,x,y] of[[2.0,.1,-2.4,2.98],[2.0,.1,-2.4,1.44],[.1,1.6,-3.4,2.2],[.1,1.6,-1.4,2.2],[.06,1.5,-2.4,2.2]])g.add(box(w,h,.12,M(T.wood,.8),x,y,-3.6,false));
+ g.add(box(3.4,.1,1.3,M(T.wood,.8,0x9a7a56),.4,.86,-2.2));for(const [x,z] of[[-1.2,-2.7],[2.0,-2.7],[-1.2,-1.7],[2.0,-1.7]])g.add(box(.1,.86,.1,M(T.wood,.8,0x7a5a3c),x,.43,z));
+ const cols=[0x2a9a7a,0xc0702a,0x2a70b0,0x9a2a60,0x8a9a2a];for(let i=0;i<5;i++){const j=new THREE.Mesh(new THREE.CylinderGeometry(.09,.09,.24,16),new THREE.MeshStandardMaterial({color:cols[i],roughness:.2,transparent:true,opacity:.85}));j.position.set(-.6+i*.32,1.03,-2.4);j.castShadow=true;g.add(j);const cp=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,.04,12),M(null,.6,0xd8d0b8));cp.position.set(-.6+i*.32,1.17,-2.4);g.add(cp)}
+ g.add(box(.7,.12,.45,M(null,.7,0xe8e2cc),1.5,.96,-2.0));g.add(box(.5,.05,.12,M(null,.6,0xd8c040),1.5,1.03,-2.0));
+ for(let i=0;i<3;i++)g.add(box(.3,2.6,2.6,M(T.wood,.9,0x7a5a3c),5.7,1.3,-1.4+0,false));
+ for(let r=0;r<3;r++){g.add(box(.5,.05,2.4,M(T.wood,.9,0x7a5a3c),5.6,.9+r*.7,-1.2,false));for(let i=0;i<4;i++){const jj=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.2,12),M(null,.4,[0x6a8a4a,0xa06a3a,0x4a6a9a][(r+i)%3]));jj.position.set(5.5,1.02+r*.7,-2+i*.55);g.add(jj)}}
+ const lamp=new THREE.Mesh(new THREE.ConeGeometry(.28,.3,14,1,true),new THREE.MeshBasicMaterial({color:0xe8c070,side:THREE.DoubleSide}));lamp.position.set(.5,3.0,-1.8);g.add(lamp);const cord=box(.02,1.0,.02,M(null,1,0x222222),.5,3.5,-1.8,false);g.add(cord);
+ const L=new THREE.PointLight(0xffc27a,110,24,2);L.position.set(.5,2.8,-1.8);L.castShadow=true;L.shadow.mapSize.set(1024,1024);L.shadow.bias=-.002;g.add(L);const L2=new THREE.PointLight(0x6a80c0,12,10,2);L2.position.set(-2.4,2.2,-3.0);g.add(L2);
+ g.userData.lights=[L,L2];g.visible=false;S.add(g);return g}
+const BARN=mkBarn(),SHOP=mkShop();
+
+// ---------- 2D characters as billboards in the 3D set ----------
+const CW=720,CH_=1240,RS=2;
+function sprite(who,hm,pos,opt={}){const cvs=document.createElement('canvas');cvs.width=CW;cvs.height=CH_;const cx=cvs.getContext('2d');const tx=new THREE.CanvasTexture(cvs);tx.encoding=THREE.sRGBEncoding;tx.anisotropy=4;
+ const ch=CH[who];const sc=opt.sc||(ch.z?1.6:(ch.dog?1.5:2.0));const hPx=(ch.z?210:(ch.dog?150:254))*sc*ch.h*RS;const ph=CH_/hPx*hm,pw=ph*CW/CH_;
+ const mat=new THREE.MeshBasicMaterial({map:tx,transparent:true,alphaTest:.04,side:THREE.DoubleSide,toneMapped:false});const m=new THREE.Mesh(new THREE.PlaneGeometry(pw,ph),mat);m.position.set(pos[0],ph/2-.02,pos[1]);S.add(m);
+ const sh=new THREE.Mesh(new THREE.CircleGeometry(.55*(hm/1.7)*(ch.w||1),24),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.42,depthWrite:false}));sh.rotation.x=-Math.PI/2;sh.position.set(pos[0],.02,pos[1]);sh.scale.y=.6;S.add(sh);
+ return {who,mesh:m,sh,ph,mat,cx,tx,sc,ch,hm,pos,face:opt.face||1,expr:opt.expr||'calm',prop:opt.prop,z:!!ch.z,seed:opt.seed||pos[0]*3.1}}
+const CAST={},Z=[];
+const HM={nell:1.68,mayor:1.8,gran:1.55,timo:1.42,doc:1.75,biscuit:.62};
+for(const k in HM){CAST[k]=sprite(k,HM[k],[0,0],{expr:'calm',face:1});CAST[k].mesh.visible=false;CAST[k].sh.visible=false}
+CH.biscuit={dog:1,h:1,w:1};
+const ZV=['z_robe','z_postman','z_jogger','z_suit','z_pyjama'];
+for(let i=0;i<9;i++){const a=Math.PI*(.7+i*.075),r=27+rnd(i+4)*5;const z=sprite(ZV[i%5],1.7,[Math.cos(a)*r,-Math.abs(Math.sin(a))*r*.9-9],{face:-1,seed:i*7.3});Z.push(z)}
+function drawSprite(sp,t,speaking){const cx=sp.cx;cx.setTransform(1,0,0,1,0,0);cx.clearRect(0,0,CW,CH_);cx.setTransform(RS,0,0,RS,CW/2,CH_-36);
+ const ph=sp.seed;let P={x:0,y:0,s:sp.sc,face:sp.face,expr:sp.expr,look:Math.sin(t*.6+ph)*.5,mouth:0,prop:sp.prop,bob:0,lean:0,tilt:0,legA:[0,0],legB:[0,0],armF:[8,8],armN:[8,10]};
+ if(sp.z){P.lean=14;P.armN=[82+Math.sin(t*2+ph)*7,-8];P.armF=[76+Math.sin(t*2.3+ph)*7,-6];P.tilt=10+Math.sin(t*1.2+ph)*5;P.bob=Math.sin(t*1.5+ph)*3;drawChar(cx,{who:sp.who},P,t)}
+ else if(sp.ch.dog){drawDog(cx,{who:sp.who,expr:sp.expr},P,t)}
+ else{P.bob=Math.sin(t*2+ph)*2;P.mouth=speaking?Math.max(0,Math.abs(Math.sin(t*11+ph))*(.5+.5*Math.sin(t*3))):0;P.armLift=speaking?20:0;drawFront(cx,{who:sp.who},P,t)}
+ sp.tx.needsUpdate=true}
+
+ST.cap='speaker';ST.line=4.5;
+const ENV={square:{g:SQ,ox:0,bg:0x0a1226,fog:[0x101c3c,.02],tint:[.9,.88,1],zs:true,moon:2.6,hemi:1.5,lamp:150},
+ night:{g:SQ,ox:0,bg:0x060a18,fog:[0x0a1230,.026],tint:[.8,.8,.95],zs:true,moon:1.7,hemi:.8,lamp:110},
+ barn:{g:BARN,ox:300,bg:0x120c08,fog:[0x1a120c,.04],tint:[1,.93,.82]},
+ shop:{g:SHOP,ox:-300,bg:0x120e14,fog:[0x181420,.035],tint:[1,.93,.85]}};
+window.setSpec=sp=>{SPEC=sp};
+window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(const x of sp.shots){if(t>=x.t0&&t<x.t1){sh=x;break}}
+ const lt=Math.min(t,sh.t1-1e-3)-sh.t0,dur=sh.t1-sh.t0;ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,W,H);ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+ if(sh.card){ctx.setTransform(SF,0,0,SF,0,0);CARD[sh.card.type||'title'](ctx,sh.card,lt);titleBar(ctx,sp);drawCaptions(sh,t)}
+ else{const E=ENV[sh.env||'square'];SQ.visible=E.g===SQ;BARN.visible=E.g===BARN;SHOP.visible=E.g===SHOP;
+  S.background.setHex(E.bg);S.fog.color.setHex(E.fog[0]);S.fog.density=E.fog[1];
+  if(E.g===SQ){moonL.intensity=E.moon;HEMI.intensity=E.hemi;warm.forEach((L,i)=>{L.intensity=E.lamp+Math.sin(t*.9+i*2)*6})}
+  else{E.g.userData.lights.forEach((L,i)=>{L.intensity=(i?L.intensity:L.intensity)})}
+  const u=ease(clamp(lt/dur));const c=sh.cam,ox=E.ox;
+  cam.fov=sh.fov||38;cam.updateProjectionMatrix();
+  cam.position.set(ox+lerp(c[0][0],c[2][0],u),lerp(c[0][1],c[2][1],u),lerp(c[0][2],c[2][2],u));cam.lookAt(ox+lerp(c[1][0],c[3][0],u),lerp(c[1][1],c[3][1],u),lerp(c[1][2],c[3][2],u));
+  cam.position.x+=Math.sin(t*1.7)*.01;cam.position.y+=Math.sin(t*2.3)*.007;cam.updateMatrixWorld();
+  for(const k in CAST){CAST[k].mesh.visible=false;CAST[k].sh.visible=false}
+  for(const ch of (sh.chars||[])){const sp2=CAST[ch.who];sp2.mesh.visible=true;sp2.sh.visible=true;sp2.mesh.position.set(ox+ch.pos[0],sp2.ph/2-.02,ch.pos[1]);sp2.sh.position.set(ox+ch.pos[0],.02,ch.pos[1]);sp2.expr=ch.expr||'calm';sp2.face=ch.face||1;sp2.prop=ch.prop;sp2.look=ch.look||0;
+   const speaking=(sh.lines||[]).some(l=>l.who===ch.who&&t>=l.t0&&t<l.t1);drawSprite(sp2,t,speaking);sp2.mesh.quaternion.copy(cam.quaternion);sp2.mat.color.setRGB(E.tint?E.tint[0]*.9:.9,E.tint?E.tint[1]*.9:.9,E.tint?E.tint[2]*.9:.9)}
+  const showZ=!!E.zs&&sh.zombies!==false;for(const z of Z){z.mesh.visible=showZ;z.sh.visible=showZ;if(showZ){drawSprite(z,t,false);z.mesh.quaternion.copy(cam.quaternion);z.mat.color.setRGB(.55,.58,.7)}}
+  R.render(S,cam);ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(cv,0,0);ctx.setTransform(SF,0,0,SF,0,0);titleBar(ctx,sp);drawCaptions(sh,t);strip(ctx,sh,sp,t);
+  for(const fx of (sh.fx||[])){if(fx[1]==='sticker'&&lt>=fx[0]&&lt<fx[0]+.9){const uu=(lt-fx[0])/.9,sc=1+Math.max(0,.25-uu)*3;ctx.save();ctx.translate(fx[3],fx[4]);ctx.rotate(-.1);ctx.scale(sc,sc);ctx.globalAlpha=clamp(1.6-uu*1.4);ctx.font='900 64px "Impact","Arial Black",sans-serif';ctx.textAlign='center';ctx.lineWidth=12;ctx.strokeStyle=OUT;ctx.strokeText(fx[2],0,0);ctx.fillStyle='#ffcf3a';ctx.fillText(fx[2],0,0);ctx.restore()}}}
+ ctx.setTransform(1,0,0,1,0,0);const fd=Math.min(1,lt/.15,(dur-lt)/.12);if(fd<1&&!sh.noFade){ctx.fillStyle='rgba(0,0,0,'+(1-fd)*.7+')';ctx.fillRect(0,0,W,H)}
+ return oc.toDataURL('image/jpeg',.93).slice(23)};
+window.fontsReady=document.fonts.load('900 38px "Roboto Condensed"');
+
+</script>
