@@ -17,8 +17,8 @@
   "metrics": {
    "dead_black_bottom_beats": "0/18",
    "dark_beats": 0,
-   "mean_saturation": 0.267,
-   "min_palette_distance": 11.8,
+   "mean_saturation": 0.264,
+   "min_palette_distance": 12.1,
    "static_beats": [],
    "cut_by_edge": [
     [
@@ -60,7 +60,7 @@
   ],
   "metrics": {
    "lufs": -14.0,
-   "true_peak": -2.0,
+   "true_peak": -2.1,
    "speakers": {
     "ren": {
      "db": -20.4,
@@ -202,15 +202,15 @@
      1920
     ],
     "detail": 8.9,
-    "colourful": 51.0
+    "colourful": 50.7
    },
    "cover_16x9.png": {
     "size": [
      1280,
      720
     ],
-    "detail": 4.9,
-    "colourful": 43.6
+    "detail": 5.0,
+    "colourful": 43.2
    }
   }
  },
@@ -270,7 +270,7 @@
    "acodec": "aac",
    "arate": "48000",
    "lufs": -14.0,
-   "true_peak": -2.0,
+   "true_peak": -2.1,
    "black_segments": [],
    "frozen_s": []
   }

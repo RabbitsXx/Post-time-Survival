@@ -208,6 +208,20 @@
      "h": 210,
      "z": 1,
      "r": 170
+    },
+    {
+     "t": "poster",
+     "x": 560,
+     "y": 330,
+     "s": 0.8,
+     "label": ""
+    },
+    {
+     "t": "poster",
+     "x": 1170,
+     "y": 300,
+     "s": 0.6,
+     "label": ""
     }
    ],
    "tint": [
@@ -215,7 +229,8 @@
     0.14
    ],
    "label": "hotel kitchen",
-   "cone": "M200,-100 L520,-100 L860,640 L120,640Z"
+   "cone": "M200,-100 L520,-100 L860,640 L120,640Z",
+   "pattern": "tiles"
   },
   "service": {
    "kind": "lane",
@@ -390,6 +405,13 @@
      "h": 300,
      "z": 1,
      "c": "#c0604a"
+    },
+    {
+     "t": "poster",
+     "x": 900,
+     "y": 330,
+     "s": 0.9,
+     "label": ""
     }
    ],
    "tint": [
@@ -397,7 +419,8 @@
     0.16
    ],
    "label": "hotel lobby",
-   "wain": "rgba(90,50,20,.18)"
+   "wain": "rgba(90,50,20,.18)",
+   "pattern": "stripes"
   },
   "street": {
    "kind": "out",

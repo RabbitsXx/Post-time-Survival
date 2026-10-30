@@ -163,7 +163,7 @@ def strike(sc,who,zname,word,held=None,wind=.5,kill=True,fall_dx=34,**kw):
     scn,view=shot
     for a in scn['p']['acts']:
         if a.get('k')==who:
-            a['view']='side';a['flip']=flip;a['seq']=turn((0,'side',None,{'pose':'windup','flip':flip}),(wind,'side',None,{'pose':'punch','flip':flip}),(wind+.45,'side',None,{'pose':'follow','flip':flip}))
+            a['view']='side';a['flip']=flip;a['seq']=turn(*[(at,'side',None,{'pose':ps,'flip':flip}) for at,ps in((0,'windup'),(wind-.2,'wp1'),(wind-.13,'wp2'),(wind-.06,'wp3'),(wind,'punch'),(wind+.1,'pf1'),(wind+.2,'pf2'),(wind+.3,'pf3'),(wind+.45,'follow'))])
         if a.get('nm')==zname:
             a['shake']=dict(at=wind+.12,dur=.3,amp=7)
             if kill:a['fall']=dict(at=wind+.12,dur=.6,rot=-88,dx=fall_dx*(1 if a.get('flip') else -1))

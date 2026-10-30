@@ -128,6 +128,7 @@ function paxHead(g,P,o){
  const mf=pMouth(q,ex,0,ink);pHairFront(q,D,P,v,ink);pSweat(q,o);pTears(q,o);
  if(D.flatcap&&ex.eye==='closed'){}
  q._mouth=mf;mf(o.mouth||0);return q}
+
 (function(){const _kh=khead;khead=function(g,P,o){if(PAXH[o.who])return paxHead(g,P,o);return _kh(g,P,o)}})();
 
 /* ---- body decorations (called by keeper after the torso/arms are drawn): vest, tie, stethoscope, bandage ... ---- */
@@ -191,3 +192,6 @@ Object.assign(SIDE,{
  windup:{lean:-12,n:{l:[[2,-140],[14,-76],[8,-14]],a:[[2,-250],[-34,-262],[-62,-320]]},f:{l:[[-2,-140],[-18,-72],[-24,-14]],a:[[-2,-250],[-26,-236],[-48,-290]]}},
  follow:{lean:20,n:{l:[[2,-140],[24,-80],[14,-14]],a:[[2,-250],[56,-214],[96,-160]]},f:{l:[[-2,-140],[-20,-72],[-26,-14]],a:[[-2,-250],[-8,-196],[18,-150]]}},
  punch:{lean:12,n:{l:[[2,-140],[18,-76],[10,-14]],a:[[2,-250],[50,-248],[100,-250]]},f:{l:[[-2,-140],[-16,-72],[-20,-14]],a:[[-2,-250],[-20,-200],[-8,-160]]}}});
+function _bl(a,b,t){const m=(x,y)=>x+(y-x)*t,pr=(P,Q)=>P.map((p,i)=>[m(p[0],Q[i][0]),m(p[1],Q[i][1])]);return {lean:m(a.lean||0,b.lean||0),n:{l:pr(a.n.l,b.n.l),a:pr(a.n.a,b.n.a)},f:{l:pr(a.f.l,b.f.l),a:pr(a.f.a,b.f.a)}}}
+(function(){const S=SIDE;if(!S.windup||!S.punch||!S.follow)return;[.25,.5,.75].forEach((t,i)=>{S['wp'+(i+1)]=_bl(S.windup,S.punch,t);S['pf'+(i+1)]=_bl(S.punch,S.follow,t)})})();
+
