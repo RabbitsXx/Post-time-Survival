@@ -329,6 +329,85 @@
     "rescue"
    ],
    "drawn_in": "world9.js"
+  },
+  "elevator": {
+   "fit": [
+    "building",
+    "indoor",
+    "urban",
+    "hotel",
+    "hospital"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "floorsign": {
+   "fit": [
+    "building",
+    "indoor",
+    "urban"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "sofa": {
+   "fit": [
+    "indoor",
+    "home",
+    "building"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "pizza": {
+   "fit": [
+    "indoor",
+    "urban",
+    "home",
+    "shop"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "cage": {
+   "fit": [
+    "indoor",
+    "home",
+    "shop",
+    "zoo"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "glassdoor": {
+   "fit": [
+    "building",
+    "indoor",
+    "urban",
+    "shop"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "rail": {
+   "fit": [
+    "building",
+    "indoor",
+    "urban",
+    "roof"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "skyline": {
+   "fit": [
+    "urban",
+    "city",
+    "roof"
+   ],
+   "drawn_in": "world9.js"
+  },
+  "pan": {
+   "fit": [
+    "indoor",
+    "home",
+    "kitchen",
+    "camp"
+   ],
+   "drawn_in": "world9.js"
   }
  }
 }

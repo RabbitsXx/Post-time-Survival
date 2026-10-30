@@ -135,6 +135,7 @@ def main():
         bd=dict(t=[round(t0,3),round(t0+dur,3)],scene=sc,skin=b['skin'],cam=cam,caps=caps,fx=fx,mood=b['mood'],i=bi)
         if b.get('view'):bd['view']=b['view']        # 9:16 engine: window onto the 1280x720 world
         if b.get('nofade'):bd['nofade']=True
+        if b.get('intent'):bd['intent']=b['intent']      # storyboard: who / does / where / how / why watch (storylint.py)
         beats.append(bd)
         moods.append((round(t0,3),round(t0+dur,3),b['mood']));t=t0+dur
     # frame-quantise beat boundaries so the engine and the audio agree

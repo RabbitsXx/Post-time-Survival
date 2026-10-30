@@ -11,6 +11,13 @@ from zlib9 import *
 from zlib9 import hz as _hz
 NUMW=['zero','one','two','three','four','five','six','seven','eight','nine','ten']
 FOOT=640;R=os.path.dirname(os.path.abspath(__file__))
+def I(who,does,where,how,why):
+    """the storyboard line of a beat: WHO is in it, what they DO (an action, not 'talks'), WHERE (a place the viewer can see), HOW it is shown (pose / prop / camera), WHY the viewer keeps watching (a question, a threat, a promise)"""
+    return dict(who=who,does=does,where=where,how=how,why=why)
+def flat(*xs):
+    out=[]
+    for x in xs:out+=flat(*x) if isinstance(x,list) else [x]
+    return out
 def turn(*steps):
     out=[]
     for st in steps:
@@ -39,7 +46,15 @@ class World:
             t=i/max(1,n-1);z=z0+(z1-z0)*((i*0.618)%1);X=X0+(X1-X0)*t;L=s.lane_pos(X,z)
             out.append(_hz(1,L['x'],L['x'],y=L['y'],s=2.7/z,seed=seed+i*7,jit=0,yj=0,human=True,**k))
         return sorted(out,key=lambda a:a['y'])
+    def hz(s,n,x0,x1,y=FOOT,sc=1.0,seed=5,**k):
+        """n human zombies between x0..x1 at ground y; sc 1.0 = as tall as a cast member"""
+        return _hz(n,x0,x1,y=y,s=1.6*sc,seed=seed,jit=30,yj=10,human=True,**k)
     def horde(s,n,x0,x1,y=650,sc=1.6,seed=5,**k):return _hz(n,x0,x1,y=y,s=sc,seed=seed,jit=50,human=True,**k)
+    def hold(s,act,item,dx=46,dy=-120,sc=.5,**k):
+        """a person holding a prop: returns [person, prop] (the prop follows the person when it walks)"""
+        p=dict(k='prop',t=item,x=act['x']+dx*act['s']/.8,y=act['y']+dy*act['s']/.8,s=sc*act['s']/.8);p.update(k)
+        if act.get('to'):p['to']=(act['to'][0]+dx*act['s']/.8,act['to'][1]+dy*act['s']/.8)
+        return [act,p]
     # ---- shots (return (scene, view) for Part.B) ----
     def set(s,v,acts=None,x=640,y=480,z=1.0,**p):p['v']=v;return stage(s.loc,acts or [],**p),dict(x=x,y=y,z=z)
     lane=set
@@ -73,7 +88,7 @@ class WorldPart(Script):
     def __init__(s,W,n,topic,of):
         Script.__init__(s,f'{W.name} - PART {n}: {topic}',W.name,n,of,topic,W.accent);s.W=W;s.say=W.say
     def B(s,say,shot,fx=None,**k):
-        fx=list(fx or [])
+        fx=list(fx or []);k.setdefault('pause',.35)    # a beat of air after each line so the story can be followed
         if isinstance(shot,tuple):
             sc,view=shot;lab=s.W.spec['locs'].get(sc['p'].get('v'),{}).get('label') or str(sc['p'].get('v','')).replace('-',' ')
             fx.append(dict(k=s.W.id+'_route',at=0,stop=s.part,of=s.of,label=f'{s.say}  ·  {lab}'));return s.beat(say,sc,view=view,fx=fx,**k)
@@ -82,5 +97,5 @@ class WorldPart(Script):
         a=s.W.spec['ann'];return s.B([('ann',f"{a.get('hello','Attention.')} This is {s.say}. Part {NUMW[s.part]} of {NUMW[s.of]}: {s.topic.lower()}.")],card(s.W.id+'_ann',mode='open',part=s.part,of=s.of,title=s.topic.upper()),mood='idle',sfx=[('radio',0)],**k)
     def close(s,nxt=None,**k):
         if s.part<s.of:t=f"Part {NUMW[s.part]} of {NUMW[s.of]}, {s.say}. Next: {(nxt or '').lower()}. Follow for part {NUMW[s.part+1]}.";c=card(s.W.id+'_ann',mode='close',part=s.part,of=s.of,next=(nxt or '').upper())
-        else:t=f"Part {NUMW[s.of]} of {NUMW[s.of]}, the end of {s.say}. Follow for the next series.";c=card('end',series=s.series,part=s.part,of=s.of)
+        else:t=f"Part {NUMW[s.of]} of {NUMW[s.of]}, the end of {s.say}. Follow for the next series.";c=card(s.W.id+'_ann',mode='end',part=s.part,of=s.of)
         return s.B([('ann',t)],c,mood='idle' if s.part<s.of else 'sad',nofade=s.part>=s.of,sfx=[('radio',0)],**k)
