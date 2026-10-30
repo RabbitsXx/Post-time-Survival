@@ -47,3 +47,6 @@ Keep the ordinary 3-part topics flowing too when `status` asks for them.
 
 ## Progress reports (owner 2026-10-30)
 Always report progress while working: `python3 studio/autopilot/notify.py "message"` posts to the owner's Discord (webhook in env DISCORD_WEBHOOK or the gitignored `autopilot/discord.env`; never print or commit it). build_clip/daily.build already post step results; add a line at the start of the run, after each finished topic/episode, and at the end. If the network blocks discord.com the call just fails quietly: say so in the final report.
+
+## CHANNEL OWNER MODE (owner 2026-10-30: "everything, as if the channel were yours")
+You own the channel. Read `studio/strategy/CHANNEL.md` (charter + guardrails) and `studio/strategy/DECISIONS.md` first. Every run, before making content: `python3 studio/autopilot/daily.py insight` (analytics + trends + strategy), read ANALYTICS.md / TRENDS.md / STRATEGY_AUTO.md, WebSearch what is trending around zombie / survival shorts, then append dated decisions (with the number or source) to DECISIONS.md and let them steer topics, titles, covers, length, hooks. `publish_mode` changes to `live` only when the owner says so.

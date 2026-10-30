@@ -90,4 +90,6 @@ if __name__=='__main__':
     elif a[0]=='build':sys.exit(1 if build(a[1:]) else 0)
     elif a[0]=='publish':sys.exit(1 if publish() else 0)
     elif a[0]=='report':report()
+    elif a[0]=='insight':
+        for f in('analytics','trends','strategy'):print(sh([py,R+f'/../strategy/{f}.py'])[1][-1500:])
     elif a[0]=='ready':rc,out=sh([py,R+'/preflight.py']);print(out);sys.exit(0 if 'MISSING/FAILING: []' in out or 'MISSING/FAILING' not in out else 1)
