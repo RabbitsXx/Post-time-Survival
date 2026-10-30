@@ -19,6 +19,8 @@ def run():
                 later=st.mean(v[2:])/v[0]
                 if later<.15:L.append(f"  - RETENTION CLIFF: parts 3+ get {later:.0%} of part 1. Fix: a cliffhanger the viewer must resolve in the next part (open loop), part title in the hook line, post parts closer together, and keep a series to what the hook can carry.")
                 elif later<.5:L.append(f"  - soft drop-off ({later:.0%} of part 1 on parts 3+): strengthen the last 5 s of each part and put the next part's number in the pinned comment.")
+            ap=[r['avg_pct'] for r in rs if r.get('avg_pct') is not None]
+            if ap and st.mean(ap)<50:L.append(f"  - average % viewed {st.mean(ap):.0f}% (< 50 %): the first 3 s and the middle sag lose people: shorten, hook harder, cut the slowest beat.")
             lr=[r['likes']/max(1,r['views']) for r in rs]
             if st.mean(lr)<.02:L.append(f"  - like rate {st.mean(lr):.1%} (< 2 %): add an explicit emotional beat + a direct ask ('If you would go up, like') in the last line.")
         best=max(k['rows'],key=lambda r:r['views']);L.append(f"* best clip: {best['clip']} '{best['title'][:70]}' ({best['views']} views): copy its hook shape.")
