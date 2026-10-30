@@ -362,6 +362,489 @@
     }
    ],
    "label": "city street"
+  },
+  "jam": {
+   "kind": "lane",
+   "indoor": false,
+   "wall": "#2a3250",
+   "ground": "#1c202a",
+   "roadc": "#2a2e3a",
+   "road": 260,
+   "vpy": 398,
+   "sides": [
+    {
+     "x": 250,
+     "side": -1,
+     "item": {
+      "t": "car",
+      "s": 1.2,
+      "c": "#8a3a3a"
+     }
+    },
+    {
+     "x": 250,
+     "side": 1,
+     "item": {
+      "t": "car",
+      "s": 1.2,
+      "c": "#3a6a8a"
+     }
+    }
+   ],
+   "end": {
+    "t": "barricade",
+    "s": 1.4
+   },
+   "tint": [
+    "#e8803c",
+    0.1
+   ],
+   "label": "gridlocked road"
+  },
+  "gas": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#1c202a",
+   "items": [
+    {
+     "t": "building",
+     "x": 300,
+     "y": 590,
+     "w": 300,
+     "h": 240,
+     "c": "#3a4a5c",
+     "z": 1,
+     "lit": 0.7
+    },
+    {
+     "t": "sign",
+     "x": 640,
+     "y": 420,
+     "s": 1.2,
+     "label": "GAS"
+    },
+    {
+     "t": "car",
+     "x": 860,
+     "y": 640,
+     "s": 1.2,
+     "c": "#5a8a3a"
+    },
+    {
+     "t": "barrel",
+     "x": 1040,
+     "y": 630,
+     "s": 1.1
+    },
+    {
+     "t": "lamp",
+     "x": 720,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    },
+    {
+     "t": "crate",
+     "x": 200,
+     "y": 630,
+     "s": 1.0
+    }
+   ],
+   "label": "gas station"
+  },
+  "tunnel": {
+   "kind": "lane",
+   "indoor": true,
+   "wall": "#1a1e28",
+   "ground": "#14161e",
+   "roadc": "#1e222c",
+   "road": 230,
+   "vpy": 398,
+   "sides": [
+    {
+     "x": 250,
+     "side": -1,
+     "item": {
+      "t": "pipe",
+      "s": 1.2
+     }
+    },
+    {
+     "x": 250,
+     "side": 1,
+     "item": {
+      "t": "lamp",
+      "s": 1.2,
+      "h": 260
+     }
+    }
+   ],
+   "end": {
+    "t": "glow",
+    "s": 1.5
+   },
+   "tint": [
+    "#203050",
+    0.16
+   ],
+   "label": "rail tunnel"
+  },
+  "ward": {
+   "kind": "in",
+   "wall": "#5a6a68",
+   "floor": "#3a4442",
+   "items": [
+    {
+     "t": "bed",
+     "x": 300,
+     "y": 600,
+     "s": 1.1
+    },
+    {
+     "t": "cabinet",
+     "x": 620,
+     "y": 590,
+     "s": 1.3,
+     "c": "#8a9a98"
+    },
+    {
+     "t": "shelf",
+     "x": 900,
+     "y": 600,
+     "s": 1.3
+    },
+    {
+     "t": "door",
+     "x": 1100,
+     "y": 600,
+     "s": 1.3,
+     "c": "#6a7a78"
+    },
+    {
+     "t": "lamp",
+     "x": 520,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    }
+   ],
+   "tint": [
+    "#58c0b0",
+    0.1
+   ],
+   "label": "hospital ward"
+  },
+  "rv": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#222a1e",
+   "items": [
+    {
+     "t": "hill",
+     "x": 300,
+     "y": 590,
+     "w": 700,
+     "h": 160,
+     "c": "#1a2418",
+     "z": 0
+    },
+    {
+     "t": "bus",
+     "x": 380,
+     "y": 640,
+     "s": 1.2
+    },
+    {
+     "t": "tent",
+     "x": 800,
+     "y": 620,
+     "s": 1.2
+    },
+    {
+     "t": "fence",
+     "x": 640,
+     "y": 670,
+     "w": 1500,
+     "s": 1.1
+    },
+    {
+     "t": "lamp",
+     "x": 1040,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    },
+    {
+     "t": "barrel",
+     "x": 1150,
+     "y": 630,
+     "s": 1.0
+    }
+   ],
+   "label": "RV park"
+  },
+  "tower": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#1e2230",
+   "items": [
+    {
+     "t": "tower",
+     "x": 640,
+     "y": 630,
+     "h": 520
+    },
+    {
+     "t": "rail",
+     "x": 640,
+     "y": 640,
+     "w": 500
+    },
+    {
+     "t": "lamp",
+     "x": 300,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    },
+    {
+     "t": "tank",
+     "x": 1000,
+     "y": 610,
+     "s": 1.5
+    },
+    {
+     "t": "rock",
+     "x": 1150,
+     "y": 640,
+     "s": 1.2
+    }
+   ],
+   "label": "radio tower"
+  },
+  "check": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#1c2028",
+   "items": [
+    {
+     "t": "barricade",
+     "x": 500,
+     "y": 650,
+     "s": 1.3
+    },
+    {
+     "t": "barricade",
+     "x": 700,
+     "y": 650,
+     "s": 1.3
+    },
+    {
+     "t": "tent",
+     "x": 200,
+     "y": 620,
+     "s": 1.2
+    },
+    {
+     "t": "flag",
+     "x": 1000,
+     "y": 620,
+     "s": 1.3
+    },
+    {
+     "t": "car",
+     "x": 1150,
+     "y": 650,
+     "s": 1.2,
+     "c": "#4a5a3a"
+    },
+    {
+     "t": "lamp",
+     "x": 860,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    },
+    {
+     "t": "fence",
+     "x": 640,
+     "y": 680,
+     "w": 1500,
+     "s": 1.1
+    }
+   ],
+   "label": "checkpoint nine"
+  },
+  "drain": {
+   "kind": "lane",
+   "indoor": true,
+   "wall": "#243038",
+   "ground": "#1a2228",
+   "roadc": "#202c34",
+   "road": 230,
+   "vpy": 398,
+   "sides": [
+    {
+     "x": 250,
+     "side": -1,
+     "item": {
+      "t": "pipe",
+      "s": 1.3
+     }
+    },
+    {
+     "x": 250,
+     "side": 1,
+     "item": {
+      "t": "pipe",
+      "s": 1.3
+     }
+    }
+   ],
+   "end": {
+    "t": "glow",
+    "s": 1.3
+   },
+   "tint": [
+    "#38a0b0",
+    0.14
+   ],
+   "label": "storm drain"
+  },
+  "field": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#2a3220",
+   "items": [
+    {
+     "t": "hill",
+     "x": 400,
+     "y": 590,
+     "w": 900,
+     "h": 200,
+     "c": "#223018",
+     "z": 0
+    },
+    {
+     "t": "tree",
+     "x": 250,
+     "y": 600,
+     "s": 1.4
+    },
+    {
+     "t": "fence",
+     "x": 640,
+     "y": 660,
+     "w": 1500,
+     "s": 1.0
+    },
+    {
+     "t": "rock",
+     "x": 900,
+     "y": 630,
+     "s": 1.2
+    },
+    {
+     "t": "tree",
+     "x": 1150,
+     "y": 600,
+     "s": 1.6
+    }
+   ],
+   "label": "open field"
+  },
+  "farm": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#2a3020",
+   "items": [
+    {
+     "t": "hill",
+     "x": 300,
+     "y": 590,
+     "w": 800,
+     "h": 180,
+     "c": "#223018",
+     "z": 0
+    },
+    {
+     "t": "house",
+     "x": 420,
+     "y": 600,
+     "s": 1.5
+    },
+    {
+     "t": "tree",
+     "x": 760,
+     "y": 600,
+     "s": 1.5
+    },
+    {
+     "t": "fence",
+     "x": 640,
+     "y": 670,
+     "w": 1500,
+     "s": 1.1
+    },
+    {
+     "t": "tank",
+     "x": 1000,
+     "y": 610,
+     "s": 1.4
+    },
+    {
+     "t": "lamp",
+     "x": 640,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    }
+   ],
+   "label": "Harrow Farm"
+  },
+  "barn": {
+   "kind": "in",
+   "wall": "#5a4030",
+   "floor": "#3a2a20",
+   "items": [
+    {
+     "t": "shelf",
+     "x": 260,
+     "y": 600,
+     "s": 1.4
+    },
+    {
+     "t": "crate",
+     "x": 640,
+     "y": 620,
+     "s": 1.3
+    },
+    {
+     "t": "barrel",
+     "x": 860,
+     "y": 620,
+     "s": 1.2
+    },
+    {
+     "t": "door",
+     "x": 1080,
+     "y": 600,
+     "s": 1.4,
+     "c": "#6a4a30"
+    },
+    {
+     "t": "lamp",
+     "x": 480,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    }
+   ],
+   "tint": [
+    "#e0a050",
+    0.12
+   ],
+   "label": "barn"
   }
  },
  "new": {
@@ -386,27 +869,55 @@
   ],
   "tied_to_topic": "Topic = the first hours of an outbreak; zombies react to sound, so the quiet hero wins by silence, a sprayer, a wrench and counting three moves; the tip is to listen before you look.",
   "setting_tags": [
-   "urban",
-   "indoor",
    "building",
+   "camp",
+   "farm",
+   "field",
+   "forest",
+   "hospital",
+   "hotel",
+   "indoor",
+   "mountain",
+   "outdoor",
+   "park",
+   "road",
+   "roof",
+   "ruin",
+   "rural",
    "street",
-   "hotel"
+   "tunnel",
+   "urban"
   ],
   "props_reused": [
-   "shelf",
-   "table",
-   "pipe",
-   "lamp",
-   "door",
-   "crate",
-   "stairs",
-   "poster",
-   "sofa",
-   "glassdoor",
-   "building",
-   "car",
+   "barrel",
    "barricade",
-   "rubble"
+   "bed",
+   "building",
+   "bus",
+   "car",
+   "crate",
+   "door",
+   "fence",
+   "flag",
+   "glassdoor",
+   "glow",
+   "hill",
+   "house",
+   "lamp",
+   "pipe",
+   "poster",
+   "rail",
+   "rock",
+   "rubble",
+   "shelf",
+   "sign",
+   "sofa",
+   "stairs",
+   "table",
+   "tank",
+   "tent",
+   "tower",
+   "tree"
   ]
  }
 }

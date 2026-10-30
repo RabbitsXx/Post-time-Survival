@@ -270,6 +270,77 @@
    "tips": [
     "go-up-seal-the-fire-doors"
    ]
+  },
+  {
+   "id": "quiet",
+   "status": "pilot",
+   "name": "THE QUIET HAND",
+   "parts_log": {
+    "all": [
+     "dispatch-job-numbers",
+     "dispatch-radio",
+     "flashlight",
+     "hotel-service-stairs",
+     "pest-sprayer",
+     "pipe-wrench",
+     "ren-counts-three",
+     "w_quiet:kitchen",
+     "w_quiet:lobby",
+     "w_quiet:service",
+     "w_quiet:stair",
+     "w_quiet:street"
+    ],
+    "1": [
+     "w_quiet:kitchen",
+     "w_quiet:service",
+     "w_quiet:stair",
+     "w_quiet:lobby",
+     "w_quiet:street",
+     "pest-sprayer",
+     "pipe-wrench",
+     "flashlight",
+     "hotel-service-stairs",
+     "dispatch-radio",
+     "ren-counts-three",
+     "dispatch-job-numbers"
+    ]
+   },
+   "world": "quiet",
+   "setting": "the first 72 hours of an outbreak: a quiet ex-assassin turned exterminator crosses 240 km of city, highway, tunnel and farmland to reach the weapons he buried",
+   "structure": "road-trip countdown: each episode is one leg with a KM LEFT and HOUR counter; the hero starts every leg alone and meets people on the way",
+   "announcer": "pest-control-dispatch-radio",
+   "palette": "night blue, hazard amber, hotel rust",
+   "cast": [
+    "gus",
+    "marlow",
+    "noor",
+    "ren"
+   ],
+   "locs": [
+    "w_quiet:kitchen",
+    "w_quiet:lobby",
+    "w_quiet:service",
+    "w_quiet:stair",
+    "w_quiet:street"
+   ],
+   "props": [
+    "dispatch-radio",
+    "flashlight",
+    "hotel-service-stairs",
+    "pest-sprayer",
+    "pipe-wrench"
+   ],
+   "devices": [
+    "quiet_ann",
+    "quiet_route"
+   ],
+   "gags": [
+    "dispatch-job-numbers",
+    "ren-counts-three"
+   ],
+   "tips": [
+    "listen-before-you-look"
+   ]
   }
  ]
 }

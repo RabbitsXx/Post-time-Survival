@@ -51,3 +51,12 @@ Cache ไม่ได้มีแค่ปืน: ข้างในคือ **
 2. Fight helper (3-move choreography + count "Three."), zombie fall/KO, held weapons (ท่อพ่น/ประแจ/ไฟฉาย), รถตู้/รถ lane, ไฟฉายสแกนในที่มืด, phone voice, KM/HOUR card
 3. World: city/hotel basement/highway/gas station/tunnel/hospital/RV park/radio tower/checkpoint/field/farm (11 locs) + cast ใน worlds/quiet.json
 4. Hook formula ถูกใส่ในทุกตอนแล้วด้านบน (YOU/NUMBER/TWIST/LOOP) และจะผ่าน dialoguelint
+
+## CONTINUITY LEDGER (parallel authors: read this, do not contradict it)
+* Ren always carries the pipe wrench; the sprayer is left in the hotel (ep1). Tools found later may be added, never removed without a beat that shows it.
+* Ep1 ends: Ren on the city street at night, hotel behind him, first horde ahead. Ep2 starts there, alone: he takes the Vale & Son van.
+* Ren starts every episode alone. Noor is met at the END of ep3 (kid on the roof, bargains for the shortcut); ep4 she waits on the far side of the tunnel; she has a fever in ep5. Gus is met in ep5 (locked in a hospital fridge); vanishes in ep6. Marlow: voice only (radio / phone / dispatch) until ep8, in person in ep9.
+* KM LEFT / HOUR from the PLAN table appear on screen (route card + a line of dialogue) every episode.
+* The tip of each episode is spoken in the last third and appears on a rule card.
+* World locations are ALREADY defined in worlds/quiet.json (kitchen, service, stair, lobby, street, jam, gas, tunnel, ward, rv, tower, check, drain, field, farm, barn): do NOT edit that file or world9.js or worldlib.py (parallel sessions); if you need a new location, build it with W.set/stage inside your own episode file or reuse these.
+* Cast in worlds/quiet.json: ren, noor, gus, marlow. Each episode file declares NEW part_new (>= 2 new items) via W.exports(part_new=[...]).

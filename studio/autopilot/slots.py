@@ -32,8 +32,13 @@ def stream_slots(state,clips,now=None):
     if taken:
         last=max(taken,key=lambda c:c['due']);lt=dt.datetime.fromisoformat(last['due'].replace('Z',''))
         t=max(t,lt+dt.timedelta(minutes=brk if last.get('part')==last.get('of') else gap))
-    out=[]
+    out=[];ser=set(CFG.get('serial_series',[]))
+    anchors={c['series']:dt.datetime.fromisoformat(c['due'].replace('Z','')) for c in state['clips'] if c.get('part')==1 and c.get('due') and c['series'] in ser}
     for i,c in enumerate(clips):
+        a=anchors.get(c.get('series')) if c.get('series') in ser else None
+        if a is not None and c.get('part',1)>1:      # serial: part n is always anchor + (n-1) gaps, whoever publishes it (parallel sessions must not collide)
+            out.append(max(a+dt.timedelta(minutes=gap*(c['part']-1)),now+dt.timedelta(minutes=CFG['min_lead_minutes'])));continue
         out.append(t)
+        if c.get('series') in ser:anchors[c['series']]=t     # part 1 of a serial found in this batch anchors the rest
         t=t+dt.timedelta(minutes=brk if c.get('part')==c.get('of') else gap)
     return out
