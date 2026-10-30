@@ -14,6 +14,9 @@ STEPS=[('newness',NW),('spec',[py,'build16.py',f'arcs/{arc}/{cid}',f'p9/{cid}'])
  ('render',[py,'render9.py','--spec',f'p9/{cid}/spec.json','--out',f'frames9_{cid}']),('finish',[py,'finish9.py','--p',f'p9/{cid}','--frames',f'frames9_{cid}','--out',f'final9_{cid}.mp4']),
  ('cover',[py,'cover9.py',cid]),('embed',[py,'embed9.py',cid]),('kit',[py,'kit9.py',cid]),('qa',[py,'qa9.py',cid])]
 go=False
+if frm=='newness':
+    try:os.remove(f'{LONG}/p9/{cid}/spec.json')   # a stale spec from an earlier build must not be judged by the newness gate
+    except OSError:pass
 for name,cmd in STEPS:
     if name==frm:go=True
     if not go:continue

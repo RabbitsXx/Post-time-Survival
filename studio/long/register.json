@@ -158,6 +158,83 @@
     "farmend",
     "nightline"
    ]
+  },
+  {
+   "id": "lastfloor",
+   "status": "pilot",
+   "name": "THE LAST FLOOR",
+   "parts_log": {
+    "all": [
+     "elevator",
+     "fire-door",
+     "frying-pan",
+     "keyring",
+     "parrot-cage",
+     "parrot-repeats-the-worst-line",
+     "roof-tank",
+     "signal-flare",
+     "w_lastfloor:flat",
+     "w_lastfloor:hall",
+     "w_lastfloor:lobby",
+     "w_lastfloor:roof",
+     "w_lastfloor:stair",
+     "w_lastfloor:street"
+    ],
+    "1": [
+     "w_lastfloor:lobby",
+     "w_lastfloor:hall",
+     "w_lastfloor:stair",
+     "w_lastfloor:flat",
+     "w_lastfloor:street",
+     "w_lastfloor:roof",
+     "elevator",
+     "keyring",
+     "frying-pan",
+     "parrot-cage",
+     "fire-door",
+     "roof-tank",
+     "signal-flare",
+     "parrot-repeats-the-worst-line"
+    ]
+   },
+   "world": "lastfloor",
+   "setting": "a twelve-floor apartment tower on its last night, climbed floor by floor from lobby to roof",
+   "structure": "ascent: one floor per scene, a neighbour behind every door, the climb ends on the roof",
+   "announcer": "tower-intercom",
+   "palette": "storm navy, mint green, window amber",
+   "cast": [
+    "bell",
+    "omar",
+    "pip",
+    "zara"
+   ],
+   "locs": [
+    "w_lastfloor:flat",
+    "w_lastfloor:hall",
+    "w_lastfloor:lobby",
+    "w_lastfloor:roof",
+    "w_lastfloor:stair",
+    "w_lastfloor:street"
+   ],
+   "props": [
+    "elevator",
+    "fire-door",
+    "frying-pan",
+    "keyring",
+    "parrot-cage",
+    "roof-tank",
+    "signal-flare"
+   ],
+   "devices": [
+    "lastfloor_ann",
+    "lastfloor_route"
+   ],
+   "gags": [
+    "parrot-repeats-the-worst-line"
+   ],
+   "tips": [
+    "go-up-seal-the-fire-doors"
+   ]
   }
  ]
 }

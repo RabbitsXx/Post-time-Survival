@@ -6,28 +6,28 @@ QA report: THE LAST FLOOR part 1/2 (lastfloor_01)
   [PASS] A: speech pace 179 wpm (132 words, 52 s)
   [PASS] A: the hook starts at 0.08 s: "The elevator just opened by itself."
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
-  [FAIL] S: PA opening: "None"
-  [FAIL] S: the PA opening is spoken at 99.0 s (series + part + topic within the first 8 s)
-  [FAIL] S: PA sign-off: "None"
-  [FAIL] S: beats without the route line: [0, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13, 14]
+  [PASS] S: PA opening: "Attention, residents. This is The Last Floor. Part one of two: the lobby."
+  [PASS] S: the PA opening is spoken at 2.1 s (series + part + topic within the first 8 s)
+  [PASS] S: PA sign-off: "Part one of two, The Last Floor. Next: the roof. Follow for part two."
+  [PASS] S: route line (part n of 2) on every non-card beat
   [PASS] S: YouTube title (87 chars): Don't Touch The Elevator! A Tower, A Parrot And One Frying Pan — The Last Floor, Part 1
   [PASS] S: 17 YouTube tags, 291 chars
   [PASS] S: 20 cues, 20 Thai lines
   [PASS] S: release kit complete
-  [PASS] F: 5 character voices: {'zara': 5, 'ann': 3, 'bell': 7, 'omar': 3, 'pip': 2}
-  [PASS] F: BUS-E/PA = 0 % of speech time (target <= 25 %)
+  [PASS] F: 4 character voices: {'zara': 5, 'ann': 3, 'bell': 7, 'omar': 3, 'pip': 2}
+  [WARN] F: BUS-E/PA = 33 % of speech time (target <= 25 %)
   [PASS] F: 17 speaker changes (conversation, not narration)
   [PASS] F: 10 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'heartbeat', 'horde', 'radio', 'rimshot', 'stab', 'swell']; comedy stings: ['boing', 'rimshot']
-  [WARN] F: characters visible in 0/12 non-card beats
+  [PASS] F: characters visible in 12/12 non-card beats
   [PASS] F: 4 lines with a question or talking to the viewer
   [PASS] B: layout: 0 CROP, 0 OVERLAP
   [PASS] B: layout: 0 BAND, 0 EDGE
   [PASS] C: 720x1280 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 52.40 s vs spec 52.40 s; 14.1 MB; audio aac 48000 Hz
+  [PASS] C: duration 52.40 s vs spec 52.40 s; 14.2 MB; audio aac 48000 Hz
   [PASS] D: integrated -14.1 LUFS, LRA 6.6 LU
   [PASS] D: true peak -2.6 dBTP
   [PASS] E: every beat boundary changes the picture clearly
   [PASS] E: no black frames in the scan
   [PASS] H: cover embedded in the first frames (diff 3.3/255)
 
-  RESULT: FAIL
+  RESULT: PASS
