@@ -9,9 +9,9 @@
  "stars": false,
  "pal": {
   "sky": [
-   "#7fb0dc",
-   "#c4dcec",
-   "#f6dcb8"
+   "#5a9cdc",
+   "#b0d4f0",
+   "#f8d4a0"
   ],
   "ground": "#8a8a84",
   "wall": "#d8d4c4",
@@ -127,8 +127,8 @@
  "locs": {
   "kitchen": {
    "kind": "in",
-   "wall": "#dfe6dc",
-   "floor": "#a8a69a",
+   "wall": "#b4e0c8",
+   "floor": "#a0a68a",
    "items": [
     {
      "t": "window",
@@ -191,16 +191,17 @@
     }
    ],
    "tint": [
-    "#ffd890",
-    0.1
+    "#7fe0b0",
+    0.14
    ],
-   "label": "hotel kitchen"
+   "label": "hotel kitchen",
+   "cone": "M200,-100 L520,-100 L860,640 L120,640Z"
   },
   "service": {
    "kind": "lane",
    "indoor": true,
-   "wall": "#c8d0cc",
-   "ground": "#8a9490",
+   "wall": "#d4e08c",
+   "ground": "#8a9a64",
    "roadc": "#a0aaa4",
    "road": 240,
    "vpy": 398,
@@ -237,15 +238,15 @@
     }
    ],
    "tint": [
-    "#ffe0a0",
-    0.08
+    "#d8f060",
+    0.12
    ],
    "label": "service corridor"
   },
   "stair": {
    "kind": "in",
-   "wall": "#cfd2d0",
-   "floor": "#8a8c8a",
+   "wall": "#a8c0ee",
+   "floor": "#6a78a8",
    "items": [
     {
      "t": "window",
@@ -282,15 +283,15 @@
     }
    ],
    "tint": [
-    "#ffe0a0",
-    0.08
+    "#6a98ff",
+    0.14
    ],
    "label": "back stairs"
   },
   "lobby": {
    "kind": "in",
-   "wall": "#e6d6b8",
-   "floor": "#b09a7a",
+   "wall": "#f2c88c",
+   "floor": "#b07a50",
    "items": [
     {
      "t": "window",
@@ -333,10 +334,11 @@
     }
    ],
    "tint": [
-    "#ffcf80",
-    0.1
+    "#ffa850",
+    0.16
    ],
-   "label": "hotel lobby"
+   "label": "hotel lobby",
+   "wain": "rgba(90,50,20,.18)"
   },
   "street": {
    "kind": "out",
@@ -1029,5 +1031,6 @@
     "beard": "#4a4a44"
    }
   }
- }
+ },
+ "line": 0.62
 }

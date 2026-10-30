@@ -9,43 +9,18 @@
  },
  "art": {
   "dept": "art-layout-animation",
-  "score": 77,
+  "score": 79,
   "issues": [
-   "ART: palette is murky (mean saturation 0.19 < 0.20): add colour accents per location",
-   "LAYOUT: 11 person(s) cut by the frame edge, e.g. [(8, 'z_cook', 469), (9, 'z_hoodie', -55), (10, 'z_cook', 434), (10, 'z_hoodie', -49)]: reframe or move them inside x 40-410"
+   "ART: two locations have almost the same colour world (distance 10 < 14): give each place its own colour key",
+   "LAYOUT: 6 person(s) cut by the frame edge, e.g. [(16, 'z_hoodie', 494), (18, 'z_dress', 478), (18, 'z_hoodie', 579), (19, 'z_hoodie', 685)]: reframe or move them inside x 40-410"
   ],
   "metrics": {
    "dead_black_bottom_beats": "0/18",
    "dark_beats": 0,
-   "mean_saturation": 0.185,
-   "min_palette_distance": 18.9,
+   "mean_saturation": 0.262,
+   "min_palette_distance": 10.3,
    "static_beats": [],
    "cut_by_edge": [
-    [
-     8,
-     "z_cook",
-     469
-    ],
-    [
-     9,
-     "z_hoodie",
-     -55
-    ],
-    [
-     10,
-     "z_cook",
-     434
-    ],
-    [
-     10,
-     "z_hoodie",
-     -49
-    ],
-    [
-     10,
-     "z_suit",
-     473
-    ],
     [
      16,
      "z_hoodie",
@@ -54,17 +29,17 @@
     [
      18,
      "z_dress",
-     473
+     478
     ],
     [
      18,
      "z_hoodie",
-     574
+     579
     ],
     [
      19,
      "z_hoodie",
-     703
+     685
     ],
     [
      23,
@@ -95,22 +70,26 @@
   ],
   "metrics": {
    "lufs": -14.0,
-   "true_peak": -2.1,
+   "true_peak": -2.0,
    "speakers": {
     "ren": {
      "db": -20.4,
      "f0": 133.0,
      "wpm": 144,
      "share": 0.83,
-     "bed_minus_voice_db": -7.2
+     "bed_minus_voice_db": -6.9
     },
     "ann": {
      "db": -21.7,
      "f0": 111.0,
      "wpm": 160,
      "share": 0.17,
-     "bed_minus_voice_db": -15.5
+     "bed_minus_voice_db": -15.4
     }
+   },
+   "fight_sound": {
+    "fights": 6,
+    "missing": []
    },
    "music_moods": {
     "creep": {
@@ -139,11 +118,11 @@
     }
    },
    "foley": {
-    "events": 85,
+    "events": 110,
     "moving_beats": 5,
     "without_steps": 0
    },
-   "sfx": 85
+   "sfx": 110
   }
  },
  "editorial": {
@@ -232,16 +211,16 @@
      1080,
      1920
     ],
-    "detail": 9.5,
-    "colourful": 39.7
+    "detail": 9.1,
+    "colourful": 51.2
    },
    "cover_16x9.png": {
     "size": [
      1280,
      720
     ],
-    "detail": 5.1,
-    "colourful": 38.7
+    "detail": 4.9,
+    "colourful": 43.7
    }
   }
  },
@@ -289,19 +268,19 @@
   "dept": "qc",
   "score": 92,
   "issues": [
-   "QC: total bitrate 4.2 Mbps (3-14)"
+   "QC: total bitrate 4.5 Mbps (3-14)"
   ],
   "metrics": {
    "size": "1080x1920",
    "fps": "30/1",
-   "mbps": 4.2,
+   "mbps": 4.5,
    "duration": 74.8,
    "vcodec": "h264",
    "profile": "High",
    "acodec": "aac",
    "arate": "48000",
    "lufs": -14.0,
-   "true_peak": -2.1,
+   "true_peak": -2.0,
    "black_segments": [],
    "frozen_s": []
   }

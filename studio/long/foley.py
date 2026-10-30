@@ -61,6 +61,22 @@ def main():
                 for st in a['seq'][1:]:add('rustle',t0+float(st.get('at',0)),pan(a['x'],v),.5)
             if a.get('pose')=='reach' and a.get('view')=='side' and any(f.get('k')=='sticker' and 'PUSH' in str(f.get('txt','')) for f in b.get('fx',[])):
                 add('grunt',t0+.1+rnd.random()*.3,pan(a['x'],v),.6)
+        # fights: whoosh before the swing, hit at the impact (by weapon), the zombie's pained groan, the fall and the thump on the floor
+        for a in p.get('acts',[]):
+            sq=a.get('seq') or []
+            if any(str(st.get('pose'))=='windup' for st in sq):
+                w=[float(st['at']) for st in sq if st.get('pose')=='punch'];wt=w[0] if w else .5;pn=pan(a['x'],v)
+                wp=[q for q in props if q.get('keys')];kind='wrench_hit' if any(q.get('t')=='wrench' for q in wp) else 'punch_hit'
+                add('swing',t0+max(0,wt-.14),pn,.9);add(kind,t0+wt+.12,pn,1.0)
+        for a in p.get('acts',[]):
+            fl=a.get('fall')
+            if str(a.get('k')).startswith('z_') and fl and fl.get('dur',0)>.05:
+                at=float(fl['at']);pn=pan(a['x'],v);add('zhurt_'+'abc'[int(a['x'])%3],t0+at+.04,pn,1.0);add('body_fall',t0+at+.36,pn,1.0)
+        zs=[a for a in p.get('acts',[]) if str(a.get('k')).startswith('z_') and not a.get('fall') and a.get('pose')!='stand' or (str(a.get('k')).startswith('z_') and a.get('view')=='back' and not a.get('fall'))]
+        for i,a in enumerate(zs[:3]):
+            add('zmoan_'+'abc'[(i+int(t0))%3],t0+.2+i*.55,pan(a['x'],v),.8)
+            if a.get('to'):
+                for j in range(max(2,int(D/.8))):add('shuffle_'+'abc'[j%3],t0+.2+j*.8,pan(a['x'],v),.7)
         for pr in props:
             if pr.get('to') and pr.get('t')=='sofa':add('sofa_fall',t0+.05,0,.9);add('thud_wood',t0+max(.4,D*.55),0,1.0)
             if pr.get('t')=='heli':

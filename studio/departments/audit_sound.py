@@ -54,6 +54,14 @@ def audit(cid):
         if e['dur']>4 and not 115<=e['wpm']<=170:issues.append(f'{k}: {e["wpm"]:.0f} wpm (115-170)');score-=4
     if 'ann' in spk and spk['ann']['dur']/tot>.25:issues.append(f'announcer is {spk["ann"]["dur"]/tot:.0%} of the speech (<= 25 %)');score-=6
 
+    # ---- fights must be heard: swing, hit, the zombie's groan and the body hitting the floor
+    try:
+        spb=S_['beats'] if 'S_' in dir() else json.load(open(f'{d}/spec.json'))['beats']
+        evs=json.load(open(f'{d}/sfx.json'));fights=[b for b in spb if b['scene']['n']=='stage' and any(f.get('k')=='sticker' and any(h in str(f.get('txt','')).upper() for h in('WHACK','BONK','SMASH','THWACK','CLANG','SHOVE')) for f in b.get('fx',[]))]
+        bad=[i for i,b in enumerate(fights) if not (any(b['t'][0]<=e['t']<=b['t'][1] and e['k'] in('punch_hit','wrench_hit') for e in evs) and any(b['t'][0]<=e['t']<=b['t'][1] and str(e['k']).startswith('zhurt') for e in evs) and any(b['t'][0]<=e['t']<=b['t'][1] and e['k']=='body_fall' for e in evs))]
+        M['fight_sound']=dict(fights=len(fights),missing=bad)
+        if bad:issues.append(f'SOUND: {len(bad)} fight beat(s) lack a hit sound, the zombie groan or the body-fall thump');score-=8*len(bad)
+    except Exception as e:M['fight_sound']='n/a '+type(e).__name__
     # ---- score + foley (the studio's music and effects follow the picture)
     try:
         import wave

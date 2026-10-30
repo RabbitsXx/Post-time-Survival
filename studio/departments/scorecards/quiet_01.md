@@ -1,9 +1,9 @@
-# Scorecard quiet_01  (2026-10-30 12:15 UTC)
+# Scorecard quiet_01  (2026-10-30 12:33 UTC)
 
 | department | score | bar | verdict |
 |---|---:|---:|---|
 | story | 97 | 70 | PASS |
-| art | 77 | 70 | PASS |
+| art | 79 | 70 | PASS |
 | sound | 96 | 60 | PASS |
 | editorial | 80 | 70 | PASS |
 | marketing | 100 | 75 | PASS |
@@ -16,8 +16,8 @@
 * STORY/storylint(warn): a 2.5D lane location is used
 
 ## art
-* ART: palette is murky (mean saturation 0.19 < 0.20): add colour accents per location
-* LAYOUT: 11 person(s) cut by the frame edge, e.g. [(8, 'z_cook', 469), (9, 'z_hoodie', -55), (10, 'z_cook', 434), (10, 'z_hoodie', -49)]: reframe or move them inside x 40-410
+* ART: two locations have almost the same colour world (distance 10 < 14): give each place its own colour key
+* LAYOUT: 6 person(s) cut by the frame edge, e.g. [(16, 'z_hoodie', 494), (18, 'z_dress', 478), (18, 'z_hoodie', 579), (19, 'z_hoodie', 685)]: reframe or move them inside x 40-410
 
 ## sound
 * dead air 1.9 s between lines
@@ -35,4 +35,4 @@
 * WRITING: ren talks 3 lines in a row: break it with a reaction or action
 
 ## qc
-* QC: total bitrate 4.2 Mbps (3-14)
+* QC: total bitrate 4.5 Mbps (3-14)

@@ -173,6 +173,7 @@ actor=function(g,o){
   if(o.tremble){x+=Math.sin(t*47+(o.ph||0))*o.tremble;y+=Math.cos(t*53)*o.tremble*.6}
   if(o.squash){const lt=bt-o.squash.at;if(lt>0&&lt<.25){const p=Math.sin(lt/.25*Math.PI);sy=1-.12*p;sx=1+.1*p}}
   if(o.snore){const br=Math.sin(t*2.2);sy*=1+.012*br;bob+=br*1.5}else{sy*=1+.010*Math.sin(t*2.3+(o.ph||0))}   // breathing
+  if(!root.__th&&window.__thin){root.__th=1;if(window.SPEC&&SPEC.world&&SPEC.world.line)window.__thin(root)}
   A(root,{transform:`translate(${x} ${y+bob}) rotate(${rot}) scale(${base.s*base.fl*base.sx*sx} ${base.s*sy})`});
   const talk=o.talk===true?who:o.talk;const m=talk?mouth(talk):(o.mouth||0);hds.forEach(h=>{if(h&&h._mouth)h._mouth(m);if(h&&h._blink)h._blink(t,(o.ph||0)*3.1)})},root,A1,A2}};
 
