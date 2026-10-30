@@ -2,6 +2,12 @@
    Coach Dex (guru), Steve (NPC zombie), Maya (his daughter), Respawn (dog, dog16.js), horde silhouettes */
 let _uid2=0;const uid2=p=>p+(++_uid2);
 function defsLong(){document.getElementById('defs').insertAdjacentHTML('beforeend',`
+ <filter id="fShade" x="-20%" y="-10%" width="140%" height="120%" color-interpolation-filters="sRGB">
+  <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="b"/>
+  <feDiffuseLighting in="b" surfaceScale="6" diffuseConstant="1.05" lighting-color="#fff2d8" result="lit"><feDistantLight azimuth="215" elevation="58"/></feDiffuseLighting>
+  <feComposite in="SourceGraphic" in2="lit" operator="arithmetic" k1="1.0" k2="0" k3="0" k4="0" result="shaded"/>
+  <feComposite in="shaded" in2="SourceAlpha" operator="in"/>
+ </filter>
  <linearGradient id="gLens" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f8fcf"/><stop offset=".55" stop-color="#173a63"/><stop offset="1" stop-color="#0a1a30"/></linearGradient>
  <linearGradient id="gSkyDay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#58b6ff"/><stop offset="1" stop-color="#bfe8ff"/></linearGradient>
  <linearGradient id="gSkyReal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6d7f8f"/><stop offset="1" stop-color="#c9c4b4"/></linearGradient>

@@ -11,14 +11,14 @@
   "dept": "art-layout-animation",
   "score": 82,
   "issues": [
-   "ART: two locations have almost the same colour world (distance 10 < 14): give each place its own colour key",
+   "ART: two locations have almost the same colour world (distance 12 < 14): give each place its own colour key",
    "LAYOUT: 4 person(s) cut by the frame edge, e.g. [(18, 'z_hoodie', 441), (19, 'z_hoodie', 547), (23, 'ren', 5), (23, 'z_porter', 478)]: reframe or move them inside x 40-410"
   ],
   "metrics": {
    "dead_black_bottom_beats": "0/18",
    "dark_beats": 0,
-   "mean_saturation": 0.265,
-   "min_palette_distance": 10.0,
+   "mean_saturation": 0.267,
+   "min_palette_distance": 11.8,
    "static_beats": [],
    "cut_by_edge": [
     [
@@ -202,7 +202,7 @@
      1920
     ],
     "detail": 8.9,
-    "colourful": 51.1
+    "colourful": 51.0
    },
    "cover_16x9.png": {
     "size": [
@@ -210,7 +210,7 @@
      720
     ],
     "detail": 4.9,
-    "colourful": 43.9
+    "colourful": 43.6
    }
   }
  },

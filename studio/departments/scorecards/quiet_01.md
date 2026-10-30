@@ -1,4 +1,4 @@
-# Scorecard quiet_01  (2026-10-30 13:11 UTC)
+# Scorecard quiet_01  (2026-10-30 13:21 UTC)
 
 | department | score | bar | verdict |
 |---|---:|---:|---|
@@ -16,7 +16,7 @@
 * STORY/storylint(warn): a 2.5D lane location is used
 
 ## art
-* ART: two locations have almost the same colour world (distance 10 < 14): give each place its own colour key
+* ART: two locations have almost the same colour world (distance 12 < 14): give each place its own colour key
 * LAYOUT: 4 person(s) cut by the frame edge, e.g. [(18, 'z_hoodie', 441), (19, 'z_hoodie', 547), (23, 'ren', 5), (23, 'z_porter', 478)]: reframe or move them inside x 40-410
 
 ## sound

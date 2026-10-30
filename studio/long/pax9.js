@@ -153,7 +153,7 @@ function woundDeco(g,T,P,v){const a=v==='side'?T.n.a:T.la;const [e,h]=[a[1],a[2]
 const _actor16=actor;
 actor=function(g,o){
  if(!PAXH[o.k])return _actor16(g,o);
- const who=o.k,view=o.view||'front';const root=G(g,{});if(o.shadow)E('ellipse',{cx:0,cy:6,rx:78,ry:11,fill:'#1a0d05',opacity:.42,style:'filter:blur(3px)'},root);if(o.rim)root.style.filter=`drop-shadow(-2px -1px 0 ${o.rim})`;const base={x:o.x||0,y:o.y||0,s:o.s||1,fl:o.flip?-1:1,sx:o.sx||1};
+ const who=o.k,view=o.view||'front';const root=G(g,{});if(o.shadow)E('ellipse',{cx:0,cy:6,rx:78,ry:11,fill:'#1a0d05',opacity:.42,style:'filter:blur(3px)'},root);if(o.rim)root.style.filter=(window.SPEC&&SPEC.world&&SPEC.world.shade?'url(#fShade) ':'')+`drop-shadow(-2px -1px 0 ${o.rim})`;const base={x:o.x||0,y:o.y||0,s:o.s||1,fl:o.flip?-1:1,sx:o.sx||1};
  const dec=(gg,T,P,v)=>{if(DECO[who])DECO[who](gg,T,P,v,o);if(o.wound)woundDeco(gg,T,P,v);if(o.stain)P_(gg,v==='side'?'M-6,-200 q10,-8 16,2 q4,14 -8,18 q-14,-2 -8,-20Z':'M-6,-210 q14,-10 24,2 q6,18 -10,26 q-20,-4 -14,-28Z','#d9302a',{'stroke-width':1.4,opacity:.95});if(o.sling)slingDeco(gg,v);if(o.sleeveUp&&v==='front'){const a=o.sleeveUp==='R'?T.ra:T.la;tube(gg,[a[1],a[2]],15,P.skin,P.ink);C(gg,a[2][0],a[2][1],8.5,P.skin,{stroke:P.ink,'stroke-width':2.5})}};
  const mk=pose=>keeper(root,{who,view,pose,expr:o.expr,mood:o.mood,x:.01,y:.01,s:1,pack:o.pack,col:o.col,mouth:0,tilt:o.tilt,noShadow:true,deco:dec,sweat:o.sweat,red:o.red,pale:o.pale,look:o.look,blush:o.blush,bare:o.bare,tear:o.tear});
  const anim=o.anim||'none';const pp=ANIMPOSE[anim];
