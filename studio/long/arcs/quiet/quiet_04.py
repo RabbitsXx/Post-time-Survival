@@ -18,7 +18,7 @@ P.B(S([('ren',"If it is dark, do not use your eyes.","ถ้ามืด อย�
  intent=I('Ren','Ren stands alone at the gas station while the black mouth of a tunnel waits far down the track','gas station at night, a rail line leading away','extra wide shot, Ren small, the tunnel far away','Why not use his eyes?'))
 P.open();TH.append("เดอะ ไควเอท แฮนด์ ตอนที่สี่จากสิบ: อุโมงค์")
 BEATS[-1]['intent']=I('Dispatch radio','The dispatch radio announces the series, part and topic','dispatch radio card','amber terminal card','What is in the tunnel?')
-P.B(S([('ren',"Noor waits on the far side. One point one kilometres.","นูร์รออยู่อีกฝั่ง หนึ่งจุดหนึ่งกิโลเมตร")]),card('chain',title='THE TUNNEL',bg=dict(loc='w_quiet',v='gas',z=1.8,x=640,y=430),nodes=[dict(i='1.1',l='1.1 KM'),dict(i='0',l='NO LIGHT'),dict(i='N',l='NOOR WAITS')]),mood='warm',sfx=[('click',.2)],
+P.B(S([('ren',"Noor waits on the far side. One point one kilometres.","นูร์รออยู่อีกฝั่ง หนึ่งจุดหนึ่งกิโลเมตร")]),card('chain',title='THE TUNNEL',bg=dict(loc='w_quiet',v='street',z=1.8,x=640,y=430),nodes=[dict(i='1.1',l='1.1 KM'),dict(i='0',l='NO LIGHT'),dict(i='N',l='NOOR WAITS')]),mood='warm',sfx=[('click',.2)],
  intent=I('Ren','A card shows 1.1 km, no light, and Noor waiting at the far side','stat card','chain card with three labelled steps','Can he cross it alone?'))
 T=W.lane('tunnel',[dict(W.at('ren',0,2.0,'worried',view='back',bob=3.0,bobSp=5.0),to=(W.lane_pos(0,3.8)['x'],W.lane_pos(0,3.8)['y']),sto=1.0)],z=1.0)
 P.B(S([('ren',"Into the black. Hand on the wall.","เข้าไปในความมืด มือแตะผนัง")]),T,mood='creep',cam='push_in',sfx=[('horde',.3),('creak',.6)],

@@ -46,7 +46,7 @@ P.B(S([('ren',"Pump seven. Empty.","ตู้เจ็ด ว่างเปล�
  intent=I('Ren','Ren checks pump seven, the gauge reads zero','gas station, close-up of Ren at the pump','close-up, steady eyes','Then what is that sound?'))
 P.B(S([('ren',"My phone is buzzing. Do not answer.","โทรศัพท์สั่น ห้ามรับ")]),card('macro',obj='phone',label='UNKNOWN',sub='RINGING',bg=dict(loc='w_quiet',v='gas',z=1.8,x=620,y=430),s=.8),mood='creep',sfx=[('radio',0),('stab',.6)],
  intent=I('Ren','His phone lights up with an unknown caller','gas station, macro of the phone screen','macro card of a ringing phone','Who is calling?'))
-P.B(S([('ren',"Silent. Airplane mode. Now.","ปิดเสียง โหมดเครื่องบิน ตอนนี้")]),card('chain',title='THE TIP',bg=dict(loc='w_quiet',v='gas',z=1.8,x=640,y=430),nodes=[dict(i='1',l='PHONE SILENT'),dict(i='2',l='NO RING'),dict(i='3',l='NO HORDE')]),mood='warm',sfx=[('click',.2)],
+P.B(S([('ren',"Silent. Airplane mode. Now.","ปิดเสียง โหมดเครื่องบิน ตอนนี้")]),card('chain',title='THE TIP',bg=dict(loc='w_quiet',v='street',z=1.8,x=640,y=430),nodes=[dict(i='1',l='PHONE SILENT'),dict(i='2',l='NO RING'),dict(i='3',l='NO HORDE')]),mood='warm',sfx=[('click',.2)],
  intent=I('Ren','A tip card: phone silent, no ring, no horde','tip card','chain card with three steps','Who else is here?'))
 G2=Scene(W,'gas',x=640,y=470,z=.7);G2.put('ren',420,expr='worried',sc=.72,face='back');G2.put('noor',300,350,expr='angry',sc=.5,face='front')
 P.B(S([('noor',"Hey. Mister. Up here.","เฮ้ ลุง ข้างบนนี่")]),G2.shot(z=1.1,vy=450,vx=360),mood='creep',cam='push_in',sfx=[('heartbeat',.1)],
