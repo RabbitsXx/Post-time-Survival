@@ -32,7 +32,7 @@ def ratchet():
     recent=list(last.values())[-5:];t=thresholds();ch=[]
     if len(recent)<5:return
     for d in DEPTS:
-        if all(r['scores'][d]>=t[d]+6 for r in recent) and t[d]<92:t[d]+=2;ch.append(d)
+        if all(r['scores'].get(d,0)>=t[d]+6 for r in recent) and t[d]<92:t[d]+=2;ch.append(d)
     if ch:json.dump(t,open(TH,'w'),indent=1);print('RATCHET: raised the bar for',ch,'->',{d:t[d] for d in ch})
 def card(cid,o,t):
     L=[f'# Scorecard {cid}  ({dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M")} UTC)','','| department | score | bar | verdict |','|---|---:|---:|---|']

@@ -19,21 +19,22 @@
   "2026-10-30d": "Owner: THE QUIET HAND, a 10-part serial (ex-assassin exterminator, 240 km in 72 hours). Parts are released one by one as they are finished; companions are met on the way; build the whole pipeline all-in-one, run itself, improve itself.",
   "2026-10-30f": "Owner cancelled THE LAST FLOOR parts 1-3 (never post them). Files stay in git, state status 'dropped', arc listed in retired_arcs so the autopilot never rebuilds or schedules it.",
   "2026-10-30g": "Owner: release THE QUIET HAND part 1 now (publish_mode live), build the remaining 9 parts automatically, post one every 2 hours after part 1, report progress to Discord.",
-  "2026-10-30h": "Owner: CANCEL ALL POSTING. paused=true, publish_mode=stage, scheduled Buffer posts removed, automatic runs disabled."
+  "2026-10-30h": "Owner: CANCEL ALL POSTING. paused=true, publish_mode=stage, scheduled Buffer posts removed, automatic runs disabled.",
+  "2026-10-30i": "Owner: POST part 1 now (live), build the other 9 parts, schedule one every 1h30 at suitable times."
  },
  "not_before_note": "autopilot grid starts after the trial; publish_mode stage = build, QA, package and plan slots but do NOT post; set to \"live\" to let the daily run schedule on Buffer",
- "paused": true,
+ "paused": false,
  "min_clips_per_day": 0,
- "publish_mode": "stage",
+ "publish_mode": "live",
  "topics_per_day": 2,
  "parts_per_topic": 3,
  "schedule": {
   "mode": "stream",
-  "part_gap_minutes": 120,
+  "part_gap_minutes": 90,
   "topic_break_minutes": 180,
   "keep_ahead_hours": 24,
   "daily_limit": null,
-  "note": "serial: one part every 2 h (owner 2026-10-30)"
+  "note": "serial: one part every 1h30 (owner 2026-10-30)"
  },
  "serial_series": [
   "THE QUIET HAND"
