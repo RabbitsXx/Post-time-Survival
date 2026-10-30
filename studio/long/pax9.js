@@ -91,7 +91,7 @@ const P_=(g,d,fill,o)=>P(g,d,fill,Object.assign({stroke:'#2a1c13','stroke-width'
 function paxBack(g,P,D,o,ink){const q=G(g,{transform:`scale(${D.hs||(D.kid?1.18:1.1)})`});const hc=D.hc||'#2a1e16',h=D.hair;
  for(const s of[-1,1])C(q,s*31,8,6.2,P.skin,{stroke:ink,'stroke-width':2.5});
  if(h==='pigtails'){for(const s of[-1,1]){blob(q,`M${s*30},-6 Q${s*58},4 ${s*52},46 Q${s*40},32 ${s*28},8Z`,hc,ink);C(q,s*38,10,5,'#e0463a',{stroke:ink,'stroke-width':2})}}
- const skull=h==='straw'?(D.bun||'#d4d4dc'):(h==='bald'&&!D.hc?P.skin:hc);
+ const hairy=['bun','curls','bob','pony','messy','beanie','seedcap','pigtails','hood','slick'].includes(h);const skull=h==='straw'?(D.bun||'#d4d4dc'):((h==='bald'||!hairy)?P.skin:hc);
  C(q,0,0,32,skull,{stroke:ink,'stroke-width':3});for(const dx of[-12,0,12])L(q,dx,-2,dx+(dx?dx*.2:0),18,ink,1.6,{opacity:.18});
  if(h==='straw'){C(q,0,6,14,D.bun||'#d4d4dc',{stroke:ink,'stroke-width':2.4});E('ellipse',{cx:0,cy:-8,rx:50,ry:11,fill:hc,stroke:ink,'stroke-width':3},q);blob(q,'M-30,-8 C-34,-46 34,-46 30,-8Z',hc,ink);R(q,-31,-22,62,8,'#a8332b',{stroke:ink,'stroke-width':2})}
  else if(h==='seedcap'){blob(q,'M-34,2 C-40,-48 40,-48 34,2 Q0,-8 -34,2Z',hc,ink);R(q,-16,-8,32,9,'#ffd23a',{rx:3,stroke:ink,'stroke-width':1.8});L(q,-30,0,30,0,'#1e4f2c',2.4);C(q,0,-40,3.4,'#1e4f2c')}

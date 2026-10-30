@@ -1,4 +1,4 @@
-# Scorecard quiet_01  (2026-10-30 12:52 UTC)
+# Scorecard quiet_01  (2026-10-30 13:11 UTC)
 
 | department | score | bar | verdict |
 |---|---:|---:|---|
@@ -35,4 +35,4 @@
 * WRITING: ren talks 3 lines in a row: break it with a reaction or action
 
 ## qc
-* QC: total bitrate 4.5 Mbps (3-14)
+* QC: total bitrate 4.7 Mbps (3-14)
