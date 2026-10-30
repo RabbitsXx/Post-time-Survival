@@ -640,7 +640,11 @@
    "caps_en": "releases/well/well_01/captions_en.srt",
    "caps_th": "releases/well/well_01/captions_th.srt",
    "status": "scheduled",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "playlist": true
+   },
    "due": "2026-10-30T18:34:00.000Z",
    "posts": {
     "yt": "6ae4e14834702c2daac5946f",
@@ -648,7 +652,8 @@
     "ig": "6ae4e14aa351214acfa1b330"
    },
    "media_day": "2026-10-31",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "yt_video_id": "zDZIoVP7zIM"
   },
   {
    "id": "well_02",
@@ -668,7 +673,11 @@
    "caps_en": "releases/well/well_02/captions_en.srt",
    "caps_th": "releases/well/well_02/captions_th.srt",
    "status": "scheduled",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "playlist": true
+   },
    "due": "2026-10-30T18:41:00.000Z",
    "posts": {
     "yt": "6ae4e30134702c2daac61417",
@@ -676,7 +685,8 @@
     "ig": "6ae4e30334702c2daac614a1"
    },
    "media_day": "2026-10-31",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "yt_video_id": "b8bjGM7B43s"
   },
   {
    "id": "well_03",
@@ -696,7 +706,11 @@
    "caps_en": "releases/well/well_03/captions_en.srt",
    "caps_th": "releases/well/well_03/captions_th.srt",
    "status": "scheduled",
-   "done": {},
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "playlist": true
+   },
    "due": "2026-10-30T18:48:00.000Z",
    "posts": {
     "yt": "6ae4e4ba10a950f1373b0d04",
@@ -704,7 +718,8 @@
     "ig": "6ae4e4bb260ad0ee5bc2b439"
    },
    "media_day": "2026-10-31",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "yt_video_id": "59exZ3Gb0fw"
   },
   {
    "id": "harvest_01",
