@@ -21,7 +21,7 @@ P.B(S([('zara',"I ordered a pizza. I did NOT order that.","ฉันสั่ง
  intent=I('Zara, zombie courier','Zara freezes as a zombie courier steps out of the elevator and holds out a pizza box','lobby, elevator doors open at the left','wide shot, the pizza box is held toward her','Will the zombie hand over the pizza?'))
 P.open();TH.append("ประกาศถึงชาวตึกอัลเดอร์ นี่คือเดอะลาสต์ฟลอร์ ตอนที่หนึ่งจากสาม: ล็อบบี้")
 BEATS[-1]['intent']=I('Tower intercom','The intercom screen lights up and announces the series, part and topic','lobby intercom panel','green terminal card with the series name','What is this building announcing?')
-P.B(S([('zara',"Nope. Nope. Nope.","ไม่ ไม่ ไม่เอา")]),L.shot(moves={'zara':(770,'run')},zmoves={'courier':540},expr={'zara':'scared'},add=ELV('G',True)),mood='comic',cam='push_in',sfx=[('boing',.1)],
+P.B(S([('zara',"Nope. Nope. Nope.","ไม่ ไม่ ไม่เอา")]),L.shot(moves={'zara':(770,'run')},zmoves={'courier':540},expr={'zara':'scared'},add=ELV('G',True)),mood='chase',cam='push_in',sfx=[('boing',.1)],
  intent=I('Zara, zombie courier','Zara runs away to the right while the courier shuffles after her','lobby, between the elevator and the stair door','Zara runs (side view), the courier walks after her','Where can she run?'))
 L.put('bell',800,expr='angry')
 P.B(S([('bell',"Zara! Behind me!","ซาร่า! มาข้างหลังฉัน!")]),L.shot(moves={'bell':(700,'walk')},zmoves={'courier':(575,False)},expr={'zara':'scared'},add=ELV('G',True)),mood='creep',cam='push_in',sfx=[('horde',.2)],
@@ -34,7 +34,7 @@ P.B(S([('bell',"Ding. Going down. Basement.","ติ๊ง ลงชั้นใ
  intent=I('Bell, Zara','The elevator doors have closed and its display now says B for basement; Bell dusts off his hands','lobby, closed elevator with display B','the display letter changed from G to B','What else is coming up that elevator?'))
 P.B(S([('bell',"Evac helicopter. Roof. Six a.m.","เฮลิคอปเตอร์อพยพ ดาดฟ้า หกโมงเช้า")]),card('macro',obj='walkie',label='ROOF',sub='6 AM',bg=dict(loc='w_lastfloor',v='lobby',z=1.7,x=620,y=430)),mood='warm',sfx=[('radio',0)],
  intent=I('Bell','Bell lifts his walkie-talkie; its screen shows ROOF 6 AM','lobby, close-up of the walkie-talkie','macro card of the radio with the message on its screen','Can they climb twelve floors before six?'))
-P.B(S([('zara',"Twelve floors. In the dark.","สิบสองชั้น ในความมืด"),('bell',"Then we start now.","งั้นเริ่มเดี๋ยวนี้")]),L.shot(moves={'bell':(775,'run'),'zara':(810,'run')},expr={'zara':'scared'},add=ELV('B',False)),mood='creep',cam='push_in',fx=[sticker(.4,'BANG!',x=300,y=170,rot=6,size=56,c='#ffcf6a',dur=1.0),shake(.4,5,.5)],sfx=[('horde',.1),('stab',.5)],
+P.B(S([('zara',"Twelve floors. In the dark.","สิบสองชั้น ในความมืด"),('bell',"Then we start now.","งั้นเริ่มเดี๋ยวนี้")]),L.shot(moves={'bell':(775,'run'),'zara':(810,'run')},expr={'zara':'scared'},add=ELV('B',False)),mood='chase',cam='push_in',fx=[sticker(.4,'BANG!',x=300,y=170,rot=6,size=56,c='#ffcf6a',dur=1.0),shake(.4,5,.5)],sfx=[('horde',.1),('stab',.5)],
  intent=I('Bell, Zara','Zombies slam the glass front door while Bell and Zara run for the red stair door','lobby, glass door at the right, stair door in the middle','both run to the stair door, BANG! on the glass','Will the glass hold?'))
 # ============ STAIRS: floor 1 -> 2 ============
 S1=Scene(W,'stair',x=600,y=450,z=.7,add=fl(2))

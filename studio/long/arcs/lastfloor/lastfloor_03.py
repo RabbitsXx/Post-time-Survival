@@ -38,7 +38,7 @@ P.B(S([('lin',"Try the key that says ROOF.","ลองดอกที่เข�
 R=Scene(W,'roof',x=640,y=470,z=.62,add=[dict(t='ladder',x=130,y=640,s=1.0,h=260)])
 HUT=dict(k='prop',t='door',x=420,y=620,s=1.1,c='#6a6a78')
 R.put('omar',420,expr='scared').put('zara',410,expr='shock').put('lin',400,expr='scared').put('bell',390,expr='calm')
-P.B(S([('omar',"Everybody out! Shut it!","ทุกคนออกไป! ปิดประตู!")]),R.shot(moves={'bell':(860,'run'),'lin':(780,'run'),'zara':(690,'run'),'omar':(580,'walk')},extra=[HUT]),mood='warm',cam='push_in',sfx=[('creak',.1),('bell',.6)],
+P.B(S([('omar',"Everybody out! Shut it!","ทุกคนออกไป! ปิดประตู!")]),R.shot(moves={'bell':(860,'run'),'lin':(780,'run'),'zara':(690,'run'),'omar':(580,'walk')},extra=[HUT]),mood='chase',cam='push_in',sfx=[('creak',.1),('bell',.6)],
  intent=I('Omar, Zara, Mrs. Lin, Bell','They burst out onto the roof at dawn, running away from the stairwell door','roof, skyline at dawn, stairwell door at the left','wide shot, four people run right, away from the door','Is the roof door strong enough?'))
 R.p['lin']['expr']='calm'
 P.B(S([('lin',"Bat through the handles. Done.","เอาไม้ตีเสียบที่จับ เรียบร้อย")]),R.shot(moves={'lin':(500,'walk')},extra=[HUT]),mood='creep',fx=[sticker(.8,'BANG!',x=225,y=150,rot=-6,size=56,c='#ffcf6a',dur=1.2)],sfx=[('stab',.8)],
@@ -53,7 +53,7 @@ P.B(S([('omar',"My pan is a mirror.","กระทะผมเป็นกระ
 P.B(S([('bell',"Rule two. Signal in threes.","กฎข้อสอง ส่งสัญญาณเป็นสาม")]),card('rulecard',n=2,head='TOWER RULE',lines=['SIGNAL','IN THREES','FLASH FLASH FLASH'],bg=dict(loc='w_lastfloor',v='roof',z=1.6,x=640,y=430)),mood='warm',sfx=[('bell',0)],
  intent=I('Bell','Bell states rule two; the card spells out three flashes','roof, rule card over the blurred rooftop','paper tag with SIGNAL IN THREES','Is anyone out there to see it?'))
 R.zput('r1',150,y=640,seed=51).zput('r2',230,y=640,seed=52)
-P.B(S([('zara',"They climbed the outside ladder!","พวกมันปีนบันไดด้านนอกขึ้นมา!")]),R.shot(zmoves={'r1':300,'r2':380},expr={'zara':'scared','omar':'scared','bell':'scared','lin':'scared'},pose={'omar':'reach'},face={'zara':'backhead'},extra=[HUT]),mood='creep',cam='push_in',fx=[shake(.2,6,.6)],sfx=[('stab',.1),('stab',.5),('heartbeat',.3)],
+P.B(S([('zara',"They climbed the outside ladder!","พวกมันปีนบันไดด้านนอกขึ้นมา!")]),R.shot(zmoves={'r1':300,'r2':380},expr={'zara':'scared','omar':'scared','bell':'scared','lin':'scared'},pose={'omar':'reach'},face={'zara':'backhead'},extra=[HUT]),mood='chase',cam='push_in',fx=[shake(.2,6,.6)],sfx=[('stab',.1),('stab',.5),('heartbeat',.3)],
  intent=I('Zara, Omar, Mrs. Lin, Bell, two zombies','Two zombies pull themselves over the roof edge by the outside ladder and shuffle toward the group','roof, ladder at the left edge','Zara glances back, two zombies advance from the left, camera shakes','Will the helicopter come before they reach them?'))
 P.B(S([('lin',"Listen. Rotor blades.","ฟังสิ ใบพัดเฮลิคอปเตอร์")]),R.shot(zmoves={'r1':420,'r2':500},face={'lin':'back','zara':'back','omar':'back','bell':'back'},expr={'lin':'shock','zara':'shock','omar':'shock','bell':'shock'},extra=[HUT,dict(k='prop',t='heli',x=1030,y=250,s=1.1,to=(900,230))]),mood='warm',cam='crane_up',sfx=[('swell',0)],
  intent=I('Mrs. Lin, Zara, Omar, Bell','All four turn their backs to us and stare as a helicopter rises over the skyline while the zombies close in','roof, sky with a helicopter','back views of all four, helicopter spotlight on the right','Will it land?'))

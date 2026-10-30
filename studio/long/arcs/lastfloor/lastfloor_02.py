@@ -60,12 +60,12 @@ P.B(S([('lin',"Goodbye, Dot. Click.","ลาก่อน ด็อต คลิ�
 S7=Scene(W,'stair',x=660,y=450,z=.7,add=fl(7))
 for who,k,ex in (('lin',0,'worried'),('zara',1,'scared'),('omar',2,'scared'),('bell',3,'worried')):S7.put(who,stp(k)[0],stp(k)[1],expr=ex)
 S7.zput('z1',300,seed=31).zput('z2',380,seed=32).zput('z3',460,seed=33)
-P.B(S([('zara',"They're gaining. Floor seven.","พวกมันตามทัน ชั้นเจ็ด")]),S7.shot(moves={'lin':(stp(2)[0],'run',stp(2)[1]),'zara':(stp(3)[0],'run',stp(3)[1]),'omar':(stp(4)[0],'run',stp(4)[1]),'bell':(stp(5)[0],'run',stp(5)[1])},zmoves={'z1':400,'z2':470,'z3':540}),mood='creep',cam='push_in',sfx=[('horde',.1),('heartbeat',.5)],
+P.B(S([('zara',"They're gaining. Floor seven.","พวกมันตามทัน ชั้นเจ็ด")]),S7.shot(moves={'lin':(stp(2)[0],'run',stp(2)[1]),'zara':(stp(3)[0],'run',stp(3)[1]),'omar':(stp(4)[0],'run',stp(4)[1]),'bell':(stp(5)[0],'run',stp(5)[1])},zmoves={'z1':400,'z2':470,'z3':540}),mood='chase',cam='push_in',sfx=[('horde',.1),('heartbeat',.5)],
  intent=I('Zara, Omar, Bell, Mrs. Lin','The group sprints up the stairs while three zombies climb after them','stair, floor 7 sign','side view running, zombies close on the left','Will they outrun them?'))
 S7.add=fl(9)
 P.B(S([('omar',"Twelve floors. My legs filed a complaint.","สิบสองชั้น ขาผมยื่นเรื่องร้องเรียนแล้ว")]),S7.shot(moves={'lin':(LANDX[0]-180,'walk',LANDY),'zara':(LANDX[0]-120,'walk',LANDY),'bell':(LANDX[0],'walk',LANDY),'omar':(stp(6)[0],'walk',stp(6)[1])},zmoves={'z1':470,'z2':540,'z3':600}),mood='comic',sfx=[('sigh',.4),('rimshot',1.8)],
  intent=I('Omar, Zara, Bell, Mrs. Lin','Everyone but Omar reaches the landing; Omar wheezes up the last steps','stair, floor 9 sign','side view, Omar lags behind the others','Will Omar make it?'))
-P.B(S([('bell',"Shortcut! Through the floor ten hall!","ทางลัด! ผ่านโถงชั้นสิบ!")]),W.lane('hall',W.crowd(6,-90,90,4,11,seed=61)+[W.at('bell',-100,1.9,'angry',pose='reach'),W.at('lin',100,2.0,'scared'),W.at('zara',-10,2.4,'scared')],x=640,y=430,z=1.0),mood='creep',cam='travel',sfx=[('horde',.1),('stab',.5)],
+P.B(S([('bell',"Shortcut! Through the floor ten hall!","ทางลัด! ผ่านโถงชั้นสิบ!")]),W.lane('hall',W.crowd(6,-90,90,4,11,seed=61)+[W.at('bell',-100,1.9,'angry',pose='reach'),W.at('lin',100,2.0,'scared'),W.at('zara',-10,2.4,'scared')],x=640,y=430,z=1.0),mood='chase',cam='travel',sfx=[('horde',.1),('stab',.5)],
  intent=I('Bell, Mrs. Lin, Zara','The group sprints through a hall on floor ten with a pack of zombies at the far end','hall on floor 10, 2.5D corridor','camera travels fast toward the end of the corridor','Is the shortcut a trap?'))
 P.close('the roof');TH.append("ตอนที่สองจากสาม เดอะลาสต์ฟลอร์ ต่อไป: ดาดฟ้า ติดตามตอนที่สาม")
 BEATS[-1]['intent']=I('Tower intercom','The intercom announces what comes next','lobby intercom panel','green terminal card','What happens next?')

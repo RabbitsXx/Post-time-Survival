@@ -53,6 +53,32 @@ def audit(cid):
         if e['dur']>3 and e['bed']>-6:issues.append(f'{k}: during speech the bed (music+sfx) is {e["bed"]:+.1f} dB relative to the voice (must be <= -6): the voice is not on top');score-=8
         if e['dur']>4 and not 115<=e['wpm']<=170:issues.append(f'{k}: {e["wpm"]:.0f} wpm (115-170)');score-=4
     if 'ann' in spk and spk['ann']['dur']/tot>.25:issues.append(f'announcer is {spk["ann"]["dur"]/tot:.0%} of the speech (<= 25 %)');score-=6
+
+    # ---- score + foley (the studio's music and effects follow the picture)
+    try:
+        import wave
+        w=wave.open(d+'/music.wav');mu=np.frombuffer(w.readframes(w.getnframes()),dtype=np.int16).astype(np.float32).reshape(-1,2).mean(1)/32768;msr=w.getframerate()
+        moods=json.load(open(d+'/mood.json'));feat={}
+        for a_,b_,k in moods:
+            x=mu[int((a_+.3)*msr):int((b_-.3)*msr)]
+            if len(x)<msr:continue
+            sp_=np.abs(np.fft.rfft(x*np.hanning(len(x))));fr=np.fft.rfftfreq(len(x),1/msr);feat.setdefault(k,[]).append((20*np.log10(np.sqrt((x**2).mean())+1e-9),float((sp_*fr).sum()/sp_.sum())))
+        kinds={k:(np.mean([f[0] for f in v]),np.mean([f[1] for f in v])) for k,v in feat.items()};M['music_moods']={k:dict(rms_db=round(float(a),1),centroid=round(float(b))) for k,(a,b) in kinds.items()}
+        if len(kinds)<3:issues.append(f'SOUND: the music uses only {len(kinds)} mood texture(s): it must follow the story (tension, comedy, warmth, chase)');score-=8
+        cs=[c for _,c in kinds.values()];rs=[r for r,_ in kinds.values()]
+        if kinds and (max(cs)/max(1,min(cs))<1.4 and max(rs)-min(rs)<3):issues.append('SOUND: the moods sound almost the same (little difference in brightness or level)');score-=6
+        if kinds and np.mean(cs)>5200:issues.append(f'SOUND: the score is hissy (mean brightness {np.mean(cs):.0f} Hz > 5200)');score-=4
+    except Exception as e:issues.append(f'SOUND: music analysis failed: {e}');score-=2
+    try:
+        spec_=json.load(open(d+'/spec.json'));ev=json.load(open(d+'/sfx.json'));foot=[e['t'] for e in ev if e['k'].startswith(('step','run','shuffle'))]
+        mv=[]
+        for b_ in spec_['beats']:
+            p_=(b_['scene'].get('p') or {})
+            if b_['scene']['n']=='stage' and any((a_.get('to') and a_.get('k') not in('prop','horde')) for a_ in p_.get('acts',[])):mv.append(b_['t'])
+        miss=[t for t in mv if not any(t[0]<=f<=t[1] for f in foot)];M['foley']=dict(events=len(ev),moving_beats=len(mv),without_steps=len(miss))
+        if mv and miss:issues.append(f'SOUND: {len(miss)}/{len(mv)} beats with people walking have no footsteps');score-=min(10,3*len(miss))
+        if len(ev)<spec_['duration']/1.6:issues.append(f'SOUND: only {len(ev)} sound effects in {spec_["duration"]:.0f} s (foley should be dense, >= 1 per 1.6 s)');score-=5
+    except Exception as e:pass
     gaps=[b['t'][0]-a['t'][1] for a,b in zip(cues,cues[1:])]
     if gaps and max(gaps)>1.6:issues.append(f'dead air {max(gaps):.1f} s between lines');score-=4
     sf=json.load(open(d+'/sfx.json'));dur=cues[-1]['t'][1]

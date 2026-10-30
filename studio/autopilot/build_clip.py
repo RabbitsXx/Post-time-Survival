@@ -12,7 +12,7 @@ except Exception:pass
 py=sys.executable;arc=cid.rsplit('_',1)[0]
 SL=[py,'storylint.py',cid]
 NW=[py,'newness.py',cid]   # owner rule 2026-10-29: library reuse is fine, but the topic must bring new things (register.json)
-STEPS=[('newness',NW),('spec',[py,'build16.py',f'arcs/{arc}/{cid}',f'p9/{cid}']),('newness-spec',NW),('story',SL),('audio',[py,'audio9.py',f'p9/{cid}']),
+STEPS=[('newness',NW),('spec',[py,'build16.py',f'arcs/{arc}/{cid}',f'p9/{cid}']),('newness-spec',NW),('story',SL),('foley',[py,'foley.py',f'p9/{cid}']),('audio',[py,'audio9.py',f'p9/{cid}']),
  ('render',[py,'render9.py','--spec',f'p9/{cid}/spec.json','--out',f'frames9_{cid}']),('finish',[py,'finish9.py','--p',f'p9/{cid}','--frames',f'frames9_{cid}','--out',f'final9_{cid}.mp4']),
  ('cover',[py,'cover9.py',cid]),('embed',[py,'embed9.py',cid]),('kit',[py,'kit9.py',cid]),('qa',[py,'qa9.py',cid])]
 go=False
