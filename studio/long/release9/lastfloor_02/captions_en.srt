@@ -3,81 +3,81 @@
 Omar: Floor four. Mrs. Lin lives here.
 
 2
-00:00:04,137 --> 00:00:07,649
+00:00:04,137 --> 00:00:08,304
 ALDER TOWER INTERCOM: The Last Floor. Part
 two of three: the stairs.
 
 3
-00:00:08,319 --> 00:00:11,662
+00:00:08,624 --> 00:00:11,968
 Mrs. Lin: Pip! There you are! Who locked
 my stairs?
 
 4
-00:00:12,332 --> 00:00:13,676
+00:00:12,638 --> 00:00:13,982
 Bell: I did. Rule one.
 
 5
-00:00:13,796 --> 00:00:14,360
+00:00:14,102 --> 00:00:14,666
 Mrs. Lin: ...Fair.
 
 6
-00:00:15,030 --> 00:00:17,312
+00:00:15,336 --> 00:00:17,617
 Bell: Go up. Seal the door behind you.
 
 7
-00:00:17,982 --> 00:00:24,086
+00:00:18,287 --> 00:00:24,392
 Omar: Floor four, five, six... that's a
 lot of floors.
 
 8
-00:00:24,206 --> 00:00:25,774
+00:00:24,512 --> 00:00:26,377
 Zara: Keep climbing. Don't count.
 
 9
-00:00:26,444 --> 00:00:28,461
+00:00:27,047 --> 00:00:29,950
 Zara: Floor five. The stairs are blocked!
 
 10
-00:00:29,131 --> 00:00:31,100
+00:00:30,620 --> 00:00:32,589
 Bell: Push! Everyone push!
 
 11
-00:00:31,770 --> 00:00:32,359
+00:00:33,259 --> 00:00:33,886
 Zara: ...Direct hit.
 
 12
-00:00:33,370 --> 00:00:36,496
+00:00:34,859 --> 00:00:37,985
 Mrs. Lin: That's my sister's flat. She
 says never open it.
 
 13
-00:00:37,166 --> 00:00:39,173
+00:00:38,655 --> 00:00:40,662
 Mrs. Lin: Dot, you're not well.
 
 14
-00:00:39,843 --> 00:00:41,604
+00:00:41,332 --> 00:00:43,093
 Bell: Leave her. Lock the door.
 
 15
-00:00:42,274 --> 00:00:44,037
+00:00:43,763 --> 00:00:45,525
 Mrs. Lin: Goodbye, Dot. Click.
 
 16
-00:00:44,707 --> 00:00:46,693
+00:00:46,195 --> 00:00:48,464
 Zara: They're gaining. Floor seven.
 
 17
-00:00:47,363 --> 00:00:50,341
+00:00:49,134 --> 00:00:52,112
 Omar: Twelve floors. My legs filed a
 complaint.
 
 18
-00:00:51,011 --> 00:00:53,255
+00:00:52,782 --> 00:00:55,026
 Bell: Shortcut! Through the floor ten
 hall!
 
 19
-00:00:53,925 --> 00:01:00,557
+00:00:55,696 --> 00:01:02,692
 ALDER TOWER INTERCOM: Part two of three, The
 Last Floor. Next: the roof. Follow for part three.
 

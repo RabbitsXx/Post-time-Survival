@@ -1,85 +1,85 @@
 1
-00:00:00,080 --> 00:00:02,851
+00:00:00,080 --> 00:00:03,150
 Zara: I ordered a pizza. I did NOT order
 that.
 
 2
-00:00:03,521 --> 00:00:06,884
+00:00:03,820 --> 00:00:07,627
 ALDER TOWER INTERCOM: The Last Floor. Part
 one of three: the lobby.
 
 3
-00:00:07,554 --> 00:00:09,913
+00:00:07,947 --> 00:00:09,280
 Zara: Nope. Nope. Nope.
 
 4
-00:00:10,583 --> 00:00:12,083
+00:00:09,950 --> 00:00:11,451
 Bell: Zara! Behind me!
 
 5
-00:00:12,753 --> 00:00:16,020
+00:00:12,121 --> 00:00:15,387
 Bell: Elevators beep and open. Zombies
 love that.
 
 6
-00:00:16,690 --> 00:00:19,259
+00:00:16,057 --> 00:00:18,627
 Bell: Ding. Going down. Basement.
 
 7
-00:00:19,929 --> 00:00:23,149
+00:00:19,297 --> 00:00:22,516
 Bell: Evac helicopter. Roof. Six a.m.
 
 8
-00:00:23,819 --> 00:00:25,897
+00:00:23,186 --> 00:00:25,415
 Zara: Twelve floors. In the dark.
 
 9
-00:00:26,017 --> 00:00:27,205
+00:00:25,535 --> 00:00:26,723
 Bell: Then we start now.
 
 10
-00:00:27,875 --> 00:00:31,511
+00:00:27,393 --> 00:00:31,028
 Bell: Zombies hate stairs. No hands for
 the rail.
 
 11
-00:00:32,181 --> 00:00:34,396
+00:00:31,698 --> 00:00:34,169
 Zara: Floor two. Every door is open.
 
 12
-00:00:35,066 --> 00:00:36,692
+00:00:34,839 --> 00:00:36,465
 Bell: Close them. One by one.
 
 13
-00:00:37,362 --> 00:00:39,075
+00:00:37,135 --> 00:00:38,848
 Omar: Don't hurt me! I'm a chef!
 
 14
-00:00:39,745 --> 00:00:40,895
+00:00:39,518 --> 00:00:40,668
 Omar: I brought my pan.
 
 15
-00:00:41,015 --> 00:00:42,514
+00:00:40,788 --> 00:00:42,503
 Zara: A pan is not a plan.
 
 16
-00:00:43,184 --> 00:00:45,973
+00:00:43,173 --> 00:00:45,962
 Omar: Also, meet Pip. Mrs. Lin's parrot.
 
 17
-00:00:46,643 --> 00:00:48,107
+00:00:46,632 --> 00:00:48,096
 Pip: Open the door! Open the door!
 
 18
-00:00:48,227 --> 00:00:50,294
+00:00:48,216 --> 00:00:50,282
 Bell: Pip. Not that sentence.
 
 19
-00:00:50,964 --> 00:00:52,623
+00:00:50,952 --> 00:00:52,623
 Zara: Something is climbing after us.
 
 20
-00:00:53,293 --> 00:00:59,047
+00:00:53,293 --> 00:01:00,233
 ALDER TOWER INTERCOM: Part one of three, The
 Last Floor. Next: the stairs. Follow for part two.
 

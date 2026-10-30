@@ -1,9 +1,9 @@
 QA report: THE LAST FLOOR part 3/3 (lastfloor_03)
-  [PASS] A: 16 beats, average 3.50 s (target 3-4.8), longest 5.1 s, shortest 2.1 s
+  [PASS] A: 16 beats, average 3.60 s (target 3-4.8), longest 6.2 s, shortest 2.1 s
   [PASS] A: no beat > 9.5 s
   [PASS] A: no beat > 7.5 s
   [PASS] A: no beat < 1.5 s
-  [PASS] A: speech pace 165 wpm (118 words, 56 s)
+  [PASS] A: speech pace 157 wpm (118 words, 58 s)
   [PASS] A: the hook starts at 0.08 s: "Floor twelve. The roof door. Locked."
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
   [PASS] S: PA opening: "The Last Floor. Part three of three: the roof."
@@ -15,7 +15,7 @@ QA report: THE LAST FLOOR part 3/3 (lastfloor_03)
   [PASS] S: 20 cues, 20 Thai lines
   [PASS] S: release kit complete
   [PASS] F: 5 character voices: {'bell': 6, 'ann': 3, 'zara': 5, 'lin': 3, 'omar': 2, 'pip': 1}
-  [PASS] F: BUS-E/PA = 23 % of speech time (target <= 25 %)
+  [WARN] F: BUS-E/PA = 26 % of speech time (target <= 25 %)
   [PASS] F: 16 speaker changes (conversation, not narration)
   [PASS] F: 10 kinds of sound effect: ['bell', 'boing', 'click', 'creak', 'heartbeat', 'horde', 'radio', 'rimshot', 'stab', 'swell']; comedy stings: ['boing', 'rimshot']
   [PASS] F: characters visible in 12/12 non-card beats
@@ -23,10 +23,10 @@ QA report: THE LAST FLOOR part 3/3 (lastfloor_03)
   [PASS] B: layout: 0 CROP, 0 OVERLAP
   [WARN] B: layout: 1 BAND, 0 EDGE
   [PASS] C: 720x1280 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 56.07 s vs spec 56.07 s; 16.4 MB; audio aac 48000 Hz
-  [PASS] D: integrated -14.0 LUFS, LRA 3.5 LU
+  [PASS] C: duration 57.53 s vs spec 57.53 s; 17.0 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.0 LUFS, LRA 1.9 LU
   [PASS] D: true peak -2.1 dBTP
-  [WARN] E: weak cuts (mean diff < 10/255): [(7, 7.7), (8, 7.8)]
+  [WARN] E: weak cuts (mean diff < 10/255): [(7, 7.7), (8, 8.5)]
   [PASS] E: no black frames in the scan
   [PASS] H: cover embedded in the first frames (diff 3.4/255)
 

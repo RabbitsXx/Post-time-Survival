@@ -26,13 +26,13 @@
  "ann": {
   "name": "ALDER TOWER INTERCOM",
   "voice": "en-US-Chirp3-HD-Rasalgethi",
-  "rate": 0.97,
+  "rate": 1.0,
   "hello": "Attention, residents.",
   "c": "#7dffb0",
   "sub": "BUILDING ANNOUNCEMENT",
   "tag": "ALDER TOWER \u00b7 12 FLOORS",
   "th": "\u0e23\u0e30\u0e1a\u0e1a\u0e2d\u0e34\u0e19\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e04\u0e2d\u0e21\u0e15\u0e36\u0e01\u0e2d\u0e31\u0e25\u0e40\u0e14\u0e2d\u0e23\u0e4c",
-  "filt": "asetrate=44100*0.78,aresample=44100,highpass=f=200,lowpass=f=3400,acompressor=threshold=-24dB:ratio=6,volume=1.6"
+  "filt": "asetrate=44100*0.64,aresample=44100,atempo=1.5625,highpass=f=120,lowpass=f=3400,acompressor=threshold=-24dB:ratio=6,volume=1.7"
  },
  "cast": {
   "bell": {
@@ -62,7 +62,7 @@
    "name": "Zara",
    "th": "\u0e0b\u0e32\u0e23\u0e48\u0e32",
    "voice": "en-US-Chirp3-HD-Zephyr",
-   "rate": 0.84,
+   "rate": 0.78,
    "filt": "asetrate=44100*1.1,aresample=44100",
    "scale": 0.578,
    "cap": "#ff8ad8",
@@ -82,7 +82,7 @@
    "name": "Omar",
    "th": "\u0e42\u0e2d\u0e21\u0e32\u0e23\u0e4c",
    "voice": "en-US-Chirp3-HD-Achird",
-   "rate": 0.95,
+   "rate": 1.1,
    "scale": 0.714,
    "cap": "#8fd0ff",
    "pal": {

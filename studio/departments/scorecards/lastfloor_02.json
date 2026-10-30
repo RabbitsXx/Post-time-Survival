@@ -14,8 +14,8 @@
   "metrics": {
    "dead_black_bottom_beats": "0/13",
    "dark_beats": 0,
-   "mean_saturation": 0.246,
-   "min_palette_distance": 5.4,
+   "mean_saturation": 0.247,
+   "min_palette_distance": 5.2,
    "static_beats": [],
    "cut_by_edge": [],
    "zoom_jumps": [],
@@ -26,47 +26,47 @@
   "dept": "sound",
   "score": 90,
   "issues": [
-   "voices omar and ann sound alike (f0 123 vs 136 Hz): recast or pitch-shift one",
+   "voices omar and ann sound alike (f0 123 vs 124 Hz): recast or pitch-shift one",
    "omar: 106 wpm (115-170)"
   ],
   "metrics": {
    "lufs": -14.0,
-   "true_peak": -2.0,
+   "true_peak": -1.9,
    "speakers": {
     "omar": {
      "db": -21.0,
      "f0": 123.0,
      "wpm": 106,
-     "share": 0.25,
-     "bed_minus_voice_db": -8.3
+     "share": 0.24,
+     "bed_minus_voice_db": -8.1
     },
     "ann": {
-     "db": -23.3,
-     "f0": 136.0,
-     "wpm": 136,
-     "share": 0.21,
-     "bed_minus_voice_db": -6.5
+     "db": -20.9,
+     "f0": 124.0,
+     "wpm": 124,
+     "share": 0.22,
+     "bed_minus_voice_db": -9.4
     },
     "lin": {
      "db": -20.0,
-     "f0": 222.0,
+     "f0": 225.0,
      "wpm": 139,
-     "share": 0.22,
+     "share": 0.21,
      "bed_minus_voice_db": -7.8
     },
     "bell": {
      "db": -20.0,
-     "f0": 162.0,
+     "f0": 163.0,
      "wpm": 156,
-     "share": 0.2,
-     "bed_minus_voice_db": -10.7
+     "share": 0.19,
+     "bed_minus_voice_db": -10.9
     },
     "zara": {
-     "db": -20.6,
-     "f0": 276.0,
-     "wpm": 156,
-     "share": 0.13,
-     "bed_minus_voice_db": -8.1
+     "db": -20.9,
+     "f0": 258.0,
+     "wpm": 125,
+     "share": 0.15,
+     "bed_minus_voice_db": -6.5
     }
    },
    "sfx": 26
@@ -74,25 +74,21 @@
  },
  "editorial": {
   "dept": "editorial",
-  "score": 77,
+  "score": 83,
   "issues": [
-   "EDITORIAL: 7 caption(s) on screen < 0.6 s [('PART TWO', 0.56), ('I DID.', 0.58), ('...FAIR.', 0.56)]",
-   "EDITORIAL: 3 caption(s) read faster than 17 characters/s [('THE STAIRS', 18.9), ('...DIRECT HIT.', 23.8), ('SHORTCUT! THROUGH', 17.3)]",
-   "EDITORIAL: announcer card beat 16 is 7.3 s (> 4 s) of a static screen: shorten the announcement or animate the card",
-   "EDITORIAL: scene beat 5 lasts 8.5 s (> 6.5 s)"
+   "EDITORIAL: 2 caption(s) on screen < 0.6 s [('...FAIR.', 0.56), ('GO UP.', 0.58)]",
+   "EDITORIAL: 2 caption(s) read faster than 17 characters/s [('...DIRECT HIT.', 22.3), ('SHORTCUT! THROUGH', 17.3)]",
+   "EDITORIAL: announcer card beat 1 is 4.5 s (> 4 s) of a static screen: shorten the announcement or animate the card",
+   "EDITORIAL: scene beat 5 lasts 8.8 s (> 6.5 s)"
   ],
   "metrics": {
-   "chunks": 48,
+   "chunks": 46,
    "dangling": [],
    "orphans": [],
    "fast": [
     [
-     "THE STAIRS",
-     18.9
-    ],
-    [
      "...DIRECT HIT.",
-     23.8
+     22.3
     ],
     [
      "SHORTCUT! THROUGH",
@@ -101,27 +97,15 @@
    ],
    "short": [
     [
-     "PART TWO",
-     0.56
-    ],
-    [
-     "I DID.",
-     0.58
-    ],
-    [
      "...FAIR.",
      0.56
     ],
     [
      "GO UP.",
-     0.59
-    ],
-    [
-     "THE STAIRS",
-     0.53
+     0.58
     ]
    ],
-   "shot_len_std": 1.72,
+   "shot_len_std": 1.75,
    "srt": [
     19,
     19
@@ -152,7 +136,7 @@
      1280
     ],
     "detail": 9.3,
-    "colourful": 31.7
+    "colourful": 36.1
    },
    "cover_16x9.png": {
     "size": [
@@ -160,7 +144,7 @@
      720
     ],
     "detail": 5.2,
-    "colourful": 28.0
+    "colourful": 28.1
    }
   }
  },

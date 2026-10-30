@@ -3,82 +3,82 @@
 Bell: Floor twelve. The roof door. Locked.
 
 2
-00:00:04,024 --> 00:00:07,543
+00:00:04,024 --> 00:00:08,210
 ALDER TOWER INTERCOM: The Last Floor. Part
 three of three: the roof.
 
 3
-00:00:08,213 --> 00:00:10,764
+00:00:08,530 --> 00:00:11,080
 Bell: Forty keys. One opens the roof.
 
 4
-00:00:11,434 --> 00:00:13,365
+00:00:11,750 --> 00:00:13,751
 Zara: Floor eleven is pouring out zombies!
 
 5
-00:00:14,035 --> 00:00:15,445
+00:00:14,421 --> 00:00:15,887
 Zara: They're one flight behind!
 
 6
-00:00:16,115 --> 00:00:18,227
+00:00:16,557 --> 00:00:18,669
 Mrs. Lin: Try the key that says ROOF.
 
 7
-00:00:18,347 --> 00:00:19,327
+00:00:18,789 --> 00:00:19,768
 Bell: ...That works.
 
 8
-00:00:19,997 --> 00:00:21,647
+00:00:20,438 --> 00:00:22,089
 Omar: Everybody out! Shut it!
 
 9
-00:00:22,317 --> 00:00:24,255
+00:00:22,759 --> 00:00:24,697
 Mrs. Lin: Bat through the handles. Done.
 
 10
-00:00:24,925 --> 00:00:26,683
+00:00:25,367 --> 00:00:27,041
 Zara: What if the pilot never sees us?
 
 11
-00:00:26,803 --> 00:00:28,824
+00:00:27,161 --> 00:00:29,182
 Bell: Then we become impossible to miss.
 
 12
-00:00:29,494 --> 00:00:32,396
+00:00:29,852 --> 00:00:32,754
 Bell: Helicopter in five minutes. Signal
 in threes.
 
 13
-00:00:33,066 --> 00:00:34,418
+00:00:33,424 --> 00:00:34,776
 Omar: My pan is a mirror.
 
 14
-00:00:34,538 --> 00:00:36,533
+00:00:34,896 --> 00:00:36,920
 Zara: Your pan IS a plan!
 
 15
-00:00:37,203 --> 00:00:39,797
+00:00:37,590 --> 00:00:40,184
 Bell: Rule two. Signal in threes.
 
 16
-00:00:40,467 --> 00:00:42,651
+00:00:40,854 --> 00:00:42,898
 Zara: They climbed the outside ladder!
 
 17
-00:00:43,321 --> 00:00:45,248
+00:00:43,568 --> 00:00:45,496
 Mrs. Lin: Listen. Rotor blades.
 
 18
-00:00:45,918 --> 00:00:48,103
+00:00:46,166 --> 00:00:48,350
 Pip: Mayday! Mayday! Open the door!
 
 19
-00:00:48,223 --> 00:00:50,374
+00:00:48,470 --> 00:00:51,749
 ALDER TOWER INTERCOM: ...Please stop
 saying that. We are landing.
 
 20
-00:00:51,044 --> 00:00:55,470
+00:00:52,419 --> 00:00:57,305
 ALDER TOWER INTERCOM: Part three of three, the end
 of The Last Floor. Follow for the next series.
 

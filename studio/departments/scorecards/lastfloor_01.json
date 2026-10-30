@@ -15,8 +15,8 @@
   "metrics": {
    "dead_black_bottom_beats": "0/13",
    "dark_beats": 0,
-   "mean_saturation": 0.227,
-   "min_palette_distance": 6.7,
+   "mean_saturation": 0.228,
+   "min_palette_distance": 6.6,
    "static_beats": [],
    "cut_by_edge": [
     [
@@ -31,49 +31,48 @@
  },
  "sound": {
   "dept": "sound",
-  "score": 86,
+  "score": 94,
   "issues": [
-   "voices ann and omar sound alike (f0 131 vs 146 Hz): recast or pitch-shift one",
-   "ann: during speech the bed (music+sfx) is -5.5 dB relative to the voice (must be <= -6): the voice is not on top"
+   "voices ann and bell sound alike (f0 117 vs 113 Hz): recast or pitch-shift one"
   ],
   "metrics": {
    "lufs": -14.1,
    "true_peak": -2.1,
    "speakers": {
     "zara": {
-     "db": -20.7,
-     "f0": 241.0,
-     "wpm": 162,
-     "share": 0.26,
-     "bed_minus_voice_db": -7.3
+     "db": -21.0,
+     "f0": 205.0,
+     "wpm": 163,
+     "share": 0.25,
+     "bed_minus_voice_db": -7.8
     },
     "ann": {
-     "db": -23.6,
-     "f0": 131.0,
-     "wpm": 151,
-     "share": 0.19,
-     "bed_minus_voice_db": -5.5
+     "db": -21.1,
+     "f0": 117.0,
+     "wpm": 128,
+     "share": 0.22,
+     "bed_minus_voice_db": -10.0
     },
     "bell": {
      "db": -20.7,
      "f0": 113.0,
      "wpm": 126,
-     "share": 0.4,
-     "bed_minus_voice_db": -9.4
+     "share": 0.39,
+     "bed_minus_voice_db": -9.6
     },
     "omar": {
      "db": -20.7,
      "f0": 146.0,
      "wpm": 170,
-     "share": 0.12,
+     "share": 0.11,
      "bed_minus_voice_db": -8.3
     },
     "pip": {
      "db": -20.1,
-     "f0": 286.0,
+     "f0": 281.0,
      "wpm": 246,
      "share": 0.03,
-     "bed_minus_voice_db": -15.1
+     "bed_minus_voice_db": -15.0
     }
    },
    "sfx": 24
@@ -81,53 +80,33 @@
  },
  "editorial": {
   "dept": "editorial",
-  "score": 80,
+  "score": 88,
   "issues": [
-   "EDITORIAL: 7 caption(s) on screen < 0.6 s [('I ORDERED', 0.59), ('I DID', 0.35), ('PART ONE', 0.55)]",
-   "EDITORIAL: 3 caption(s) read faster than 17 characters/s [('THEN WE START', 17.2), ('OPEN THE DOOR!', 19.1), ('SOMETHING IS CLIMBING', 20.1)]",
-   "EDITORIAL: announcer card beat 16 is 6.4 s (> 4 s) of a static screen: shorten the announcement or animate the card"
+   "EDITORIAL: 1 caption(s) on screen < 0.6 s [('A PAN', 0.43)]",
+   "EDITORIAL: 2 caption(s) read faster than 17 characters/s [('OPEN THE DOOR!', 19.1), ('SOMETHING IS CLIMBING', 20.0)]",
+   "EDITORIAL: announcer card beat 16 is 7.3 s (> 4 s) of a static screen: shorten the announcement or animate the card"
   ],
   "metrics": {
-   "chunks": 48,
+   "chunks": 44,
    "dangling": [],
    "orphans": [],
    "fast": [
-    [
-     "THEN WE START",
-     17.2
-    ],
     [
      "OPEN THE DOOR!",
      19.1
     ],
     [
      "SOMETHING IS CLIMBING",
-     20.1
+     20.0
     ]
    ],
    "short": [
     [
-     "I ORDERED",
-     0.59
-    ],
-    [
-     "I DID",
-     0.35
-    ],
-    [
-     "PART ONE",
-     0.55
-    ],
-    [
-     "NOW.",
+     "A PAN",
      0.43
-    ],
-    [
-     "I BROUGHT",
-     0.55
     ]
    ],
-   "shot_len_std": 1.01,
+   "shot_len_std": 1.21,
    "srt": [
     20,
     20
@@ -136,10 +115,8 @@
  },
  "marketing": {
   "dept": "marketing",
-  "score": 96,
-  "issues": [
-   "MARKETING: cover_9x16.png is dull (colourfulness 29 < 30): thumbnails need a strong colour accent"
-  ],
+  "score": 100,
+  "issues": [],
   "metrics": {
    "title": "A Zombie Delivers Pizza To The Elevator! 12 | The Last Floor Part 1",
    "title_len": 67,
@@ -157,8 +134,8 @@
      720,
      1280
     ],
-    "detail": 8.8,
-    "colourful": 29.4
+    "detail": 8.7,
+    "colourful": 33.5
    },
    "cover_16x9.png": {
     "size": [
