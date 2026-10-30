@@ -55,7 +55,8 @@
     "brow": "thick",
     "beard": "#3a2e24",
     "bags": 1,
-    "hs": 0.9
+    "hs": 0.84,
+    "mini": 1
    },
    "f0": 115
   },
@@ -76,7 +77,8 @@
    "look": {
     "hair": "pony",
     "hc": "#1a120c",
-    "hs": 0.9
+    "hs": 0.84,
+    "mini": 1
    },
    "f0": 300
   },
@@ -98,7 +100,8 @@
     "glasses": "round",
     "beard": "#8a8a8a",
     "bags": 1,
-    "hs": 0.9
+    "hs": 0.84,
+    "mini": 1
    },
    "f0": 150
   },
@@ -119,7 +122,8 @@
     "hair": "short",
     "hc": "#9a9a9a",
     "brow": "thick",
-    "hs": 0.9
+    "hs": 0.84,
+    "mini": 1
    },
    "f0": 90
   }
@@ -1004,7 +1008,9 @@
    },
    "look": {
     "hair": "bald",
-    "brow": "thick"
+    "brow": "thick",
+    "mini": 1,
+    "hs": 0.84
    }
   },
   "suit": {
@@ -1015,7 +1021,9 @@
    },
    "look": {
     "hair": "short",
-    "hc": "#2a2018"
+    "hc": "#2a2018",
+    "mini": 1,
+    "hs": 0.84
    }
   },
   "dress": {
@@ -1027,7 +1035,9 @@
    },
    "look": {
     "hair": "pony",
-    "hc": "#3a2a20"
+    "hc": "#3a2a20",
+    "mini": 1,
+    "hs": 0.84
    }
   },
   "hoodie": {
@@ -1038,7 +1048,9 @@
    },
    "look": {
     "hair": "short",
-    "hc": "#1a1410"
+    "hc": "#1a1410",
+    "mini": 1,
+    "hs": 0.84
    }
   },
   "porter": {
@@ -1049,7 +1061,9 @@
    },
    "look": {
     "hair": "bald",
-    "beard": "#4a4a44"
+    "beard": "#4a4a44",
+    "mini": 1,
+    "hs": 0.84
    }
   }
  },

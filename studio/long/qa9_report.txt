@@ -23,7 +23,7 @@ QA report: THE QUIET HAND part 1/10 (quiet_01)
   [PASS] B: layout: 0 CROP, 0 OVERLAP
   [PASS] B: layout: 0 BAND, 0 EDGE
   [PASS] C: 1080x1920 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 74.77 s vs spec 74.77 s; 42.6 MB; audio aac 48000 Hz
+  [PASS] C: duration 74.77 s vs spec 74.77 s; 42.5 MB; audio aac 48000 Hz
   [PASS] D: integrated -14.0 LUFS, LRA 3.4 LU
   [PASS] D: true peak -2.0 dBTP
   [PASS] E: every beat boundary changes the picture clearly

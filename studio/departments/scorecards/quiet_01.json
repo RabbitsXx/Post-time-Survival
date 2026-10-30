@@ -18,7 +18,7 @@
    "dead_black_bottom_beats": "0/18",
    "dark_beats": 0,
    "mean_saturation": 0.263,
-   "min_palette_distance": 10.2,
+   "min_palette_distance": 10.1,
    "static_beats": [],
    "cut_by_edge": [
     [
@@ -210,7 +210,7 @@
      720
     ],
     "detail": 4.9,
-    "colourful": 43.7
+    "colourful": 43.8
    }
   }
  },
@@ -258,12 +258,12 @@
   "dept": "qc",
   "score": 92,
   "issues": [
-   "QC: total bitrate 4.6 Mbps (3-14)"
+   "QC: total bitrate 4.5 Mbps (3-14)"
   ],
   "metrics": {
    "size": "1080x1920",
    "fps": "30/1",
-   "mbps": 4.6,
+   "mbps": 4.5,
    "duration": 74.8,
    "vcodec": "h264",
    "profile": "High",

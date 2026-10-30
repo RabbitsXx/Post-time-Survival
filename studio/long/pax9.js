@@ -35,7 +35,7 @@ function pEyes(q,ex,P,o,ink){const look=o.look||0;const red=o.red||0;q._lids=[];
   C(e,cx+look,3,ex.eye==='wide2'?2.4:ex.eye==='wide'?3.2:2.9,P.eye);C(e,cx+look+1.4,1.2,1,'#fff');
   if(ex.eye==='half'){R(e,cx-8,-6,16,8.4,P.skin)&&L(e,cx-7,2.4,cx+7,2.4,ink,3)}}
 }
-function pBrows(q,ex,D,ink){const b=ex.br,w=D.brow==='thick'?6:4.6;L(q,-b[0],b[1],-b[2],b[3],D.hc&&D.hair!=='bald'&&D.hair!=='bun'&&D.hair!=='curls'?ink:ink,w);L(q,b[0],b[1],b[2],b[3],ink,w)}
+function pBrows(q,ex,D,ink){const b=ex.br,w=D.mini?2.4:(D.brow==='thick'?6:4.6);L(q,-b[0],b[1],-b[2],b[3],D.hc&&D.hair!=='bald'&&D.hair!=='bun'&&D.hair!=='curls'?ink:ink,w);L(q,b[0],b[1],b[2],b[3],ink,w)}
 function pMouth(q,ex,m,ink){const g=G(q,{});const cl=E('path',{d:MOUTH[ex.mo]||MOUTH.flat,fill:ex.mo==='grin'?'#fff':'none',stroke:ink,'stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'},g);
  const opn=G(g,{display:'none'});E('ellipse',{cx:0,cy:29,rx:8,ry:2,fill:'#4a1414',stroke:ink,'stroke-width':2.2},opn);const tg=R(opn,-6,26,12,3,'#fff',{rx:1.5});
  return mm=>{const mo=ex.mo==='o'?Math.max(mm,.55):mm;if(mo>.07){A(cl,{d:'M0,0'});A(opn,{display:'inline'});const ry=2+9*mo,rx=6.5+4*mo;const c=opn.firstChild;A(c,{cy:28+ry*.35,rx,ry});A(tg,{y:28+ry*.35-ry+.6,x:-rx*.78,width:rx*1.56,height:Math.min(3.6,ry*.7)})}else{A(opn,{display:'none'});A(cl,{d:MOUTH[ex.mo]||MOUTH.flat})}}}
@@ -65,7 +65,7 @@ function pHairFront(q,D,P,v,ink){const h=D.hair,c=D.hc||'#222';const top=v==='si
  else if(h==='bald'&&D.flatcap){blob(q,'M-34,-4 C-36,-34 36,-34 34,-4 Q0,-12 -34,-4Z',D.flatcap,ink);blob(q,'M-6,-8 Q18,-2 38,-6 L34,-1 Q10,6 -6,0Z',D.flatcap,ink)}
  else if(h==='bald'&&!D.hc){/* bald */}}
 function pFaceExtras(q,D,P,v,ink,ex){
- if(D.bags){for(const s of[-1,1])E('path',{d:`M${s*5},10 Q${s*12},15 ${s*19},10`,fill:'none',stroke:P.skinS,'stroke-width':2.6,'stroke-linecap':'round'},q)}
+ if(D.bags&&!D.mini){for(const s of[-1,1])E('path',{d:`M${s*5},10 Q${s*12},15 ${s*19},10`,fill:'none',stroke:P.skinS,'stroke-width':2.6,'stroke-linecap':'round'},q)}
  if(D.glasses){const sq=D.glasses==='rect';for(const s of[-1,1]){if(sq)R(q,s*12-9,-5,18,13,'none',{rx:3,stroke:'#2a2a30','stroke-width':2.6});else C(q,s*12,2,10,'none',{stroke:'#b0782a','stroke-width':2.6})}L(q,-3,2,3,2,sq?'#2a2a30':'#b0782a',2.4)}
  if(D.goggles){const g=G(q,{});R(g,-30,-26,60,12,'#3a3a46',{rx:5,stroke:ink,'stroke-width':2.4});for(const s of[-1,1]){C(g,s*14,-20,8.5,'#ffd23a',{stroke:ink,'stroke-width':2.2});C(g,s*14-2,-22,2.6,'#fff',{opacity:.8})}}
  if(D.scar){L(q,-22,-18,-8,8,'#a8433a',3.2);L(q,-26,-8,-14,-12,'#a8433a',2.6)}
@@ -111,16 +111,18 @@ function paxHead(g,P,o){
  if(v==='side'){
   C(q,-4,6,6.4,P.skin,{stroke:ink,'stroke-width':2.5});C(q,0,0,32,P.skin,{stroke:ink,'stroke-width':3});blob(q,'M30,2 Q45,12 31,18Z',P.skin,ink);
   if(ex.eye==='closed')E('path',{d:'M8,4 Q15,8 22,4',fill:'none',stroke:ink,'stroke-width':3,'stroke-linecap':'round'},q);
+  else if(D.mini){C(q,17,3,ex.eye==='wide'||ex.eye==='wide2'?3.8:3,(o.red>.3?'#d83a30':ink));if(ex.eye==='half')L(q,11,0,23,0,ink,2.4)}
   else{C(q,15,2,ex.eye==='wide'||ex.eye==='wide2'?7:5.6,'#fff',{stroke:ink,'stroke-width':2});C(q,17,3,2.8,P.eye);if(ex.eye==='half')R(q,6,-6,18,7.6,P.skin)&&L(q,7,2.4,23,2.4,ink,3)}
-  L(q,8,-12,24,ex.br[3]>ex.br[1]?-8:-14,ink,4.4);
+  L(q,8,-12,24,ex.br[3]>ex.br[1]?-8:-14,ink,D.mini?2.2:4.4);
   const mo=E('ellipse',{cx:24,cy:28,rx:5,ry:1,fill:'#4a1414',opacity:0},q);E('path',{d:'M16,28 Q22,31 28,27',fill:'none',stroke:ink,'stroke-width':2.8,'stroke-linecap':'round'},q);
   pHairFront(q,D,P,v,ink);pFaceExtras(q,Object.assign({},D,{stache:null,beard:D.beard,goggles:D.goggles}),P,v,ink,ex);pSweat(q,o);pPale(q,o);if(o.tear)P_(q,'M20,12 q-4,10 0,16 q4,-6 0,-16Z','#9fe0ff',{stroke:'#2a6a9a','stroke-width':1.2});
   q._mouth=m=>A(mo,{opacity:m>.08?1:0,ry:1+6*m});return q}
  for(const s of[-1,1])C(q,s*33,6,6.4,P.skin,{stroke:ink,'stroke-width':2.5});
  C(q,0,0,32,P.skin,{stroke:ink,'stroke-width':3});
- pPale(q,o);pEyes(q,ex,P,o,ink);
+ pPale(q,o);
+ if(D.mini){q._lids=[];const cl=ex.eye==='closed';for(const sg of[-1,1]){if(cl)E('path',{d:`M${sg*12-6},3 Q${sg*12},7 ${sg*12+6},3`,fill:'none',stroke:ink,'stroke-width':2.2,'stroke-linecap':'round'},q);else C(q,sg*12+(o.look||0),2,ex.eye==='wide'||ex.eye==='wide2'?3.8:3,(o.red>.3?'#d83a30':ink))}}else pEyes(q,ex,P,o,ink);
  const lids=(q._lids||[]).map(l=>E('ellipse',{cx:l.cx,cy:2,rx:l.r+1.3,ry:l.r+1.3,fill:P.skin,stroke:ink,'stroke-width':2,opacity:0},q));q._blink=(t,ph)=>{const b=((t*.8+ph)%3.4)<.13;lids.forEach(l=>A(l,{opacity:b?1:0}))};pBrows(q,ex,D,ink);
- E('ellipse',{cx:0,cy:10,rx:5,ry:4.4,fill:P.skinS,stroke:ink,'stroke-width':2},q);
+ if(!D.mini)E('ellipse',{cx:0,cy:10,rx:5,ry:4.4,fill:P.skinS,stroke:ink,'stroke-width':2},q);
  if(o.blush)for(const s of[-1,1])C(q,s*20,14,6,'#ff7a7a',{opacity:.35});
  pFaceExtras(q,D,P,v,ink,ex);
  const mf=pMouth(q,ex,0,ink);pHairFront(q,D,P,v,ink);pSweat(q,o);pTears(q,o);
