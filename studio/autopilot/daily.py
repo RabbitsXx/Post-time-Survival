@@ -19,14 +19,19 @@ def arcs_on_disk():
         arc=os.path.basename(os.path.dirname(f));out.setdefault(arc,[]).append(os.path.basename(f)[:-3])
     return out
 def topics_ready(s):
-    """ready clips grouped into COMPLETE topics (all parts ready), ordered by topic then part"""
+    """ready clips grouped into COMPLETE topics (all parts ready), ordered by topic then part.
+    A SERIAL series (config serial_series, e.g. a 10-part story) is released part by part: any contiguous run of ready parts that follows the parts already scheduled."""
     by={}
-    for c in s['clips']:
-        if c['status']=='ready':by.setdefault(c['series'],[]).append(c)
-    out=[]
+    for c in s['clips']:by.setdefault(c['series'],[]).append(c)
+    out=[];ser_cfg=set(CFG.get('serial_series',[]))
     for ser,cs in by.items():
-        cs.sort(key=lambda c:c['part'])
-        if [c['part'] for c in cs]==list(range(1,cs[0]['of']+1)):out+=cs
+        cs.sort(key=lambda c:c['part']);rd=[c for c in cs if c['status']=='ready']
+        if not rd:continue
+        if ser in ser_cfg:
+            want=1+max([c['part'] for c in cs if c['status']!='ready'] or [0])
+            for c in rd:
+                if c['part']==want:out.append(c);want+=1
+        elif [c['part'] for c in rd]==list(range(1,rd[0]['of']+1)):out+=rd
     return out
 def status():
     s=ST.load();now=dt.datetime.now(dt.timezone.utc).replace(tzinfo=None);sc=CFG['schedule']

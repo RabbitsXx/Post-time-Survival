@@ -39,3 +39,8 @@ Every beat carries a storyboard line `intent=I(who, does, where, how, why)` and 
 
 ## Budget
 A session has limited time: aim for 2 topics. If time runs short, finish and package the topics you have (2 clips each) rather than leaving half-built ones.
+
+## SERIAL series (owner 2026-10-30): THE QUIET HAND, 10 parts
+`config.json -> serial_series` lists series that are released part by part (no need to wait for all 10). Plan: `studio/long/arcs/quiet/PLAN.md` (episode table: KM/HOUR counter, fights, solo beats, tip, HOOK per episode). World: `worlds/quiet.json` (add locations/cast as an episode needs them; keep old locs unchanged). Template script: `arcs/quiet/quiet_01.py` (uses `strike()` for fights: swing + impact sticker + zombie knocked back).
+Each run, FIRST check `ls studio/long/arcs/quiet`: if the next episode `quiet_NN.py` does not exist yet and the queue of ready serial parts is < 3, write it (follow the PLAN row, HOOK_FORMULA.md: YOU / NUMBER / TWIST / OPEN LOOP; Ren starts alone, companions are met on the way; >= 3 fights, >= 30 % solo beats; Thai line per cue; `P.close('<next title>')`; `newness.py quiet_NN --record` for part_new on parts >= 2). Build with `python3 studio/autopilot/daily.py build quiet`, publish with `daily.py publish`. One new episode per run is enough; never break continuity with earlier parts (where Ren stands, what he carries, KM/HOUR from the PLAN).
+Keep the ordinary 3-part topics flowing too when `status` asks for them.

@@ -1,0 +1,412 @@
+{
+ "id": "quiet",
+ "series": "THE QUIET HAND",
+ "say": "The Quiet Hand",
+ "accent": "#ffcf6a",
+ "time": "night",
+ "moon": true,
+ "clouds": true,
+ "stars": false,
+ "pal": {
+  "sky": [
+   "#10182c",
+   "#2a3a5c",
+   "#6a5a68"
+  ],
+  "ground": "#2c2e36",
+  "wall": "#4a4f60",
+  "floor": "#34363f",
+  "hills": "#1a2238",
+  "ink": "#10121a",
+  "glow": "#ffcf6a",
+  "rim": "rgba(255,207,106,.45)",
+  "cloud": "#8a96b8",
+  "cloud2": "#c0a0a8"
+ },
+ "ann": {
+  "name": "VALE & SON DISPATCH",
+  "voice": "en-US-Chirp3-HD-Orus",
+  "rate": 1.0,
+  "hello": "Dispatch.",
+  "c": "#ffcf6a",
+  "sub": "PEST CONTROL RADIO",
+  "tag": "VALE & SON · 240 KM TO HARROW",
+  "th": "วิทยุส่งงาน เวล แอนด์ ซัน",
+  "f0": 88
+ },
+ "cast": {
+  "ren": {
+   "name": "Ren",
+   "th": "เรน",
+   "voice": "en-US-Chirp3-HD-Algenib",
+   "rate": 0.88,
+   "scale": 0.72,
+   "cap": "#ffcf6a",
+   "pal": {
+    "skin": "#d4a07c",
+    "coat": "#c8a028",
+    "coatS": "#9a7a18",
+    "pants": "#2e3440",
+    "boot": "#1e1e24"
+   },
+   "look": {
+    "hair": "short",
+    "hc": "#2a2018",
+    "brow": "thick",
+    "beard": "#3a2e24",
+    "bags": 1
+   },
+   "f0": 115
+  },
+  "noor": {
+   "name": "Noor",
+   "th": "นูร์",
+   "voice": "en-US-Chirp3-HD-Leda",
+   "rate": 0.82,
+   "scale": 0.56,
+   "cap": "#ff9ae0",
+   "pal": {
+    "skin": "#b98060",
+    "coat": "#2fb6a8",
+    "coatS": "#1f8a80",
+    "pants": "#2a2e44",
+    "boot": "#f2f0ea"
+   },
+   "look": {
+    "hair": "pony",
+    "hc": "#1a120c"
+   },
+   "f0": 300
+  },
+  "gus": {
+   "name": "Gus",
+   "th": "กัส",
+   "voice": "en-US-Chirp3-HD-Charon",
+   "rate": 1.05,
+   "scale": 0.7,
+   "cap": "#a8d8ff",
+   "pal": {
+    "skin": "#e0b898",
+    "coat": "#7a8aa0",
+    "coatS": "#5a6a80",
+    "pants": "#3a3f4d"
+   },
+   "look": {
+    "hair": "bald",
+    "glasses": "round",
+    "beard": "#8a8a8a",
+    "bags": 1
+   },
+   "f0": 150
+  },
+  "marlow": {
+   "name": "Marlow",
+   "th": "มาร์โลว์",
+   "voice": "en-US-Chirp3-HD-Gacrux",
+   "rate": 0.85,
+   "scale": 0.74,
+   "cap": "#d8d8d8",
+   "pal": {
+    "skin": "#e2c0a0",
+    "coat": "#1e1e28",
+    "coatS": "#12121a",
+    "pants": "#1e1e28"
+   },
+   "look": {
+    "hair": "short",
+    "hc": "#9a9a9a",
+    "brow": "thick"
+   },
+   "f0": 90
+  }
+ },
+ "locs": {
+  "kitchen": {
+   "kind": "in",
+   "wall": "#5a5c52",
+   "floor": "#3a3a36",
+   "items": [
+    {
+     "t": "shelf",
+     "x": 250,
+     "y": 600,
+     "s": 1.4
+    },
+    {
+     "t": "table",
+     "x": 640,
+     "y": 610,
+     "s": 1.5,
+     "c": "#8a8f98"
+    },
+    {
+     "t": "pipe",
+     "x": 900,
+     "y": 240,
+     "w": 480
+    },
+    {
+     "t": "lamp",
+     "x": 470,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    },
+    {
+     "t": "door",
+     "x": 1030,
+     "y": 600,
+     "s": 1.35,
+     "c": "#6a6a70"
+    },
+    {
+     "t": "crate",
+     "x": 830,
+     "y": 620,
+     "s": 1.1
+    }
+   ],
+   "tint": [
+    "#c8d8a8",
+    0.1
+   ],
+   "label": "hotel kitchen"
+  },
+  "service": {
+   "kind": "lane",
+   "indoor": true,
+   "wall": "#3a4a50",
+   "ground": "#26303a",
+   "roadc": "#2e3a44",
+   "road": 240,
+   "vpy": 398,
+   "sides": [
+    {
+     "x": 250,
+     "side": -1,
+     "item": {
+      "t": "door",
+      "s": 1.2,
+      "c": "#6a6a70"
+     }
+    },
+    {
+     "x": 250,
+     "side": 1,
+     "item": {
+      "t": "pipe",
+      "s": 1.2
+     }
+    }
+   ],
+   "end": {
+    "t": "door",
+    "s": 1.4
+   },
+   "fg": [
+    {
+     "t": "lamp",
+     "x": -30,
+     "y": 800,
+     "s": 2.2,
+     "h": 300
+    }
+   ],
+   "tint": [
+    "#58b0c0",
+    0.11
+   ],
+   "label": "service corridor"
+  },
+  "stair": {
+   "kind": "in",
+   "wall": "#3e4a5c",
+   "floor": "#2a3040",
+   "items": [
+    {
+     "t": "pipe",
+     "x": 900,
+     "y": 250,
+     "w": 420
+    },
+    {
+     "t": "stairs",
+     "x": 360,
+     "y": 650,
+     "s": 1.0
+    },
+    {
+     "t": "lamp",
+     "x": 250,
+     "y": 600,
+     "h": 340,
+     "r": 200
+    },
+    {
+     "t": "poster",
+     "x": 250,
+     "y": 360,
+     "s": 0.9,
+     "label": "EXIT"
+    }
+   ],
+   "tint": [
+    "#4a78c8",
+    0.13
+   ],
+   "label": "back stairs"
+  },
+  "lobby": {
+   "kind": "in",
+   "wall": "#5a4a48",
+   "floor": "#3a2e2c",
+   "items": [
+    {
+     "t": "sofa",
+     "x": 360,
+     "y": 610,
+     "s": 1.4
+    },
+    {
+     "t": "table",
+     "x": 640,
+     "y": 610,
+     "s": 1.2,
+     "c": "#6a4a30"
+    },
+    {
+     "t": "lamp",
+     "x": 520,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    },
+    {
+     "t": "glassdoor",
+     "x": 1010,
+     "y": 600,
+     "s": 1.0
+    },
+    {
+     "t": "poster",
+     "x": 780,
+     "y": 410,
+     "s": 0.7,
+     "label": "HOTEL"
+    }
+   ],
+   "tint": [
+    "#e8803c",
+    0.12
+   ],
+   "label": "hotel lobby"
+  },
+  "street": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#1c202a",
+   "items": [
+    {
+     "t": "building",
+     "x": 140,
+     "y": 590,
+     "w": 240,
+     "h": 420,
+     "c": "#2a3248",
+     "z": 0
+    },
+    {
+     "t": "building",
+     "x": 460,
+     "y": 590,
+     "w": 200,
+     "h": 330,
+     "c": "#343c5a",
+     "z": 0,
+     "lit": 0.5
+    },
+    {
+     "t": "building",
+     "x": 1090,
+     "y": 590,
+     "w": 260,
+     "h": 460,
+     "c": "#2a3248",
+     "z": 0
+    },
+    {
+     "t": "car",
+     "x": 320,
+     "y": 640,
+     "s": 1.2,
+     "c": "#8a3a3a"
+    },
+    {
+     "t": "lamp",
+     "x": 640,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    },
+    {
+     "t": "barricade",
+     "x": 960,
+     "y": 650,
+     "s": 1.2
+    },
+    {
+     "t": "rubble",
+     "x": 1200,
+     "y": 640,
+     "s": 1
+    }
+   ],
+   "label": "city street"
+  }
+ },
+ "new": {
+  "setting": "the first 72 hours of an outbreak: a quiet ex-assassin turned exterminator crosses 240 km of city, highway, tunnel and farmland to reach the weapons he buried",
+  "structure": "road-trip countdown: each episode is one leg with a KM LEFT and HOUR counter; the hero starts every leg alone and meets people on the way",
+  "announcer": "pest-control-dispatch-radio",
+  "palette": "night blue, hazard amber, hotel rust",
+  "props": [
+   "pest-sprayer",
+   "pipe-wrench",
+   "flashlight",
+   "hotel-service-stairs",
+   "dispatch-radio"
+  ],
+  "devices": [],
+  "gags": [
+   "ren-counts-three",
+   "dispatch-job-numbers"
+  ],
+  "tips": [
+   "listen-before-you-look"
+  ],
+  "tied_to_topic": "Topic = the first hours of an outbreak; zombies react to sound, so the quiet hero wins by silence, a sprayer, a wrench and counting three moves; the tip is to listen before you look.",
+  "setting_tags": [
+   "urban",
+   "indoor",
+   "building",
+   "street",
+   "hotel"
+  ],
+  "props_reused": [
+   "shelf",
+   "table",
+   "pipe",
+   "lamp",
+   "door",
+   "crate",
+   "stairs",
+   "poster",
+   "sofa",
+   "glassdoor",
+   "building",
+   "car",
+   "barricade",
+   "rubble"
+  ]
+ }
+}

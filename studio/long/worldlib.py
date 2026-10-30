@@ -136,6 +136,15 @@ class Scene:
         return s.W.set(s.loc,acts+(extra or []),add=(add if add is not None else s.add),**v)
     def hold(s,who,item,ox=60,oy=-130,sc=1.0):
         s.p[who]['held']=dict(t=item,ox=ox,oy=oy,s=sc);return s
+def strike(sc,who,zname,word,held=None,dx=70,knock=70,face_left=True,sx=None,**kw):
+    """fight beat helper (owner: real fights): the hero swings (pose punch + the weapon in hand), an impact sticker pops, the zombie is knocked back.
+    Returns (shot, fx) ; pass as   P.B(say, shot, fx=fx, ...).  The weapon is drawn as a prop next to the hero."""
+    st=sc.p[who];zb=sc.z[zname];flip=zb['x']<st['x'];st['flip']=flip
+    ex=list(kw.pop('extra',None) or [])
+    if held:ex.append(dict(k='prop',t=held,x=st['x']+(-dx if flip else dx),y=st['y']-20,s=sc.W.sc(who)*1.4/.8*.8,flip=flip))
+    shot=sc.shot(pose={who:'punch'},zmoves={zname:zb['x']+(knock if not flip else -knock)},extra=ex,**kw)
+    fx=[sticker(.15,word,x=225,y=170,rot=-6,size=62,c='#ffcf6a',dur=.9),shake(.15,6,.35)]
+    return shot,fx
 class WorldPart(Script):
     def __init__(s,W,n,topic,of):
         Script.__init__(s,f'{W.name} - PART {n}: {topic}',W.name,n,of,topic,W.accent);s.W=W;s.say=W.say
