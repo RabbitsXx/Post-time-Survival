@@ -29,26 +29,26 @@ def run(n):
     row('A','PASS' if cues[0]['t'][0]<=.6 else 'FAIL',f'the hook starts at {cues[0]["t"][0]:.2f} s: "{cues[0]["text"][:48]}"')
     chip=[f for f in B[0]['fx'] if f.get('k')=='series'];row('S','PASS' if chip and chip[0]['at']<=.5 else 'FAIL','on-screen series chip (name / part / topic) in the first 0.5 s' if chip else 'NO on-screen series chip in beat 0')
     # S: the PA says it
-    pa=[c for c in cues if c['sp'] in('bus','radio')];first=pa[0]['text'].lower() if pa else '';last=pa[-1]['text'].lower() if pa else ''
+    pa=[c for c in cues if c['sp'] in('bus','radio','ann')];first=pa[0]['text'].lower() if pa else '';last=pa[-1]['text'].lower() if pa else ''
     ok1=(uni in first) and (f'part {NUM[np_]} of {NUM[of]}' in first);row('S','PASS' if ok1 else 'FAIL',f'PA opening: "{pa[0]["text"] if pa else None}"')
     t0=pa[0]['t'][0] if pa else 99;row('S','PASS' if t0<=8 else 'FAIL',f'the PA opening is spoken at {t0:.1f} s (series + part + topic within the first 8 s)')
     if np_<of:ok2=(uni in last) and (f'part {NUM[np_]} of {NUM[of]}' in last) and ('follow' in last or 'next' in last)
     else:ok2=(uni in last) and (f'part {NUM[of]} of {NUM[of]}' in last) and ('follow' in last)
     row('S','PASS' if ok2 else 'FAIL',f'PA sign-off: "{pa[-1]["text"] if pa else None}"')
-    rt=[i for i,b in enumerate(B) if b['scene']['n']!='card' and not any(f.get('k') in('route','nightline') for f in b['fx'])]
+    rt=[i for i,b in enumerate(B) if b['scene']['n']!='card' and not any(f.get('k') in('route','nightline') or str(f.get('k','')).endswith('_route') for f in b['fx'])]
     row('S','PASS' if not rt else 'FAIL',f'route line (part n of {of}) on every non-card beat' if not rt else f'beats without the route line: {rt}')
     m=ME;row('S','PASS' if f'Part {np_}' in m['yt_title'] and len(m['yt_title'])<=100 else 'FAIL',f'YouTube title ({len(m["yt_title"])} chars): {m["yt_title"]}')
     tl=[t.strip() for t in m['tags'].split(',') if t.strip()];row('S','PASS' if len(tl)>=8 and len(m['tags'])<=500 else 'FAIL',f'{len(tl)} YouTube tags, {len(m["tags"])} chars')
     cn=len(cues);row('S','PASS' if len(TH)==cn else 'FAIL',f'{cn} cues, {len(TH)} Thai lines')
     rel=f'{R}/{CR.release(n)}';miss=[f for f in('captions_en.srt','captions_th.srt','cover_9x16.png','cover_16x9.png','PUBLISH.md') if not os.path.exists(f'{rel}/{f}')];row('S','PASS' if not miss else 'FAIL','release kit complete' if not miss else f'missing {miss}')
     # F fun audit
-    spk=collections.Counter(c['sp'] for c in cues);chars=[k for k in spk if k not in('bus','buswh','radio')];narr=sum(c['t'][1]-c['t'][0] for c in cues if c['sp'] in('bus','buswh','radio'))/max(.1,sum(c['t'][1]-c['t'][0] for c in cues))
+    spk=collections.Counter(c['sp'] for c in cues);chars=[k for k in spk if k not in('bus','buswh','radio','ann')];narr=sum(c['t'][1]-c['t'][0] for c in cues if c['sp'] in('bus','buswh','radio','ann'))/max(.1,sum(c['t'][1]-c['t'][0] for c in cues))
     row('F','PASS' if len(chars)>=4 else 'WARN',f'{len(chars)} character voices: {dict(spk)}')
     row('F','PASS' if narr<=.25 else 'WARN',f'BUS-E/PA = {narr*100:.0f} % of speech time (target <= 25 %)')
     turns=sum(1 for a,b in zip(cues,cues[1:]) if a['sp']!=b['sp']);row('F','PASS' if turns>=14 else 'WARN',f'{turns} speaker changes (conversation, not narration)')
     sf=json.load(open(f'{P}/sfx.json'));kinds={s['k'] for s in sf};com={'rimshot','boing','cluck','cheer'}&kinds
     row('F','PASS' if len(kinds)>=6 and com else 'WARN',f'{len(kinds)} kinds of sound effect: {sorted(kinds)}; comedy stings: {sorted(com)}')
-    nc=[b for b in B if b['scene']['n']!='card'];ch=[b for b in nc if b['scene']['n']=='stage' and b['scene']['p'].get('loc') in('bus','dinerin','farm') or any(a.get('k') in('dex','steve','marcus','dante','priya','rosa','benny','slim','ruth','eli','junie','hank') for a in b['scene']['p'].get('acts',[]))]
+    nc=[b for b in B if b['scene']['n']!='card'];ch=[b for b in nc if b['scene']['n']=='stage' and (b['scene']['p'].get('loc') in('bus','dinerin','farm') or str(b['scene']['p'].get('loc','')).startswith('w_')) or any(a.get('k') in('dex','steve','marcus','dante','priya','rosa','benny','slim','ruth','eli','junie','hank') for a in b['scene']['p'].get('acts',[]))]
     row('F','PASS' if len(ch)/max(1,len(nc))>=.6 else 'WARN',f'characters visible in {len(ch)}/{len(nc)} non-card beats')
     q=sum(1 for c in cues if '?' in c['text'] or re.search(r'\b(chat|you)\b',c['text'].lower()));row('F','PASS' if q>=1 else 'WARN',f'{q} lines with a question or talking to the viewer')
     # B layout

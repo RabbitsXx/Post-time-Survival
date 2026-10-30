@@ -70,6 +70,12 @@ LOC['w_'+W.id]=(Z,p)=>{const LC=(W.locs||{})[p.v||Object.keys(W.locs)[0]]||{};co
  if(LC.fog)R(m,-200,300,1680,320,'url(#gHaze)',{opacity:LC.fog});
  if(LC.fireflies!==false&&kind!=='in'){const ff=fFirefly(G(m),LC.ff||8);upd.push((u,t)=>ff(t))}
  return (u,t,bt)=>upd.forEach(fn=>fn(u,t,bt))};
+
+/* ---- the world's route line (standing rule: series + part progress on every non-card beat): FX['<id>_route'] {stop,of,label} ---- */
+FX[W.id+'_route']=(g,f)=>{const q=G(g,{});const n=f.of||2,x0=96,x1=354,y=632;R(q,x0-62,y-30,x1-x0+124,86,'rgba(8,10,14,.72)',{rx:14});L(q,x0,y,x1,y,'#3a4450',4);
+ const dots=[];for(let i=0;i<n;i++){const x=n>1?lerp(x0,x1,i/(n-1)):225,cur=i===f.stop-1;dots.push(C(q,x,y,cur?9:5,i<=f.stop-1?((W.accent)||'#7dffb0'):'#4a5560',{stroke:cur?'#fff':'none','stroke-width':2.5}))}
+ T(q,225,y+34,(f.label||'').toUpperCase(),15,'#cfe8da',{'font-family':MONO,'font-weight':800,'letter-spacing':1.5});
+ return (lt)=>{A(q,{opacity:clamp(lt/.3)});A(dots[f.stop-1],{r:9+1.6*Math.sin(lt*6)})}};
 /* ---- the world's announcer device: a themed broadcast panel; p.mode open|close, p.part,p.of,p.title,p.next ---- */
 const AN=W.ann||{};CARD[W.id+'_ann']=(Z,p)=>{const f=G(Z.far),m=G(Z.mid);R(f,-20,-20,490,840,AN.bg||'#0a0e12');for(let i=0;i<60;i++)R(f,rnd(i)*450,rnd(i+9)*820,2,2,'#fff',{opacity:.15+rnd(i+3)*.4});R(f,-20,-20,490,840,'url(#gWallShade)');
  const col=AN.c||'#7dffb0',scr=G(m);R(scr,30,120,390,300,'#06100a',{rx:18,stroke:AN.frame||'#3a4a40','stroke-width':8});R(scr,40,130,370,280,AN.screen||'#0a1a10',{rx:12});

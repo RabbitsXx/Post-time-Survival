@@ -63,7 +63,7 @@ class World:
         a=S['ann'];V['ann']=(a.get('voice','en-US-Chirp3-HD-Enceladus'),a.get('rate',1.0));F['ann']=a.get('filt','highpass=f=300,lowpass=f=3400,acompressor=threshold=-24dB:ratio=6,volume=1.2')
         SP['ann']=dict(label=a['name'].upper(),fill=a.get('c','#7dffb0'),stroke='#02170c',mono=True);NE['ann']=a['name'];NT['ann']=a.get('th',a['name'])
         N=S['new'];ne=dict(world=s.id,setting=N['setting'],structure=N['structure'],announcer=N['announcer'],announcer_voice='ann',palette=N['palette'],
-            locs=[f'{s.loc}:{k}' for k in S['locs']],cast=list(s.cast),props=N['props'],devices=N['devices']+[s.id+'_ann'],gags=N['gags'],tips=N['tips'],tied_to_topic=N['tied_to_topic'],setting_tags=N.get('setting_tags',[]),props_reused=N.get('props_reused',[]),
+            locs=[f'{s.loc}:{k}' for k in S['locs']],cast=list(s.cast),props=N['props'],devices=N['devices']+[s.id+'_ann',s.id+'_route'],gags=N['gags'],tips=N['tips'],tied_to_topic=N['tied_to_topic'],setting_tags=N.get('setting_tags',[]),props_reused=N.get('props_reused',[]),
             library_used=['pax rig','caption engine','SFX base','card helpers','finish9 audio chain','world9 catalogue'])
         if part_new:ne['part_new']=part_new
         return V,F,SP,NE,NT,True,S,ne
@@ -74,7 +74,9 @@ class WorldPart(Script):
         Script.__init__(s,f'{W.name} - PART {n}: {topic}',W.name,n,of,topic,W.accent);s.W=W;s.say=W.say
     def B(s,say,shot,fx=None,**k):
         fx=list(fx or [])
-        if isinstance(shot,tuple):sc,view=shot;return s.beat(say,sc,view=view,fx=fx,**k)
+        if isinstance(shot,tuple):
+            sc,view=shot;lab=s.W.spec['locs'].get(sc['p'].get('v'),{}).get('label') or str(sc['p'].get('v','')).replace('-',' ')
+            fx.append(dict(k=s.W.id+'_route',at=0,stop=s.part,of=s.of,label=f'{s.say}  ·  {lab}'));return s.beat(say,sc,view=view,fx=fx,**k)
         return s.beat(say,shot,fx=fx,**k)
     def open(s,**k):
         a=s.W.spec['ann'];return s.B([('ann',f"{a.get('hello','Attention.')} This is {s.say}. Part {NUMW[s.part]} of {NUMW[s.of]}: {s.topic.lower()}.")],card(s.W.id+'_ann',mode='open',part=s.part,of=s.of,title=s.topic.upper()),mood='idle',sfx=[('radio',0)],**k)
