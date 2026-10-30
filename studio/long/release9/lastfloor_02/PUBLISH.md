@@ -1,7 +1,7 @@
 # THE LAST FLOOR - Part 2 of 3 - publish kit
 
-**YouTube title** (76 chars)
-`Never Open The Red Door! A Sofa Smashes The Zombies — The Last Floor, Part 2`
+**YouTube title** (67 chars)
+`Never Open The Red Door! A Sofa Smashes The | The Last Floor Part 2`
 
 **YouTube description**
 ```
@@ -19,7 +19,7 @@ Bell, Zara, Omar, Pip, Mrs. Lin
 Fiction and comedy. Voices are AI-generated; the animation is original.
 Watch the whole series in order: THE LAST FLOOR, Parts 1-3, from Post Time Survival.
 
-#shorts #zombie #zombieapocalypse #animation #mystery #thelastfloor
+#shorts #zombie #zombieapocalypse #animation #survival #thelastfloor
 ```
 
 **Tags** (paste in Studio > Details > Show more > Tags; Buffer has no tags field)

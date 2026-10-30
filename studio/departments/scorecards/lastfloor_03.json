@@ -7,15 +7,15 @@
  },
  "art": {
   "dept": "art-layout-animation",
-  "score": 88,
+  "score": 94,
   "issues": [
-   "ART: the bottom fifth of the picture is a flat black band in 7/12 scene beats (the set stops at y=720 of the 800 px window): extend floors / ground / walls below the horizon"
+   "ART: two locations have almost the same colour world (distance 13 < 14): give each place its own colour key"
   ],
   "metrics": {
-   "dead_black_bottom_beats": "7/12",
+   "dead_black_bottom_beats": "0/12",
    "dark_beats": 0,
-   "mean_saturation": 0.297,
-   "min_palette_distance": 19.1,
+   "mean_saturation": 0.315,
+   "min_palette_distance": 13.4,
    "static_beats": [],
    "cut_by_edge": [],
    "zoom_jumps": [],
@@ -24,61 +24,57 @@
  },
  "sound": {
   "dept": "sound",
-  "score": 56,
+  "score": 86,
   "issues": [
-   "true peak -1.4 dBTP (> -1.5)",
-   "speaker loudness spread 4.0 dB (> 4): one voice is much quieter/louder than another",
-   "voices ann and lin sound alike (f0 170 vs 178 Hz): recast or pitch-shift one",
-   "voices ann and omar sound alike (f0 170 vs 155 Hz): recast or pitch-shift one",
-   "ann: 176 wpm (115-170)",
-   "zara: 207 wpm (115-170)",
-   "announcer is 27% of the speech (<= 25 %)"
+   "voices ann and omar sound alike (f0 156 vs 155 Hz): recast or pitch-shift one",
+   "ann: 184 wpm (115-170)",
+   "zara: 175 wpm (115-170)"
   ],
   "metrics": {
    "lufs": -14.0,
-   "true_peak": -1.4,
+   "true_peak": -2.1,
    "speakers": {
     "bell": {
      "db": -20.7,
      "f0": 125.0,
      "wpm": 134,
      "share": 0.32,
-     "bed_minus_voice_db": -12.1
+     "bed_minus_voice_db": -12.4
     },
     "ann": {
-     "db": -23.9,
-     "f0": 170.0,
-     "wpm": 176,
-     "share": 0.27,
-     "bed_minus_voice_db": -6.1
+     "db": -22.5,
+     "f0": 156.0,
+     "wpm": 184,
+     "share": 0.23,
+     "bed_minus_voice_db": -8.0
     },
     "zara": {
-     "db": -21.5,
-     "f0": 242.0,
-     "wpm": 207,
-     "share": 0.17,
-     "bed_minus_voice_db": -7.7
+     "db": -20.1,
+     "f0": 254.0,
+     "wpm": 175,
+     "share": 0.21,
+     "bed_minus_voice_db": -9.2
     },
     "lin": {
      "db": -20.5,
      "f0": 178.0,
      "wpm": 141,
      "share": 0.13,
-     "bed_minus_voice_db": -6.4
+     "bed_minus_voice_db": -7.5
     },
     "omar": {
      "db": -19.9,
      "f0": 155.0,
      "wpm": 180,
      "share": 0.07,
-     "bed_minus_voice_db": -13.2
+     "bed_minus_voice_db": -13.5
     },
     "pip": {
-     "db": -20.3,
-     "f0": 205.0,
-     "wpm": 165,
-     "share": 0.04,
-     "bed_minus_voice_db": -12.9
+     "db": -20.6,
+     "f0": 317.0,
+     "wpm": 137,
+     "share": 0.05,
+     "bed_minus_voice_db": -11.8
     }
    },
    "sfx": 28
@@ -86,69 +82,64 @@
  },
  "editorial": {
   "dept": "editorial",
-  "score": 58,
+  "score": 74,
   "issues": [
-   "EDITORIAL: 6 caption chunk(s) stop on a dangling word, e.g. ['THIS IS', 'WHAT IF', 'HELICOPTER IN', 'THEY CLIMBED THE']: break captions at phrase boundaries",
-   "EDITORIAL: 10 caption(s) on screen < 0.6 s [('THIS IS', 0.48), ('FLOOR ELEVEN', 0.52), ('IS POURING', 0.44)]",
-   "EDITORIAL: 15 caption(s) read faster than 17 characters/s [('FLOOR ELEVEN', 23.2), ('IS POURING', 22.8), ('OUT ZOMBIES!', 18.8)]",
-   "EDITORIAL: announcer card beat 1 is 6.1 s (> 4 s) of a static screen: shorten the announcement or animate the card"
+   "EDITORIAL: 1 caption chunk(s) stop on a dangling word, e.g. ['FLOOR. FOLLOW FOR']: break captions at phrase boundaries",
+   "EDITORIAL: 6 caption(s) on screen < 0.6 s [('IS POURING', 0.53), (\"THEY'RE ONE\", 0.56), ('WHAT', 0.24)]",
+   "EDITORIAL: 9 caption(s) read faster than 17 characters/s [('FLOOR ELEVEN', 19.1), ('IS POURING', 18.8), (\"THEY'RE ONE\", 19.5)]",
+   "EDITORIAL: announcer card beat 15 is 5.1 s (> 4 s) of a static screen: shorten the announcement or animate the card"
   ],
   "metrics": {
-   "chunks": 52,
+   "chunks": 50,
    "dangling": [
-    "THIS IS",
-    "WHAT IF",
-    "HELICOPTER IN",
-    "THEY CLIMBED THE",
-    "THE END OF",
-    "FOLLOW FOR"
+    "FLOOR. FOLLOW FOR"
    ],
    "orphans": [],
    "fast": [
     [
      "FLOOR ELEVEN",
-     23.2
+     19.1
     ],
     [
      "IS POURING",
-     22.8
-    ],
-    [
-     "OUT ZOMBIES!",
      18.8
     ],
     [
      "THEY'RE ONE",
-     21.5
+     19.5
     ],
     [
-     "FLIGHT BEHIND!",
-     18.2
+     "IF THE PILOT",
+     18.9
+    ],
+    [
+     "THEN WE BECOME",
+     17.5
     ]
    ],
    "short": [
     [
-     "THIS IS",
-     0.48
-    ],
-    [
-     "FLOOR ELEVEN",
-     0.52
-    ],
-    [
      "IS POURING",
-     0.44
+     0.53
     ],
     [
      "THEY'RE ONE",
-     0.51
+     0.56
     ],
     [
-     "WHAT IF",
-     0.32
+     "WHAT",
+     0.24
+    ],
+    [
+     "MY PAN",
+     0.41
+    ],
+    [
+     "PART THREE",
+     0.59
     ]
    ],
-   "shot_len_std": 1.1,
+   "shot_len_std": 0.94,
    "srt": [
     20,
     20
@@ -157,20 +148,18 @@
  },
  "marketing": {
   "dept": "marketing",
-  "score": 94,
-  "issues": [
-   "MARKETING: YouTube title is 91 chars (> 70): it will be cut on phones"
-  ],
+  "score": 100,
+  "issues": [],
   "metrics": {
-   "title": "Three Flashes Saved Us On The Roof! A Parrot Yells MAYDAY — The Last Floor, Part 3 (Finale)",
-   "title_len": 91,
+   "title": "Three Flashes Saved Us On The Roof! A | The Last Floor Part 3 Finale",
+   "title_len": 68,
    "tags": 17,
    "hashtags": [
     "#shorts",
     "#zombie",
     "#zombieapocalypse",
     "#animation",
-    "#mystery",
+    "#survival",
     "#thelastfloor"
    ],
    "cover_9x16.png": {
@@ -178,16 +167,16 @@
      720,
      1280
     ],
-    "detail": 8.7,
-    "colourful": 46.5
+    "detail": 8.1,
+    "colourful": 49.4
    },
    "cover_16x9.png": {
     "size": [
      1280,
      720
     ],
-    "detail": 5.0,
-    "colourful": 35.1
+    "detail": 4.2,
+    "colourful": 32.8
    }
   }
  },

@@ -22,7 +22,7 @@ def make(base,out,aspect,part,main,box,accent=0,tag="THE LIGHTHOUSE",top=False):
     im=Image.open(base).convert('RGBA')
     # contrast / saturation pop + vignette
     from PIL import ImageEnhance
-    rgb=im.convert('RGB');rgb=ImageEnhance.Contrast(rgb).enhance(1.12);rgb=ImageEnhance.Color(rgb).enhance(1.1);im=rgb.convert('RGBA')
+    rgb=im.convert('RGB');rgb=ImageEnhance.Contrast(rgb).enhance(1.12);rgb=ImageEnhance.Color(rgb).enhance(1.38 if top else 1.1);im=rgb.convert('RGBA')
     W,H=im.size
     vg=Image.new('L',(W,H),0);ImageDraw.Draw(vg).ellipse([-W*.25,-H*.15,W*1.25,H*1.15],fill=255);vg=vg.filter(ImageFilter.GaussianBlur(W//5))
     dark=Image.new('RGBA',(W,H),(0,0,0,110));im=Image.composite(im,Image.alpha_composite(im,dark),vg)

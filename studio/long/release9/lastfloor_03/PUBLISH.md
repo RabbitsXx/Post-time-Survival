@@ -1,7 +1,7 @@
 # THE LAST FLOOR - Part 3 of 3 - publish kit
 
-**YouTube title** (91 chars)
-`Three Flashes Saved Us On The Roof! A Parrot Yells MAYDAY — The Last Floor, Part 3 (Finale)`
+**YouTube title** (68 chars)
+`Three Flashes Saved Us On The Roof! A | The Last Floor Part 3 Finale`
 
 **YouTube description**
 ```
@@ -19,7 +19,7 @@ Bell, Zara, Omar, Pip, Mrs. Lin
 Fiction and comedy. Voices are AI-generated; the animation is original.
 Watch the whole series in order: THE LAST FLOOR, Parts 1-3, from Post Time Survival.
 
-#shorts #zombie #zombieapocalypse #animation #mystery #thelastfloor
+#shorts #zombie #zombieapocalypse #animation #survival #thelastfloor
 ```
 
 **Tags** (paste in Studio > Details > Show more > Tags; Buffer has no tags field)

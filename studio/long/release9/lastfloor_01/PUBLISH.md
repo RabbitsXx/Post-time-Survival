@@ -1,7 +1,7 @@
 # THE LAST FLOOR - Part 1 of 3 - publish kit
 
-**YouTube title** (63 chars)
-`A Zombie Delivers Pizza To The Elevator! 12 | The Last Floor P1`
+**YouTube title** (67 chars)
+`A Zombie Delivers Pizza To The Elevator! 12 | The Last Floor Part 1`
 
 **YouTube description**
 ```

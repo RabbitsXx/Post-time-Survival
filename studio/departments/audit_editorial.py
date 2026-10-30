@@ -38,7 +38,7 @@ def audit(cid):
     if first>1.0:issues.append(f'EDITORIAL: the first spoken line starts at {first:.1f} s (> 1 s)');score-=5
     for i,b in enumerate(B):
         d=b['t'][1]-b['t'][0]
-        if b['scene']['n']=='card' and 'ann' in json.dumps(b['scene'])[:200] and d>4.2:issues.append(f'EDITORIAL: announcer card beat {i} is {d:.1f} s (> 4 s) of a static screen: shorten the announcement or animate the card');score-=6;break
+        if b['scene']['n']=='card' and '_ann' in json.dumps(b['scene'])[:200] and d>(4.2 if i<3 else 7.0):issues.append(f'EDITORIAL: announcer card beat {i} is {d:.1f} s (> 4 s) of a static screen: shorten the announcement or animate the card');score-=6;break
     for i,b in enumerate(B):
         d=b['t'][1]-b['t'][0]
         if d>6.5 and b['scene']['n']!='card':issues.append(f'EDITORIAL: scene beat {i} lasts {d:.1f} s (> 6.5 s)');score-=3

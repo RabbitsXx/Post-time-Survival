@@ -7,38 +7,22 @@
  },
  "art": {
   "dept": "art-layout-animation",
-  "score": 70,
+  "score": 91,
   "issues": [
-   "ART: the bottom fifth of the picture is a flat black band in 6/13 scene beats (the set stops at y=720 of the 800 px window): extend floors / ground / walls below the horizon",
-   "ART: two locations have almost the same colour world (distance 9 < 14): give each place its own colour key",
-   "LAYOUT: 4 person(s) cut by the frame edge, e.g. [(8, 'bell', 14), (8, 'zara', -22), (11, 'omar', 444), (12, 'bell', 3)]: reframe or move them inside x 40-410"
+   "ART: two locations have almost the same colour world (distance 7 < 14): give each place its own colour key",
+   "LAYOUT: 1 person(s) cut by the frame edge, e.g. [(14, 'bell', -16)]: reframe or move them inside x 40-410"
   ],
   "metrics": {
-   "dead_black_bottom_beats": "6/13",
+   "dead_black_bottom_beats": "0/13",
    "dark_beats": 0,
-   "mean_saturation": 0.219,
-   "min_palette_distance": 9.1,
+   "mean_saturation": 0.227,
+   "min_palette_distance": 6.7,
    "static_beats": [],
    "cut_by_edge": [
     [
-     8,
+     14,
      "bell",
-     14
-    ],
-    [
-     8,
-     "zara",
-     -22
-    ],
-    [
-     11,
-     "omar",
-     444
-    ],
-    [
-     12,
-     "bell",
-     3
+     -16
     ]
    ],
    "zoom_jumps": [],
@@ -47,52 +31,49 @@
  },
  "sound": {
   "dept": "sound",
-  "score": 66,
+  "score": 86,
   "issues": [
-   "speaker loudness spread 4.5 dB (> 4): one voice is much quieter/louder than another",
-   "voices ann and omar sound alike (f0 150 vs 145 Hz): recast or pitch-shift one",
-   "zara: during speech the bed (music+sfx) is -3.9 dB relative to the voice (must be <= -6): the voice is not on top",
-   "zara: 187 wpm (115-170)",
-   "ann: during speech the bed (music+sfx) is -3.4 dB relative to the voice (must be <= -6): the voice is not on top"
+   "voices ann and omar sound alike (f0 131 vs 146 Hz): recast or pitch-shift one",
+   "ann: during speech the bed (music+sfx) is -5.5 dB relative to the voice (must be <= -6): the voice is not on top"
   ],
   "metrics": {
    "lufs": -14.1,
-   "true_peak": -1.9,
+   "true_peak": -2.1,
    "speakers": {
     "zara": {
-     "db": -22.9,
-     "f0": 232.0,
-     "wpm": 187,
-     "share": 0.23,
-     "bed_minus_voice_db": -3.9
+     "db": -20.7,
+     "f0": 241.0,
+     "wpm": 162,
+     "share": 0.26,
+     "bed_minus_voice_db": -7.3
     },
     "ann": {
-     "db": -25.1,
-     "f0": 150.0,
-     "wpm": 146,
-     "share": 0.23,
-     "bed_minus_voice_db": -3.4
+     "db": -23.6,
+     "f0": 131.0,
+     "wpm": 151,
+     "share": 0.19,
+     "bed_minus_voice_db": -5.5
     },
     "bell": {
      "db": -20.7,
      "f0": 113.0,
      "wpm": 126,
      "share": 0.4,
-     "bed_minus_voice_db": -10.0
+     "bed_minus_voice_db": -9.4
     },
     "omar": {
      "db": -20.7,
-     "f0": 145.0,
+     "f0": 146.0,
      "wpm": 170,
      "share": 0.12,
      "bed_minus_voice_db": -8.3
     },
     "pip": {
-     "db": -18.4,
-     "f0": 288.0,
-     "wpm": 319,
-     "share": 0.02,
-     "bed_minus_voice_db": -16.6
+     "db": -20.1,
+     "f0": 286.0,
+     "wpm": 246,
+     "share": 0.03,
+     "bed_minus_voice_db": -15.1
     }
    },
    "sfx": 24
@@ -100,65 +81,53 @@
  },
  "editorial": {
   "dept": "editorial",
-  "score": 58,
+  "score": 80,
   "issues": [
-   "EDITORIAL: 6 caption chunk(s) stop on a dangling word, e.g. ['I ORDERED A', 'THIS IS', 'THEN WE', 'A PAN IS']: break captions at phrase boundaries",
-   "EDITORIAL: 9 caption(s) on screen < 0.6 s [('THIS IS', 0.48), ('PART ONE', 0.54), ('THEN WE', 0.43)]",
-   "EDITORIAL: 4 caption(s) read faster than 17 characters/s [('OPEN THE DOOR!', 24.8), ('OPEN THE DOOR!', 20.4), ('SOMETHING', 22.1)]",
-   "EDITORIAL: announcer card beat 1 is 6.0 s (> 4 s) of a static screen: shorten the announcement or animate the card"
+   "EDITORIAL: 7 caption(s) on screen < 0.6 s [('I ORDERED', 0.59), ('I DID', 0.35), ('PART ONE', 0.55)]",
+   "EDITORIAL: 3 caption(s) read faster than 17 characters/s [('THEN WE START', 17.2), ('OPEN THE DOOR!', 19.1), ('SOMETHING IS CLIMBING', 20.1)]",
+   "EDITORIAL: announcer card beat 16 is 6.4 s (> 4 s) of a static screen: shorten the announcement or animate the card"
   ],
   "metrics": {
-   "chunks": 50,
-   "dangling": [
-    "I ORDERED A",
-    "THIS IS",
-    "THEN WE",
-    "A PAN IS",
-    "PIP. NOT",
-    "FOLLOW FOR"
-   ],
+   "chunks": 48,
+   "dangling": [],
    "orphans": [],
    "fast": [
     [
-     "OPEN THE DOOR!",
-     24.8
+     "THEN WE START",
+     17.2
     ],
     [
      "OPEN THE DOOR!",
-     20.4
+     19.1
     ],
     [
-     "SOMETHING",
-     22.1
-    ],
-    [
-     "IS CLIMBING",
-     22.4
+     "SOMETHING IS CLIMBING",
+     20.1
     ]
    ],
    "short": [
     [
-     "THIS IS",
-     0.48
+     "I ORDERED",
+     0.59
+    ],
+    [
+     "I DID",
+     0.35
     ],
     [
      "PART ONE",
-     0.54
+     0.55
     ],
     [
-     "THEN WE",
+     "NOW.",
      0.43
     ],
     [
      "I BROUGHT",
      0.55
-    ],
-    [
-     "A PAN IS",
-     0.52
     ]
    ],
-   "shot_len_std": 1.23,
+   "shot_len_std": 1.01,
    "srt": [
     20,
     20
@@ -167,20 +136,20 @@
  },
  "marketing": {
   "dept": "marketing",
-  "score": 94,
+  "score": 96,
   "issues": [
-   "MARKETING: YouTube title is 86 chars (> 70): it will be cut on phones"
+   "MARKETING: cover_9x16.png is dull (colourfulness 29 < 30): thumbnails need a strong colour accent"
   ],
   "metrics": {
-   "title": "A Zombie Delivers Pizza To The Elevator! 12 Floors To Survive — The Last Floor, Part 1",
-   "title_len": 86,
+   "title": "A Zombie Delivers Pizza To The Elevator! 12 | The Last Floor Part 1",
+   "title_len": 67,
    "tags": 17,
    "hashtags": [
     "#shorts",
     "#zombie",
     "#zombieapocalypse",
     "#animation",
-    "#mystery",
+    "#survival",
     "#thelastfloor"
    ],
    "cover_9x16.png": {
@@ -188,16 +157,16 @@
      720,
      1280
     ],
-    "detail": 10.1,
-    "colourful": 31.6
+    "detail": 8.8,
+    "colourful": 29.4
    },
    "cover_16x9.png": {
     "size": [
      1280,
      720
     ],
-    "detail": 5.6,
-    "colourful": 32.6
+    "detail": 4.9,
+    "colourful": 30.9
    }
   }
  },

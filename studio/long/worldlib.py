@@ -146,8 +146,8 @@ class WorldPart(Script):
             fx.append(dict(k=s.W.id+'_route',at=0,stop=s.part,of=s.of,label=f'{s.say}  ·  {lab}'));return s.beat(say,sc,view=view,fx=fx,**k)
         return s.beat(say,shot,fx=fx,**k)
     def open(s,**k):
-        a=s.W.spec['ann'];return s.B([('ann',f"{s.say}. Part {NUMW[s.part]} of {NUMW[s.of]}: {s.topic.lower()}.")],card(s.W.id+'_ann',mode='open',part=s.part,of=s.of,title=s.topic.upper()),mood='idle',sfx=[('radio',0)],**k)
+        a=s.W.spec['ann'];return s.B([('ann',f"{s.say}. Part {NUMW[s.part]} of {NUMW[s.of]}: {s.topic.lower()}.")],card(s.W.id+'_ann',mode='open',part=s.part,of=s.of,title=s.topic.upper()),mood='idle',sfx=[('radio',0)],**dict(dict(pause=0),**k))
     def close(s,nxt=None,**k):
         if s.part<s.of:t=f"Part {NUMW[s.part]} of {NUMW[s.of]}, {s.say}. Next: {(nxt or '').lower()}. Follow for part {NUMW[s.part+1]}.";c=card(s.W.id+'_ann',mode='close',part=s.part,of=s.of,next=(nxt or '').upper())
         else:t=f"Part {NUMW[s.of]} of {NUMW[s.of]}, the end of {s.say}. Follow for the next series.";c=card(s.W.id+'_ann',mode='end',part=s.part,of=s.of)
-        return s.B([('ann',t)],c,mood='idle' if s.part<s.of else 'sad',nofade=s.part>=s.of,sfx=[('radio',0)],**k)
+        return s.B([('ann',t)],c,mood='idle' if s.part<s.of else 'sad',nofade=s.part>=s.of,sfx=[('radio',0)],**dict(dict(pause=0),**k))

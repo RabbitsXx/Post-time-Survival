@@ -3,81 +3,81 @@
 Omar: Floor four. Mrs. Lin lives here.
 
 2
-00:00:04,137 --> 00:00:09,648
-ALDER TOWER INTERCOM: Attention, residents. This is The
-Last Floor. Part two of three: the stairs.
+00:00:04,137 --> 00:00:07,649
+ALDER TOWER INTERCOM: The Last Floor. Part
+two of three: the stairs.
 
 3
-00:00:10,318 --> 00:00:13,661
+00:00:08,319 --> 00:00:11,662
 Mrs. Lin: Pip! There you are! Who locked
 my stairs?
 
 4
-00:00:14,331 --> 00:00:15,676
+00:00:12,332 --> 00:00:13,676
 Bell: I did. Rule one.
 
 5
-00:00:15,796 --> 00:00:16,359
+00:00:13,796 --> 00:00:14,360
 Mrs. Lin: ...Fair.
 
 6
-00:00:17,029 --> 00:00:19,311
+00:00:15,030 --> 00:00:17,312
 Bell: Go up. Seal the door behind you.
 
 7
-00:00:19,981 --> 00:00:26,085
+00:00:17,982 --> 00:00:24,086
 Omar: Floor four, five, six... that's a
 lot of floors.
 
 8
-00:00:26,205 --> 00:00:27,707
+00:00:24,206 --> 00:00:25,774
 Zara: Keep climbing. Don't count.
 
 9
-00:00:28,377 --> 00:00:30,041
+00:00:26,444 --> 00:00:28,461
 Zara: Floor five. The stairs are blocked!
 
 10
-00:00:30,711 --> 00:00:32,681
+00:00:29,131 --> 00:00:31,100
 Bell: Push! Everyone push!
 
 11
-00:00:33,351 --> 00:00:34,188
+00:00:31,770 --> 00:00:32,359
 Zara: ...Direct hit.
 
 12
-00:00:34,951 --> 00:00:38,077
+00:00:33,370 --> 00:00:36,496
 Mrs. Lin: That's my sister's flat. She
 says never open it.
 
 13
-00:00:38,747 --> 00:00:40,754
+00:00:37,166 --> 00:00:39,173
 Mrs. Lin: Dot, you're not well.
 
 14
-00:00:41,424 --> 00:00:43,185
+00:00:39,843 --> 00:00:41,604
 Bell: Leave her. Lock the door.
 
 15
-00:00:43,855 --> 00:00:45,617
+00:00:42,274 --> 00:00:44,037
 Mrs. Lin: Goodbye, Dot. Click.
 
 16
-00:00:46,287 --> 00:00:48,388
+00:00:44,707 --> 00:00:46,693
 Zara: They're gaining. Floor seven.
 
 17
-00:00:49,058 --> 00:00:52,036
+00:00:47,363 --> 00:00:50,341
 Omar: Twelve floors. My legs filed a
 complaint.
 
 18
-00:00:52,706 --> 00:00:54,951
+00:00:51,011 --> 00:00:53,255
 Bell: Shortcut! Through the floor ten
 hall!
 
 19
-00:00:55,621 --> 00:01:02,252
+00:00:53,925 --> 00:01:00,557
 ALDER TOWER INTERCOM: Part two of three, The
 Last Floor. Next: the roof. Follow for part three.
 

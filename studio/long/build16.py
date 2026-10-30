@@ -120,6 +120,19 @@ def main():
                 dd=span*w/tot;caps.append(dict(t=[round(t0+x,3),round(t0+x+dd,3)],h=fmt(c).upper() if False else fmt([(w_.upper(),col) for w_,col in c]),sp=(s['sp'] if s['sp'] in ('game','maya','steve') or getattr(M,'SPEAKERS',None) else 'dex')));x+=dd
             cues.append(dict(t=[round(t0+s['t0'],3),round(t0+s['t1']+.1,3)],text=plain(s['cap']),sp=s['sp']))
             voice_events.append(dict(t=t0+s['t0'],a=s['audio'],sp=s['sp'],spk=s['spk']))
+        # editorial: a caption chunk that would be on screen < 0.6 s is merged with its neighbour (up to 4 words) so nothing flashes by unreadably
+        def _w(c):return len(re.sub(r'<[^>]+>','',c['h']).split())
+        k=0
+        while k<len(caps):
+            c=caps[k]
+            if c['t'][1]-c['t'][0]<.6:
+                for nb in(k+1,k-1):
+                    if 0<=nb<len(caps) and caps[nb]['sp']==c['sp'] and _w(c)+_w(caps[nb])<=4:
+                        lo,hi=(k,nb) if k<nb else (nb,k);A_,B_=caps[lo],caps[hi]
+                        caps[lo]=dict(A_,t=[A_['t'][0],B_['t'][1]],h=A_['h']+' '+B_['h']);del caps[hi];k=max(0,lo-1);break
+                else:k+=1
+                continue
+            k+=1
         # captions stay until the next chunk begins (no flicker between chunks of one sentence), but never cross the beat end
         for i in range(len(caps)-1):
             if caps[i+1]['t'][0]-caps[i]['t'][1]<.5:caps[i]['t'][1]=caps[i+1]['t'][0]
