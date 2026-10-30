@@ -14,7 +14,7 @@ NAMES_EN=dict(ruth='Ruth',eli='Eli',junie='Junie',hank='Hank',radio='Radio');NAM
 SC=dict(ruth=.86,eli=.74,junie=.6,hank=.98)
 FOOT=640
 def person(who,expr='calm',x=640,y=FOOT,s=None,talk=False,pose='stand',**k):
-    a=dict(k=who,view='front',pose=pose,expr=expr,x=x,y=y,s=s or SC[who],talk=who if talk else False,bob=1.1,ph=x*.011)
+    a=dict(k=who,view='front',pose=pose,expr=expr,x=x,y=y,s=s or SC[who],talk=who if talk else False,bob=1.1,ph=x*.011,shadow=1,rim='rgba(255,190,120,.55)')
     if who=='hank':a['sx']=1.18
     a.update(k);return a
 def farm(v,acts=None,x=640,y=480,z=1.0,**p):

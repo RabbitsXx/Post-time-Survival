@@ -14,6 +14,9 @@ function defsLong(){document.getElementById('defs').insertAdjacentHTML('beforeen
  <radialGradient id="gNeon"><stop offset="0" stop-color="#ff3da0" stop-opacity=".55"/><stop offset="1" stop-color="#ff3da0" stop-opacity="0"/></radialGradient>
  <radialGradient id="gLamp"><stop offset="0" stop-color="#ffe9a8" stop-opacity=".9"/><stop offset="1" stop-color="#ffe9a8" stop-opacity="0"/></radialGradient>
  <linearGradient id="gCone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff6c8" stop-opacity=".75"/><stop offset="1" stop-color="#fff6c8" stop-opacity="0"/></linearGradient>
+ <linearGradient id="gSkySoft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d3a6e"/><stop offset=".45" stop-color="#c2677a"/><stop offset=".8" stop-color="#f1a477"/><stop offset="1" stop-color="#f8d3a0"/></linearGradient>
+ <linearGradient id="gHaze" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6bf92" stop-opacity="0"/><stop offset=".6" stop-color="#f6bf92" stop-opacity=".42"/><stop offset="1" stop-color="#f6bf92" stop-opacity="0"/></linearGradient>
+ <linearGradient id="gGroundShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1606" stop-opacity="0"/><stop offset="1" stop-color="#2a1606" stop-opacity=".4"/></linearGradient>
  <linearGradient id="gWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b87a6"/><stop offset="1" stop-color="#1a3550"/></linearGradient>`)}
 
 /* ---------- palettes ---------- */

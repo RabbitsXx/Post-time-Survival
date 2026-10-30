@@ -1,6 +1,9 @@
 /* ===== farm9: THE LAST HARVEST sets (world 1280x720, seen through the 450x800 window).  LOC.farm variants: yard | field | porch | barn
    dusk-to-night family farm: red barn + silo + windmill + hay bales + fence, a corn field that rustles, the farmhouse porch with its lantern and the old radio. ===== */
 const FARM_INK='#1a1208';
+
+function fCloud(g,x,y,w,c,o){const q=G(g,{style:'filter:blur(7px)',opacity:o||.5});for(let i=0;i<5;i++)E('ellipse',{cx:x+(i-2)*w*.2,cy:y+(i%2?-1:1)*w*.04,rx:w*.2,ry:w*.07+(i===2?w*.04:0),fill:c},q);return q}
+function fShadow(g,x,y,rx){E('ellipse',{cx:x,cy:y,rx,ry:rx*.14,fill:'#1a0d05',opacity:.38,style:'filter:blur(3px)'},g)}
 function fStars(g,n,y1){for(let i=0;i<n;i++)C(g,rnd(i+40)*1380-40,rnd(i+7)*y1,1+rnd(i+9)*1.3,'#fff',{opacity:.2+rnd(i+13)*.55})}
 function fHills(g){P(g,'M-100,450 Q120,370 380,430 T760,400 T1100,440 T1380,410 L1380,640 L-100,640Z','#1b1a30');P(g,'M-100,500 Q200,440 520,490 T1000,470 T1380,500 L1380,640 L-100,640Z','#14172a');
  for(let i=0;i<22;i++){const x=i*66+rnd(i)*30,h=26+rnd(i+3)*30;P(g,`M${x},500 L${x+14},${500-h} L${x+28},500Z`,'#0d1322')}}
@@ -26,12 +29,12 @@ function fWindmill(g,x,y){const t=G(g,{});P(t,`M${x-34},${y} L${x-6},${y-250} L$
  const b=G(g,{transform:`translate(${x} ${y-256})`});for(let k=0;k<4;k++){const r=G(b,{transform:`rotate(${k*90})`});P(r,'M0,0 L10,-8 L12,-96 L-4,-100 L-8,-8Z','#d7dbe3',{stroke:FARM_INK,'stroke-width':2.4})}C(b,0,0,10,'#c0392b',{stroke:FARM_INK,'stroke-width':3});return b}
 function fFirefly(g,n){const o=[];for(let i=0;i<n;i++){const q=G(g,{});C(q,0,0,12,'url(#gLamp)',{opacity:.55});C(q,0,0,2.6,'#f4ff9a');o.push({q,x:rnd(i+5)*1280,y:380+rnd(i+9)*230,ph:rnd(i+2)*6.28,sp:.4+rnd(i+11)*.6})}return t=>o.forEach(f=>A(f.q,{transform:`translate(${f.x+Math.sin(t*f.sp+f.ph)*34} ${f.y+Math.cos(t*f.sp*1.3+f.ph)*18})`,opacity:.35+.65*Math.max(0,Math.sin(t*1.7+f.ph*3))}))}
 LOC.farm=(Z,p)=>{const f=G(Z.far),m=G(Z.mid),n=G(Z.near);const v=p.v||'yard';let upd=[];
- const night=p.sky||'url(#gSkyDusk)';
+ const night=p.sky||'url(#gSkySoft)';
  if(v==='porch'||v==='barn'){}
- else{R(f,-100,-100,1480,760,night);fStars(f,50,260);fMoon(f,p.moonx||980,p.moony||120);fHills(f)}
+ else{R(f,-100,-100,1480,760,night);fStars(f,36,220);fMoon(f,p.moonx||980,p.moony||120);fCloud(f,260,170,520,'#ffc9a8',.38);fCloud(f,860,250,620,'#e79a9a',.34);fCloud(f,1150,120,420,'#ffd9b8',.3);fHills(f);R(f,-100,380,1480,160,'url(#gHaze)');A(f,{style:'filter:blur(3.2px)'})}
  if(v==='yard'){
   R(m,-100,590,1480,300,'#2a2118');P(m,'M360,720 L560,590 L760,590 L1040,720Z','#3b2f20');for(let i=0;i<26;i++)R(m,rnd(i)*1380-40,600+rnd(i+3)*110,30+rnd(i+1)*60,3,'#3a2e1d',{opacity:.7});
-  const wm=fWindmill(m,1130,590);fBarn(m,70,590,p);fSilo(m,500,590);
+  const far=G(m,{style:'filter:blur(1.8px)'});const wm=fWindmill(far,1130,590);fBarn(far,70,590,p);fSilo(far,500,590);R(m,-100,560,1480,40,'url(#gHaze)',{opacity:.55});R(m,-100,600,1480,130,'url(#gGroundShade)');
   for(let i=0;i<9;i++)fPost(m,640+i*80,604,74);R(m,620,540,760,7,'#6a5438',{stroke:FARM_INK,'stroke-width':1.6});R(m,620,566,760,7,'#6a5438',{stroke:FARM_INK,'stroke-width':1.6});
   fBale(m,980,602,34);fBale(m,1052,602,34);fBale(m,1016,534,30);
   const lp=G(m);R(lp,758,360,10,240,'#3a3226');R(lp,730,352,66,12,'#2a2218',{rx:5});C(lp,763,372,150,'url(#gLamp)',{opacity:.45});P(lp,'M740,364 L786,364 L810,598 L716,598Z','url(#gCone)',{opacity:.12});C(lp,763,366,9,'#fff3c0');
@@ -42,7 +45,7 @@ LOC.farm=(Z,p)=>{const f=G(Z.far),m=G(Z.mid),n=G(Z.near);const v=p.v||'yard';let
   const sway=G(n);if(p.fg!==false){for(let i=0;i<72;i++)fCorn(sway,i*18.5-20+rnd(i+70)*6,735+rnd(i+80)*8,p.fgh||200+rnd(i+90)*40,i,false)}else{for(let i=0;i<7;i++)fCorn(sway,-30+i*26,730,300,i,false);for(let i=0;i<7;i++)fCorn(sway,1330-i*26,730,300,i+9,false)}
   const ff=fFirefly(G(m),10);upd.push((u,t)=>{ff(t);A(sway,{transform:`translate(${Math.sin(t*1.3)*3} 0)`})})}
  if(v==='porch'){
-  R(f,-100,-100,1480,820,'#2a3644');for(let i=0;i<48;i++)R(f,i*30-20,-100,3,820,'#232d39');R(f,-100,-100,1480,820,'url(#gWallShade)',{opacity:.9});
+  R(f,-100,-100,1480,820,'#2f3d4e');for(let i=0;i<48;i++)R(f,i*30-20,-100,3,820,'#273241');R(f,-100,-100,1480,820,'url(#gWallShade)',{opacity:.9});A(f,{style:'filter:blur(3px)'});
   R(m,-100,-20,1480,76,'#1b212b');R(m,-100,52,1480,10,'#10141b');
   R(m,380,230,210,170,'#ffd98a',{stroke:'#e9e2cd','stroke-width':9,rx:3});L(m,485,230,485,400,'#e9e2cd',6);L(m,380,315,590,315,'#e9e2cd',6);P(m,'M388,236 L470,236 L420,300Z','#c0505a',{opacity:.55});P(m,'M582,236 L500,236 L550,300Z','#c0505a',{opacity:.55});C(m,485,320,230,'url(#gLamp)',{opacity:.4});
   R(m,800,180,170,420,'#6f3d2b',{stroke:'#e9e2cd','stroke-width':8,rx:3});R(m,818,198,134,160,'#ffd98a',{opacity:.35});for(let i=0;i<9;i++){L(m,820,206+i*16,950,206+i*16,'#3a2418',1.4)}R(m,930,390,12,18,'#d9b24a',{rx:5});
