@@ -186,7 +186,7 @@ def strike(sc,who,zname,word,held=None,wind=.5,kill=True,fall_dx=34,**kw):
         x,y=st['x'],st['y'];hk=lambda at,hx,hy,r:dict(at=at,x=x+sg*hx*sc_,y=y+hy*sc_,rot=sg*r)      # hand positions come from the pose tables (windup / punch / follow), scaled by the actor
         scn['p']['acts'].append(dict(k='prop',t=held,s=sc_*.55,flip=False,x=x,y=y,keys=[hk(0,-62,-320,-28),hk(wind*.9,-70,-330,-40),hk(wind-.06,10,-300,18),hk(wind,100,-250,82),hk(wind+.1,100,-228,96),hk(wind+.45,96,-160,128)]))
     if kill:sc.zdown(zname,dx0=fall_dx)
-    fx=[sticker(wind+.1,word,x=225,y=170,rot=-6,size=62,c='#ffcf6a',dur=.9),shake(wind+.1,7,.35)]
+    fx=[sticker(wind+.1,word,x=225,y=170,rot=-6,size=62,c='#ffcf6a',dur=.9),shake(wind+.1,3.2,.22)]
     return shot,fx
 class WorldPart(Script):
     def __init__(s,W,n,topic,of):

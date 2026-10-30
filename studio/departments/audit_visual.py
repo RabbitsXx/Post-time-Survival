@@ -69,6 +69,24 @@ def audit(cid):
             za,zb=a['view']['z'],b['view']['z']
             if max(za,zb)/min(za,zb)>2.4:jumps.append((i,round(za,2),round(zb,2)))
     M['zoom_jumps']=jumps
+    # shimmer: thin periodic detail (curtain folds, stripes, fences, tile grids) crawls under camera moves and reads as FLICKER.  Measured on the edge columns and top strip
+    # (where no character stands) at 30 fps: share of pixels that flip brightness up-down >= 3 times inside a beat.  Found 2026-10-30: a 6-fold stroked curtain gave 8.8 %, a blurred soft one 0.16 %.
+    try:
+        r=subprocess.run(['ffmpeg','-v','error','-i',f'{LONG}/{CR.final(cid)}','-vf','scale=225:400:flags=area,format=gray','-f','rawvideo','-'],capture_output=True)
+        G=np.frombuffer(r.stdout,dtype=np.uint8).reshape(-1,400,225).astype(np.int16);bad=[]
+        for i,b in enumerate(B):
+            if b['scene']['n']!='stage':continue
+            a,z=int((b['t'][0]+.25)*30),int((b['t'][1]-.15)*30)
+            if z-a<12:continue
+            acts=(b['scene'].get('p') or {}).get('acts',[])
+            if any(x.get('to') or x.get('seq') or x.get('fall') or x.get('anim') for x in acts) or any(f.get('k') in('shake','zoom') for f in b.get('fx',[])):continue   # real motion / camera shake is not shimmer
+            fl=[]
+            for ys,xs in((slice(0,215),slice(0,40)),(slice(0,215),slice(185,225)),(slice(0,60),slice(0,225))):
+                d=np.diff(G[a:z,ys,xs],axis=0);sg=np.sign(d)*(np.abs(d)>6);fl.append(((sg[1:]*sg[:-1]<0).sum(0)>=3).mean())
+            if max(fl)>.03:bad.append((i,round(max(fl)*100,1)))
+        M['shimmer_beats']=bad
+        if bad:issues.append(f'ANIMATION: background shimmer (reads as flicker) in {len(bad)} beat(s), e.g. {bad[:4]} (beat, % pixels): replace thin repeated lines (curtain folds, stripes, fences) by soft shapes, or blur that layer');score-=min(15,4*len(bad))
+    except Exception as e:M['shimmer_beats']='n/a '+type(e).__name__
     if len(jumps)>3:issues.append(f'LAYOUT: {len(jumps)} hard cuts change the zoom by more than 2.4x (shot-size jumps feel like a different film): step wide -> medium -> close');score-=5
     # empty shots: low gradient energy in the centre
     emp=[]

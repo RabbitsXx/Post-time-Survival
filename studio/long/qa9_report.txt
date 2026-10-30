@@ -1,9 +1,9 @@
 QA report: THE QUIET HAND part 1/10 (quiet_01)
-  [WARN] A: 28 beats, average 2.80 s (target 3-4.8), longest 5.7 s, shortest 1.6 s
+  [WARN] A: 28 beats, average 2.76 s (target 3-4.8), longest 5.7 s, shortest 1.6 s
   [PASS] A: no beat > 9.5 s
   [PASS] A: no beat > 7.5 s
   [PASS] A: no beat < 1.5 s
-  [PASS] A: speech pace 156 wpm (131 words, 78 s)
+  [PASS] A: speech pace 156 wpm (131 words, 77 s)
   [PASS] A: the hook starts at 0.08 s: "If you hear screaming above you, don't go up."
   [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
   [PASS] S: PA opening: "The Quiet Hand. Part one of ten: hour zero."
@@ -23,11 +23,11 @@ QA report: THE QUIET HAND part 1/10 (quiet_01)
   [PASS] B: layout: 0 CROP, 0 OVERLAP
   [PASS] B: layout: 0 BAND, 0 EDGE
   [PASS] C: 1080x1920 h264 yuv420p 30.00 fps; colour bt709
-  [PASS] C: duration 78.37 s vs spec 78.37 s; 47.0 MB; audio aac 48000 Hz
-  [PASS] D: integrated -14.0 LUFS, LRA 3.6 LU
-  [PASS] D: true peak -2.0 dBTP
+  [PASS] C: duration 77.17 s vs spec 77.17 s; 44.0 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.0 LUFS, LRA 3.7 LU
+  [PASS] D: true peak -2.1 dBTP
   [PASS] E: every beat boundary changes the picture clearly
   [PASS] E: no black frames in the scan
-  [PASS] H: cover embedded in the first frames (diff 3.3/255)
+  [PASS] H: cover embedded in the first frames (diff 3.4/255)
 
   RESULT: PASS
