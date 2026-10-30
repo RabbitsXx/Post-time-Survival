@@ -16,7 +16,8 @@
   "2026-10-30": "Owner: a COMPLETE autonomous pipeline for the channel: at least 6 clips a day, running by itself every day, inventing fun new survival content. Topics are 1-2 parts (3 topics x 2 parts = 6 clips). Props may be reused where they truly fit the place (props.json).",
   "2026-10-30b": "Owner: every topic runs 3 parts (2 topics x 3 parts = 6 clips a day) so the story is easier to follow; each shot must show who / does what / where / how / why keep watching.",
   "2026-10-30c": "Owner: run it as a continuous stream: one part per hour, after a topic's last part rest 3 hours, then the next topic, forever, no daily limit.",
-  "2026-10-30d": "Owner: THE QUIET HAND, a 10-part serial (ex-assassin exterminator, 240 km in 72 hours). Parts are released one by one as they are finished; companions are met on the way; build the whole pipeline all-in-one, run itself, improve itself."
+  "2026-10-30d": "Owner: THE QUIET HAND, a 10-part serial (ex-assassin exterminator, 240 km in 72 hours). Parts are released one by one as they are finished; companions are met on the way; build the whole pipeline all-in-one, run itself, improve itself.",
+  "2026-10-30f": "Owner cancelled THE LAST FLOOR parts 1-3 (never post them). Files stay in git, state status 'dropped', arc listed in retired_arcs so the autopilot never rebuilds or schedules it."
  },
  "not_before_utc": "2026-10-31T03:00:00Z",
  "not_before_note": "autopilot grid starts after the trial; publish_mode stage = build, QA, package and plan slots but do NOT post; set to \"live\" to let the daily run schedule on Buffer",
@@ -35,5 +36,8 @@
  },
  "serial_series": [
   "THE QUIET HAND"
+ ],
+ "retired_arcs": [
+  "lastfloor"
  ]
 }

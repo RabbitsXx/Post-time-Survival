@@ -16,7 +16,9 @@ def sh(cmd,cwd=R,env=None):
 def arcs_on_disk():
     out={}
     for f in sorted(glob.glob(LONG+'/arcs/*/*_[0-9][0-9].py')):
-        arc=os.path.basename(os.path.dirname(f));out.setdefault(arc,[]).append(os.path.basename(f)[:-3])
+        arc=os.path.basename(os.path.dirname(f))
+        if arc in CFG.get('retired_arcs',[]):continue
+        out.setdefault(arc,[]).append(os.path.basename(f)[:-3])
     return out
 def topics_ready(s):
     """ready clips grouped into COMPLETE topics (all parts ready), ordered by topic then part.
