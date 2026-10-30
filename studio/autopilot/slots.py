@@ -21,3 +21,19 @@ iso=lambda t:t.strftime('%Y-%m-%dT%H:%M:00.000Z')
 if __name__=='__main__':
     import sys;n=int(sys.argv[1]) if len(sys.argv)>1 else 10
     for s in next_slots(n):print(iso(s),'=',(s+dt.timedelta(hours=CFG['slot_tz_offset_hours'])).strftime('%a %d %b %H:%M'),'Thailand')
+
+# ---- stream schedule (owner 2026-10-30): one part per hour, a 3 hour break after a topic's last part, no daily limit ----
+def stream_slots(state,clips,now=None):
+    """slot (UTC datetime) for every clip in `clips` (ordered: topic by topic, part 1,2,3).  Starts after the latest slot already taken in the state (+ the gap that follows that clip), else now + lead."""
+    now=now or dt.datetime.now(dt.timezone.utc).replace(tzinfo=None);sc=CFG.get('schedule',{});gap=sc.get('part_gap_minutes',60);brk=sc.get('topic_break_minutes',180)
+    t=now+dt.timedelta(minutes=CFG['min_lead_minutes']);nb=CFG.get('not_before_utc')
+    if nb:t=max(t,dt.datetime.fromisoformat(nb.replace('Z','')))
+    taken=[c for c in state['clips'] if c.get('due') and c.get('status') in('scheduled','finished','partial')]
+    if taken:
+        last=max(taken,key=lambda c:c['due']);lt=dt.datetime.fromisoformat(last['due'].replace('Z',''))
+        t=max(t,lt+dt.timedelta(minutes=brk if last.get('part')==last.get('of') else gap))
+    out=[]
+    for i,c in enumerate(clips):
+        out.append(t)
+        t=t+dt.timedelta(minutes=brk if c.get('part')==c.get('of') else gap)
+    return out

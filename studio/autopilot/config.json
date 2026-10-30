@@ -6,7 +6,7 @@
  "first_slot_local": "10:00",
  "step_minutes": 150,
  "min_lead_minutes": 45,
- "keep_ahead_hours": 30,
+ "keep_ahead_hours": 24,
  "yt_quota_daily_limit": 9000,
  "ai_generated_flag": true,
  "owner_decisions": {
@@ -14,7 +14,8 @@
   "2026-10-29b": "Owner rejected THE LAST BUS: ROUTE 12 (same bus, same cast, same template). Rule: each topic is made all new - new setting, new characters, new story structure. First new worlds to consider: farm, building/rooftop, school. Delete the scheduled Route 12 posts (done). Pause the 10-a-day schedule until the new style exists.",
   "2026-10-29c": "Owner: a library of reusable ingredients is allowed, but each topic must also bring NEW things that follow from its subject (setting, locations, cast, props, announcer/devices, structure, gag, tip, palette). Library-only reuse is not allowed. Enforced by studio/long/newness.py + register.json; each topic is 2-3 parts.",
   "2026-10-30": "Owner: a COMPLETE autonomous pipeline for the channel: at least 6 clips a day, running by itself every day, inventing fun new survival content. Topics are 1-2 parts (3 topics x 2 parts = 6 clips). Props may be reused where they truly fit the place (props.json).",
-  "2026-10-30b": "Owner: every topic runs 3 parts (2 topics x 3 parts = 6 clips a day) so the story is easier to follow; each shot must show who / does what / where / how / why keep watching."
+  "2026-10-30b": "Owner: every topic runs 3 parts (2 topics x 3 parts = 6 clips a day) so the story is easier to follow; each shot must show who / does what / where / how / why keep watching.",
+  "2026-10-30c": "Owner: run it as a continuous stream: one part per hour, after a topic's last part rest 3 hours, then the next topic, forever, no daily limit."
  },
  "not_before_utc": "2026-10-31T03:00:00Z",
  "not_before_note": "autopilot grid starts after the trial; publish_mode stage = build, QA, package and plan slots but do NOT post; set to \"live\" to let the daily run schedule on Buffer",
@@ -22,5 +23,13 @@
  "min_clips_per_day": 6,
  "publish_mode": "stage",
  "topics_per_day": 2,
- "parts_per_topic": 3
+ "parts_per_topic": 3,
+ "schedule": {
+  "mode": "stream",
+  "part_gap_minutes": 60,
+  "topic_break_minutes": 180,
+  "keep_ahead_hours": 24,
+  "daily_limit": null,
+  "note": "one part every hour; after the last part of a topic a 3 hour break; then the next topic; no daily limit. 3 parts per 5 h = about 14 clips a day"
+ }
 }
