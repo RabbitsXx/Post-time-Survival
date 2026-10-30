@@ -22,53 +22,85 @@
  },
  "sound": {
   "dept": "sound",
-  "score": 84,
+  "score": 76,
   "issues": [
    "voices omar and ann sound alike (f0 158 vs 173 Hz): recast or pitch-shift one",
    "voices ann and lin sound alike (f0 173 vs 191 Hz): recast or pitch-shift one",
+   "bell: during speech the bed (music+sfx) is -6.0 dB relative to the voice (must be <= -6): the voice is not on top",
    "bell: 112 wpm (115-170)"
   ],
   "metrics": {
    "lufs": -14.0,
-   "true_peak": -2.1,
+   "true_peak": -2.0,
    "speakers": {
     "omar": {
      "db": -20.2,
      "f0": 158.0,
      "wpm": 147,
      "share": 0.18,
-     "bed_minus_voice_db": -11.4
+     "bed_minus_voice_db": -10.7
     },
     "ann": {
      "db": -21.3,
      "f0": 173.0,
      "wpm": 143,
      "share": 0.19,
-     "bed_minus_voice_db": -10.2
+     "bed_minus_voice_db": -16.0
     },
     "lin": {
      "db": -21.0,
      "f0": 191.0,
      "wpm": 141,
      "share": 0.21,
-     "bed_minus_voice_db": -6.9
+     "bed_minus_voice_db": -7.3
     },
     "bell": {
      "db": -20.8,
      "f0": 104.0,
      "wpm": 112,
      "share": 0.27,
-     "bed_minus_voice_db": -6.2
+     "bed_minus_voice_db": -6.0
     },
     "zara": {
      "db": -20.7,
      "f0": 235.0,
      "wpm": 135,
      "share": 0.14,
-     "bed_minus_voice_db": -8.9
+     "bed_minus_voice_db": -6.3
     }
    },
-   "sfx": 26
+   "music_moods": {
+    "creep": {
+     "rms_db": -20.0,
+     "centroid": 2804
+    },
+    "idle": {
+     "rms_db": -29.3,
+     "centroid": 623
+    },
+    "comic": {
+     "rms_db": -26.4,
+     "centroid": 2554
+    },
+    "warm": {
+     "rms_db": -24.0,
+     "centroid": 1561
+    },
+    "sad": {
+     "rms_db": -24.1,
+     "centroid": 1654
+    },
+    "chase": {
+     "rms_db": -18.5,
+     "centroid": 2407
+    }
+   },
+   "foley": {
+    "events": 81,
+    "moving_beats": 5,
+    "without_steps": 0
+   },
+   "sfx": 81
   }
  },
  "editorial": {
