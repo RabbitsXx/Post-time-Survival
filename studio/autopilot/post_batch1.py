@@ -14,9 +14,9 @@ M=[ # id, order, title, extra tags, tt/ig hook, description line
  ('i2','If the zombie apocalypse starts while you\'re holding a crying baby… do this','box breathing, crying baby, how to stay calm','Do not shush it. Breathe.','Real tip: box breathing is in 4, hold 4, out 4, hold 4.'),
  ('g6','When a zombie asks for the manager','manager, customer service, funny','Six years of customer service.','The manager is calm.'),
  ('g5','POV: Fire drill during a zombie apocalypse','fire drill, evacuation, pov','This is a drill. Please remain calm.','Single file, please.'),
- ('g4','Employee of the Month at the zombie supermarket: Captain Carrot','employee of the month, carrot, funny','Captain Carrot never panics.','Congratulations.'),
+ ('i4','If the zombie apocalypse starts while you\'re in the parking lot… don\'t run to your car','parking lot, dont run, how to stay calm','Calm gets you to the car. Fear gets you noticed.','Real tip: when you are startled, a long slow exhale helps you settle.'),
  ('i3','If the zombie apocalypse starts while you\'re in the checkout line… don\'t look back','checkout line, dont look back, queue','Pay. Smile. Walk out slowly.','Real tip: when you are scared, a slow exhale helps you calm down.'),
- ('g7','Teddy asks a zombie "Is this a game?"','kid and zombie, juice box, funny','Is this a game?','Teddy is not scared.')]
+ ('g8','POV: You\'re locked out of the supermarket and a zombie asks if they\'re open','locked out, closed sign, pov','We\'re closed.','Sorry, sir. Please remain calm.')]
 def main():
     s=ST.load();start=dt.datetime(2026,11,1,5,0);n=0
     for i,(k,title,xt,hook,desc) in enumerate(M):

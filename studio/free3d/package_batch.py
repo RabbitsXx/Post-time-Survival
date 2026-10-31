@@ -5,10 +5,10 @@ sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import package_rc as P
 from package_rc import R,REPO
 # id: (key shot 1-based, line1, line2, pill)
-CV={'g1':(3,'UNEXPECTED','ITEM','IN THE BAGGING AREA'),'g2':(1,'ELEVEN','ITEMS','EXPRESS LANE'),'g3':(2,'TIME TO','BREATHE','HEART RATE 160'),'g4':(2,'BEST','EMPLOYEE','NEVER PANICS'),
- 'g5':(3,'FIRE','DRILL','SINGLE FILE PLEASE'),'g6':(1,'ASK FOR','THE MANAGER','SIX YEARS OF SERVICE'),'g7':(2,'IS THIS','A GAME?','JUICE BOX?'),'i1':(2,"DON'T",'RUN','3 AM SUPERMARKET'),
+CV={'g1':(3,'UNEXPECTED','ITEM','IN THE BAGGING AREA'),'g2':(1,'ELEVEN','ITEMS','EXPRESS LANE'),'g3':(2,'TIME TO','BREATHE','HEART RATE 160'),'i4':(2,'DON\'T RUN','TO THE CAR','PARKING LOT RULES'),
+ 'g5':(3,'FIRE','DRILL','SINGLE FILE PLEASE'),'g6':(1,'ASK FOR','THE MANAGER','SIX YEARS OF SERVICE'),'g8':(2,'WE ARE','CLOSED','SORRY, SIR'),'i1':(2,"DON'T",'RUN','3 AM SUPERMARKET'),
  'i2':(2,'CRYING','BABY','BREATHE INSTEAD'),'i3':(1,"DON'T LOOK",'BACK','THE LINE BEHIND YOU')}
-NUM={k:i+1 for i,k in enumerate(['g1','g2','g3','g4','g5','g6','g7','i1','i2','i3'])}
+NUM={k:i+1 for i,k in enumerate(['g1','g2','g3','i4','g5','g6','g8','i1','i2','i3'])}
 def one(k):
     ep=json.load(open(R+f'/out/{k}.spec.json'));frames=R+f'/out/{k}_frames';od=f'{REPO}/releases/remaincalm/batch1/{k}';os.makedirs(od,exist_ok=True)
     si,l1,l2,pill=CV[k];sh=dict(ep['shots'][si-1]);t=(sh['t0']+sh['t1'])/2
