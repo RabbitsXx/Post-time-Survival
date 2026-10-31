@@ -16,3 +16,5 @@ studio/free3d/models/
 releases/remaincalm/rc2/rc2_part2.mp4
 releases/remaincalm/rc3/rc3_part3.mp4
 releases/remaincalm/batch1/*/*.mp4
+studio/lowpoly/out/
+studio/lowpoly/**/*.mp4
