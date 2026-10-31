@@ -1,5 +1,5 @@
 // ===== FRESHWAY set dressing: real-looking shelves with facings & price tags, carts, baskets, checkout, freezers, ceiling clutter, wear, apocalypse dressing =====
-function ctex(w,h,draw,rep){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);t.magFilter=THREE.NearestFilter;t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.anisotropy=1;return t}
+function ctex(w,h,draw,rep){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);t.magFilter=t.minFilter=(typeof CLEAN!=='undefined'&&CLEAN?THREE.LinearFilter:THREE.NearestFilter);t.generateMipmaps=false;t.anisotropy=1;return t}
 const PAL=['#d8342c','#f0b82a','#2a9a4a','#2a6ad0','#e86c24','#7a3aa8','#f2efe4','#e0508a','#2ab8a8','#8a5a32','#1a1a1e'];
 const CATS=[
  {name:'CEREAL · BREAKFAST',col:'#d8802a'},{name:'CANNED GOODS',col:'#b83a2a'},{name:'SNACKS · CHIPS',col:'#d8b020'},{name:'DRINKS · SODA',col:'#2a6ad0'},
@@ -79,11 +79,9 @@ function buildKiosk(){
  const road=new THREE.Mesh(new THREE.PlaneGeometry(60,40),MC(0x15181c,.25,.2));road.rotation.x=-Math.PI/2;road.position.set(KX,-.01,KZ+22);S.add(road);
  const walk=new THREE.Mesh(new THREE.PlaneGeometry(60,4.6),MC(0x4a4e52,.8));walk.rotation.x=-Math.PI/2;walk.position.set(KX,.0,KZ+3.2);S.add(walk);bx(60,.16,.25,MC(0x7a7e82,.8),KX,.08,KZ+5.6);
  cyl(.06,5.4,MC(0x2a2e32,.5,.5),KX+3.6,2.7,KZ+4.6,0,0,S,8);bx(1.3,.07,.07,MC(0x2a2e32,.5,.5),KX+3.0,5.3,KZ+4.6);const lamp=new THREE.Mesh(new THREE.BoxGeometry(.5,.08,.3),new THREE.MeshBasicMaterial({color:0xcfe8ff,fog:false}));lamp.position.set(KX+2.5,5.25,KZ+4.6);S.add(lamp);
- for(let i=0;i<9;i++){const h=5+Math.sin(i*2.3)*3+4,w=5+Math.cos(i*1.7)*1.5+1.5,x=KX-36+i*9;bx(w,h,3,MC(0x0c1014,.9),x,h/2,KZ+30);for(let k=0;k<8;k++)if(Math.sin(i*7+k*3.1)>.1)bx(.6,.8,.05,new THREE.MeshBasicMaterial({color:0xd8c080,fog:true}),x+(Math.cos(k*5+i)-.0)*w*.35,2+k*1.1,KZ+28.45)}
 
  // atmosphere: strings of warm bulbs across the street, a haze glow behind the customer, a lit sign across the road, brighter pavement
  for(let r=0;r<2;r++)for(let i=0;i<13;i++){const x=KX-6+i,y=3.15+Math.sin(i*.5)*.18-r*.35,z=KZ+5.2+r*3.2;const b=new THREE.Mesh(new THREE.SphereGeometry(.09,6,5),new THREE.MeshBasicMaterial({color:i%3?0xffd890:0xff9a60,fog:false}));b.position.set(x,y,z);S.add(b)}
- const haze=new THREE.Mesh(new THREE.PlaneGeometry(10,5),new THREE.MeshBasicMaterial({map:ctex(256,128,(x,w,h)=>{const g=x.createRadialGradient(w/2,h*.55,4,w/2,h*.55,w*.5);g.addColorStop(0,'rgba(110,150,175,.2)');g.addColorStop(1,'rgba(120,170,200,0)');x.fillStyle=g;x.fillRect(0,0,w,h)}),transparent:true,depthWrite:false,fog:false}));haze.position.set(KX+1.5,2.4,KZ+9);haze.rotation.y=Math.PI;S.add(haze);
  const pave=new THREE.Mesh(new THREE.PlaneGeometry(14,4.4),new THREE.MeshStandardMaterial({color:0x8a9096,roughness:.5,metalness:.1}));pave.rotation.x=-Math.PI/2;pave.position.set(KX,.012,KZ+3.4);S.add(pave);
  // lights: warm bulb inside, orange coals, red neon, cool street lamp (also used to tint the 2D characters)
  const mk=(c,i,d,x,y,z)=>{const L=new THREE.PointLight(c,i,d,2);L.position.set(x,y,z);S.add(L)};

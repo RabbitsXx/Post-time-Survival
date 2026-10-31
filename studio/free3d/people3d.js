@@ -9,7 +9,7 @@ Object.assign(P3CFG,{
 function clothTex(top){const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d');x.fillStyle=top.a;x.fillRect(0,0,64,64);
  if(top.t==='plaid'){x.fillStyle=top.b;x.globalAlpha=.55;for(let i=0;i<64;i+=16){x.fillRect(i,0,6,64);x.fillRect(0,i,64,6)}x.globalAlpha=.9;x.fillRect(0,0,64,2);x.fillRect(0,0,2,64);x.globalAlpha=.3;x.fillStyle='#f4ead0';for(let i=8;i<64;i+=16){x.fillRect(i,0,2,64)}}
  else if(top.t==='dress'){x.fillStyle=top.b;x.globalAlpha=.5;for(let i=0;i<64;i+=16)x.fillRect(0,i+12,64,3);x.globalAlpha=.25;x.fillStyle='#ffd9a0';for(let i=0;i<64;i+=8)x.fillRect(i,0,1,64)}
- const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;return t}
+ const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.magFilter=t.minFilter=(CLEAN?THREE.LinearFilter:THREE.NearestFilter);t.generateMipmaps=false;return t}
 function inkOutline(g,k){const ol=new THREE.MeshBasicMaterial({color:0x0a0806,side:THREE.BackSide,fog:true});const list=[];g.traverse(o=>{if(o.isMesh&&!o.userData.noOL)list.push(o)});
  list.forEach(m=>{const o=new THREE.Mesh(m.geometry,ol);o.position.copy(m.position);o.rotation.copy(m.rotation);o.scale.copy(m.scale).multiplyScalar(k||1.07);o.userData.noOL=1;m.parent.add(o)})}
 function makePerson(cfg){const g=new THREE.Group(),M=c=>new THREE.MeshLambertMaterial({color:c}),sk=M(cfg.skin);

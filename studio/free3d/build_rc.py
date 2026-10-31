@@ -2,6 +2,7 @@
 """REMAIN CALM builder (store3.html, 2D cast on 3D PS1 set).  python3 build_rc.py episodes/rc1.py [--w 1080 --h 1920] [--stills t1,t2] [--workers 4]"""
 import sys,os,json,subprocess,time,importlib.util,wave
 R=os.path.dirname(os.path.abspath(__file__));sys.path.insert(0,R+'/../free');sys.path.insert(0,R)
+QS='&2d'+('&clean' if '--clean' in sys.argv else '')
 import numpy as np
 import build as B
 from build import tts,rd,FPS,SR,NAMES,NAMECOL,VOICES,SFXLIB
@@ -73,7 +74,7 @@ def render(spec,fd,w,h,workers=4):
     n=int(round(spec['dur']*FPS));k=(n+workers-1)//workers;ps=[]
     for i in range(workers):
         a,b=i*k,min(n,(i+1)*k)
-        if a<b:ps.append(subprocess.Popen(['node',R+'/render_store3.js',sp,fd,str(a),str(b),str(w),str(h),'&2d'],cwd=R))
+        if a<b:ps.append(subprocess.Popen(['node',R+'/render_store3.js',sp,fd,str(a),str(b),str(w),str(h),QS],cwd=R))
     for p in ps:
         if p.wait():raise SystemExit('render failed')
     return n
@@ -101,14 +102,14 @@ def main():
     print(f'{name}: {spec["dur"]:.1f}s, {len(spec["shots"])} shots (avg {spec["dur"]/len(spec["shots"]):.2f}s), {words} words = {words/spec["dur"]:.2f} w/s')
     if '--stills' in a:
         ts=[(x['t0']+x['t1'])/2 for x in spec['shots']] if a[a.index('--stills')+1]=='mid' else [float(x) for x in a[a.index('--stills')+1].split(',')];fd=OUT+f'/{name}_stills';import shutil;shutil.rmtree(fd,ignore_errors=True);os.makedirs(fd,exist_ok=True);p=R+f'/spec_{name}_s.json';json.dump(spec,open(p,'w'))
-        for t in ts:subprocess.check_call(['node',R+'/render_store3.js',p,fd,str(int(t*FPS)),str(int(t*FPS)+1),str(w),str(h),'&2d'],cwd=R)
+        for t in ts:subprocess.check_call(['node',R+'/render_store3.js',p,fd,str(int(t*FPS)),str(int(t*FPS)+1),str(w),str(h),QS],cwd=R)
         print('stills',fd);return
     fd=OUT+f'/{name}_frames'
     if '--shots' in a:   # re-render only the listed shots (1-based) into the existing frames dir, then re-mux
         ids=[int(x) for x in a[a.index('--shots')+1].split(',')];sp_=R+f'/spec_{name}_frames.json';json.dump(spec,open(sp_,'w'));ps=[];t0=time.time()
         for i in ids:
             sh_=spec['shots'][i-1];f0,f1=int(round(sh_['t0']*FPS)),min(int(round(spec['dur']*FPS)),int(round(sh_['t1']*FPS))+1)
-            ps.append(subprocess.Popen(['node',R+'/render_store3.js',sp_,fd,str(f0),str(f1),str(w),str(h),'&2d'],cwd=R))
+            ps.append(subprocess.Popen(['node',R+'/render_store3.js',sp_,fd,str(f0),str(f1),str(w),str(h),QS],cwd=R))
             if len(ps)>=workers:[q.wait() for q in ps];ps=[]
         [q.wait() for q in ps];print(f're-rendered shots {ids} in {time.time()-t0:.0f}s')
         mix_rc(spec,lines,sfx,cues,OUT+f'/{name}.wav')

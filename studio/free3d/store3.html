@@ -7,17 +7,17 @@
 <script>const BG={};</script>
 <script src="overlay.js"></script>
 <script src="props.js"></script>
-<script src="kiosk3d.js"></script><script src="people3d.js"></script><script src="mart3d.js"></script>
+<script src="kiosk3d.js"></script><script src="people3d.js"></script><script src="street3d.js"></script>
 <script>
 // REMAIN CALM - FRESHWAY 24H supermarket 3D set. Deterministic: renderAt(f) -> jpeg
-const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d',{willReadFrequently:true});
-const cv=document.getElementById('c');const R=new THREE.WebGLRenderer({canvas:cv,antialias:false,preserveDrawingBuffer:true});const RQ=+(Q.get('rq')||.4);R.setSize(Math.round(W*RQ),Math.round(H*RQ),false);R.setPixelRatio(1);
+const CLEAN=/clean/.test(location.search);const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d',{willReadFrequently:true});
+const cv=document.getElementById('c');const R=new THREE.WebGLRenderer({canvas:cv,antialias:CLEAN,preserveDrawingBuffer:true});const RQ=+(Q.get('rq')||(CLEAN?1:.4));R.setSize(Math.round(W*RQ),Math.round(H*RQ),false);R.setPixelRatio(1);
 R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.25;
 const S=new THREE.Scene();S.background=new THREE.Color(0x06100c);S.fog=new THREE.FogExp2(0x0a1a14,.034);
 const cam=new THREE.PerspectiveCamera(38,W/H,.1,420);
 
 // ---------- textures ----------
-function tex(w,h,draw,rep){const cw=Math.max(32,w>>1),chh=Math.max(32,h>>1);const c=document.createElement('canvas');c.width=cw;c.height=chh;const x=c.getContext('2d');draw(x,cw,chh);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);t.anisotropy=1;t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;return t}
+function tex(w,h,draw,rep){const cw=Math.max(32,w>>1),chh=Math.max(32,h>>1);const c=document.createElement('canvas');c.width=cw;c.height=chh;const x=c.getContext('2d');draw(x,cw,chh);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);t.anisotropy=1;t.magFilter=t.minFilter=CLEAN?THREE.LinearFilter:THREE.NearestFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;return t}
 const PCOL=['#e8302a','#f2c230','#2a9a4a','#2a7ad8','#e8742a','#8a3ab8','#f2f2ea','#e84a8a','#3ad8c8'];
 function products(x,w,h,seed,rows){const rh=h/rows;for(let r=0;r<rows;r++){x.fillStyle='#b8bcc0';x.fillRect(0,r*rh+rh-6,w,6);let px=4;let i=0;while(px<w-20){const bw=22+rnd(seed+r*31+i)*30,bh=rh*(.55+rnd(seed+r*7+i)*.35);x.fillStyle=PCOL[Math.floor(rnd(seed+r*13+i*3)*PCOL.length)];x.fillRect(px,r*rh+rh-6-bh,bw,bh);x.fillStyle='rgba(255,255,255,.55)';x.fillRect(px+3,r*rh+rh-6-bh+4,bw-6,Math.max(5,bh*.22));px+=bw+3;i++}}}
 const TX={
@@ -95,8 +95,8 @@ const lerp3=(a,b,t)=>a+(b-a)*t;
 const SNAP=new THREE.Vector2(Math.round(W*RQ*.55),Math.round(H*RQ*.55));
 function ps1(root){root.traverse(o=>{if(!o.isMesh||o.layers.mask===2)return;const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>{if(!m||m.userData.ps1||m.isShaderMaterial)return;m.userData.ps1=1;m.onBeforeCompile=sh=>{sh.uniforms.uSnap={value:SNAP};sh.vertexShader='uniform vec2 uSnap;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n gl_Position.xy=(floor(gl_Position.xy/gl_Position.w*uSnap+.5)/uSnap)*gl_Position.w;')};m.needsUpdate=true})})}
 buildProps();
-buildMart();buildPeople3D();
-ps1(S);
+buildStreet();buildPeople3D();
+if(!CLEAN)ps1(S);
 const lowc=document.createElement('canvas');lowc.width=Math.round(W*RQ);lowc.height=Math.round(H*RQ);const lctx=lowc.getContext('2d',{willReadFrequently:true});
 const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
 function ps1post(){lctx.drawImage(cv,0,0);const im=lctx.getImageData(0,0,lowc.width,lowc.height),d=im.data,w=lowc.width;for(let i=0,p=0;i<d.length;i+=4,p++){const x=p%w,y=(p/w)|0,b=(BAY[(y&3)*4+(x&3)]/16-.5);for(let k=0;k<3;k++){const v=d[i+k]/255*31+b;d[i+k]=Math.max(0,Math.min(31,Math.round(v)))*255/31}}lctx.putImageData(im,0,0)}
@@ -129,7 +129,7 @@ window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(
    const LA=lightAt(x,z,t);const rxv=Math.cos(ry),rzv=-Math.sin(ry);const lsd=(LA.lx*rxv+LA.lz*rzv)>=0?-1:1;animSprite(g,t,{still:ch.still,moving:mv,act,expr:ch.expr||'calm',mouthOpen:mo,seed:ch.who.length*3,look:ch.look||0,react:ch.react,prop:ch.prop,propSide:ch.propSide,shadeSide:lsd,shadeStr:LA.str},lt);const zz=/^z/.test(ch.who)&&ch.who!=='z1x';g.userData.spr.m.material.color.setRGB(LA.r*(zz?.9:1),LA.g*(zz?.9:1),LA.b*(zz?.9:1));const ll=Math.hypot(LA.lx,LA.lz)||1;BLOB[ch.who].position.x=x-LA.lx/ll*.28*(.4+LA.str);BLOB[ch.who].position.z=z-LA.lz/ll*.28*(.4+LA.str);BLOB[ch.who].material.opacity=.3+.3*(1-(LA.r+LA.g+LA.b)/3)}
    else animPerson(g,t,{moving:mv,act,expr:ch.expr||'calm',speaking,seed:ch.who.length*3,look:ch.look||0})}
   if(window.FLK)FLK.forEach((L,i)=>{const fl=Math.sin(t*(7+i*3.1)+i)*Math.sin(t*2.3+i*1.7);L.intensity=(i===2&&fl>.82)?4:(i===0&&Math.sin(t*1.3)>.97?10:30)});
-  cam.layers.set(0);R.render(S,cam);ps1post();ctx.setTransform(1,0,0,1,0,0);ctx.imageSmoothingEnabled=false;ctx.drawImage(lowc,0,0,W,H);
+  cam.layers.set(0);R.render(S,cam);if(!CLEAN)ps1post();ctx.setTransform(1,0,0,1,0,0);ctx.imageSmoothingEnabled=CLEAN;ctx.drawImage(lowc,0,0,W,H);
   cam.layers.enable(1);const bg=S.background;S.background=null;ENVMATS.forEach(m=>{m.colorWrite=false});if(CULL)for(const e of OCCL)e[0].material=OCCM;R2.render(S,cam);if(CULL)for(const e of OCCL)e[0].material=e[1];ENVMATS.forEach(m=>{m.colorWrite=true});S.background=bg;cam.layers.set(0);
   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(cv2,0,0,W,H);
   GRADE(sh.grade);

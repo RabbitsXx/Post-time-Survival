@@ -5,7 +5,7 @@ const P3={},P3CFG={
  uncle3:{skin:'#b88458',shirt:'#8a8a5a',pants:'#3a3a3a',hair:'bald',hc:'#000',stache:1,w:1.22,h:1.0},
  girl3:{skin:'#e8c4a0',shirt:'#e8c82a',pants:'#d8b81a',hair:'messy',hc:'#1a1a1a',w:.8,h:.82},
  zom3:{skin:'#8aa878',shirt:'#6a4a3a',pants:'#2a3a4a',hair:'spiky',hc:'#2a3a22',zombie:1,w:1.0,h:1.0}};
-function faceTex(cfg){const c=document.createElement('canvas');c.width=c.height=128;const t=new THREE.CanvasTexture(c);t.minFilter=t.magFilter=THREE.NearestFilter;return {c,t,cur:''}}
+function faceTex(cfg){const c=document.createElement('canvas');c.width=c.height=128;const t=new THREE.CanvasTexture(c);t.minFilter=t.magFilter=(CLEAN?THREE.LinearFilter:THREE.NearestFilter);return {c,t,cur:''}}
 function drawFace(F,cfg,expr){if(F.cur===expr)return;F.cur=expr;const x=F.c.getContext('2d');x.fillStyle=cfg.skin;x.fillRect(0,0,128,128);x.lineWidth=5;x.strokeStyle='#1a1008';x.lineJoin=x.lineCap='round';
  const eye=(cx,cy,r,p)=>{x.fillStyle=cfg.zombie?'#d8e8a8':'#fff';x.beginPath();x.arc(cx,cy,r,0,7);x.fill();x.stroke();x.fillStyle='#1a1008';x.beginPath();x.arc(cx+1,cy+1,p,0,7);x.fill()};
  const sc=expr==='shock'?1.25:1;if(cfg.zombie){x.fillStyle='rgba(30,10,30,.6)';x.beginPath();x.arc(42,52,22,0,7);x.arc(86,52,22,0,7);x.fill()}
