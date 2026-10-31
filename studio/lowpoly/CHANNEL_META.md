@@ -23,3 +23,22 @@ Note: "low poly shorts" is also the name of the reference channel; as a phrase i
 ## How to set tags (Buffer cannot)
 1. YouTube Studio -> Settings -> Upload defaults: paste the core tags + the default hashtag line once. (Unverified: uploads made through Buffer/the API may NOT inherit these defaults.)
 2. Otherwise edit tags per video in Studio after upload (30 seconds each), or vidIQ update_video (5 credits per video; ~17 credits left).
+
+## Channel description (YouTube > Customization > Basic info; limit 1000 chars)
+Weird true stories and strange facts, retold in low-poly PS1-style 3D by Poly, a man who has seen too much and reacts to none of it.
+
+A farmer, a pig, and two empires almost go to war. Wombats poop cubes. Every short is a real story or a real fact, checked against named sources (listed in each description), and told in under 30 seconds with a straight face.
+
+New Shorts regularly. Subscribe for history, animals, science and general weirdness, all in low poly.
+
+Sources are credited in every video's description. Where something is only a theory, we say so.
+
+#lowpoly #truestory #funfacts #shorts
+
+(Characters: 576)
+
+## Channel keywords (Advanced settings; space-separated, quote multi-word)
+"low poly shorts" "low poly" lowpoly "low poly 3d animation" "ps1 graphics" "true story" "fun facts" "weird facts" "history shorts" "science shorts" "animal facts"
+
+## Handle ideas (if not set yet)
+@posttimelowpoly (matches the channel name); display name "PosttimeLowPoly".
