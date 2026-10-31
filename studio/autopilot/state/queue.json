@@ -1028,13 +1028,14 @@
    "status": "scheduled",
    "done": {},
    "posts": {
-    "yt": "6ae5af1dceb491e585e88f30",
-    "tt": "6ae5af1eeaa24d6f9a6582e7",
-    "ig": "6ae5af1feaa24d6f9a658345"
+    "yt": "6ae5c1e31891472093c83a5d",
+    "tt": "6ae5c1e4a1145743499c0b1f",
+    "ig": "6ae5c1e41891472093c83ab5"
    },
    "yt_mode": "buffer",
    "due": "2026-11-01T00:30:00.000Z",
-   "media_day": "2026-11-01"
+   "media_day": "2026-11-01",
+   "v2": true
   },
   {
    "id": "rcb_g1",
@@ -1056,13 +1057,14 @@
    "status": "scheduled",
    "done": {},
    "posts": {
-    "yt": "6ae5af2c1891472093c2b20d",
-    "tt": "6ae5af2d1891472093c2b25e",
-    "ig": "6ae5af2da114574349965f1f"
+    "yt": "6ae5c1f81891472093c83e31",
+    "tt": "6ae5c1f9eaa24d6f9a6b4a11",
+    "ig": "6ae5c1fa406ab8a018b0ea9d"
    },
    "yt_mode": "buffer",
    "due": "2026-11-01T02:00:00.000Z",
-   "media_day": "2026-11-01"
+   "media_day": "2026-11-01",
+   "v2": true
   },
   {
    "id": "rcb_g3",
@@ -1084,13 +1086,14 @@
    "status": "scheduled",
    "done": {},
    "posts": {
-    "yt": "6ae5af3bceb491e585e8971d",
-    "tt": "6ae5af3b1891472093c2b654",
-    "ig": "6ae5af3cb84259308bc92b41"
+    "yt": "6ae5c20feaa24d6f9a6b522e",
+    "tt": "6ae5c210ceb491e585ee5b35",
+    "ig": "6ae5c210a1145743499c1596"
    },
    "yt_mode": "buffer",
    "due": "2026-11-01T03:30:00.000Z",
-   "media_day": "2026-11-01"
+   "media_day": "2026-11-01",
+   "v2": true
   },
   {
    "id": "rcb_g2",
@@ -1112,13 +1115,14 @@
    "status": "scheduled",
    "done": {},
    "posts": {
-    "yt": "6ae5af46406ab8a018ab1fbc",
-    "tt": "6ae5af47ceb491e585e8a0a9",
-    "ig": "6ae5af48b84259308bc930fb"
+    "yt": "6ae5c226406ab8a018b0fb4b",
+    "tt": "6ae5c227eaa24d6f9a6b576a",
+    "ig": "6ae5c228406ab8a018b0fba4"
    },
    "yt_mode": "buffer",
    "due": "2026-11-01T05:00:00.000Z",
-   "media_day": "2026-11-01"
+   "media_day": "2026-11-01",
+   "v2": true
   },
   {
    "id": "rcb_i2",
@@ -1140,13 +1144,14 @@
    "status": "scheduled",
    "done": {},
    "posts": {
-    "yt": "6ae5af53eaa24d6f9a659c38",
-    "tt": "6ae5af54ceb491e585e8a6d3",
-    "ig": "6ae5af54b84259308bc937d1"
+    "yt": "6ae5c240a1145743499c2099",
+    "tt": "6ae5c241406ab8a018b10809",
+    "ig": "6ae5c242406ab8a018b10902"
    },
    "yt_mode": "buffer",
    "due": "2026-11-01T06:30:00.000Z",
-   "media_day": "2026-11-01"
+   "media_day": "2026-11-01",
+   "v2": true
   },
   {
    "id": "rcb_g6",
@@ -1168,13 +1173,14 @@
    "status": "scheduled",
    "done": {},
    "posts": {
-    "yt": "6ae5af5f406ab8a018ab3395",
-    "tt": "6ae5af60eaa24d6f9a65a156",
-    "ig": "6ae5af61406ab8a018ab35de"
+    "yt": "6ae5c258b84259308bcebcf9",
+    "tt": "6ae5c258a1145743499c24dc",
+    "ig": "6ae5c259406ab8a018b10d42"
    },
    "yt_mode": "buffer",
    "due": "2026-11-01T08:00:00.000Z",
-   "media_day": "2026-11-01"
+   "media_day": "2026-11-01",
+   "v2": true
   },
   {
    "id": "rcb_g5",
@@ -1196,13 +1202,14 @@
    "status": "scheduled",
    "done": {},
    "posts": {
-    "yt": "6ae5af6b1891472093c2cde6",
-    "tt": "6ae5af6ceaa24d6f9a65a518",
-    "ig": "6ae5af6d406ab8a018ab38e4"
+    "yt": "6ae5c26f406ab8a018b110b6",
+    "tt": "6ae5c270a1145743499c27fc",
+    "ig": "6ae5c270eaa24d6f9a6b6f4f"
    },
    "yt_mode": "buffer",
    "due": "2026-11-01T09:30:00.000Z",
-   "media_day": "2026-11-01"
+   "media_day": "2026-11-01",
+   "v2": true
   },
   {
    "id": "rcb_i4",
@@ -1224,13 +1231,14 @@
    "status": "scheduled",
    "done": {},
    "posts": {
-    "yt": "6ae5af77406ab8a018ab3c79",
-    "tt": "6ae5af77406ab8a018ab3cbb",
-    "ig": "6ae5af78eaa24d6f9a65a783"
+    "yt": "6ae5c2851891472093c875e1",
+    "tt": "6ae5c285eaa24d6f9a6b75cd",
+    "ig": "6ae5c286b84259308bcec7d9"
    },
    "yt_mode": "buffer",
    "due": "2026-11-01T11:00:00.000Z",
-   "media_day": "2026-11-01"
+   "media_day": "2026-11-01",
+   "v2": true
   },
   {
    "id": "rcb_i3",
@@ -1249,14 +1257,17 @@
    "thumb": "releases/remaincalm/batch1/i3/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/i3/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/i3/captions_en.srt",
-   "status": "partial",
+   "status": "scheduled",
    "done": {},
    "posts": {
-    "yt": "6ae5af83a114574349968b46"
+    "yt": "6ae5c298406ab8a018b11e47",
+    "tt": "6ae5c299406ab8a018b11e7d",
+    "ig": "6ae5c299ceb491e585ee8b71"
    },
    "yt_mode": "buffer",
    "due": "2026-11-01T12:30:00.000Z",
-   "media_day": "2026-11-01"
+   "media_day": "2026-11-01",
+   "v2": true
   },
   {
    "id": "rcb_g8",
@@ -1275,10 +1286,17 @@
    "thumb": "releases/remaincalm/batch1/g8/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/g8/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/g8/captions_en.srt",
-   "status": "ready",
+   "status": "scheduled",
    "done": {},
-   "posts": {},
-   "yt_mode": "buffer"
+   "posts": {
+    "yt": "6ae5c2a9406ab8a018b1211e",
+    "tt": "6ae5c2aa406ab8a018b12156",
+    "ig": "6ae5c2aa1891472093c88420"
+   },
+   "yt_mode": "buffer",
+   "due": "2026-11-01T14:00:00.000Z",
+   "media_day": "2026-11-01",
+   "v2": true
   }
  ]
 }
