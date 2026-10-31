@@ -5,5 +5,5 @@ const port=srv.address().port;
 const br=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist']});const p=await br.newPage({viewport:{width:+w,height:+h}});
 p.on('requestfailed',r=>console.log('RF',r.url(),r.failure().errorText));p.on('response',r=>{if(r.status()>=400)console.log('HTTP',r.status(),r.url())});p.on('pageerror',e=>console.log('ERR',e.message));p.on('console',m=>{if(m.type()==='error')console.log('CON',m.text().slice(0,300))});
 await p.goto('http://localhost:'+port+'/free3d/store3.html?w='+w+'&h='+h+(extra||''));await p.evaluate(()=>window.fontsReady);await p.evaluate(s=>window.setSpec(s),JSON.parse(fs.readFileSync(spec)));
-for(let f=+a;f<+b;f++){const d=await p.evaluate(f=>window.renderAt(f),f);fs.writeFileSync(out+'/'+String(f).padStart(5,'0')+'.jpg',Buffer.from(d,'base64'))}
+for(let f=+a;f<+b;f+=(+process.env.STEP||1)){const d=await p.evaluate(f=>window.renderAt(f),f);fs.writeFileSync(out+'/'+String(f).padStart(5,'0')+'.jpg',Buffer.from(d,'base64'))}
 await br.close();srv.close()})()});

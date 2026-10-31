@@ -66,7 +66,7 @@ const SPR_MAP={mimi:'mimi',gus:'gus',teddy:'teddy',vance:'vance',rosa:'rosa',z1:
 const SPW=768,SPH=1024,SPS=1.55; // canvas px; char baseline near bottom
 function makeSprite(k){const cvs=document.createElement('canvas');cvs.width=SPW;cvs.height=SPH;const tex=new THREE.CanvasTexture(cvs);tex.colorSpace=THREE.SRGBColorSpace;tex.minFilter=THREE.LinearFilter;tex.generateMipmaps=false;
  const ppm=SPW/1.75;const geo=new THREE.PlaneGeometry(SPW/ppm,SPH/ppm);geo.translate(0,SPH/ppm/2-50/ppm,0); // feet at y=0 (baseline 100px*? set below)
- const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({map:tex,transparent:true,alphaTest:.03,fog:false,toneMapped:false,color:0xc4d4cc}));m.frustumCulled=false;const g=new THREE.Group();g.add(m);g.userData={spr:{cvs,tex,m,ppm,who:SPR_MAP[k]},cfg:{s:1,w:(CH[SPR_MAP[k]]||{}).w||1}};return g}
+ const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({map:tex,transparent:true,alphaTest:.03,fog:false,toneMapped:false,color:/^zr/.test(SPR_MAP[k])?0xa4b4ac:0xc4d4cc}));m.frustumCulled=false;const g=new THREE.Group();g.add(m);g.userData={spr:{cvs,tex,m,ppm,who:SPR_MAP[k]},cfg:{s:1,w:(CH[SPR_MAP[k]]||{}).w||1}};return g}
 function buildPeople(){const keys=window.USE_2D?Object.keys(SPR_MAP):Object.keys(window.USE_RIG?RCAST:TCAST);for(const k of keys){const g=window.USE_2D?makeSprite(k):(window.USE_RIG?RCAST:TCAST)[k]();g.visible=false;g.traverse(o=>o.layers.set(1));S.add(g);PEOPLE[k]=g;const cf=g.userData.cfg;const bl=new THREE.Mesh(new THREE.CircleGeometry(.5*(cf.s||1)*(cf.w||1),14),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.42,depthWrite:false}));bl.rotation.x=-Math.PI/2;bl.scale.y=.62;bl.visible=false;S.add(bl);BLOB[k]=bl;ps1(bl)}}
 function animSprite(g,t,st,lt){const U=g.userData.spr,c=U.cvs.getContext('2d'),isZ=/^zr/.test(U.who);c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,SPW,SPH);
  const ph=(st.seed||0)*1.7,act=st.act||'idle',e=st.expr||'calm';let sx=1,sy=1,bobY=0,rz=0,jx=0;
@@ -76,7 +76,7 @@ function animSprite(g,t,st,lt){const U=g.userData.spr,c=U.cvs.getContext('2d'),i
  // reaction pop (squash & stretch overshoot)
  const r=(st.react==null?0:st.react);if((e==='scared'||e==='shock')&&lt>r){const d=lt-r,k=Math.exp(-7*d)*Math.cos(26*d);sy+=.2*k;sx-=.12*k}
  if(lt<.18){const k=1-lt/.18;sy-=.06*k;sx+=.04*k}
- const zs=isZ?1.55:(U.who==='carrot'?2.2:SPS);const P={x:SPW/2,y:SPH-50,s:zs,expr:e,mouth:st.mouthOpen||0,look:st.look||0,bob:0,tilt:(isZ?0:Math.sin(t*.8+ph)*.6),armLift:act==='scared'?30:act==='point'?26:act==='hands'?18:0,prop:act==='shush'?'none':undefined};
+ const zs=isZ?1.55:(U.who==='carrot'?2.2:SPS);const wk=(act==='walk'||act==='run'||st.moving);const P={view:U.view,flip:U.flip,walk:wk?t*(act==='run'?11:isZ?3.4:6.5)+ph:null,wamp:wk?1:0,x:SPW/2,y:SPH-50,s:zs,expr:e,mouth:st.mouthOpen||(e==='shock'?.85:e==='scared'?.55:0),look:st.look||0,bob:0,tilt:(isZ?0:Math.sin(t*.8+ph)*.6),armBoth:act==='scared'?1:0,armLift:act==='scared'?30:act==='point'?26:act==='hands'?18:0,prop:act==='shush'?'none':undefined};
  const L=ST.line;ST.line=4.2;drawLB(c,{who:U.who},P,t);ST.line=L;U.tex.needsUpdate=true;
  U.m.scale.set(sx,sy,1);U.m.position.set(jx,bobY,0);U.m.rotation.z=rz;U.m.material.opacity=1}
 window.USE_2D=/2d/.test(location.search);window.USE_RIG=!USE_2D&&!/norig/.test(location.search);
@@ -90,7 +90,8 @@ const lowc=document.createElement('canvas');lowc.width=Math.round(W*RQ);lowc.hei
 const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
 function ps1post(){lctx.drawImage(cv,0,0);const im=lctx.getImageData(0,0,lowc.width,lowc.height),d=im.data,w=lowc.width;for(let i=0,p=0;i<d.length;i+=4,p++){const x=p%w,y=(p/w)|0,b=(BAY[(y&3)*4+(x&3)]/16-.5);for(let k=0;k<3;k++){const v=d[i+k]/255*31+b;d[i+k]=Math.max(0,Math.min(31,Math.round(v)))*255/31}}lctx.putImageData(im,0,0)}
 window.setSpec=sp=>{SPEC=sp};
-function GRADE(){ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='multiply';ctx.fillStyle='rgb(206,226,214)';ctx.fillRect(0,0,W,H);ctx.globalCompositeOperation='source-over';const g=ctx.createRadialGradient(W/2,H*.46,H*.22,W/2,H*.5,H*.72);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,10,6,.62)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore()}
+const GRADES={calm:['rgb(206,226,214)',.62],cold:['rgb(170,205,215)',.7],warm:['rgb(240,214,176)',.55],alarm:['rgb(236,170,160)',.72],dead:['rgb(150,185,160)',.85]};
+function GRADE(g){const m=Array.isArray(g)?g:(GRADES[g]||GRADES.calm);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='multiply';ctx.fillStyle=m[0];ctx.fillRect(0,0,W,H);ctx.globalCompositeOperation='source-over';const gr=ctx.createRadialGradient(W/2,H*.46,H*.22,W/2,H*.5,H*.72);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,10,6,'+m[1]+')');ctx.fillStyle=gr;ctx.fillRect(0,0,W,H);ctx.restore()}
 window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(const x of sp.shots){if(t>=x.t0&&t<x.t1){sh=x;break}}
  const lt=Math.min(t,sh.t1-1e-3)-sh.t0,dur=sh.t1-sh.t0;ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,W,H);ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
  if(sh.card){ctx.setTransform(SF,0,0,SF,0,0);CARD[sh.card.type||'title'](ctx,sh.card,lt);titleBar(ctx,sp);drawCaptions(sh,t)}
@@ -101,13 +102,13 @@ window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(
    if(ch.to){const uu=ease(clamp((lt-(ch.t0||0))/Math.max(.01,(ch.t1||dur)-(ch.t0||0))));x=lerp(ch.pos[0],ch.to[0],uu);z=lerp(ch.pos[1],ch.to[1],uu);if(uu>0&&uu<1){act=ch.act||'walk';mv=true}yawTo=Math.atan2(ch.to[0]-ch.pos[0],ch.to[1]-ch.pos[1])}
    g.position.set(x,0,z);BLOB[ch.who].visible=true;BLOB[ch.who].position.set(x,.025,z);let yaw=yawTo!=null&&act!=='idle'?yawTo:(ch.face?Math.atan2(ch.face[0]-x,ch.face[1]-z):Math.atan2(cam.position.x-x,cam.position.z-z)-(ch.yawOff||0));g.rotation.y=yaw;
    const speaking=(sh.lines||[]).some(l=>l.who===ch.who&&t>=l.t0&&t<l.t1);
-   if(g.userData.spr){g.rotation.y=Math.atan2(cam.position.x-x,cam.position.z-z);const mo=speaking?Math.abs(Math.sin(t*11+ch.who.length))*(.55+.45*Math.sin(t*2.7)):0;animSprite(g,t,{moving:mv,act,expr:ch.expr||'calm',mouthOpen:mo,seed:ch.who.length*3,look:ch.look||0,react:ch.react},lt)}
+   if(g.userData.spr){const ry=Math.atan2(cam.position.x-x,cam.position.z-z);g.rotation.y=ry;let hx,hz;if(ch.to&&mv){hx=ch.to[0]-ch.pos[0];hz=ch.to[1]-ch.pos[1]}else if(ch.face){hx=ch.face[0]-x;hz=ch.face[1]-z}else{hx=cam.position.x-x;hz=cam.position.z-z}const hl=Math.hypot(hx,hz)||1;hx/=hl;hz/=hl;const tcx=Math.sin(ry),tcz=Math.cos(ry),rx=Math.cos(ry),rz=-Math.sin(ry);const sxx=hx*rx+hz*rz,szz=hx*tcx+hz*tcz;let view='front',flip=false;if(szz<-.55)view='back';else if(szz<.55){view='side';flip=sxx<0}g.userData.spr.view=view;g.userData.spr.flip=flip;const mo=speaking?Math.abs(Math.sin(t*11+ch.who.length))*(.55+.45*Math.sin(t*2.7)):0;animSprite(g,t,{moving:mv,act,expr:ch.expr||'calm',mouthOpen:mo,seed:ch.who.length*3,look:ch.look||0,react:ch.react},lt)}
    else animPerson(g,t,{moving:mv,act,expr:ch.expr||'calm',speaking,seed:ch.who.length*3,look:ch.look||0})}
   if(window.FLK)FLK.forEach((L,i)=>{const fl=Math.sin(t*(7+i*3.1)+i)*Math.sin(t*2.3+i*1.7);L.intensity=(i===2&&fl>.82)?4:(i===0&&Math.sin(t*1.3)>.97?10:30)});
   cam.layers.set(0);R.render(S,cam);ps1post();ctx.setTransform(1,0,0,1,0,0);ctx.imageSmoothingEnabled=false;ctx.drawImage(lowc,0,0,W,H);
   cam.layers.enable(1);const bg=S.background;S.background=null;ENVMATS.forEach(m=>{m.colorWrite=false});R2.render(S,cam);ENVMATS.forEach(m=>{m.colorWrite=true});S.background=bg;cam.layers.set(0);
   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(cv2,0,0,W,H);
-  GRADE();
+  GRADE(sh.grade);
   ctx.setTransform(SF,0,0,SF,0,0);if(!sh.noUI){titleBar(ctx,sp);drawCaptions(sh,t);strip(ctx,sh,sp,t)}}
  ctx.setTransform(1,0,0,1,0,0);return oc.toDataURL('image/jpeg',.93).slice(23)};
 window.fontsReady=Promise.all([document.fonts.load('900 38px "Roboto Condensed"'),window.USE_RIG?loadRig():0]).then(()=>{buildPeople();PEOPLE&&Object.values(BLOB).forEach(b=>ENVMATS.push(b.material))});
