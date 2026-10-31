@@ -54,16 +54,22 @@ function buildStreet(){
  const tin=new THREE.Mesh(new THREE.PlaneGeometry(4.6,3.4),MC(0x5a6a72,.5,.6));tin.rotation.x=Math.PI/2+.12;tin.position.set(KX,2.78,KZ-.7);S.add(tin);
  cyl(.01,.5,MC(0x111111),KX,2.55,KZ-.3,0,0,S,4);const bulb=new THREE.Mesh(new THREE.SphereGeometry(.1,8,6),new THREE.MeshBasicMaterial({color:0xfff0c0,fog:false}));bulb.position.set(KX,2.28,KZ-.3);S.add(bulb);
 
- // ---- stall counter dressing (what the camera sees first) ----
- const tray=bx(.8,.05,.45,MC(0xb8bcc0,.3,.8),KX+.55,1.08,KZ+.78);
- for(let r=0;r<2;r++)for(let k=0;k<9;k++){bx(.012,.012,.42,MC(0xc8a86a,.6),KX+.2+k*.08,1.13+r*.03,KZ+.78);for(let m=0;m<3;m++)bx(.05,.04,.05,MC(m%2?0xe8a0a0:0xd88a8a,.7),KX+.2+k*.08,1.15+r*.03,KZ+.66+m*.12)}
- const sc=[0xc8201a,0xe8c020,0x3a8a3a];sc.forEach((c,i)=>{cyl(.035,.2,MC(c,.4),KX-.55+i*.1,1.16,KZ+.9,0,0,S,8);cyl(.012,.06,MC(0xf0f0f0,.4),KX-.55+i*.1,1.29,KZ+.9,0,0,S,6)});
- cyl(.2,.46,MC(0xd8e8f0,.2,.1),KX-1.95,1.28,KZ+.78,0,0,S,14);cyl(.21,.04,MC(0x2a6ab0,.5),KX-1.95,1.52,KZ+.78,0,0,S,14);bx(.06,.05,.1,MC(0xc8201a,.4),KX-1.95,1.12,KZ+.55);
- bx(.38,.14,.26,MC(0x2a2e34,.5,.4),KX+1.6,1.1,KZ+.85);bx(.3,.02,.2,MC(0xf0e8c8,.8),KX+1.6,1.18,KZ+.85);
- const bell=cyl(.07,.04,MC(0xd8b030,.3,.8),KX+1.1,1.07,KZ+1.05,0,0,S,10);
- // wooden menu sign across the top-left of the opening, bulbs along the awning edge, hanging neon bar
- const ms=new THREE.Mesh(new THREE.PlaneGeometry(1.5,.5),new THREE.MeshBasicMaterial({map:signTex('MIDNIGHT SKEWERS','#2a1810','#ffd070',768,256,84),fog:false}));ms.position.set(KX,2.38,KZ+1.08);ms.rotation.y=Math.PI;S.add(ms);
- const nb=new THREE.Mesh(new THREE.PlaneGeometry(.8,.28),new THREE.MeshBasicMaterial({map:signTex('OPEN','#1a0808','#ff5a4a',256,90,64),fog:false}));nb.position.set(KX-1.5,2.0,KZ+1.1);nb.rotation.y=Math.PI;S.add(nb);
+
+ // ---- stall counter dressing: sized for a ~1 m wide portrait view at the counter ----
+ const cy=1.055,cz=KZ+.82;
+ // steel tray of raw skewers (centre) with a price card
+ bx(.46,.03,.36,MC(0xc8ccd0,.25,.85),KX+.05,cy+.015,cz);
+ for(let k=0;k<10;k++){bx(.008,.008,.34,MC(0xd8b878,.7),KX-.17+k*.038,cy+.045,cz);for(let m=0;m<3;m++)bx(.03,.022,.03,MC(m%2?0xd9908a:0xe8a49c,.75),KX-.17+k*.038,cy+.06,cz-.1+m*.1)}
+ const pc=new THREE.Mesh(new THREE.PlaneGeometry(.2,.08),new THREE.MeshBasicMaterial({map:signTex('PORK 10','#f4ead0','#2a1810',256,100,56),fog:false}));pc.position.set(KX+.05,cy+.07,cz+.2);pc.rotation.set(-.5,Math.PI,0);S.add(pc);
+ // sauce bottles with labels (left of tray)
+ [['CHILI',0xc8201a],['SOY',0x2a1a10],['SWEET',0xe8a020]].forEach(([n,c],i)=>{const x=KX+.36+i*.06;cyl(.022,.13,MC(c,.4),x,cy+.065,cz+.12,0,0,S,8);cyl(.01,.03,MC(0xf0f0f0,.4),x,cy+.145,cz+.12,0,0,S,6)});
+ // stainless tea dispenser with tap (far left, mostly out of frame)
+ cyl(.16,.34,MC(0xd8e8f0,.2,.1),KX+1.1,1.22,KZ+.78,0,0,S,14);cyl(.165,.03,MC(0x2a6ab0,.5),KX+1.1,1.4,KZ+.78,0,0,S,14);bx(.04,.04,.08,MC(0xc8201a,.4),KX+1.1,1.1,KZ+.62);
+ // cash tin + bell near the customer edge
+ bx(.2,.07,.14,MC(0x3a3e44,.4,.5),KX-.38,cy+.035,cz+.25);bx(.16,.01,.1,MC(0xe8e0c0,.8),KX-.38,cy+.075,cz+.25);cyl(.04,.025,MC(0xd8b030,.3,.8),KX-.2,cy+.013,cz+.3,0,0,S,10);
+ // stall name board on the pillar, outside the portrait view; small hanging neon
+ const ms=new THREE.Mesh(new THREE.PlaneGeometry(1.3,.42),new THREE.MeshBasicMaterial({map:signTex('MIDNIGHT SKEWERS','#2a1810','#ffd070',768,256,84),fog:false}));ms.position.set(KX+1.35,2.35,KZ+1.1);ms.rotation.y=Math.PI;S.add(ms);
+ const nb=new THREE.Mesh(new THREE.PlaneGeometry(.6,.2),new THREE.MeshBasicMaterial({map:signTex('OPEN','#1a0808','#ff5a4a',256,90,64),fog:false}));nb.position.set(KX-1.35,2.1,KZ+1.1);nb.rotation.y=Math.PI;S.add(nb);
  // plastic stools + folding table on the pavement
  for(const [sx,sz] of[[-2.6,3.4],[-3.2,4.1],[3.4,3.5]]){cyl(.17,.04,MC(0xd84a2a,.6),KX+sx,.4,KZ+sz,0,0,S,10);for(const a of[0,2.1,4.2])cyl(.015,.4,MC(0xaa3a1a,.6),KX+sx+Math.cos(a)*.1,.2,KZ+sz+Math.sin(a)*.1,0,0,S,5)}
  bx(.8,.04,.6,MC(0xc8c0a8,.7),KX-2.9,.75,KZ+3.8);for(const [dx,dz] of[[-.35,-.25],[.35,-.25],[-.35,.25],[.35,.25]])bx(.04,.75,.04,MC(0x6a6a6a,.5,.5),KX-2.9+dx,.37,KZ+3.8+dz);
