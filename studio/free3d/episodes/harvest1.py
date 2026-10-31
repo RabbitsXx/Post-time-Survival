@@ -1,0 +1,17 @@
+import sys,os;sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from build3d import *
+sh=[];A=sh.append
+N=lambda en:say('narrator',en)
+A(SQW([ch('gran',-2.4,2.6,'calm'),ch('nell',-.3,2.5,'calm'),ch('timo',1.5,3.2,'worried')],[N("If you only have nineteen days of food, plant today.")],'DAY 12 · 7:00 AM · HOLLIS FORD',min=4.2))
+A(TITLE('THE|HARVEST','NINETEEN DAYS',1,3,"The Harvest. Part one of three. Nineteen days."))
+A(C(dict(type='stat',g='fuel',c='#c0502a',label='FOOD LEFT',v0=40,v=19,unit='DAYS',note=['41 PEOPLE','WINTER IN 60 DAYS']),[N("Nineteen days of food. Forty-one mouths. Winter is sixty days away.")],min=5.2))
+A(BRN([ch('mayor',-.8,-3.6,'worried'),ch('doc',1.0,-3.8,'calm')],[say('mayor',"Sack, sack, sack. Not enough sacks.")],"DAY 12 · 7:30 AM · THE STOREROOM",min=3.6))
+A(SHP([ch('gran',.2,-2.8,'smile'),ch('timo',1.8,-2.4,'smile')],[say('gran',"My husband's seeds. Radish, lettuce, spinach. Seventeen years old."),say('timo',"Do seeds expire?"),say('gran',"Only if you do.")],"DAY 12 · 8:00 AM · GRAN ODA'S KITCHEN",min=7.5))
+A(C(dict(type='rules',top='FAST CROPS FIRST',items=['RADISH: ABOUT 25 DAYS','LETTUCE: ABOUT 30 DAYS','SPINACH: ABOUT 40 DAYS']),[N("Radish, twenty-five days. Lettuce, thirty. Spinach, forty. Potatoes take months.")],min=6.0,sfx=[[0.3,'click'],[0.9,'click'],[1.5,'click']]))
+A(SQW([ch('mayor',-1.2,2.0,'angry'),ch('nell',.6,2.3,'angry'),ch('timo',2.2,3.0,'worried')],[say('mayor',"Cook the seed potatoes! Eat now!"),say('nell',"Eat the seed, and next year you eat nothing.")],'DAY 12 · 9:00 AM · THE WELL',min=6.0))
+A(C(dict(type='rules',top='ONE SEED',items=['EAT IT: ONE MEAL','PLANT IT: MANY MEALS','NEVER EAT THE LAST SEED']),[N("One seed eaten is one meal. One seed planted is many.")],min=5.2,sfx=[[0.3,'click'],[0.9,'click'],[1.5,'click']]))
+A(SQW([ch('nell',-.6,2.2,'calm',prop='wrench'),ch('timo',1.2,2.6,'smile')],[N("Dig where the sun stays at least six hours.")],'DAY 12 · 10:00 AM · THE GARDEN',min=4.2,sfx=[[0.5,'thump'],[1.5,'thump']]))
+A(C(dict(type='stat',g='clock',c='#2a6a9a',label='FIRST FROST',v0=0,v=22,unit='DAYS',note=['PLANT NOW.']),[say('doc',"Frost comes in twenty-two days.")],min=4.2))
+A(NGT([ch('biscuit',1.5,2.4,'sad'),ch('nell',-.8,2.0,'worried')],[N("That night, someone dug up the seed bed.")],'DAY 12 · 11:40 PM · THE GARDEN',min=4.4,sfx=[[0.3,'sting'],[1.4,'groan']]))
+A(TITLE('THE|HARVEST','THE RATTLE',1,3,"Part one of three, The Harvest. Next: the rattle.",nxt=True))
+EP=dict(id='harvest_01',series='THE HARVEST',title='NINETEEN DAYS',part=1,of=3,shots=sh,minscale=.9)

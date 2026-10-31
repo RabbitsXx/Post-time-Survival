@@ -1,0 +1,23 @@
+1
+00:00:00,250 --> 00:00:01,762
+Please scan your first item.
+
+2
+00:00:02,649 --> 00:00:05,079
+Unexpected item in the bagging area.
+
+3
+00:00:05,650 --> 00:00:08,220
+Mimi. It says there's an unexpected item.
+
+4
+00:00:08,850 --> 00:00:10,635
+Sir, please wait for assistance.
+
+5
+00:00:11,650 --> 00:00:12,759
+He's... waiting?
+
+6
+00:00:13,850 --> 00:00:15,347
+Everyone waits for assistance.

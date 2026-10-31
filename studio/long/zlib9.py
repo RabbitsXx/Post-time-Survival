@@ -8,10 +8,11 @@ import re
 class Script:
     def __init__(s,title,series,part,of,topic,accent='#ffd23a'):
         s.TITLE=title;s.BEATS=[];s.series=series;s.part=part;s.of=of;s.topic=topic;s.accent=accent
-    def beat(s,say=(),scene=None,skin='real',cam=None,fx=None,sfx=None,mood='tense',dur=None,pause=0.0,view=None,nofade=False):
+    def beat(s,say=(),scene=None,skin='real',cam=None,fx=None,sfx=None,mood='tense',dur=None,pause=0.0,view=None,nofade=False,intent=None):
         b=dict(say=[(a,t) for a,t in say],scene=scene,skin=skin,cam=cam,fx=fx or [],sfx=sfx or [],mood=mood,dur=dur,pause=pause)
         if view:b['view']=view
         if nofade:b['nofade']=True
+        if intent:b['intent']=intent
         s.BEATS.append(b);return b
     def announce(s,at=.15,dur=3.1):
         return dict(k='series',at=at,dur=dur,name=s.series,part=s.part,of=s.of,topic=s.topic,c=s.accent)

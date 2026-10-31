@@ -11,11 +11,21 @@ def ff(a,capture=True):
     return r.stderr
 def audio_chain(P,dur,out_m4a,tmp,err):
     try:
-        graph=("[0:a]highpass=f=70,acompressor=threshold=0.09:ratio=3:attack=5:release=90:makeup=2.2,aformat=sample_rates=44100:channel_layouts=stereo,asplit=2[v1][v2];"
-               "[1:a]volume=0.95,aformat=sample_rates=44100:channel_layouts=stereo[mus];"
-               "[mus][v1]sidechaincompress=threshold=0.028:ratio=9:attack=12:release=380[duck];"
-               "[2:a]volume=0.9,aformat=sample_rates=44100:channel_layouts=stereo[sx];"
-               "[duck][sx][v2]amix=inputs=3:normalize=0:duration=longest[mix]")
+        import json as _j
+        try:world='world' in _j.load(open(f'{P}/spec.json'))
+        except Exception:world=False
+        if world:     # data-driven worlds: the voice is always on top (owner: studio-level sound): sfx at 0.5 and ducked by the voice too, music ducked harder
+            graph=("[0:a]highpass=f=70,acompressor=threshold=0.09:ratio=3:attack=5:release=90:makeup=2.2,aformat=sample_rates=44100:channel_layouts=stereo,asplit=3[v1][v2][v3];"
+                   "[1:a]volume=0.8,aformat=sample_rates=44100:channel_layouts=stereo[mus];"
+                   "[mus][v1]sidechaincompress=threshold=0.02:ratio=14:attack=10:release=420[duck];"
+                   "[2:a]volume=0.5,aformat=sample_rates=44100:channel_layouts=stereo[sx0];[sx0][v3]sidechaincompress=threshold=0.03:ratio=5:attack=8:release=220[sx];"
+                   "[duck][sx][v2]amix=inputs=3:normalize=0:duration=longest[mix]")
+        else:
+            graph=("[0:a]highpass=f=70,acompressor=threshold=0.09:ratio=3:attack=5:release=90:makeup=2.2,aformat=sample_rates=44100:channel_layouts=stereo,asplit=2[v1][v2];"
+                   "[1:a]volume=0.95,aformat=sample_rates=44100:channel_layouts=stereo[mus];"
+                   "[mus][v1]sidechaincompress=threshold=0.028:ratio=9:attack=12:release=380[duck];"
+                   "[2:a]volume=0.9,aformat=sample_rates=44100:channel_layouts=stereo[sx];"
+                   "[duck][sx][v2]amix=inputs=3:normalize=0:duration=longest[mix]")
         mixed=f'{tmp}/mixed.wav'
         ff(['-i',f'{P}/voice.wav','-i',f'{P}/music.wav','-i',f'{P}/sfx.wav','-filter_complex',graph,'-map','[mix]','-t',str(dur),'-ar','44100','-ac','2',mixed])
         log=ff(['-i',mixed,'-af','loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json','-f','null','-'])
@@ -28,13 +38,13 @@ def audio_chain(P,dur,out_m4a,tmp,err):
     except BaseException as e:err.append(e)
 def main():
     a=sys.argv[1:];g=lambda k,d:a[a.index(k)+1] if k in a else d
-    P=f'{R}/'+g('--p','p9/part1');frames=f'{R}/'+g('--frames','frames9');out=g('--out',f'{R}/final9.mp4');preset=g('--preset','medium');crf=g('--crf','18')
+    P=f'{R}/'+g('--p','p9/part1');frames=f'{R}/'+g('--frames','frames9');out=g('--out',f'{R}/final9.mp4');preset=g('--preset','medium');crf=g('--crf',str(json.load(open(R+'/delivery.json'))['crf']))
     spec=json.load(open(f'{P}/spec.json'));dur=spec['duration'];nfr=int(round(dur*FPS))
     with tempfile.TemporaryDirectory() as tmp:
         m4a=f'{tmp}/a.m4a';err=[];th=threading.Thread(target=audio_chain,args=(P,dur,m4a,tmp,err));th.start()
         vid=f'{tmp}/v.mp4'
-        vf='scale=720:1280:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p'
-        r=subprocess.run(['ffmpeg','-hide_banner','-y','-framerate',str(FPS),'-i',f'{frames}/%05d.jpg','-frames:v',str(nfr),'-vf',vf,'-c:v','libx264','-preset',preset,'-crf',crf,'-g','60','-bf','2',
+        DL=json.load(open(f'{R}/delivery.json'));vf=f"scale={DL['width']}:{DL['height']}:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p"
+        r=subprocess.run(['ffmpeg','-hide_banner','-y','-framerate',str(FPS),'-i',f'{frames}/%05d.jpg','-frames:v',str(nfr),'-vf',vf,'-c:v','libx264','-preset',preset,'-crf',crf,'-maxrate',DL['maxrate'],'-bufsize',DL['bufsize'],'-profile:v','high','-g','60','-bf','2',
                           '-colorspace','bt709','-color_primaries','bt709','-color_trc','bt709','-color_range','tv','-an',vid],capture_output=True,text=True)
         if r.returncode:sys.exit('video encode failed: '+r.stderr[-1500:])
         th.join()

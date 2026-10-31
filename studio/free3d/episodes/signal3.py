@@ -1,0 +1,15 @@
+import sys,os;sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from build3d import *
+sh=[];A=sh.append
+N=lambda en:say('narrator',en)
+A(NGT([ch('hale',.2,2.2,'calm',face=-1)],[N("If you light a signal fire, you also light a dinner bell.")],'DAY 16 · 8:00 PM · THE WALL',min=4.4,sfx=[[0.4,'groan']]))
+A(TITLE('THE|SIGNAL','THREE FIRES',3,4,"The Signal. Part three of four. Three fires."))
+A(SQW([ch('doc',-.8,2.4,'calm'),ch('nell',1.0,2.4,'worried')],[say('doc',"Three fires in a triangle. The international sign for help."),say('nell',"And smoke the dead can smell.")],'DAY 16 · 7:00 AM · THE VILLAGE',min=7.0))
+A(C(dict(type='rules',top='THE RULE OF THREE',items=['THREE FIRES IN A TRIANGLE','THREE WHISTLE BLASTS','THREE FLASHES OF LIGHT']),[N("Three of anything means help. Three fires. Three whistles. Three flashes.")],min=6.4,sfx=[[0.3,'click'],[0.9,'click'],[1.5,'click']]))
+A(SQW([ch('mayor',-1.0,2.2,'smug'),ch('nell',.8,2.4,'calm')],[say('mayor',"Light them on the wall. Loud and proud."),say('nell',"Light them far from the village. On the ridge.")],'DAY 16 · 9:00 AM · THE VILLAGE',min=6.2))
+A(C(dict(type='info',top='LURE THEM AWAY',bg='#2a1a1a',items=[dict(g='light',l='FIRES|ON THE RIDGE',c='#c8902a'),dict(g='skull',l='THE DEAD|WALK THERE',c='#5a6a4a'),dict(g='door',l='VILLAGE|STAYS SAFE',c='#6a4a30')],foot=['KEEP SMOKE AWAY','FROM HOME.']),[N("Light them on the ridge. The dead walk there. The village stays safe.")],min=6.0))
+A(NGT([ch('timo',-.4,2.2,'worried'),ch('nell',1.2,2.2,'angry')],[say('timo',"I light them at sunset?"),say('nell',"At dusk. Then run.")],'DAY 16 · 6:00 PM · THE RIDGE',min=5.0,sfx=[[0.3,'foot']]))
+A(NGT([ch('timo',-.6,2.2,'scared')],[N("One fire. Two fires. Three fires.")],'DAY 16 · 6:40 PM · THE RIDGE',min=4.0,fx=[[0.6,'sticker','FWOOSH!',270,330]],sfx=[[0.6,'pump'],[1.5,'pump'],[2.4,'pump'],[3.0,'groan']]))
+A(NGT([ch('nell',-.6,2.0,'worried')],[N("Smoke rises. The dead stir. And far away, an engine starts.")],'DAY 16 · 7:10 PM · THE RIDGE',min=5.0,sfx=[[0.4,'groan'],[1.4,'sting']]))
+A(TITLE('THE|SIGNAL','THE REPLY',3,4,"Part three of four, The Signal. Next: the reply.",nxt=True))
+EP=dict(id='signal_03',series='THE SIGNAL',title='THREE FIRES',part=3,of=4,shots=sh,minscale=.9)

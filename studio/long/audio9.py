@@ -162,6 +162,7 @@ NEW={'oink':s_oink,'tick':s_tick,'rustle':s_rustle,'cricket':s_cricket,'bell':s_
 GN={'oink':.8,'tick':.7,'rustle':.7,'cricket':.6,'bell':.7,'polka':.9,'chime':.7,'doorhiss':.7,'horn':.6,'hornlong':.55,'brake':.45,'crank':.7,'engfail':.8,'engstart':.8,'glass':.6,'slap':.9,'clunk':.8,'creak':.5,'gurgle':.6,'boing':.7,'rimshot':.7,'stab':.65,'riser':.6,'swell':.7,'gasp':.6,'sigh':.6,
  'heartbeat':.95,'snore':.8,'cluck':.8,'meow':.8,'baby':.7,'horde':.8,'ping':.7,'sneak':.8,'whisper':.8,'zip':.7,'pour':.7,'ratchet':.7,'bridge':.7,'purr':.9,'lever':.8,'splat':.8,'cheer':.7}
 A.SFX.update(NEW);A.GAIN.update(GN)
+import foley_sfx   # foley library for data-driven worlds (registers itself into audio16.SFX)
 # ------------------------------------------------------------------ moods that carry the engine
 def engine(total,level=1.0):
     n=int(total*SR);t=np.arange(n)/SR;rpm=1+.03*np.sin(2*np.pi*t/7)+.015*np.sin(2*np.pi*t/2.3)
@@ -225,11 +226,14 @@ def main():
     out=sys.argv[1] if len(sys.argv)>1 else 'p9/part1'
     sp=json.load(open(f'{R}/{out}/spec.json'));total=sp['duration']+1.0
     moods=[tuple(m) for m in json.load(open(f'{R}/{out}/mood.json'))];ev=json.load(open(f'{R}/{out}/sfx.json'))
-    mus=gen_music9(total,moods);n=int(total*SR);sfx=np.zeros((2,n));cache={}
+    if sp.get('world'):
+        import score;mus=score.gen(total,sp,moods)      # data-driven worlds get their own score + room tone (no bus engine)
+    else:mus=gen_music9(total,moods)
+    n=int(total*SR);sfx=np.zeros((2,n));cache={}
     for e in ev:
         if e['k'] not in A.SFX:print('unknown sfx',e['k']);continue
         if e['k'] not in cache:cache[e['k']]=A.SFX[e['k']]()
-        put(sfx,e['t'],cache[e['k']]*A.GAIN.get(e['k'],.8),pan=e.get('pan',0))
+        put(sfx,e['t'],cache[e['k']]*A.GAIN.get(e['k'],.8)*e.get('g',1.0),pan=e.get('pan',0))
     def wr(path,a):
         a=np.clip(a.T,-1,1);w=wave.open(path,'wb');w.setnchannels(2);w.setsampwidth(2);w.setframerate(SR);w.writeframes((a*32767).astype(np.int16).tobytes());w.close()
     nz=mus[mus!=0];mus=mus*(10**(-22/20)/np.sqrt(np.mean(nz**2)));mus=np.tanh(mus*1.2)/1.2
