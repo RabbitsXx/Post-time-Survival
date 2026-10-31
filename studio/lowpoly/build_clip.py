@@ -85,13 +85,19 @@ def main():
     steps=[x for x in('--spec','--sheet','--render','--mix') if x in a] or ['--spec','--sheet','--render','--mix'];wk=int(a[a.index('--workers')+1]) if '--workers' in a else 3
     name=EP['id'];O=H+'/out/'+name;os.makedirs(O,exist_ok=True);FR=O+'/frames'
     t=0;shots=[];caps=[];vo=[];slots={}
+    DL=[];TALK=[]
+    DLG={'farmer':('FARMER','#ffe21f',330),'owner':('OWNER','#ff9a5a',190),'officer':('OFFICER','#ff6a6a',150),'kaiser':('KAISER','#9ad0ff',110),'pig':('PIG','#ff9ac0',560),'poly':('POLY','#7affc0',300)}
     for L in EP['lines']:
+        if 'd' in L:
+            who,tx=L['d'];nm,col,fq=DLG[who];ty=max(.7,len(tx)/16.0);lead=.08;slot=lead+ty+.6+L.get('pad',0);DL.append(dict(t0=t+lead,t1=t+lead+ty,te=t+lead+ty+.55,who=who,text=tx,name=nm,color=col,freq=fq));acc=0
+            for sid,fr in L['shots']:shots.append(dict(id=sid,t0=t+slot*acc,t1=t+slot*(acc+fr)));slots[sid]=(t+slot*acc,t+slot*(acc+fr));acc+=fr
+            t+=slot;continue
         p=B.tts(L['t'],L['v']);x,sr=rd(p);d=len(x)/sr;lead=.15;slot=lead+d+L.get('pad',.3);v0=t+lead;vo.append((v0,p))
         caps+=chunks(L['t'],v0,v0+d,L.get('c'));acc=0
         for sid,fr in L['shots']:shots.append(dict(id=sid,t0=t+slot*acc,t1=t+slot*(acc+fr)));slots[sid]=(t+slot*acc,t+slot*(acc+fr));acc+=fr
         t+=slot
-    dur=t+.3;shots[-1]['t1']=dur;spec=dict(shots=shots,caps=caps,dur=dur);json.dump(spec,open(O+'/spec.json','w'),indent=0)
-    words=sum(len(L['t'].split()) for L in EP['lines']);print(f'{name}: {dur:.1f}s, {len(shots)} shots (avg {dur/len(shots):.2f}s), {words} words = {words/dur:.2f} w/s')
+    dur=t+.3;shots[-1]['t1']=dur;spec=dict(shots=shots,caps=caps,dur=dur,dlg=DL);json.dump(spec,open(O+'/spec.json','w'),indent=0)
+    words=sum(len(L['t'].split()) for L in EP['lines'] if 't' in L);print(f'{name}: {dur:.1f}s, {len(shots)} shots (avg {dur/len(shots):.2f}s), {words} words = {words/dur:.2f} w/s')
     if '--sheet' in steps:
         d2=O+'/mid';subprocess.run(['rm','-rf',d2]);ts=','.join(f'{(s["t0"]+s["t1"])/2:.3f}' for s in shots);subprocess.check_call(['node',H+'/render.js',O+'/spec.json',d2,ts,'--t'])
         from PIL import Image
@@ -118,6 +124,14 @@ def main():
                 tt=s0+off+r*gap
                 if tt>=s1-.02 and r>0:break
                 i=int(tt*SR);k=max(0,min(len(y),n-i));X[i:i+k]+=y[:k]*.7
+        for d_ in DL:
+            m_=len(d_['text'])
+            for ci,ch in enumerate(d_['text']):
+                if ch==' ':continue
+                tt=d_['t0']+(d_['t1']-d_['t0'])*ci/m_;fq=d_['freq']*(1+((ord(ch)%7)-3)*.035);nn=int(.055*SR);tb=np.arange(nn)/SR
+                y=(np.sign(np.sin(2*np.pi*fq*tb))*.5+np.sin(2*np.pi*fq*tb)*.3)*np.exp(-tb/.03)*np.minimum(tb/.002,1)
+                if d_['who']=='pig':y=lp(np.sign(np.sin(2*np.pi*fq*tb*(1+tb*8))).astype(np.float32),1800)*np.exp(-tb/.04)
+                i=int(tt*SR);k_=max(0,min(nn,n-i));X[i:i+k_]+=y[:k_].astype(np.float32)*.55
         Mu=bed(dur)[:n];env=np.convolve(np.abs(V),np.ones(2205)/2205,'same');duck=1-np.clip(env*7,0,.6)
         out=V*1.0+X*.55+Mu*.16*duck;out/=max(1e-6,np.abs(out).max())/.9;wr(O+'/mix.wav',out)
         import shutil

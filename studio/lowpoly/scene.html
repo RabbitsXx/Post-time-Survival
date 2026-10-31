@@ -4,8 +4,10 @@ html,body{margin:0;background:#000;overflow:hidden}
 #wrap{position:relative;width:1080px;height:1920px;overflow:hidden}
 #c{width:1080px;height:1920px;image-rendering:pixelated;display:block}
 #cap{position:absolute;left:30px;right:30px;top:1250px;text-align:center;font:900 124px/1.02 RC,Arial;color:#ffe21f;-webkit-text-stroke:16px #000;paint-order:stroke fill;text-transform:uppercase;letter-spacing:2px;text-wrap:balance}
+#dlg{position:absolute;left:54px;right:54px;top:1170px;height:340px;box-sizing:border-box;background:#000;border:10px solid #fff;padding:20px 30px;display:none;font:700 92px/1.08 RC,Arial;color:#fff;letter-spacing:3px;text-transform:uppercase;overflow:hidden}
+#dlgname{font-size:56px;margin-bottom:10px;letter-spacing:4px}
 #fl{position:absolute;left:0;top:0;width:1080px;height:1920px;background:#fff;opacity:0}
-</style><body><div id=wrap><canvas id=c></canvas><div id=cap></div><div id=fl></div></div>
+</style><body><div id=wrap><canvas id=c></canvas><div id=cap></div><div id=dlg><div id=dlgname></div><div id=dlgtxt></div></div><div id=fl></div></div>
 <script src="../free3d/node_modules/three/build/three.min.js"></script>
 <script>
 const QP=new URLSearchParams(location.search);const VW=+(QP.get('w')||1080),VH=+(QP.get('h')||1920);const RW=VW/2,RH=VH/2;
@@ -158,15 +160,20 @@ ghost:(u,d,k)=>{show(ghost);ghost.root.visible=true;ghost.state(u>d*.55?'pigshru
 let SPEC=null;const capEl=document.getElementById('cap'),flEl=document.getElementById('fl');
 window.fontsReady=document.fonts.load('900 100px RC').then(()=>document.fonts.ready);
 window.setSpec=s=>{SPEC=s};
+const ANIMS=[];const dlgEl=document.getElementById('dlg'),dlgName=document.getElementById('dlgname'),dlgTxt=document.getElementById('dlgtxt');
+function allPeople(){return [F,OFF,KAI,POLY,SC,CAPT,...US,...BR].concat(typeof POLYF!=='undefined'?[POLYF]:[],typeof GRIF!=='undefined'?[GRIF]:[])}
 window.renderAt=f=>{const t=f/30;let sh=SPEC.shots.find(s=>t>=s.t0&&t<s.t1)||SPEC.shots[SPEC.shots.length-1];const u=t-sh.t0,d=sh.t1-sh.t0,k=u/d;
- hideAll();SHAKE=0;FLASH=0;smoke.forEach(m=>m.visible=false);
+ allPeople().forEach(p=>p.head.position.y=1.76);hideAll();SHAKE=0;FLASH=0;smoke.forEach(m=>m.visible=false);
  clouds.forEach(c=>{const a=c.userData.a+t*c.userData.sp;c.position.x=Math.cos(a)*c.userData.r;c.position.z=Math.sin(a)*c.userData.r});
  waterT.offset.x=t*.04;
- SHOTS[sh.id](u,d,k);
+ SHOTS[sh.id](u,d,k);ANIMS.forEach(fn=>fn(t));
+ const dl=(SPEC.dlg||[]).find(x=>t>=x.t0&&t<x.te);if(dl){const n=Math.min(dl.text.length,Math.floor((t-dl.t0)/(dl.t1-dl.t0)*dl.text.length)+1);dlgEl.style.display='block';dlgName.textContent=dl.name;dlgName.style.color=dl.color;dlgTxt.textContent='* '+dl.text.slice(0,n);if(n<dl.text.length){const A=(window.ACTORS&&window.ACTORS[dl.who]);if(A){if(A.root)A.root.position.y+=Math.abs(Math.sin(t*30))*.05;else if(A.head)A.head.position.y+=Math.abs(Math.sin(t*30))*.03}}}else dlgEl.style.display='none';
  pigBlob();R.render(S,cam);flEl.style.opacity=FLASH;
- const c=SPEC.caps.find(c=>t>=c.t0&&t<c.t1);if(c){if(capEl.dataset.k!==String(c.t0)){capEl.textContent=c.text;capEl.dataset.k=String(c.t0)}const a=cl((t-c.t0)/.1);capEl.style.transform='scale('+(1.14-.14*a)+')';capEl.style.opacity=1}else{capEl.style.opacity=0;capEl.dataset.k=''}
+ const c=dl?null:SPEC.caps.find(c=>t>=c.t0&&t<c.t1);if(c){if(capEl.dataset.k!==String(c.t0)){capEl.textContent=c.text;capEl.dataset.k=String(c.t0)}const a=cl((t-c.t0)/.1);capEl.style.transform='scale('+(1.14-.14*a)+')';capEl.style.opacity=1}else{capEl.style.opacity=0;capEl.dataset.k=''}
  return sh.id};
 </script>
 <script src="wombat.js"></script>
 <script src="sharks.js"></script>
 <script src="pigwar2.js"></script>
+<script src="decor.js"></script>
+<script src="pigwar3.js"></script>
