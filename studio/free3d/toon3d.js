@@ -7,9 +7,9 @@ const sph=(r,w=24,h=18)=>new THREE.SphereGeometry(r,w,h),cap=(r,l)=>new THREE.Ca
 // proportions: ~1.8 m adult, head ~1/6.3 of height (realistic-leaning toon). Head-local units: skull radius .31, scaled by HK*S.
 function hand(skin,S){const h=new THREE.Group();const pm=part(sph(.052*S,12,10),skin,.1);pm.scale.set(1,1.1,.62);h.add(pm);const fg=part(cap(.03*S,.05*S),skin,.12);fg.scale.set(1.35,1,.55);fg.position.set(0,-.075*S,0);h.add(fg);const tb=part(cap(.017*S,.032*S),skin,.14);tb.position.set(0,-.025*S,.04*S);tb.rotation.x=.9;h.add(tb);return h}
 function buildFace(U,cfg,head,skin){const S=1;
- const sk=part(sph(.31*S,32,24),skin,.05);sk.scale.set(.97,1.06,.98);sk.position.y=.02*S;head.add(sk);
+ if(!cfg.rigged){const sk=part(sph(.31*S,32,24),skin,.05);sk.scale.set(.97,1.06,.98);sk.position.y=.02*S;head.add(sk);
  const chin=part(sph(.12*S,16,12),skin,.06);chin.scale.set(1,.85,.8);chin.position.set(0,-.2*S,.12*S);head.add(chin);U.chin=chin;
- for(const sx of[-1,1]){const ear=part(sph(.055*S),skin,.1);ear.position.set(sx*.295*S,-.01*S,0);ear.scale.z=.45;head.add(ear)}
+ for(const sx of[-1,1]){const ear=part(sph(.055*S),skin,.1);ear.position.set(sx*.295*S,-.01*S,0);ear.scale.z=.45;head.add(ear)}}
  U.eyes=[];for(const sx of[-1,1]){const eg=new THREE.Group();eg.position.set(sx*.125*S,.04*S,.262*S);const ew=part(sph(.066*S,20,14),0xffffff,.13);ew.scale.set(1.12,.95,.5);eg.add(ew);const pu=new THREE.Mesh(sph(.036*S,14,10),new THREE.MeshBasicMaterial({color:0x0a0606}));pu.position.set(0,0,.03*S);eg.add(pu);const hl=new THREE.Mesh(sph(.011*S,8,6),new THREE.MeshBasicMaterial({color:0xffffff}));hl.position.set(-.012*S,.014*S,.058*S);eg.add(hl);head.add(eg);U.eyes.push({eg,ew,pu})}
  U.brows=[];for(const sx of[-1,1]){const br=part(new THREE.BoxGeometry(.125*S,.03*S,.02*S),cfg.hc||0x2a1a10,.2);br.position.set(sx*.125*S,.135*S,.285*S);head.add(br);U.brows.push(br)}
  const nose=part(sph(.045*S,12,10),skin,.12);nose.position.set(0,-.045*S,.3*S);nose.scale.set(.9,1.1,.85);head.add(nose);
@@ -49,7 +49,7 @@ function toonPerson(cfg){const S=cfg.s||1,W=cfg.w||1,skin=cfg.skin,HK=cfg.hk||.4
  const head=new THREE.Group();head.position.y=U.hY;torso.add(head);U.head=head;
  const hs=new THREE.Group();hs.scale.setScalar(HK*S);head.add(hs);U.hs=hs;buildFace(U,cfg,hs,skin);
  g.traverse(o=>{if(o.isMesh)o.castShadow=true});return g}
-function toonZombie(cfg){const g=toonPerson(Object.assign({skin:0x7d8c76,shirt:0x3d6b45,pants:0x2a2a30,shoe:0x14120e,hair:'none',s:1.0,w:.9,tag:1,hk:.42},cfg||{}));const U=g.userData,S=U.cfg.s||1,H=U.hs;U.isZ=true;U.hY=.70*S;
+function zombieFace(U,H){
  // sunken eye sockets + milky dead eyes (no glow)
  for(const e of U.eyes){e.ew.material=toon(0xd6d2b4);e.ew.scale.set(.95,.8,.5);e.pu.material=new THREE.MeshBasicMaterial({color:0x2a1410});e.pu.scale.setScalar(.55);
   const so=new THREE.Mesh(sph(.105,16,12),new THREE.MeshBasicMaterial({color:0x140c0a}));so.scale.set(1.15,1.05,.5);so.position.set(0,-.005,-.03);e.eg.add(so);e.eg.position.z-=.012;e.eg.position.y-=.01}
@@ -63,9 +63,12 @@ function toonZombie(cfg){const g=toonPerson(Object.assign({skin:0x7d8c76,shirt:0
  // blood + neck bite + torso stains
  const bl=part(sph(.04,8,6),0x7a0a0e,.0,false);bl.scale.set(1,3.2,.4);bl.position.set(.07,-.3,.27);H.add(bl);const bl3=bl.clone();bl3.position.set(-.1,-.28,.26);bl3.scale.set(.8,2.4,.4);H.add(bl3);
  const neck=part(sph(.075,8,6),0x8a1014,.08,false);neck.scale.set(1.3,.9,.5);neck.position.set(.14,-.22,.1);H.add(neck);
+ for(let i=0;i<5;i++){const st=part(new THREE.CylinderGeometry(.004,.003,.16,4),0x1a1610,.0,false);st.position.set((i-2)*.08,.32,-.02);st.rotation.z=(i-2)*.25;H.add(st)}
+}
+function toonZombie(cfg){const g=toonPerson(Object.assign({skin:0x7d8c76,shirt:0x3d6b45,pants:0x2a2a30,shoe:0x14120e,hair:'none',s:1.0,w:.9,tag:1,hk:.42},cfg||{}));const U=g.userData,S=U.cfg.s||1,H=U.hs;U.isZ=true;U.hY=.70*S;
+ zombieFace(U,H);
  const bl2=part(sph(.05*S,10,8),0x4a0608,.0,false);bl2.scale.set(1.2,2.6,.2);bl2.position.set(.07*S,.42*S,.1*S);U.torso.add(bl2);const bl4=part(sph(.035*S,8,6),0x5a080c,.0,false);bl4.scale.set(1,2.4,.2);bl4.position.set(-.08*S,.28*S,.1*S);U.torso.add(bl4);
  for(let i=0;i<3;i++){const fl=part(new THREE.ConeGeometry(.045*S,.13*S,4),(cfg&&cfg.shirt)||0x3d6b45,.1,false);fl.position.set((i-1)*.09*S,.0*S,.09*S);fl.rotation.x=Math.PI;U.torso.add(fl)}
- for(let i=0;i<5;i++){const st=part(new THREE.CylinderGeometry(.004,.003,.16,4),0x1a1610,.0,false);st.position.set((i-2)*.08,.32,-.02);st.rotation.z=(i-2)*.25;H.add(st)}
  U.arms.forEach(a=>{a.sh.scale.set(1,1.12,1);a.hd.scale.set(.9,1.25,.9)});
  return g}
 // ===== animation =====
@@ -75,7 +78,7 @@ function setExpr(U,e,open){const S=1;const set=(sm,fl,op,fr)=>{U.mSmile.visible=
  const eo=cfg[2];U.eyes.forEach(ev=>{ev.eg.scale.set(1,eo,1)});
  if(open>.12||e==='shock'||e==='scared'&&open>.05)set(false,false,true,false);else if(e==='smile'||e==='smug')set(true,false,false,false);else if(e==='worried'||e==='sad')set(false,false,false,true);else set(false,true,false,false);
  const o=Math.max(open,e==='shock'?.6:0);U.mOpen.scale.y=(U.isZ?1.2:.8)+o*1.1;U.mOpen.position.y=-.15*S-o*.02*S;if(U.mSmile.visible&&e==='smug')U.mSmile.rotation.z=Math.PI*.9}
-function animPerson(g,t,st){const U=g.userData,S=U.cfg.s||1,ph=(st.seed||0)*1.7;const act=st.act||'idle',sp=st.speaking;
+function animPerson(g,t,st){if(g.userData.rig)return animRigged(g,t,st);const U=g.userData,S=U.cfg.s||1,ph=(st.seed||0)*1.7;const act=st.act||'idle',sp=st.speaking;
  const br=Math.sin(t*1.7+ph);U.torso.scale.y=1+br*.012;U.head.rotation.set(0,0,0);U.head.position.set(0,U.hY+br*.004*S,U.isZ?.07*S:0);
  U.legs.forEach(l=>l.rotation.set(0,0,0));U.arms.forEach(a=>{a.sh.rotation.set(0,0,0);a.el.rotation.set(0,0,0)});U.hip.position.y=U.pY;U.hip.rotation.set(0,0,0);U.torso.rotation.set(0,0,0);
  const idle=()=>{U.arms[0].sh.rotation.z=.12+Math.sin(t*1.2+ph)*.03;U.arms[1].sh.rotation.z=-.12-Math.sin(t*1.2+ph)*.03;U.arms[0].el.rotation.x=-.15;U.arms[1].el.rotation.x=-.15};
