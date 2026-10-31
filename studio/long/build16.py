@@ -26,6 +26,10 @@ def tts(text,voice,rate,path,key):
 def trim(src,dst,extra=''):
     f='silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.02,areverse,silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.02,areverse,aresample=44100'+extra
     subprocess.check_call(['ffmpeg','-y','-hide_banner','-loglevel','error','-i',src,'-af',f,'-ac','1',dst])
+    try:                                    # every spoken line is levelled to the same RMS (-23 dBFS) so no character is louder than another (sound department)
+        x=rd(dst);rms=float(np.sqrt(np.mean(x**2))+1e-9);g=min(4.0,max(.25,10**((-23-20*np.log10(rms))/20)))
+        wr(dst,np.clip(x*g,-.98,.98),44100)
+    except Exception:pass
 def rd(f):
     w=wave.open(f);n=w.getnframes();a=np.frombuffer(w.readframes(n),dtype=np.int16).astype(np.float32)/32768;return a.reshape(-1,w.getnchannels()).mean(1)
 def wr(path,x,sr=SR):
@@ -68,7 +72,7 @@ def chunk(cap,maxw=None,maxc=None):
     for k in range(2,min(max(5,-(-n//maxw)+1),n,7)+1):
         for cuts in itertools.combinations(range(1,n),k-1):
             idx=[0,*cuts,n];parts=[ws[idx[i]:idx[i+1]] for i in range(k)]
-            c=cost(parts)+sum(7 for p in parts if len(p)==1)-sum(5 for p in parts[:-1] if p[-1][0][-1] in ',.:;?!')+sum(7 for p in parts[:-1] if p[-1][0].lower().strip(',.:;?!') in STOP)+k*3
+            c=cost(parts)+sum(7 for p in parts if len(p)==1)-sum(5 for p in parts[:-1] if p[-1][0][-1] in ',.:;?!')+sum(45 for p in parts[:-1] if p[-1][0].lower().strip(',.:;?!') in STOP and p[-1][0][-1] not in ',.:;?!')+sum(12 for p in parts if len(p)==1 and n>2)+k*3
             if best is None or c<best[0]:best=(c,parts)
         if best and best[0]<20:break
     return best[1]
@@ -86,18 +90,45 @@ def main():
     M=load_script(name);OUT=f'{R}/{out}';os.makedirs(OUT,exist_ok=True);os.makedirs(f'{R}/tts',exist_ok=True);key=_key()
     VOICES.update(getattr(M,'VOICES',{}));FILT.update(getattr(M,'FILT',{}))      # scripts with a bigger cast (THE LAST BUS) bring their own voices / filters
     SPK=sorted({sp for b in M.BEATS for sp,_ in b['say']})
-    jobs={}
-    for bi,b in enumerate(M.BEATS):
-        radio=any(f.get('k')=='pip' for f in b['fx'])
-        for si,(sp,tx) in enumerate(b['say']):
-            spk=sp+('_radio' if (sp=='maya' and radio) else '')
-            vname,rate=VOICES[sp][:2];txt=plain(tx).replace('™','').replace('*','')
-            h=hashlib.md5(f'{vname}|{rate}|{txt}'.encode()).hexdigest()[:16]
-            jobs[(bi,si)]=dict(sp=sp,spk=spk,text=txt,raw=f'{R}/tts/{h}.wav',trim=f'{R}/tts/{h}_{spk}.wav',vname=vname,rate=rate)
-    with cf.ThreadPoolExecutor(6) as ex:
-        list(ex.map(lambda j:tts(j['text'],j['vname'],j['rate'],j['raw'],key),jobs.values()))
-    for j in jobs.values():
-        if not os.path.exists(j['trim']):trim(j['raw'],j['trim'],(','+FILT[j['spk']]) if j['spk'] in FILT else '')
+    import pitch
+    def build_jobs():
+        jobs={}
+        for bi,b in enumerate(M.BEATS):
+            radio=any(f.get('k')=='pip' for f in b['fx'])
+            for si,(sp,tx) in enumerate(b['say']):
+                spk=sp+('_radio' if (sp=='maya' and radio) else '')
+                vname,rate=VOICES[sp][:2];txt=plain(tx).replace('™','').replace('*','')
+                h=hashlib.md5(f'{vname}|{rate}|{txt}'.encode()).hexdigest()[:16]
+                jobs[(bi,si)]=dict(sp=sp,spk=spk,text=txt,raw=f'{R}/tts/{h}.wav',vname=vname,rate=rate,h=h)
+        return jobs
+    def synth(jobs):
+        with cf.ThreadPoolExecutor(6) as ex:
+            list(ex.map(lambda j:tts(j['text'],j['vname'],j['rate'],j['raw'],key),jobs.values()))
+    def cast_pitch(jobs):
+        """FILT value '@pitch:<Hz>|<extra filter>' = cast this speaker at that fundamental: measure the raw TTS voice, shift by the ratio WITHOUT changing duration (asetrate + atempo)"""
+        for sp in SPK:
+            f=FILT.get(sp,'')
+            if not f.startswith('@pitch:'):continue
+            tgt,_,extra=f[7:].partition('|');tgt=float(tgt)
+            xs=[rd(j['raw']) for j in jobs.values() if j['sp']==sp][:6]
+            f0=pitch.f0_of(np.concatenate(xs),24000) if xs else None
+            k=min(1.8,max(.6,tgt/f0)) if f0 else 1.0
+            FILT[sp]=f'asetrate=44100*{k:.4f},aresample=44100,atempo={1/k:.4f}'+(','+extra if extra else '')
+            print(f'  casting {sp}: raw {f0 and round(f0)} Hz -> target {tgt:.0f} Hz (x{k:.2f})')
+    def do_trim(jobs):
+        for j in jobs.values():
+            filt=FILT.get(j['spk'],'');fh=hashlib.md5(filt.encode()).hexdigest()[:6];j['trim']=f"{R}/tts/{j['h']}_{j['spk']}_{fh}.wav"
+            if not os.path.exists(j['trim']):trim(j['raw'],j['trim'],(','+filt) if filt else '')
+    jobs=build_jobs();synth(jobs);cast_pitch(jobs);do_trim(jobs)
+    # auto speaking rate: a speaker whose pace leaves 125-165 wpm is re-synthesised at a corrected rate (one correction pass)
+    redo=False
+    for sp in SPK:
+        js=[j for j in jobs.values() if j['sp']==sp];wd=sum(len(j['text'].split()) for j in js);du=sum(len(rd(j['trim']))/SR for j in js)
+        if wd>=8 and du>0 and getattr(M,'WORLD',None):      # auto-rate: data-driven worlds only (shipped series keep their hand-tuned rates)
+            wpm=wd/(du/60)
+            if not 125<=wpm<=165:
+                v,r=VOICES[sp][:2];nr=min(1.35,max(.55,r*145/wpm));VOICES[sp]=(v,round(nr,3))+tuple(VOICES[sp][2:]);redo=True;print(f'  pace {sp}: {wpm:.0f} wpm -> rate {r:.2f} -> {nr:.2f}')
+    if redo:jobs=build_jobs();synth(jobs);do_trim(jobs)
     # ---- timeline
     t=0.0;beats=[];voice_events=[];sfx=[];moods=[];cues=[];words=0;wsum=0.0
     for bi,b in enumerate(M.BEATS):
@@ -116,6 +147,19 @@ def main():
                 dd=span*w/tot;caps.append(dict(t=[round(t0+x,3),round(t0+x+dd,3)],h=fmt(c).upper() if False else fmt([(w_.upper(),col) for w_,col in c]),sp=(s['sp'] if s['sp'] in ('game','maya','steve') or getattr(M,'SPEAKERS',None) else 'dex')));x+=dd
             cues.append(dict(t=[round(t0+s['t0'],3),round(t0+s['t1']+.1,3)],text=plain(s['cap']),sp=s['sp']))
             voice_events.append(dict(t=t0+s['t0'],a=s['audio'],sp=s['sp'],spk=s['spk']))
+        # editorial: a caption chunk that would be on screen < 0.6 s is merged with its neighbour (up to 4 words) so nothing flashes by unreadably
+        def _w(c):return len(re.sub(r'<[^>]+>','',c['h']).split())
+        k=0
+        while k<len(caps):
+            c=caps[k]
+            if c['t'][1]-c['t'][0]<.6:
+                for nb in(k+1,k-1):
+                    if 0<=nb<len(caps) and caps[nb]['sp']==c['sp'] and _w(c)+_w(caps[nb])<=5:
+                        lo,hi=(k,nb) if k<nb else (nb,k);A_,B_=caps[lo],caps[hi]
+                        caps[lo]=dict(A_,t=[A_['t'][0],B_['t'][1]],h=A_['h']+' '+B_['h']);del caps[hi];k=max(0,lo-1);break
+                else:k+=1
+                continue
+            k+=1
         # captions stay until the next chunk begins (no flicker between chunks of one sentence), but never cross the beat end
         for i in range(len(caps)-1):
             if caps[i+1]['t'][0]-caps[i]['t'][1]<.5:caps[i]['t'][1]=caps[i+1]['t'][0]
@@ -135,6 +179,7 @@ def main():
         bd=dict(t=[round(t0,3),round(t0+dur,3)],scene=sc,skin=b['skin'],cam=cam,caps=caps,fx=fx,mood=b['mood'],i=bi)
         if b.get('view'):bd['view']=b['view']        # 9:16 engine: window onto the 1280x720 world
         if b.get('nofade'):bd['nofade']=True
+        if b.get('intent'):bd['intent']=b['intent']      # storyboard: who / does / where / how / why watch (storylint.py)
         beats.append(bd)
         moods.append((round(t0,3),round(t0+dur,3),b['mood']));t=t0+dur
     # frame-quantise beat boundaries so the engine and the audio agree
@@ -157,6 +202,7 @@ def main():
     wr(f'{OUT}/voice.wav',voice/(max(1e-6,np.abs(voice).max())/.95) if np.abs(voice).max()>.95 else voice)
     spec=dict(title=M.TITLE,duration=round(total,3),fps=FPS,beats=beats,mouth=mouth)
     if getattr(M,'SPEAKERS',None):spec['speakers']=M.SPEAKERS
+    if getattr(M,'WORLD',None):spec['world']=M.WORLD      # data-driven world (worldlib / world9.js)
     json.dump(dict(spec,mouth=None),open(f'{OUT}/spec.json','w'),ensure_ascii=False,indent=0)
     json.dump({k:[int(c) for c in v] for k,v in mouth.items()},open(f'{OUT}/spec.mouth.json','w'))
     open(f'{OUT}/spec.js','w').write('var SPEC='+json.dumps(spec,ensure_ascii=False)+';')

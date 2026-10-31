@@ -1,0 +1,231 @@
+{
+ "story": {
+  "dept": "story",
+  "score": 100,
+  "issues": [],
+  "metrics": {}
+ },
+ "art": {
+  "dept": "art-layout-animation",
+  "score": 97,
+  "issues": [
+   "LAYOUT: 1 person(s) cut by the frame edge, e.g. [(14, 'bell', -16)]: reframe or move them inside x 40-410"
+  ],
+  "metrics": {
+   "dead_black_bottom_beats": "0/13",
+   "dark_beats": 0,
+   "mean_saturation": 0.319,
+   "min_palette_distance": 25.5,
+   "static_beats": [],
+   "cut_by_edge": [
+    [
+     14,
+     "bell",
+     -16
+    ]
+   ],
+   "zoom_jumps": [],
+   "empty_beats": []
+  }
+ },
+ "sound": {
+  "dept": "sound",
+  "score": 86,
+  "issues": [
+   "voices ann and bell sound alike (f0 129 vs 118 Hz): recast or pitch-shift one",
+   "zara: during speech the bed (music+sfx) is -5.5 dB relative to the voice (must be <= -6): the voice is not on top"
+  ],
+  "metrics": {
+   "lufs": -14.1,
+   "true_peak": -2.9,
+   "speakers": {
+    "zara": {
+     "db": -20.6,
+     "f0": 236.0,
+     "wpm": 123,
+     "share": 0.31,
+     "bed_minus_voice_db": -5.5
+    },
+    "ann": {
+     "db": -21.6,
+     "f0": 129.0,
+     "wpm": 159,
+     "share": 0.16,
+     "bed_minus_voice_db": -15.4
+    },
+    "bell": {
+     "db": -21.0,
+     "f0": 118.0,
+     "wpm": 130,
+     "share": 0.35,
+     "bed_minus_voice_db": -9.5
+    },
+    "omar": {
+     "db": -20.6,
+     "f0": 155.0,
+     "wpm": 134,
+     "share": 0.14,
+     "bed_minus_voice_db": -9.2
+    },
+    "pip": {
+     "db": -19.9,
+     "f0": 322.0,
+     "wpm": 174,
+     "share": 0.04,
+     "bed_minus_voice_db": -13.1
+    }
+   },
+   "music_moods": {
+    "creep": {
+     "rms_db": -20.0,
+     "centroid": 2849
+    },
+    "idle": {
+     "rms_db": -29.6,
+     "centroid": 618
+    },
+    "chase": {
+     "rms_db": -19.5,
+     "centroid": 2420
+    },
+    "comic": {
+     "rms_db": -25.6,
+     "centroid": 2511
+    },
+    "warm": {
+     "rms_db": -23.7,
+     "centroid": 1483
+    }
+   },
+   "foley": {
+    "events": 98,
+    "moving_beats": 6,
+    "without_steps": 0
+   },
+   "sfx": 98
+  }
+ },
+ "editorial": {
+  "dept": "editorial",
+  "score": 98,
+  "issues": [
+   "EDITORIAL: 1 caption(s) on screen < 0.6 s [('A PAN', 0.5)]"
+  ],
+  "metrics": {
+   "chunks": 44,
+   "dangling": [],
+   "orphans": [],
+   "fast": [],
+   "short": [
+    [
+     "A PAN",
+     0.5
+    ]
+   ],
+   "shot_len_std": 0.96,
+   "srt": [
+    20,
+    20
+   ]
+  }
+ },
+ "marketing": {
+  "dept": "marketing",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "title": "A Zombie Delivers Pizza To The Elevator! 12 | The Last Floor Part 1",
+   "title_len": 67,
+   "tags": 17,
+   "hashtags": [
+    "#shorts",
+    "#zombie",
+    "#zombieapocalypse",
+    "#animation",
+    "#survival",
+    "#thelastfloor"
+   ],
+   "cover_9x16.png": {
+    "size": [
+     1080,
+     1920
+    ],
+    "detail": 8.0,
+    "colourful": 42.8
+   },
+   "cover_16x9.png": {
+    "size": [
+     1280,
+     720
+    ],
+    "detail": 4.8,
+    "colourful": 41.8
+   }
+  }
+ },
+ "legal": {
+  "dept": "legal-brand",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "props": [
+    "door",
+    "elevator",
+    "floorsign",
+    "pizza"
+   ]
+  }
+ },
+ "direction": {
+  "dept": "direction",
+  "score": 88,
+  "issues": [
+   "DIRECTION: more than 3 shots of the same size in a row (beats [4, 5, 7, 8, 9]): vary wide / medium / close",
+   "DIRECTION: the same picture (place + size) holds for 12.7 s (> 6.5 s): cut, move the camera or change the subject"
+  ],
+  "metrics": {
+   "sizes": "wwwwwwwwwwwmw",
+   "headroom": [],
+   "side_swaps": [],
+   "eyeline_flips": [],
+   "longest_same_picture_s": 12.7
+  }
+ },
+ "writing": {
+  "dept": "writing",
+  "score": 96,
+  "issues": [
+   "WRITING: bell talks 3 lines in a row: break it with a reaction or action"
+  ],
+  "metrics": {
+   "mean_words": 5.3,
+   "word_length": {
+    "zara": 3.71,
+    "bell": 4.24,
+    "omar": 3.56
+   },
+   "reading_grade": 2.1
+  }
+ },
+ "qc": {
+  "dept": "qc",
+  "score": 92,
+  "issues": [
+   "QC: total bitrate 4.9 Mbps (3-14)"
+  ],
+  "metrics": {
+   "size": "1080x1920",
+   "fps": "30/1",
+   "mbps": 4.9,
+   "duration": 64.0,
+   "vcodec": "h264",
+   "profile": "High",
+   "acodec": "aac",
+   "arate": "48000",
+   "lufs": -14.1,
+   "true_peak": -2.9,
+   "black_segments": [],
+   "frozen_s": []
+  }
+ }
+}

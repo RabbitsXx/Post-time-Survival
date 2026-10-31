@@ -26,16 +26,16 @@ const PEXP={ // eye type, brow [x1,y1,x2,y2] for the +x brow (mirrored for -x), 
  sleep:{eye:'closed',br:[5,-12,19,-12],mo:'snore'}, wince:{eye:'closed',br:[5,-15,19,-9],mo:'grit'},   deadpan:{eye:'half',br:[5,-12,19,-12],mo:'flat'},
  scared:{eye:'wide',br:[5,-20,19,-11],mo:'grit'},   cry:{eye:'wide',br:[5,-18,19,-9],mo:'frown'}};
 const MOUTH={flat:'M-8,28 L8,28',smile:'M-10,26 Q0,34 10,26',grin:'M-11,25 Q0,38 11,25 Z',wavy:'M-9,29 Q-4,25 0,29 T9,29',frown:'M-9,31 Q0,24 9,31',grit:'M-9,27 L9,27',smirk:'M-9,29 Q2,30 11,24',o:'M0,0',snore:'M-5,28 Q0,32 5,28'};
-function pEyes(q,ex,P,o,ink){const look=o.look||0;const red=o.red||0;
+function pEyes(q,ex,P,o,ink){const look=o.look||0;const red=o.red||0;q._lids=[];
  for(const s of[-1,1]){const cx=s*12,e=G(q,{});
   if(ex.eye==='closed'){E('path',{d:`M${cx-7},3 Q${cx},8 ${cx+7},3`,fill:'none',stroke:ink,'stroke-width':3,'stroke-linecap':'round'},e);continue}
   if(ex.eye==='happy'){E('path',{d:`M${cx-7},5 Q${cx},-4 ${cx+7},5`,fill:'none',stroke:ink,'stroke-width':3.2,'stroke-linecap':'round'},e);continue}
-  const r=ex.eye==='wide'?7.2:ex.eye==='wide2'?8.6:5.8;C(e,cx,2,r,red>0?`rgb(255,${Math.round(255-130*red)},${Math.round(255-150*red)})`:'#fff',{stroke:ink,'stroke-width':2});
+  const r=ex.eye==='wide'?7.2:ex.eye==='wide2'?8.6:5.8;if(!q._lids)q._lids=[];q._lids.push({cx,r,e});C(e,cx,2,r,red>0?`rgb(255,${Math.round(255-130*red)},${Math.round(255-150*red)})`:'#fff',{stroke:ink,'stroke-width':2});
   if(red>0)for(let k=0;k<4;k++){const a=k*1.7+s;L(e,cx+Math.cos(a)*r*.95,2+Math.sin(a)*r*.95,cx+Math.cos(a)*r*.45,2+Math.sin(a)*r*.45,'#d02020',1.2*red+.4,{opacity:.9})}
   C(e,cx+look,3,ex.eye==='wide2'?2.4:ex.eye==='wide'?3.2:2.9,P.eye);C(e,cx+look+1.4,1.2,1,'#fff');
   if(ex.eye==='half'){R(e,cx-8,-6,16,8.4,P.skin)&&L(e,cx-7,2.4,cx+7,2.4,ink,3)}}
 }
-function pBrows(q,ex,D,ink){const b=ex.br,w=D.brow==='thick'?6:4.6;L(q,-b[0],b[1],-b[2],b[3],D.hc&&D.hair!=='bald'&&D.hair!=='bun'&&D.hair!=='curls'?ink:ink,w);L(q,b[0],b[1],b[2],b[3],ink,w)}
+function pBrows(q,ex,D,ink){const b=ex.br,w=D.mini?2.4:(D.brow==='thick'?6:4.6);L(q,-b[0],b[1],-b[2],b[3],D.hc&&D.hair!=='bald'&&D.hair!=='bun'&&D.hair!=='curls'?ink:ink,w);L(q,b[0],b[1],b[2],b[3],ink,w)}
 function pMouth(q,ex,m,ink){const g=G(q,{});const cl=E('path',{d:MOUTH[ex.mo]||MOUTH.flat,fill:ex.mo==='grin'?'#fff':'none',stroke:ink,'stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round'},g);
  const opn=G(g,{display:'none'});E('ellipse',{cx:0,cy:29,rx:8,ry:2,fill:'#4a1414',stroke:ink,'stroke-width':2.2},opn);const tg=R(opn,-6,26,12,3,'#fff',{rx:1.5});
  return mm=>{const mo=ex.mo==='o'?Math.max(mm,.55):mm;if(mo>.07){A(cl,{d:'M0,0'});A(opn,{display:'inline'});const ry=2+9*mo,rx=6.5+4*mo;const c=opn.firstChild;A(c,{cy:28+ry*.35,rx,ry});A(tg,{y:28+ry*.35-ry+.6,x:-rx*.78,width:rx*1.56,height:Math.min(3.6,ry*.7)})}else{A(opn,{display:'none'});A(cl,{d:MOUTH[ex.mo]||MOUTH.flat})}}}
@@ -65,7 +65,7 @@ function pHairFront(q,D,P,v,ink){const h=D.hair,c=D.hc||'#222';const top=v==='si
  else if(h==='bald'&&D.flatcap){blob(q,'M-34,-4 C-36,-34 36,-34 34,-4 Q0,-12 -34,-4Z',D.flatcap,ink);blob(q,'M-6,-8 Q18,-2 38,-6 L34,-1 Q10,6 -6,0Z',D.flatcap,ink)}
  else if(h==='bald'&&!D.hc){/* bald */}}
 function pFaceExtras(q,D,P,v,ink,ex){
- if(D.bags){for(const s of[-1,1])E('path',{d:`M${s*5},10 Q${s*12},15 ${s*19},10`,fill:'none',stroke:P.skinS,'stroke-width':2.6,'stroke-linecap':'round'},q)}
+ if(D.bags&&!D.mini){for(const s of[-1,1])E('path',{d:`M${s*5},10 Q${s*12},15 ${s*19},10`,fill:'none',stroke:P.skinS,'stroke-width':2.6,'stroke-linecap':'round'},q)}
  if(D.glasses){const sq=D.glasses==='rect';for(const s of[-1,1]){if(sq)R(q,s*12-9,-5,18,13,'none',{rx:3,stroke:'#2a2a30','stroke-width':2.6});else C(q,s*12,2,10,'none',{stroke:'#b0782a','stroke-width':2.6})}L(q,-3,2,3,2,sq?'#2a2a30':'#b0782a',2.4)}
  if(D.goggles){const g=G(q,{});R(g,-30,-26,60,12,'#3a3a46',{rx:5,stroke:ink,'stroke-width':2.4});for(const s of[-1,1]){C(g,s*14,-20,8.5,'#ffd23a',{stroke:ink,'stroke-width':2.2});C(g,s*14-2,-22,2.6,'#fff',{opacity:.8})}}
  if(D.scar){L(q,-22,-18,-8,8,'#a8433a',3.2);L(q,-26,-8,-14,-12,'#a8433a',2.6)}
@@ -86,29 +86,49 @@ function chickenHead(g,P,o,v,ink){ // the mascot head: big white head, red comb,
  q._mouth=m=>{if(mouthEls.lo)A(mouthEls.lo,{transform:`translate(0 ${m*7})`})};return q}
 const P_=(g,d,fill,o)=>P(g,d,fill,Object.assign({stroke:'#2a1c13','stroke-width':2.6,'stroke-linejoin':'round'},o||{}));
 
+
+/* ---- back of the head (view 'back'): no face; hair / hat from behind ---- */
+function paxBack(g,P,D,o,ink){const q=G(g,{transform:`scale(${D.hs||(D.kid?1.18:1.1)})`});const hc=D.hc||'#2a1e16',h=D.hair;
+ for(const s of[-1,1])C(q,s*31,8,6.2,P.skin,{stroke:ink,'stroke-width':2.5});
+ if(h==='pigtails'){for(const s of[-1,1]){blob(q,`M${s*30},-6 Q${s*58},4 ${s*52},46 Q${s*40},32 ${s*28},8Z`,hc,ink);C(q,s*38,10,5,'#e0463a',{stroke:ink,'stroke-width':2})}}
+ const hairy=['bun','curls','bob','pony','messy','beanie','seedcap','pigtails','hood','slick'].includes(h);const skull=h==='straw'?(D.bun||'#d4d4dc'):((h==='bald'||!hairy)?P.skin:hc);
+ C(q,0,0,32,skull,{stroke:ink,'stroke-width':3});for(const dx of[-12,0,12])L(q,dx,-2,dx+(dx?dx*.2:0),18,ink,1.6,{opacity:.18});
+ if(h==='straw'){C(q,0,6,14,D.bun||'#d4d4dc',{stroke:ink,'stroke-width':2.4});E('ellipse',{cx:0,cy:-8,rx:50,ry:11,fill:hc,stroke:ink,'stroke-width':3},q);blob(q,'M-30,-8 C-34,-46 34,-46 30,-8Z',hc,ink);R(q,-31,-22,62,8,'#a8332b',{stroke:ink,'stroke-width':2})}
+ else if(h==='seedcap'){blob(q,'M-34,2 C-40,-48 40,-48 34,2 Q0,-8 -34,2Z',hc,ink);R(q,-16,-8,32,9,'#ffd23a',{rx:3,stroke:ink,'stroke-width':1.8});L(q,-30,0,30,0,'#1e4f2c',2.4);C(q,0,-40,3.4,'#1e4f2c')}
+ else if(h==='pigtails'){blob(q,'M-33,-2 C-38,-46 38,-46 33,-2 Q22,-16 0,-14 Q-22,-16 -33,-2Z',hc,ink)}
+ else if(h==='messy'){blob(q,'M-33,0 C-40,-40 -24,-50 -12,-44 L-6,-58 L2,-44 L12,-56 L16,-42 C34,-50 40,-30 33,0 Q20,-8 0,-6 Q-20,-8 -33,0Z',hc,ink);if(D.goggles){R(q,-33,-24,66,8,'#3a3a46',{rx:4,stroke:ink,'stroke-width':2.2})}}
+ else if(h==='beanie'){blob(q,'M-34,-2 C-40,-52 40,-52 34,-2Z','#2c2c34',ink);R(q,-35,-12,70,13,'#3d3d48',{rx:6,stroke:ink,'stroke-width':3})}
+ else{blob(q,'M-33,-4 C-38,-44 38,-44 33,-4 Q0,10 -33,-4Z',hc,ink)}
+ q._mouth=()=>{};return q}
+
 function paxHead(g,P,o){
  let D=PAXH[o.who];if(o.who==='benny'&&o.bare)D=PAXH.benny2;
  if(D.skin)P=Object.assign({},P,{skin:D.skin,skinS:D.skinS||P.skinS});const ink=P.ink,v=o.view||'front';
  if(D.hair==='chicken')return chickenHead(g,P,o,v,ink);
+ if(v==='back')return paxBack(g,P,D,o,ink);
  const q=G(g,{transform:`scale(${D.kid?1.18:1.1})`});const ex=PEXP[o.expr||'calm']||PEXP.calm;
  pHairBack(q,D,P,v,ink);
  if(v==='side'){
   C(q,-4,6,6.4,P.skin,{stroke:ink,'stroke-width':2.5});C(q,0,0,32,P.skin,{stroke:ink,'stroke-width':3});blob(q,'M30,2 Q45,12 31,18Z',P.skin,ink);
   if(ex.eye==='closed')E('path',{d:'M8,4 Q15,8 22,4',fill:'none',stroke:ink,'stroke-width':3,'stroke-linecap':'round'},q);
+  else if(D.mini){C(q,17,3,ex.eye==='wide'||ex.eye==='wide2'?3.8:3,(o.red>.3?'#d83a30':ink));if(ex.eye==='half')L(q,11,0,23,0,ink,2.4)}
   else{C(q,15,2,ex.eye==='wide'||ex.eye==='wide2'?7:5.6,'#fff',{stroke:ink,'stroke-width':2});C(q,17,3,2.8,P.eye);if(ex.eye==='half')R(q,6,-6,18,7.6,P.skin)&&L(q,7,2.4,23,2.4,ink,3)}
-  L(q,8,-12,24,ex.br[3]>ex.br[1]?-8:-14,ink,4.4);
+  L(q,8,-12,24,ex.br[3]>ex.br[1]?-8:-14,ink,D.mini?2.2:4.4);
   const mo=E('ellipse',{cx:24,cy:28,rx:5,ry:1,fill:'#4a1414',opacity:0},q);E('path',{d:'M16,28 Q22,31 28,27',fill:'none',stroke:ink,'stroke-width':2.8,'stroke-linecap':'round'},q);
   pHairFront(q,D,P,v,ink);pFaceExtras(q,Object.assign({},D,{stache:null,beard:D.beard,goggles:D.goggles}),P,v,ink,ex);pSweat(q,o);pPale(q,o);if(o.tear)P_(q,'M20,12 q-4,10 0,16 q4,-6 0,-16Z','#9fe0ff',{stroke:'#2a6a9a','stroke-width':1.2});
   q._mouth=m=>A(mo,{opacity:m>.08?1:0,ry:1+6*m});return q}
  for(const s of[-1,1])C(q,s*33,6,6.4,P.skin,{stroke:ink,'stroke-width':2.5});
  C(q,0,0,32,P.skin,{stroke:ink,'stroke-width':3});
- pPale(q,o);pEyes(q,ex,P,o,ink);pBrows(q,ex,D,ink);
- E('ellipse',{cx:0,cy:10,rx:5,ry:4.4,fill:P.skinS,stroke:ink,'stroke-width':2},q);
+ pPale(q,o);
+ if(D.mini){q._lids=[];const cl=ex.eye==='closed';for(const sg of[-1,1]){if(cl)E('path',{d:`M${sg*12-6},3 Q${sg*12},7 ${sg*12+6},3`,fill:'none',stroke:ink,'stroke-width':2.2,'stroke-linecap':'round'},q);else C(q,sg*12+(o.look||0),2,ex.eye==='wide'||ex.eye==='wide2'?3.8:3,(o.red>.3?'#d83a30':ink))}}else pEyes(q,ex,P,o,ink);
+ const lids=(q._lids||[]).map(l=>E('ellipse',{cx:l.cx,cy:2,rx:l.r+1.3,ry:l.r+1.3,fill:P.skin,stroke:ink,'stroke-width':2,opacity:0},q));q._blink=(t,ph)=>{const b=((t*.8+ph)%3.4)<.13;lids.forEach(l=>A(l,{opacity:b?1:0}))};pBrows(q,ex,D,ink);
+ if(!D.mini)E('ellipse',{cx:0,cy:10,rx:5,ry:4.4,fill:P.skinS,stroke:ink,'stroke-width':2},q);
  if(o.blush)for(const s of[-1,1])C(q,s*20,14,6,'#ff7a7a',{opacity:.35});
  pFaceExtras(q,D,P,v,ink,ex);
  const mf=pMouth(q,ex,0,ink);pHairFront(q,D,P,v,ink);pSweat(q,o);pTears(q,o);
  if(D.flatcap&&ex.eye==='closed'){}
  q._mouth=mf;mf(o.mouth||0);return q}
+
 (function(){const _kh=khead;khead=function(g,P,o){if(PAXH[o.who])return paxHead(g,P,o);return _kh(g,P,o)}})();
 
 /* ---- body decorations (called by keeper after the torso/arms are drawn): vest, tie, stethoscope, bandage ... ---- */
@@ -134,24 +154,32 @@ function woundDeco(g,T,P,v){const a=v==='side'?T.n.a:T.la;const [e,h]=[a[1],a[2]
 const _actor16=actor;
 actor=function(g,o){
  if(!PAXH[o.k])return _actor16(g,o);
- const who=o.k,view=o.view||'front';const root=G(g,{});const base={x:o.x||0,y:o.y||0,s:o.s||1,fl:o.flip?-1:1,sx:o.sx||1};
+ const who=o.k,view=o.view||'front';const root=G(g,{});if(o.shadow)E('ellipse',{cx:0,cy:6,rx:78,ry:11,fill:'#1a0d05',opacity:.42,style:'filter:blur(3px)'},root);if(o.rim)root.style.filter=(window.SPEC&&SPEC.world&&SPEC.world.shade?'url(#fShade) ':'')+`drop-shadow(-2px -1px 0 ${o.rim})`;const base={x:o.x||0,y:o.y||0,s:o.s||1,fl:o.flip?-1:1,sx:o.sx||1};
  const dec=(gg,T,P,v)=>{if(DECO[who])DECO[who](gg,T,P,v,o);if(o.wound)woundDeco(gg,T,P,v);if(o.stain)P_(gg,v==='side'?'M-6,-200 q10,-8 16,2 q4,14 -8,18 q-14,-2 -8,-20Z':'M-6,-210 q14,-10 24,2 q6,18 -10,26 q-20,-4 -14,-28Z','#d9302a',{'stroke-width':1.4,opacity:.95});if(o.sling)slingDeco(gg,v);if(o.sleeveUp&&v==='front'){const a=o.sleeveUp==='R'?T.ra:T.la;tube(gg,[a[1],a[2]],15,P.skin,P.ink);C(gg,a[2][0],a[2][1],8.5,P.skin,{stroke:P.ink,'stroke-width':2.5})}};
  const mk=pose=>keeper(root,{who,view,pose,expr:o.expr,mood:o.mood,x:.01,y:.01,s:1,pack:o.pack,col:o.col,mouth:0,tilt:o.tilt,noShadow:true,deco:dec,sweat:o.sweat,red:o.red,pale:o.pale,look:o.look,blush:o.blush,bare:o.bare,tear:o.tear});
- const anim=o.anim||'none';const pp=ANIMPOSE[anim];const A1=mk(pp?pp[0]:(o.pose||'stand')),A2=pp?mk(pp[1]):null;
- const hds=[A1._hd,A2&&A2._hd].filter(Boolean);const spd=o.spd||(anim==='run'?4.4:anim==='zwalk'?1.8:2.8);
+ const anim=o.anim||'none';const pp=ANIMPOSE[anim];
+ /* o.seq = [{at,view,headView,flip,headFlip}] : the character turns during the beat (front <-> back goes through a quick side step) */
+ let SQ=null;if(o.seq){const raw=o.seq.slice().sort((a,b)=>a.at-b.at),ex=[];raw.forEach((st,i)=>{const pv=i?raw[i-1].view||view:null,nv=st.view||view;if(pv&&((pv==='front'&&nv==='back')||(pv==='back'&&nv==='front')))ex.push({at:st.at-.14,view:'side',flip:st.flip,headView:'side',headFlip:st.headFlip});ex.push(st)});
+  SQ=ex.map(st=>{const kv=Object.assign({},st);const r=G(root,{});const one=keeper(r,{who,view:st.view||view,pose:st.pose||o.pose||'stand',expr:o.expr,mood:o.mood,x:.01,y:.01,s:1,pack:o.pack,col:o.col,mouth:0,tilt:o.tilt,noShadow:true,deco:dec,sweat:o.sweat,red:o.red,pale:o.pale,look:o.look,blush:o.blush,bare:o.bare,tear:o.tear,headView:st.headView,headFlip:st.headFlip});
+   A(r,{transform:`scale(${st.flip?-1:1} 1)`});return {at:st.at,g:r,hd:one._hd}})}
+ const A1=SQ?SQ[0].g:mk(pp?pp[0]:(o.pose||'stand')),A2=pp&&!SQ?mk(pp[1]):null;
+ const hds=SQ?SQ.map(q=>q.hd).filter(Boolean):[A1._hd,A2&&A2._hd].filter(Boolean);const spd=o.spd||(anim==='run'?4.4:anim==='zwalk'?1.8:2.8);
  return {root,upd(u,t,bt){
   const to=o.to,k=o.ease?ease(u):u;let x=base.x,y=base.y;if(to){x=lerp(base.x,to[0],k);y=lerp(base.y,to[1]!=null?to[1]:base.y,k)}
   let bob=0,rot=0,sx=1,sy=1;
-  if(pp){const ph=Math.floor(t*spd)%2;A(A1,{display:ph?'none':'inline'});A(A2,{display:ph?'inline':'none'});bob=-Math.abs(Math.sin(t*spd*Math.PI))*(anim==='run'?9:5)}
+  if(SQ){let ai=0;SQ.forEach((q,i)=>{if(bt>=q.at-1e-6)ai=i});SQ.forEach((q,i)=>A(q.g,{display:i===ai?'inline':'none'}))}
+  if(pp&&!SQ){const ph=Math.floor(t*spd)%2;A(A1,{display:ph?'none':'inline'});A(A2,{display:ph?'inline':'none'});bob=-Math.abs(Math.sin(t*spd*Math.PI))*(anim==='run'?9:5)}
   else{bob=Math.sin(t*(o.bobSp||1.9)+(o.ph||0))*(o.bob==null?1.4:o.bob)}
   if(o.jump){const j=o.jump;const lt=bt-j.at;if(lt>0&&lt<j.dur){const p=lt/j.dur;bob-=Math.sin(p*Math.PI)*j.h}}
   if(o.fall){const f=o.fall;const lt=bt-f.at;if(lt>0){const p=clamp(lt/f.dur);rot=(f.rot||90)*p*p*(o.flip?-1:1);y+=(f.dy||0)*p*p;x+=(f.dx||0)*p}}
   if(o.shake){const lt=bt-o.shake.at;if(lt>0&&lt<o.shake.dur){x+=Math.sin(lt*60)*o.shake.amp}}
   if(o.tremble){x+=Math.sin(t*47+(o.ph||0))*o.tremble;y+=Math.cos(t*53)*o.tremble*.6}
   if(o.squash){const lt=bt-o.squash.at;if(lt>0&&lt<.25){const p=Math.sin(lt/.25*Math.PI);sy=1-.12*p;sx=1+.1*p}}
-  if(o.snore){const br=Math.sin(t*2.2);sy*=1+.012*br;bob+=br*1.5}
-  A(root,{transform:`translate(${x} ${y+bob}) rotate(${rot}) scale(${base.s*base.fl*base.sx*sx} ${base.s*sy})`});
-  const talk=o.talk===true?who:o.talk;const m=talk?mouth(talk):(o.mouth||0);hds.forEach(h=>h&&h._mouth&&h._mouth(m))},root,A1,A2}};
+  if(o.snore){const br=Math.sin(t*2.2);sy*=1+.012*br;bob+=br*1.5}else{sy*=1+.010*Math.sin(t*2.3+(o.ph||0))}   // breathing
+  if(!root.__th&&window.__thin){root.__th=1;if(window.SPEC&&SPEC.world&&SPEC.world.line)window.__thin(root)}
+  const bs=o.sto!=null?lerp(base.s,o.sto,k):base.s;
+  A(root,{transform:`translate(${x} ${y+bob}) rotate(${rot}) scale(${bs*base.fl*base.sx*sx} ${bs*sy})`});
+  const talk=o.talk===true?who:o.talk;const m=talk?mouth(talk):(o.mouth||0);hds.forEach(h=>{if(h&&h._mouth)h._mouth(m);if(h&&h._blink)h._blink(t,(o.ph||0)*3.1)})},root,A1,A2}};
 
 /* Amara's baby sling: the baby's head + hat peeks out (front view only) */
 function slingDeco(g,v){if(v!=='front')return;blob(g,'M-30,-226 Q0,-204 30,-226 L24,-160 Q0,-146 -24,-160Z','#e8d8b8','#241810');const b=G(g,{transform:'translate(0 -212)'});C(b,0,0,15,'#8d5a3b',{stroke:'#241810','stroke-width':2.4});C(b,0,-9,11,'#ffd0e0',{stroke:'#241810','stroke-width':2});C(b,-5,2,2,'#241810');C(b,5,2,2,'#241810');C(b,0,9,3.4,'#ffd23a',{stroke:'#241810','stroke-width':1.6})}
@@ -162,4 +190,9 @@ Object.assign(FRONT,{
 Object.assign(SIDE,{
  climb:{lean:6,n:{l:[[2,-140],[16,-100],[8,-40]],a:[[2,-250],[22,-300],[26,-350]]},f:{l:[[-2,-140],[-14,-72],[-10,-14]],a:[[-2,-250],[14,-330],[20,-380]]}},
  drive:{lean:2,n:{l:[[2,-140],[24,-96],[44,-40]],a:[[2,-250],[30,-206],[58,-196]]},f:{l:[[-2,-140],[22,-100],[40,-50]],a:[[-2,-250],[26,-210],[56,-200]]}},
+ windup:{lean:-12,n:{l:[[2,-140],[14,-76],[8,-14]],a:[[2,-250],[-34,-262],[-62,-320]]},f:{l:[[-2,-140],[-18,-72],[-24,-14]],a:[[-2,-250],[-26,-236],[-48,-290]]}},
+ follow:{lean:20,n:{l:[[2,-140],[24,-80],[14,-14]],a:[[2,-250],[56,-214],[96,-160]]},f:{l:[[-2,-140],[-20,-72],[-26,-14]],a:[[-2,-250],[-8,-196],[18,-150]]}},
  punch:{lean:12,n:{l:[[2,-140],[18,-76],[10,-14]],a:[[2,-250],[50,-248],[100,-250]]},f:{l:[[-2,-140],[-16,-72],[-20,-14]],a:[[-2,-250],[-20,-200],[-8,-160]]}}});
+function _bl(a,b,t){const m=(x,y)=>x+(y-x)*t,pr=(P,Q)=>P.map((p,i)=>[m(p[0],Q[i][0]),m(p[1],Q[i][1])]);return {lean:m(a.lean||0,b.lean||0),n:{l:pr(a.n.l,b.n.l),a:pr(a.n.a,b.n.a)},f:{l:pr(a.f.l,b.f.l),a:pr(a.f.a,b.f.a)}}}
+(function(){const S=SIDE;if(!S.windup||!S.punch||!S.follow)return;[.25,.5,.75].forEach((t,i)=>{S['wp'+(i+1)]=_bl(S.windup,S.punch,t);S['pf'+(i+1)]=_bl(S.punch,S.follow,t)})})();
+

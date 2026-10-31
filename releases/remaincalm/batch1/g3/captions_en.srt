@@ -1,0 +1,27 @@
+1
+00:00:00,250 --> 00:00:02,364
+I'm calm. I'm completely calm.
+
+2
+00:00:02,644 --> 00:00:06,064
+Heart rate: one sixty. Time to breathe.
+
+3
+00:00:06,614 --> 00:00:07,062
+They're coming!
+
+4
+00:00:07,342 --> 00:00:08,442
+You are not calm.
+
+5
+00:00:10,214 --> 00:00:11,918
+In... and out...
+
+6
+00:00:12,198 --> 00:00:14,648
+Heart rate: seventy. Great job.
+
+7
+00:00:15,214 --> 00:00:16,168
+Time to breathe.

@@ -6,6 +6,7 @@ R=os.path.dirname(os.path.abspath(__file__));REPO=os.path.abspath(R+'/../..');sy
 import state as ST,yt_api as Y,buffer_api as B
 a=sys.argv[1:];dry='--dry-run' in a;only=a[a.index('--only')+1] if '--only' in a else None
 STEPS=['tags','thumb','en','th','playlist']
+RUN=a[a.index('--steps')+1].split(',') if '--steps' in a else STEPS      # e.g. --steps tags,thumb,playlist (cheap steps first when the daily quota is nearly used)
 def do(c,vid,step):
     p=lambda k:os.path.join(REPO,c[k])
     if step=='tags':Y.set_tags(vid,[t.strip() for t in c['tags'].split(',') if t.strip()])
@@ -26,7 +27,7 @@ for c in s['clips']:
         if st.get('status')!='sent':continue          # not out yet
         c['yt_video_id']=Y.video_id_from_url(st.get('externalLink'))
         if not c['yt_video_id']:c['last_error']='sent but no video id in '+str(st.get('externalLink'));continue
-    vid=c['yt_video_id'];todo=[x for x in STEPS if not c['done'].get(x)]
+    vid=c['yt_video_id'];todo=[x for x in RUN if not c['done'].get(x)]
     print(c['id'],vid,'todo:',todo or 'nothing')
     for step in todo:
         if dry:continue

@@ -49,7 +49,7 @@ Object.assign(PROP,{
 });
 Object.assign(PROP,{
  cables:(g,o)=>{const cs=['#f4f4f6','#2a6ad0','#e0463a','#ffd23a','#2ab85a','#111'];cs.forEach((c,i)=>E('path',{d:`M-14,${-34+i*13} q14,-7 28,0`,fill:'none',stroke:c,'stroke-width':4,'stroke-linecap':'round'},g));P(g,'M10,40 l6,-10 l6,10Z','#cfd6de',{stroke:'#241810','stroke-width':1.6})},
- pizza:(g,o)=>{R(g,-24,-14,48,30,'#c9a86a',{rx:4,stroke:'#241810','stroke-width':2.4});R(g,-24,-14,48,8,'#e8c88a',{rx:3});T(g,0,10,'HOT POCKET',8,'#7a3a1a',{'font-family':'RC, Inter, sans-serif','font-weight':700})},
+ pizza:(g,o)=>{R(g,-24,-14,48,30,'#c9a86a',{rx:4,stroke:'#241810','stroke-width':2.4});R(g,-24,-14,48,8,'#e8c88a',{rx:3});T(g,0,10,'PIZZA',8,'#7a3a1a',{'font-family':'RC, Inter, sans-serif','font-weight':700})},
  scratch:(g,o)=>{for(let i=0;i<3;i++)E('path',{d:`M${-12+i*10},-24 q4,24 -2,48`,fill:'none',stroke:'#c4443a','stroke-width':3.4,'stroke-linecap':'round'},g);for(let i=0;i<3;i++)E('path',{d:`M${-12+i*10},-24 q4,24 -2,48`,fill:'none',stroke:'#ff8a7a','stroke-width':1.2,'stroke-linecap':'round',opacity:.7},g)},
  mermaid:(g,o)=>{E('path',{d:'M0,-30 q-10,10 0,22 q10,10 0,26 q-6,6 -14,4 q6,-6 -2,-12 q-8,-10 4,-24 q6,-10 12,-16Z',fill:'#2a9a8a',stroke:'#14504a','stroke-width':1.6},g);T(g,0,30,'ELVIS 77',9,'#7a1a1a',{'font-family':'RC, Inter, sans-serif','font-weight':700})},
 });

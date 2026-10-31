@@ -6,6 +6,7 @@ import sys,os,json,datetime as dt
 R=os.path.dirname(os.path.abspath(__file__));REPO=os.path.abspath(R+'/../..');sys.path.insert(0,R);sys.path.insert(0,os.environ.get('SER_DIR',REPO+'/studio/ser'))
 import state as ST,slots,media,yt_api as Y,buffer_api as B
 CH=json.load(open(REPO+'/studio/ser/channels.json'))
+AIFLAG=bool(json.load(open(os.path.join(R,'config.json'))).get('ai_generated_flag',False))   # owner 2026-10-30: no AI label on posts
 class Partial(Exception):pass
 def post(c,video_url,due_iso,dry=False,channels=('yt','tt','ig')):
     tags=[t for t in c['tags'].split(',') if t.strip()]
@@ -20,9 +21,9 @@ def post(c,video_url,due_iso,dry=False,channels=('yt','tt','ig')):
         if k in posts:continue
         asset=dict(url=video_url,metadata=dict(title=c['yt_title']) if k=='yt' else dict(thumbnailOffset=50))
         inp=dict(channelId=CH[k],schedulingType='automatic',text=dict(yt=c['yt_desc'],tt=c['tt'],ig=c['ig'])[k],assets=[dict(video=asset)],mode='customScheduled',dueAt=due_iso)
-        if k=='yt':inp['metadata']=dict(youtube=dict(title=c['yt_title'],categoryId='1',privacy='public',madeForKids=False,notifySubscribers=True,embeddable=True,isAiGenerated=True))
-        if k=='ig':inp['metadata']=dict(instagram=dict(type='reel',shouldShareToFeed=True,isAiGenerated=True))
-        if k=='tt':inp['metadata']=dict(tiktok=dict(isAiGenerated=True))
+        if k=='yt':inp['metadata']=dict(youtube=dict(title=c['yt_title'],categoryId='1',privacy='public',madeForKids=False,notifySubscribers=True,embeddable=True,isAiGenerated=AIFLAG))
+        if k=='ig':inp['metadata']=dict(instagram=dict(type='reel',shouldShareToFeed=True,isAiGenerated=AIFLAG))
+        if k=='tt':inp['metadata']=dict(tiktok=dict(isAiGenerated=AIFLAG))
         if dry:print('  would post',k,due_iso);continue
         r=B.gql(B.CREATE,dict(input=inp));x=(r.get('data') or {}).get('createPost') or {}
         if x.get('__typename')!='PostActionSuccess':c['posts']=posts;raise Partial(f'Buffer {k} failed: {json.dumps(r)[:300]}')

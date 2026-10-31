@@ -129,7 +129,8 @@
     "farm:yard",
     "farm:field",
     "farm:porch",
-    "farm:barn"
+    "farm:barn",
+    "farm:lane"
    ],
    "cast": [
     "ruth",
@@ -156,6 +157,189 @@
     "radio",
     "farmend",
     "nightline"
+   ]
+  },
+  {
+   "id": "lastfloor",
+   "status": "pilot",
+   "name": "THE LAST FLOOR",
+   "parts_log": {
+    "all": [
+     "dot-the-zombie",
+     "elevator",
+     "elevator-with-floor-display",
+     "fire-door",
+     "frying-pan",
+     "frying-pan-mirror",
+     "keyring",
+     "mrs-lin",
+     "parrot-cage",
+     "parrot-repeats-the-worst-line",
+     "pizza-box",
+     "roof-tank",
+     "signal-flare",
+     "sofa-barricade",
+     "w_lastfloor:flat",
+     "w_lastfloor:hall",
+     "w_lastfloor:lobby",
+     "w_lastfloor:roof",
+     "w_lastfloor:stair",
+     "w_lastfloor:street"
+    ],
+    "1": [
+     "w_lastfloor:lobby",
+     "w_lastfloor:hall",
+     "w_lastfloor:stair",
+     "w_lastfloor:flat",
+     "w_lastfloor:street",
+     "w_lastfloor:roof",
+     "elevator",
+     "elevator-with-floor-display",
+     "fire-door",
+     "frying-pan",
+     "frying-pan-mirror",
+     "keyring",
+     "parrot-cage",
+     "pizza-box",
+     "roof-tank",
+     "signal-flare",
+     "parrot-repeats-the-worst-line"
+    ],
+    "2": [
+     "mrs-lin",
+     "sofa-barricade",
+     "dot-the-zombie",
+     "w_lastfloor:lobby",
+     "w_lastfloor:hall",
+     "w_lastfloor:stair",
+     "w_lastfloor:flat",
+     "w_lastfloor:street",
+     "w_lastfloor:roof",
+     "elevator",
+     "elevator-with-floor-display",
+     "fire-door",
+     "frying-pan",
+     "frying-pan-mirror",
+     "keyring",
+     "parrot-cage",
+     "pizza-box",
+     "roof-tank",
+     "signal-flare",
+     "parrot-repeats-the-worst-line"
+    ]
+   },
+   "world": "lastfloor",
+   "setting": "a twelve-floor apartment tower on its last night, climbed floor by floor from lobby to roof",
+   "structure": "ascent: one floor per scene, a neighbour behind every door, the climb ends on the roof",
+   "announcer": "tower-intercom",
+   "palette": "storm navy, mint green, window amber",
+   "cast": [
+    "bell",
+    "lin",
+    "omar",
+    "pip",
+    "zara"
+   ],
+   "locs": [
+    "w_lastfloor:flat",
+    "w_lastfloor:hall",
+    "w_lastfloor:lobby",
+    "w_lastfloor:roof",
+    "w_lastfloor:stair",
+    "w_lastfloor:street"
+   ],
+   "props": [
+    "elevator",
+    "elevator-with-floor-display",
+    "fire-door",
+    "frying-pan",
+    "frying-pan-mirror",
+    "keyring",
+    "parrot-cage",
+    "pizza-box",
+    "roof-tank",
+    "signal-flare"
+   ],
+   "devices": [
+    "lastfloor_ann",
+    "lastfloor_route"
+   ],
+   "gags": [
+    "parrot-repeats-the-worst-line"
+   ],
+   "tips": [
+    "go-up-seal-the-fire-doors"
+   ]
+  },
+  {
+   "id": "quiet",
+   "status": "pilot",
+   "name": "THE QUIET HAND",
+   "parts_log": {
+    "all": [
+     "dispatch-job-numbers",
+     "dispatch-radio",
+     "flashlight",
+     "hotel-service-stairs",
+     "pest-sprayer",
+     "pipe-wrench",
+     "ren-counts-three",
+     "w_quiet:kitchen",
+     "w_quiet:lobby",
+     "w_quiet:service",
+     "w_quiet:stair",
+     "w_quiet:street"
+    ],
+    "1": [
+     "w_quiet:kitchen",
+     "w_quiet:service",
+     "w_quiet:stair",
+     "w_quiet:lobby",
+     "w_quiet:street",
+     "pest-sprayer",
+     "pipe-wrench",
+     "flashlight",
+     "hotel-service-stairs",
+     "dispatch-radio",
+     "ren-counts-three",
+     "dispatch-job-numbers"
+    ]
+   },
+   "world": "quiet",
+   "setting": "the first 72 hours of an outbreak: a quiet ex-assassin turned exterminator crosses 240 km of city, highway, tunnel and farmland to reach the weapons he buried",
+   "structure": "road-trip countdown: each episode is one leg with a KM LEFT and HOUR counter; the hero starts every leg alone and meets people on the way",
+   "announcer": "pest-control-dispatch-radio",
+   "palette": "night blue, hazard amber, hotel rust",
+   "cast": [
+    "gus",
+    "marlow",
+    "noor",
+    "ren"
+   ],
+   "locs": [
+    "w_quiet:kitchen",
+    "w_quiet:lobby",
+    "w_quiet:service",
+    "w_quiet:stair",
+    "w_quiet:street"
+   ],
+   "props": [
+    "dispatch-radio",
+    "flashlight",
+    "hotel-service-stairs",
+    "pest-sprayer",
+    "pipe-wrench"
+   ],
+   "devices": [
+    "quiet_ann",
+    "quiet_route"
+   ],
+   "gags": [
+    "dispatch-job-numbers",
+    "ren-counts-three"
+   ],
+   "tips": [
+    "listen-before-you-look"
    ]
   }
  ]

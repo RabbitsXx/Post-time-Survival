@@ -1,0 +1,16 @@
+import sys,os;sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from build3d import *
+sh=[];A=sh.append
+N=lambda en:say('narrator',en)
+A(BRN([ch('timo',-.2,-3.4,'smile')],[N("If you hear a voice on the radio, do not answer yet. Listen first.")],'DAY 14 · 8:00 PM · THE BARN',min=4.6,sfx=[[0.4,'static']]))
+A(TITLE('THE|SIGNAL','STATIC',1,4,"The Signal. Part one of four. Static."))
+A(C(dict(type='macro',obj='radio',label='HAND CRANK',top='TIMO FOUND A RADIO',live=1,note=['NO BATTERIES.']),[N("A hand-crank radio. No batteries. Thirty turns, ten minutes of power.")],min=5.6,sfx=[[0,'static']]))
+A(BRN([ch('timo',-.8,-3.4,'smile'),ch('nell',1.2,-3.6,'calm')],[say('timo',"It only says static."),say('nell',"Then we listen longer.")],'DAY 14 · 8:10 PM · THE BARN',min=5.2,sfx=[[0.3,'static']]))
+A(C(dict(type='rules',top='WHERE TO LISTEN',items=['121.5 MHZ: AIR EMERGENCY','CB CHANNEL 9: EMERGENCY','WEATHER BAND: 162 MHZ']),[N("One twenty-one point five. Channel nine. The weather band.")],min=6.0,sfx=[[0.3,'click'],[0.9,'click'],[1.5,'click']]))
+A(BRN([ch('timo',-.6,-3.4,'worried'),ch('nell',1.2,-3.6,'worried')],[say('radio',"...survivors... grid six four... repeating... hold position...")],'DAY 14 · 8:40 PM · THE BARN',min=5.6,sfx=[[0.2,'static']]))
+A(BRN([ch('timo',-.6,-3.4,'scared'),ch('nell',1.2,-3.6,'angry')],[say('timo',"I can answer it!"),say('nell',"No. Write the numbers. Listen first.")],'DAY 14 · 8:42 PM · THE BARN',min=5.2))
+A(C(dict(type='paper',top='NELL WROTE',text="GRID 64  ·  HOLD"),[N("Why not answer? You do not know who is listening.")],min=4.6,sfx=[[0,'sting']]))
+A(NGT([ch('nell',-.8,2.0,'worried'),ch('timo',.9,2.3,'calm')],[say('nell',"A signal works both ways.")],'DAY 14 · 9:30 PM · THE WELL',min=3.8))
+A(SQW([ch('nell',-.8,2.2,'smile'),ch('timo',1.0,2.6,'smile')],[N("Tomorrow, we answer with light.")],'DAY 15 · 6:30 AM · THE VILLAGE',min=4.0))
+A(TITLE('THE|SIGNAL','THE MIRROR',1,4,"Part one of four, The Signal. Next: the mirror.",nxt=True))
+EP=dict(id='signal_01',series='THE SIGNAL',title='STATIC',part=1,of=4,shots=sh,minscale=.9)

@@ -1,0 +1,288 @@
+{
+ "story": {
+  "dept": "story",
+  "score": 97,
+  "issues": [
+   "STORY/storylint(warn): a 2.5D lane location is used"
+  ],
+  "metrics": {}
+ },
+ "art": {
+  "dept": "art-layout-animation",
+  "score": 85,
+  "issues": [
+   "LAYOUT: 7 person(s) cut by the frame edge, e.g. [(6, 'z_hoodie', 437), (14, 'ren', 468), (19, 'z_hoodie', 444), (20, 'z_hoodie', 441)]: reframe or move them inside x 40-410"
+  ],
+  "metrics": {
+   "dead_black_bottom_beats": "0/21",
+   "dark_beats": 0,
+   "mean_saturation": 0.275,
+   "min_palette_distance": 22.1,
+   "static_beats": [],
+   "cut_by_edge": [
+    [
+     6,
+     "z_hoodie",
+     437
+    ],
+    [
+     14,
+     "ren",
+     468
+    ],
+    [
+     19,
+     "z_hoodie",
+     444
+    ],
+    [
+     20,
+     "z_hoodie",
+     441
+    ],
+    [
+     21,
+     "z_hoodie",
+     547
+    ],
+    [
+     23,
+     "z_dress",
+     -26
+    ],
+    [
+     26,
+     "z_hoodie",
+     463
+    ]
+   ],
+   "zoom_jumps": [],
+   "shimmer_beats": [],
+   "empty_beats": []
+  }
+ },
+ "sound": {
+  "dept": "sound",
+  "score": 96,
+  "issues": [
+   "dead air 3.0 s between lines"
+  ],
+  "metrics": {
+   "lufs": -14.0,
+   "true_peak": -1.8,
+   "speakers": {
+    "ren": {
+     "db": -20.4,
+     "f0": 134.0,
+     "wpm": 146,
+     "share": 0.84,
+     "bed_minus_voice_db": -6.8
+    },
+    "ann": {
+     "db": -21.7,
+     "f0": 111.0,
+     "wpm": 160,
+     "share": 0.16,
+     "bed_minus_voice_db": -15.6
+    }
+   },
+   "fight_sound": {
+    "fights": 6,
+    "missing": []
+   },
+   "music_moods": {
+    "creep": {
+     "rms_db": -20.9,
+     "centroid": 2468
+    },
+    "idle": {
+     "rms_db": -30.7,
+     "centroid": 636
+    },
+    "warm": {
+     "rms_db": -24.3,
+     "centroid": 1397
+    },
+    "comic": {
+     "rms_db": -28.3,
+     "centroid": 2619
+    },
+    "chase": {
+     "rms_db": -20.6,
+     "centroid": 2024
+    },
+    "sad": {
+     "rms_db": -25.0,
+     "centroid": 1462
+    }
+   },
+   "foley": {
+    "events": 129,
+    "moving_beats": 7,
+    "without_steps": 0
+   },
+   "sfx": 129
+  }
+ },
+ "editorial": {
+  "dept": "editorial",
+  "score": 80,
+  "issues": [
+   "EDITORIAL: 1 caption chunk(s) stop on a dangling word, e.g. ['SCREAMING ABOVE YOU,']: break captions at phrase boundaries",
+   "EDITORIAL: 5 caption(s) on screen < 0.6 s [('IF YOU HEAR', 0.51), ('TWO.', 0.58), ('THREE.', 0.56)]",
+   "EDITORIAL: 6 caption(s) read faster than 17 characters/s [('IF YOU HEAR', 21.4), ('SCREAMING ABOVE YOU,', 19.5), (\"DON'T GO UP.\", 17.5)]"
+  ],
+  "metrics": {
+   "chunks": 53,
+   "dangling": [
+    "SCREAMING ABOVE YOU,"
+   ],
+   "orphans": [],
+   "fast": [
+    [
+     "IF YOU HEAR",
+     21.4
+    ],
+    [
+     "SCREAMING ABOVE YOU,",
+     19.5
+    ],
+    [
+     "DON'T GO UP.",
+     17.5
+    ],
+    [
+     "THEN THE SCREAMING STARTED.",
+     18.9
+    ],
+    [
+     "NOBODY CAN OPEN",
+     17.4
+    ]
+   ],
+   "short": [
+    [
+     "IF YOU HEAR",
+     0.51
+    ],
+    [
+     "TWO.",
+     0.58
+    ],
+    [
+     "THREE.",
+     0.56
+    ],
+    [
+     "TWO.",
+     0.58
+    ],
+    [
+     "THREE.",
+     0.56
+    ]
+   ],
+   "shot_len_std": 0.91,
+   "srt": [
+    26,
+    26
+   ]
+  }
+ },
+ "marketing": {
+  "dept": "marketing",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "title": "Retired Assassin vs First Hour Zombies: 240! | The Quiet Hand Part 1",
+   "title_len": 68,
+   "tags": 17,
+   "hashtags": [
+    "#shorts",
+    "#zombie",
+    "#zombieapocalypse",
+    "#animation",
+    "#survival",
+    "#thequiethand"
+   ],
+   "cover_9x16.png": {
+    "size": [
+     1080,
+     1920
+    ],
+    "detail": 10.9,
+    "colourful": 56.1
+   },
+   "cover_16x9.png": {
+    "size": [
+     1280,
+     720
+    ],
+    "detail": 5.2,
+    "colourful": 42.4
+   }
+  }
+ },
+ "legal": {
+  "dept": "legal-brand",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "props": [
+    "hands",
+    "sprayer",
+    "wrench"
+   ]
+  }
+ },
+ "direction": {
+  "dept": "direction",
+  "score": 88,
+  "issues": [
+   "DIRECTION: more than 3 shots of the same size in a row (beats [17, 23, 24]): vary wide / medium / close",
+   "DIRECTION: the same picture (place + size) holds for 7.6 s (> 6.5 s): cut, move the camera or change the subject"
+  ],
+  "metrics": {
+   "sizes": "wwmcmwwwmwwwwmwwwwwmm",
+   "headroom": [],
+   "side_swaps": [],
+   "eyeline_flips": [],
+   "longest_same_picture_s": 7.6
+  }
+ },
+ "writing": {
+  "dept": "writing",
+  "score": 96,
+  "issues": [
+   "WRITING: ren talks 3 lines in a row: break it with a reaction or action"
+  ],
+  "metrics": {
+   "mean_words": 4.5,
+   "word_length": {
+    "ren": 4.18
+   },
+   "reading_grade": 3.3
+  }
+ },
+ "qc": {
+  "dept": "qc",
+  "score": 92,
+  "issues": [
+   "QC: total bitrate 4.6 Mbps (3-14)"
+  ],
+  "metrics": {
+   "size": "1080x1920",
+   "fps": "30/1",
+   "mbps": 4.6,
+   "duration": 77.2,
+   "vcodec": "h264",
+   "profile": "High",
+   "acodec": "aac",
+   "arate": "48000",
+   "lufs": -14.0,
+   "true_peak": -1.8,
+   "black_segments": [],
+   "frozen_s": []
+  }
+ }
+}
