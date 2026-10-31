@@ -6,6 +6,7 @@
 <script src="rigged.js"></script>
 <script>const BG={};</script>
 <script src="overlay.js"></script>
+<script src="props.js"></script>
 <script>
 // REMAIN CALM - FRESHWAY 24H supermarket 3D set. Deterministic: renderAt(f) -> jpeg
 const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d',{willReadFrequently:true});
@@ -41,8 +42,7 @@ const FW=44,FD=34;
  // ceiling neon panels + lights
  for(let ix=-4;ix<=4;ix++)for(let iz=-3;iz<=3;iz++){const p=new THREE.Mesh(new THREE.BoxGeometry(3,.05,.6),new THREE.MeshBasicMaterial({color:(ix+iz)%5===0?0xf0fff0:0xe8fff4,fog:false}));p.position.set(ix*5,4.36,iz*4.4);S.add(p)}
  // shelf rows (gondolas), two sided, run along x
- const rows=[-9,-3.4,2.2];rows.forEach((z,ri)=>{for(let side=-1;side<=1;side+=2){const m=MS(shelfTex(ri*17+side*5,4),.7);const b=box(24,2.0,.5,m,-1,1.0,z+side*.3,true);b.material=m;
-   const front=new THREE.Mesh(new THREE.PlaneGeometry(24,2.0),MS(shelfTex(ri*29+side*7+3,4),.7));front.position.set(-1,1.0,z+side*.56);front.rotation.y=side>0?0:Math.PI;S.add(front)}
+ const rows=[-9,-3.4,2.2];rows.forEach((z,ri)=>{for(let side=-1;side<=1;side+=2)gondolaSide(z,side,ri);
   box(24,.12,1.2,MS(TX.steel),-1,2.06,z,true);
   const sg=new THREE.Mesh(new THREE.PlaneGeometry(1.8,.7),new THREE.MeshBasicMaterial({map:signTex('AISLE '+(8+ri),'#f2c230','#1a1a1a',360,140,90),fog:false}));sg.position.set(-9,3.0,z);S.add(sg);const sg2=sg.clone();sg2.rotation.y=Math.PI;S.add(sg2);box(.04,1.2,.04,MS(TX.steel),-9,3.6,z,false)});
  // freezer wall (back)
@@ -85,6 +85,7 @@ const ENVMATS=[];S.traverse(o=>{if(o.isMesh&&o.layers.test(new THREE.Layers())){
 const lerp3=(a,b,t)=>a+(b-a)*t;
 const SNAP=new THREE.Vector2(Math.round(W*RQ*.55),Math.round(H*RQ*.55));
 function ps1(root){root.traverse(o=>{if(!o.isMesh||o.layers.mask===2)return;const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>{if(!m||m.userData.ps1||m.isShaderMaterial)return;m.userData.ps1=1;m.onBeforeCompile=sh=>{sh.uniforms.uSnap={value:SNAP};sh.vertexShader='uniform vec2 uSnap;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n gl_Position.xy=(floor(gl_Position.xy/gl_Position.w*uSnap+.5)/uSnap)*gl_Position.w;')};m.needsUpdate=true})})}
+buildProps();
 ps1(S);
 const lowc=document.createElement('canvas');lowc.width=Math.round(W*RQ);lowc.height=Math.round(H*RQ);const lctx=lowc.getContext('2d',{willReadFrequently:true});
 const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
