@@ -28,3 +28,7 @@ Sources: top 50 Shorts of the reference channel (views, length, titles) + vidIQ 
 - The Man Who Sold... / He Rented A Cow... (odd-history; search for a verified story)
 - Sharks Are Older Than Trees (already on the list; verified with caveat)
 - Wombats Poop Cubes (done), The Pig War (done)
+
+## 5. Covers (checked 2026-10-31)
+- Could not view the reference thumbnails (this environment blocks i.ytimg.com). vidIQ thumbnail scores: "You've Never Touched Anything" 48/100, "Upside-Down Glasses" 57/100 (feedback: cluttered/too-empty composition, no clear focal cue, weak curiosity, exaggerated expression, comparison unclear). Both videos got tens of millions of views anyway => Shorts views come from the swipe feed, the cover matters little; do not over-invest.
+- Applied to our covers: ONE focal subject cropped tight, clean background, a subtle (deadpan) expression, <=5 words of text, curiosity phrase (a question or an incomplete claim), nothing in the bottom 300 px.
