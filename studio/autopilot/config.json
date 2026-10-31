@@ -23,12 +23,13 @@
   "2026-10-30i": "Owner: POST part 1 now (live), build the other 9 parts, schedule one every 1h30 at suitable times.",
   "2026-10-30j": "Owner: STOP building episodes 2-10 (story feels odd, only numbers). Part 1 is live. paused=true until the owner decides.",
   "2026-10-30k": "Owner: do NOT use the AI-generated tag on posts. Old THE QUIET HAND parts 2-10 are cancelled (part 1 stays). Owner wants a NEW topic, 3 episodes, free hand (rules relaxed), delivered for review before posting.",
-  "2026-10-30l": "Owner: post THE WELL parts 1-3 immediately in order (title/topic/part first), then fill to 10 clips total (THE HARVEST x3, THE SIGNAL x4) scheduled every 1h30. No AI tag."
+  "2026-10-30l": "Owner: post THE WELL parts 1-3 immediately in order (title/topic/part first), then fill to 10 clips total (THE HARVEST x3, THE SIGNAL x4) scheduled every 1h30. No AI tag.",
+  "2026-10-31": "Owner: CANCEL all queued clips (REMAIN CALM batch 1 'rcb_*'); viewers called it AI slop with no variety. paused=true, publish_mode=stage. Nothing is posted without a new explicit owner command."
  },
  "not_before_note": "autopilot grid starts after the trial; publish_mode stage = build, QA, package and plan slots but do NOT post; set to \"live\" to let the daily run schedule on Buffer",
- "paused": false,
+ "paused": true,
  "min_clips_per_day": 0,
- "publish_mode": "live",
+ "publish_mode": "stage",
  "topics_per_day": 2,
  "parts_per_topic": 3,
  "schedule": {
