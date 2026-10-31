@@ -34,13 +34,15 @@ function makePerson(cfg){const g=new THREE.Group(),M=c=>new THREE.MeshLambertMat
  drawFace(F,cfg,'smile');g.visible=false;bl.visible=false;S.add(g);S.add(bl);return g}
 // first-person hands + items
 const HANDS={g:new THREE.Group(),arm:[],hand:[],items:{}};
-function buildHands(){const skin=new THREE.MeshLambertMaterial({color:'#c8946a'}),sleeve=new THREE.MeshLambertMaterial({color:'#e8e0d0'});
+function buildHands(){const skin=new THREE.MeshLambertMaterial({color:'#c8946a'}),sleeve=new THREE.MeshLambertMaterial({color:'#2a9a5a'});
  for(let i=0;i<2;i++){const a=new THREE.Mesh(new THREE.BoxGeometry(.085,.085,1),sleeve),h=new THREE.Group();const palm=new THREE.Mesh(new THREE.BoxGeometry(.13,.05,.15),skin);h.add(palm);for(let f=0;f<4;f++){const fi=new THREE.Mesh(new THREE.BoxGeometry(.025,.03,.09),skin);fi.position.set(-.045+f*.03,0,-.1);h.add(fi)}const th=new THREE.Mesh(new THREE.BoxGeometry(.04,.03,.07),skin);th.position.set(.08*(i?-1:1),0,-.03);h.add(th);HANDS.g.add(a);HANDS.g.add(h);HANDS.arm.push(a);HANDS.hand.push(h)}
  const M=c=>new THREE.MeshLambertMaterial({color:c});
  const sk=new THREE.Group();const st=new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.34,5),M('#c8a86a'));st.rotation.x=Math.PI/2;sk.add(st);for(let i=0;i<3;i++){const m=new THREE.Mesh(new THREE.BoxGeometry(.05,.04,.06),M(i%2?'#7a3a1a':'#8a4a22'));m.position.z=-.08+i*.075;sk.add(m)}sk.position.set(0,.02,-.12);sk.scale.setScalar(2.4);
  const cup=new THREE.Group();const cm=new THREE.Mesh(new THREE.CylinderGeometry(.045,.035,.13,8),new THREE.MeshLambertMaterial({color:'#d8801a',transparent:true,opacity:.9}));cup.add(cm);const sr=new THREE.Mesh(new THREE.CylinderGeometry(.005,.005,.12,4),M('#d8342a'));sr.position.set(.015,.1,0);sr.rotation.z=-.2;cup.add(sr);cup.position.set(0,.08,-.06);cup.scale.setScalar(2.2);
  const coin=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,.006,10),new THREE.MeshBasicMaterial({color:0xf0c030}));coin.rotation.x=Math.PI/2;coin.position.set(0,.04,-.08);coin.scale.setScalar(2.4);
- HANDS.items={skewer:sk,tea:cup,coin};for(const k in HANDS.items){HANDS.items[k].visible=false;HANDS.hand[1].add(HANDS.items[k])}
+ const hd=new THREE.Group();const bun=new THREE.Mesh(new THREE.BoxGeometry(.05,.045,.2),M('#e0b060'));hd.add(bun);const sg=new THREE.Mesh(new THREE.CylinderGeometry(.018,.018,.23,6),M('#c8382a'));sg.rotation.x=Math.PI/2;sg.position.y=.03;hd.add(sg);const mu=new THREE.Mesh(new THREE.BoxGeometry(.012,.006,.18),M('#f0d020'));mu.position.y=.056;hd.add(mu);hd.position.set(0,.03,-.1);hd.scale.setScalar(2.2);
+ const cola=cup.clone();cola.traverse(o=>{if(o.isMesh&&o.geometry.type==='CylinderGeometry'&&o.material.transparent)o.material=new THREE.MeshLambertMaterial({color:'#5a1a10'})});
+ HANDS.items={skewer:sk,tea:cup,coin,hotdog:hd,cola};for(const k in HANDS.items){HANDS.items[k].visible=false;HANDS.hand[1].add(HANDS.items[k])}
  HANDS.g.userData={dyn:1};HANDS.g.visible=false;S.add(HANDS.g)}
 // poses: hand targets in camera space (x right, y up, -z forward)
 const POSE={idle:[[-.26,-.34,-.55],[.26,-.34,-.55]],grill:[[-.42,-.36,-.95],[-.18,-.42,-.8]],give:[[-.26,-.34,-.55],[.04,-.22,-.95]],take:[[-.26,-.34,-.55],[.12,-.2,-.7]],refuse:[[-.22,-.06,-.85],[.22,-.06,-.85]],pour:[[-.26,-.34,-.55],[.3,-.08,-.75]]};

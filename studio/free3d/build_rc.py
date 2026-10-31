@@ -7,9 +7,9 @@ import build as B
 from build import tts,rd,FPS,SR,NAMES,NAMECOL,VOICES,SFXLIB
 import score
 OUT=R+'/out';os.makedirs(OUT,exist_ok=True)
-VOICES.update({'mimi':('en-US-Chirp3-HD-Kore',1.0),'gus':('en-US-Chirp3-HD-Fenrir',1.08),'teddy':('en-US-Chirp3-HD-Puck',1.18),'vance':('en-US-Chirp3-HD-Charon',.93),'rosa':('en-US-Chirp3-HD-Vindemiatrix',1.05),'pa':('en-US-Chirp3-HD-Leda',.92),'machine':('en-US-Chirp3-HD-Leda',.95),'watch':('en-US-Chirp3-HD-Aoede',1.05),'zombie':('en-US-Chirp3-HD-Algenib',.62),'nana':('en-US-Chirp3-HD-Gacrux',.88),'bo':('en-US-Chirp3-HD-Charon',1.12),'vendor':('en-US-Chirp3-HD-Charon',.88),'auntie':('en-US-Chirp3-HD-Aoede',.95),'lad':('en-US-Chirp3-HD-Puck',1.05),'uncle':('en-US-Chirp3-HD-Fenrir',.9),'girl':('en-US-Chirp3-HD-Leda',1.05)})
-NAMES.update({'mimi':'MIMI','gus':'GUS','teddy':'TEDDY','vance':'DR. VANCE','rosa':'ROSA','pa':'STORE PA','machine':'SELF-CHECKOUT','watch':'SMARTWATCH','zombie':'ZOMBIE','nana':'NANA PIM','bo':'BO','vendor':'YOU','auntie':'AUNTIE','lad':'LAD','uncle':'UNCLE','girl':'GIRL'})
-NAMECOL.update({'mimi':'#7affc0','gus':'#9ad0ff','teddy':'#ff9a8a','vance':'#ffd98a','rosa':'#d8a8ff','pa':'#8aff9a','machine':'#8aff9a','watch':'#ffe070','zombie':'#9aff6a','nana':'#7fe0e0','bo':'#ffb070','vendor':'#ffffff','auntie':'#ff9ac8','lad':'#9ad0ff','uncle':'#d0d090','girl':'#ffe070'})
+VOICES.update({'mimi':('en-US-Chirp3-HD-Kore',1.0),'gus':('en-US-Chirp3-HD-Fenrir',1.08),'teddy':('en-US-Chirp3-HD-Puck',1.18),'vance':('en-US-Chirp3-HD-Charon',.93),'rosa':('en-US-Chirp3-HD-Vindemiatrix',1.05),'pa':('en-US-Chirp3-HD-Leda',.92),'machine':('en-US-Chirp3-HD-Leda',.95),'watch':('en-US-Chirp3-HD-Aoede',1.05),'zombie':('en-US-Chirp3-HD-Algenib',.62),'nana':('en-US-Chirp3-HD-Gacrux',.88),'bo':('en-US-Chirp3-HD-Charon',1.12),'vendor':('en-US-Chirp3-HD-Charon',.88),'auntie':('en-US-Chirp3-HD-Aoede',.95),'lad':('en-US-Chirp3-HD-Puck',1.05),'uncle':('en-US-Chirp3-HD-Fenrir',.9),'girl':('en-US-Chirp3-HD-Leda',1.05),'man':('en-US-Chirp3-HD-Fenrir',.95),'woman':('en-US-Chirp3-HD-Aoede',1.0)})
+NAMES.update({'mimi':'MIMI','gus':'GUS','teddy':'TEDDY','vance':'DR. VANCE','rosa':'ROSA','pa':'STORE PA','machine':'SELF-CHECKOUT','watch':'SMARTWATCH','zombie':'ZOMBIE','nana':'NANA PIM','bo':'BO','vendor':'YOU','auntie':'AUNTIE','lad':'LAD','uncle':'UNCLE','girl':'GIRL','man':'MAN','woman':'WOMAN'})
+NAMECOL.update({'mimi':'#7affc0','gus':'#9ad0ff','teddy':'#ff9a8a','vance':'#ffd98a','rosa':'#d8a8ff','pa':'#8aff9a','machine':'#8aff9a','watch':'#ffe070','zombie':'#9aff6a','nana':'#7fe0e0','bo':'#ffb070','vendor':'#ffffff','auntie':'#ff9ac8','lad':'#9ad0ff','uncle':'#d0d090','girl':'#ffe070','man':'#d0d090','woman':'#ff9a7a'})
 def _env(n,a=.005,d=.06):
     t=np.arange(n)/SR;return np.minimum(t/a,1)*np.exp(-t/d)
 def S_beep():
@@ -28,7 +28,7 @@ def S_sizzle():
     return ((x*.28+crack*.5)*np.minimum(t/.1,1)*np.minimum((2.6-t)/.5,1)).astype(np.float32)*.9
 SFXLIB.update({'beep':S_beep,'cry':S_cry,'heart':S_heart,'sizzle':S_sizzle})
 BLIP=False
-BL={'vendor':(110,'tri',.062),'auntie':(392,'sq',.052),'lad':(294,'sq',.055),'girl':(523,'sine',.05),'uncle':(147,'saw',.066),'zombie':(82,'saw',.09),'nana':(330,'tri',.07),'bo':(247,'sq',.05),'mimi':(349,'tri',.055),'gus':(165,'sq',.06),'teddy':(494,'sq',.045),'narrator':(196,'tri',.06)}
+BL={'man':(196,'sq',.056),'woman':(440,'tri',.054),'vendor':(110,'tri',.062),'auntie':(392,'sq',.052),'lad':(294,'sq',.055),'girl':(523,'sine',.05),'uncle':(147,'saw',.066),'zombie':(82,'saw',.09),'nana':(330,'tri',.07),'bo':(247,'sq',.05),'mimi':(349,'tri',.055),'gus':(165,'sq',.06),'teddy':(494,'sq',.045),'narrator':(196,'tri',.06)}
 def blip_wav(text,who):
     """Undertale-style speech: one short blip per letter, pitch by character, silence on spaces and longer on punctuation; the subtitles carry the meaning."""
     import hashlib,wave

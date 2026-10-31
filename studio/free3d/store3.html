@@ -7,7 +7,7 @@
 <script>const BG={};</script>
 <script src="overlay.js"></script>
 <script src="props.js"></script>
-<script src="kiosk3d.js"></script>
+<script src="kiosk3d.js"></script><script src="people3d.js"></script><script src="mart3d.js"></script>
 <script>
 // REMAIN CALM - FRESHWAY 24H supermarket 3D set. Deterministic: renderAt(f) -> jpeg
 const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d',{willReadFrequently:true});
@@ -95,7 +95,7 @@ const lerp3=(a,b,t)=>a+(b-a)*t;
 const SNAP=new THREE.Vector2(Math.round(W*RQ*.55),Math.round(H*RQ*.55));
 function ps1(root){root.traverse(o=>{if(!o.isMesh||o.layers.mask===2)return;const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>{if(!m||m.userData.ps1||m.isShaderMaterial)return;m.userData.ps1=1;m.onBeforeCompile=sh=>{sh.uniforms.uSnap={value:SNAP};sh.vertexShader='uniform vec2 uSnap;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n gl_Position.xy=(floor(gl_Position.xy/gl_Position.w*uSnap+.5)/uSnap)*gl_Position.w;')};m.needsUpdate=true})})}
 buildProps();
-buildPeople3D();
+buildMart();buildPeople3D();
 ps1(S);
 const lowc=document.createElement('canvas');lowc.width=Math.round(W*RQ);lowc.height=Math.round(H*RQ);const lctx=lowc.getContext('2d',{willReadFrequently:true});
 const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
