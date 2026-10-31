@@ -416,6 +416,10 @@ function drawLBFront(c,A,P,t){const ch=CH[A.who];if(ch.zr){drawLBZ(c,A,P,t);retu
  // arms: thin tubes, skin forearm + sleeve
  const gest=(P.mouth||0)>.08?(.4+(P.mouth||0)*.6):0;
  for(const sx of[-1,1]){const lift=(P.armLift||0)*(sx>0?1:0)+gest*(sx>0?30:10)*(Math.sin(t*7+sx));
+  if(P.armPose&&!P.armBoth){const holder=sx===(P.propSide||1);const a=-sx*(P.armPose==='rest'?.25:.45);c.save();c.translate(sx*(bw+4),shY+16);
+   if(P.armPose==='rest'||holder){c.rotate(a);rect(c,-8,0,16,72,ch.skin,OUT,ST.line,8);rect(c,-10,-4,20,40,ch.shirt,OUT,ST.line,9);c.translate(0,70);c.rotate(P.armPose==='rest'?sx*1.35:sx*(Math.PI+.1));rect(c,-8,0,16,62,ch.skin,OUT,ST.line,8);c.translate(0,70);circ(c,0,0,14,ch.skin,ST.line);if(holder&&P.prop)drawHeld(c,P.prop,0,0,P.armPose==='rest'?0:Math.PI)}
+   else{c.rotate(sx*(.1+lift*.015));rect(c,-8,0,16,138,ch.skin,OUT,ST.line,8);rect(c,-10,-4,20,52,ch.shirt,OUT,ST.line,9);circ(c,0,146,14,ch.skin,ST.line);if(P.prop==='basket'||P.prop==='can'){}}
+   c.restore();continue}
   if(P.armBoth){c.save();c.translate(sx*(bw+4),shY+16);c.rotate(-sx*(.9+Math.sin(t*30+sx)*.04));rect(c,-8,0,16,72,ch.skin,OUT,ST.line,8);rect(c,-10,-4,20,40,ch.shirt,OUT,ST.line,9);c.translate(0,70);c.rotate(-sx*1.9);rect(c,-8,0,16,62,ch.skin,OUT,ST.line,8);circ(c,0,70,14,ch.skin,ST.line);c.restore();continue}
   c.save();c.translate(sx*(bw+4),shY+16);c.rotate(sx*(.1+lift*.015));rect(c,-8,0,16,138,ch.skin,OUT,ST.line,8);rect(c,-10,-4,20,52,ch.shirt,OUT,ST.line,9);circ(c,0,146,14,ch.skin,ST.line);c.restore()}
  // neck + head
@@ -491,8 +495,19 @@ function lbSide(c,ch,A,P,t){const Z=ch.zr?(LBZ[A.who]||LBZ.zr1):null,kid=!Z&&(ch
  const hy=shY-30-R*.9;c.save();c.translate(Z?16:6,hy+(Z?8:0));c.rotate(Z?.3:0);
  if(Z)lbZSideFace(c,R,t,P,ph,skin,Z);else{hair(c,ch,R,true);circ(c,0,0,R,skin,ST.line);circ(c,-R*.15,R*.08,R*.2,skin,ST.line);face(c,ch,P,t,R);hair(c,ch,R,false)}
  c.restore();
- c.save();c.translate(0,shY+16);c.rotate(Z?-1.45+Math.sin(t*1.8+ph)*.08:-sw*.9);rect(c,-8,0,16,138,skin,OUT,ST.line,8);rect(c,-10,-4,20,52,shirt,OUT,ST.line,9);circ(c,0,146,14,skin,ST.line);c.restore();
+ c.save();c.translate(0,shY+16);c.rotate(Z?-1.45+Math.sin(t*1.8+ph)*.08:(P.arm==='reach'?-1.38:-sw*.9));rect(c,-8,0,16,138,skin,OUT,ST.line,8);rect(c,-10,-4,20,52,shirt,OUT,ST.line,9);circ(c,0,146,14,skin,ST.line);if(!Z&&P.prop)drawHeld(c,P.prop,0,146,P.arm==='reach'?Math.PI/2:Math.PI);c.restore();
  c.restore();leg(1);c.restore()}
 function drawLB(c,A,P,t){const ch=CH[A.who],v=P.view||'front';
  if(v==='side'&&!(ch.z||ch.carrot||ch.hr||ch.dog)){c.save();if(P.flip){c.translate(P.x,0);c.scale(-1,1);c.translate(-P.x,0)}lbSide(c,ch,A,P,t);c.restore();return}
  drawLBFront(c,A,Object.assign({},P,{back:v==='back'}),t)}
+
+// ===== held props + touch poses =====  (new props extend UP (-y) from the hand unless noted)
+function drawHeld(c,k,x,y,ang){c.save();c.translate(x,y);c.rotate(ang||0);
+ if(k==='can'){blob(c,-11,-26,22,34,4,'#d8342c');c.fillStyle='#f4f0e4';c.fillRect(-11,-18,22,12);c.fillStyle=OUT;c.fillRect(-7,-14,14,3)}
+ else if(k==='bat'){c.fillStyle='#c08a4a';c.strokeStyle=OUT;c.lineWidth=ST.line;c.beginPath();c.moveTo(-6,6);c.lineTo(-7,-70);c.quadraticCurveTo(-14,-110,-14,-150);c.quadraticCurveTo(0,-162,14,-150);c.quadraticCurveTo(14,-110,7,-70);c.lineTo(6,6);c.closePath();c.fill();c.stroke();c.fillStyle='#f4f0e4';c.fillRect(-6,-30,12,22)}
+ else if(k==='flashlight'){blob(c,-8,-44,16,48,5,'#3a3a44');blob(c,-13,-62,26,20,5,'#ffd870');const g=c.createRadialGradient(0,-66,2,0,-66,46);g.addColorStop(0,'rgba(255,248,200,.9)');g.addColorStop(1,'rgba(255,240,160,0)');c.save();c.globalCompositeOperation='lighter';c.fillStyle=g;c.beginPath();c.arc(0,-66,46,0,7);c.fill();c.restore()}
+ else if(k==='phone'){blob(c,-11,-34,22,38,5,'#22262e');c.fillStyle='#8ae8ff';c.fillRect(-8,-30,16,28);const g=c.createRadialGradient(0,-16,2,0,-16,40);g.addColorStop(0,'rgba(140,230,255,.55)');g.addColorStop(1,'rgba(140,230,255,0)');c.save();c.globalCompositeOperation='lighter';c.fillStyle=g;c.beginPath();c.arc(0,-16,40,0,7);c.fill();c.restore()}
+ else if(k==='crowbar'){c.strokeStyle=OUT;c.lineWidth=13;c.lineCap='round';c.beginPath();c.moveTo(0,6);c.lineTo(0,-110);c.quadraticCurveTo(0,-132,-22,-134);c.stroke();c.strokeStyle='#c03a30';c.lineWidth=7;c.stroke()}
+ else if(k==='basket'){c.strokeStyle=OUT;c.lineWidth=5;c.beginPath();c.moveTo(-26,10);c.quadraticCurveTo(0,-30,26,10);c.stroke();blob(c,-34,6,68,38,6,'#d8342c');c.fillStyle='rgba(255,255,255,.7)';for(let i=0;i<4;i++)c.fillRect(-26+i*15,18,8,10)}
+ else drawProp(c,k,0,0,Math.PI);
+ c.restore()}
