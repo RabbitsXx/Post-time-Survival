@@ -1,39 +1,35 @@
 1
-00:00:00,250 --> 00:00:05,372
-Rule one of the night shift. If something is wrong with a customer, don't serve it.
+00:00:00,250 --> 00:00:04,198
+Real customers look at you. Serve them. Refuse anyone else.
 
 2
-00:00:05,922 --> 00:00:09,068
-Ten pork skewers and sticky rice, please. Extra chili.
+00:00:07,250 --> 00:00:08,824
+Ten pork skewers, please.
 
 3
-00:00:09,348 --> 00:00:10,199
-Coming up.
+00:00:09,104 --> 00:00:09,734
+Serve.
 
 4
-00:00:10,922 --> 00:00:13,901
-Uncle, do you have anything that is not on the menu?
+00:00:11,650 --> 00:00:12,589
+One iced tea.
 
 5
-00:00:14,181 --> 00:00:14,625
-No.
+00:00:12,869 --> 00:00:13,499
+Serve.
 
 6
-00:00:14,905 --> 00:00:15,445
-Okay.
+00:00:15,650 --> 00:00:16,789
+Pork. No chili.
 
 7
-00:00:16,122 --> 00:00:18,352
-Pork. No chili. I never have chili.
+00:00:17,069 --> 00:00:18,424
+She is facing away.
 
 8
-00:00:18,632 --> 00:00:22,113
-...She has her back to me. And it isn't raining.
+00:00:20,650 --> 00:00:21,341
+Refuse.
 
 9
-00:00:22,663 --> 00:00:23,735
-Who was wrong?
-
-10
-00:00:27,663 --> 00:00:30,977
-She never turned around. A raincoat on a dry night.
+00:00:24,050 --> 00:00:26,356
+Next night. Which one isn't human?
