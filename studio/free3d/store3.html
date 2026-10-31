@@ -7,6 +7,7 @@
 <script>const BG={};</script>
 <script src="overlay.js"></script>
 <script src="props.js"></script>
+<script src="kiosk3d.js"></script>
 <script>
 // REMAIN CALM - FRESHWAY 24H supermarket 3D set. Deterministic: renderAt(f) -> jpeg
 const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d',{willReadFrequently:true});
@@ -94,6 +95,7 @@ const lerp3=(a,b,t)=>a+(b-a)*t;
 const SNAP=new THREE.Vector2(Math.round(W*RQ*.55),Math.round(H*RQ*.55));
 function ps1(root){root.traverse(o=>{if(!o.isMesh||o.layers.mask===2)return;const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>{if(!m||m.userData.ps1||m.isShaderMaterial)return;m.userData.ps1=1;m.onBeforeCompile=sh=>{sh.uniforms.uSnap={value:SNAP};sh.vertexShader='uniform vec2 uSnap;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n gl_Position.xy=(floor(gl_Position.xy/gl_Position.w*uSnap+.5)/uSnap)*gl_Position.w;')};m.needsUpdate=true})})}
 buildProps();
+buildPeople3D();
 ps1(S);
 const lowc=document.createElement('canvas');lowc.width=Math.round(W*RQ);lowc.height=Math.round(H*RQ);const lctx=lowc.getContext('2d',{willReadFrequently:true});
 const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
@@ -118,7 +120,7 @@ window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(
  if(sh.card){ctx.setTransform(SF,0,0,SF,0,0);CARD[sh.card.type||'title'](ctx,sh.card,lt);titleBar(ctx,sp);drawCaptions(sh,t);drawIcons(sh,t)}
  else{const si=sp.shots.indexOf(sh);if(si!==LASTSHOT){prepareShot(sh);LASTSHOT=si}const u=ease(clamp(lt/dur)),c=sh.cam;cam.fov=sh.fov||38;cam.updateProjectionMatrix();
   cam.position.set(lerp(c[0][0],c[2][0],u),lerp(c[0][1],c[2][1],u),lerp(c[0][2],c[2][2],u));cam.lookAt(lerp(c[1][0],c[3][0],u),lerp(c[1][1],c[3][1],u),lerp(c[1][2],c[3][2],u));cam.position.x+=Math.sin(t*1.7)*.006;cam.position.y+=Math.sin(t*2.3)*.005;cam.updateMatrixWorld();
-  if(!BEAM)makeBeam();BEAM.piv.visible=false;BEAM.sp.visible=false;for(const k in PEOPLE){PEOPLE[k].visible=false;BLOB[k].visible=false}
+  if(!BEAM)makeBeam();BEAM.piv.visible=false;BEAM.sp.visible=false;for(const k in PEOPLE){PEOPLE[k].visible=false;BLOB[k].visible=false}update3D(sh,t,lt,dur,cam);updateHands(sh,t,lt,cam);
   for(const ch of (sh.chars||[])){const g=PEOPLE[ch.who];g.visible=true;let x=ch.pos[0],z=ch.pos[1],act=ch.act||'idle',yawTo=null,mv=false;
    if(ch.to){const uu=ease(clamp((lt-(ch.t0||0))/Math.max(.01,(ch.t1||dur)-(ch.t0||0))));x=lerp(ch.pos[0],ch.to[0],uu);z=lerp(ch.pos[1],ch.to[1],uu);if(uu>0&&uu<1){act=ch.act||'walk';mv=true}yawTo=Math.atan2(ch.to[0]-ch.pos[0],ch.to[1]-ch.pos[1])}
    g.position.set(x,0,z);BLOB[ch.who].visible=!ch.noShadow;BLOB[ch.who].position.set(x,.025,z);let yaw=yawTo!=null&&act!=='idle'?yawTo:(ch.face?Math.atan2(ch.face[0]-x,ch.face[1]-z):Math.atan2(cam.position.x-x,cam.position.z-z)-(ch.yawOff||0));g.rotation.y=yaw;
