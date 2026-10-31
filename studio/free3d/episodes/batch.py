@@ -269,6 +269,8 @@ KX,KZ=100,-60
 K3=CAM([KX,1.65,KZ-.7],[KX,1.5,KZ+2.8])
 GRILL=[[KX,1.6,KZ-.7],[KX,1.2,KZ+4.4],[KX-.2,1.8,KZ-1.7],[KX-1.4,.95,KZ+.2]]
 JUG=[[KX,1.6,KZ-.7],[KX+.5,1.2,KZ+3.0],[KX+.6,1.75,KZ-1.1],[KX+1.1,1.25,KZ+.78]]
+CCTV=[[KX,1.65,KZ-.7],[KX,1.5,KZ+2.8],[KX+.9,1.62,KZ-.6],[KX+2.12,1.48,KZ+.2]]
+CLOSEB=[[KX+.9,1.62,KZ-.6],[KX+2.12,1.35,KZ+.2],[KX+1.35,1.55,KZ-.45],[KX+2.12,1.2,KZ+.2]]
 KFACE3=CAM([KX,1.72,KZ+.9],[KX,1.86,KZ+2.6])
 def P(who,x=.1,e='smile',**k):return dict(who=who,pos=[KX+x,KZ+2.6],expr=e,**k)
 def W(who,x0,e,**k):return dict(who=who,pos=[KX+x0,KZ+2.6],to=[KX+.1,KZ+2.6],t0=0,t1=2.2,expr=e,**k)
@@ -285,8 +287,10 @@ ep('ks1','NIGHT 1',[
  S(K3,[],[L('woman',"Perfect. Goodnight."),L('vendor',"Serve.")],'HANDING OVER',fov=55,grade='warm',min=5.6,p3=[P('woman',-.1,'smile',give=dict(t0=1.2,t1=2.6))],hands=[dict(pose='give',item='tea',t0=.1,t1=1.9)],icons=[dict(k='stampS',t0=3.1,t1=9,x=.5,y=.5,s=1)],sfx=[[1.2,'click'],[2.8,'chime']]),
  S(K3,[],[],'CUSTOMER 3 · ARRIVES',fov=55,grade='dead',min=2.8,p3=[W('woman',-4.6,'smile',still=True,noShadow=True)],hands=[],cues=[dict(t=0,type='gate',dur=2.4)],sfx=[[.4,'foot'],[1.1,'foot'],[1.8,'foot']]),
  S(K3,[],[L('woman',"Iced tea, less sugar, please.")],'ORDER: ICED TEA',fov=55,grade='dead',min=3.6,p3=[P('woman',-.1,'smile',still=True,noShadow=True)],hands=[],icons=[OB('tea')],cues=[dict(t=0,type='tick'),dict(t=1.8,type='tick')]),
+ S(CCTV,[],[L('vendor',"Check the camera.")],'CHECKING CCTV',fov=50,grade='dead',min=4.2,p3=[P('woman',-.1,'smile',still=True,noShadow=True)],hands=[],sfx=[[.3,'click'],[1.6,'heart']],cues=[dict(t=0,type='tick')]),
  S(PUSH,[],[L('vendor',"Same dress. Same order."),L('vendor',"Everyone visits once.")],'CUSTOMER 3 · SAME AS CUSTOMER 2',fov=55,grade='dead',min=6.4,p3=[P('woman',-.1,'smile',still=True,noShadow=True)],hands=[],sfx=[[.3,'heart'],[1.8,'heart']],cues=[dict(t=0,type='gate',dur=5.0),dict(t=.2,type='riser',dur=5.0,level=.3)]),
  S(KFACE3,[],[L('vendor',"Refuse.")],'CUSTOMER 3 · REFUSED',fov=34,grade='alarm',min=3.8,lead=.05,p3=[P('womanZ',-.1,'calm')],hands=[dict(pose='refuse',t0=.1,t1=3.0)],icons=[dict(k='stampR',t0=.5,t1=9,x=.5,y=.8,s=.9)],sfx=[[0,'sting'],[.2,'groan']],cues=[dict(t=0,type='stinger',level=.8)]),
+ S(CLOSEB,[],[L('vendor',"Closing.")],'CLOSING THE STALL',fov=50,grade='warm',min=4.4,hands=[dict(pose='press',t0=1.0,t1=2.6)],sfx=[[1.6,'click'],[2.0,'whoosh'],[2.6,'groan']]),
  CARD('NEXT NIGHT',['3 CUSTOMERS','1 IS NOT HUMAN','COMMENT WHICH ONE'],L('vendor',"Next night. Which one isn't human?"),min=6.0,sfx=[[.3,'click'],[1.5,'click'],[2.7,'click']])])
 EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
 for _s in EPS['ks1']['shots']:_s['typed']=True

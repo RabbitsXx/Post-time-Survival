@@ -2,7 +2,7 @@
 """REMAIN CALM builder (store3.html, 2D cast on 3D PS1 set).  python3 build_rc.py episodes/rc1.py [--w 1080 --h 1920] [--stills t1,t2] [--workers 4]"""
 import sys,os,json,subprocess,time,importlib.util,wave
 R=os.path.dirname(os.path.abspath(__file__));sys.path.insert(0,R+'/../free');sys.path.insert(0,R)
-QS='&2d'+('&clean' if '--clean' in sys.argv else '')
+QS='&2d'+('&clean&nocull' if '--clean' in sys.argv else '')
 import numpy as np
 import build as B
 from build import tts,rd,FPS,SR,NAMES,NAMECOL,VOICES,SFXLIB

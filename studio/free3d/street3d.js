@@ -77,5 +77,16 @@ function buildStreet(){
  const pool=new THREE.Mesh(new THREE.PlaneGeometry(7,5),new THREE.MeshBasicMaterial({map:ctex(128,96,(x,w,h)=>{const g=x.createRadialGradient(w/2,h/2,2,w/2,h/2,w/2);g.addColorStop(0,'rgba(255,230,170,.5)');g.addColorStop(1,'rgba(255,230,170,0)');x.fillStyle=g;x.fillRect(0,0,w,h)}),transparent:true,depthWrite:false,fog:false}));pool.rotation.x=-Math.PI/2;pool.position.set(KX+1,.03,S0+9.5);S.add(pool);
  // lights (street warm / cold, shop bulb)
  const mk=(c,i,d,x,y,z)=>{const L=new THREE.PointLight(c,i,d,2);L.position.set(x,y,z);S.add(L);LIGHTS.push([x,y,z,c,i,d])};
+
+ // ---- control panel on the stall's side wall: CCTV monitor + big red CLOSE button (the player turns to use these) ----
+ const px=KX+2.12,pz=KZ+.2;bx(.08,.72,.78,MC(0x2a2e34,.5,.4),px+.04,1.4,pz);
+ const cctv=ctex(256,192,(x,w,h)=>{x.fillStyle='#0a1a12';x.fillRect(0,0,w,h);x.fillStyle='#14301f';x.fillRect(6,22,w-12,h-60);for(let i=0;i<40;i++){x.fillStyle='rgba(120,255,160,.05)';x.fillRect(0,i*5,w,1)}
+  x.fillStyle='#7aff9a';x.font='700 16px "Roboto Condensed",monospace';x.textAlign='left';x.fillText('CAM 01 · STALL FRONT',10,18);x.fillText('REC',w-44,18);x.fillStyle='#e83a2a';x.beginPath();x.arc(w-54,13,4,0,7);x.fill();
+  const fig=(cx,col)=>{x.fillStyle=col;x.beginPath();x.moveTo(cx-10,150);x.lineTo(cx+10,150);x.lineTo(cx+16,112);x.lineTo(cx-16,112);x.fill();x.fillStyle='#d8b898';x.fillRect(cx-6,92,12,16);x.fillStyle='#3a2418';x.fillRect(cx-7,88,14,8)};fig(70,'#c4552a');fig(186,'#c4552a');
+  x.fillStyle='#7aff9a';x.font='700 15px "Roboto Condensed",monospace';x.fillText('02:14',46,84);x.fillText('02:19',162,84);x.font='700 13px "Roboto Condensed",monospace';x.fillText('LEFT',50,168);x.fillText('ENTERS',156,168)});
+ const mon=new THREE.Mesh(new THREE.PlaneGeometry(.64,.48),new THREE.MeshBasicMaterial({map:cctv,fog:false}));mon.position.set(px-.001,1.52,pz);mon.rotation.y=-Math.PI/2;S.add(mon);
+ const btn=new THREE.Mesh(new THREE.CylinderGeometry(.075,.085,.05,16),MC(0xc8201a,.35,.1));btn.rotation.z=Math.PI/2;btn.position.set(px-.04,1.16,pz);S.add(btn);
+ const bl=new THREE.Mesh(new THREE.PlaneGeometry(.3,.09),new THREE.MeshBasicMaterial({map:signTex('CLOSE','#16181c','#ffffff',256,80,54),fog:false}));bl.position.set(px-.001,1.05,pz);bl.rotation.y=-Math.PI/2;S.add(bl);
+ mk(0x7aff9a,6,2.5,px-.5,1.5,pz);
  mk(0xffe0b0,30,12,KX-1.5,5.9,S0+14.6);mk(0xffe0b0,30,12,KX+6.5,5.9,S0+14.6);mk(0xffd8a0,22,9,KX,2.2,S0+3.0);mk(0xffc880,20,8,KX+2.5,2.3,S0+2.0);
 }

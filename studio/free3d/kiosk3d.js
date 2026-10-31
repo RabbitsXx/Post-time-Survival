@@ -45,7 +45,7 @@ function buildHands(){const skin=new THREE.MeshLambertMaterial({color:'#c8946a'}
  HANDS.items={skewer:sk,tea:cup,coin,hotdog:hd,cola};for(const k in HANDS.items){HANDS.items[k].visible=false;HANDS.hand[1].add(HANDS.items[k])}
  HANDS.g.userData={dyn:1};HANDS.g.visible=false;S.add(HANDS.g)}
 // poses: hand targets in camera space (x right, y up, -z forward)
-const POSE={idle:[[-.26,-.34,-.55],[.26,-.34,-.55]],grill:[[-.42,-.36,-.95],[-.18,-.42,-.8]],give:[[-.26,-.34,-.55],[.04,-.22,-.95]],take:[[-.26,-.34,-.55],[.12,-.2,-.7]],refuse:[[-.22,-.06,-.85],[.22,-.06,-.85]],pour:[[-.26,-.34,-.55],[.3,-.08,-.75]]};
+const POSE={idle:[[-.26,-.34,-.55],[.26,-.34,-.55]],grill:[[-.42,-.36,-.95],[-.18,-.42,-.8]],give:[[-.26,-.34,-.55],[.04,-.22,-.95]],take:[[-.26,-.34,-.55],[.12,-.2,-.7]],refuse:[[-.22,-.06,-.85],[.22,-.06,-.85]],pour:[[-.26,-.34,-.55],[.3,-.08,-.75]],press:[[-.26,-.34,-.55],[.04,-.1,-.62]]};
 function updateHands(sh,t,lt,cam){const hs=sh.hands;if(!hs||!hs.length){HANDS.g.visible=false;return}HANDS.g.visible=true;HANDS.g.position.copy(cam.position);HANDS.g.quaternion.copy(cam.quaternion);HANDS.g.updateMatrixWorld(true);
  let cur=null;for(const s of hs)if(lt>=s.t0&&lt<s.t1){cur=s;break}
  let a=POSE.idle,b=POSE.idle,k=0,item=null;if(cur){const m=Math.max(.001,cur.t1-cur.t0),u=(lt-cur.t0)/m;const up=Math.min(1,u/.3),dn=Math.min(1,(1-u)/.3);k=Math.min(up,dn);k=k*k*(3-2*k);b=POSE[cur.pose]||POSE.idle;item=cur.item||null}
