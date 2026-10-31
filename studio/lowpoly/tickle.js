@@ -84,7 +84,7 @@ Object.assign(SHOTS,{tcover2:(u,d,k)=>{tkEnv('home');show(POLY,TKP2,TKHAND);TKFE
  [[.78,1.78,.3],[.86,1.66,.3],[.74,1.95,.3],[.6,2.04,.3],[.9,1.86,.3],[.7,1.58,.3]].forEach((p,i)=>{TKTEAR[i].visible=true;TKTEAR[i].scale.setScalar(.4);TKTEAR[i].position.set(p[0],p[1],p[2])});
  camTo([0,1.8,3.7],[0,1.8,3.7],[0,2.0,0],[0,2.0,0],0,40)}});
 // ---- cover v3: ONE huge hero (the laughing face) on a vivid flat background; the tickling glove is rendered in its own pass (green screen) and composited big in the foreground by make_cover.py ----
-Object.assign(SHOTS,{tcover3:(u,d,k)=>{tkOff();S.background=new THREE.Color(0x7a3ae0);S.fog.color.set(0x7a3ae0);HEMI.intensity=1.5;show(TKP2);
+Object.assign(SHOTS,{tcover3:(u,d,k)=>{tkEnv('home');show(TKP2);
  TKP2.rest();TKP2.at(.21,0,0,.18);TKP2.face('laugh');TKP2.g.rotation.z=.12;TKP2.arms[0].rotation.set(-.2,0,-.95);TKP2.arms[1].rotation.set(-.2,0,.95);
  camTo([0,1.7,1.55],[0,1.7,1.55],[0,1.62,0],[0,1.62,0],0,40);cam.rotateZ(.14)},
  tcover3g:(u,d,k)=>{tkOff();S.background=new THREE.Color(0x00ff00);S.fog.color.set(0x00ff00);HEMI.intensity=1.5;show(TKHAND);TKHAND.userData.f.forEach((f,i)=>f.rotation.x=-.3+i*.14);TKHAND.rotation.set(Math.PI/2,0,.5);TKHAND.position.set(0,0,0);camTo([0,.1,3.4],[0,.1,3.4],[0,0,0],[0,0,0],0,40)}});

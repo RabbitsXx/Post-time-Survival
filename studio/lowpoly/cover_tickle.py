@@ -5,7 +5,7 @@ from PIL import Image,ImageDraw,ImageFont,ImageFilter
 H=os.path.dirname(os.path.abspath(__file__));F=H+'/../fonts/RobotoCondensed-Bold.ttf';Q=H+'/out/tickle_cover'
 W,Hh=1080,1920;BG=(122,58,224)
 face=Image.open(Q+'/face/00015.jpg').convert('RGB');gl=Image.open(Q+'/glove/00015.jpg').convert('RGBA')
-im=Image.new('RGB',(W,Hh),BG);im.paste(face,(0,250))
+im=face.resize((W,Hh)).crop((0,0,W,Hh)) if False else Image.new('RGB',(W,Hh),BG);im.paste(face,(0,250));im.paste(face.crop((0,0,W,10)).resize((W,260)),(0,0))
 # key out the green background of the glove pass, crop to the glove
 px=gl.load()
 for y in range(gl.size[1]):
