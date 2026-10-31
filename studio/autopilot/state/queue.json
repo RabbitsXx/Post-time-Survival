@@ -1025,16 +1025,11 @@
    "thumb": "releases/remaincalm/batch1/i1/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/i1/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/i1/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c1e31891472093c83a5d",
-    "tt": "6ae5c1e4a1145743499c0b1f",
-    "ig": "6ae5c1e41891472093c83ab5"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T00:30:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-10-31T11:00:00.000Z",
    "v2": true
   },
   {
@@ -1054,16 +1049,11 @@
    "thumb": "releases/remaincalm/batch1/g1/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/g1/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/g1/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c1f81891472093c83e31",
-    "tt": "6ae5c1f9eaa24d6f9a6b4a11",
-    "ig": "6ae5c1fa406ab8a018b0ea9d"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T02:00:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-10-31T12:30:00.000Z",
    "v2": true
   },
   {
@@ -1083,16 +1073,11 @@
    "thumb": "releases/remaincalm/batch1/g3/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/g3/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/g3/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c20feaa24d6f9a6b522e",
-    "tt": "6ae5c210ceb491e585ee5b35",
-    "ig": "6ae5c210a1145743499c1596"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T03:30:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-10-31T14:00:00.000Z",
    "v2": true
   },
   {
@@ -1112,16 +1097,11 @@
    "thumb": "releases/remaincalm/batch1/g2/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/g2/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/g2/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c226406ab8a018b0fb4b",
-    "tt": "6ae5c227eaa24d6f9a6b576a",
-    "ig": "6ae5c228406ab8a018b0fba4"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T05:00:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-10-31T15:30:00.000Z",
    "v2": true
   },
   {
@@ -1141,16 +1121,11 @@
    "thumb": "releases/remaincalm/batch1/i2/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/i2/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/i2/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c240a1145743499c2099",
-    "tt": "6ae5c241406ab8a018b10809",
-    "ig": "6ae5c242406ab8a018b10902"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T06:30:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-10-31T17:00:00.000Z",
    "v2": true
   },
   {
@@ -1170,16 +1145,11 @@
    "thumb": "releases/remaincalm/batch1/g6/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/g6/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/g6/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c258b84259308bcebcf9",
-    "tt": "6ae5c258a1145743499c24dc",
-    "ig": "6ae5c259406ab8a018b10d42"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T08:00:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-10-31T18:30:00.000Z",
    "v2": true
   },
   {
@@ -1199,16 +1169,11 @@
    "thumb": "releases/remaincalm/batch1/g5/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/g5/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/g5/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c26f406ab8a018b110b6",
-    "tt": "6ae5c270a1145743499c27fc",
-    "ig": "6ae5c270eaa24d6f9a6b6f4f"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T09:30:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-10-31T20:00:00.000Z",
    "v2": true
   },
   {
@@ -1228,16 +1193,11 @@
    "thumb": "releases/remaincalm/batch1/i4/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/i4/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/i4/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c2851891472093c875e1",
-    "tt": "6ae5c285eaa24d6f9a6b75cd",
-    "ig": "6ae5c286b84259308bcec7d9"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T11:00:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-10-31T21:30:00.000Z",
    "v2": true
   },
   {
@@ -1257,16 +1217,11 @@
    "thumb": "releases/remaincalm/batch1/i3/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/i3/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/i3/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c298406ab8a018b11e47",
-    "tt": "6ae5c299406ab8a018b11e7d",
-    "ig": "6ae5c299ceb491e585ee8b71"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T12:30:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-10-31T23:00:00.000Z",
    "v2": true
   },
   {
@@ -1286,16 +1241,11 @@
    "thumb": "releases/remaincalm/batch1/g8/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/g8/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/g8/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "posts": {
-    "yt": "6ae5c2a9406ab8a018b1211e",
-    "tt": "6ae5c2aa406ab8a018b12156",
-    "ig": "6ae5c2aa1891472093c88420"
-   },
+   "posts": {},
    "yt_mode": "buffer",
-   "due": "2026-11-01T14:00:00.000Z",
-   "media_day": "2026-11-01",
+   "due": "2026-11-01T00:30:00.000Z",
    "v2": true
   }
  ]
