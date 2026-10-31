@@ -1,0 +1,39 @@
+1
+00:00:00,250 --> 00:00:05,372
+Rule one of the night shift. If something is wrong with a customer, don't serve it.
+
+2
+00:00:05,922 --> 00:00:09,068
+Ten pork skewers and sticky rice, please. Extra chili.
+
+3
+00:00:09,348 --> 00:00:10,199
+Coming up.
+
+4
+00:00:10,922 --> 00:00:13,901
+Uncle, do you have anything that is not on the menu?
+
+5
+00:00:14,181 --> 00:00:14,625
+No.
+
+6
+00:00:14,905 --> 00:00:15,445
+Okay.
+
+7
+00:00:16,122 --> 00:00:18,352
+Pork. No chili. I never have chili.
+
+8
+00:00:18,632 --> 00:00:22,113
+...She has her back to me. And it isn't raining.
+
+9
+00:00:22,663 --> 00:00:23,735
+Who was wrong?
+
+10
+00:00:27,663 --> 00:00:30,977
+She never turned around. A raincoat on a dry night.

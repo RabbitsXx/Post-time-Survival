@@ -5,7 +5,7 @@ sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import package_rc as P
 from package_rc import R,REPO
 # id: (key shot 1-based, line1, line2, pill)
-CV={'ks1':(4,'SPOT THE','ANOMALY','NIGHT 1 · THE RAINCOAT'),'nn1':(3,'NANA','PIM','THE DEAD ARE SLOW CUSTOMERS'),'bo1':(1,'MOM, I\'M','OUTSIDE','A BUNCH OF GUYS'),'hm1':(5,'KEEP','EATING','THE PUDDING RULE'),'hm2':(1,'ONE STAR','REVIEW','STAFF WAS TOO CALM'),'hm3':(3,'ROUGH','NIGHT?','NOT AT ALL.'),'g1':(3,'UNEXPECTED','ITEM','IN THE BAGGING AREA'),'g2':(1,'ELEVEN','ITEMS','EXPRESS LANE'),'g3':(2,'TIME TO','BREATHE','HEART RATE 160'),'i4':(2,'DON\'T RUN','TO THE CAR','PARKING LOT RULES'),
+CV={'ks1':(5,'WHO IS NOT','HUMAN?','MIDNIGHT SKEWERS'),'nn1':(3,'NANA','PIM','THE DEAD ARE SLOW CUSTOMERS'),'bo1':(1,'MOM, I\'M','OUTSIDE','A BUNCH OF GUYS'),'hm1':(5,'KEEP','EATING','THE PUDDING RULE'),'hm2':(1,'ONE STAR','REVIEW','STAFF WAS TOO CALM'),'hm3':(3,'ROUGH','NIGHT?','NOT AT ALL.'),'g1':(3,'UNEXPECTED','ITEM','IN THE BAGGING AREA'),'g2':(1,'ELEVEN','ITEMS','EXPRESS LANE'),'g3':(2,'TIME TO','BREATHE','HEART RATE 160'),'i4':(2,'DON\'T RUN','TO THE CAR','PARKING LOT RULES'),
  'g5':(3,'FIRE','DRILL','SINGLE FILE PLEASE'),'g6':(1,'ASK FOR','THE MANAGER','SIX YEARS OF SERVICE'),'g8':(2,'WE ARE','CLOSED','SORRY, SIR'),'i1':(2,"DON'T",'RUN','3 AM SUPERMARKET'),
  'i2':(2,'CRYING','BABY','BREATHE INSTEAD'),'i3':(1,"DON'T LOOK",'BACK','THE LINE BEHIND YOU')}
 NUM={k:i+1 for i,k in enumerate(['g1','g2','g3','i4','g5','g6','g8','i1','i2','i3','hm1','hm2','hm3'])}

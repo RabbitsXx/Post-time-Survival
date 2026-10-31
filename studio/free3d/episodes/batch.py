@@ -169,3 +169,15 @@ ep('ks1','NIGHT 1: THE RAINCOAT',[
 
 EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
 for _s in EPS['ks1']['shots']:_s['typed']=True
+
+# ---- ks1 rewritten for clarity: rule first, clear serve/refuse decisions, visible consequence ----
+KFACE=CAM([KX,1.6,KZ-.7],[KX,1.62,KZ+4.4])
+ep('ks1','NIGHT 1',[
+ CARD('NIGHT SHIFT RULES',['REAL CUSTOMERS LOOK AT YOU','SERVE THEM','REFUSE ANYONE ELSE'],L('vendor',"Real customers look at you. Serve them. Refuse anyone else."),min=7.0,sfx=[[.3,'click'],[1.9,'click'],[3.5,'click']]),
+ S(KC,[kc('auntie',.1,'smile')],[L('auntie',"Ten pork skewers, please."),L('vendor',"Serve.")],'CUSTOMER 1 · SERVED',fov=30,grade='warm',min=4.4,sfx=[[2.6,'chime']]),
+ S(KC,[kc('lad',-.2,'calm')],[L('lad',"One iced tea."),L('vendor',"Serve.")],'CUSTOMER 2 · SERVED',fov=30,grade='warm',min=4.0,sfx=[[2.2,'chime']]),
+ S(KC,[ch('girl',KX+.1,KZ+4.4,'smile',face=[KX,KZ+12],still=True,noShadow=True)],[L('girl',"Pork. No chili."),L('vendor',"She is facing away.")],'CUSTOMER 3 · ???',fov=30,grade='dead',min=5.2,cues=[dict(t=0,type='gate',dur=3.4),dict(t=.6,type='tick'),dict(t=2.4,type='tick')]),
+ S(KFACE,[ch('z3',KX+.1,KZ+4.4,'calm',face=[KX,KZ-.7])],[L('vendor',"Refuse.")],'CUSTOMER 3 · REFUSED',fov=22,grade='alarm',min=3.2,lead=.05,sfx=[[0,'sting'],[.2,'groan']],cues=[dict(t=0,type='stinger',level=.8)]),
+ CARD('NEXT NIGHT',['3 CUSTOMERS','1 IS NOT HUMAN','COMMENT WHICH ONE'],L('vendor',"Next night. Which one isn't human?"),min=6.0,sfx=[[.3,'click'],[1.5,'click'],[2.7,'click']])])
+EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
+for _s in EPS['ks1']['shots']:_s['typed']=True
