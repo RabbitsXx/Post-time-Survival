@@ -9,7 +9,7 @@
 const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d',{willReadFrequently:true});
 const cv=document.getElementById('c');const R=new THREE.WebGLRenderer({canvas:cv,antialias:false,preserveDrawingBuffer:true});const RQ=+(Q.get('rq')||.25);R.setSize(Math.round(W*RQ),Math.round(H*RQ),false);R.setPixelRatio(1);
 R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.25;
-const S=new THREE.Scene();S.background=new THREE.Color(0x0c1814);S.fog=new THREE.FogExp2(0x1c2c28,.012);
+const S=new THREE.Scene();S.background=new THREE.Color(0x06100c);S.fog=new THREE.FogExp2(0x0a1a14,.034);
 const cam=new THREE.PerspectiveCamera(38,W/H,.1,420);
 
 // ---------- textures ----------
@@ -52,12 +52,13 @@ const FW=44,FD=34;
  for(let i=0;i<5;i++){box(1.3,.5,.9,MS(null,.8,0x8a6a3a),10+i*1.5,.25,FD/2-7,true);for(let j=0;j<8;j++){const sp=new THREE.Mesh(new THREE.SphereGeometry(.14,12,10),new THREE.MeshStandardMaterial({color:[0xe8742a,0xe8302a,0x3aa83a,0xf2c230][(i+j)%4],roughness:.5}));sp.position.set(10+i*1.5-.45+(j%4)*.3,.62,FD/2-7+(j<4?-.2:.2));S.add(sp)}}
  box(8,.1,.04,MS(null,.5,0xe8742a),12,2.4,FD/2-8.2);const cs=new THREE.Mesh(new THREE.PlaneGeometry(2.6,.9),new THREE.MeshBasicMaterial({map:signTex('CARROTS 2 FOR 1','#e8742a','#ffffff',512,160,80),fog:false}));cs.position.set(12,2.2,FD/2-7.3);S.add(cs);
  // lights
- const H1=new THREE.HemisphereLight(0xdfffe8,0x5a6a60,1.6);S.add(H1);
- const pl=[[-8,3.6,-6],[6,3.6,-6],[-8,3.6,6],[8,3.6,6],[0,3.6,0]];pl.forEach(p=>{const L=new THREE.PointLight(0xeaffee,34,26,2);L.position.set(...p);S.add(L)});
- const warm=new THREE.PointLight(0xffd8a0,20,14,2);warm.position.set(0,3,FD/2-3);S.add(warm)})();
+ const H1=new THREE.HemisphereLight(0x9ac8b0,0x1a2a22,.62);S.add(H1);
+ const FL=[];const pl=[[-8,3.6,-6],[6,3.6,-6],[-8,3.6,6],[8,3.6,6],[0,3.6,0]];pl.forEach(p=>{const L=new THREE.PointLight(0xcaffe0,30,22,2);L.position.set(...p);S.add(L);FL.push(L)});
+ const warm=new THREE.PointLight(0xffb070,16,12,2);warm.position.set(0,3,FD/2-3);S.add(warm);window.FLK=FL})();
 
 // ---------- 3D toon cast ----------
-const SUN=new THREE.DirectionalLight(0xffffff,1.15);SUN.position.set(3,12,9);SUN.castShadow=true;SUN.shadow.mapSize.set(1024,1024);Object.assign(SUN.shadow.camera,{left:-16,right:16,top:16,bottom:-16,near:1,far:40});SUN.shadow.bias=-.0006;S.add(SUN);S.add(SUN.target);
+const SUN=new THREE.DirectionalLight(0xffffff,.8);SUN.position.set(3,12,9);SUN.color.setHex(0xbfe8d8);SUN.castShadow=true;SUN.shadow.mapSize.set(1024,1024);Object.assign(SUN.shadow.camera,{left:-16,right:16,top:16,bottom:-16,near:1,far:40});SUN.shadow.bias=-.0006;S.add(SUN);S.add(SUN.target);
+const CLH=new THREE.HemisphereLight(0xe8f0ff,0x6a6a78,1.25);CLH.layers.set(1);S.add(CLH);const CLD=new THREE.DirectionalLight(0xfff2e0,1.5);CLD.position.set(2,6,9);CLD.layers.set(1);S.add(CLD);
 const PEOPLE={},BLOB={};for(const k in TCAST){const g=TCAST[k]();g.visible=false;g.traverse(o=>o.layers.set(1));S.add(g);PEOPLE[k]=g;const bl=new THREE.Mesh(new THREE.CircleGeometry(.5*(g.userData.cfg.s||1)*(g.userData.cfg.w||1),14),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.42,depthWrite:false}));bl.rotation.x=-Math.PI/2;bl.scale.y=.62;bl.visible=false;S.add(bl);BLOB[k]=bl;ps1(bl)}
 const cv2=document.createElement('canvas');const R2=new THREE.WebGLRenderer({canvas:cv2,alpha:true,antialias:true,preserveDrawingBuffer:true});R2.setPixelRatio(1);const RQ2=.8;R2.setSize(Math.round(W*RQ2),Math.round(H*RQ2),false);R2.setClearColor(0x000000,0);R2.outputEncoding=THREE.sRGBEncoding;
 const ENVMATS=[];S.traverse(o=>{if(o.isMesh&&o.layers.test(new THREE.Layers())){const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>{if(m&&!ENVMATS.includes(m))ENVMATS.push(m)})}});
@@ -79,6 +80,7 @@ window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(
    if(ch.to){const uu=ease(clamp((lt-(ch.t0||0))/Math.max(.01,(ch.t1||dur)-(ch.t0||0))));x=lerp(ch.pos[0],ch.to[0],uu);z=lerp(ch.pos[1],ch.to[1],uu);if(uu>0&&uu<1)act=ch.act||'walk';yawTo=Math.atan2(ch.to[0]-ch.pos[0],ch.to[1]-ch.pos[1])}
    g.position.set(x,0,z);BLOB[ch.who].visible=true;BLOB[ch.who].position.set(x,.025,z);let yaw=yawTo!=null&&act!=='idle'?yawTo:(ch.face?Math.atan2(ch.face[0]-x,ch.face[1]-z):Math.atan2(cam.position.x-x,cam.position.z-z)-(ch.yawOff||0));g.rotation.y=yaw;
    const speaking=(sh.lines||[]).some(l=>l.who===ch.who&&t>=l.t0&&t<l.t1);animPerson(g,t,{act,expr:ch.expr||'calm',speaking,seed:ch.who.length*3,look:ch.look||0})}
+  if(window.FLK)FLK.forEach((L,i)=>{const fl=Math.sin(t*(7+i*3.1)+i)*Math.sin(t*2.3+i*1.7);L.intensity=(i===2&&fl>.82)?4:(i===0&&Math.sin(t*1.3)>.97?10:30)});
   cam.layers.set(0);R.render(S,cam);ps1post();ctx.setTransform(1,0,0,1,0,0);ctx.imageSmoothingEnabled=false;ctx.drawImage(lowc,0,0,W,H);
   cam.layers.enable(1);const bg=S.background;S.background=null;ENVMATS.forEach(m=>{m.colorWrite=false});R2.render(S,cam);ENVMATS.forEach(m=>{m.colorWrite=true});S.background=bg;cam.layers.set(0);
   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(cv2,0,0,W,H);

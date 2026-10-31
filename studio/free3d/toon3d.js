@@ -38,16 +38,27 @@ function toonPerson(cfg){const S=cfg.s||1,g=new THREE.Group(),W=cfg.w||1;const s
  if(cfg.beard){const bd=part(sph(.22*S,18,12,0,Math.PI*2,Math.PI*.35,Math.PI*.5),cfg.beard,.06);bd.position.set(0,-.02*S,.06*S);bd.scale.set(1,1,.9);head.add(bd)}
  if(cfg.glasses){for(const sx of[-1,1]){const gl=part(new THREE.TorusGeometry(.1*S,.014*S,8,20),0x181410,.1);gl.position.set(sx*.115*S,.04*S,.29*S);head.add(gl)}const br=part(new THREE.BoxGeometry(.06*S,.012*S,.012*S),0x181410,.1);br.position.set(0,.05*S,.3*S);head.add(br)}
  g.traverse(o=>{if(o.isMesh)o.castShadow=true});return g}
-function toonZombie(cfg){const g=toonPerson(Object.assign({skin:0x8fa482,shirt:0x3a3c44,pants:0x24262c,shoe:0x14120e,hair:'none',s:1.0},cfg||{}));const U=g.userData,S=U.cfg.s||1;
- U.isZ=true;
- // gaunt, sunken eyes, red pupils, bloody open mouth
- U.head.scale.set(.95,1.1,.95);
- for(const e of U.eyes){e.ew.material=toon(0xe8e0b0);e.pu.material=new THREE.MeshBasicMaterial({color:0xb01810});const so=part(sph(.12*S,16,12),0x1a0c0c,.0,false);so.scale.set(1.1,1.0,.5);so.position.set(0,0,-.012*S);e.eg.add(so)}
- U.mOpen.material=toon(0x5a0c10);U.mOpen.scale.set(1.3,1.5,.6);
- for(let i=-2;i<=2;i++){const tt=part(new THREE.ConeGeometry(.012*S,.04*S,6),0xe8e0b8,.1,false);tt.position.set(i*.022*S,.035*S,.04*S);tt.rotation.x=Math.PI;U.mOpen.add(tt)}
- const bl=part(sph(.05*S,10,8),0x7a0c10,.0,false);bl.scale.set(1,2.4,.4);bl.position.set(.07*S,-.26*S,.27*S);U.head.add(bl);
- const bl2=part(sph(.1*S,12,10),0x6a0a0e,.0,false);bl2.scale.set(1,1,.2);bl2.position.set(.05*S,.28*S,.18*S);U.torso.add(bl2);
- const wd=part(sph(.06*S,10,8),0x9a2a2a,.0,false);wd.scale.set(1.3,.9,.3);wd.position.set(-.12*S,.1*S,.255*S);U.head.add(wd);
+function toonZombie(cfg){const g=toonPerson(Object.assign({skin:0x8c9c84,shirt:0x3a3c44,pants:0x24262c,shoe:0x14120e,hair:'none',s:1.12,w:.78},cfg||{}));const U=g.userData,S=U.cfg.s||1;U.isZ=true;
+ U.head.scale.set(.82,1.18,.88);U.head.position.y=.64*S;
+ // hollow cheeks + dark mottling
+ for(const sx of[-1,1]){const ch=part(sph(.1*S,10,8),0x4a5646,.0,false);ch.scale.set(.8,1.2,.4);ch.position.set(sx*.17*S,-.08*S,.22*S);U.head.add(ch)}
+ const mot=part(sph(.1*S,10,8),0x5a4a52,.0,false);mot.scale.set(1.3,.7,.3);mot.position.set(-.1*S,.16*S,.27*S);U.head.add(mot);
+ for(const e of U.eyes){e.ew.material=toon(0xe6e0b4);e.ew.scale.set(.8,.9,.5);e.pu.material=new THREE.MeshBasicMaterial({color:0xc01810});e.pu.scale.setScalar(.7);const so=new THREE.Mesh(sph(.14*S,14,10),new THREE.MeshBasicMaterial({color:0x080404}));so.scale.set(1.05,1.1,.5);so.position.set(0,.005*S,-.02*S);e.eg.add(so);e.eg.position.z-=.005*S}
+ U.brows.forEach(b=>{b.scale.set(1.2,1.4,1);b.position.y=.17*S;b.material=toon(0x1a1a14)});
+ // wide dark mouth, long jaw, teeth rows
+ U.mOpen.material=toon(0x3a0608);U.mOpen.scale.set(1.5,1.9,.7);U.mOpen.position.y=-.17*S;
+ for(let i=-3;i<=3;i++){const tt=part(new THREE.ConeGeometry(.013*S,.05*S,5),0xe8dfb4,.1,false);tt.position.set(i*.02*S,.04*S,.04*S);tt.rotation.x=Math.PI;U.mOpen.add(tt);const tb=part(new THREE.ConeGeometry(.012*S,.04*S,5),0xe0d6a8,.1,false);tb.position.set(i*.02*S,-.045*S,.04*S);U.mOpen.add(tb)}
+ const jaw=part(sph(.1*S,10,8),0x6a7a60,.06,false);jaw.scale.set(1,.7,.9);jaw.position.set(0,-.27*S,.2*S);U.head.add(jaw);U.jaw=jaw;
+ // blood from mouth + neck bite + torso stains
+ const bl=part(sph(.04*S,8,6),0x8a0c10,.0,false);bl.scale.set(1,3.2,.4);bl.position.set(.07*S,-.3*S,.27*S);U.head.add(bl);const bl3=bl.clone();bl3.position.set(-.1*S,-.28*S,.26*S);bl3.scale.set(.8,2.4,.4);U.head.add(bl3);
+ const neck=part(sph(.07*S,8,6),0x9a1418,.08,false);neck.scale.set(1.3,.9,.5);neck.position.set(.08*S,-.18*S,.1*S);U.head.add(neck);
+ const bl2=part(sph(.12*S,10,8),0x6a0a0e,.0,false);bl2.scale.set(1.2,1.4,.25);bl2.position.set(.04*S,.28*S,.16*S);U.torso.add(bl2);const bl4=part(sph(.08*S,8,6),0x7a0c10,.0,false);bl4.scale.set(1,1.3,.25);bl4.position.set(-.1*S,.12*S,.16*S);U.torso.add(bl4);
+ // torn shirt flaps
+ for(let i=0;i<3;i++){const fl=part(new THREE.ConeGeometry(.04*S,.12*S,4),cfg&&cfg.shirt||0x3a3c44,.1,false);fl.position.set((i-1)*.08*S,.02*S,.14*S);fl.rotation.x=Math.PI;U.torso.add(fl)}
+ // sparse hair strands
+ for(let i=0;i<5;i++){const st=part(new THREE.CylinderGeometry(.004*S,.003*S,.14*S,4),0x1a1610,.0,false);st.position.set((i-2)*.07*S,.32*S,-.02*S);st.rotation.z=(i-2)*.25;U.head.add(st)}
+ // long arms / claw hands
+ U.arms.forEach(a=>{a.sh.scale.set(1,1.18,1);a.hd.scale.set(.8,1.5,.8)});
  return g}
 // ===== animation =====
 function setExpr(U,e,open){const S=U.cfg.s||1;const set=(sm,fl,op,fr)=>{U.mSmile.visible=sm;U.mFlat.visible=fl;U.mOpen.visible=op;U.mFrown.visible=fr};
@@ -63,14 +74,14 @@ function animPerson(g,t,st){const U=g.userData,S=U.cfg.s||1,ph=(st.seed||0)*1.7;
  idle();
  if(act==='walk'||act==='run'){const f=act==='run'?9:5.5,a=act==='run'?.7:.45;const w=Math.sin(t*f+ph);U.legs[0].rotation.x=w*a;U.legs[1].rotation.x=-w*a;U.arms[0].sh.rotation.x=-w*a*.9;U.arms[1].sh.rotation.x=w*a*.9;U.hip.position.y=.50*S+Math.abs(Math.cos(t*f+ph))*.035*S;U.torso.rotation.x=act==='run'?.2:.04}
  else if(act==='scared'){const sh=Math.sin(t*38+ph)*.012*S;U.arms[0].sh.rotation.set(-.9,0,.5);U.arms[1].sh.rotation.set(-.9,0,-.5);U.arms[0].el.rotation.x=-1.5;U.arms[1].el.rotation.x=-1.5;g.position.x+=sh;U.torso.rotation.x=-.12}
- else if(act==='reach'){U.arms[0].sh.rotation.set(-1.45,0,.12);U.arms[1].sh.rotation.set(-1.35,0,-.12);U.arms[0].el.rotation.x=-.1;U.arms[1].el.rotation.x=-.2;U.torso.rotation.x=.2;U.head.rotation.x=.18;const w=Math.sin(t*2.2+ph);U.legs[0].rotation.x=w*.28;U.legs[1].rotation.x=-w*.28}
+ else if(act==='reach'){U.arms[0].sh.rotation.set(-1.55,0,.18);U.arms[1].sh.rotation.set(-1.25,0,-.22);U.arms[0].el.rotation.x=-.05;U.arms[1].el.rotation.x=-.3;U.torso.rotation.x=.34;U.head.rotation.x=.1;const w=Math.sin(t*2.2+ph);U.legs[0].rotation.x=w*.28;U.legs[1].rotation.x=-w*.28}
  else if(act==='point'){U.arms[1].sh.rotation.set(-1.4,0,-.1);U.arms[1].el.rotation.x=-.05}
  else if(act==='shush'){U.arms[1].sh.rotation.set(-1.1,0,-.2);U.arms[1].el.rotation.x=-1.9}
  else if(act==='hands'){U.arms[0].sh.rotation.set(-.6,0,.7);U.arms[1].sh.rotation.set(-.6,0,-.7);U.arms[0].el.rotation.x=-.9;U.arms[1].el.rotation.x=-.9}
  if(sp&&act==='idle'){U.arms[1].sh.rotation.set(-.55+Math.sin(t*4.2+ph)*.18,0,-.25);U.arms[1].el.rotation.x=-1.1+Math.sin(t*5.1+ph)*.25;U.head.rotation.x=Math.sin(t*3.3+ph)*.05;U.head.rotation.y=Math.sin(t*1.9+ph)*.1}
  if(st.look)U.head.rotation.y+=st.look*.35;
- if(U.isZ){U.head.rotation.z=Math.sin(t*1.1+ph)*.18;U.head.rotation.x+=.12;U.torso.rotation.z=Math.sin(t*.9+ph)*.06}
- const open=sp?Math.abs(Math.sin(t*11+ph))*(.55+.45*Math.sin(t*2.7+ph)):(U.isZ?(.35+Math.abs(Math.sin(t*1.6+ph))*.5):0);setExpr(U,st.expr||'calm',open)}
+ if(U.isZ){U.head.rotation.z=Math.sin(t*1.1+ph)*.22;U.head.rotation.x=-.05+Math.sin(t*.7+ph)*.05;U.torso.rotation.z=Math.sin(t*.9+ph)*.06}
+ const open=sp?Math.abs(Math.sin(t*11+ph))*(.55+.45*Math.sin(t*2.7+ph)):(U.isZ?(.35+Math.abs(Math.sin(t*1.6+ph))*.5):0);setExpr(U,st.expr||'calm',open);if(U.jaw){U.jaw.position.y=(-.27-open*.1)*S;U.jaw.rotation.x=open*.4}}
 const TCAST={
  mimi:()=>toonPerson({s:1.0,w:.95,skin:0xe8b898,shirt:0x2fa86a,pants:0x2a2e3a,shoe:0x1a1a1a,hair:'bun',hc:0x8a3a22,tag:1,sleeve:'short'}),
  gus:()=>toonPerson({s:1.12,w:1.3,skin:0xc8946a,shirt:0x2a3a5a,pants:0x1a2030,shoe:0x0e0e12,hair:'cap',hc:0x1a2a4a,stache:0x2a1c12,badge:1,sleeve:'short'}),
