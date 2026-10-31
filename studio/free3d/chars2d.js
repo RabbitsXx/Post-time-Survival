@@ -155,7 +155,7 @@ function drawFront(c,A,P,t){const ch=CH[A.who];if(ch.hr){drawHuman(c,A,P,t);retu
   // leafy top
   c.fillStyle='#3aa83a';for(let i=-2;i<=2;i++){c.beginPath();c.moveTo(i*14,-210);c.quadraticCurveTo(i*34+sw,-290-Math.abs(i)*6,i*10+sw*.5,-300+Math.abs(i)*14);c.quadraticCurveTo(i*8,-250,i*14+10,-210);c.fill();c.stroke()}
   // zombie face poking out of the costume
-  c.save();c.translate(0,-146);c.scale(.62,.62);realHead(c,5,t,.5+Math.abs(Math.sin(t*1.6))*.5,Math.sin(t*.7));c.restore();c.restore();return}
+  c.save();c.translate(0,-140);c.scale(.95,.95);lbZFace(c,48,t,{},5,'#9ab88a',ch);c.restore();c.restore();return}
  c.save();c.scale(1,.2);c.fillStyle='rgba(0,0,0,.3)';c.beginPath();c.arc(0,0,80*(ch.w||1),0,7);c.fill();c.restore();
  const bob=P.bob||0;c.translate(0,bob);const R=66*ST.head;const bw=64*(ch.w||1);
  // legs
@@ -401,7 +401,7 @@ CH.teddy_hr={f:1,hr:1,seed:8,skin:'#e8bc94',shirt:'#e84a4a',pants:'#2a3a6a',shoe
 CH.vance_hr={f:1,hr:1,seed:11,skin:'#8a5a3c',shirt:'#b89a62',pants:'#3a4a5a',shoe:'#2a2018',hair:'grey',hc:'#a8a8a8',iris:'#2a1a10',iris0:'#4a3422',beard:'#a8a8a8',glasses:1,h:1,w:1.0,hk:1.0};
 
 // ===== Last Bus proportions: small round head on a long, thin figure (head ~1/5 of height, legs ~55%), tube limbs, big shoes =====
-function drawLB(c,A,P,t){const ch=CH[A.who];if(ch.z||ch.zr||ch.carrot||ch.hr||ch.dog){drawFront(c,A,P,t);return}
+function drawLB(c,A,P,t){const ch=CH[A.who];if(ch.zr){drawLBZ(c,A,P,t);return}if(ch.z||ch.carrot||ch.hr||ch.dog){drawFront(c,A,P,t);return}
  const kid=(ch.h||1)<.8,S=P.s*(kid?1.18:ch.h||1),W=ch.w||1;c.save();c.translate(P.x,P.y);c.scale(S,S);
  const bw=36*W,L=kid?170:236,hipY=-(L+12),shY=hipY-96,R=(kid?62:54)*ST.head,bob=P.bob||0;c.translate(0,bob);
  const hy=shY-36-R*.95+(P.tiltY||0);
@@ -423,3 +423,43 @@ function drawLB(c,A,P,t){const ch=CH[A.who];if(ch.z||ch.zr||ch.carrot||ch.hr||ch
  frontHair(c,ch,R,false);circ(c,-R,R*.1,R*.2,ch.skin,ST.line);circ(c,R,R*.1,R*.2,ch.skin,ST.line);circ(c,0,0,R,ch.skin,ST.line);
  c.fillStyle='rgba(255,255,255,.12)';c.beginPath();c.ellipse(-R*.38,-R*.42,R*.3,R*.16,-.6,0,7);c.fill();
  frontFace(c,ch,P,t,R);frontHair(c,ch,R,true);c.restore();c.restore()}
+
+// ===== zombies in the same thick-outline cartoon line as the cast (Last Bus proportions) =====
+const LBZ={zr1:{skin:'#8fb086',shirt:'#3d8a4a',pants:'#2a2e3a',hair:'messy',hc:'#2a2418'},zr2:{skin:'#9ab08a',shirt:'#8a4a42',pants:'#3a3a44',hair:'grey',hc:'#6a665e'},zr3:{skin:'#86a890',shirt:'#3e6a8a',pants:'#2a2a30',hair:'bald'},zr4:{skin:'#94ac80',shirt:'#6a7040',pants:'#30302a',hair:'cap',hc:'#1a2a1a'}};
+function lbZFace(c,R,t,P,ph,skin,ch){const jaw=P.jaw==null?(.45+Math.abs(Math.sin(t*1.6+ph))*.5):P.jaw,look=P.look||Math.sin(t*.7+ph);
+ circ(c,-R,R*.1,R*.2,skin,ST.line);circ(c,R,R*.1,R*.2,skin,ST.line);circ(c,0,0,R,skin,ST.line);
+ c.fillStyle='rgba(60,90,60,.35)';c.beginPath();c.ellipse(-R*.55,R*.25,R*.22,R*.16,.4,0,7);c.fill();c.beginPath();c.ellipse(R*.5,-R*.5,R*.2,R*.13,-.3,0,7);c.fill();
+ // sunken sockets + mismatched dead eyes
+ for(const sx of[-1,1]){const ex=sx*R*.42,ey=-R*.08,er=R*(sx<0?.3:.22);c.fillStyle='#2a1a22';c.strokeStyle=OUT;c.lineWidth=ST.line*.9;c.beginPath();c.ellipse(ex,ey,er*1.5,er*1.6,0,0,7);c.fill();c.stroke();
+  c.fillStyle='#ecdcae';c.beginPath();c.ellipse(ex,ey,er*.95,er*1,0,0,7);c.fill();c.stroke();c.fillStyle=OUT;c.beginPath();c.arc(ex+look*er*.4,ey+er*.1,er*.2,0,7);c.fill();
+  c.strokeStyle=OUT;c.lineWidth=ST.line*1.2;c.lineCap='round';c.beginPath();c.moveTo(ex-sx*er*1.3,ey-er*1.55);c.lineTo(ex+sx*er*1.1,ey-er*(sx<0?.95:1.6));c.stroke()}
+ // nose holes
+ c.fillStyle='#2a1018';c.beginPath();c.ellipse(-R*.07,R*.22,R*.045,R*.07,0,0,7);c.fill();c.beginPath();c.ellipse(R*.07,R*.22,R*.045,R*.07,0,0,7);c.fill();
+ // open slack mouth with teeth, tongue, blood
+ const my=R*.46,mh=R*(.2+jaw*.34);c.fillStyle='#3a0a12';c.strokeStyle=OUT;c.lineWidth=ST.line;c.beginPath();c.moveTo(-R*.5,my);c.quadraticCurveTo(0,my-R*.02,R*.5,my);c.quadraticCurveTo(R*.46,my+mh*1.3,0,my+mh*1.45);c.quadraticCurveTo(-R*.46,my+mh*1.3,-R*.5,my);c.closePath();c.fill();c.stroke();
+ c.fillStyle='#e8e0b0';c.lineWidth=ST.line*.55;for(let i=-3;i<=3;i++){c.beginPath();c.moveTo(i*R*.13-R*.06,my-R*.1+Math.abs(i)*R*.025);c.lineTo(i*R*.13+R*.06,my-R*.1+Math.abs(i)*R*.025);c.lineTo(i*R*.13,my+R*(.16+(i%2?.04:0)));c.closePath();c.fill();c.stroke()}
+ for(let i=-2;i<=2;i++){c.beginPath();c.moveTo(i*R*.13-R*.05,my+mh*1.1);c.lineTo(i*R*.13+R*.05,my+mh*1.1);c.lineTo(i*R*.13,my+mh*1.1-R*.14);c.closePath();c.fill();c.stroke()}
+ c.fillStyle='#c0303a';c.beginPath();c.ellipse(R*.05,my+mh*.9,R*.17,R*.1,0,0,7);c.fill();
+ c.fillStyle='#a01820';c.strokeStyle=OUT;c.lineWidth=ST.line*.7;c.beginPath();c.moveTo(R*.3,my+R*.08);c.quadraticCurveTo(R*.46,my+R*.5,R*.3,my+R*.85+Math.sin(t*2+ph)*R*.05);c.quadraticCurveTo(R*.2,my+R*.5,R*.22,my+R*.1);c.fill();c.stroke();
+ // stitch scar
+ c.strokeStyle=OUT;c.lineWidth=ST.line*.55;c.beginPath();c.moveTo(-R*.7,-R*.5);c.lineTo(-R*.38,-R*.7);c.stroke();for(let i=0;i<4;i++){c.beginPath();c.moveTo(-R*.68+i*R*.09,-R*.46-i*R*.06);c.lineTo(-R*.62+i*R*.09,-R*.62-i*R*.06);c.stroke()}}
+function drawLBZ(c,A,P,t){const ch=CH[A.who],Z=LBZ[A.who]||LBZ.zr1,S=P.s*(ch.h||1),ph=(ch.seed||1)*1.7;c.save();c.translate(P.x,P.y);c.scale(S,S);
+ const sway=Math.sin(t*1.1+ph)*6,bw=40,L=236,hipY=-(L+12),shY=hipY-92,R=56*ST.head,tilt=(ch.tilt||14)+Math.sin(t*.9+ph)*6;
+ const hy=shY-6-R*.78+Math.abs(Math.sin(t*1.3+ph))*3;
+ for(const sx of[-1,1]){const lx=sx*bw*.36;rect(c,lx-13,hipY,26,L,Z.pants,OUT,ST.line,11);
+  c.fillStyle='#6a6a70';c.strokeStyle=OUT;c.lineWidth=ST.line*.6;c.beginPath();c.moveTo(lx-13,-60);c.lineTo(lx-4,-44);c.lineTo(lx+2,-58);c.lineTo(lx+13,-40);c.lineTo(lx+13,-70);c.closePath();c.fillStyle=Z.skin;c.fill();c.stroke();
+  c.fillStyle='#2a2420';c.strokeStyle=OUT;c.lineWidth=ST.line;c.beginPath();c.ellipse(lx+sx*10,-13,34,16,0,Math.PI,0);c.lineTo(lx+sx*10+34,-2);c.quadraticCurveTo(lx+sx*10,6,lx+sx*10-34,-2);c.closePath();c.fill();c.stroke()}
+ c.save();c.translate(sway,0);c.rotate(.06);
+ // torso: torn hem + blood
+ c.fillStyle=Z.shirt;c.strokeStyle=OUT;c.lineWidth=ST.line;c.beginPath();c.moveTo(-bw*.86,hipY+10);c.lineTo(-bw*.5,hipY+26);c.lineTo(-bw*.25,hipY+8);c.lineTo(0,hipY+28);c.lineTo(bw*.3,hipY+6);c.lineTo(bw*.55,hipY+24);c.lineTo(bw*.86,hipY+10);c.lineTo(bw,shY+8);c.quadraticCurveTo(0,shY-14,-bw,shY+8);c.closePath();c.fill();c.stroke();
+ c.fillStyle='#b01c26';c.beginPath();c.moveTo(-bw*.3,shY+30);c.quadraticCurveTo(-bw*.05,shY+20,bw*.2,shY+34);c.quadraticCurveTo(bw*.4,shY+70,bw*.1,shY+80);c.quadraticCurveTo(-bw*.3,shY+72,-bw*.3,shY+30);c.fill();c.stroke();
+ c.fillStyle=Z.skin;c.beginPath();c.moveTo(-bw*.7,shY+50);c.lineTo(-bw*.4,shY+60);c.lineTo(-bw*.5,shY+86);c.lineTo(-bw*.75,shY+76);c.closePath();c.fill();c.stroke();
+ // arms reaching out (bent elbows, claws)
+ for(const sx of[-1,1]){c.save();c.translate(sx*(bw+4),shY+16);const a=-sx*(.95+Math.sin(t*1.8+ph+sx)*.1);c.rotate(a);rect(c,-9,0,18,74,Z.shirt,OUT,ST.line,9);c.translate(0,70);c.rotate(-sx*(1.55+Math.sin(t*2.2+ph)*.12));rect(c,-8,0,16,52,Z.skin,OUT,ST.line,8);
+  c.translate(0,54);circ(c,0,0,13,Z.skin,ST.line);c.strokeStyle=OUT;c.lineWidth=ST.line*.8;c.lineCap='round';for(let f=-1;f<=1;f++){c.beginPath();c.moveTo(f*6,8);c.lineTo(f*9,26+Math.sin(t*3+f+ph)*2);c.stroke()}c.restore()}
+ rect(c,-9,shY-30,18,30,Z.skin,OUT,ST.line*.8,6);
+ c.save();c.translate(sway*.6,hy);c.rotate(tilt*D);
+ if(Z.hair==='messy'||Z.hair==='grey'){c.fillStyle=Z.hc;c.strokeStyle=OUT;c.lineWidth=ST.line;for(let i=-3;i<=3;i++){c.beginPath();c.moveTo(i*R*.3-R*.12,-R*.78);c.lineTo(i*R*.32+Math.sin(i*2+ph)*R*.1,-R*1.28-Math.abs(i)*R*.05);c.lineTo(i*R*.3+R*.14,-R*.8);c.fill();c.stroke()}}
+ lbZFace(c,R,t,P,ph,Z.skin,ch);
+ if(Z.hair==='cap'){c.fillStyle=Z.hc;c.strokeStyle=OUT;c.lineWidth=ST.line;c.beginPath();c.arc(0,-R*.3,R*1.02,Math.PI,0);c.lineTo(R,-R*.52);c.lineTo(-R,-R*.52);c.closePath();c.fill();c.stroke()}
+ c.restore();c.restore();c.restore()}

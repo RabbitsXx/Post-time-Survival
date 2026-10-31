@@ -76,7 +76,7 @@ function animSprite(g,t,st,lt){const U=g.userData.spr,c=U.cvs.getContext('2d'),i
  // reaction pop (squash & stretch overshoot)
  const r=(st.react==null?0:st.react);if((e==='scared'||e==='shock')&&lt>r){const d=lt-r,k=Math.exp(-7*d)*Math.cos(26*d);sy+=.2*k;sx-=.12*k}
  if(lt<.18){const k=1-lt/.18;sy-=.06*k;sx+=.04*k}
- const zs=isZ?2.55:(U.who==='carrot'?2.2:SPS);const P={x:SPW/2,y:SPH-50,s:zs,expr:e,mouth:st.mouthOpen||0,look:st.look||0,bob:0,tilt:(isZ?0:Math.sin(t*.8+ph)*.6),armLift:act==='scared'?30:act==='point'?26:act==='hands'?18:0,prop:act==='shush'?'none':undefined};
+ const zs=isZ?1.55:(U.who==='carrot'?2.2:SPS);const P={x:SPW/2,y:SPH-50,s:zs,expr:e,mouth:st.mouthOpen||0,look:st.look||0,bob:0,tilt:(isZ?0:Math.sin(t*.8+ph)*.6),armLift:act==='scared'?30:act==='point'?26:act==='hands'?18:0,prop:act==='shush'?'none':undefined};
  const L=ST.line;ST.line=4.2;drawLB(c,{who:U.who},P,t);ST.line=L;U.tex.needsUpdate=true;
  U.m.scale.set(sx,sy,1);U.m.position.set(jx,bobY,0);U.m.rotation.z=rz;U.m.material.opacity=1}
 window.USE_2D=/2d/.test(location.search);window.USE_RIG=!USE_2D&&!/norig/.test(location.search);
