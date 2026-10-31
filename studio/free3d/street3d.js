@@ -60,7 +60,7 @@ function buildStreet(){
  // steel tray of raw skewers (centre) with a price card
  bx(.46,.03,.36,MC(0xc8ccd0,.25,.85),KX+.05,cy+.015,cz);
  for(let k=0;k<10;k++){bx(.008,.008,.34,MC(0xd8b878,.7),KX-.17+k*.038,cy+.045,cz);for(let m=0;m<3;m++)bx(.03,.022,.03,MC(m%2?0xd9908a:0xe8a49c,.75),KX-.17+k*.038,cy+.06,cz-.1+m*.1)}
- const pc=new THREE.Mesh(new THREE.PlaneGeometry(.2,.08),new THREE.MeshBasicMaterial({map:signTex('PORK 10','#f4ead0','#2a1810',256,100,56),fog:false}));pc.position.set(KX+.05,cy+.06,cz+.21);pc.rotation.set(0,Math.PI,0);S.add(pc);
+ const pc=new THREE.Mesh(new THREE.PlaneGeometry(.2,.08),new THREE.MeshBasicMaterial({map:signTex('PORK 10','#f4ead0','#2a1810',256,100,56),fog:false}));pc.position.set(KX+.05,cy+.1,cz+.3);pc.rotation.set(0,Math.PI,0);S.add(pc);
  // sauce bottles with labels (left of tray)
  [['CHILI',0xc8201a],['SOY',0x2a1a10],['SWEET',0xe8a020]].forEach(([n,c],i)=>{const x=KX+.36+i*.06;cyl(.022,.13,MC(c,.4),x,cy+.065,cz+.12,0,0,S,8);cyl(.01,.03,MC(0xf0f0f0,.4),x,cy+.145,cz+.12,0,0,S,6)});
  // stainless tea dispenser with tap (far left, mostly out of frame)
