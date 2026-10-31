@@ -6,3 +6,4 @@
 - Posting blocked until owner creates channels + Buffer ids + approves clips. No AI label.
 
 - 2026-10-31 14:11Z: POSTED The Pig War v3 on PosttimeLowPoly YouTube via Buffer after the owner said "post it now". https://www.youtube.com/watch?v=PIG8N4BFH1E (post id in studio/lowpoly/posted.json). Tags still to be set by the owner in YouTube Studio (list in topics/pig_war3.meta.json).
+- 2026-10-31 17:02Z: POSTED Why You Can't Tickle Yourself on PosttimeLowPoly YouTube via Buffer after the owner said 'post it' (https://www.youtube.com/watch?v=K1Kq_JQ6OM8). Tags + pinned comment still to be set by the owner in YouTube Studio (topics/tickle.meta.json). No cover image was made.
