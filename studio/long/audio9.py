@@ -148,10 +148,18 @@ def s_polka():
         if i%2==1:
             m=int(.1*SR);tm=np.arange(m)/SR;w2=(np.sign(np.sin(2*np.pi*392*tm))*.4+np.sin(2*np.pi*784*tm)*.3)*np.exp(-tm*18)*.2;x[t0:t0+m]+=w2[:max(0,len(x)-t0)]
     return fade(fft_filter(x,300,3400),.01,.1)
-NEW={'rustle':s_rustle,'cricket':s_cricket,'bell':s_bell,'polka':s_polka,'chime':s_chime,'doorhiss':s_doorhiss,'horn':s_horn,'hornlong':s_hornlong,'brake':s_brake,'crank':s_crank,'engfail':s_engfail,'engstart':s_engstart,'glass':s_glass,'slap':s_slap,'clunk':s_clunk,'creak':s_creak,'gurgle':s_gurgle,
+def s_oink():
+    d=.55;t=tt(d);f=210+90*np.sin(2*np.pi*5*t)*np.exp(-t*3)-120*t;ph=np.cumsum(f)/SR*2*np.pi
+    x=(np.sign(np.sin(ph))*.5+np.sin(ph*2)*.3)*np.exp(-t*4)*(1+.4*np.sin(2*np.pi*38*t));return fade(fft_filter(x,150,2600)*.5,.01,.1)
+def s_tick():
+    d=.5;x=np.zeros(int(d*SR))
+    for k,i in enumerate([0,.08,.16,.3,.38]):
+        n=int(.03*SR);tn=np.arange(n)/SR;x[int(i*SR):int(i*SR)+n]+=np.sin(2*np.pi*1500*tn)*np.exp(-tn*160)*.4
+    return x
+NEW={'oink':s_oink,'tick':s_tick,'rustle':s_rustle,'cricket':s_cricket,'bell':s_bell,'polka':s_polka,'chime':s_chime,'doorhiss':s_doorhiss,'horn':s_horn,'hornlong':s_hornlong,'brake':s_brake,'crank':s_crank,'engfail':s_engfail,'engstart':s_engstart,'glass':s_glass,'slap':s_slap,'clunk':s_clunk,'creak':s_creak,'gurgle':s_gurgle,
  'boing':s_boing,'rimshot':s_rimshot,'stab':s_stab,'riser':s_riser,'swell':s_swell,'gasp':s_gasp,'sigh':s_sigh,'heartbeat':s_heartbeat,'snore':s_snore,'cluck':s_cluck,'meow':s_meow,'baby':s_baby,'horde':s_horde,'ping':s_ping,
  'sneak':s_sneak,'whisper':s_whisper,'zip':s_zip,'pour':s_pour,'ratchet':s_ratchet,'bridge':s_bridge,'purr':s_purr,'lever':s_lever,'splat':s_splat,'cheer':s_cheer}
-GN={'rustle':.7,'cricket':.6,'bell':.7,'polka':.9,'chime':.7,'doorhiss':.7,'horn':.6,'hornlong':.55,'brake':.45,'crank':.7,'engfail':.8,'engstart':.8,'glass':.6,'slap':.9,'clunk':.8,'creak':.5,'gurgle':.6,'boing':.7,'rimshot':.7,'stab':.65,'riser':.6,'swell':.7,'gasp':.6,'sigh':.6,
+GN={'oink':.8,'tick':.7,'rustle':.7,'cricket':.6,'bell':.7,'polka':.9,'chime':.7,'doorhiss':.7,'horn':.6,'hornlong':.55,'brake':.45,'crank':.7,'engfail':.8,'engstart':.8,'glass':.6,'slap':.9,'clunk':.8,'creak':.5,'gurgle':.6,'boing':.7,'rimshot':.7,'stab':.65,'riser':.6,'swell':.7,'gasp':.6,'sigh':.6,
  'heartbeat':.95,'snore':.8,'cluck':.8,'meow':.8,'baby':.7,'horde':.8,'ping':.7,'sneak':.8,'whisper':.8,'zip':.7,'pour':.7,'ratchet':.7,'bridge':.7,'purr':.9,'lever':.8,'splat':.8,'cheer':.7}
 A.SFX.update(NEW);A.GAIN.update(GN)
 # ------------------------------------------------------------------ moods that carry the engine

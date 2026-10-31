@@ -74,7 +74,7 @@ FX.dateline=(g,f)=>{const q=G(g,{});const x0=36,x1=414,y=628,lvl=f.level==null?0
  T(q,225,y-10,f.date||'',20,'#ffffff',{'font-family':MONO,'font-weight':800,'letter-spacing':1.5});
  T(q,225,y+10,f.place||'',14,'#9fd0e8',{'font-family':MONO,'font-weight':700,'letter-spacing':1.5});
  R(q,x0,y+24,x1-x0,12,'#2a3a50',{rx:6});const bar=R(q,x0,y+24,0.01,12,lvl>.66?'#e0463a':lvl>.33?'#f0b23a':'#7acb7a',{rx:6});
- T(q,x0,y+52,'WAR METER',11,'#9fd0e8',{'font-family':MONO,'font-weight':800,'letter-spacing':2});T(q,x1,y+52,'PIGS: 1',11,'#ffb3c1',{'font-family':MONO,'font-weight':800,'letter-spacing':2,'text-anchor':'end'});
+ T(q,x0,y+52,'WAR METER',11,'#9fd0e8',{'font-family':MONO,'font-weight':800,'letter-spacing':2,'text-anchor':'start'});T(q,x1,y+52,'PIGS: 1',11,'#ffb3c1',{'font-family':MONO,'font-weight':800,'letter-spacing':2,'text-anchor':'end'});
  return (lt)=>{A(q,{opacity:clamp(lt/.3)});A(bar,{width:Math.max(.01,(x1-x0)*lvl*clamp(lt/.9))})}};
 /* ---- device: the telegraph card (p.mode 'open' | 'close' | 'text') ---- */
 CARD.telegraph=(Z,p)=>{const f=G(Z.far),m=G(Z.mid);R(f,-20,-20,490,840,'#14202e');lpMesh(f,-20,470,x=>560,820,'#1f3550',91,10,3,.4);

@@ -1,0 +1,33 @@
+QA report: THE PIG WAR part 1/3 (lowpoly_01)
+  [PASS] A: 13 beats, average 3.38 s (target 3-4.8), longest 7.3 s, shortest 1.6 s
+  [PASS] A: no beat > 9.5 s
+  [PASS] A: no beat > 7.5 s
+  [PASS] A: no beat < 1.5 s
+  [PASS] A: speech pace 156 wpm (97 words, 44 s)
+  [PASS] A: the hook starts at 0.08 s: "Get out of my potatoes!"
+  [PASS] S: on-screen series chip (name / part / topic) in the first 0.5 s
+  [PASS] S: PA opening: "Post Time Lowpoly. The Pig War. Part one of three: one pig."
+  [PASS] S: the PA opening is spoken at 1.7 s (series + part + topic within the first 8 s)
+  [PASS] S: PA sign-off: "Part one of three, The Pig War. Next dispatch: the standoff. Follow for part two."
+  [PASS] S: route line (part n of 3) on every non-card beat
+  [PASS] S: YouTube title (68 chars): One Pig Almost Started A War (1859 True Story) — The Pig War, Part 1
+  [PASS] S: 15 YouTube tags, 241 chars
+  [PASS] S: 15 cues, 15 Thai lines
+  [PASS] S: release kit complete
+  [WARN] F: 3 character voices: {'lyman': 6, 'tele': 5, 'griffin': 3, 'pickett': 1}
+  [WARN] F: BUS-E/PA = 63 % of speech time (target <= 25 %)
+  [WARN] F: 10 speaker changes (conversation, not narration)
+  [PASS] F: 11 kinds of sound effect: ['bell', 'boing', 'gasp', 'heartbeat', 'horn', 'oink', 'ping', 'radio', 'rimshot', 'stab', 'tick']; comedy stings: ['boing', 'rimshot']
+  [PASS] F: characters visible in 9/9 non-card beats
+  [PASS] F: 1 lines with a question or talking to the viewer
+  [PASS] B: layout: 0 CROP, 0 OVERLAP
+  [PASS] B: layout: 0 BAND, 0 EDGE
+  [PASS] C: 720x1280 h264 yuv420p 30.00 fps; colour bt709
+  [PASS] C: duration 43.97 s vs spec 43.97 s; 10.1 MB; audio aac 48000 Hz
+  [PASS] D: integrated -14.1 LUFS, LRA 6.0 LU
+  [PASS] D: true peak -1.9 dBTP
+  [PASS] E: every beat boundary changes the picture clearly
+  [PASS] E: no black frames in the scan
+  [PASS] H: cover embedded in the first frames (diff 3.4/255)
+
+  RESULT: PASS
