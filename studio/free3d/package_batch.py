@@ -16,7 +16,7 @@ def one(k):
     # camera keyframes already relative; keep chars as authored (positions at shot start)
     p=R+f'/spec_{k}_cover.json';json.dump(sp,open(p,'w'));d=R+f'/out/{k}_cover';os.makedirs(d,exist_ok=True)
     subprocess.check_call(['node',R+'/render_store3.js',p,d,'20','21','1080','1920','&2d'],cwd=R);base=R+f'/out/{k}_cover_base.jpg';os.replace(d+'/00020.jpg',base)
-    img=P.cover_ref(base,f'#{NUM[k]}',l1,l2,pill);img.save(f'{od}/cover_9x16.jpg',quality=92);P.preview(img,f'{od}/cover_preview.jpg')
+    img=P.cover_ref(base,'',l1,l2,pill);img.save(f'{od}/cover_9x16.jpg',quality=92);P.preview(img,f'{od}/cover_preview.jpg')
     for i in range(4):img.save(f'{frames}/{i:05d}.jpg',quality=93)
     open(f'{od}/captions_en.srt','w').write(P.srt(ep))
     wav=R+f'/out/{k}.wav'

@@ -55,8 +55,9 @@ def cover_ref(base,part='PART 1',l1='THE DEAD',l2='SMELL FEAR',pill='12 SHOPPERS
     for y in range(1020,1920):d.line([(0,y),(1080,y)],fill=(5,8,18,int(235*min(1,(y-1020)/330))))
     img=Image.alpha_composite(img.convert('RGBA'),ov).convert('RGB');d=ImageDraw.Draw(img)
     f_cap=ImageFont.truetype(FONT,52);f_part=ImageFont.truetype(FONT,168);f_big=ImageFont.truetype(FONT,176);f_pill=ImageFont.truetype(FONT,74)
-    d.rounded_rectangle((65,447,65+415,447+82),radius=22,fill=(8,10,20),outline=(242,194,48),width=6);d.text((272,488),'REMAIN CALM',font=f_cap,fill=(255,255,255),anchor='mm')
-    outlined(d,(1005,490),part,f_part,(242,194,48),w=12,anchor='rm')
+    bx0=65 if part else 332
+    d.rounded_rectangle((bx0,447,bx0+415,447+82),radius=22,fill=(8,10,20),outline=(242,194,48),width=6);d.text((bx0+207,488),'REMAIN CALM',font=f_cap,fill=(255,255,255),anchor='mm')
+    if part:outlined(d,(1005,490),part,f_part,(242,194,48),w=12,anchor='rm')
     outlined(d,(540,1058),l1,f_big,(255,255,255),w=14);outlined(d,(540,1240),l2,f_big,(242,194,48),w=14)
     d.rounded_rectangle((142,1330,938,1475),radius=30,fill=(216,40,36),outline=(255,255,255),width=6);d.text((540,1403),pill,font=f_pill,fill=(255,255,255),anchor='mm')
     return img
