@@ -122,7 +122,7 @@ function buildCheckout(){for(let i=0;i<3;i++){const x=-12+i*5,z0=FD/2-5;
  for(let k=0;k<4;k++)bx(.2,.3,.02,new THREE.MeshBasicMaterial({color:0xf2f2e8,fog:true}),x+.7,1.2,z0+.2+k*.3,.2*k);}
  const ex=signTex('EXPRESS · 10 ITEMS','#1f7ad0','#ffffff',512,90,52);const em=new THREE.Mesh(new THREE.PlaneGeometry(2.4,.42),new THREE.MeshBasicMaterial({map:ex,fog:true}));em.position.set(-2,3.2,FD/2-7);em.rotation.y=Math.PI;S.add(em)}
 
-function buildCheckout2(){for(let i=0;i<3;i++){const x=-12+i*5,z0=FD/2-5;
+function buildCheckout2(){for(const lx of[-12,-7,-2]){const L=new THREE.PointLight(0xdff8ff,18,9,2);L.position.set(lx,3.2,13);S.add(L)}for(let i=0;i<3;i++){const x=-12+i*5,z0=FD/2-5;
  bx(.5,.04,.32,MC(0x1a1c20,.4),x+.3,.97,z0+1.3);bx(.34,.02,.2,new THREE.MeshBasicMaterial({color:0x9ad8ff,fog:true}),x+.3,1.0,z0+1.3);
  bx(.3,.22,.04,MC(0x20242a,.4),x-.2,1.13,z0+1.75,.3);bx(.26,.16,.02,new THREE.MeshBasicMaterial({color:i===1?0x2affb0:0x16a070,fog:true}),x-.2,1.14,z0+1.77,.3);
  for(let k=0;k<9;k++)bx(.62,.012,.04,MC(0x3a3e44,.5,.4),x,.965,z0-1.2+k*.3);
