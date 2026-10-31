@@ -74,7 +74,7 @@ function buildKiosk(){
  bx(1.1,.7,.7,DK,KX-1.4,.55,KZ+.2);const coals=new THREE.Mesh(new THREE.BoxGeometry(.95,.06,.5),new THREE.MeshBasicMaterial({color:0xff6a20,fog:false}));coals.position.set(KX-1.4,.92,KZ+.2);S.add(coals);
  for(let i=0;i<8;i++){bx(.03,.03,.7,MC(0x9a9a9a,.3,.6),KX-1.78+i*.1,1.0,KZ+.2);cyl(.05,.06,MC(0x7a3a1a,.7),KX-1.78+i*.1,1.0,KZ+.05,Math.PI/2,0,S,6);cyl(.05,.06,MC(0x8a4a22,.7),KX-1.78+i*.1,1.0,KZ+.2,Math.PI/2,0,S,6);cyl(.05,.06,MC(0x7a3a1a,.7),KX-1.78+i*.1,1.0,KZ+.35,Math.PI/2,0,S,6)}
  // sticky rice basket, tea jug, cash tin, bell on the counter
- cyl(.28,.22,MC(0xc8a850,.8),KX+.9,1.17,KZ+.7,0,0,S,10);cyl(.14,.42,MC(0xe0e0e0,.4,.3),KX+1.5,1.25,KZ+.65,0,0,S,10);bx(.35,.1,.25,MC(0x8a8a8a,.4,.5),KX-.3,1.1,KZ+.65);cyl(.07,.07,MC(0xd8b030,.3,.8),KX+.25,1.1,KZ+.75,0,0,S,10);
+ cyl(.17,.16,MC(0xc8a850,.8),KX-.75,1.12,KZ+.75,0,0,S,10);cyl(.14,.42,MC(0xe0e0e0,.4,.3),KX+1.5,1.25,KZ+.65,0,0,S,10);bx(.35,.1,.25,MC(0x8a8a8a,.4,.5),KX-.3,1.1,KZ+.65);cyl(.07,.07,MC(0xd8b030,.3,.8),KX+.25,1.1,KZ+.75,0,0,S,10);
  // street outside: wet road, kerb, lamp post, far buildings
  const road=new THREE.Mesh(new THREE.PlaneGeometry(60,40),MC(0x15181c,.25,.2));road.rotation.x=-Math.PI/2;road.position.set(KX,-.01,KZ+22);S.add(road);
  const walk=new THREE.Mesh(new THREE.PlaneGeometry(60,4.6),MC(0x4a4e52,.8));walk.rotation.x=-Math.PI/2;walk.position.set(KX,.0,KZ+3.2);S.add(walk);bx(60,.16,.25,MC(0x7a7e82,.8),KX,.08,KZ+5.6);
