@@ -32,6 +32,11 @@ def S_slide():
     n=int(.7*SR);t=np.arange(n)/SR;f=1500*np.exp(-t*2.2)+250;ph=2*np.pi*np.cumsum(f)/SR;return (np.sin(ph)*.3*np.minimum((.7-t)/.1,1)).astype(np.float32)
 def S_riser():
     n=int(2.0*SR);t=np.arange(n)/SR;f=180+t**2*500;ph=2*np.pi*np.cumsum(f)/SR;return (np.sin(ph)*.18*(t/2)**1.5).astype(np.float32)
+def S_plop():
+    n=int(.25*SR);t=np.arange(n)/SR;return (sine(260*np.exp(-t*14)+90,t)*np.exp(-t/.07)*.8+lp(noise(n,17),900)*np.exp(-t/.02)*.3).astype(np.float32)
+def S_pop():
+    n=int(.2*SR);t=np.arange(n)/SR;return (sine(500*np.exp(-t*30)+120,t)*np.exp(-t/.04)*.8+noise(n,3)*np.exp(-t/.004)*.4).astype(np.float32)
+SFXLIB.update(plop=S_plop,pop=S_pop)
 SFXLIB.update(gun=S_gun,squeal=S_squeal,oink=S_oink,plink=S_plink,munch=S_munch,fly=S_fly,tick=S_tick,stamp=S_stamp,bugle=S_bugle,slide=S_slide,riser=S_riser)
 def bed(dur):
     bpm=116;sp=60/bpm;n=int((dur+1)*SR);out=np.zeros(n,dtype=np.float32);ch=[(130.8,164.8,196),(98,123.5,146.8),(110,130.8,164.8),(87.3,110,130.8)]

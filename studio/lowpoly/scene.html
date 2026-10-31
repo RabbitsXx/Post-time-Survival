@@ -13,7 +13,7 @@ const QP=new URLSearchParams(location.search);const VW=+(QP.get('w')||1080),VH=+
 const cv=document.getElementById('c');const R=new THREE.WebGLRenderer({canvas:cv,antialias:false,preserveDrawingBuffer:true});R.setSize(RW,RH,false);R.setPixelRatio(1);
 const S=new THREE.Scene();const HOR=0xcdeeff;S.fog=new THREE.Fog(HOR,45,130);
 const cam=new THREE.PerspectiveCamera(45,RW/RH,.1,300);
-S.add(new THREE.HemisphereLight(0xffffff,0x7a9a58,1.15));const sun=new THREE.DirectionalLight(0xfff0cc,1.0);sun.position.set(-20,40,25);S.add(sun);
+const HEMI=new THREE.HemisphereLight(0xffffff,0x7a9a58,1.15);S.add(HEMI);const PROPS=[];const sun=new THREE.DirectionalLight(0xfff0cc,1.0);sun.position.set(-20,40,25);S.add(sun);
 const NZ=(()=>{const c=document.createElement('canvas');c.width=c.height=16;const x=c.getContext('2d');for(let j=0;j<16;j++)for(let i=0;i<16;i++){const v=Math.round(232+((i*7+j*13)%5)*5+(((i+j)%2)?-10:0));x.fillStyle='rgb('+v+','+v+','+v+')';x.fillRect(i,j,1,1)}const t=new THREE.CanvasTexture(c);t.magFilter=t.minFilter=THREE.NearestFilter;t.generateMipmaps=false;t.colorSpace=THREE.SRGBColorSpace;return t})();
 const M=(c,o={})=>new THREE.MeshLambertMaterial(Object.assign({color:c,flatShading:true,map:NZ},o));
 const rn=i=>{const s=Math.sin(i*127.1+3.7)*43758.5453;return s-Math.floor(s)};
@@ -44,14 +44,14 @@ for(let i=0;i<5;i++)GARD.push(box(.12,.9,.12,fenceM,-3.9,.45,-2.5+i*1.3));GARD.p
 // cabin
 const cabinG=new THREE.Group();const plank=ctex(32,32,(x,w,h)=>{x.fillStyle='#8a5a30';x.fillRect(0,0,w,h);x.fillStyle='#6a4220';for(let i=0;i<8;i++)x.fillRect(0,i*4,w,1)},[2,1]);
 box(4.4,2.3,3.2,new THREE.MeshLambertMaterial({map:plank}),0,1.15,0,cabinG);const roof=cone(3.4,1.6,4,M(0x9a3a2a),0,3.1,0,cabinG);roof.rotation.y=Math.PI/4;roof.scale.set(1.35,1,.95);box(.8,1.5,.1,M(0x4a2a12),0,.75,1.62,cabinG);box(.8,.7,.1,M(0xbfe8ff),1.4,1.4,1.62,cabinG);box(.7,1.2,.7,M(0x6a3a28),1.4,3.3,-.6,cabinG);
-cabinG.position.set(-9,0,-8);cabinG.rotation.y=.5;S.add(cabinG);
+cabinG.position.set(-9,0,-8);cabinG.rotation.y=.5;S.add(cabinG);PROPS.push(cabinG);
 // trees
-function tree(x,z,s){const g=new THREE.Group();box(.4,1.4,.4,M(0x6a4326),0,.7,0,g);cone(1.5,2.2,6,M(0x2f8a3a),0,2.2,0,g);cone(1.15,1.8,6,M(0x3aa046),0,3.3,0,g);cone(.75,1.4,6,M(0x4ab850),0,4.2,0,g);g.position.set(x,0,z);g.scale.setScalar(s);S.add(g)}
+function tree(x,z,s){const g=new THREE.Group();box(.4,1.4,.4,M(0x6a4326),0,.7,0,g);cone(1.5,2.2,6,M(0x2f8a3a),0,2.2,0,g);cone(1.15,1.8,6,M(0x3aa046),0,3.3,0,g);cone(.75,1.4,6,M(0x4ab850),0,4.2,0,g);g.position.set(x,0,z);g.scale.setScalar(s);S.add(g);PROPS.push(g)}
 for(let i=0;i<22;i++){const a=rn(i)*6.28,r=14+rn(i+40)*11;const x=Math.cos(a)*r,z=Math.sin(a)*r;if(Math.abs(x)<7&&Math.abs(z)<6)continue;if(z<-6&&Math.abs(x)<13)continue;tree(x,z,.8+rn(i+7)*.7)}
 // clouds
 const clouds=[];for(let i=0;i<12;i++){const g=new THREE.Group();for(let j=0;j<4;j++)box(4+rn(i*3+j)*3,1.4,2.4,new THREE.MeshBasicMaterial({color:0xffffff}),j*2.2-3,rn(j+i)*.8,rn(j*2+i)*1.2,g);const a=i/12*6.28;g.position.set(Math.cos(a)*60,16+rn(i+3)*14,Math.sin(a)*60);g.userData={a,r:60,y:g.position.y,sp:.01+rn(i)*.015};S.add(g);clouds.push(g)}
 // tents
-function tent(x,z,col){const t=cone(2,2,4,M(col),x,1,z);t.rotation.y=Math.PI/4;S.add(t);return t}
+function tent(x,z,col){const t=cone(2,2,4,M(col),x,1,z);t.rotation.y=Math.PI/4;S.add(t);PROPS.push(t);return t}
 tent(-16,5,0xd8c9a0);tent(-19,1,0xd8c9a0);tent(-17,-3,0xd8c9a0);tent(16,4,0xe8e8e8);tent(18,-1,0xe8e8e8);tent(15.5,-4.5,0xe8e8e8);
 
 // ---------- ships ----------
@@ -114,7 +114,7 @@ const hand=ACT; // alias
 const lerp=(a,b,k)=>a+(b-a)*k,ease=k=>k*k*(3-2*k),cl=(k,a=0,b=1)=>Math.min(b,Math.max(a,k));
 let SHAKE=0,FLASH=0;
 function pigBlob(){[pig,ghost].forEach(p=>{p.bl.visible=Math.abs(p.root.rotation.z)<.3&&p.root.position.y<.7})}
-function hideAll(){GARD.forEach(a=>a.visible=false);ACT.forEach(a=>a.visible=false);usFlag.visible=true;SH.forEach((s,i)=>{s.visible=false})}
+function hideAll(){PROPS.forEach(a=>a.visible=true);ground.material.color.set(0xffffff);S.background=SKY;S.fog.color.set(HOR);HEMI.intensity=1.15;GARD.forEach(a=>a.visible=false);ACT.forEach(a=>a.visible=false);usFlag.visible=true;SH.forEach((s,i)=>{s.visible=false})}
 function showGarden(){GARD.forEach(a=>a.visible=true)}
 function show(...a){a.forEach(x=>{(x.g||x.root||x).visible=true;if(x.root)x.root.visible=true})}
 function camTo(p0,p1,l0,l1,k,fov=45){const e=ease(cl(k));cam.position.set(lerp(p0[0],p1[0],e),lerp(p0[1],p1[1],e),lerp(p0[2],p1[2],e));cam.fov=fov;cam.updateProjectionMatrix();cam.lookAt(lerp(l0[0],l1[0],e),lerp(l0[1],l1[1],e),lerp(l0[2],l1[2],e));if(SHAKE>0){cam.position.x+=(Math.random()-.5)*SHAKE;cam.position.y+=(Math.random()-.5)*SHAKE}}
@@ -167,3 +167,4 @@ window.renderAt=f=>{const t=f/30;let sh=SPEC.shots.find(s=>t>=s.t0&&t<s.t1)||SPE
  const c=SPEC.caps.find(c=>t>=c.t0&&t<c.t1);if(c){if(capEl.dataset.k!==String(c.t0)){capEl.textContent=c.text;capEl.dataset.k=String(c.t0)}const a=cl((t-c.t0)/.1);capEl.style.transform='scale('+(1.14-.14*a)+')';capEl.style.opacity=1}else{capEl.style.opacity=0;capEl.dataset.k=''}
  return sh.id};
 </script>
+<script src="wombat.js"></script>
