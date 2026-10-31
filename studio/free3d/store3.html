@@ -77,7 +77,7 @@ function makeSprite(k){const cvs=document.createElement('canvas');cvs.width=SPW;
 function buildPeople(){const keys=window.USE_2D?Object.keys(SPR_MAP):Object.keys(window.USE_RIG?RCAST:TCAST);for(const k of keys){const g=window.USE_2D?makeSprite(k):(window.USE_RIG?RCAST:TCAST)[k]();g.visible=false;g.traverse(o=>o.layers.set(1));S.add(g);PEOPLE[k]=g;const cf=g.userData.cfg;const bl=new THREE.Mesh(new THREE.CircleGeometry(.5*(cf.s||1)*(cf.w||1),14),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.42,depthWrite:false}));bl.rotation.x=-Math.PI/2;bl.scale.y=.62;bl.visible=false;bl.userData.dyn=1;S.add(bl);BLOB[k]=bl;ps1(bl)}}
 function animSprite(g,t,st,lt){const U=g.userData.spr,c=U.cvs.getContext('2d'),isZ=/^zr/.test(U.who);c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,SPW,SPH);
  const ph=(st.seed||0)*1.7,act=st.act||'idle',e=st.expr||'calm';let sx=1,sy=1,bobY=0,rz=0,jx=0;
- const br=Math.sin(t*1.7+ph);sx-=br*.006;sy+=br*.012;
+ const br=Math.sin(t*1.7+ph);sx-=br*.010;sy+=br*.020;if(act==='idle')rz+=Math.sin(t*.9+ph)*.007;   // moving hold: breathing + a slow weight shift so a still character never freezes (12 principles)
  if(act==='walk'||act==='run'||(isZ&&st.moving)){const f=act==='run'?9:isZ?3.2:5.5,ph2=Math.sin(t*f+ph);bobY=Math.abs(ph2)*(act==='run'?.09:isZ?.035:.06);rz=ph2*(isZ?.07:.05);const sq=Math.abs(Math.cos(t*f+ph));sy+=(.5-sq)*.06;sx-=(.5-sq)*.04}
  if(act==='scared'){jx=Math.sin(t*38+ph)*.012;sy+=Math.sin(t*3)*.01}
  // reaction pop (squash & stretch overshoot)

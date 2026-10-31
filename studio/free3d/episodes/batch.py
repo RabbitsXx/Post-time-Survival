@@ -149,3 +149,7 @@ ep('nn1',"NANA PIM",[
 ep('bo1',"BO",[
  S(OUT,[ch('bo',1.0,22.0,'calm',prop='phone',propSide=1,face=[1.8,26.0]),ch('z2',-1.0,22.6,'calm',face=[1.0,22.0]),ch('z3',3.0,22.4,'calm',face=[1.0,22.0])],[L('bo',"Mom? I'm outside Freshway."),L('bo',"No, I'm fine. There's, like, a bunch of guys standing around.")],'FRESHWAY 24H · 3:47 AM',fov=44,grade='cold',min=7.4,cues=[dict(t=0,type='gate',dur=6.0),dict(t=1,type='tick'),dict(t=4,type='tick')],sfx=[[3.0,'foot']]),
  S(OUT,[ch('bo',1.0,22.0,'calm',prop='phone',propSide=1,face=[1.8,26.0]),ch('z2',-.2,22.3,'calm',face=[1.0,22.0]),ch('z3',2.2,22.2,'calm',face=[1.0,22.0])],[L('bo',"They're not doing anything. Can you bring snacks?"),L('zombie',"Snacks.")],'FRESHWAY 24H · 3:47 AM',fov=44,min=5.6,sfx=[[.2,'groan']],cues=[dict(t=3.6,type='motif',detune=.3,level=.2)])])
+
+for _k in ('nn1','bo1','hm3'):
+    for _s in EPS[_k]['shots']:
+        _s['pad']=min(_s.get('pad',.3),.15);_s['lead']=min(_s.get('lead',.25),.12)
