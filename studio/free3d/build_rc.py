@@ -7,9 +7,9 @@ import build as B
 from build import tts,rd,FPS,SR,NAMES,NAMECOL,VOICES,SFXLIB
 import score
 OUT=R+'/out';os.makedirs(OUT,exist_ok=True)
-VOICES.update({'mimi':('en-US-Chirp3-HD-Kore',1.0),'gus':('en-US-Chirp3-HD-Fenrir',1.08),'teddy':('en-US-Chirp3-HD-Puck',1.18),'vance':('en-US-Chirp3-HD-Charon',.93),'rosa':('en-US-Chirp3-HD-Vindemiatrix',1.05),'pa':('en-US-Chirp3-HD-Leda',.92)})
-NAMES.update({'mimi':'MIMI','gus':'GUS','teddy':'TEDDY','vance':'DR. VANCE','rosa':'ROSA','pa':'STORE PA'})
-NAMECOL.update({'mimi':'#7affc0','gus':'#9ad0ff','teddy':'#ff9a8a','vance':'#ffd98a','rosa':'#d8a8ff','pa':'#8aff9a'})
+VOICES.update({'mimi':('en-US-Chirp3-HD-Kore',1.0),'gus':('en-US-Chirp3-HD-Fenrir',1.08),'teddy':('en-US-Chirp3-HD-Puck',1.18),'vance':('en-US-Chirp3-HD-Charon',.93),'rosa':('en-US-Chirp3-HD-Vindemiatrix',1.05),'pa':('en-US-Chirp3-HD-Leda',.92),'machine':('en-US-Chirp3-HD-Leda',.95),'watch':('en-US-Chirp3-HD-Aoede',1.05),'zombie':('en-US-Chirp3-HD-Algenib',.62)})
+NAMES.update({'mimi':'MIMI','gus':'GUS','teddy':'TEDDY','vance':'DR. VANCE','rosa':'ROSA','pa':'STORE PA','machine':'SELF-CHECKOUT','watch':'SMARTWATCH','zombie':'ZOMBIE'})
+NAMECOL.update({'mimi':'#7affc0','gus':'#9ad0ff','teddy':'#ff9a8a','vance':'#ffd98a','rosa':'#d8a8ff','pa':'#8aff9a','machine':'#8aff9a','watch':'#ffe070','zombie':'#9aff6a'})
 def _env(n,a=.005,d=.06):
     t=np.arange(n)/SR;return np.minimum(t/a,1)*np.exp(-t/d)
 def S_beep():
@@ -26,7 +26,7 @@ def S_heart():
 SFXLIB.update({'beep':S_beep,'cry':S_cry,'heart':S_heart})
 def voice(text,who):
     p=tts(text,who)
-    if who!='pa':return p
+    if who not in('pa','machine','watch'):return p
     q=p.replace('.wav','.pa.wav')
     if not os.path.exists(q):subprocess.check_call(['ffmpeg','-y','-loglevel','error','-i',p,'-af','highpass=f=380,lowpass=f=3400,acompressor=threshold=-20dB:ratio=5,aecho=0.6:0.5:70:0.25,volume=1.2','-ac','1',q])
     return q
