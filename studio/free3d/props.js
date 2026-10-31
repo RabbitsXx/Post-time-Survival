@@ -50,7 +50,7 @@ const FOOT=ctex(64,128,(x,w,h)=>{x.clearRect(0,0,w,h);x.fillStyle='rgba(90,10,14
 const POSTERS=[['FRESH BAKED DAILY','#e8a43a','#3a1a08'],['ALL FRUIT 2 FOR 1','#2aa050','#ffffff'],['NIGHT SHIFT: STAY CALM','#2a5ab8','#ffffff'],['MEMBERS SAVE 20%','#c02a4a','#ffffff'],['BUY 3 GET 1 FREE','#f0c020','#1a1a1a']];
 function posterTex(i){const p=POSTERS[i%POSTERS.length];return ctex(256,384,(x,w,h)=>{x.fillStyle=p[1];x.fillRect(0,0,w,h);x.fillStyle='rgba(255,255,255,.18)';x.beginPath();x.arc(w/2,h*.38,w*.34,0,7);x.fill();x.fillStyle=p[2];x.font='900 38px "Roboto Condensed",Arial';x.textAlign='center';const wd=p[0].split(' ');for(let k=0;k<wd.length;k++)x.fillText(wd[k],w/2,h*.72+k*40-(wd.length-2)*20);x.strokeStyle='rgba(0,0,0,.4)';x.lineWidth=6;x.strokeRect(3,3,w-6,h-6)})}
 function banner(x,z,txt,col,ry=0){const t=signTex(txt,col,'#ffffff',512,200,92);for(const f of[0,Math.PI]){const m=new THREE.Mesh(new THREE.PlaneGeometry(2.2,.86),new THREE.MeshBasicMaterial({map:t,fog:true}));m.position.set(x,3.85,z);m.rotation.y=ry+f;S.add(m)}for(const sx of[-1,1])cyl(.008,.5,MC(0x222222),x+sx*1.0*Math.cos(ry),4.15,z-sx*1.0*Math.sin(ry),0,0,S,4)}
-function buildProps(){buildOutside();buildCheckout();
+function buildProps(){buildOutside();buildCheckout();buildCheckout2();
  // aisle hanging signs (big, readable) over every aisle mouth
  [[-9,'AISLE 8','CEREAL · SNACKS'],[-3.4,'AISLE 9','CANNED · PASTA'],[2.2,'AISLE 10','DRINKS · CLEANING']].forEach(([z,a,b],i)=>{for(const xx of[8.2,-2]){const t=ctex(512,256,(x,w,h)=>{x.fillStyle='#17324a';x.fillRect(0,0,w,h);x.strokeStyle='#f2c230';x.lineWidth=10;x.strokeRect(6,6,w-12,h-12);x.fillStyle='#f2c230';x.font='900 120px "Roboto Condensed",Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(a,w/2,92);x.fillStyle='#fff';x.font='900 52px "Roboto Condensed",Arial';x.fillText(b,w/2,196)});for(const f of[0,Math.PI]){const m=new THREE.Mesh(new THREE.PlaneGeometry(2.4,1.2),new THREE.MeshBasicMaterial({map:t,fog:true}));m.position.set(xx,3.4,z);m.rotation.y=Math.PI/2+f;S.add(m)}for(const sz of[-1,1])cyl(.01,.9,MC(0x222222),xx,4.0,z+sz*.8,0,0,S,4)}});
  // end caps: promo can pyramids
@@ -121,3 +121,12 @@ function buildCheckout(){for(let i=0;i<3;i++){const x=-12+i*5,z0=FD/2-5;
  bx(.04,1.9,.04,MC(0x888c90,.4,.7),x-.6,1.45,z0-1.9);bx(.04,1.9,.04,MC(0x888c90,.4,.7),x+.6,1.45,z0-1.9);
  for(let k=0;k<4;k++)bx(.2,.3,.02,new THREE.MeshBasicMaterial({color:0xf2f2e8,fog:true}),x+.7,1.2,z0+.2+k*.3,.2*k);}
  const ex=signTex('EXPRESS · 10 ITEMS','#1f7ad0','#ffffff',512,90,52);const em=new THREE.Mesh(new THREE.PlaneGeometry(2.4,.42),new THREE.MeshBasicMaterial({map:ex,fog:true}));em.position.set(-2,3.2,FD/2-7);em.rotation.y=Math.PI;S.add(em)}
+
+function buildCheckout2(){for(let i=0;i<3;i++){const x=-12+i*5,z0=FD/2-5;
+ bx(.5,.04,.32,MC(0x1a1c20,.4),x+.3,.97,z0+1.3);bx(.34,.02,.2,new THREE.MeshBasicMaterial({color:0x9ad8ff,fog:true}),x+.3,1.0,z0+1.3);
+ bx(.3,.22,.04,MC(0x20242a,.4),x-.2,1.13,z0+1.75,.3);bx(.26,.16,.02,new THREE.MeshBasicMaterial({color:i===1?0x2affb0:0x16a070,fog:true}),x-.2,1.14,z0+1.77,.3);
+ for(let k=0;k<9;k++)bx(.62,.012,.04,MC(0x3a3e44,.5,.4),x,.965,z0-1.2+k*.3);
+ bx(.04,.3,3.6,MC(0xc8ccd0,.3,.8),x+.45,1.1,z0);
+ for(let k=0;k<3;k++)bx(.16,.22,.08,MC(0xf0f0e8,.9),x+.62,1.1,z0+.3+k*.25,.3*k);
+ cyl(.03,2.2,MC(0x888c90,.4,.7),x,1.1,z0+1.8,0,0,S,6);const ln=new THREE.Mesh(new THREE.PlaneGeometry(.6,.4),new THREE.MeshBasicMaterial({map:signTex(String(i+1),(i===1?'#16a050':'#c02a24'),'#fff',128,86,60),fog:false}));ln.position.set(x,2.3,z0+1.8);S.add(ln);
+ bx(.4,.3,.3,MC(0xe8ecf0,.5),x+.55,1.1,z0-.3);const sn=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,.18,8),MC(0x2aa8e0,.5));sn.position.set(x+.55,1.35,z0-.3);S.add(sn)}}
