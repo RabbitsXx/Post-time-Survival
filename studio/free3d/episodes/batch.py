@@ -139,3 +139,13 @@ ep('hm3','ROUGH NIGHT?',[
  S(A,[MI('smile')],[L('mimi',"Welcome to Freshway.")],'FRESHWAY 24H · 6:00 AM',fov=23,min=2.8,sfx=[[0,'chime']]),
  S(B,[cus('z1','calm')],[L('zombie',"Rough night?")],'FRESHWAY 24H · 6:00 AM',fov=36,min=2.8,cues=[dict(t=0.9,type='gate',dur=1.2)]),
  S(A,[MI('smile')],[L('mimi',"Not at all.")],'FRESHWAY 24H · 6:00 AM',fov=23,min=3.6,cues=[dict(t=.2,type='motif',detune=.3,level=.2)])])
+
+# ---- new people, new place (owner: "still the same place and characters") ----
+OUT=CAM([1.9,1.4,26.4],[1.0,1.25,22.0])
+ep('nn1',"NANA PIM",[
+ S(GUS,[ch('nana',6.4,Z,'smile',prop='basket',face=[3.4,Z+.3]),ch('z2',9.0,Z-.5,'calm',to=[7.4,Z-.5],t0=.2,t1=3.4,act='reach',face=[6.4,Z])],[L('nana',"Don't mind them, dear. I buried two husbands.")],'AISLE 9 · 3:41 AM',fov=38,min=4.6,sfx=[[.4,'foot'],[1.2,'foot'],[2.0,'foot']]),
+ S(GUS,[ch('nana',6.4,Z,'smile',prop='basket',face=[3.4,Z+.3]),ch('z2',7.4,Z-.5,'calm',to=[8.6,Z-.5],t0=1.8,t1=3.6,act='reach',face=[6.4,Z])],[L('nana',"That's the last pudding. It's mine."),L('zombie',"Sorry.")],'AISLE 9 · 3:41 AM',fov=38,min=5.2,sfx=[[0,'groan'],[2.4,'foot'],[3.0,'foot']]),
+ S(FRONT,[ch('gus',8.4,Z+.5,'shock'),ch('nana',9.6,Z-.3,'smile',prop='basket')],[L('gus',"Ma'am. How are you not scared?"),L('nana',"At my age, dear, the dead are just very slow customers.")],'AISLE 9 · 3:42 AM',fov=42,min=6.4,cues=[dict(t=.4,type='motif',detune=.3,level=.18)])])
+ep('bo1',"BO",[
+ S(OUT,[ch('bo',1.0,22.0,'calm',prop='phone',propSide=1,face=[1.8,26.0]),ch('z2',-1.0,22.6,'calm',face=[1.0,22.0]),ch('z3',3.0,22.4,'calm',face=[1.0,22.0])],[L('bo',"Mom? I'm outside Freshway."),L('bo',"No, I'm fine. There's, like, a bunch of guys standing around.")],'FRESHWAY 24H · 3:47 AM',fov=44,grade='cold',min=7.4,cues=[dict(t=0,type='gate',dur=6.0),dict(t=1,type='tick'),dict(t=4,type='tick')],sfx=[[3.0,'foot']]),
+ S(OUT,[ch('bo',1.0,22.0,'calm',prop='phone',propSide=1,face=[1.8,26.0]),ch('z2',-.2,22.3,'calm',face=[1.0,22.0]),ch('z3',2.2,22.2,'calm',face=[1.0,22.0])],[L('bo',"They're not doing anything. Can you bring snacks?"),L('zombie',"Snacks.")],'FRESHWAY 24H · 3:47 AM',fov=44,min=5.6,sfx=[[.2,'groan']],cues=[dict(t=3.6,type='motif',detune=.3,level=.2)])])
