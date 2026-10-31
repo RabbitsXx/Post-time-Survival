@@ -248,18 +248,43 @@ def MP(who,x=.1,e='smile',**k):return dict(who=who,pos=[MX+x,MZ+2.7],expr=e,**k)
 def MW(who,x0,e,**k):return dict(who=who,pos=[MX+x0,MZ+2.7],to=[MX+.1,MZ+2.7],t0=0,t1=2.2,expr=e,**k)
 ep('ks1','NIGHT 1',[
  CARD('NIGHT SHIFT RULES',['EVERYONE VISITS ONCE','SERVE THEM','REFUSE ANYONE WHO COMES BACK'],L('vendor',"Everyone visits once. Serve them. Refuse anyone who comes back."),min=7.0,sfx=[[.3,'click'],[1.9,'click'],[3.5,'click']]),
- S(M3,[],[],'CUSTOMER 1 · ARRIVES',fov=55,grade='calm',min=2.4,p3=[MW('man',4.6,'smile')],hands=[],sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
- S(M3,[],[L('man',"One hot dog, please. Long shift tonight.")],'ORDER: 1 HOT DOG',fov=55,grade='calm',min=4.8,p3=[MP('man',.1,'smile')],hands=[],icons=[OB('skewer',1,'x1')]),
+ S(M3,[],[],'CUSTOMER 1 · ARRIVES',fov=55,grade='warm',min=2.4,p3=[MW('man',4.6,'smile')],hands=[],sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
+ S(M3,[],[L('man',"One hot dog, please. Long shift tonight.")],'ORDER: 1 HOT DOG',fov=55,grade='warm',min=4.8,p3=[MP('man',.1,'smile')],hands=[],icons=[OB('skewer',1,'x1')]),
  S(MGRILL,[],[L('vendor',"Fresh off the roller.")],'GRABBING',fov=44,grade='warm',min=4.6,hands=[dict(pose='grill',item='hotdog',t0=.6,t1=4.2)],sfx=[[0,'whoosh'],[.6,'click']]),
- S(M3,[],[L('man',"Thanks. Smells great."),L('vendor',"Serve.")],'HANDING OVER',fov=55,grade='calm',min=6.0,p3=[MP('man',.1,'smile',give=dict(t0=1.4,t1=2.8))],hands=[dict(pose='give',item='hotdog',t0=.1,t1=2.0),dict(pose='take',item='coin',t0=2.2,t1=3.4)],icons=[dict(k='stampS',t0=3.7,t1=9,x=.5,y=.5,s=1)],sfx=[[.9,'click'],[2.6,'chime']]),
- S(M3,[],[],'CUSTOMER 2 · ARRIVES',fov=55,grade='calm',min=2.4,p3=[MW('woman',-4.6,'calm')],hands=[],sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
- S(M3,[],[L('woman',"A cola, please. No ice.")],'ORDER: 1 COLA',fov=55,grade='calm',min=4.4,p3=[MP('woman',-.1,'calm')],hands=[],icons=[OB('tea',1,'x1')]),
- S(MCOLA,[],[L('vendor',"One cola.")],'POURING',fov=44,grade='calm',min=3.8,hands=[dict(pose='pour',item='cola',t0=.3,t1=3.4)],sfx=[[.3,'splash'],[1.2,'click']]),
- S(M3,[],[L('woman',"Perfect. Goodnight."),L('vendor',"Serve.")],'HANDING OVER',fov=55,grade='calm',min=5.6,p3=[MP('woman',-.1,'smile',give=dict(t0=1.2,t1=2.6))],hands=[dict(pose='give',item='cola',t0=.1,t1=1.9)],icons=[dict(k='stampS',t0=3.1,t1=9,x=.5,y=.5,s=1)],sfx=[[1.2,'click'],[2.8,'chime']]),
+ S(M3,[],[L('man',"Thanks. Smells great."),L('vendor',"Serve.")],'HANDING OVER',fov=55,grade='warm',min=6.0,p3=[MP('man',.1,'smile',give=dict(t0=1.4,t1=2.8))],hands=[dict(pose='give',item='hotdog',t0=.1,t1=2.0),dict(pose='take',item='coin',t0=2.2,t1=3.4)],icons=[dict(k='stampS',t0=3.7,t1=9,x=.5,y=.5,s=1)],sfx=[[.9,'click'],[2.6,'chime']]),
+ S(M3,[],[],'CUSTOMER 2 · ARRIVES',fov=55,grade='warm',min=2.4,p3=[MW('woman',-4.6,'calm')],hands=[],sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
+ S(M3,[],[L('woman',"A cola, please. No ice.")],'ORDER: 1 COLA',fov=55,grade='warm',min=4.4,p3=[MP('woman',-.1,'calm')],hands=[],icons=[OB('tea',1,'x1')]),
+ S(MCOLA,[],[L('vendor',"One cola.")],'POURING',fov=44,grade='warm',min=3.8,hands=[dict(pose='pour',item='cola',t0=.3,t1=3.4)],sfx=[[.3,'splash'],[1.2,'click']]),
+ S(M3,[],[L('woman',"Perfect. Goodnight."),L('vendor',"Serve.")],'HANDING OVER',fov=55,grade='warm',min=5.6,p3=[MP('woman',-.1,'smile',give=dict(t0=1.2,t1=2.6))],hands=[dict(pose='give',item='cola',t0=.1,t1=1.9)],icons=[dict(k='stampS',t0=3.1,t1=9,x=.5,y=.5,s=1)],sfx=[[1.2,'click'],[2.8,'chime']]),
  S(M3,[],[],'CUSTOMER 3 · ARRIVES',fov=55,grade='dead',min=2.8,p3=[MW('woman',-4.6,'smile',still=True,noShadow=True)],hands=[],cues=[dict(t=0,type='gate',dur=2.4)],sfx=[[.4,'foot'],[1.1,'foot'],[1.8,'foot']]),
  S(M3,[],[L('woman',"A cola, please. No ice.")],'ORDER: 1 COLA',fov=55,grade='dead',min=3.6,p3=[MP('woman',-.1,'smile',still=True,noShadow=True)],hands=[],icons=[OB('tea',1,'x1')],cues=[dict(t=0,type='tick'),dict(t=1.8,type='tick')]),
  S(MPUSH,[],[L('vendor',"Same dress. Same order."),L('vendor',"Everyone visits once.")],'CUSTOMER 3 · SAME AS CUSTOMER 2',fov=55,grade='dead',min=6.4,p3=[MP('woman',-.1,'smile',still=True,noShadow=True)],hands=[],sfx=[[.3,'heart'],[1.8,'heart']],cues=[dict(t=0,type='gate',dur=5.0),dict(t=.2,type='riser',dur=5.0,level=.3)]),
  S(MFACE,[],[L('vendor',"Refuse.")],'CUSTOMER 3 · REFUSED',fov=34,grade='alarm',min=3.8,lead=.05,p3=[MP('womanZ',-.1,'calm')],hands=[dict(pose='refuse',t0=.1,t1=3.0)],icons=[dict(k='stampR',t0=.5,t1=9,x=.5,y=.8,s=.9)],sfx=[[0,'sting'],[.2,'groan']],cues=[dict(t=0,type='stinger',level=.8)]),
+ CARD('NEXT NIGHT',['3 CUSTOMERS','1 IS NOT HUMAN','COMMENT WHICH ONE'],L('vendor',"Next night. Which one isn't human?"),min=6.0,sfx=[[.3,'click'],[1.5,'click'],[2.7,'click']])])
+EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
+for _s in EPS['ks1']['shots']:_s['typed']=True
+
+# ---- ks1 v6: small roadside skewer stall, new 3D people, first-person hands, repeat-customer anomaly ----
+KX,KZ=100,-60
+K3=CAM([KX,1.6,KZ-.7],[KX,1.3,KZ+2.8])
+KFACE3=CAM([KX,1.72,KZ+.9],[KX,1.86,KZ+2.6])
+def P(who,x=.1,e='smile',**k):return dict(who=who,pos=[KX+x,KZ+2.6],expr=e,**k)
+def W(who,x0,e,**k):return dict(who=who,pos=[KX+x0,KZ+2.6],to=[KX+.1,KZ+2.6],t0=0,t1=2.2,expr=e,**k)
+OB=lambda what,n=1,label=None:dict(k='order',what=what,n=n,label=label,t0=.6,t1=9,x=.76,y=.30,s=1.3)
+ep('ks1','NIGHT 1',[
+ CARD('NIGHT SHIFT RULES',['EVERYONE VISITS ONCE','SERVE THEM','REFUSE ANYONE WHO COMES BACK'],L('vendor',"Everyone visits once. Serve them. Refuse anyone who comes back."),min=7.0,sfx=[[.3,'click'],[1.9,'click'],[3.5,'click']]),
+ S(K3,[],[],'CUSTOMER 1 · ARRIVES',fov=55,grade='warm',min=2.4,p3=[W('man',4.6,'smile')],hands=[],sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
+ S(K3,[],[L('man',"Ten pork skewers, please. Long shift tonight.")],'ORDER: 10 PORK SKEWERS',fov=55,grade='warm',min=5.0,p3=[P('man',.1,'smile')],hands=[],icons=[OB('skewer',1,'x10')]),
+ S(GRILL,[],[L('vendor',"Coming up.")],'COOKING',fov=44,grade='warm',min=5.6,hands=[dict(pose='grill',item='skewer',t0=.6,t1=5.2)],sfx=[[0,'whoosh'],[.4,'sizzle'],[2.8,'sizzle']],cues=[dict(t=0,type='motif',detune=.3,level=.14)]),
+ S(K3,[],[L('man',"Smells wonderful. Thanks."),L('vendor',"Serve.")],'HANDING OVER',fov=55,grade='warm',min=6.0,p3=[P('man',.1,'smile',give=dict(t0=1.4,t1=2.8))],hands=[dict(pose='give',item='skewer',t0=.1,t1=2.0),dict(pose='take',item='coin',t0=2.2,t1=3.4)],icons=[dict(k='stampS',t0=3.7,t1=9,x=.5,y=.5,s=1)],sfx=[[.9,'click'],[2.6,'chime']]),
+ S(K3,[],[],'CUSTOMER 2 · ARRIVES',fov=55,grade='warm',min=2.4,p3=[W('woman',-4.6,'calm')],hands=[],sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
+ S(K3,[],[L('woman',"Iced tea, less sugar, please.")],'ORDER: ICED TEA',fov=55,grade='warm',min=4.4,p3=[P('woman',-.1,'calm')],hands=[],icons=[OB('tea')]),
+ S(JUG,[],[L('vendor',"One iced tea.")],'POURING',fov=44,grade='warm',min=3.8,hands=[dict(pose='pour',item='tea',t0=.3,t1=3.4)],sfx=[[.3,'splash'],[1.2,'click']]),
+ S(K3,[],[L('woman',"Perfect. Goodnight."),L('vendor',"Serve.")],'HANDING OVER',fov=55,grade='warm',min=5.6,p3=[P('woman',-.1,'smile',give=dict(t0=1.2,t1=2.6))],hands=[dict(pose='give',item='tea',t0=.1,t1=1.9)],icons=[dict(k='stampS',t0=3.1,t1=9,x=.5,y=.5,s=1)],sfx=[[1.2,'click'],[2.8,'chime']]),
+ S(K3,[],[],'CUSTOMER 3 · ARRIVES',fov=55,grade='dead',min=2.8,p3=[W('woman',-4.6,'smile',still=True,noShadow=True)],hands=[],cues=[dict(t=0,type='gate',dur=2.4)],sfx=[[.4,'foot'],[1.1,'foot'],[1.8,'foot']]),
+ S(K3,[],[L('woman',"Iced tea, less sugar, please.")],'ORDER: ICED TEA',fov=55,grade='dead',min=3.6,p3=[P('woman',-.1,'smile',still=True,noShadow=True)],hands=[],icons=[OB('tea')],cues=[dict(t=0,type='tick'),dict(t=1.8,type='tick')]),
+ S(PUSH,[],[L('vendor',"Same dress. Same order."),L('vendor',"Everyone visits once.")],'CUSTOMER 3 · SAME AS CUSTOMER 2',fov=55,grade='dead',min=6.4,p3=[P('woman',-.1,'smile',still=True,noShadow=True)],hands=[],sfx=[[.3,'heart'],[1.8,'heart']],cues=[dict(t=0,type='gate',dur=5.0),dict(t=.2,type='riser',dur=5.0,level=.3)]),
+ S(KFACE3,[],[L('vendor',"Refuse.")],'CUSTOMER 3 · REFUSED',fov=34,grade='alarm',min=3.8,lead=.05,p3=[P('womanZ',-.1,'calm')],hands=[dict(pose='refuse',t0=.1,t1=3.0)],icons=[dict(k='stampR',t0=.5,t1=9,x=.5,y=.8,s=.9)],sfx=[[0,'sting'],[.2,'groan']],cues=[dict(t=0,type='stinger',level=.8)]),
  CARD('NEXT NIGHT',['3 CUSTOMERS','1 IS NOT HUMAN','COMMENT WHICH ONE'],L('vendor',"Next night. Which one isn't human?"),min=6.0,sfx=[[.3,'click'],[1.5,'click'],[2.7,'click']])])
 EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
 for _s in EPS['ks1']['shots']:_s['typed']=True

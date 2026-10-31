@@ -2,9 +2,9 @@
 const MX=200,MZ=-60;
 function buildMart(){
  const W0=14,Z0=MZ-2.6,Z1=MZ+16,CH=3.3,LEN=Z1-Z0,CZ=(Z0+Z1)/2;
- const tile=MS(TX.tile.clone(),.3,0xffffff,{metalness:.05});tile.map.repeat.set(9,11);tile.map.needsUpdate=true;
+ const tile=MS(TX.tile.clone(),.3,0xa8aeb8,{metalness:.05});tile.map.repeat.set(9,11);tile.map.needsUpdate=true;
  const fl=new THREE.Mesh(new THREE.PlaneGeometry(W0,LEN),tile);fl.rotation.x=-Math.PI/2;fl.position.set(MX,0,CZ);S.add(fl);
- const wallM=MS(TX.wall,.9,0xf0ead8);
+ const wallM=MS(TX.wall,.9,0xf0c868);
  bx(.2,CH,LEN,wallM,MX-W0/2,CH/2,CZ);bx(.2,CH,LEN,wallM,MX+W0/2,CH/2,CZ);bx(W0,CH,.2,wallM,MX,CH/2,Z0);
  const ce=new THREE.Mesh(new THREE.PlaneGeometry(W0,LEN),MS(TX.ceil,.9));ce.rotation.x=Math.PI/2;ce.position.set(MX,CH,CZ);S.add(ce);
  // fluorescent tubes + housings
@@ -12,8 +12,8 @@ function buildMart(){
  // ducts + pipes
  bx(.7,.35,LEN,MC(0x9aa0a4,.6),MX-2.0,CH-.3,CZ);bx(.3,.3,LEN,MC(0x8a9094,.6),MX+1.7,CH-.28,CZ);
  // long gondolas down the middle aisle, product faces on the aisle side
- const steel=MC(0x4a5058,.5,.4);
- for(const sd of[-1,1]){const gx=MX+sd*3.7;bx(.9,1.9,9.8,steel,gx,.95,MZ+9.7);bx(.94,.08,9.8,MC(0x2a2e34,.6),gx,1.94,MZ+9.7);
+ const steel=MC(0x24282e,.6,.3);
+ for(const sd of[-1,1]){const gx=MX+sd*2.6;bx(.9,1.9,9.8,steel,gx,.95,MZ+9.7);bx(.94,.08,9.8,MC(0x2a2e34,.6),gx,1.94,MZ+9.7);
   for(let k=0;k<3;k++){const m=new THREE.Mesh(new THREE.PlaneGeometry(3.15,1.75),new THREE.MeshBasicMaterial({map:shelfTex(k*17+(sd>0?5:0),5),fog:true}));m.position.set(gx-sd*.46,1.0,MZ+6.0+k*3.3);m.rotation.y=-sd*Math.PI/2;S.add(m)}
   const kk=bx(.9,1.0,.9,MC(0xe8742a,.8),gx,.5,MZ+4.2)}
  // wall shelving (far sides) + freezer doors on the right wall
