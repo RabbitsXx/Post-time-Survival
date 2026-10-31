@@ -117,3 +117,25 @@ ep('g8',"WE'RE CLOSED",[
  S(O2,[ch('gus',1.0,18.7,'shock',act='scared',face=[1.0,16.0]),ch('z2',-.2,20.6,'calm',face=[1.0,18.7])],[L('gus',"There's a zombie behind me!"),L('mimi',"Sir, please remain calm.")],'FRESHWAY 24H · CLOSED',fov=40,grade='alarm',min=4.6,cues=[dict(t=.2,type='stinger',level=.4)]),
  S(O2,[ch('gus',1.0,18.7,'worried',face=[1.0,16.0]),ch('z2',.2,19.6,'calm',face=[1.0,18.7])],[L('zombie',"Are you open?"),L('mimi',"We're closed.")],'FRESHWAY 24H · CLOSED',fov=40,min=4.0),
  S(O2,[ch('gus',1.0,18.7,'worried',face=[1.0,16.0]),ch('z2',.2,19.6,'calm',to=[-4.0,23.5],t0=.6,t1=3.2,act='reach')],[L('zombie',"Okay.")],'FRESHWAY 24H · CLOSED',fov=40,min=3.8,sfx=[[1.0,'foot'],[1.7,'foot'],[2.4,'foot']])])
+
+# ---- hand-written set 2 (owner asked for 3 clips that do not feel like slop): three different forms ----
+ep('hm1','KEEP EATING',[
+ S(GUS,[ch('gus',6.4,Z,'smile',prop='can')],[L('gus',"Best pudding I have ever had.")],'AISLE 9 · 3:41 AM',fov=38,min=3.4,sfx=[[.2,'squeak']]),
+ S(WIDE,[ch('gus',7.6,Z+.3,'smile',prop='can',face=[-12,Z]),ch('z2',-2.0,Z+.1,'calm',to=[5.9,Z+.1],t0=.2,t1=4.6,act='reach'),ch('z3',-4.2,Z-.7,'calm',to=[4.9,Z-.7],t0=.4,t1=4.8,act='reach'),ch('z4',-6.0,Z+.6,'calm',to=[4.2,Z+.6],t0=.6,t1=5.0,act='reach')],[],'AISLE 9 · 3:41 AM',fov=46,grade='dead',min=5.6,sfx=[[.8,'foot'],[1.6,'foot'],[2.4,'foot'],[3.2,'foot'],[4.0,'foot']],cues=[dict(t=0,type='gate',dur=5.0),dict(t=.4,type='tick'),dict(t=2.0,type='tick')]),
+ S(GUS,[ch('gus',6.4,Z,'smile',prop='can'),ch('z2',7.5,Z-.2,'calm',face=[6.4,Z])],[],'AISLE 9 · 3:41 AM',fov=34,grade='dead',min=2.6,cues=[dict(t=0,type='gate',dur=2.0)]),
+ S(FRONT,[ch('mimi',9.4,Z,'smile'),ch('gus',8.2,Z+.3,'worried',prop='can')],[L('mimi',"Gus. That is my pudding.")],'AISLE 9 · 3:42 AM',fov=42,min=3.2),
+ S(GUS,[ch('gus',6.4,Z,'shock',prop='can'),ch('z2',7.5,Z-.2,'calm',face=[6.4,Z]),ch('z3',8.4,Z+.4,'calm',face=[6.4,Z])],[L('mimi',"Look behind you."),L('gus',"..."),L('mimi',"Keep eating.")],'AISLE 9 · 3:42 AM',fov=38,grade='alarm',min=5.4,cues=[dict(t=.2,type='stinger',level=.4)]),
+ S(GUS,[ch('gus',6.4,Z,'smile',prop='can'),ch('z2',7.5,Z-.2,'calm',face=[6.4,Z])],[L('gus',"Okay.")],'AISLE 9 · 3:42 AM',fov=34,min=3.0,sfx=[[.6,'squeak']],cues=[dict(t=.2,type='motif',detune=.3,level=.2)])])
+ep('hm2','FEEDBACK FORM',[
+ S(B,[cus('z1','calm')],[L('zombie',"I would like to fill out a feedback form.")],'CUSTOMER SERVICE',fov=36,min=3.2,sfx=[[0,'groan']]),
+ S(A,[MI()],[L('mimi',"Of course.")],'CUSTOMER SERVICE',fov=23,min=2.2),
+ CARD('CUSTOMER FEEDBACK',['WHAT WENT WRONG?','NOBODY WAS AFRAID','STAFF WAS TOO CALM','RATING: 1 STAR'],[L('zombie',"What went wrong. Nobody was afraid. The staff was too calm. One star.")],min=8.0,sfx=[[.4,'click'],[2.0,'click'],[3.8,'click'],[5.6,'click']]),
+ S(A,[MI()],[L('mimi',"Thank you for your feedback.")],'CUSTOMER SERVICE',fov=23,min=3.4),
+ S(B,[ch('z1',-5.6,9.2,'calm',to=[-9.6,9.0],t0=.8,t1=3.4,act='reach',face=[-9.6,9.0])],[],'CUSTOMER SERVICE',fov=36,min=3.6,sfx=[[1.0,'foot'],[1.7,'foot'],[2.4,'foot']])])
+ep('hm3','ROUGH NIGHT?',[
+ S(A,[MI()],[],'FRESHWAY 24H · 5:58 AM',fov=23,min=3.2,sfx=[[.3,'gen']],cues=[dict(t=0,type='motif',detune=0,level=.18)]),
+ S(A,[MI('worried')],[],'FRESHWAY 24H · 5:58 AM',fov=19,grade='cold',min=3.0,sfx=[[.6,'heart']],cues=[dict(t=0,type='gate',dur=2.6)]),
+ S(A,[MI('scared')],[],'FRESHWAY 24H · 5:59 AM',fov=19,grade='cold',min=4.4,sfx=[[.4,'exhale'],[2.6,'exhale'],[.2,'heart'],[1.4,'heart']]),
+ S(A,[MI('smile')],[L('mimi',"Welcome to Freshway.")],'FRESHWAY 24H · 6:00 AM',fov=23,min=2.8,sfx=[[0,'chime']]),
+ S(B,[cus('z1','calm')],[L('zombie',"Rough night?")],'FRESHWAY 24H · 6:00 AM',fov=36,min=2.8,cues=[dict(t=0.9,type='gate',dur=1.2)]),
+ S(A,[MI('smile')],[L('mimi',"Not at all.")],'FRESHWAY 24H · 6:00 AM',fov=23,min=3.6,cues=[dict(t=.2,type='motif',detune=.3,level=.2)])])
