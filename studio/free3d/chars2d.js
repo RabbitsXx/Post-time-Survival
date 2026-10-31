@@ -233,6 +233,10 @@ CH.vance={f:1,skin:'#8a5a3c',shirt:'#b89a62',acc:'#8a7040',hair:'grey',hc:'#a8a8
 CH.teddy={f:1,skin:'#e0b088',shirt:'#e84a4a',acc:'#b02a2a',hair:'messy',hc:'#4a2a14',pants:'#2a3a6a',h:.72,w:.8};
 CH.rosa={f:1,skin:'#c8906a',shirt:'#8a4aa8',acc:'#6a2a88',hair:'bun',hc:'#2a1a14',pants:'#3a3040',h:.95,w:1.0};
 
+CH.auntie={f:1,skin:'#d8a47c',shirt:'#d8508a',acc:'#a8306a',hair:'bun',hc:'#2a1a14',glasses:1,pants:'#4a3a5a',h:.9,w:1.18};
+CH.lad={f:1,skin:'#c89468',shirt:'#3a9a4a',acc:'#2a7a3a',hair:'cap',hc:'#2a6ab0',pants:'#22262e',h:.95,w:.86};
+CH.uncle={f:1,skin:'#b88458',shirt:'#8a8a5a',acc:'#6a6a3a',hair:'bald',hc:'#000',mustache:'#2a2a2a',pants:'#3a3a3a',h:1.0,w:1.22};
+CH.girl={f:1,skin:'#e8c4a0',shirt:'#e8c82a',acc:'#c8a81a',hair:'messy',hc:'#1a1a1a',pants:'#e8c82a',h:.8,w:.8};
 CH.nana={f:1,skin:'#d8a47c',shirt:'#3a8a8a',acc:'#2a6a6a',hair:'whitebun',hc:'#e8e4de',glasses:1,pants:'#5a4a5a',h:.84,w:1.08};
 CH.bo={f:1,skin:'#b8805a',shirt:'#e8782a',acc:'#b85a1a',hair:'messy',hc:'#2a6ab0',pants:'#22262e',h:.97,w:.86};
 CH.lou={f:1,skin:'#d8a07a',shirt:'#d83a2a',acc:'#a82018',hair:'bald',mustache:'#3a2a1a',pants:'#2a2a30',h:1.15,w:1.45};

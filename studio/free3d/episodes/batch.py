@@ -153,3 +153,19 @@ ep('bo1',"BO",[
 for _k in ('nn1','bo1','hm3'):
     for _s in EPS[_k]['shots']:
         _s['pad']=min(_s.get('pad',.3),.15);_s['lead']=min(_s.get('lead',.25),.12)
+
+# ============ MIDNIGHT SKEWERS (new direction): night-market skewer kiosk, first-person vendor POV, spot the anomaly ============
+KX,KZ=100,-60
+KC=CAM([KX,1.6,KZ-.7],[KX,1.0,KZ+4.4])
+def kc(w,x=0.0,e='smile',**k):return ch(w,KX+x,KZ+4.4,e,face=[KX,KZ-.7],**k)
+KP='MIDNIGHT SKEWERS · 2:14 AM'
+ep('ks1','NIGHT 1: THE RAINCOAT',[
+ S(KC,[],[L('vendor',"Rule one of the night shift. If something is wrong with a customer, don't serve it.")],KP,fov=35,grade='cold',min=5.2,sfx=[[.3,'bell']] if False else [[.3,'chime']],cues=[dict(t=0,type='motif',detune=0,level=.2)]),
+ S(KC,[kc('auntie',.1,'smile',to=[KX+.1,KZ+4.4],t0=0,t1=.01)],[L('auntie',"Ten pork skewers and sticky rice, please. Extra chili."),L('vendor',"Coming up.")],KP,fov=35,grade='cold',min=5.0,sfx=[[.2,'foot'],[.8,'foot']]),
+ S(KC,[kc('lad',-.3,'calm')],[L('lad',"Uncle, do you have anything that is not on the menu?"),L('vendor',"No."),L('lad',"Okay.")],KP,fov=35,grade='cold',min=5.2),
+ S(KC,[kc('girl',.1,'smile',still=True,noShadow=True)],[L('girl',"Pork. No chili. I never have chili."),L('vendor',"...It isn't raining.")],'MIDNIGHT SKEWERS · 2:19 AM',fov=35,grade='dead',min=6.0,cues=[dict(t=0,type='gate',dur=4.0),dict(t=.5,type='tick'),dict(t=3.0,type='tick')]),
+ CARD('SERVE OR REJECT?',['AUNTIE · LAD · GIRL','WHO IS THE ANOMALY?','COMMENT 1, 2 OR 3'],L('vendor',"Who was wrong?"),min=5.0,sfx=[[.3,'click'],[1.6,'click'],[2.9,'click']]),
+ CARD('ANOMALY: THE GIRL',['NO SHADOW','NO BREATHING','RAINCOAT, NO RAIN'],L('vendor',"No shadow. No breathing. A raincoat on a dry night."),min=6.0,sfx=[[.3,'click'],[1.6,'click'],[2.9,'click']])])
+
+EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
+for _s in EPS['ks1']['shots']:_s['typed']=True

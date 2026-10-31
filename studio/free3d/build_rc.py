@@ -7,9 +7,9 @@ import build as B
 from build import tts,rd,FPS,SR,NAMES,NAMECOL,VOICES,SFXLIB
 import score
 OUT=R+'/out';os.makedirs(OUT,exist_ok=True)
-VOICES.update({'mimi':('en-US-Chirp3-HD-Kore',1.0),'gus':('en-US-Chirp3-HD-Fenrir',1.08),'teddy':('en-US-Chirp3-HD-Puck',1.18),'vance':('en-US-Chirp3-HD-Charon',.93),'rosa':('en-US-Chirp3-HD-Vindemiatrix',1.05),'pa':('en-US-Chirp3-HD-Leda',.92),'machine':('en-US-Chirp3-HD-Leda',.95),'watch':('en-US-Chirp3-HD-Aoede',1.05),'zombie':('en-US-Chirp3-HD-Algenib',.62),'nana':('en-US-Chirp3-HD-Gacrux',.88),'bo':('en-US-Chirp3-HD-Charon',1.12)})
-NAMES.update({'mimi':'MIMI','gus':'GUS','teddy':'TEDDY','vance':'DR. VANCE','rosa':'ROSA','pa':'STORE PA','machine':'SELF-CHECKOUT','watch':'SMARTWATCH','zombie':'ZOMBIE','nana':'NANA PIM','bo':'BO'})
-NAMECOL.update({'mimi':'#7affc0','gus':'#9ad0ff','teddy':'#ff9a8a','vance':'#ffd98a','rosa':'#d8a8ff','pa':'#8aff9a','machine':'#8aff9a','watch':'#ffe070','zombie':'#9aff6a','nana':'#7fe0e0','bo':'#ffb070'})
+VOICES.update({'mimi':('en-US-Chirp3-HD-Kore',1.0),'gus':('en-US-Chirp3-HD-Fenrir',1.08),'teddy':('en-US-Chirp3-HD-Puck',1.18),'vance':('en-US-Chirp3-HD-Charon',.93),'rosa':('en-US-Chirp3-HD-Vindemiatrix',1.05),'pa':('en-US-Chirp3-HD-Leda',.92),'machine':('en-US-Chirp3-HD-Leda',.95),'watch':('en-US-Chirp3-HD-Aoede',1.05),'zombie':('en-US-Chirp3-HD-Algenib',.62),'nana':('en-US-Chirp3-HD-Gacrux',.88),'bo':('en-US-Chirp3-HD-Charon',1.12),'vendor':('en-US-Chirp3-HD-Charon',.88),'auntie':('en-US-Chirp3-HD-Aoede',.95),'lad':('en-US-Chirp3-HD-Puck',1.05),'uncle':('en-US-Chirp3-HD-Fenrir',.9),'girl':('en-US-Chirp3-HD-Leda',1.05)})
+NAMES.update({'mimi':'MIMI','gus':'GUS','teddy':'TEDDY','vance':'DR. VANCE','rosa':'ROSA','pa':'STORE PA','machine':'SELF-CHECKOUT','watch':'SMARTWATCH','zombie':'ZOMBIE','nana':'NANA PIM','bo':'BO','vendor':'','auntie':'AUNTIE','lad':'LAD','uncle':'UNCLE','girl':'GIRL'})
+NAMECOL.update({'mimi':'#7affc0','gus':'#9ad0ff','teddy':'#ff9a8a','vance':'#ffd98a','rosa':'#d8a8ff','pa':'#8aff9a','machine':'#8aff9a','watch':'#ffe070','zombie':'#9aff6a','nana':'#7fe0e0','bo':'#ffb070','vendor':'#ffffff','auntie':'#ff9ac8','lad':'#9ad0ff','uncle':'#d0d090','girl':'#ffe070'})
 def _env(n,a=.005,d=.06):
     t=np.arange(n)/SR;return np.minimum(t/a,1)*np.exp(-t/d)
 def S_beep():
@@ -24,7 +24,28 @@ def S_heart():
         i=int(t0*SR);m=int(.12*SR);tt=np.arange(m)/SR;y[i:i+m]+=np.sin(2*np.pi*55*tt)*np.exp(-tt*28)*a
     return y*.9
 SFXLIB.update({'beep':S_beep,'cry':S_cry,'heart':S_heart})
+BLIP=False
+BL={'vendor':(110,'tri',.062),'auntie':(392,'sq',.052),'lad':(294,'sq',.055),'girl':(523,'sine',.05),'uncle':(147,'saw',.066),'zombie':(82,'saw',.09),'nana':(330,'tri',.07),'bo':(247,'sq',.05),'mimi':(349,'tri',.055),'gus':(165,'sq',.06),'teddy':(494,'sq',.045),'narrator':(196,'tri',.06)}
+def blip_wav(text,who):
+    """Undertale-style speech: one short blip per letter, pitch by character, silence on spaces and longer on punctuation; the subtitles carry the meaning."""
+    import hashlib,wave
+    f,kind,step=BL.get(who,(262,'sq',.058));h=hashlib.md5(('blip3'+text+who).encode()).hexdigest()[:12];p=f'{R}/tts/blip_{h}.wav'
+    if os.path.exists(p):return p
+    os.makedirs(R+'/tts',exist_ok=True);rng=np.random.RandomState(int(h[:6],16));out=[]
+    def tone(fr,dur):
+        n=int(dur*SR);t=np.arange(n)/SR;ph=2*np.pi*fr*t
+        w=np.sign(np.sin(ph))*.6 if kind=='sq' else (2*np.abs(2*((fr*t)%1)-1)-1) if kind=='tri' else (2*((fr*t)%1)-1)*.7 if kind=='saw' else np.sin(ph+.6*np.sin(2*np.pi*9*t))
+        env=np.minimum(t/.004,1)*np.exp(-t/(dur*.55));return (w*env).astype(np.float32)
+    for ch in text:
+        if ch.isalpha():
+            fr=f*(1+(.14 if ch.lower() in 'aeiou' else 0)+(rng.rand()-.5)*.16);b=tone(fr,.05);out.append(np.concatenate([b,np.zeros(max(0,int(step*SR)-len(b)),dtype=np.float32)]))
+        elif ch==' ':out.append(np.zeros(int(.035*SR),dtype=np.float32))
+        elif ch in '.!?':out.append(np.zeros(int(.2*SR),dtype=np.float32))
+        elif ch in ',;:':out.append(np.zeros(int(.11*SR),dtype=np.float32))
+    y=np.concatenate(out) if out else np.zeros(int(.2*SR),dtype=np.float32);y=np.concatenate([y,np.zeros(int(.12*SR),dtype=np.float32)])
+    w=wave.open(p,'wb');w.setnchannels(1);w.setsampwidth(2);w.setframerate(SR);w.writeframes((np.clip(y*.55,-1,1)*32767).astype(np.int16).tobytes());w.close();return p
 def voice(text,who):
+    if BLIP:return blip_wav(text,who)
     p=tts(text,who)
     if who not in('pa','machine','watch'):return p
     q=p.replace('.wav','.pa.wav')
@@ -72,7 +93,7 @@ def main():
     a=sys.argv[1:];sp=importlib.util.spec_from_file_location('ep',a[0]);m=importlib.util.module_from_spec(sp);sp.loader.exec_module(m);ep=m.EP
     g=lambda k,d:int(a[a.index(k)+1]) if k in a else d
     w,h,workers=g('--w',1080),g('--h',1920),g('--workers',4)
-    spec,lines,sfx,cues=build_spec(ep);name=ep['id'];json.dump(dict(spec,cues=cues),open(OUT+f'/{name}.spec.json','w'))
+    global BLIP;BLIP=bool(ep.get('blip'));spec,lines,sfx,cues=build_spec(ep);name=ep['id'];json.dump(dict(spec,cues=cues),open(OUT+f'/{name}.spec.json','w'))
     words=sum(len(L['en'].split()) for L in lines)
     print(f'{name}: {spec["dur"]:.1f}s, {len(spec["shots"])} shots (avg {spec["dur"]/len(spec["shots"]):.2f}s), {words} words = {words/spec["dur"]:.2f} w/s')
     if '--stills' in a:

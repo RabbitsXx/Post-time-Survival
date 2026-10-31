@@ -50,7 +50,47 @@ const FOOT=ctex(64,128,(x,w,h)=>{x.clearRect(0,0,w,h);x.fillStyle='rgba(90,10,14
 const POSTERS=[['FRESH BAKED DAILY','#e8a43a','#3a1a08'],['ALL FRUIT 2 FOR 1','#2aa050','#ffffff'],['NIGHT SHIFT: STAY CALM','#2a5ab8','#ffffff'],['MEMBERS SAVE 20%','#c02a4a','#ffffff'],['BUY 3 GET 1 FREE','#f0c020','#1a1a1a']];
 function posterTex(i){const p=POSTERS[i%POSTERS.length];return ctex(256,384,(x,w,h)=>{x.fillStyle=p[1];x.fillRect(0,0,w,h);x.fillStyle='rgba(255,255,255,.18)';x.beginPath();x.arc(w/2,h*.38,w*.34,0,7);x.fill();x.fillStyle=p[2];x.font='900 38px "Roboto Condensed",Arial';x.textAlign='center';const wd=p[0].split(' ');for(let k=0;k<wd.length;k++)x.fillText(wd[k],w/2,h*.72+k*40-(wd.length-2)*20);x.strokeStyle='rgba(0,0,0,.4)';x.lineWidth=6;x.strokeRect(3,3,w-6,h-6)})}
 function banner(x,z,txt,col,ry=0){const t=signTex(txt,col,'#ffffff',512,200,92);for(const f of[0,Math.PI]){const m=new THREE.Mesh(new THREE.PlaneGeometry(2.2,.86),new THREE.MeshBasicMaterial({map:t,fog:true}));m.position.set(x,3.85,z);m.rotation.y=ry+f;S.add(m)}for(const sx of[-1,1])cyl(.008,.5,MC(0x222222),x+sx*1.0*Math.cos(ry),4.15,z-sx*1.0*Math.sin(ry),0,0,S,4)}
-function buildProps(){buildOutside();buildCheckout();buildCheckout2();
+
+// ===== MIDNIGHT SKEWERS: a night-market food kiosk seen from the vendor's side (far from the store so both sets can live in one scene) =====
+const KX=100,KZ=-60;
+function buildKiosk(){
+ const wood=ctex(256,256,(x,w,h)=>{x.fillStyle='#6a4a2c';x.fillRect(0,0,w,h);for(let i=0;i<22;i++){x.fillStyle=i%2?'rgba(0,0,0,.18)':'rgba(255,220,160,.07)';x.fillRect(0,i*12,w,6)}x.fillStyle='rgba(0,0,0,.25)';for(let i=0;i<60;i++)x.fillRect(Math.random()*w,Math.random()*h,18,1)},[2,1]);
+ const WM=new THREE.MeshStandardMaterial({map:wood,roughness:.85}),DK=MC(0x2a2018,.9);
+ const awn=ctex(256,128,(x,w,h)=>{for(let i=0;i<10;i++){x.fillStyle=i%2?'#e8e0d0':'#c8342a';x.fillRect(i*w/10,0,w/10,h)}x.fillStyle='rgba(0,0,0,.25)';x.fillRect(0,h-10,w,10)});
+ // floor + side walls + back
+ bx(4.4,.1,3.6,MC(0x3a2c20,.9),KX,-.05,KZ-.8);bx(.12,2.7,3.6,WM,KX-2.2,1.35,KZ-.8);bx(.12,2.7,3.6,WM,KX+2.2,1.35,KZ-.8);bx(4.4,2.7,.12,WM,KX,1.35,KZ-2.55);
+ // counter: front board + top
+ bx(4.4,1.0,.5,WM,KX,.5,KZ+.9);bx(4.6,.07,.8,MC(0x9a6a3a,.6),KX,1.02,KZ+.95);
+ // window frame posts and header
+ bx(.14,1.6,.14,DK,KX-2.15,1.8,KZ+1.1);bx(.14,1.6,.14,DK,KX+2.15,1.8,KZ+1.1);bx(4.5,.18,.2,DK,KX,2.62,KZ+1.1);
+ // striped awning (tilted forward)
+ const am=new THREE.Mesh(new THREE.PlaneGeometry(4.8,1.5),new THREE.MeshStandardMaterial({map:awn,roughness:.9,side:THREE.DoubleSide}));am.position.set(KX,2.55,KZ+1.7);am.rotation.x=Math.PI/2-.28;S.add(am);
+ // menu board hanging at the left of the window
+ const menu=ctex(256,320,(x,w,h)=>{x.fillStyle='#1a1410';x.fillRect(0,0,w,h);x.strokeStyle='#d8a040';x.lineWidth=6;x.strokeRect(5,5,w-10,h-10);x.fillStyle='#f0c860';x.font='900 30px "Roboto Condensed",Arial';x.textAlign='center';x.fillText('MIDNIGHT',w/2,48);x.fillText('SKEWERS',w/2,82);x.font='700 24px "Roboto Condensed",Arial';x.fillStyle='#f4ead0';x.textAlign='left';[['PORK','10'],['CHICKEN','10'],['STICKY RICE','5'],['FISH BALLS','8'],['ICED TEA','4']].forEach((r,i)=>{x.fillText(r[0],24,134+i*36);x.textAlign='right';x.fillText(r[1],w-24,134+i*36);x.textAlign='left'});x.fillStyle='#c8342a';x.font='900 20px "Roboto Condensed",Arial';x.textAlign='center';x.fillText('NO CREDIT · NO REFUNDS',w/2,306)});
+ const mb=new THREE.Mesh(new THREE.PlaneGeometry(1.0,1.25),new THREE.MeshBasicMaterial({map:menu,fog:false}));mb.position.set(KX-1.45,1.75,KZ+1.0);mb.rotation.y=Math.PI;S.add(mb);
+ // neon OPEN sign (hangs outside, glows red)
+ const neon=new THREE.Mesh(new THREE.PlaneGeometry(.9,.36),new THREE.MeshBasicMaterial({map:signTex('OPEN','#2a0808','#ff4a3a',256,100,70),fog:false}));neon.position.set(KX+1.4,2.2,KZ+1.12);neon.rotation.y=Math.PI;S.add(neon);
+ // grill with glowing coals (left inside) + skewers
+ bx(1.1,.7,.7,DK,KX-1.4,.55,KZ+.2);const coals=new THREE.Mesh(new THREE.BoxGeometry(.95,.06,.5),new THREE.MeshBasicMaterial({color:0xff6a20,fog:false}));coals.position.set(KX-1.4,.92,KZ+.2);S.add(coals);
+ for(let i=0;i<8;i++){bx(.03,.03,.7,MC(0x9a9a9a,.3,.6),KX-1.78+i*.1,1.0,KZ+.2);cyl(.05,.06,MC(0x7a3a1a,.7),KX-1.78+i*.1,1.0,KZ+.05,Math.PI/2,0,S,6);cyl(.05,.06,MC(0x8a4a22,.7),KX-1.78+i*.1,1.0,KZ+.2,Math.PI/2,0,S,6);cyl(.05,.06,MC(0x7a3a1a,.7),KX-1.78+i*.1,1.0,KZ+.35,Math.PI/2,0,S,6)}
+ // sticky rice basket, tea jug, cash tin, bell on the counter
+ cyl(.28,.22,MC(0xc8a850,.8),KX+.9,1.17,KZ+.7,0,0,S,10);cyl(.14,.42,MC(0xe0e0e0,.4,.3),KX+1.5,1.25,KZ+.65,0,0,S,10);bx(.35,.1,.25,MC(0x8a8a8a,.4,.5),KX-.3,1.1,KZ+.65);cyl(.07,.07,MC(0xd8b030,.3,.8),KX+.25,1.1,KZ+.75,0,0,S,10);
+ // street outside: wet road, kerb, lamp post, far buildings
+ const road=new THREE.Mesh(new THREE.PlaneGeometry(60,40),MC(0x15181c,.25,.2));road.rotation.x=-Math.PI/2;road.position.set(KX,-.01,KZ+22);S.add(road);
+ const walk=new THREE.Mesh(new THREE.PlaneGeometry(60,4.6),MC(0x4a4e52,.8));walk.rotation.x=-Math.PI/2;walk.position.set(KX,.0,KZ+3.2);S.add(walk);bx(60,.16,.25,MC(0x7a7e82,.8),KX,.08,KZ+5.6);
+ cyl(.06,5.4,MC(0x2a2e32,.5,.5),KX+3.6,2.7,KZ+4.6,0,0,S,8);bx(1.3,.07,.07,MC(0x2a2e32,.5,.5),KX+3.0,5.3,KZ+4.6);const lamp=new THREE.Mesh(new THREE.BoxGeometry(.5,.08,.3),new THREE.MeshBasicMaterial({color:0xcfe8ff,fog:false}));lamp.position.set(KX+2.5,5.25,KZ+4.6);S.add(lamp);
+ for(let i=0;i<9;i++){const h=5+Math.sin(i*2.3)*3+4,w=5+Math.cos(i*1.7)*1.5+1.5,x=KX-36+i*9;bx(w,h,3,MC(0x0c1014,.9),x,h/2,KZ+30);for(let k=0;k<8;k++)if(Math.sin(i*7+k*3.1)>.1)bx(.6,.8,.05,new THREE.MeshBasicMaterial({color:0xd8c080,fog:true}),x+(Math.cos(k*5+i)-.0)*w*.35,2+k*1.1,KZ+28.45)}
+
+ // atmosphere: strings of warm bulbs across the street, a haze glow behind the customer, a lit sign across the road, brighter pavement
+ for(let r=0;r<2;r++)for(let i=0;i<13;i++){const x=KX-6+i,y=3.15+Math.sin(i*.5)*.18-r*.35,z=KZ+5.2+r*3.2;const b=new THREE.Mesh(new THREE.SphereGeometry(.09,6,5),new THREE.MeshBasicMaterial({color:i%3?0xffd890:0xff9a60,fog:false}));b.position.set(x,y,z);S.add(b)}
+ const haze=new THREE.Mesh(new THREE.PlaneGeometry(10,5),new THREE.MeshBasicMaterial({map:ctex(256,128,(x,w,h)=>{const g=x.createRadialGradient(w/2,h*.55,4,w/2,h*.55,w*.5);g.addColorStop(0,'rgba(110,150,175,.2)');g.addColorStop(1,'rgba(120,170,200,0)');x.fillStyle=g;x.fillRect(0,0,w,h)}),transparent:true,depthWrite:false,fog:false}));haze.position.set(KX+1.5,2.4,KZ+9);haze.rotation.y=Math.PI;S.add(haze);
+ const pave=new THREE.Mesh(new THREE.PlaneGeometry(14,4.4),new THREE.MeshStandardMaterial({color:0x8a9096,roughness:.5,metalness:.1}));pave.rotation.x=-Math.PI/2;pave.position.set(KX,.012,KZ+3.4);S.add(pave);
+ // lights: warm bulb inside, orange coals, red neon, cool street lamp (also used to tint the 2D characters)
+ const mk=(c,i,d,x,y,z)=>{const L=new THREE.PointLight(c,i,d,2);L.position.set(x,y,z);S.add(L)};
+ mk(0xffc880,20,9,KX,2.3,KZ-.3);mk(0xff7a30,10,5,KX-1.4,1.3,KZ+.3);mk(0xff4a3a,9,6,KX+1.4,2.1,KZ+1.5);mk(0xcfe8ff,48,16,KX+2.6,5.0,KZ+4.0);mk(0x9ab8ff,22,12,KX-1.0,2.6,KZ+4.5);
+ LIGHTS.push([KX,2.3,KZ-.3,0xffc880,20,7],[KX-1.4,1.3,KZ+.3,0xff7a30,10,4],[KX+1.4,2.1,KZ+1.5,0xff4a3a,9,5],[KX+2.6,5.0,KZ+4.6,0xcfe8ff,26,12]);
+}
+function buildProps(){buildOutside();buildCheckout();buildCheckout2();buildKiosk();
  // aisle hanging signs (big, readable) over every aisle mouth
  [[-9,'AISLE 8','CEREAL · SNACKS'],[-3.4,'AISLE 9','CANNED · PASTA'],[2.2,'AISLE 10','DRINKS · CLEANING']].forEach(([z,a,b],i)=>{for(const xx of[8.2,-2]){const t=ctex(512,256,(x,w,h)=>{x.fillStyle='#17324a';x.fillRect(0,0,w,h);x.strokeStyle='#f2c230';x.lineWidth=10;x.strokeRect(6,6,w-12,h-12);x.fillStyle='#f2c230';x.font='900 120px "Roboto Condensed",Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(a,w/2,92);x.fillStyle='#fff';x.font='900 52px "Roboto Condensed",Arial';x.fillText(b,w/2,196)});for(const f of[0,Math.PI]){const m=new THREE.Mesh(new THREE.PlaneGeometry(2.4,1.2),new THREE.MeshBasicMaterial({map:t,fog:true}));m.position.set(xx,3.4,z);m.rotation.y=Math.PI/2+f;S.add(m)}for(const sz of[-1,1])cyl(.01,.9,MC(0x222222),xx,4.0,z+sz*.8,0,0,S,4)}});
  // end caps: promo can pyramids
