@@ -1,0 +1,92 @@
+<!doctype html><style>@font-face{font-family:'Roboto Condensed';src:url('../fonts/RobotoCondensed-Bold.ttf');font-weight:100 900}</style><body style="margin:0;background:#000"><canvas id="c"></canvas>
+<script src="node_modules/three/build/three.min.js"></script>
+<script src="chars2d.js"></script>
+<script>const BG={};</script>
+<script src="overlay.js"></script>
+<script>
+// REMAIN CALM - FRESHWAY 24H supermarket 3D set. Deterministic: renderAt(f) -> jpeg
+const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d',{willReadFrequently:true});
+const cv=document.getElementById('c');const R=new THREE.WebGLRenderer({canvas:cv,antialias:Q.get('aa')!=='0',preserveDrawingBuffer:true});const RQ=+(Q.get('rq')||.667);R.setSize(Math.round(W*RQ),Math.round(H*RQ),false);R.setPixelRatio(1);
+R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.25;
+const S=new THREE.Scene();S.background=new THREE.Color(0x0c1814);S.fog=new THREE.FogExp2(0x1c2c28,.012);
+const cam=new THREE.PerspectiveCamera(38,W/H,.1,420);
+
+// ---------- textures ----------
+function tex(w,h,draw,rep){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);t.anisotropy=4;t.encoding=THREE.sRGBEncoding;return t}
+const PCOL=['#e8302a','#f2c230','#2a9a4a','#2a7ad8','#e8742a','#8a3ab8','#f2f2ea','#e84a8a','#3ad8c8'];
+function products(x,w,h,seed,rows){const rh=h/rows;for(let r=0;r<rows;r++){x.fillStyle='#b8bcc0';x.fillRect(0,r*rh+rh-6,w,6);let px=4;let i=0;while(px<w-20){const bw=22+rnd(seed+r*31+i)*30,bh=rh*(.55+rnd(seed+r*7+i)*.35);x.fillStyle=PCOL[Math.floor(rnd(seed+r*13+i*3)*PCOL.length)];x.fillRect(px,r*rh+rh-6-bh,bw,bh);x.fillStyle='rgba(255,255,255,.55)';x.fillRect(px+3,r*rh+rh-6-bh+4,bw-6,Math.max(5,bh*.22));px+=bw+3;i++}}}
+const TX={
+ tile:tex(256,256,(x,w,h)=>{x.fillStyle='#dcdedc';x.fillRect(0,0,w,h);x.fillStyle='#c4c8c4';x.fillRect(0,0,w/2,h/2);x.fillRect(w/2,h/2,w/2,h/2);x.strokeStyle='rgba(0,0,0,.18)';x.lineWidth=2;x.strokeRect(0,0,w,h);x.beginPath();x.moveTo(w/2,0);x.lineTo(w/2,h);x.moveTo(0,h/2);x.lineTo(w,h/2);x.stroke();for(let i=0;i<120;i++){x.fillStyle='rgba(0,0,0,.05)';x.fillRect(rnd(i)*w,rnd(i+9)*h,2+rnd(i+3)*10,2)}},[16,12]),
+ wall:tex(128,128,(x,w,h)=>{x.fillStyle='#d8e4d8';x.fillRect(0,0,w,h);x.fillStyle='rgba(0,0,0,.05)';for(let i=0;i<80;i++)x.fillRect(rnd(i)*w,rnd(i+5)*h,3,3)},[8,2]),
+ ceil:tex(128,128,(x,w,h)=>{x.fillStyle='#c8ccc8';x.fillRect(0,0,w,h);x.strokeStyle='rgba(0,0,0,.2)';x.lineWidth=2;x.strokeRect(0,0,w,h)},[16,10]),
+ steel:tex(64,64,(x,w,h)=>{x.fillStyle='#9aa0a6';x.fillRect(0,0,w,h);for(let i=0;i<60;i++){x.fillStyle='rgba(255,255,255,.08)';x.fillRect(0,rnd(i)*h,w,1)}},[1,1])
+};
+function shelfTex(seed,rows){return tex(512,256,(x,w,h)=>{x.fillStyle='#6a6e72';x.fillRect(0,0,w,h);products(x,w,h,seed,rows)})}
+function signTex(txt,bg,fg,w=512,h=192,fs=110){return tex(w,h,(x,W,H)=>{x.fillStyle=bg;x.fillRect(0,0,W,H);x.strokeStyle='rgba(0,0,0,.4)';x.lineWidth=8;x.strokeRect(4,4,W-8,H-8);x.fillStyle=fg;x.font='900 '+fs+'px "Roboto Condensed",Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(txt,W/2,H/2+4)})}
+const MS=(map,rough=.6,col=0xffffff,extra={})=>new THREE.MeshStandardMaterial(Object.assign({map,roughness:rough,color:col},extra));
+const MB=col=>new THREE.MeshBasicMaterial({color:col,fog:false});
+function box(w,h,d,mat,x,y,z,cast=false){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=cast;m.receiveShadow=true;S.add(m);return m}
+// ---------- the store ----------
+const FW=44,FD=34;
+(()=>{const fl=new THREE.Mesh(new THREE.PlaneGeometry(FW,FD),MS(TX.tile,.32,0xffffff,{metalness:.05}));fl.rotation.x=-Math.PI/2;fl.receiveShadow=true;S.add(fl);
+ box(FW,5,.4,MS(TX.wall,.9),0,2.5,-FD/2);box(.4,5,FD,MS(TX.wall,.9),-FW/2,2.5,0);box(.4,5,FD,MS(TX.wall,.9),FW/2,2.5,0);
+ const ce=new THREE.Mesh(new THREE.PlaneGeometry(FW,FD),MS(TX.ceil,.9));ce.rotation.x=Math.PI/2;ce.position.y=4.4;S.add(ce);
+ // front glass wall + doors
+ const gl=new THREE.Mesh(new THREE.BoxGeometry(FW,4.4,.1),new THREE.MeshStandardMaterial({color:0x6a8a9a,roughness:.1,metalness:.6,transparent:true,opacity:.35}));gl.position.set(0,2.2,FD/2);S.add(gl);
+ for(let i=-1;i<=1;i+=2){box(.08,3.2,.08,MS(TX.steel),i*1.2,1.6,FD/2-.05);}
+ const entrance=new THREE.Mesh(new THREE.PlaneGeometry(9,2.2),new THREE.MeshBasicMaterial({map:signTex('FRESHWAY 24H','#1fa860','#ffffff',1024,256,150),fog:false}));entrance.position.set(0,4.0,FD/2-.4);entrance.rotation.y=Math.PI;S.add(entrance);
+ // ceiling neon panels + lights
+ for(let ix=-4;ix<=4;ix++)for(let iz=-3;iz<=3;iz++){const p=new THREE.Mesh(new THREE.BoxGeometry(3,.05,.6),new THREE.MeshBasicMaterial({color:(ix+iz)%5===0?0xf0fff0:0xe8fff4,fog:false}));p.position.set(ix*5,4.36,iz*4.4);S.add(p)}
+ // shelf rows (gondolas), two sided, run along x
+ const rows=[-9,-3.4,2.2];rows.forEach((z,ri)=>{for(let side=-1;side<=1;side+=2){const m=MS(shelfTex(ri*17+side*5,4),.7);const b=box(24,2.0,.5,m,-1,1.0,z+side*.3,true);b.material=m;
+   const front=new THREE.Mesh(new THREE.PlaneGeometry(24,2.0),MS(shelfTex(ri*29+side*7+3,4),.7));front.position.set(-1,1.0,z+side*.56);front.rotation.y=side>0?0:Math.PI;S.add(front)}
+  box(24,.12,1.2,MS(TX.steel),-1,2.06,z,true);
+  const sg=new THREE.Mesh(new THREE.PlaneGeometry(1.8,.7),new THREE.MeshBasicMaterial({map:signTex('AISLE '+(8+ri),'#f2c230','#1a1a1a',360,140,90),fog:false}));sg.position.set(-9,3.0,z);S.add(sg);const sg2=sg.clone();sg2.rotation.y=Math.PI;S.add(sg2);box(.04,1.2,.04,MS(TX.steel),-9,3.6,z,false)});
+ // freezer wall (back)
+ for(let i=0;i<8;i++){const x=-14+i*4;box(3.6,2.4,.9,MS(TX.steel),x,1.2,-FD/2+1.0,true);const g=new THREE.Mesh(new THREE.PlaneGeometry(3.3,2.1),new THREE.MeshBasicMaterial({map:shelfTex(i*11,4),fog:true}));g.position.set(x,1.25,-FD/2+1.47);S.add(g);const gl2=new THREE.Mesh(new THREE.PlaneGeometry(3.3,2.1),new THREE.MeshBasicMaterial({color:0xcfefff,transparent:true,opacity:.18}));gl2.position.set(x,1.25,-FD/2+1.49);S.add(gl2)}
+ const fs=new THREE.Mesh(new THREE.PlaneGeometry(6,.9),new THREE.MeshBasicMaterial({map:signTex('FROZEN  ·  DAIRY','#2a7ad8','#ffffff',640,100,70),fog:false}));fs.position.set(-3,3.2,-FD/2+.5);S.add(fs);
+ // checkout lanes
+ for(let i=0;i<3;i++){const x=-12+i*5;box(1.1,.9,3.6,MS(TX.steel),x,.45,FD/2-5,true);box(.7,.3,.5,MS(null,.5,0x222222),x-.1,1.05,FD/2-3.4,true);const lane=new THREE.Mesh(new THREE.PlaneGeometry(.7,.5),new THREE.MeshBasicMaterial({map:signTex(String(i+1),'#e8302a','#ffffff',128,96,72),fog:false}));lane.position.set(x,2.7,FD/2-5);S.add(lane)}
+ // produce crates
+ for(let i=0;i<5;i++){box(1.3,.5,.9,MS(null,.8,0x8a6a3a),10+i*1.5,.25,FD/2-7,true);for(let j=0;j<8;j++){const sp=new THREE.Mesh(new THREE.SphereGeometry(.14,12,10),new THREE.MeshStandardMaterial({color:[0xe8742a,0xe8302a,0x3aa83a,0xf2c230][(i+j)%4],roughness:.5}));sp.position.set(10+i*1.5-.45+(j%4)*.3,.62,FD/2-7+(j<4?-.2:.2));S.add(sp)}}
+ box(8,.1,.04,MS(null,.5,0xe8742a),12,2.4,FD/2-8.2);const cs=new THREE.Mesh(new THREE.PlaneGeometry(2.6,.9),new THREE.MeshBasicMaterial({map:signTex('CARROTS 2 FOR 1','#e8742a','#ffffff',512,160,80),fog:false}));cs.position.set(12,2.2,FD/2-7.3);S.add(cs);
+ // lights
+ const H1=new THREE.HemisphereLight(0xdfffe8,0x5a6a60,1.6);S.add(H1);
+ const pl=[[-8,3.6,-6],[6,3.6,-6],[-8,3.6,6],[8,3.6,6],[0,3.6,0]];pl.forEach(p=>{const L=new THREE.PointLight(0xeaffee,34,26,2);L.position.set(...p);S.add(L)});
+ const warm=new THREE.PointLight(0xffd8a0,20,14,2);warm.position.set(0,3,FD/2-3);S.add(warm)})();
+function sprite(who,hm,pos,opt={}){const CW=opt.cw||600,CH_=opt.ch||1030,RS=opt.rs||1.7;const cvs=document.createElement('canvas');cvs.width=CW;cvs.height=CH_;const cx=cvs.getContext('2d');const tx=new THREE.CanvasTexture(cvs);tx.encoding=THREE.sRGBEncoding;tx.anisotropy=4;
+ const ch=CH[who];const sc=opt.sc||(ch.z?1.6:(ch.dog?1.5:2.0));const hPx=(ch.hr?340*(ch.hk||1):(ch.zr?330:(ch.z?210:(ch.dog?150:254))))*sc*(ch.hr?1:ch.h)*RS/(ch.hr?1.34:1);const ph=CH_/hPx*hm,pw=ph*CW/CH_;
+ const mat=new THREE.MeshBasicMaterial({map:tx,transparent:true,alphaTest:.04,side:THREE.DoubleSide,toneMapped:false});const m=new THREE.Mesh(new THREE.PlaneGeometry(pw,ph),mat);m.position.set(pos[0],ph/2-.02,pos[1]);S.add(m);
+ const sh=new THREE.Mesh(new THREE.CircleGeometry(.55*(hm/1.7)*(ch.w||1),24),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.42,depthWrite:false}));sh.rotation.x=-Math.PI/2;sh.position.set(pos[0],.02,pos[1]);sh.scale.y=.6;S.add(sh);
+ return {cvs,CW,CH_,RS,who,mesh:m,sh,ph,mat,cx,tx,sc,ch,hm,pos,face:opt.face||1,expr:opt.expr||'calm',prop:opt.prop,z:!!ch.z,seed:opt.seed||pos[0]*3.1}}
+
+const CAST={};
+const HM={mimi:1.62,gus:1.88,vance:1.74,teddy:1.28,rosa:1.66,lou:1.95,pip:1.7,kim:1.62,carrot:1.9,zr1:1.82,zr2:1.9,zr3:1.74,zr4:1.95};
+for(const k in HM){CAST[k]=sprite(k,HM[k],[0,0],{expr:'calm',face:1});CAST[k].mesh.visible=false;CAST[k].sh.visible=false}
+function drawSprite(sp,t,speaking){const cx=sp.cx,CW=sp.CW,CH_=sp.CH_,RS=sp.RS;cx.setTransform(1,0,0,1,0,0);cx.clearRect(0,0,CW,CH_);cx.setTransform(RS,0,0,RS,CW/2,CH_-30*RS/1.7);
+ const ph=sp.seed;let P={x:0,y:0,s:sp.sc,face:sp.face,expr:sp.expr,look:Math.sin(t*.6+ph)*.5,mouth:0,prop:sp.prop,bob:0,lean:0,tilt:0,legA:[0,0],legB:[0,0],armF:[8,8],armN:[8,10]};
+ if(sp.z){P.lean=14;P.armN=[82+Math.sin(t*2+ph)*7,-8];P.armF=[76+Math.sin(t*2.3+ph)*7,-6];P.tilt=10+Math.sin(t*1.2+ph)*5;P.bob=Math.sin(t*1.5+ph)*3;drawChar(cx,{who:sp.who},P,t)}
+ else if(sp.ch.dog){drawDog(cx,{who:sp.who,expr:sp.expr},P,t)}
+ else{P.bob=Math.sin(t*2+ph)*2;P.mouth=speaking?Math.max(0,Math.abs(Math.sin(t*11+ph))*(.5+.5*Math.sin(t*3))):0;P.armLift=speaking?20:0;drawFront(cx,{who:sp.who},P,t)}
+ sp.tx.needsUpdate=true}
+
+ST.cap='speaker';ST.line=4.5;
+
+const lerp2=(a,b,t)=>a+(b-a)*t;
+window.setSpec=sp=>{SPEC=sp};
+window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(const x of sp.shots){if(t>=x.t0&&t<x.t1){sh=x;break}}
+ const lt=Math.min(t,sh.t1-1e-3)-sh.t0,dur=sh.t1-sh.t0;ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,W,H);ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+ if(sh.card){ctx.setTransform(SF,0,0,SF,0,0);CARD[sh.card.type||'title'](ctx,sh.card,lt);titleBar(ctx,sp);drawCaptions(sh,t)}
+ else{const u=ease(clamp(lt/dur)),c=sh.cam;cam.fov=sh.fov||38;cam.updateProjectionMatrix();
+  cam.position.set(lerp(c[0][0],c[2][0],u),lerp(c[0][1],c[2][1],u),lerp(c[0][2],c[2][2],u));cam.lookAt(lerp(c[1][0],c[3][0],u),lerp(c[1][1],c[3][1],u),lerp(c[1][2],c[3][2],u));cam.position.x+=Math.sin(t*1.7)*.008;cam.position.y+=Math.sin(t*2.3)*.006;cam.updateMatrixWorld();
+  for(const k in CAST){CAST[k].mesh.visible=false;CAST[k].sh.visible=false}
+  const OVER=[];for(const ch of (sh.chars||[])){const sp2=CAST[ch.who];sp2.mesh.visible=false;sp2.sh.visible=true;sp2.sh.position.set(ch.pos[0],.02,ch.pos[1]);sp2.expr=ch.expr||'calm';sp2.face=ch.face||1;sp2.prop=ch.prop;sp2.look=ch.look||0;
+   const dist=Math.hypot(ch.pos[0]-cam.position.x,ch.pos[1]-cam.position.z),hi=dist<5.2;if(hi!==!!sp2.hi){sp2.hi=hi;sp2.CW=hi?1000:600;sp2.CH_=hi?1717:1030;sp2.RS=hi?2.83:1.7;sp2.cvs.width=sp2.CW;sp2.cvs.height=sp2.CH_}
+   const speaking=(sh.lines||[]).some(l=>l.who===ch.who&&t>=l.t0&&t<l.t1);drawSprite(sp2,t,speaking);OVER.push({sp:sp2,x:ch.pos[0],z:ch.pos[1]})}
+  R.render(S,cam);ctx.setTransform(1,0,0,1,0,0);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(cv,0,0,W,H);
+  OVER.sort((a,b)=>Math.hypot(b.x-cam.position.x,b.z-cam.position.z)-Math.hypot(a.x-cam.position.x,a.z-cam.position.z));
+  for(const o of OVER){const f=new THREE.Vector3(o.x,-.02,o.z).project(cam),h=new THREE.Vector3(o.x,o.sp.ph-.02,o.z).project(cam);const sx=(f.x*.5+.5)*W,sy=(1-(f.y*.5+.5))*H,sy2=(1-(h.y*.5+.5))*H;const k=(sy-sy2)/o.sp.CH_;ctx.drawImage(o.sp.cvs,sx-o.sp.CW*k/2,sy2,o.sp.CW*k,o.sp.CH_*k)}
+  ctx.setTransform(SF,0,0,SF,0,0);titleBar(ctx,sp);drawCaptions(sh,t);strip(ctx,sh,sp,t)}
+ ctx.setTransform(1,0,0,1,0,0);return oc.toDataURL('image/jpeg',.93).slice(23)};
+window.fontsReady=document.fonts.load('900 38px "Roboto Condensed"');
+</script>
