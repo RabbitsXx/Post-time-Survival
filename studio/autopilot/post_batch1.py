@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""post_batch1.py [--dry-run] : add the 10 REMAIN CALM shorts (batch1) to the queue and schedule them on YT/TT/IG via Buffer, 90 min apart from 2026-11-01 03:00Z (10:00 Thailand). Needs package_batch.py output."""
+"""post_batch1.py [--dry-run] : add the 10 REMAIN CALM shorts (batch1) to the queue and schedule them on YT/TT/IG via Buffer, 90 min apart from 2026-11-01 00:30Z (07:30 Thailand). Needs package_batch.py output."""
 import sys,os,json,time,datetime as dt
 R=os.path.dirname(os.path.abspath(__file__));sys.path.insert(0,R);sys.path.insert(0,R+'/../ser')
 import state as ST,slots,post_clip as PC
@@ -18,7 +18,7 @@ M=[ # id, order, title, extra tags, tt/ig hook, description line
  ('i3','If the zombie apocalypse starts while you\'re in the checkout line… don\'t look back','checkout line, dont look back, queue','Pay. Smile. Walk out slowly.','Real tip: when you are scared, a slow exhale helps you calm down.'),
  ('g8','POV: You\'re locked out of the supermarket and a zombie asks if they\'re open','locked out, closed sign, pov','We\'re closed.','Sorry, sir. Please remain calm.')]
 def main():
-    s=ST.load();start=dt.datetime(2026,11,1,3,0);n=0
+    s=ST.load();start=dt.datetime(2026,11,1,0,30);n=0
     for i,(k,title,xt,hook,desc) in enumerate(M):
         cid=f'rcb_{k}';od=f'releases/remaincalm/batch1/{k}';due=slots.iso(start+dt.timedelta(minutes=90*i))
         tags=BASE+', '+xt
@@ -29,6 +29,7 @@ def main():
              tt=f"REMAIN CALM · {hook} Calm or run? 🧟 #zombie #zombiecomedy #remaincalm #fyp",ig=f"REMAIN CALM · {hook} Calm or run? 🧟 #zombie #zombiecomedy #animation #reels #remaincalm",
              pin='Would you stay calm or run? Comment CALM or RUN.',tags=tags,playlist='REMAIN CALM',video=f'{od}/{k}.mp4',thumb=f'{od}/cover_9x16.jpg',caps_en=f'{od}/captions_en.srt',caps_th=f'{od}/captions_en.srt',status='ready',done={},due=due)
             s['clips'].append(c);ST.save(s)
+        if c.get('status')!='scheduled':c['due']=due
         if len(c['yt_title'])>100:raise SystemExit(f'{cid}: title {len(c["yt_title"])} > 100')
         if c.get('status')=='scheduled':print(cid,'already scheduled');continue
         print(cid,due,c['yt_title'][:70])

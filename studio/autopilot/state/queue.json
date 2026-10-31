@@ -1027,14 +1027,14 @@
    "caps_th": "releases/remaincalm/batch1/i1/captions_en.srt",
    "status": "scheduled",
    "done": {},
-   "due": "2026-10-31T10:30:00.000Z",
    "posts": {
-    "yt": "6ae5ad48eaa24d6f9a64cf43",
-    "tt": "6ae5ad48b84259308bc86172",
-    "ig": "6ae5ad49b84259308bc861ae"
+    "yt": "6ae5af1dceb491e585e88f30",
+    "tt": "6ae5af1eeaa24d6f9a6582e7",
+    "ig": "6ae5af1feaa24d6f9a658345"
    },
-   "media_day": "2026-10-31",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "due": "2026-11-01T00:30:00.000Z",
+   "media_day": "2026-11-01"
   },
   {
    "id": "rcb_g1",
@@ -1055,14 +1055,14 @@
    "caps_th": "releases/remaincalm/batch1/g1/captions_en.srt",
    "status": "scheduled",
    "done": {},
-   "due": "2026-10-31T13:00:00.000Z",
    "posts": {
-    "yt": "6ae5ad74b84259308bc8698c",
-    "tt": "6ae5ad75a11457434995ab1f",
-    "ig": "6ae5ad76406ab8a018aa5a25"
+    "yt": "6ae5af2c1891472093c2b20d",
+    "tt": "6ae5af2d1891472093c2b25e",
+    "ig": "6ae5af2da114574349965f1f"
    },
-   "media_day": "2026-10-31",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "due": "2026-11-01T02:00:00.000Z",
+   "media_day": "2026-11-01"
   },
   {
    "id": "rcb_g3",
@@ -1083,14 +1083,14 @@
    "caps_th": "releases/remaincalm/batch1/g3/captions_en.srt",
    "status": "scheduled",
    "done": {},
-   "due": "2026-10-31T15:30:00.000Z",
    "posts": {
-    "yt": "6ae5ad9feaa24d6f9a64dc97",
-    "tt": "6ae5ada0a11457434995b28d",
-    "ig": "6ae5ada0ceb491e585e7d20e"
+    "yt": "6ae5af3bceb491e585e8971d",
+    "tt": "6ae5af3b1891472093c2b654",
+    "ig": "6ae5af3cb84259308bc92b41"
    },
-   "media_day": "2026-10-31",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "due": "2026-11-01T03:30:00.000Z",
+   "media_day": "2026-11-01"
   },
   {
    "id": "rcb_g2",
@@ -1111,14 +1111,14 @@
    "caps_th": "releases/remaincalm/batch1/g2/captions_en.srt",
    "status": "scheduled",
    "done": {},
-   "due": "2026-11-01T03:00:00.000Z",
    "posts": {
-    "yt": "6ae5adab406ab8a018aa637d",
-    "tt": "6ae5adac1891472093c1fa68",
-    "ig": "6ae5adadceb491e585e7d3c3"
+    "yt": "6ae5af46406ab8a018ab1fbc",
+    "tt": "6ae5af47ceb491e585e8a0a9",
+    "ig": "6ae5af48b84259308bc930fb"
    },
-   "media_day": "2026-11-01",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "due": "2026-11-01T05:00:00.000Z",
+   "media_day": "2026-11-01"
   },
   {
    "id": "rcb_i2",
@@ -1139,14 +1139,14 @@
    "caps_th": "releases/remaincalm/batch1/i2/captions_en.srt",
    "status": "scheduled",
    "done": {},
-   "due": "2026-11-01T05:30:00.000Z",
    "posts": {
-    "yt": "6ae5adb8eaa24d6f9a64e367",
-    "tt": "6ae5adb9406ab8a018aa6564",
-    "ig": "6ae5adb9a11457434995b69a"
+    "yt": "6ae5af53eaa24d6f9a659c38",
+    "tt": "6ae5af54ceb491e585e8a6d3",
+    "ig": "6ae5af54b84259308bc937d1"
    },
-   "media_day": "2026-11-01",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "due": "2026-11-01T06:30:00.000Z",
+   "media_day": "2026-11-01"
   },
   {
    "id": "rcb_g6",
@@ -1167,14 +1167,14 @@
    "caps_th": "releases/remaincalm/batch1/g6/captions_en.srt",
    "status": "scheduled",
    "done": {},
-   "due": "2026-11-01T08:00:00.000Z",
    "posts": {
-    "yt": "6ae5adc5eaa24d6f9a64e516",
-    "tt": "6ae5adc5406ab8a018aa6697",
-    "ig": "6ae5adc6b84259308bc8777b"
+    "yt": "6ae5af5f406ab8a018ab3395",
+    "tt": "6ae5af60eaa24d6f9a65a156",
+    "ig": "6ae5af61406ab8a018ab35de"
    },
-   "media_day": "2026-11-01",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "due": "2026-11-01T08:00:00.000Z",
+   "media_day": "2026-11-01"
   },
   {
    "id": "rcb_g5",
@@ -1195,14 +1195,14 @@
    "caps_th": "releases/remaincalm/batch1/g5/captions_en.srt",
    "status": "scheduled",
    "done": {},
-   "due": "2026-11-01T10:30:00.000Z",
    "posts": {
-    "yt": "6ae5add2eaa24d6f9a64eb47",
-    "tt": "6ae5add3ceb491e585e7dd3c",
-    "ig": "6ae5add4406ab8a018aa6809"
+    "yt": "6ae5af6b1891472093c2cde6",
+    "tt": "6ae5af6ceaa24d6f9a65a518",
+    "ig": "6ae5af6d406ab8a018ab38e4"
    },
-   "media_day": "2026-11-01",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "due": "2026-11-01T09:30:00.000Z",
+   "media_day": "2026-11-01"
   },
   {
    "id": "rcb_i4",
@@ -1223,14 +1223,14 @@
    "caps_th": "releases/remaincalm/batch1/i4/captions_en.srt",
    "status": "scheduled",
    "done": {},
-   "due": "2026-11-01T13:00:00.000Z",
    "posts": {
-    "yt": "6ae5ade0b84259308bc87e66",
-    "tt": "6ae5ade1a11457434995bcbc",
-    "ig": "6ae5ade2406ab8a018aa6ac5"
+    "yt": "6ae5af77406ab8a018ab3c79",
+    "tt": "6ae5af77406ab8a018ab3cbb",
+    "ig": "6ae5af78eaa24d6f9a65a783"
    },
-   "media_day": "2026-11-01",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "due": "2026-11-01T11:00:00.000Z",
+   "media_day": "2026-11-01"
   },
   {
    "id": "rcb_i3",
@@ -1249,16 +1249,14 @@
    "thumb": "releases/remaincalm/batch1/i3/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/i3/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/i3/captions_en.srt",
-   "status": "scheduled",
+   "status": "partial",
    "done": {},
-   "due": "2026-11-01T15:30:00.000Z",
    "posts": {
-    "yt": "6ae5adef1891472093c20a8b",
-    "tt": "6ae5adf01891472093c20b09",
-    "ig": "6ae5adf1406ab8a018aa7190"
+    "yt": "6ae5af83a114574349968b46"
    },
-   "media_day": "2026-11-01",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "due": "2026-11-01T12:30:00.000Z",
+   "media_day": "2026-11-01"
   },
   {
    "id": "rcb_g8",
@@ -1277,15 +1275,9 @@
    "thumb": "releases/remaincalm/batch1/g8/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/g8/captions_en.srt",
    "caps_th": "releases/remaincalm/batch1/g8/captions_en.srt",
-   "status": "scheduled",
+   "status": "ready",
    "done": {},
-   "due": "2026-11-02T03:00:00.000Z",
-   "posts": {
-    "yt": "6ae5adfca11457434995c4cd",
-    "tt": "6ae5adfca11457434995c509",
-    "ig": "6ae5adfdceb491e585e7e898"
-   },
-   "media_day": "2026-11-02",
+   "posts": {},
    "yt_mode": "buffer"
   }
  ]
