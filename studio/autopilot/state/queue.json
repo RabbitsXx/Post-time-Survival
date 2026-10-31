@@ -934,8 +934,14 @@
    "thumb": "releases/remaincalm/rc1/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/rc1/captions_en.srt",
    "caps_th": "releases/remaincalm/rc1/captions_th.srt",
-   "status": "scheduled",
-   "done": {},
+   "status": "finished",
+   "done": {
+    "tags": true,
+    "thumb": true,
+    "en": true,
+    "th": true,
+    "playlist": true
+   },
    "due": "2026-10-31T03:59:00.000Z",
    "posts": {
     "tt": "6ae564faa114574349849b12",
@@ -943,7 +949,8 @@
     "yt": "6ae565101891472093b14edf"
    },
    "media_day": "2026-10-31",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "yt_video_id": "M39ee9Jur7k"
   }
  ]
 }
