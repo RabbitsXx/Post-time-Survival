@@ -3,7 +3,7 @@
 import sys,os
 from PIL import Image,ImageDraw,ImageFont,ImageFilter
 H=os.path.dirname(os.path.abspath(__file__));F=H+'/../fonts/RobotoCondensed-Bold.ttf'
-base,out,main,sub=sys.argv[1:5];im=Image.open(base).convert('RGB');W,Hh=im.size
+base,out,main,sub=sys.argv[1:5];labels=sys.argv[5:7];im=Image.open(base).convert('RGB');W,Hh=im.size
 def fit(txt,maxw,size):
     while True:
         f=ImageFont.truetype(F,size)
@@ -21,4 +21,9 @@ cx=W//2;y0=int(Hh*.155)
 ang=3
 A=shadow(a.rotate(ang,expand=True,resample=Image.BICUBIC));Bn=shadow(ban.rotate(ang,expand=True,resample=Image.BICUBIC))
 im=im.convert('RGBA');im.paste(A,(cx-A.size[0]//2,y0),A);im.paste(Bn,(cx-Bn.size[0]//2,y0+a.size[1]-30),Bn)
+def pill(txt,fill,fg,cx,cy,rot):
+    f=fit(txt,420,110);t=text_layer(txt,f,fg,(0,0,0,255),8);w,h=t.size[0]+50,t.size[1]+18;P=layer(w,h);d=ImageDraw.Draw(P);d.rounded_rectangle([0,0,w-1,h-1],radius=h//2,fill=fill,outline=(0,0,0,255),width=7);P.paste(t,(25,9),t);P=shadow(P.rotate(rot,expand=True,resample=Image.BICUBIC),8,5);im.paste(P,(cx-P.size[0]//2,cy-P.size[1]//2),P)
+if labels:
+    pill(labels[0],(120,126,140,255),(255,255,255,255),int(W*.25),int(Hh*.76),4)
+    pill(labels[1],(255,226,31,255),(196,32,42,255),int(W*.76),int(Hh*.78),-5)
 im.convert('RGB').save(out,quality=92);print(out,os.path.getsize(out)//1024,'KB')

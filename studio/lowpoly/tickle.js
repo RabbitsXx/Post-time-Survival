@@ -47,7 +47,7 @@ const TKL1=tkLabel('YOURSELF','#9ad0ff'),TKL2=tkLabel('MACHINE','#ffb3a0');
 function tkOff(){ground.visible=false;water.visible=false;sandR.visible=false;PROPS.forEach(p=>p.visible=false);clouds.forEach(c=>c.visible=false)}
 function tkBg(u){tkOff();S.background=TKSKY;S.fog.color.set(0x14224a);HEMI.intensity=.95;show(TKVOID);TKVOID.userData.d.forEach((m,i)=>{m.position.y=m.userData.b+Math.sin(u*2+i)*.12})}
 function tkEnv(k){tkOff();HEMI.intensity=1.2;if(k==='home'){S.background=new THREE.Color(0xf1d6a4);S.fog.color.set(0xf1d6a4);show(TKHOME)}else{S.background=new THREE.Color(0xe8eef2);S.fog.color.set(0xe8eef2);show(TKLABROOM)}}
-const _tkhide=hideAll;hideAll=function(){_tkhide();ground.visible=true;water.visible=true;sandR.visible=true;clouds.forEach(c=>c.visible=true);TKFEATHER.visible=false;POLY.g.rotation.z=0};
+const _tkhide=hideAll;hideAll=function(){_tkhide();TKHAND.scale.setScalar(1);TKP2.g.rotation.z=0;ground.visible=true;water.visible=true;sandR.visible=true;clouds.forEach(c=>c.visible=true);TKFEATHER.visible=false;POLY.g.rotation.z=0};
 function tkSig(path,u,n){TKSIG.forEach((m,i)=>{const a=cl(u*1.3-i*.12);if(a<=0||a>=1){m.visible=false;return}m.visible=true;const p=path(a);m.position.set(p[0],p[1],p[2]);m.rotation.set(a*6,a*5,0)})}
 const TSH={
 t_self:(u,d,k)=>{tkEnv('home');show(POLY);POLY.rest();POLY.at(0,0,0,.12);POLY.face('bored');POLY.arms[1].rotation.set(-1.0,0,-.5+Math.sin(u*16)*.1);camTo([0,1.7,4.6],[0,1.7,3.9],[0,1.55,0],[0,1.55,0],k,40)},
@@ -66,3 +66,25 @@ t_stare:(u,d,k)=>{tkEnv('home');show(POLY);TKFEATHER.visible=true;POLY.rest();PO
 Object.assign(SHOTS,TSH);
 // cover shot: deadpan Poly, feather at his own neck, the tickling glove hovering and getting ignored
 Object.assign(SHOTS,{tcover:(u,d,k)=>{tkEnv('home');show(POLY,TKHAND);TKFEATHER.visible=true;POLY.rest();POLY.at(0,0,0,.1);POLY.face('bored');POLY.arms[1].rotation.set(-1.75,0,-.55);TKHAND.userData.f.forEach((f,i)=>f.rotation.x=-.25+i*.1);TKHAND.rotation.y=-Math.PI/2;TKHAND.position.set(-.8,1.45,.25);camTo([0,1.5,5.3],[0,1.5,5.3],[0,1.95,0],[0,1.95,0],0,40)}});
+// ---- cover v2: the contrast that IS the story: deadpan self-tickle vs. laughing-out-loud tickled by someone else ----
+const _tkFace=faceTex;
+faceTex=function(st,skin,hair,o={}){if(st!=='laugh')return _tkFace(st,skin,hair,o);const k='laugh'+skin+hair+(o.stubble?1:0);if(FC[k])return FC[k];
+ const base=_tkFace('neutral',skin,hair,o);const src=base.image;return FC[k]=ctex(256,128,(x,w,h)=>{x.drawImage(src,0,0);const sk=shade(skin,1.0);
+  x.fillStyle=sk;x.fillRect(44,44,40,22);x.fillRect(48,76,32,18);
+  x.strokeStyle='#1a1210';x.lineWidth=3;for(const cx of[53,75]){x.beginPath();x.arc(cx,57,5.5,Math.PI*1.1,Math.PI*1.9);x.stroke();x.strokeStyle='#1a1210';x.lineWidth=2.2;x.beginPath();x.moveTo(cx-5,45);x.lineTo(cx+5,43);x.stroke();x.lineWidth=3}
+  x.fillStyle='#e87a8a';x.fillRect(46,64,7,4);x.fillRect(75,64,7,4);
+  x.fillStyle='#2a0a10';x.beginPath();x.ellipse(64,85,9,7,0,0,7);x.fill();x.fillStyle='#f4efe6';x.fillRect(57,79,14,3);x.fillStyle='#d04a5a';x.fillRect(59,88,10,3);
+  x.fillStyle='#5ab8ff';x.fillRect(46,58,2,6);x.fillRect(80,58,2,6)})};
+const TKP2=person({hairCap:1,coat:'#2f8070',shortSleeve:1,pants:'#2d5f9a',hair:'#4a3020',stubble:1,skin:'#e8b894'});
+const TKTEAR=[...Array(8)].map(()=>{const m=box(.06,.15,.06,new THREE.MeshBasicMaterial({color:0x5ab8ff}));S.add(m);ACT.push(m);return m});
+Object.assign(SHOTS,{tcover2:(u,d,k)=>{tkEnv('home');show(POLY,TKP2,TKHAND);TKFEATHER.visible=true;
+ POLY.rest();POLY.at(-.4,0,0,.3);POLY.face('bored');POLY.arms[1].rotation.set(-1.75,0,-.55);
+ TKP2.rest();TKP2.at(.42,0,0,-.3);TKP2.face('laugh');TKP2.g.rotation.z=.08;TKP2.arms[0].rotation.set(-.2,0,-.95);TKP2.arms[1].rotation.set(-.2,0,.95);
+ TKHAND.userData.f.forEach((f,i)=>f.rotation.x=-.2+i*.1);TKHAND.rotation.y=Math.PI/2;TKHAND.position.set(.8,1.3,1.5);
+ [[.78,1.78,.3],[.86,1.66,.3],[.74,1.95,.3],[.6,2.04,.3],[.9,1.86,.3],[.7,1.58,.3]].forEach((p,i)=>{TKTEAR[i].visible=true;TKTEAR[i].scale.setScalar(.4);TKTEAR[i].position.set(p[0],p[1],p[2])});
+ camTo([0,1.8,3.7],[0,1.8,3.7],[0,2.0,0],[0,2.0,0],0,40)}});
+// ---- cover v3: ONE huge hero (the laughing face) on a vivid flat background; the tickling glove is rendered in its own pass (green screen) and composited big in the foreground by make_cover.py ----
+Object.assign(SHOTS,{tcover3:(u,d,k)=>{tkOff();S.background=new THREE.Color(0x7a3ae0);S.fog.color.set(0x7a3ae0);HEMI.intensity=1.5;show(TKP2);
+ TKP2.rest();TKP2.at(.21,0,0,.18);TKP2.face('laugh');TKP2.g.rotation.z=.12;TKP2.arms[0].rotation.set(-.2,0,-.95);TKP2.arms[1].rotation.set(-.2,0,.95);
+ camTo([0,1.7,1.55],[0,1.7,1.55],[0,1.62,0],[0,1.62,0],0,40);cam.rotateZ(.14)},
+ tcover3g:(u,d,k)=>{tkOff();S.background=new THREE.Color(0x00ff00);S.fog.color.set(0x00ff00);HEMI.intensity=1.5;show(TKHAND);TKHAND.userData.f.forEach((f,i)=>f.rotation.x=-.3+i*.14);TKHAND.rotation.set(Math.PI/2,0,.5);TKHAND.position.set(0,0,0);camTo([0,.1,3.4],[0,.1,3.4],[0,0,0],[0,0,0],0,40)}});
