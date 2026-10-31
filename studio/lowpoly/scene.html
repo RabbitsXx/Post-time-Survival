@@ -8,7 +8,8 @@ html,body{margin:0;background:#000;overflow:hidden}
 </style><body><div id=wrap><canvas id=c></canvas><div id=cap></div><div id=fl></div></div>
 <script src="../free3d/node_modules/three/build/three.min.js"></script>
 <script>
-const RW=540,RH=960;
+const QP=new URLSearchParams(location.search);const VW=+(QP.get('w')||1080),VH=+(QP.get('h')||1920);const RW=VW/2,RH=VH/2;
+(()=>{const w=document.getElementById('wrap'),c=document.getElementById('c'),f=document.getElementById('fl');for(const e of[w,c,f]){e.style.width=VW+'px';e.style.height=VH+'px'}})();
 const cv=document.getElementById('c');const R=new THREE.WebGLRenderer({canvas:cv,antialias:false,preserveDrawingBuffer:true});R.setSize(RW,RH,false);R.setPixelRatio(1);
 const S=new THREE.Scene();const HOR=0xcdeeff;S.fog=new THREE.Fog(HOR,45,130);
 const cam=new THREE.PerspectiveCamera(45,RW/RH,.1,300);
@@ -77,6 +78,7 @@ const SK=['#efc2a2','#dca47e','#f3cdb0'],HR=['#4a3020','#8a5a2a','#2a1c14'];
 const US=[...Array(6)].map((_,i)=>person({coat:'#1f3a8a',torsoDraw:brass,pants:'#7a88a8',hat:'kepi',belt:1,gun:true,skin:SK[i%3],hair:HR[i%3],stubble:i%2}));
 const BR=[...Array(6)].map((_,i)=>person({coat:'#c4202a',torsoDraw:crossbelts,pants:'#e8e8e0',hat:'shako',belt:1,gun:true,skin:SK[(i+1)%3],hair:HR[(i+2)%3],stubble:i%2}));
 const CAPT=person({coat:'#1c2a5c',torsoDraw:imperial,pants:'#e8e8e0',hat:'shako',belt:1,stache:'#d8d8d8',hair:'#c8c8c8',skin:'#dca47e'});
+const POLY=person({hairCap:1,coat:'#2f8070',shortSleeve:1,pants:'#2d5f9a',hair:'#4a3020',stubble:1,skin:'#e8b894'});
 const pig=pigModel(),ghost=pigModel();
 const SH=[ship(),ship(),ship()];SH[1].userData.flag.visible=true;
 SH[0].userData.body.add(CAPT.g);
@@ -146,7 +148,9 @@ peace:(u,d,k)=>{[[0,0],[1,-2.8]].forEach(([i,z])=>{const a=US[i],b=BR[i];show(a,
 grave:(u,d,k)=>{show(graveG,US[0],BR[0],US[1],BR[1]);graveG.position.set(0,0,0);const L=[[US[0],-1.9],[US[1],-3.2],[BR[0],1.9],[BR[1],3.2]];L.forEach(([p,x],i)=>{p.rest();p.at(x,0,.9+(i%2)*.5,x<0?.8:-.8);p.face('bored');p.gun.visible=false;p.head.rotation.x=.45;p.arms[0].rotation.x=-.5;p.arms[1].rotation.x=-.5});camTo([0,1.5,6],[0,1.2,4.8],[0,.8,0],[0,.8,0],k,48)},
 years:(u,d,k)=>{show(signG,US[0],BR[0],US[1],BR[1]);drawSign(1859+Math.min(12,Math.floor(k*14)));signG.position.set(0,.7,-1.5);signG.scale.setScalar(.75);const L=[[US[0],-1.6,1.2],[BR[0],1.6,1.2],[US[1],-.7,3],[BR[1],.7,3]];L.forEach(([p,x,z],i)=>{p.rest();p.at(x,0,z,0);p.face('bored');p.gun.visible=false;p.head.rotation.z=Math.sin(u*2+i)*.25;p.arms[0].rotation.z=.1;p.arms[1].rotation.z=-.1});camTo([0,2.0,9],[0,2.0,8],[0,1.9,0],[0,1.9,0],k,58)},
 kaiser:(u,d,k)=>{show(KAI,tableG);tableG.position.set(0,0,1.0);KAI.rest();KAI.at(0,0,-.1,0);KAI.face('smug');const press=cl((k-.6)/.2);const lift=cl(k/.5);const h=lerp(1.55,1.4,ease(lift));const dn=k>.6?lerp(1.4,1.12,ease(press)):h;stamp.position.set(lerp(.55,.1,ease(cl(k/.6))),dn+.05,.1);stamp.visible=true;mark.visible=k>.8;KAI.arms[1].rotation.x=-1.45-(k<.6?(1-lift)*.4:0);KAI.arms[1].rotation.z=-.1;KAI.head.rotation.z=.08*Math.sin(u*3);if(k>.8&&k<.9){SHAKE=.12}camTo([.4,2.9,5.0],[.3,2.6,4.4],[.1,1.45,.8],[.1,1.35,1],k,42)},
-cover:(u,d,k)=>{showGarden();show(pig);pig.at(0,0,0);pig.state('pigalive');pig.root.rotation.set(0,.12,0);pig.head.rotation.x=0;stick.visible=true;waveFlag(pigFlag,0);camTo([0,1.0,3.3],[0,1.0,3.3],[0,.95,0],[0,.95,0],0,38)},
+banner:(u,d,k)=>{show(pig,POLY);pig.at(-3.6,.5,.4);pig.state('pigalive');pig.root.rotation.set(0,.5,0);pig.head.rotation.x=.1;stick.visible=true;waveFlag(pigFlag,0.5);POLY.rest();POLY.at(3.5,0,.4,-.3);POLY.face('neutral');POLY.arms[0].rotation.set(0,0,.05);POLY.arms[1].rotation.set(0,0,-.05);camTo([0,1.5,6.9],[0,1.5,6.9],[0,1.45,0],[0,1.45,0],0,38)},
+logo:(u,d,k)=>{show(POLY);POLY.rest();POLY.at(0,0,0,0);POLY.face('neutral');camTo([0,1.78,1.55],[0,1.78,1.55],[0,1.66,0],[0,1.66,0],0,32)},
+cover:(u,d,k)=>{show(pig,POLY);POLY.rest();POLY.at(-.42,0,.3,.2);POLY.face('neutral');POLY.arms[0].rotation.set(0,0,.05);POLY.arms[1].rotation.set(0,0,-.05);pig.at(.55,-.9,-.3);pig.state('pigalive');pig.head.rotation.x=0;stick.visible=true;waveFlag(pigFlag,0);camTo([0,2.0,5.6],[0,2.0,5.6],[0,2.0,0],[0,2.0,0],0,40)},
 ghost:(u,d,k)=>{show(ghost);ghost.root.visible=true;ghost.state(u>d*.55?'pigshrug':'pigghost');ghost.at(0,0,0);ghost.root.position.y=2.4+k*.9+Math.sin(u*3)*.12;ghost.root.rotation.set(0,Math.sin(u*2.4)*.5,0);ghost.head.rotation.y=Math.sin(u*5)*.35;wings.forEach((w,i)=>{w.rotation.z=(i?1:-1)*(.5+Math.sin(u*14)*.4)});ghost.legs.forEach((l,i)=>l.rotation.x=Math.sin(u*6+i)*.3);ghost.bl.visible=false;sparks.forEach((m,i)=>{m.visible=true;const a=u*2+i*.8;m.position.set(Math.cos(a)*1.3,ghost.root.position.y+Math.sin(a*1.7)*.8,Math.sin(a)*1.3);m.rotation.set(a,a,0)});camTo([0,2.6,5.6],[0,3.1,5.2],[0,2.8,0],[0,3.3,0],k,45)}
 };
 

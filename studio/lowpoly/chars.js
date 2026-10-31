@@ -57,6 +57,7 @@ function person(o){const g=new THREE.Group();const skin=o.skin||'#e8b894';const 
  P.head=new THREE.Group();P.head.position.set(0,1.76,0);g.add(P.head);
  P.fm=new THREE.MeshLambertMaterial({map:faceTex('neutral',skin,hair,o),flatShading:false});
  const hg=new THREE.SphereGeometry(.17,12,9);const hm=new THREE.Mesh(hg,P.fm);hm.scale.set(.92,1.12,1.0);P.head.add(hm);
+ if(o.hairCap){const hm2=new THREE.MeshLambertMaterial({map:fab(hair,{seed:9,noise:.32,w:32,h:32}),flatShading:true});const hc=new THREE.Mesh(new THREE.SphereGeometry(.186,10,7,0,Math.PI*2,0,1.0),hm2);hc.scale.set(.97,1.14,1.08);hc.position.set(0,.012,-.014);P.head.add(hc);const bk=new THREE.Mesh(new THREE.SphereGeometry(.176,10,7,0,Math.PI*2,0,1.9),hm2);bk.scale.set(.96,1.1,1.0);bk.position.set(0,.005,-.03);P.head.add(bk);const tf=box(.16,.07,.09,hm2,.02,.205,.11,P.head);tf.rotation.set(-.35,0,.15);const tf2=box(.12,.06,.08,hm2,-.07,.19,.13,P.head);tf2.rotation.set(-.3,0,-.2)}
  const nose=cone(.032,.07,4,new THREE.MeshLambertMaterial({map:skinT,flatShading:true}),0,-.015,.175,P.head);nose.rotation.x=Math.PI/2;nose.rotation.y=Math.PI/4;
  for(const sx of[-1,1]){const e=new THREE.Mesh(new THREE.IcosahedronGeometry(.04,0),new THREE.MeshLambertMaterial({map:skinT,flatShading:true}));e.scale.set(.4,1,.7);e.position.set(sx*.16,-.01,-.01);P.head.add(e)}
  const h=o.hat;const dark=M(0x16161a);
