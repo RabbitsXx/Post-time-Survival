@@ -64,3 +64,5 @@ t_try:(u,d,k)=>{tkEnv('home');show(POLY);TKFEATHER.visible=true;POLY.rest();POLY
 t_stare:(u,d,k)=>{tkEnv('home');show(POLY);TKFEATHER.visible=true;POLY.rest();POLY.at(0,0,0,0);POLY.face('smug');POLY.arms[1].rotation.set(-1.5,0,-.12+Math.sin(u*5)*.04);camTo([0,1.78,2.9],[0,1.8,2.5],[0,1.75,0],[0,1.75,0],k,36)}
 };
 Object.assign(SHOTS,TSH);
+// cover shot: deadpan Poly, feather at his own neck, the tickling glove hovering and getting ignored
+Object.assign(SHOTS,{tcover:(u,d,k)=>{tkEnv('home');show(POLY,TKHAND);TKFEATHER.visible=true;POLY.rest();POLY.at(0,0,0,.1);POLY.face('bored');POLY.arms[1].rotation.set(-1.75,0,-.55);TKHAND.userData.f.forEach((f,i)=>f.rotation.x=-.25+i*.1);TKHAND.rotation.y=-Math.PI/2;TKHAND.position.set(-.8,1.45,.25);camTo([0,1.5,5.3],[0,1.5,5.3],[0,1.95,0],[0,1.95,0],0,40)}});
