@@ -45,16 +45,29 @@ def bed(dur):
             for f in c:put(sine(f*2,t)*np.exp(-t/.07)*.22,t0)
         th=np.arange(int(.05*SR))/SR;put(noise(len(th),b+1)*np.exp(-th/.01)*.12,t0+sp/2)
     return out
+LIM='acompressor=threshold=0.1:ratio=3:attack=5:release=90:makeup=2,alimiter=limit=0.45:attack=3:release=60:level=disabled'
 def wr(path,y):
     w=wave.open(path,'wb');w.setnchannels(1);w.setsampwidth(2);w.setframerate(SR);w.writeframes((np.clip(y,-1,1)*32767).astype('<i2').tobytes());w.close()
-def chunks(text,t0,t1):
+def chunks(text,t0,t1,groups=None):
     ws=text.split();wt=[len(w)+1.5 for w in ws];tot=sum(wt);acc=0;t=[];
     for w,x in zip(ws,wt):t.append((t0+(t1-t0)*acc/tot,t0+(t1-t0)*(acc+x)/tot));acc+=x
+    if groups:
+        assert ' '.join(groups).split()==ws,(groups,ws)
+        out=[];i=0
+        for g in groups:
+            n=len(g.split());out.append(dict(t0=t[i][0],t1=t[i+n-1][1],text=re.sub(r'[,.]$','',g)));i+=n
+        for a,b2 in zip(out,out[1:]):a['t1']=b2['t0']
+        return out
     out=[];cur=[]
     for i,w in enumerate(ws):
         cur.append(i)
         if len(cur)>=3 or re.search(r'[,.!?]$',w) or i==len(ws)-1:
             out.append(dict(t0=t[cur[0]][0],t1=t[cur[-1]][1],text=re.sub(r'[,.]$','',' '.join(ws[j] for j in cur))));cur=[]
+    STOP={'a','an','the','to','of','and','at','over','in','his','her','it','was','were','who'}
+    for i in range(len(out)-1):
+        w=out[i]['text'].split()
+        if len(w)>1 and w[-1].lower() in STOP and not re.search(r'[.!?]$',w[-1]) and len((out[i+1]['text']).split())<3:
+            out[i+1]['text']=w[-1]+' '+out[i+1]['text'];out[i]['text']=' '.join(w[:-1]);out[i]['t1']=out[i+1]['t0']=out[i]['t1']-(out[i]['t1']-out[i]['t0'])/len(w)
     m=[]
     for c in out:
         if m and len(c['text'].split())==1 and len(m[-1]['text'].split())<3 and not re.search(r'[.!?]$',m[-1]['text']):m[-1]['text']+=' '+c['text'];m[-1]['t1']=c['t1']
@@ -69,7 +82,7 @@ def main():
     t=0;shots=[];caps=[];vo=[];slots={}
     for L in EP['lines']:
         p=B.tts(L['t'],L['v']);x,sr=rd(p);d=len(x)/sr;lead=.15;slot=lead+d+L.get('pad',.3);v0=t+lead;vo.append((v0,p))
-        caps+=chunks(L['t'],v0,v0+d);acc=0
+        caps+=chunks(L['t'],v0,v0+d,L.get('c'));acc=0
         for sid,fr in L['shots']:shots.append(dict(id=sid,t0=t+slot*acc,t1=t+slot*(acc+fr)));slots[sid]=(t+slot*acc,t+slot*(acc+fr));acc+=fr
         t+=slot
     dur=t+.3;shots[-1]['t1']=dur;spec=dict(shots=shots,caps=caps,dur=dur);json.dump(spec,open(O+'/spec.json','w'),indent=0)
@@ -102,6 +115,11 @@ def main():
                 i=int(tt*SR);k=max(0,min(len(y),n-i));X[i:i+k]+=y[:k]*.7
         Mu=bed(dur)[:n];env=np.convolve(np.abs(V),np.ones(2205)/2205,'same');duck=1-np.clip(env*7,0,.6)
         out=V*1.0+X*.55+Mu*.16*duck;out/=max(1e-6,np.abs(out).max())/.9;wr(O+'/mix.wav',out)
-        subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate','30','-i',FR+'/%05d.jpg','-i',O+'/mix.wav','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-af','loudnorm=I=-14:TP=-1.5:LRA=11','-movflags','+faststart','-shortest',O+f'/{name}.mp4'])
+        import shutil
+        if os.path.exists(O+'/cover.jpg'):
+            for i in range(4):shutil.copy(O+'/cover.jpg',FR+'/%05d.jpg'%i)
+        r=subprocess.run(['ffmpeg','-hide_banner','-nostats','-i',O+'/mix.wav','-af',LIM+',loudnorm=I=-14:TP=-2.4:LRA=11:print_format=json','-f','null','-'],capture_output=True,text=True).stderr
+        J=json.loads(r[r.rindex('{'):r.rindex('}')+1]);LN=LIM+',loudnorm=I=-14:TP=-2.4:LRA=11:measured_I=%s:measured_TP=%s:measured_LRA=%s:measured_thresh=%s:offset=%s:linear=true'%(J['input_i'],J['input_tp'],J['input_lra'],J['input_thresh'],J['target_offset'])
+        subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate','30','-i',FR+'/%05d.jpg','-i',O+'/mix.wav','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-af',LN,'-movflags','+faststart','-shortest',O+f'/{name}.mp4'])
         print('DONE',O+f'/{name}.mp4')
 main()

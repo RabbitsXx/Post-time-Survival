@@ -18,3 +18,4 @@ releases/remaincalm/rc3/rc3_part3.mp4
 releases/remaincalm/batch1/*/*.mp4
 studio/lowpoly/out/
 studio/lowpoly/**/*.mp4
+studio/lowpoly/.secrets.env
