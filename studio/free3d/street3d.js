@@ -28,7 +28,7 @@ function buildStreet(){
  bx(70,.16,.2,MC(0x8a8e92,.8),KX,.08,S0+13.2);
  for(const [px,pz,pw,pd] of [[-3.2,8.0,1.6,.8],[2.6,10.2,2.2,.9],[5.5,7.4,1.2,.6]]){const pu=new THREE.Mesh(new THREE.PlaneGeometry(pw,pd),new THREE.MeshBasicMaterial({color:0x6a7a9a,transparent:true,opacity:.35,fog:true}));pu.rotation.x=-Math.PI/2;pu.position.set(KX+px,.02,S0+pz);S.add(pu)}
  // opposite shophouses, continuous row
- for(let i=-6;i<=6;i++){const h=9+((i*7)%3+3)%3*1.2,w=5;const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:facadeTex(i+9),fog:true}));m.position.set(KX+i*w,h/2,S0+16.4);m.rotation.y=Math.PI;S.add(m);
+ for(let i=-6;i<=6;i++){const h=9+((i*7)%3+3)%3*1.2,w=5;const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:facadeTex(i+9),fog:true,color:0x8a90a8}));m.position.set(KX+i*w,h/2,S0+16.4);m.rotation.y=Math.PI;S.add(m);
   bx(w,.3,.5,MC(0x2a2a2e,.9),KX+i*w,h+.1,S0+16.5);bx(w-.1,.12,1.1,MC(0x3a3a40,.8),KX+i*w,3.05,S0+15.9)}
  // far dark sky blocks behind roofs
  const sky=new THREE.Mesh(new THREE.PlaneGeometry(90,30),new THREE.MeshBasicMaterial({color:0x0a1426,fog:false}));sky.position.set(KX,12,S0+30);sky.rotation.y=Math.PI;S.add(sky);
