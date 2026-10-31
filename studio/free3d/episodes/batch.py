@@ -181,3 +181,34 @@ ep('ks1','NIGHT 1',[
  CARD('NEXT NIGHT',['3 CUSTOMERS','1 IS NOT HUMAN','COMMENT WHICH ONE'],L('vendor',"Next night. Which one isn't human?"),min=6.0,sfx=[[.3,'click'],[1.5,'click'],[2.7,'click']])])
 EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
 for _s in EPS['ks1']['shots']:_s['typed']=True
+
+# ---- ks1 v3: longer, every order is shown, cooked and handed over; SERVED / REFUSED stamps ----
+GRILL=[[KX,1.6,KZ-.7],[KX,1.2,KZ+4.4],[KX-.5,1.75,KZ-1.3],[KX-1.4,.9,KZ+.25]]
+JUG=[[KX+.2,1.6,KZ-.7],[KX+.5,1.2,KZ+3.0],[KX+1.3,1.7,KZ-.9],[KX+1.5,1.2,KZ+.65]]
+PUSH=[[KX,1.6,KZ-.7],[KX,1.2,KZ+4.4],[KX,1.5,KZ+1.6],[KX,1.25,KZ+4.4]]
+def walk_in(w,x0,e,face=None):
+    k=dict(to=[KX+.1,KZ+4.4],t0=0,t1=2.2,act='walk')
+    if face:k['face']=face
+    return ch(w,KX+x0,KZ+4.4,e,**k)
+TIP='MIDNIGHT SKEWERS · 2:14 AM'
+def O(**k):return dict(k=k.pop('k','order'),**k)
+ep('ks1','NIGHT 1',[
+ CARD('NIGHT SHIFT RULES',['REAL CUSTOMERS LOOK AT YOU','SERVE THEM','REFUSE ANYONE ELSE'],L('vendor',"Real customers look at you. Serve them. Refuse anyone else."),min=7.0,sfx=[[.3,'click'],[1.9,'click'],[3.5,'click']]),
+ # customer 1: auntie
+ S(KC,[walk_in('auntie',4.6,'smile')],[],'CUSTOMER 1 · ARRIVES',fov=30,grade='warm',min=2.4,sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
+ S(KC,[kc('auntie',.1,'smile')],[L('auntie',"Ten pork skewers, please. My husband loves them.")],'ORDER: 10 PORK SKEWERS',fov=30,grade='warm',min=5.2,icons=[dict(k='order',what='skewer',n=1,label='x10',t0=.6,t1=9,x=.74,y=.36,s=1.35)]),
+ S(GRILL,[],[L('vendor',"Coming up.")],'COOKING',fov=42,grade='warm',min=5.4,sfx=[[0,'whoosh'],[.4,'sizzle'],[2.6,'sizzle']],cues=[dict(t=0,type='motif',detune=.3,level=.14)]),
+ S(KC,[kc('auntie',.1,'smile')],[L('auntie',"Smells wonderful. Thank you, dear."),L('vendor',"Serve.")],'HANDING OVER',fov=30,grade='warm',min=6.0,icons=[dict(k='skewer',t0=.2,t1=1.6,x=.5,y=.95,x2=.5,y2=.62,s=1.5),dict(k='coin',t0=2.0,t1=3.2,x=.5,y2=.95,y=.6,s=1.2),dict(k='stampS',t0=3.6,t1=9,x=.5,y=.5,s=1)],sfx=[[.9,'click'],[2.4,'chime']]),
+ # customer 2: lad
+ S(KC,[walk_in('lad',-4.6,'calm')],[],'CUSTOMER 2 · ARRIVES',fov=30,grade='warm',min=2.4,sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
+ S(KC,[kc('lad',-.1,'calm')],[L('lad',"Iced tea, less sugar. I walked a long way.")],'ORDER: ICED TEA',fov=30,grade='warm',min=4.6,icons=[dict(k='order',what='tea',n=1,t0=.6,t1=9,x=.74,y=.36,s=1.35)]),
+ S(JUG,[],[L('vendor',"One iced tea.")],'POURING',fov=40,grade='warm',min=3.8,sfx=[[.3,'splash'],[1.2,'click']]),
+ S(KC,[kc('lad',-.1,'calm')],[L('lad',"Keep the change."),L('vendor',"Serve.")],'HANDING OVER',fov=30,grade='warm',min=5.4,icons=[dict(k='tea',t0=.2,t1=1.6,x=.5,y=.95,x2=.5,y2=.62,s=1.5),dict(k='stampS',t0=3.0,t1=9,x=.5,y=.5,s=1)],sfx=[[1.2,'click'],[2.6,'chime']]),
+ # customer 3: the girl (anomaly)
+ S(KC,[ch('girl',KX+4.6,KZ+4.4,'smile',to=[KX+.1,KZ+4.4],t0=0,t1=2.4,act='walk',face=[KX,KZ+12],still=True,noShadow=True)],[],'CUSTOMER 3 · ARRIVES',fov=30,grade='dead',min=2.8,cues=[dict(t=0,type='gate',dur=2.4)],sfx=[[.4,'foot'],[1.1,'foot'],[1.8,'foot']]),
+ S(KC,[ch('girl',KX+.1,KZ+4.4,'smile',face=[KX,KZ+12],still=True,noShadow=True)],[L('girl',"Pork. No chili.")],'ORDER: PORK. NO CHILI.',fov=30,grade='dead',min=3.4,icons=[dict(k='order',what='skewer',n=1,t0=.6,t1=9,x=.74,y=.36,s=1.35)],cues=[dict(t=0,type='tick'),dict(t=1.8,type='tick')]),
+ S(PUSH,[ch('girl',KX+.1,KZ+4.4,'smile',face=[KX,KZ+12],still=True,noShadow=True)],[L('vendor',"She is facing away."),L('vendor',"Real customers look at you.")],'CUSTOMER 3 · ???',fov=30,grade='dead',min=6.4,sfx=[[.3,'heart'],[1.8,'heart']],cues=[dict(t=0,type='gate',dur=5.0),dict(t=.2,type='riser',dur=5.0,level=.3)]),
+ S(KFACE,[ch('z3',KX+.1,KZ+4.4,'calm',face=[KX,KZ-.7])],[L('vendor',"Refuse.")],'CUSTOMER 3 · REFUSED',fov=22,grade='alarm',min=3.8,lead=.05,icons=[dict(k='stampR',t0=.5,t1=9,x=.5,y=.78,s=1.35)],sfx=[[0,'sting'],[.2,'groan']],cues=[dict(t=0,type='stinger',level=.8)]),
+ CARD('NEXT NIGHT',['3 CUSTOMERS','1 IS NOT HUMAN','COMMENT WHICH ONE'],L('vendor',"Next night. Which one isn't human?"),min=6.0,sfx=[[.3,'click'],[1.5,'click'],[2.7,'click']])])
+EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
+for _s in EPS['ks1']['shots']:_s['typed']=True

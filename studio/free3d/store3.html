@@ -115,7 +115,7 @@ const GRADES={calm:['rgb(206,226,214)',.62],cold:['rgb(170,205,215)',.7],warm:['
 function GRADE(g){const m=Array.isArray(g)?g:(GRADES[g]||GRADES.calm);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='multiply';ctx.fillStyle=m[0];ctx.fillRect(0,0,W,H);ctx.globalCompositeOperation='source-over';const gr=ctx.createRadialGradient(W/2,H*.46,H*.22,W/2,H*.5,H*.72);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,10,6,'+m[1]+')');ctx.fillStyle=gr;ctx.fillRect(0,0,W,H);ctx.restore()}
 window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(const x of sp.shots){if(t>=x.t0&&t<x.t1){sh=x;break}}
  const lt=Math.min(t,sh.t1-1e-3)-sh.t0,dur=sh.t1-sh.t0;ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,W,H);ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
- if(sh.card){ctx.setTransform(SF,0,0,SF,0,0);CARD[sh.card.type||'title'](ctx,sh.card,lt);titleBar(ctx,sp);drawCaptions(sh,t)}
+ if(sh.card){ctx.setTransform(SF,0,0,SF,0,0);CARD[sh.card.type||'title'](ctx,sh.card,lt);titleBar(ctx,sp);drawCaptions(sh,t);drawIcons(sh,t)}
  else{const si=sp.shots.indexOf(sh);if(si!==LASTSHOT){prepareShot(sh);LASTSHOT=si}const u=ease(clamp(lt/dur)),c=sh.cam;cam.fov=sh.fov||38;cam.updateProjectionMatrix();
   cam.position.set(lerp(c[0][0],c[2][0],u),lerp(c[0][1],c[2][1],u),lerp(c[0][2],c[2][2],u));cam.lookAt(lerp(c[1][0],c[3][0],u),lerp(c[1][1],c[3][1],u),lerp(c[1][2],c[3][2],u));cam.position.x+=Math.sin(t*1.7)*.006;cam.position.y+=Math.sin(t*2.3)*.005;cam.updateMatrixWorld();
   if(!BEAM)makeBeam();BEAM.piv.visible=false;BEAM.sp.visible=false;for(const k in PEOPLE){PEOPLE[k].visible=false;BLOB[k].visible=false}
@@ -131,7 +131,7 @@ window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(
   cam.layers.enable(1);const bg=S.background;S.background=null;ENVMATS.forEach(m=>{m.colorWrite=false});if(CULL)for(const e of OCCL)e[0].material=OCCM;R2.render(S,cam);if(CULL)for(const e of OCCL)e[0].material=e[1];ENVMATS.forEach(m=>{m.colorWrite=true});S.background=bg;cam.layers.set(0);
   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(cv2,0,0,W,H);
   GRADE(sh.grade);
-  ctx.setTransform(SF,0,0,SF,0,0);if(!sh.noUI){titleBar(ctx,sp);drawCaptions(sh,t);strip(ctx,sh,sp,t)}}
+  ctx.setTransform(SF,0,0,SF,0,0);if(!sh.noUI){titleBar(ctx,sp);drawCaptions(sh,t);drawIcons(sh,t);strip(ctx,sh,sp,t)}}
  ctx.setTransform(1,0,0,1,0,0);return oc.toDataURL('image/jpeg',.93).slice(23)};
 window.fontsReady=Promise.all([document.fonts.load('900 38px "Roboto Condensed"'),window.USE_RIG?loadRig():0]).then(()=>{buildPeople();PEOPLE&&Object.values(BLOB).forEach(b=>ENVMATS.push(b.material));initCull()});
 </script>
