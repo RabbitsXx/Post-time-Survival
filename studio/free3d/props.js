@@ -60,7 +60,7 @@ function buildKiosk(){
  // floor + side walls + back
  bx(4.4,.1,3.6,MC(0x3a2c20,.9),KX,-.05,KZ-.8);bx(.12,2.7,3.6,WM,KX-2.2,1.35,KZ-.8);bx(.12,2.7,3.6,WM,KX+2.2,1.35,KZ-.8);bx(4.4,2.7,.12,WM,KX,1.35,KZ-2.55);
  // counter: front board + top
- bx(4.4,1.0,.5,WM,KX,.5,KZ+.9);bx(4.6,.07,.8,MC(0x9a6a3a,.6),KX,1.02,KZ+.95);
+ bx(4.4,1.0,.5,WM,KX,.5,KZ+.9);bx(4.6,.07,.8,MC(0x5a544c,.45,.25),KX,1.02,KZ+.95);
  // window frame posts and header
  bx(.14,1.6,.14,DK,KX-2.15,1.8,KZ+1.1);bx(.14,1.6,.14,DK,KX+2.15,1.8,KZ+1.1);bx(4.5,.18,.2,DK,KX,2.62,KZ+1.1);
  // striped awning (tilted forward)
@@ -81,7 +81,6 @@ function buildKiosk(){
  cyl(.06,5.4,MC(0x2a2e32,.5,.5),KX+3.6,2.7,KZ+4.6,0,0,S,8);bx(1.3,.07,.07,MC(0x2a2e32,.5,.5),KX+3.0,5.3,KZ+4.6);const lamp=new THREE.Mesh(new THREE.BoxGeometry(.5,.08,.3),new THREE.MeshBasicMaterial({color:0xcfe8ff,fog:false}));lamp.position.set(KX+2.5,5.25,KZ+4.6);S.add(lamp);
 
  // atmosphere: strings of warm bulbs across the street, a haze glow behind the customer, a lit sign across the road, brighter pavement
- for(let r=0;r<2;r++)for(let i=0;i<13;i++){const x=KX-6+i,y=3.15+Math.sin(i*.5)*.18-r*.35,z=KZ+5.2+r*3.2;const b=new THREE.Mesh(new THREE.SphereGeometry(.09,6,5),new THREE.MeshBasicMaterial({color:i%3?0xffd890:0xff9a60,fog:false}));b.position.set(x,y,z);S.add(b)}
  const pave=new THREE.Mesh(new THREE.PlaneGeometry(14,4.4),new THREE.MeshStandardMaterial({color:0x8a9096,roughness:.5,metalness:.1}));pave.rotation.x=-Math.PI/2;pave.position.set(KX,.012,KZ+3.4);S.add(pave);
  // lights: warm bulb inside, orange coals, red neon, cool street lamp (also used to tint the 2D characters)
  const mk=(c,i,d,x,y,z)=>{const L=new THREE.PointLight(c,i,d,2);L.position.set(x,y,z);S.add(L)};

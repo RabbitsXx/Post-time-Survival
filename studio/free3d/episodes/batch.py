@@ -266,7 +266,7 @@ for _s in EPS['ks1']['shots']:_s['typed']=True
 
 # ---- ks1 v6: small roadside skewer stall, new 3D people, first-person hands, repeat-customer anomaly ----
 KX,KZ=100,-60
-K3=CAM([KX,1.6,KZ-.7],[KX,1.3,KZ+2.8])
+K3=CAM([KX,1.65,KZ-.7],[KX,1.5,KZ+2.8])
 GRILL=[[KX,1.6,KZ-.7],[KX,1.2,KZ+4.4],[KX-.2,1.8,KZ-1.7],[KX-1.4,.95,KZ+.2]]
 JUG=[[KX,1.6,KZ-.7],[KX+.5,1.2,KZ+3.0],[KX+.9,1.8,KZ-1.5],[KX+1.5,1.15,KZ+.7]]
 KFACE3=CAM([KX,1.72,KZ+.9],[KX,1.86,KZ+2.6])
