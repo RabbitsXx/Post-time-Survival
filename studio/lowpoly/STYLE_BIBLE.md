@@ -16,7 +16,7 @@ Research: vidIQ channel list of @LowPolyShorts (top 50 Shorts by views) + vidIQ 
 - Branding is diegetic and rare (name appears as a prop in the story, small watermark ~5 s in).
 
 ## Our version (PosttimeLowPoly) — decisions
-- Format 1080x1920, 30 fps, 25-40 s, 65-95 words, target 2.5-2.9 w/s, a new shot every 1.2-2.5 s.
+- Format 1080x1920, 30 fps, 28-42 s (science/body) or ~50 s (history), 100-140 words, target 3.2-4.0 w/s, a new shot every 2-4 s (bursts ~1 s, explanation shots 4-6 s). Numbers corrected 2026-10-31 from the verified clip analysis below.
 - Every clip = ONE true, source-checked fact/story. Source note per clip in `topics/<id>.md`. Keep claims narrow ("roughly", "according to ..."); no medical advice stated as fact; no real private individuals; no defamation of living people.
 - Title 3-7 words, Title Case, deadpan. Cover: one big object/animal face, <=5 words, nothing in bottom 300 px, text inside centre square (COVER_GUIDE.md).
 - Look: reuse free3d three.js PS1 renderer (NearestFilter textures, low res, fog, hard light) but with 3D low-poly primitives for animals/people/props (not 2D billboards). Palette per clip: 3 saturated hues + sky/ground; high-key daylight.
@@ -25,3 +25,10 @@ Research: vidIQ channel list of @LowPolyShorts (top 50 Shorts by views) + vidIQ 
 - Audio: bed from score.py (bouncy), SFX from SFXLIB, loudnorm -14 LUFS, TP <= -1.5.
 - No "AI generated" label. No copying of their topics: forbidden list kept in TOPICS.md ("already covered by reference": cow window, upside-down glasses, lemon juice robbery, meat shower, honey man, fake bus stop, paperclip->house, Toy Story 2, dolphins/pufferfish, etc.).
 - QC gate per clip: contact sheet of every shot, framing/occlusion, numeric loudness+peak, caption proof, cover proof. Fix before sending.
+
+## Verified against 7 clips (vidIQ scene walkthroughs, 2026-10-31)
+Clips: LowPolyShorts "Why You Should Get A Cast" (16M), "The Ganzfeld Effect" (26M); PolySoldier "This MiG Flew Into NATO With No Pilot" (1M, 11.5K views/h), "They Buried The Kamikaze Who Hit Them" (923K); 3D Poly Films "The Bizarre Biology Of The Dive Reflex"; Internet Bias "IT TAKES MUSCLES FOR WHAT?" (6.2M, stick figure, not low-poly); our own The Pig War v3.
+Confirmed (seen in several clips): shot 1 shows what sentence 1 says; one picture per clause, literal or exaggerated (brain with huge eyes, cow in VR goggles); diagram/X-ray/map shots alternate with character shots; yellow call-out labels with arrows, date stamps, big number pop-ups; a recurring character (red jacket + jeans on LowPolyShorts, suit + shades on 3D Poly Films); the ending is a picture (twist reveal, fourth-wall stare, absurd demo), not a moral; foley on every action; branding is a small watermark ~6-17 s in; "If you <weird thing>, ..." opening and a "You see," pivot in the science clips.
+Corrected numbers: words/s 3.6-4.3 in the references (Cast 4.1, Ganzfeld 4.0, Kamikaze 4.2, MiG 4.3, Dive Reflex 3.6), Pig War v3 3.2; shot length 2-4 s with 1 s bursts and 4-6 s explanation shots; history clips ~50-56 s, science clips 28-42 s.
+Weak spots found in Pig War v3: three RPG text boxes in <4 s (slow readers lose the $10/$100 joke), one shot with no character (0:03-0:04), no recurring character on screen.
+Limits: summaries came from vidIQ's video analysis, not frame-by-frame viewing; n = 7.
