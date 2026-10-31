@@ -24,7 +24,7 @@ def main():
         tags=BASE+', '+xt
         c=ST.find(s,cid)
         if not c:
-            c=dict(id=cid,series='REMAIN CALM',part=0,of=0,topic=title.split('|')[0][:60],yt_title=title,
+            c=dict(id=cid,series='REMAIN CALM',part=1,of=1,topic=title.split('|')[0][:60],yt_title=title,
              yt_desc=f"REMAIN CALM · {title}\n\n{hook}\n\n{desc}\n\nFrom the supermarket of REMAIN CALM: the dead smell fear, so stay calm. Part 1 of the series is on the channel.\n\nWould you stay calm or run? Comment CALM or RUN.\n\nREMAIN CALM is an original animated survival comedy by Post Time Survival. Fiction.\n\n#zombie #zombieapocalypse #shorts #animation #remaincalm",
              tt=f"REMAIN CALM · {hook} Calm or run? 🧟 #zombie #zombiecomedy #remaincalm #fyp",ig=f"REMAIN CALM · {hook} Calm or run? 🧟 #zombie #zombiecomedy #animation #reels #remaincalm",
              pin='Would you stay calm or run? Comment CALM or RUN.',tags=tags,playlist='REMAIN CALM',video=f'{od}/{k}.mp4',thumb=f'{od}/cover_9x16.jpg',caps_en=f'{od}/captions_en.srt',caps_th=f'{od}/captions_en.srt',status='ready',done={},due=due)
