@@ -40,6 +40,10 @@ def main():
      tags=['remain calm','what if','zombie apocalypse','survival','animated short','zombie short film','horror comedy','what if zombies','apocalypse survival','supermarket zombie'],next='BOX BREATHING (Part 2)',
      status='built, NOT posted')
     json.dump(meta,open(f'{od}/meta.json','w'),indent=1,ensure_ascii=False)
-    subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate','30','-i',frames+'/%05d.jpg','-i',R+'/out/rc1.wav','-c:v','libx264','-preset','medium','-crf','17','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-af','loudnorm=I=-14:TP=-1.5:LRA=11','-movflags','+faststart','-shortest',f'{od}/rc1_part1.mp4'])
+    wav=R+'/out/rc1.wav'
+    m=subprocess.run(['ffmpeg','-hide_banner','-i',wav,'-af','loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json','-f','null','-'],capture_output=True,text=True).stderr
+    j=json.loads(m[m.rindex('{'):m.rindex('}')+1])
+    af=f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={j['input_i']}:measured_LRA={j['input_lra']}:measured_TP={j['input_tp']}:measured_thresh={j['input_thresh']}:offset={j['target_offset']}:linear=true"
+    subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate','30','-i',frames+'/%05d.jpg','-i',wav,'-c:v','libx264','-preset','medium','-crf','17','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-af',af,'-movflags','+faststart','-shortest',f'{od}/rc1_part1.mp4'])
     print('packaged',od)
 if __name__=='__main__':main()

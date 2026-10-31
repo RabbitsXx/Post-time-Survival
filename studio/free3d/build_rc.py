@@ -80,6 +80,15 @@ def main():
         for t in ts:subprocess.check_call(['node',R+'/render_store3.js',p,fd,str(int(t*FPS)),str(int(t*FPS)+1),str(w),str(h),'&2d'],cwd=R)
         print('stills',fd);return
     fd=OUT+f'/{name}_frames'
+    if '--shots' in a:   # re-render only the listed shots (1-based) into the existing frames dir, then re-mux
+        ids=[int(x) for x in a[a.index('--shots')+1].split(',')];sp_=R+f'/spec_{name}_frames.json';json.dump(spec,open(sp_,'w'));ps=[];t0=time.time()
+        for i in ids:
+            sh_=spec['shots'][i-1];f0,f1=int(round(sh_['t0']*FPS)),min(int(round(spec['dur']*FPS)),int(round(sh_['t1']*FPS))+1)
+            ps.append(subprocess.Popen(['node',R+'/render_store3.js',sp_,fd,str(f0),str(f1),str(w),str(h),'&2d'],cwd=R))
+            if len(ps)>=workers:[q.wait() for q in ps];ps=[]
+        [q.wait() for q in ps];print(f're-rendered shots {ids} in {time.time()-t0:.0f}s')
+        mix_rc(spec,lines,sfx,cues,OUT+f'/{name}.wav')
+        subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate',str(FPS),'-i',fd+'/%05d.jpg','-i',OUT+f'/{name}.wav','-c:v','libx264','-preset','medium','-crf','17','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-movflags','+faststart','-shortest',OUT+f'/{name}.mp4']);print('DONE',OUT+f'/{name}.mp4');return
     if os.path.isdir(fd):
         for f in os.listdir(fd):os.remove(fd+'/'+f)
     t0=time.time();n=render(spec,fd,w,h,workers);print(f'rendered {n} frames in {time.time()-t0:.0f}s')

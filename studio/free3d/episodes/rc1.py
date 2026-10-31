@@ -32,7 +32,7 @@ A(S(CAM([5.2,1.3,Z],[10.4,1.2,Z]),[ch('mimi',10.2,Z,'shock',act='hands'),ch('gus
 # 13 Mimi talks him down (profile two-shot)
 A(S(CAM([9.1,1.3,1.45],[9.1,1.2,Z]),[ch('mimi',9.4,Z,'smile',face=[8.85,Z]),ch('gus',8.85,Z,'scared',face=[9.4,Z])],[L('mimi',"Look at me. Breathe in for four."),L('gus',"I can't, I can't!"),L('mimi',"Smile. Like it's your first day.")],'AISLE 9 · FRONT',fov=56,grade='cold',min=4.8,sfx=[[1.2,'exhale']]))
 # 14 zombies arrive and pass the two of them (silence)
-A(S(CAM([9.1,1.3,1.45],[9.1,1.2,Z]),[ch('mimi',9.4,Z,'smile',face=[8.85,Z]),ch('gus',8.85,Z,'scared',face=[9.4,Z]),ch('z2',4.6,Z+.8,'calm',to=[13.6,Z+.8],t0=0,t1=4.4,act='reach'),ch('z3',3.4,Z-.8,'calm',to=[12.4,Z-.8],t0=.4,t1=4.6,act='reach')],[],'AISLE 9 · FRONT',fov=56,grade='dead',min=4.4,sfx=[[.4,'foot'],[1.0,'foot'],[1.6,'foot'],[2.2,'foot'],[2.8,'foot'],[3.4,'foot']],cues=[dict(t=0,type='gate',dur=4.0),dict(t=.3,type='tick'),dict(t=1.5,type='tick'),dict(t=2.7,type='tick')]))
+A(S(CAM([9.1,1.3,1.45],[9.1,1.2,Z]),[ch('mimi',9.4,Z,'smile',face=[8.85,Z]),ch('gus',8.85,Z,'scared',face=[9.4,Z]),ch('z2',6.6,Z+.8,'calm',to=[12.2,Z+.8],t0=0,t1=4.4,act='reach'),ch('z3',7.0,Z-1.0,'calm',to=[11.6,Z-1.0],t0=.4,t1=4.6,act='reach')],[],'AISLE 9 · FRONT',fov=74,grade='dead',min=4.4,sfx=[[.4,'foot'],[1.0,'foot'],[1.6,'foot'],[2.2,'foot'],[2.8,'foot'],[3.4,'foot']],cues=[dict(t=0,type='gate',dur=4.0),dict(t=.3,type='tick'),dict(t=1.5,type='tick'),dict(t=2.7,type='tick')]))
 # 15 Vance explains
 A(S(CAM([-6.2,1.35,-9.6],[-6,1.1,-14],[-6.2,1.35,-9.9],[-6,1.1,-14]),[ch('vance',-6.0,-13.0,'calm',act='shush')],[L('vance',"Fascinating. They don't hunt people. They hunt fear.")],'FROZEN · DAIRY',fov=44,grade='cold',min=3.6,cues=[dict(t=0,type='motif',detune=.5,level=.2)]))
 # 16 rules card (store-policy voice)
@@ -46,7 +46,7 @@ A(S(CAM([11.5,1.4,Z],[-1.5,1.2,Z],[10.9,1.4,Z],[-1.5,1.2,Z]),[ch('rosa',-9.0,Z,'
 # 20 every head turns
 A(S(CAM([9,1.35,Z],[-3,1.2,Z],[8.6,1.35,Z],[-3,1.2,Z]),[ch('z2',3.0,Z+.1,'calm',face=[9,Z]),ch('z3',.6,Z-.7,'calm',face=[9,Z]),ch('z4',-1.8,Z+.6,'calm',face=[9,Z])],[],'AISLE 9 · CANNED GOODS',fov=44,grade='dead',min=2.6,lead=.05,cues=[dict(t=0,type='gate',dur=1.4),dict(t=1.4,type='stinger',level=.9)],sfx=[[1.4,'sting'],[1.4,'groan']]))
 # 21 payoff of the PA line
-A(S(CAM([4.0,1.25,Z],[7.4,1.2,Z]),[ch('gus',7.0,Z,'smile'),ch('rosa',8.1,Z,'scared',prop='baby')],[L('gus',"Please... remain calm.")],'AISLE 9 · CANNED GOODS',fov=38,grade='cold',min=2.8,cues=[dict(t=0,type='motif',detune=.3,level=.2)]))
+A(S(CAM([4.0,1.25,Z],[7.4,1.2,Z]),[ch('gus',6.9,Z+.25,'smile'),ch('rosa',8.3,Z-.45,'scared',prop='baby')],[L('gus',"Please... remain calm.")],'AISLE 9 · CANNED GOODS',fov=38,grade='cold',min=2.8,cues=[dict(t=0,type='motif',detune=.3,level=.2)]))
 # 22 loop: same frame as the hook, a zombie now stands right behind her
-A(S(CAM([-5.2,1.4,8.0],[-6.0,1.2,14.6],[-5.3,1.4,8.7],[-6.0,1.2,14.6]),[ch('mimi',CO+.9,14.6,'smile'),ch('z1',CO+.9,15.9,'calm')],[L('mimi',"Have a nice day.")],T0,fov=34,min=2.6,pad=.9,cues=[dict(t=1.6,type='stinger',level=.6)]))
+A(S(CAM([-5.2,1.4,8.0],[-6.0,1.2,14.6],[-5.3,1.4,8.7],[-6.0,1.2,14.6]),[ch('mimi',CO+.9,14.6,'smile'),ch('z1',CO+1.8,15.7,'calm')],[L('mimi',"Have a nice day.")],T0,fov=34,min=2.6,pad=.9,cues=[dict(t=1.6,type='stinger',level=.6)]))
 EP=dict(id='rc1',series=SER,title='THE DEAD SMELL FEAR',part=1,of=3,shots=sh)
