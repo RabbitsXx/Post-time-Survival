@@ -3,5 +3,5 @@ const srv=http.createServer((q,r)=>{const f=path.join(path.resolve(process.cwd()
 const port=srv.address().port;const [spec,w,h,extra]=process.argv.slice(2);
 const br=await chromium.launch({args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist']});const p=await br.newPage({viewport:{width:+w,height:+h}});
 await p.goto('http://localhost:'+port+'/free3d/store3.html?w='+w+'&h='+h+(extra||''));await p.evaluate(()=>window.fontsReady);await p.evaluate(s=>window.setSpec(s),JSON.parse(fs.readFileSync(spec)));
-const T=[];for(const f of[300,301,302,303,304,305]){const t0=Date.now();await p.evaluate(f=>window.renderAt(f),f);T.push(Date.now()-t0)}console.log(w+'x'+h,JSON.stringify(T));
+const T=[];for(const f of[300,301,302,303,304,305,306,307]){const t0=Date.now();await p.evaluate(f=>window.renderAt(f),f);T.push(Date.now()-t0)}console.log(w+'x'+h,JSON.stringify(T));
 await br.close();srv.close()});
