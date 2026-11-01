@@ -80,11 +80,12 @@ function buildStreet(){
 
  // ---- control panel on the stall's side wall: CCTV monitor + big red CLOSE button (the player turns to use these) ----
  const px=KX+2.12,pz=KZ+.2;bx(.08,.72,.78,MC(0x2a2e34,.5,.4),px+.04,1.4,pz);
- const cctv=ctex(256,192,(x,w,h)=>{x.fillStyle='#0a1a12';x.fillRect(0,0,w,h);x.fillStyle='#14301f';x.fillRect(6,22,w-12,h-60);for(let i=0;i<40;i++){x.fillStyle='rgba(120,255,160,.05)';x.fillRect(0,i*5,w,1)}
-  x.fillStyle='#7aff9a';x.font='700 16px "Roboto Condensed",monospace';x.textAlign='left';x.fillText('CAM 01 · STALL FRONT',10,18);x.fillText('REC',w-44,18);x.fillStyle='#e83a2a';x.beginPath();x.arc(w-54,13,4,0,7);x.fill();
-  const fig=(cx,col)=>{x.fillStyle=col;x.beginPath();x.moveTo(cx-10,150);x.lineTo(cx+10,150);x.lineTo(cx+16,112);x.lineTo(cx-16,112);x.fill();x.fillStyle='#d8b898';x.fillRect(cx-6,92,12,16);x.fillStyle='#3a2418';x.fillRect(cx-7,88,14,8)};fig(70,'#c4552a');fig(186,'#c4552a');
-  x.fillStyle='#7aff9a';x.font='700 15px "Roboto Condensed",monospace';x.fillText('02:14',46,84);x.fillText('02:19',162,84);x.font='700 13px "Roboto Condensed",monospace';x.fillText('LEFT',50,168);x.fillText('ENTERS',156,168)});
- const mon=new THREE.Mesh(new THREE.PlaneGeometry(.64,.48),new THREE.MeshBasicMaterial({map:cctv,fog:false}));mon.position.set(px-.001,1.52,pz);mon.rotation.y=-Math.PI/2;S.add(mon);
+ // live CCTV: second camera on the awning corner renders the real stall front into this monitor
+ const crt=new THREE.WebGLRenderTarget(320,240);const ccam=new THREE.PerspectiveCamera(68,320/240,.1,60);ccam.position.set(KX+2.0,2.45,KZ+1.5);ccam.lookAt(KX-.2,.95,KZ+3.1);
+ const mon=new THREE.Mesh(new THREE.PlaneGeometry(.64,.48),new THREE.MeshBasicMaterial({map:crt.texture,color:0x9affb8,fog:false}));mon.position.set(px-.001,1.52,pz);mon.rotation.y=-Math.PI/2;S.add(mon);
+ const ovt=ctex(256,192,(x,w,h)=>{for(let i=0;i<48;i++){x.fillStyle='rgba(0,20,8,.28)';x.fillRect(0,i*4,w,2)}x.fillStyle='#7aff9a';x.font='700 15px "Roboto Condensed",monospace';x.textAlign='left';x.fillText('CAM 01 · STALL FRONT',8,16);x.fillText('REC',w-40,16);x.fillStyle='#e83a2a';x.beginPath();x.arc(w-50,11,4,0,7);x.fill();x.fillStyle='#7aff9a';x.fillText('02:19:41',8,h-8)});
+ const ov=new THREE.Mesh(new THREE.PlaneGeometry(.64,.48),new THREE.MeshBasicMaterial({map:ovt,transparent:true,fog:false}));ov.position.set(px-.003,1.52,pz);ov.rotation.y=-Math.PI/2;S.add(ov);
+ window.CCTV={rt:crt,cam:ccam,mon:mon,ov:ov};
  const btn=new THREE.Mesh(new THREE.CylinderGeometry(.075,.085,.05,16),MC(0xc8201a,.35,.1));btn.rotation.z=Math.PI/2;btn.position.set(px-.04,1.16,pz);S.add(btn);
  const bl=new THREE.Mesh(new THREE.PlaneGeometry(.3,.09),new THREE.MeshBasicMaterial({map:signTex('CLOSE','#16181c','#ffffff',256,80,54),fog:false}));bl.position.set(px-.001,1.05,pz);bl.rotation.y=-Math.PI/2;S.add(bl);
  mk(0x7aff9a,6,2.5,px-.5,1.5,pz);

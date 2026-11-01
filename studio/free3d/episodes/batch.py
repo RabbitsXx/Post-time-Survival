@@ -294,3 +294,36 @@ ep('ks1','NIGHT 1',[
  CARD('NEXT NIGHT',['3 CUSTOMERS','1 IS NOT HUMAN','COMMENT WHICH ONE'],L('vendor',"Next night. Which one isn't human?"),min=6.0,sfx=[[.3,'click'],[1.5,'click'],[2.7,'click']])])
 EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
 for _s in EPS['ks1']['shots']:_s['typed']=True
+
+# ---- ks1 v7: two customers, one continuous first-person take (camera waypoints chain end-to-start, no cuts, people never pop), live CCTV monitor ----
+KX,KZ=100,-60
+_F=([KX,1.65,KZ-.7],[KX,1.5,KZ+2.8]);_G=([KX-.45,1.68,KZ-1.0],[KX-1.4,.95,KZ+.2]);_M=([KX+.9,1.62,KZ-.6],[KX+2.12,1.48,KZ+.2]);_B=([KX+1.35,1.55,KZ-.45],[KX+2.12,1.2,KZ+.2])
+def HOLD(w):return [w[0],w[1],w[0],w[1]]
+def TURN(a,b):return [a[0],a[1],b[0],b[1]]
+FV=52
+def MP(who,x=.1,e='smile',**k):return dict(who=who,pos=[KX+x,KZ+2.6],expr=e,**k)
+def MW(who,x0,e,**k):return dict(who=who,pos=[KX+x0,KZ+2.6],to=[KX+.1,KZ+2.6],t0=0,t1=2.2,expr=e,**k)
+WN=dict(still=True,noShadow=True,nocam=True)
+OB=lambda what,n=1,label=None:dict(k='order',what=what,n=n,label=label,t0=.6,t1=9,x=.76,y=.30,s=1.3)
+def SS(cam,lines,label,min,p3,hands=[],**k):return S(cam,[],lines,label,fov=FV,grade='warm',min=min,p3=p3,hands=hands,**k)
+ep('ks1','NIGHT 1',[
+ CARD('NIGHT SHIFT RULES',['REAL CUSTOMERS SHOW ON CAMERA','SERVE THEM',"REFUSE ANYONE WHO DOESN'T"],L('vendor',"Real customers show on the camera. Serve them. Refuse anyone who doesn't."),min=7.5,sfx=[[.3,'click'],[1.9,'click'],[3.5,'click']]),
+ SS(HOLD(_F),[],'CUSTOMER 1 · ARRIVES',2.6,[MW('man',4.6,'smile')],sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
+ SS(HOLD(_F),[L('man',"Ten pork skewers, please. Long shift tonight.")],'ORDER: 10 PORK SKEWERS',4.8,[MP('man')],icons=[OB('skewer',1,'x10')]),
+ SS(TURN(_F,_M),[L('vendor',"Check the camera.")],'LOOKING AT CCTV',2.6,[MP('man')],cctv=True,sfx=[[.4,'click']]),
+ SS(HOLD(_M),[L('vendor',"He's on camera. Good.")],'CCTV: CUSTOMER 1 VISIBLE',3.6,[MP('man')],cctv=True),
+ SS(TURN(_M,_G),[],'TURNING TO THE GRILL',2.0,[MP('man')],cctv=True),
+ SS(HOLD(_G),[L('vendor',"Coming up.")],'COOKING',5.0,[MP('man')],[dict(pose='grill',item='skewer',t0=.5,t1=4.6)],sfx=[[0,'whoosh'],[.4,'sizzle'],[2.8,'sizzle']],cues=[dict(t=0,type='motif',detune=.3,level=.14)]),
+ SS(TURN(_G,_F),[],'BACK TO THE COUNTER',1.8,[MP('man')],[dict(pose='give',item='skewer',t0=.4,t1=1.8)]),
+ SS(HOLD(_F),[L('man',"Smells wonderful. Thanks."),L('vendor',"Serve.")],'HANDING OVER',5.4,[MP('man',.1,'smile',give=dict(t0=1.0,t1=2.4))],[dict(pose='give',item='skewer',t0=0,t1=1.8),dict(pose='take',item='coin',t0=2.0,t1=3.2)],icons=[dict(k='stampS',t0=3.4,t1=9,x=.5,y=.5,s=1)],sfx=[[.6,'click'],[2.4,'chime']]),
+ SS(HOLD(_F),[],'CUSTOMER 2 · ARRIVES',3.6,[dict(who='man',pos=[KX+.1,KZ+2.6],to=[KX+4.9,KZ+2.6],t0=0,t1=2.4,expr='smile'),dict(who='woman',pos=[KX-4.6,KZ+2.6],to=[KX-.1,KZ+2.6],t0=.6,t1=3.0,expr='smile',**WN)],sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot'],[2.1,'foot']]),
+ SS(HOLD(_F),[L('woman',"Iced tea, less sugar, please.")],'ORDER: ICED TEA',4.4,[MP('woman',-.1,'smile',**WN)],icons=[OB('tea')],cues=[dict(t=0,type='tick'),dict(t=1.8,type='tick')]),
+ SS(TURN(_F,_M),[L('vendor',"Check the camera.")],'LOOKING AT CCTV',2.6,[MP('woman',-.1,'smile',**WN)],cctv=True,sfx=[[.4,'click']]),
+ SS(HOLD(_M),[L('vendor',"...Nobody there."),L('vendor',"She's not on camera.")],'CCTV: CUSTOMER 2 NOT VISIBLE',5.2,[MP('woman',-.1,'smile',**WN)],cctv=True,sfx=[[.3,'heart'],[1.8,'heart']],cues=[dict(t=0,type='gate',dur=5.0),dict(t=.2,type='riser',dur=5.0,level=.3)]),
+ SS(TURN(_M,_F),[],'LOOKING BACK',2.0,[MP('woman',-.1,'smile',**WN)],cctv=True),
+ SS(HOLD(_F),[L('vendor',"Refuse.")],'CUSTOMER 2 · REFUSED',4.2,[MP('woman',-.1,'zomb',**WN)],[dict(pose='refuse',t0=.4,t1=3.4)],icons=[dict(k='stampR',t0=.8,t1=9,x=.5,y=.6,s=.9)],sfx=[[0,'sting'],[.2,'groan']],cues=[dict(t=0,type='stinger',level=.8)]),
+ SS(TURN(_F,_B),[],'REACHING FOR THE BUTTON',1.8,[MP('woman',-.1,'zomb',**WN)],cctv=True),
+ SS(HOLD(_B),[L('vendor',"Closing.")],'CLOSING THE STALL',4.0,[MP('woman',-.1,'zomb',**WN)],[dict(pose='press',t0=1.0,t1=2.6)],cctv=True,sfx=[[1.6,'click'],[2.0,'whoosh'],[2.6,'groan']]),
+ CARD('NEXT NIGHT',['2 CUSTOMERS','1 IS NOT HUMAN','COMMENT WHICH ONE'],L('vendor',"Next night. Which one isn't human?"),min=6.0,sfx=[[.3,'click'],[1.5,'click'],[2.7,'click']])])
+EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
+for _s in EPS['ks1']['shots']:_s['typed']=True
