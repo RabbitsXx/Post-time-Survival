@@ -60,7 +60,7 @@ function buildStreet(){
  // steel tray of raw skewers (centre) with a price card
  bx(.46,.03,.36,MC(0xc8ccd0,.25,.85),KX+.05,cy+.015,cz);
  for(let k=0;k<10;k++){bx(.008,.008,.34,MC(0xd8b878,.7),KX-.17+k*.038,cy+.045,cz);for(let m=0;m<3;m++)bx(.03,.022,.03,MC(m%2?0xd9908a:0xe8a49c,.75),KX-.17+k*.038,cy+.06,cz-.1+m*.1)}
- const pc=new THREE.Mesh(new THREE.PlaneGeometry(.2,.08),new THREE.MeshBasicMaterial({map:signTex('PORK 10','#f4ead0','#2a1810',256,100,56),fog:false}));pc.position.set(KX+.05,cy+.1,cz+.3);pc.rotation.set(0,Math.PI,0);S.add(pc);
+ const pc=new THREE.Mesh(new THREE.PlaneGeometry(.2,.08),new THREE.MeshBasicMaterial({map:signTex('PORK 10','#f4ead0','#2a1810',256,100,30),fog:false}));pc.position.set(KX+.05,cy+.1,cz+.3);pc.rotation.set(0,Math.PI,0);S.add(pc);
  // sauce bottles with labels (left of tray)
  [['CHILI',0xc8201a],['SOY',0x2a1a10],['SWEET',0xe8a020]].forEach(([n,c],i)=>{const x=KX+.36+i*.06;cyl(.022,.13,MC(c,.4),x,cy+.065,cz+.12,0,0,S,8);cyl(.01,.03,MC(0xf0f0f0,.4),x,cy+.145,cz+.12,0,0,S,6)});
  // stainless tea dispenser with tap (far left, mostly out of frame)
@@ -68,8 +68,8 @@ function buildStreet(){
  // cash tin + bell near the customer edge
  bx(.2,.07,.14,MC(0x3a3e44,.4,.5),KX-.38,cy+.035,cz+.25);bx(.16,.01,.1,MC(0xe8e0c0,.8),KX-.38,cy+.075,cz+.25);cyl(.04,.025,MC(0xd8b030,.3,.8),KX-.2,cy+.013,cz+.3,0,0,S,10);
  // stall name board on the pillar, outside the portrait view; small hanging neon
- const ms=new THREE.Mesh(new THREE.PlaneGeometry(1.3,.42),new THREE.MeshBasicMaterial({map:signTex('MIDNIGHT SKEWERS','#2a1810','#ffd070',768,256,84),fog:false}));ms.position.set(KX+1.35,2.35,KZ+1.1);ms.rotation.y=Math.PI;S.add(ms);
- const nb=new THREE.Mesh(new THREE.PlaneGeometry(.6,.2),new THREE.MeshBasicMaterial({map:signTex('OPEN','#1a0808','#ff5a4a',256,90,64),fog:false}));nb.position.set(KX-1.35,2.1,KZ+1.1);nb.rotation.y=Math.PI;S.add(nb);
+ const ms=new THREE.Mesh(new THREE.PlaneGeometry(1.3,.42),new THREE.MeshBasicMaterial({map:signTex('MIDNIGHT SKEWERS','#2a1810','#ffd070',768,256,38),fog:false}));ms.position.set(KX+1.35,2.35,KZ+1.1);ms.rotation.y=Math.PI;S.add(ms);
+ const nb=new THREE.Mesh(new THREE.PlaneGeometry(.6,.2),new THREE.MeshBasicMaterial({map:signTex('OPEN','#1a0808','#ff5a4a',256,90,40),fog:false}));nb.position.set(KX-1.35,2.1,KZ+1.1);nb.rotation.y=Math.PI;S.add(nb);
  // plastic stools + folding table on the pavement
  for(const [sx,sz] of[[-2.6,3.4],[-3.2,4.1],[3.4,3.5]]){cyl(.17,.04,MC(0xd84a2a,.6),KX+sx,.4,KZ+sz,0,0,S,10);for(const a of[0,2.1,4.2])cyl(.015,.4,MC(0xaa3a1a,.6),KX+sx+Math.cos(a)*.1,.2,KZ+sz+Math.sin(a)*.1,0,0,S,5)}
  bx(.8,.04,.6,MC(0xc8c0a8,.7),KX-2.9,.75,KZ+3.8);for(const [dx,dz] of[[-.35,-.25],[.35,-.25],[-.35,.25],[.35,.25]])bx(.04,.75,.04,MC(0x6a6a6a,.5,.5),KX-2.9+dx,.37,KZ+3.8+dz);
@@ -88,11 +88,13 @@ function buildStreet(){
  const crt=new THREE.WebGLRenderTarget(320,240);const ccam=new THREE.PerspectiveCamera(68,320/240,.1,60);ccam.position.set(KX+2.0,2.45,KZ+1.5);ccam.lookAt(KX-.2,.95,KZ+3.1);
  const mcv=document.createElement('canvas');mcv.width=320;mcv.height=240;const mtex=new THREE.CanvasTexture(mcv);mtex.minFilter=mtex.magFilter=THREE.LinearFilter;mtex.generateMipmaps=false;mtex.encoding=THREE.sRGBEncoding;
  const mon=new THREE.Mesh(new THREE.PlaneGeometry(.64,.48),new THREE.MeshBasicMaterial({map:mtex,fog:false,toneMapped:false}));mon.position.set(px-.001,1.52,pz);mon.rotation.y=-Math.PI/2;S.add(mon);
- const ovt=ctex(256,192,(x,w,h)=>{for(let i=0;i<48;i++){x.fillStyle='rgba(0,20,8,.28)';x.fillRect(0,i*4,w,2)}x.fillStyle='#7aff9a';x.font='700 15px "Roboto Condensed",monospace';x.textAlign='left';x.fillText('CAM 01 · STALL FRONT',8,16);x.fillText('REC',w-40,16);x.fillStyle='#e83a2a';x.beginPath();x.arc(w-50,11,4,0,7);x.fill();x.fillStyle='#7aff9a';x.fillText('02:19:41',8,h-8)});
+ const ovt=ctex(256,192,()=>{});const ovc=ovt.image;
+ const drawOv=(tsec)=>{const x=ovc.getContext('2d'),w=256,h=192;x.clearRect(0,0,w,h);for(let i=0;i<48;i++){x.fillStyle='rgba(0,20,8,.28)';x.fillRect(0,i*4,w,2)}x.fillStyle='#7aff9a';x.font='700 15px "Roboto Condensed",monospace';x.textAlign='left';x.fillText('CAM 01 · STALL FRONT',8,16);x.fillText('REC',w-40,16);x.fillStyle='#e83a2a';x.beginPath();x.arc(w-50,11,4,0,7);x.fill();x.fillStyle='#7aff9a';
+  const tt=7*60+Math.max(0,Math.round(tsec)),hh=2,mm=Math.floor(tt/60)%60,ss=tt%60;x.fillText('02:'+String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0'),8,h-8);ovt.needsUpdate=true};drawOv(0);
  const ov=new THREE.Mesh(new THREE.PlaneGeometry(.64,.48),new THREE.MeshBasicMaterial({map:ovt,transparent:true,fog:false}));ov.position.set(px-.003,1.52,pz);ov.rotation.y=-Math.PI/2;S.add(ov);
- window.CCTV={rt:crt,cam:ccam,mon:mon,ov:ov,cv:mcv,tex:mtex,buf:new Uint8Array(320*240*4)};
+ window.CCTV={drawOv:drawOv,rt:crt,cam:ccam,mon:mon,ov:ov,cv:mcv,tex:mtex,buf:new Uint8Array(320*240*4)};
  const btn=new THREE.Mesh(new THREE.CylinderGeometry(.075,.085,.05,16),MC(0xc8201a,.35,.1));btn.rotation.z=Math.PI/2;btn.position.set(px-.04,1.16,pz);S.add(btn);
- const bl=new THREE.Mesh(new THREE.PlaneGeometry(.3,.09),new THREE.MeshBasicMaterial({map:signTex('CLOSE','#16181c','#ffffff',256,80,54),fog:false}));bl.position.set(px-.001,1.05,pz);bl.rotation.y=-Math.PI/2;S.add(bl);
+ const bl=new THREE.Mesh(new THREE.PlaneGeometry(.3,.09),new THREE.MeshBasicMaterial({map:signTex('CLOSE','#16181c','#ffffff',256,80,38),fog:false}));bl.position.set(px-.001,1.05,pz);bl.rotation.y=-Math.PI/2;S.add(bl);
  mk(0x7aff9a,6,2.5,px-.5,1.5,pz);
  mk(0xffe0b0,30,12,KX-1.5,5.9,S0+14.6);mk(0xffe0b0,30,12,KX+6.5,5.9,S0+14.6);mk(0xffd8a0,22,9,KX,2.2,S0+3.0);mk(0xffc880,20,8,KX+2.5,2.3,S0+2.0);
 }
