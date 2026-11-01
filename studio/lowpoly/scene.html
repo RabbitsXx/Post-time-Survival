@@ -172,7 +172,7 @@ window.renderAt=f=>{const t=f/30;let sh=SPEC.shots.find(s=>t>=s.t0&&t<s.t1)||SPE
  clouds.forEach(c=>{const a=c.userData.a+t*c.userData.sp;c.position.x=Math.cos(a)*c.userData.r;c.position.z=Math.sin(a)*c.userData.r});
  waterT.offset.x=t*.04;
  SHOTS[sh.id](u,d,k);ANIMS.forEach(fn=>fn(t));if(window.TAGS.on){tagEl.style.display='block';tagEl.children[0].textContent=window.TAGS.a;tagEl.children[1].textContent=window.TAGS.b;tagEl.children[1].style.color=window.TAGS.c||'#ffe21f'}else tagEl.style.display='none';
- {const st=window.STAMP,se=document.getElementById('stamp');if(st&&st.on&&st.u>=0){const q=st.u<0?0:1+.5*Math.exp(-st.u*10)*Math.cos(st.u*18);se.style.display='block';se.textContent=st.text;se.style.color=st.c||'#c4202a';se.style.borderColor=st.c||'#c4202a';se.style.transform='rotate('+(st.rot==null?-7:st.rot)+'deg) scale('+Math.max(.05,q).toFixed(3)+')'}else se.style.display='none'}
+ {const st=window.STAMP,se=document.getElementById('stamp');if(st&&st.on&&st.u>=0){const q=st.u<0?0:1+.22*Math.exp(-st.u*10)*Math.cos(st.u*18);se.style.display='block';se.textContent=st.text;se.style.color=st.c||'#c4202a';se.style.borderColor=st.c||'#c4202a';se.style.transform='rotate('+(st.rot==null?-7:st.rot)+'deg) scale('+Math.max(.05,q).toFixed(3)+')'}else se.style.display='none'}
  const dl=(SPEC.dlg||[]).find(x=>t>=x.t0&&t<x.te);if(dl){const n=Math.min(dl.text.length,Math.floor((t-dl.t0)/(dl.t1-dl.t0)*dl.text.length)+1);dlgEl.style.display='block';dlgName.textContent=dl.name;dlgName.style.color=dl.color;dlgTxt.textContent='* '+dl.text.slice(0,n);if(n<dl.text.length){const A=(window.ACTORS&&window.ACTORS[dl.who]);if(A){if(A.root)A.root.position.y+=Math.abs(Math.sin(t*30))*.05;else if(A.head)A.head.position.y+=Math.abs(Math.sin(t*30))*.03}}}else dlgEl.style.display='none';
  pigBlob();R.render(S,cam);flEl.style.opacity=FLASH;
  const c=dl?null:SPEC.caps.find(c=>t>=c.t0&&t<c.t1);if(c){if(capEl.dataset.k!==String(c.t0)){capEl.textContent=c.text;capEl.dataset.k=String(c.t0)}const a=cl((t-c.t0)/.1);capEl.style.transform='scale('+(1.14-.14*a)+')';capEl.style.opacity=1}else{capEl.style.opacity=0;capEl.dataset.k=''}
@@ -191,4 +191,6 @@ window.renderAt=f=>{const t=f/30;let sh=SPEC.shots.find(s=>t>=s.t0&&t<s.t1)||SPE
 <script src="pa2.js"></script>
 <script src="jk.js"></script>
 <script src="nk.js"></script>
+<script src="tx.js"></script>
+<script src="vs.js"></script>
 <script src="gate_info.js"></script>
