@@ -1275,6 +1275,35 @@
    "v2": true,
    "media_day": "2026-11-01",
    "ver": "s2"
+  },
+  {
+   "id": "ks1_n1",
+   "series": "MIDNIGHT SKEWERS",
+   "part": 1,
+   "of": 1,
+   "topic": "Night 1: The Camera Shows What's Wrong",
+   "yt_title": "One of My Customers Isn't Human… Can You Spot Them? (Night 1)",
+   "yt_desc": "Night shift at a roadside skewer stall. One rule: the camera shows what's wrong.\n\nTwo customers tonight. One of them isn't human — can you spot them before I do?\n\nNight 2 is coming. Comment who you think it will be.\n\nMIDNIGHT SKEWERS is an original animated horror series by Post Time Survival. Fiction.\n\n#shorts #horror #anomaly #nightshift #creepy #spottheanomaly #3danimation",
+   "tt": "Two customers. One isn't human. Can you spot them before I do? 👀 #horror #anomaly #nightshift #creepy #fyp",
+   "ig": "Two customers. One isn't human. Can you spot them before I do? 👀 #horror #anomaly #nightshift #creepy #reels #3danimation",
+   "pin": "Who do you think it will be on Night 2? Comment below.",
+   "tags": "midnight skewers, night shift horror, spot the anomaly, anomaly horror game, creepy short, horror short, scary animation, 3d animation horror, cctv horror, street food horror, one rule horror, can you spot it, scary stories, shorts horror, post time survival",
+   "playlist": "MIDNIGHT SKEWERS",
+   "video": "releases/remaincalm/batch1/ks1/ks1.mp4",
+   "thumb": "releases/remaincalm/batch1/ks1/cover_9x16.jpg",
+   "caps_en": "releases/remaincalm/batch1/ks1/captions_en.srt",
+   "status": "scheduled",
+   "done": {
+    "th": true
+   },
+   "due": "2026-11-01T09:09:00.000Z",
+   "posts": {
+    "yt": "6ae6fec621c807e9d5ac853b",
+    "tt": "6ae6fec6f0984eef335691fd",
+    "ig": "6ae6fec721c807e9d5ac8596"
+   },
+   "media_day": "2026-11-01",
+   "yt_mode": "buffer"
   }
  ]
 }
