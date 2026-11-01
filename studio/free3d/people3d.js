@@ -81,7 +81,7 @@ function makePerson(cfg){const g=new THREE.Group(),L=c=>new THREE.MeshLambertMat
  // head
  const head=new THREE.Group();head.position.set(0,1.5,0);body.add(head);const F=faceTex(cfg);
  const hm=L(cfg.zombie?'#76946c':cfg.skin);const hd=add(SPH(.125),hm,0,.165,0,head,null,[1,1.2,1.07]);
- add(SPH(.024),hm,0,.15,.14,head,null,[1,1.3,1.1]);add(SPH(.03),hm,.125,.17,0,head,null,[.5,1.2,.9]);add(SPH(.03),hm,-.125,.17,0,head,null,[.5,1.2,.9]);
+ add(SPH(.017),hm,0,.145,.138,head,null,[1,1.35,1.15]);add(SPH(.03),hm,.125,.17,0,head,null,[.5,1.2,.9]);add(SPH(.03),hm,-.125,.17,0,head,null,[.5,1.2,.9]);
  const fm=new THREE.MeshLambertMaterial({map:F.t,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2});
  const patch=new THREE.Mesh(new THREE.SphereGeometry(.1262,24,18,Math.PI/2-.95,1.9,.55,1.8),fm);patch.position.set(0,.17,0);patch.scale.set(1,1.2,1.07);patch.userData.noOL=1;head.add(patch);
  const hc=L(cfg.hc);

@@ -14,8 +14,8 @@ def one(k):
     NOTEXT=(k=='ks1')
     if NOTEXT:
         sh=dict([x for x in ep['shots'] if 'REFUSED' in x.get('place','')][0]);KX,KZ=100,-60
-        sh.update(noUI=True,lines=[],icons=[],hands=[],panic=.9,typed=False,grade='dead',fov=36,cam=[[KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4],[KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4]],
-                  p3=[dict(who='woman',pos=[KX-.1,KZ+2.0],expr='zomb',lean=.1,tilt=.12,headYaw=0,still=True,noShadow=True,nocam=True,face=[KX-.1,KZ-5])],cues=[],sfx=[])
+        sh.update(noUI=True,lines=[],icons=[],hands=[],panic=.55,typed=False,grade='dead',fov=36,cam=[[KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4],[KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4]],
+                  p3=[dict(who='woman',pos=[KX-.1,KZ+2.0],expr='calm',lean=.06,tilt=-.32,headYaw=0,still=True,noShadow=True,nocam=True,face=[KX-.1,KZ-5])],cues=[],sfx=[])
         sp=dict(series=ep['series'],title='COVER',part=0,of=0,dur=2,shots=[dict(sh,t0=0,t1=2)]);t=1
     else:
         si,l1,l2,pill=CV[k];sh=dict(ep['shots'][si-1]);t=(sh['t0']+sh['t1'])/2
