@@ -82,10 +82,11 @@ function buildStreet(){
  const px=KX+2.12,pz=KZ+.2;bx(.08,.72,.78,MC(0x2a2e34,.5,.4),px+.04,1.4,pz);
  // live CCTV: second camera on the awning corner renders the real stall front into this monitor
  const crt=new THREE.WebGLRenderTarget(320,240);const ccam=new THREE.PerspectiveCamera(68,320/240,.1,60);ccam.position.set(KX+2.0,2.45,KZ+1.5);ccam.lookAt(KX-.2,.95,KZ+3.1);
- const mon=new THREE.Mesh(new THREE.PlaneGeometry(.64,.48),new THREE.MeshBasicMaterial({map:crt.texture,color:0x9affb8,fog:false}));mon.position.set(px-.001,1.52,pz);mon.rotation.y=-Math.PI/2;S.add(mon);
+ const mcv=document.createElement('canvas');mcv.width=320;mcv.height=240;const mtex=new THREE.CanvasTexture(mcv);mtex.minFilter=mtex.magFilter=THREE.LinearFilter;mtex.generateMipmaps=false;mtex.encoding=THREE.sRGBEncoding;
+ const mon=new THREE.Mesh(new THREE.PlaneGeometry(.64,.48),new THREE.MeshBasicMaterial({map:mtex,fog:false,toneMapped:false}));mon.position.set(px-.001,1.52,pz);mon.rotation.y=-Math.PI/2;S.add(mon);
  const ovt=ctex(256,192,(x,w,h)=>{for(let i=0;i<48;i++){x.fillStyle='rgba(0,20,8,.28)';x.fillRect(0,i*4,w,2)}x.fillStyle='#7aff9a';x.font='700 15px "Roboto Condensed",monospace';x.textAlign='left';x.fillText('CAM 01 · STALL FRONT',8,16);x.fillText('REC',w-40,16);x.fillStyle='#e83a2a';x.beginPath();x.arc(w-50,11,4,0,7);x.fill();x.fillStyle='#7aff9a';x.fillText('02:19:41',8,h-8)});
  const ov=new THREE.Mesh(new THREE.PlaneGeometry(.64,.48),new THREE.MeshBasicMaterial({map:ovt,transparent:true,fog:false}));ov.position.set(px-.003,1.52,pz);ov.rotation.y=-Math.PI/2;S.add(ov);
- window.CCTV={rt:crt,cam:ccam,mon:mon,ov:ov};
+ window.CCTV={rt:crt,cam:ccam,mon:mon,ov:ov,cv:mcv,tex:mtex,buf:new Uint8Array(320*240*4)};
  const btn=new THREE.Mesh(new THREE.CylinderGeometry(.075,.085,.05,16),MC(0xc8201a,.35,.1));btn.rotation.z=Math.PI/2;btn.position.set(px-.04,1.16,pz);S.add(btn);
  const bl=new THREE.Mesh(new THREE.PlaneGeometry(.3,.09),new THREE.MeshBasicMaterial({map:signTex('CLOSE','#16181c','#ffffff',256,80,54),fog:false}));bl.position.set(px-.001,1.05,pz);bl.rotation.y=-Math.PI/2;S.add(bl);
  mk(0x7aff9a,6,2.5,px-.5,1.5,pz);
