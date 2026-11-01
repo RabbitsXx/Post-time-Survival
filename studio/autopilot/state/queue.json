@@ -1292,18 +1292,23 @@
    "video": "releases/remaincalm/batch1/ks1/ks1.mp4",
    "thumb": "releases/remaincalm/batch1/ks1/cover_9x16.jpg",
    "caps_en": "releases/remaincalm/batch1/ks1/captions_en.srt",
-   "status": "scheduled",
+   "status": "finished",
    "done": {
-    "th": true
+    "th": true,
+    "tags": true,
+    "thumb": true,
+    "en": true,
+    "playlist": true
    },
-   "due": "2026-11-01T09:09:00.000Z",
+   "due": "2026-11-01T08:59:19.888Z",
    "posts": {
-    "yt": "6ae6fec621c807e9d5ac853b",
-    "tt": "6ae6fec6f0984eef335691fd",
-    "ig": "6ae6fec721c807e9d5ac8596"
+    "yt": "6ae6ff54f0984eef33569dfa",
+    "tt": "6ae6ff5acf3a3112f3ea2f13",
+    "ig": "6ae6ff67f0984eef3356a008"
    },
    "media_day": "2026-11-01",
-   "yt_mode": "buffer"
+   "yt_mode": "buffer",
+   "yt_video_id": "pab41gVAbA8"
   }
  ]
 }
