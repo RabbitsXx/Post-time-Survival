@@ -52,9 +52,14 @@ def blip_wav(text,who):
         elif ch in ',;:':out.append(np.zeros(int(.11*SR),dtype=np.float32))
     y=np.concatenate(out) if out else np.zeros(int(.2*SR),dtype=np.float32);y=np.concatenate([y,np.zeros(int(.12*SR),dtype=np.float32)])
     w=wave.open(p,'wb');w.setnchannels(1);w.setsampwidth(2);w.setframerate(SR);w.writeframes((np.clip(y*.55,-1,1)*32767).astype(np.int16).tobytes());w.close();return p
-def voice(text,who):
+STYLES={'whisper':'lowpass=f=4300,volume=.62,aecho=0.8:0.7:45:0.35','panic':'asetrate=48200,aresample=44100,atempo=1.07,volume=1.1,treble=g=3','low':'asetrate=40500,aresample=44100,atempo=1.08'}
+def voice(text,who,style=None):
     if BLIP and who!='vendor':return blip_wav(text,who)
     p=tts(text,who)
+    if style in STYLES:
+        q=p.replace('.wav','.'+style+'.wav')
+        if not os.path.exists(q):subprocess.check_call(['ffmpeg','-y','-loglevel','error','-i',p,'-af',STYLES[style],'-ac','1',q])
+        p=q
     if who not in('pa','machine','watch'):return p
     q=p.replace('.wav','.pa.wav')
     if not os.path.exists(q):subprocess.check_call(['ffmpeg','-y','-loglevel','error','-i',p,'-af','highpass=f=380,lowpass=f=3400,acompressor=threshold=-20dB:ratio=5,aecho=0.6:0.5:70:0.25,volume=1.2','-ac','1',q])
@@ -64,15 +69,15 @@ def build_spec(ep):
     for sh in ep['shots']:
         wavs=[]
         for ln in sh['lines']:
-            p=voice(ln[1],ln[0]);x,sr=rd(p);wavs.append((ln,p,len(x)/sr))
+            p=voice(ln[1],ln[0],ln[2] if len(ln)>2 else None);x,sr=rd(p);wavs.append((ln,p,len(x)/sr))
         lead=sh.get('lead',.25)
         dur=sum(d for _,_,d in wavs)+.28*max(0,len(wavs)-1)+sh.get('pad',.3)+(lead if wavs else 0);dur=max(dur,sh.get('min',2.4));t0=t;t1=t+dur;cur=t0+lead;LN=[]
         for ln,p,d in wavs:
-            LN.append(dict(t0=cur,t1=cur+d,en=ln[1],name=NAMES[ln[0]],c=NAMECOL[ln[0]],who=ln[0],wav=p));cur+=d+.28
+            LN.append(dict(t0=cur,t1=cur+d,en=ln[1],th=ep.get('th',{}).get(ln[1]),name=NAMES[ln[0]],c=NAMECOL[ln[0]],who=ln[0],wav=p));cur+=d+.28
         sfx_all+=[[t0+s[0],s[1]] for s in sh.get('sfx',[])]
         for c in sh.get('cues',[]):cues.append(dict(c,t=t0+c['t']))
         o={k:v for k,v in sh.items() if k not in('lines','sfx','min','pad','cues','lead')};o.update(t0=t0,t1=t1,lines=[{k:v for k,v in L.items() if k!='wav'} for L in LN]);shots.append(o);lines_all+=LN;t=t1
-    return dict(series=ep['series'],title=ep['title'],part=ep['part'],of=ep['of'],shots=shots,dur=t+.5),lines_all,sfx_all,cues
+    return dict(series=ep['series'],title=ep['title'],part=ep['part'],of=ep['of'],shots=shots,dur=t+.5,safe=bool(ep.get('safe'))),lines_all,sfx_all,cues
 def render(spec,fd,w,h,workers=4):
     os.makedirs(fd,exist_ok=True);sp=R+'/spec_%s.json'%os.path.basename(fd);json.dump(spec,open(sp,'w'))
     n=int(round(spec['dur']*FPS));k=(n+workers-1)//workers;ps=[]

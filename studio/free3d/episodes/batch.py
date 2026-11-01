@@ -376,8 +376,8 @@ for _s in EPS['ks1']['shots']:_s['typed']=True
 _HK=dict(who='woman',pos=[KX-.1,KZ+2.6],expr='calm',tilt=[0,-.55],still=True,noShadow=True,nocam=True)
 _HKC=([KX-.1,1.66,KZ+1.0],[KX-.1,1.6,KZ+2.6],[KX-.1,1.66,KZ+.15],[KX-.1,1.6,KZ+2.6])
 ep('ks1','NIGHT 1',[
- SF(_HKC,[],'HOOK',2.8,[_HK],fov=40,panic=0,intro=dict(l1='ONE CUSTOMER IS NOT HUMAN',l2='SPOT IT',l3='',t0=.25,t1=2.7),sfx=[[.2,'whisper']],cues=[dict(t=0,type='riser',dur=2.8,level=.3)]),
- SF(HOLD(_HI),[L('vendor',"Rule: the camera shows what's wrong.")],'NIGHT 1 · 2:07 AM',3.2,[VEND],fov=55,intro=dict(l1='MIDNIGHT SKEWERS',l2='DAY 1',l3='NIGHT SHIFT · 2:07 AM',t0=.1,t1=3.0),cues=[dict(t=0,type='bed',dur=30,level=.2)]),
+ SF(_HKC,[],'HOOK',2.8,[_HK],fov=40,panic=0,intro=dict(l1='ONE CUSTOMER IS NOT HUMAN',l2='SPOT IT',l3='',l4='ลูกค้าคนหนึ่งไม่ใช่คน ลองจับให้ได้',t0=.25,t1=2.7),sfx=[[.2,'whisper']],cues=[dict(t=0,type='riser',dur=2.8,level=.3)]),
+ SF(HOLD(_HI),[L('vendor',"Rule: the camera shows what's wrong.")],'NIGHT 1 · 2:07 AM',3.2,[VEND],fov=55,intro=dict(l1='MIDNIGHT SKEWERS',l2='DAY 1',l3='NIGHT SHIFT · 2:07 AM',l4='วันแรกของกะดึก',t0=.1,t1=3.0),cues=[dict(t=0,type='bed',dur=30,level=.2)]),
  SF(HOLD(_F),[],'CUSTOMER 1',1.5,[dict(who='man',pos=[KX+4.0,KZ+2.6],to=[KX+.1,KZ+2.6],t0=0,t1=1.4,expr='smile')],sfx=[[.2,'foot'],[.7,'foot'],[1.1,'foot']]),
  SF(HOLD(_FC),[L('man',"Ten skewers. Cook them until they stop talking.")],'ORDER: 10 PORK SKEWERS',3.2,[MP('man',.1,'smile',tilt=[0,.4],lean=[0,.14])],fov=38,icons=[OB('skewer',1,'x10')]),
  SF(HOLD(_F),[L('vendor',"Weird. Check the camera.")],'CUSTOMER 1 · WEIRD',1.9,[MP('man',.1,'smile',tilt=.4,lean=.14)]),
@@ -391,18 +391,18 @@ ep('ks1','NIGHT 1',[
  SF(HOLD(_FC2),[L('woman',"Iced tea. Less sugar. Less... you.")],'ORDER: ICED TEA',3.4,[MP('woman',-.1,'smile',tilt=[0,-.5],**WM)],fov=38,icons=[OB('tea')],cues=[dict(t=0,type='tick')]),
  SF(HOLD(_F),[L('vendor',"She's staring. Camera!")],'CUSTOMER 2 · STARING',2.0,[MP('woman',-.1,'creep',tilt=-.5,**WM)]),
  SF(TURN(_F,_M),[],'LOOKING AT CCTV',.5,[MP('woman',-.1,'creep',tilt=-.5,**WM)],cctv=True,snap=True,sfx=[[.15,'click']]),
- SF(HOLD(_M),[L('vendor',"...No. No no no.")],'CAMERA CHECK',2.6,[MP('woman',-.1,'creep',tilt=-.5,**WM)],cctv=True,sfx=[[.2,'heart'],[1.2,'heart']],cues=[dict(t=0,type='dread',dur=34,level=.34),dict(t=0,type='gate',dur=1.2)]),
+ SF(HOLD(_M),[L('vendor',"...No. No no no.",'panic')],'CAMERA CHECK',2.6,[MP('woman',-.1,'creep',tilt=-.5,**WM)],cctv=True,sfx=[[.2,'heart'],[1.2,'heart']],cues=[dict(t=0,type='dread',dur=34,level=.34),dict(t=0,type='gate',dur=1.2)]),
  SF(TURN(_M,_F),[],'LOOKING BACK',.45,[MP('woman',-.1,'creep',tilt=[-.5,0],**WM)],cctv=True,snap=True),
- SF(HOLD(_F),[L('vendor',"Refuse! REFUSE!")],'CUSTOMER 2 · REFUSED',3.0,[dict(who='woman',pos=[KX-.1,KZ+2.6],to=[KX-.1,KZ+1.62],t0=.15,t1=.55,expr='zomb',lean=[0,.35],reach=[0,1],headX=[0,.25],glide=True,**WM)],[dict(pose='refuse',t0=.1,t1=2.8)],icons=[dict(k='stampR',t0=.9,t1=9,x=.5,y=.86,s=.8)],sfx=[[.1,'sting'],[.2,'groan']],cues=[dict(t=.1,type='stinger',level=.8)]),
+ SF(HOLD(_F),[L('vendor',"Refuse! REFUSE!",'panic')],'CUSTOMER 2 · REFUSED',3.0,[dict(who='woman',pos=[KX-.1,KZ+2.6],to=[KX-.1,KZ+1.62],t0=.15,t1=.55,expr='zomb',lean=[0,.35],reach=[0,1],headX=[0,.25],glide=True,**WM)],[dict(pose='refuse',t0=.1,t1=2.8)],icons=[dict(k='stampR',t0=.9,t1=9,x=.5,y=.86,s=.8)],sfx=[[.1,'sting'],[.2,'groan']],cues=[dict(t=.1,type='stinger',level=.8)]),
  SF(TURN(_F,_B),[],'REACHING FOR THE BUTTON',.6,[dict(who='woman',pos=[KX-.1,KZ+1.62],expr='zomb',lean=.35,reach=1,headX=.25,glide=True,**WM)],cctv=True,snap=True),
- SF(HOLD(_B),[L('vendor',"Close it! Close it!")],'CLOSING THE STALL',1.8,[dict(who='woman',pos=[KX-.1,KZ+1.62],to=[KX-.1,KZ+1.75],t0=.5,t1=1.2,expr='zomb',lean=.35,reach=1,headX=.25,glide=True,**WM)],[dict(pose='press',t0=.2,t1=.9)],cctv=True,shutter=[0,1],sfx=[[.7,'click'],[.8,'rattle']]),
+ SF(HOLD(_B),[L('vendor',"Close it! Close it!",'panic')],'CLOSING THE STALL',1.8,[dict(who='woman',pos=[KX-.1,KZ+1.62],to=[KX-.1,KZ+1.75],t0=.5,t1=1.2,expr='zomb',lean=.35,reach=1,headX=.25,glide=True,**WM)],[dict(pose='press',t0=.2,t1=.9)],cctv=True,shutter=[0,1],sfx=[[.7,'click'],[.8,'rattle']]),
  SF(TURN(_B,_F),[],'THE SHUTTER',.5,[dict(who='woman',pos=[KX-.1,KZ+1.75],expr='zomb',lean=.35,headX=.25,**WM)],snap=True,shutter=1,flicker=True,knocks=[.35],kamp=1.2,sfx=[[.3,'knock']]),
- SF(HOLD(_F),[L('vendor',"Don't open it.")],'SOMETHING AT THE SHUTTER',3.0,[dict(who='woman',pos=[KX-.1,KZ+1.75],expr='zomb',lean=[.1,.25],headX=[.1,0],tilt=[0,.35],glide=True,**WM)],[dict(pose='refuse',t0=.2,t1=2.8)],shutter=1,flicker=True,knocks=[.2,.9,1.5,1.9,2.2,2.5],kamp=1.3,sfx=[[.15,'knock'],[.85,'knock'],[1.45,'knock'],[1.85,'knock'],[2.15,'knock'],[2.45,'knock'],[.5,'heart'],[1.0,'scratch']],cues=[dict(t=0,type='riser',dur=3.0,level=.3)]),
+ SF(HOLD(_F),[L('vendor',"Don't open it.",'whisper')],'SOMETHING AT THE SHUTTER',3.0,[dict(who='woman',pos=[KX-.1,KZ+1.75],expr='zomb',lean=[.1,.25],headX=[.1,0],tilt=[0,.35],glide=True,**WM)],[dict(pose='refuse',t0=.2,t1=2.8)],shutter=1,flicker=True,knocks=[.2,.9,1.5,1.9,2.2,2.5],kamp=1.3,sfx=[[.15,'knock'],[.85,'knock'],[1.45,'knock'],[1.85,'knock'],[2.15,'knock'],[2.45,'knock'],[.5,'heart'],[1.0,'scratch']],cues=[dict(t=0,type='riser',dur=3.0,level=.3)]),
  SF(TURN(_F,_M),[],'CAMERA CHECK',.5,[dict(who='woman',pos=[KX-.1,KZ+1.75],expr='zomb',lean=.2,**WM)],cctv=True,snap=True,shutter=1,flicker=True,knocks=[.1],sfx=[[.05,'knock']]),
  SF(HOLD(_M),[L('vendor',"Nothing. There's nothing there.")],'CAMERA CHECK',2.6,[dict(who='woman',pos=[KX-.1,KZ+1.75],expr='zomb',lean=.2,**WM)],cctv=True,shutter=1,flicker=True,knocks=[.3,.6,.85,1.1,1.3,1.5,1.7,1.9,2.1],kamp=1.4,sfx=[[.25,'knock'],[.55,'knock'],[.8,'knock'],[1.05,'knock'],[1.25,'knock'],[1.45,'knock'],[1.65,'knock'],[1.85,'knock'],[2.05,'knock'],[.5,'clock']]),
  SF(TURN(_M,_F),[],'LOOKING BACK',.4,[dict(who='woman',pos=[KX-.1,KZ+1.75],expr='zomb',lean=.2,**WM)],cctv=True,snap=True,shutter=1),
- SF(HOLD(_F),[L('vendor',"...Gone.")],'SILENCE',3.4,[dict(who='woman',pos=[KX-.1,KZ+1.75],to=[KX-.1,KZ+5.2],t0=.6,t1=3.2,expr='zomb',backwards=True,face=[KX,KZ-6],tilt=[.3,.5],glide=True,**WM)],[],shutter=1,panic=.25,sfx=[[.9,'foot'],[1.5,'foot'],[2.1,'foot'],[2.7,'foot']],cues=[dict(t=0,type='gate',dur=3.0)]),
- CARD('NEXT NIGHT',['2 CUSTOMERS','BOTH ARE STRANGE','WHO IS NOT HUMAN?'],L('vendor',"Next night. Who isn't human?"),min=3.4,sfx=[[.3,'click'],[1.0,'click'],[1.7,'click']])])
+ SF(HOLD(_F),[L('vendor',"...Gone.",'whisper')],'SILENCE',3.4,[dict(who='woman',pos=[KX-.1,KZ+1.75],to=[KX-.1,KZ+5.2],t0=.6,t1=3.2,expr='zomb',backwards=True,face=[KX,KZ-6],tilt=[.3,.5],**WM)],[],shutter=1,panic=.25,sfx=[[.9,'foot'],[1.5,'foot'],[2.1,'foot'],[2.7,'foot']],cues=[dict(t=0,type='gate',dur=3.0)]),
+ CARD('NEXT NIGHT',['NIGHT 2','3 CUSTOMERS','SPOT THEM FIRST'],L('vendor',"Night two. Can you spot them before I do?"),min=3.4,sfx=[[.3,'click'],[1.0,'click'],[1.7,'click']])])
 _sh=EPS['ks1']['shots'];_w=False;_r=0;_stare=False
 for _s in _sh:
     _pl=_s.get('place','')
@@ -413,5 +413,16 @@ for _s in _sh:
 _X={'HOOK':[[.2,'whisper']],'CUSTOMER 2 · STARING':[[.3,'whisper']],'SOMETHING AT THE SHUTTER':[[1.0,'scratch']],'CAMERA CHECK':[[.3,'clock']]}
 for _s in EPS['ks1']['shots']:
     if _s.get('place') in _X:_s['sfx']=list(_s.get('sfx',[]))+_X[_s['place']]
+
+EPS['ks1']['safe']=True
+EPS['ks1']['th']={"Rule: the camera shows what's wrong.":"กฎข้อเดียว: กล้องจะบอกสิ่งผิดปกติ","Ten skewers. Cook them until they stop talking.":"ไม้เสียบสิบไม้ ย่างจนกว่าจะเลิกพูด","Weird. Check the camera.":"ประหลาดแฮะ เช็กกล้องหน่อย","Camera's clean. Cook.":"กล้องปกติ ย่างต่อ","Payment.":"จ่ายเงิน","...That's a leaf.":"...นั่นมันใบไม้","Very valuable.":"มีค่ามากนะ","Iced tea. Less sugar. Less... you.":"ชาเย็น หวานน้อย น้อย...คุณ","She's staring. Camera!":"เธอจ้องไม่วางตา ดูกล้อง!","...No. No no no.":"...ไม่ ไม่ ไม่นะ","Refuse! REFUSE!":"ปฏิเสธ! ปฏิเสธเดี๋ยวนี้!","Close it! Close it!":"ปิด! ปิดเร็ว!","Don't open it.":"อย่าเปิดนะ","Nothing. There's nothing there.":"ไม่มีอะไร ไม่มีอะไรเลย","...Gone.":"...ไปแล้ว","Night two. Can you spot them before I do?":"คืนที่สอง คุณจับได้ก่อนผมไหม"}
+_INS=('CUSTOMER 1','ORDER: 10 PORK SKEWERS','CUSTOMER 1 · WEIRD','COOKING','HANDING OVER','ORDER: ICED TEA','CUSTOMER 2 · STARING','CUSTOMER 2 · REFUSED','SOMETHING AT THE SHUTTER','SILENCE')
+for _s in EPS['ks1']['shots']:
+    _p=_s.get('place','')
+    if _p in _INS:_s['inset']=True
+    if _p=='CUSTOMER 1':_s['insetHint']=1.4
+    if _p=='ORDER: ICED TEA':_s['glitch']=[0,.5];_s['sfx']=list(_s.get('sfx',[]))+[[.05,'static']]
+    if _p=='NIGHT 1 · 2:07 AM':_s['cues']=list(_s.get('cues',[]))+[dict(t=.2,type='motif',detune=0,level=.22)]
+    if _s.get('card') and 'Night two' in str(_s.get('lines','')):_s['cues']=list(_s.get('cues',[]))+[dict(t=.3,type='motif',detune=.6,level=.25)]
 EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
 for _s in EPS['ks1']['shots']:_s['typed']=True

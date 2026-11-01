@@ -78,17 +78,24 @@ function updateHands(sh,t,lt,cam){const hs=sh.hands;if(!hs||!hs.length){HANDS.g.
   const arm=HANDS.arm[i];arm.position.set((sx+tx)/2,(sy+ty)/2,(sz+tz)/2);arm.scale.z=L;arm.lookAt(HANDS.g.localToWorld(new THREE.Vector3(tx,ty,tz)));
   const h=HANDS.hand[i];h.position.set(tx,ty,tz);h.rotation.set(i?-.25:-.1,0,0)}
  for(const key in HANDS.items)HANDS.items[key].visible=!!(item&&key===item&&k>.05)}
+const NAMEMAP={man:'man',woman:'woman',vendor:'vendor3'};
 function update3D(sh,t,lt,dur,cam){for(const k in P3){P3[k].visible=false;P3[k].userData.blob.visible=false}
  for(const c of (sh.p3||[])){const g=P3[c.who];if(!g)continue;g.visible=true;const pr=g.userData.parts;let x=c.pos[0],z=c.pos[1],mv=false;
   if(c.to){const uu=Math.min(1,Math.max(0,(lt-(c.t0||0))/Math.max(.01,(c.t1||dur)-(c.t0||0))));const e=uu*uu*(3-2*uu);x=c.pos[0]+(c.to[0]-c.pos[0])*e;z=c.pos[1]+(c.to[1]-c.pos[1])*e;mv=uu>0&&uu<1}
   g.position.set(x,0,z);let yaw;if(mv&&c.to)yaw=Math.atan2(c.to[0]-c.pos[0],c.to[1]-c.pos[1]);else if(c.face)yaw=Math.atan2(c.face[0]-x,c.face[1]-z);else yaw=Math.atan2(cam.position.x-x,cam.position.z-z);if(mv&&c.to&&c.backwards&&c.face)yaw=Math.atan2(c.face[0]-x,c.face[1]-z);g.rotation.y=yaw;const e0=(()=>{const u=Math.min(1,Math.max(0,lt/Math.max(.01,dur)));return u*u*(3-2*u)})(),V=v=>Array.isArray(v)?v[0]+(v[1]-v[0])*e0:(v||0);
-  const w=(mv&&!c.glide)?Math.sin(t*7.5):0,br=c.still?0:Math.sin(t*1.8+x)*.012;pr.legs[0].rotation.x=w*.6;pr.legs[1].rotation.x=-w*.6;pr.arms[0].rotation.x=-w*.5;pr.arms[1].rotation.x=w*.5;
-  pr.body.position.y=mv?Math.abs(w)*.04:0;pr.torso.scale.y=1+br*1.5;pr.body.rotation.z=c.still?0:Math.sin(t*.9+x)*.01;
-  pr.head.rotation.x=V(c.headX);pr.head.rotation.y=V(c.headYaw);pr.head.rotation.z=V(c.tilt);pr.body.rotation.x=V(c.lean);
+  const walk=mv&&!c.glide,ph=t*7.2,w=walk?Math.sin(ph):0,br=c.still?0:Math.sin(t*1.8+x)*.012;
+  pr.legs[0].rotation.x=w*.62;pr.legs[1].rotation.x=-w*.62;pr.arms[0].rotation.x=-w*.5;pr.arms[1].rotation.x=w*.5;
+  // walk: hip bounce + sway, counter-rotating torso, head stays level; idle: slow weight shift
+  pr.body.position.y=walk?Math.abs(Math.sin(ph))*.035-.012:0;pr.body.position.x=walk?Math.sin(ph)*.018:Math.sin(t*.55+x*3)*.012;pr.body.rotation.y=walk?Math.sin(ph)*.09:Math.sin(t*.4+x)*.03;
+  pr.torso.scale.y=1+br*1.5;pr.body.rotation.z=walk?-Math.sin(ph)*.025:(c.still?0:Math.sin(t*.9+x)*.012);
+  if(!walk&&!c.still){pr.legs[0].rotation.x=Math.sin(t*.55+x*3)*.035;pr.legs[1].rotation.x=-Math.sin(t*.55+x*3)*.035}
+  const spk=(sh.lines||[]).some(l=>l.name&&NAMEMAP[l.who]===c.who&&t>=l.t0&&t<l.t1);
+  const idleY=(c.headYaw==null)?Math.sin(t*.7+x*2)*.07:0,idleX=(c.headX==null)?Math.sin(t*.9+x)*.03+(spk?Math.sin(t*10)*.035:0):0;
+  pr.head.rotation.x=V(c.headX)+idleX;pr.head.rotation.y=V(c.headYaw)+idleY;pr.head.rotation.z=V(c.tilt);pr.body.rotation.x=V(c.lean);
   // hand-over: right arm reaches to the vendor
   const gv=c.give;if(gv&&lt>=gv.t0&&lt<gv.t1){const u=(lt-gv.t0)/(gv.t1-gv.t0),kk=Math.sin(Math.min(1,u)*Math.PI);pr.arms[1].rotation.x=-1.35*Math.min(1,kk*1.4)}
   const gs=c.gesture;if(gs&&lt>=gs.t0&&lt<gs.t1){const u=(lt-gs.t0)/(gs.t1-gs.t0);pr.arms[0].rotation.x=-2.4*Math.min(1,Math.sin(u*Math.PI)*1.5);pr.arms[0].rotation.z=.2}
   if(c.reach){const r=V(c.reach);pr.arms[0].rotation.x=-1.5*r;pr.arms[1].rotation.x=-1.5*r;pr.arms[0].rotation.z=.12*r;pr.arms[1].rotation.z=-.12*r}
   if(pr.shins){for(let i=0;i<2;i++){pr.shins[i].rotation.x=Math.max(0,-pr.legs[i].rotation.x)*1.1+.02}}if(pr.fores){for(let i=0;i<2;i++)pr.fores[i].rotation.x=-(.12+Math.abs(pr.arms[i].rotation.x)*.45)}
-  drawFace(pr.F,pr.cfg,c.expr||'calm');{const zc=c.expr==='zomb'?'#76946c':pr.cfg.skin;if(pr.hm)pr.hm.color.set(zc);if(pr.sk)pr.sk.color.set(zc)}const bl=g.userData.blob;bl.visible=!c.noShadow;bl.position.set(x,.02,z)}}
+  const bk=((t*.5+x*1.7)%3.1)<.13;drawFace(pr.F,pr.cfg,c.expr||'calm',bk);{const zc=c.expr==='zomb'?'#76946c':pr.cfg.skin;if(pr.hm)pr.hm.color.set(zc);if(pr.sk)pr.sk.color.set(zc)}const bl=g.userData.blob;bl.visible=!c.noShadow;bl.position.set(x,.02,z)}}
 function buildPeople3D(){for(const k in P3CFG)P3[k]=makePerson(P3CFG[k]);buildHands()}

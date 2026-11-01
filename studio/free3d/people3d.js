@@ -17,7 +17,7 @@ function inkOutline(g,k){const ol=new THREE.MeshBasicMaterial({color:0x0a0806,si
  list.forEach(m=>{const o=new THREE.Mesh(m.geometry,ol);o.position.copy(m.position);o.rotation.copy(m.rotation);o.scale.copy(m.scale).multiplyScalar(k||1.04);o.userData.noOL=1;m.parent.add(o)})}
 // ---- face: transparent painted patch on a curved piece of the head sphere ----
 function faceTex(cfg){const c=document.createElement('canvas');c.width=c.height=256;const t=new THREE.CanvasTexture(c);t.minFilter=t.magFilter=THREE.LinearFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;return {c,t,cur:''}}
-function drawFace(F,cfg0,expr){if(F.cur===expr)return;F.cur=expr;const x=F.c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,256,256);x.save();x.scale(2,2);x.lineJoin=x.lineCap='round';
+function drawFace(F,cfg0,expr,blink){const key=expr+((blink&&expr!=='zomb'&&expr!=='creep')?'_b':'');if(F.cur===key)return;F.cur=key;blink=key.endsWith('_b');const x=F.c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,256,256);x.save();x.scale(2,2);x.lineJoin=x.lineCap='round';
  if(expr==='zomb'||expr==='creep'){drawFaceHorror({c:F.c,t:F.t},cfg0,expr)}
  else{
   const sk=cfg0.skin,sh=expr==='shock',wr=expr==='worried',sm=expr==='smile';
@@ -25,7 +25,7 @@ function drawFace(F,cfg0,expr){if(F.cur===expr)return;F.cur=expr;const x=F.c.get
   let g=x.createRadialGradient(64,70,6,64,70,64);g.addColorStop(0,'rgba(255,240,225,.18)');g.addColorStop(1,'rgba(120,60,40,.0)');x.fillStyle=g;x.fillRect(0,0,128,128);
   x.fillStyle='rgba(215,110,100,.22)';x.beginPath();x.ellipse(30,78,12,7,0,0,7);x.ellipse(98,78,12,7,0,0,7);x.fill();
   // eyes
-  const eye=(cx,cy,flip)=>{const r=sh?15:12;x.fillStyle='rgba(60,30,20,.25)';x.beginPath();x.ellipse(cx,cy+1,r+3,r-2,0,0,7);x.fill();
+  const eye=(cx,cy,flip)=>{if(blink){x.strokeStyle='#1a0c08';x.lineWidth=3;x.beginPath();x.moveTo(cx-12,cy+1);x.quadraticCurveTo(cx,cy+7,cx+12,cy+1);x.stroke();if(cfg0.lash){x.lineWidth=1.4;for(let q=0;q<3;q++){x.beginPath();x.moveTo(cx-8+q*8,cy+5);x.lineTo(cx-9+q*8,cy+9);x.stroke()}}return}const r=sh?15:12;x.fillStyle='rgba(60,30,20,.25)';x.beginPath();x.ellipse(cx,cy+1,r+3,r-2,0,0,7);x.fill();
    x.fillStyle='#f6f2ea';x.beginPath();x.ellipse(cx,cy,r,r*(sh?1:.68),0,0,7);x.fill();
    const ir=sh?6.2:7.4;x.fillStyle=cfg0.eye||'#3a2414';x.beginPath();x.arc(cx+flip*1,cy,ir,0,7);x.fill();x.fillStyle='#0a0604';x.beginPath();x.arc(cx+flip*1,cy,ir*.5,0,7);x.fill();x.fillStyle='rgba(255,255,255,.9)';x.beginPath();x.arc(cx+flip*1+2.2,cy-2.4,1.9,0,7);x.fill();
    x.strokeStyle='#1a0c08';x.lineWidth=2.4;x.beginPath();x.ellipse(cx,cy,r,r*(sh?1:.68),0,Math.PI*1.05,Math.PI*1.95);x.stroke();

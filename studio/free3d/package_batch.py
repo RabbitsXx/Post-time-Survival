@@ -29,11 +29,13 @@ def one(k):
         img=P.cover_ref(base,'',l1,l2,pill);img.save(f'{od}/cover_9x16.jpg',quality=92);P.preview(img,f'{od}/cover_preview.jpg')
     for i in range(4):img.save(f'{frames}/{i:05d}.jpg',quality=93)
     open(f'{od}/captions_en.srt','w').write(P.srt(ep))
+    thm={L['en']:L['th'] for sh_ in ep['shots'] for L in sh_['lines'] if L.get('th')}
+    if thm:open(f'{od}/captions_th.srt','w').write(P.srt(ep,th=thm))
     wav=R+f'/out/{k}.wav'
     m=subprocess.run(['ffmpeg','-hide_banner','-i',wav,'-af','loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json','-f','null','-'],capture_output=True,text=True).stderr
     j=json.loads(m[m.rindex('{'):m.rindex('}')+1])
     af=f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={j['input_i']}:measured_LRA={j['input_lra']}:measured_TP={j['input_tp']}:measured_thresh={j['input_thresh']}:offset={j['target_offset']}:linear=true"
-    subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate','30','-i',frames+'/%05d.jpg','-i',wav,'-c:v','libx264','-preset','medium','-crf','21','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','160k','-af',af,'-movflags','+faststart','-shortest',f'{od}/{k}.mp4'])
+    subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate','30','-i',frames+'/%05d.jpg','-i',wav,'-c:v','libx264','-preset','slow','-b:v','10M','-maxrate','13M','-bufsize','26M','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-af',af+',alimiter=limit=0.84:level=disabled','-movflags','+faststart','-shortest',f'{od}/{k}.mp4'])
     print('packaged',k)
 if __name__=='__main__':
     for k in (sys.argv[1:] or [x for x in CV if not x.startswith(('hm','nn','bo','ks'))]):one(k)
