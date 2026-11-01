@@ -27,7 +27,11 @@ def S_heart():
 def S_sizzle():
     n=int(2.6*SR);t=np.arange(n)/SR;x=np.random.RandomState(7).randn(n).astype(np.float32);x=np.diff(x,prepend=0);crack=(np.random.RandomState(9).rand(n)>.9994).astype(np.float32);crack=np.convolve(crack,np.hanning(180),'same')*3
     return ((x*.28+crack*.5)*np.minimum(t/.1,1)*np.minimum((2.6-t)/.5,1)).astype(np.float32)*.9
-SFXLIB.update({'beep':S_beep,'cry':S_cry,'heart':S_heart,'sizzle':S_sizzle})
+def S_knock():
+    n=int(.5*SR);t=np.arange(n)/SR;r=np.random.RandomState(11)
+    y=np.sin(2*np.pi*(110-60*t)*t)*np.exp(-t*22)*1.0+np.sin(2*np.pi*230*t)*np.exp(-t*40)*.5+r.randn(n)*np.exp(-t*90)*.35
+    return (y*.95).astype(np.float32)
+SFXLIB.update({'beep':S_beep,'cry':S_cry,'heart':S_heart,'sizzle':S_sizzle,'knock':S_knock})
 BLIP=False
 BL={'man':(196,'sq',.056),'woman':(440,'tri',.054),'vendor':(110,'tri',.062),'auntie':(392,'sq',.052),'lad':(294,'sq',.055),'girl':(523,'sine',.05),'uncle':(147,'saw',.066),'zombie':(82,'saw',.09),'nana':(330,'tri',.07),'bo':(247,'sq',.05),'mimi':(349,'tri',.055),'gus':(165,'sq',.06),'teddy':(494,'sq',.045),'narrator':(196,'tri',.06)}
 def blip_wav(text,who):
