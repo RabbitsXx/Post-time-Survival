@@ -24,6 +24,9 @@ const _pa2hide=hideAll;hideAll=function(){_pa2hide();PACOFFIN.scale.setScalar(1)
 function paSea(){ground.visible=false;water.visible=true;sandR.visible=false;PROPS.forEach(p=>p.visible=false);clouds.forEach(c=>c.visible=true);S.background=SKY;S.fog.color.set(HOR);HEMI.intensity=1.15}
 function paBeach(){paSea();ground.visible=true;ground.material.map=OCSAND;ground.material.needsUpdate=true}
 function paBall(i,from,to,a,hgt){const e=cl(a);PABALL[i].visible=a>0&&a<1;PABALL[i].position.set(lerp(from[0],to[0],e),lerp(from[1],to[1],e)+Math.sin(e*Math.PI)*hgt,lerp(from[2],to[2],e))}
+function paFuneral(u,d,k,cake){paSea();ground.visible=true;ground.material.map=grassT;ground.material.needsUpdate=true;water.visible=false;sandR.visible=false;show(PACOFFIN,PASANTA,PASOLD,PASOLD2,PACAKE);PACOFFIN.position.set(0,0,.4);PACOFFIN.scale.setScalar(1.4);PACOFFIN.rotation.y=.2;PASANTA.rest();PASANTA.at(-1.5,0,.4,.6);PASANTA.arms[1].rotation.set(-2.6,0,.2);PASANTA.face('bored');
+ PASOLD.rest();PASOLD.at(1.4,0,.3,-.7);PASOLD.face('bored');PASOLD.arms[0].rotation.set(-.6,0,-.2);PASOLD2.rest();PASOLD2.at(2.1,0,-.8,-.5);PASOLD2.face('bored');
+ puffs(3.2,1.2,-2,u,.2);if(cake){PACAKE.visible=true;PACAKE.position.set(-3.1,.5,1.3);PACAKE.rotation.set(0,0,.15);window.TAG('THE CAKES','0 MOURNERS','#ff8aa0')}else window.TAG('FULL MILITARY HONORS','FOR ONE LEG','#7affc0');camTo([0,2.0,8.6],[0,2.0,8.6],[0,.9,0],[0,.9,0],0,46)}
 const PAS={
 pa_smash:(u,d,k)=>{show(PASHOP,PACHEF,PASOLD,PASOLD2,PACAKE);PASHOP.visible=true;S.background=new THREE.Color(0xf6dfa0);S.fog.color.set(0xf6dfa0);ground.visible=false;water.visible=false;sandR.visible=false;PROPS.forEach(p=>p.visible=false);clouds.forEach(c=>c.visible=false);HEMI.intensity=1.25;
  PACHEF.rest();PACHEF.at(-.5,0,-1.95,.12);PASOLD.rest();PASOLD.at(.6,0,-.6,-1.2);PASOLD2.rest();PASOLD2.at(-1.5,0,-.3,1.1);
@@ -40,11 +43,12 @@ pa_fort:(u,d,k)=>{paSea();show(PAFORT);PAFORT.position.set(0,-.2,-8);PAFORT.rota
 pa_leg:(u,d,k)=>{paBeach();show(PASANTA,PALEG);PASANTA.rest();PASANTA.at(0,0,0,.25);PASANTA.face(u>.45?'shock':'smug');PASANTA.g.position.y=u>.45?Math.min(.35,(u-.45)*2):0;
  if(u>.4){const a=cl((u-.4)/.9);PALEG.visible=true;PALEG.position.set(lerp(.3,2.2,a),lerp(.9,.6,a)+Math.sin(a*Math.PI)*1.6,lerp(.2,1.4,a));PALEG.rotation.set(a*9,0,a*7)}else PALEG.visible=false;puffs(.35,.9,.2,u,.4);SHAKE=(u>.4&&u<.7)?.1:0;window.TAG('GENERAL SANTA ANNA','-1 LEG','#ff8a8a');camTo([.4,1.7,7.2],[.4,1.7,7.2],[.6,1.3,0],[.6,1.3,0],0,42)},
 pa_peace:(u,d,k)=>{paBeach();show(PASANTA,PASAIL,PACOINS,PAUJ);PASAIL.rest();PASANTA.rest();PASAIL.at(-1.2,0,0,1.25);PASANTA.at(1.2,0,0,-1.25);PASAIL.arms[1].rotation.set(-1.5,0,0);PASANTA.arms[0].rotation.set(-1.5,0,0);PASAIL.face('smug');PASANTA.face('smug');
- PAUJ.visible=true;PAUJ.position.set(0,2.6,-.4);cyl(.03,.03,2.6,5,tkMetal,0,0,0,PAUJ);PACOINS.position.set(0,0,.9);PACOINS.scale.setScalar(.9);window.TAG('BRITAIN STEPS IN','MEXICO PAYS 600,000','#7ad0ff');camTo([0,1.9,8.4],[0,1.9,8.4],[0,1.2,0],[0,1.2,0],k,42)},
-pa_funeral:(u,d,k)=>{paSea();ground.visible=true;ground.material.map=grassT;ground.material.needsUpdate=true;water.visible=false;sandR.visible=false;show(PACOFFIN,PASANTA,PASOLD,PASOLD2,PACAKE);PACOFFIN.position.set(0,0,.4);PACOFFIN.scale.setScalar(1.4);PACOFFIN.rotation.y=.2;PASANTA.rest();PASANTA.at(-1.5,0,.4,.6);PASANTA.arms[1].rotation.set(-2.6,0,.2);PASANTA.face('bored');
- PASOLD.rest();PASOLD.at(1.4,0,.3,-.7);PASOLD.face('bored');PASOLD.arms[0].rotation.set(-.6,0,-.2);PASOLD2.rest();PASOLD2.at(2.1,0,-.8,-.5);PASOLD2.face('bored');
- const st=box(.9,1.1,.2,M(0x9a9a92),.2,.55,-1.7);st.visible=true;
- puffs(3.2,1.2,-2,u,.2);if(k>.55){PACAKE.visible=true;PACAKE.position.set(-3.1,.5,1.3);PACAKE.rotation.set(0,0,.15);window.TAG('THE CAKES','0 MOURNERS','#ff8aa0')}else window.TAG('STATE FUNERAL','FOR ONE LEG','#7affc0');camTo([0,2.0,8.6],[0,2.0,8.6],[0,.9,0],[0,.9,0],0,46)}
+ PAUJ.visible=true;PAUJ.position.set(0,2.6,-.4);cyl(.03,.03,2.6,5,tkMetal,0,0,0,PAUJ);PACOINS.position.set(0,0,.9);PACOINS.scale.setScalar(.9);window.TAG('BRITAIN BROKERS PEACE','MEXICO AGREES TO PAY','#7ad0ff');camTo([0,1.9,8.4],[0,1.9,8.4],[0,1.2,0],[0,1.2,0],k,42)},
+pa_funeral:(u,d,k)=>{paFuneral(u,d,k,false)},
+pa_funeral2:(u,d,k)=>{paFuneral(u,d,k,true)},
+pa_mob:(u,d,k)=>{paSea();ground.visible=true;ground.material.map=grassT;ground.material.needsUpdate=true;water.visible=false;sandR.visible=false;show(PALEG,PASOLD,PASOLD2,PASAIL);const x0=lerp(1.6,-3.2,k);PALEG.visible=true;PALEG.position.set(x0+.6,.2,.4);PALEG.rotation.set(0,0,Math.PI/2);
+ [[PASOLD,1.4,.4],[PASOLD2,2.1,.7],[PASAIL,2.8,.2]].forEach(([P,dx,z],i)=>{P.rest();P.at(x0+dx,0,z,-Math.PI/2);P.walk(u*1.4+i,9,.9);P.arms[0].rotation.z=-1.3;P.arms[1].rotation.z=1.3;P.face('angry')});
+ window.TAG('DECEMBER 1844','A MOB DIGS IT UP','#ff8a8a');camTo([0,1.6,8.4],[0,1.6,8.4],[0,.9,0],[0,.9,0],0,44)}
 };
 Object.assign(SHOTS,PAS);
 // cover: angry chef with a cake splat (hero) over the blurred shop

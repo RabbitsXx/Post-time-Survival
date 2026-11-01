@@ -22,7 +22,7 @@ def drop(L,off=10,blur=6):
     s=Image.new('RGBA',L.size,(0,0,0,0));s.putalpha(L.split()[3].point(lambda v:int(v*.55)));s=s.filter(ImageFilter.GaussianBlur(blur));o=Image.new('RGBA',(L.size[0]+2*off,L.size[1]+2*off),(0,0,0,0));o.paste(s,(off,off),s);o.paste(L,(0,0),L);return o
 def put(L,cx,cy,rot=0):
     L=drop(L.rotate(rot,expand=True,resample=Image.BICUBIC));im.paste(L,(cx-L.size[0]//2,cy-L.size[1]//2),L)
-f1=ImageFont.truetype(F,176);put(tl('A BAKERY',f1,(255,226,31,255),16),W//2,330,-3)
-f2=ImageFont.truetype(F,130);t=tl("STARTED A WAR",f2,(255,255,255,255),12);bw,bh=t.size[0]+60,t.size[1]+10;ban=Image.new('RGBA',(bw,bh),(0,0,0,0));d=ImageDraw.Draw(ban);d.rectangle([0,0,bw-1,bh-1],fill=(196,32,42,255),outline=(0,0,0,255),width=8);ban.paste(t,(30,5),t);put(ban,W//2,505,-3)
+f1=ImageFont.truetype(F,150);put(tl('NAMED AFTER',f1,(255,226,31,255),16),W//2,330,-3)
+f2=ImageFont.truetype(F,130);t=tl("A PASTRY SHOP",f2,(255,255,255,255),12);bw,bh=t.size[0]+60,t.size[1]+10;ban=Image.new('RGBA',(bw,bh),(0,0,0,0));d=ImageDraw.Draw(ban);d.rectangle([0,0,bw-1,bh-1],fill=(196,32,42,255),outline=(0,0,0,255),width=8);ban.paste(t,(30,5),t);put(ban,W//2,505,-3)
 fh=ImageFont.truetype(F,84);put(tl('IT REALLY HAPPENED',fh,(255,226,31,255),12),540,1480,-4)
 im.convert('RGB').save(H+'/topics/pa.cover.jpg',quality=92);print(os.path.getsize(H+'/topics/pa.cover.jpg')//1024,'KB')
