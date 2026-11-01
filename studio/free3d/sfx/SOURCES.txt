@@ -1,1 +1,0 @@
-Real SFX in this folder: facebookincubator/Meta-open-sound (corpora/oculus-audio-pack), CC0 1.0 Universal (public domain dedication). Source: https://github.com/facebookincubator/Meta-open-sound. No attribution required.

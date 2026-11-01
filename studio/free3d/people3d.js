@@ -10,7 +10,7 @@ Object.assign(P3CFG,{
 
 function clothTex(top){const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');x.fillStyle=top.a;x.fillRect(0,0,128,128);
  if(top.t==='plaid'){x.fillStyle=top.b;x.globalAlpha=.5;for(let i=0;i<128;i+=32){x.fillRect(i,0,12,128);x.fillRect(0,i,128,12)}x.globalAlpha=.85;x.fillRect(0,0,128,3);x.fillRect(0,0,3,128);x.globalAlpha=.25;x.fillStyle='#f4ead0';for(let i=16;i<128;i+=32){x.fillRect(i,0,2,128);x.fillRect(0,i,128,2)}}
- else if(top.t==='dress'){x.fillStyle=top.b;x.globalAlpha=.4;for(let i=0;i<128;i+=32)x.fillRect(0,i+22,128,5);x.globalAlpha=.2;x.fillStyle='#ffd9a0';for(let i=0;i<128;i+=6)x.fillRect(i,0,1,128);x.globalAlpha=.35;x.fillStyle='#f4d8b0';for(let k=0;k<60;k++){x.beginPath();x.arc((k*37)%128,(k*61)%128,2,0,7);x.fill()}}
+ else if(top.t==='dress'){x.fillStyle=top.b;x.globalAlpha=.3;for(let i=0;i<128;i+=32)x.fillRect(0,i+22,128,5);x.globalAlpha=.35;x.fillStyle='#f4d8b0';for(let k=0;k<60;k++){x.beginPath();x.arc((k*37)%128,(k*61)%128,2,0,7);x.fill()}}
  x.globalAlpha=.08;x.fillStyle='#000';for(let i=0;i<500;i++)x.fillRect((i*53)%128,(i*29)%128,1,1);
  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.magFilter=t.minFilter=THREE.LinearFilter;t.generateMipmaps=false;t.encoding=THREE.sRGBEncoding;return t}
 function inkOutline(g,k){const ol=new THREE.MeshBasicMaterial({color:0x0a0806,side:THREE.BackSide,fog:true});const list=[];g.traverse(o=>{if(o.isMesh&&!o.userData.noOL&&!o.userData.noInk)list.push(o)});
@@ -88,6 +88,6 @@ function makePerson(cfg){const g=new THREE.Group(),L=c=>new THREE.MeshLambertMat
  if(cfg.hair==='long'){add(SPH(.133),hc,0,.19,-.012,head,null,[1,1.18,1.06]);add(CAP(.1,.36),hc,0,-.02,-.075,head,null,[1.15,1,.55]);add(CAP(.03,.3),hc,.118,.0,.0,head);add(CAP(.03,.3),hc,-.118,.0,.0,head);add(SPH(.001),hc,0,0,0,head)}
  else{add(SPH(.1315),hc,0,.19,-.035,head,null,[1,1.1,1.0]);add(CAP(.03,.1),hc,.12,.18,.0,head);add(CAP(.03,.1),hc,-.12,.18,.0,head)}
  inkOutline(g,1.035);
- g.scale.setScalar(cfg.h);g.userData={dyn:1,parts:{body,torso,legs,arms,head,F,cfg,hm,shins,fores}};
+ g.scale.setScalar(cfg.h);g.userData={dyn:1,parts:{body,torso,legs,arms,head,F,cfg,hm,shins,fores,sk}};
  const bl=new THREE.Mesh(new THREE.CircleGeometry(.45*cfg.w,14),new THREE.MeshBasicMaterial({color:0,transparent:true,opacity:.45,depthWrite:false}));bl.rotation.x=-Math.PI/2;bl.position.y=.02;bl.userData.dyn=1;g.userData.blob=bl;
  drawFace(F,cfg,'smile');g.visible=false;bl.visible=false;S.add(g);S.add(bl);return g}

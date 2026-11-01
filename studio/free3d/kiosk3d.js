@@ -90,5 +90,5 @@ function update3D(sh,t,lt,dur,cam){for(const k in P3){P3[k].visible=false;P3[k].
   const gs=c.gesture;if(gs&&lt>=gs.t0&&lt<gs.t1){const u=(lt-gs.t0)/(gs.t1-gs.t0);pr.arms[0].rotation.x=-2.4*Math.min(1,Math.sin(u*Math.PI)*1.5);pr.arms[0].rotation.z=.2}
   if(c.reach){const r=V(c.reach);pr.arms[0].rotation.x=-1.5*r;pr.arms[1].rotation.x=-1.5*r;pr.arms[0].rotation.z=.12*r;pr.arms[1].rotation.z=-.12*r}
   if(pr.shins){for(let i=0;i<2;i++){pr.shins[i].rotation.x=Math.max(0,-pr.legs[i].rotation.x)*1.1+.02}}if(pr.fores){for(let i=0;i<2;i++)pr.fores[i].rotation.x=-(.12+Math.abs(pr.arms[i].rotation.x)*.45)}
-  drawFace(pr.F,pr.cfg,c.expr||'calm');if(pr.hm)pr.hm.color.set(c.expr==='zomb'?'#76946c':pr.cfg.skin);const bl=g.userData.blob;bl.visible=!c.noShadow;bl.position.set(x,.02,z)}}
+  drawFace(pr.F,pr.cfg,c.expr||'calm');{const zc=c.expr==='zomb'?'#76946c':pr.cfg.skin;if(pr.hm)pr.hm.color.set(zc);if(pr.sk)pr.sk.color.set(zc)}const bl=g.userData.blob;bl.visible=!c.noShadow;bl.position.set(x,.02,z)}}
 function buildPeople3D(){for(const k in P3CFG)P3[k]=makePerson(P3CFG[k]);buildHands()}
