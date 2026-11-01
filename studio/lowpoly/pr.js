@@ -12,12 +12,12 @@ const PRROOM=(()=>{const g=tkRoom(PRTILE,PRFLOOR,0x6aa8b8);
  g.userData.tub=tub;return g})();
 const PRSOAP=box(.32,.12,.22,M(0xf6f2c8),0,.06,0);S.add(PRSOAP);ACT.push(PRSOAP);
 // hands: wrinkles grow with wr (0..1); finger material turns pale; optional vessels inside
-function prHand(){const g=new THREE.Group();const skin=new THREE.MeshLambertMaterial({color:0xe8b894,flatShading:true,map:NZ});const rid=M(0xc08a70);const U={ridges:[],vess:[],skin};g.userData=U;
+function prHand(){const g=new THREE.Group();const skin=new THREE.MeshLambertMaterial({color:0xe8b894,flatShading:true,map:NZ});const rid=M(0xd3a58c);const U={ridges:[],vess:[],skin};g.userData=U;
  box(.52,.56,.2,skin,0,.28,0,g);
  const fx=[-.2,-.07,.06,.19],fl=[.34,.42,.4,.32];fx.forEach((x,i)=>{for(let j=0;j<3;j++){const L=fl[i]/3,y=.56+j*L+L/2;box(.1,L*.98,.12,skin,x,y,0,g);const r=box(.108,.014,.128,rid,x,y,0,g);r.userData.base=1;U.ridges.push(r);const r2=box(.108,.014,.128,rid,x,y+L*.36,0,g);U.ridges.push(r2);if(j===1){const v=cyl(.018,.018,L*3,5,M(0xd02040),x,.56+fl[i]/2,0,g);v.visible=false;U.vess.push(v)}}});
  const th=new THREE.Group();for(let j=0;j<2;j++){box(.11,.17,.12,skin,0,.09+j*.17,0,th);const r=box(.118,.014,.128,rid,0,.09+j*.17,0,th);U.ridges.push(r)}th.position.set(.34,.2,0);th.rotation.z=-.7;g.add(th);
  S.add(g);ACT.push(g);return g}
-function prWrinkle(h,w){const U=h.userData;U.ridges.forEach(r=>r.scale.set(1,1+w*3,1));U.skin.color.set(w<.01?0xe8b894:new THREE.Color(0xe8b894).lerp(new THREE.Color(0xe4cdd0),w))}
+function prWrinkle(h,w){const U=h.userData;U.ridges.forEach(r=>r.scale.set(1,1+w*2,1));U.skin.color.set(w<.01?0xe8b894:new THREE.Color(0xe8b894).lerp(new THREE.Color(0xeed8c8),w))}
 const PRH1=prHand(),PRH2=prHand();
 // brain with sunglasses (the culprit)
 const PRSUN=(()=>{const g=new THREE.Group();for(const sx of[-1,1])box(.34,.2,.05,M(0x111111),sx*.5,.4,.95,g);box(.2,.05,.05,M(0x111111),0,.44,.95,g);g.visible=false;TKBRAIN.add(g);return g})();
@@ -47,6 +47,6 @@ p_slip:(u,d,k)=>{prEnv();show(POLY,PRSOAP);const f=cl((k-.5)/.3),fe=ease(f);POLY
 };
 Object.assign(SHOTS,PSH);
 // cover: stretched shocked Poly in the tub, giant wrinkled hand in front (hero), blurred bathroom behind
-function prCoverPose(){show(POLY,PRH1);POLY.rest();POLY.at(-.15,.2,-1.7,.1);POLY.face('shock');POLY.head.scale.set(1.5,.8,1.1);PREYE.forEach(m=>m.visible=true);POLY.arms[1].rotation.set(-2.6,0,-.2);prWrinkle(PRH1,1);PRH1.position.set(.45,1.1,.2);PRH1.scale.setScalar(1.15);PRH1.rotation.z=-.1}
-Object.assign(SHOTS,{prcover:(u,d,k)=>{prEnv();camTo([0,1.9,4.6],[0,1.9,4.6],[0,1.75,-.6],[0,1.75,-.6],0,40)},
- prcoverc:(u,d,k)=>{tkOff();S.background=new THREE.Color(0x00ff00);S.fog.color.set(0x00ff00);HEMI.intensity=1.25;show(PRROOM);PRROOM.children.forEach(c=>c.visible=(c===PRROOM.userData.tub));prCoverPose();camTo([0,1.9,4.6],[0,1.9,4.6],[0,1.75,-.6],[0,1.75,-.6],0,40)}});
+function prCoverPose(){show(POLY,PRH1);POLY.rest();POLY.at(0,.2,-1.7,.1);POLY.face('shock');POLY.head.scale.set(1.5,.8,1.1);PREYE.forEach(m=>m.visible=true);POLY.arms[1].rotation.set(-2.6,0,-.2);prWrinkle(PRH1,1);PRH1.position.set(.22,1.05,-.7);PRH1.scale.setScalar(.62);PRH1.rotation.z=-.15}
+Object.assign(SHOTS,{prcover:(u,d,k)=>{prEnv();camTo([0,1.85,1.15],[0,1.85,1.15],[0,1.98,-1.7],[0,1.98,-1.7],0,40)},
+ prcoverc:(u,d,k)=>{tkOff();S.background=new THREE.Color(0x00ff00);S.fog.color.set(0x00ff00);HEMI.intensity=1.25;show(PRROOM);PRROOM.children.forEach(c=>c.visible=(c===PRROOM.userData.tub));prCoverPose();camTo([0,1.85,1.15],[0,1.85,1.15],[0,1.98,-1.7],[0,1.98,-1.7],0,40)}});
