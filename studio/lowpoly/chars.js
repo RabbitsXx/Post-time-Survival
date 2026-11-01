@@ -45,20 +45,20 @@ function limb(rt,rb,h,seg,tex,y){const g=new THREE.CylinderGeometry(rt,rb,h,seg)
 function person(o){const g=new THREE.Group();const skin=o.skin||'#e8b894';const hair=o.hair||'#4a3020';const P={g,skin,hair};
  const coatT=fab(o.coat,{seed:1,draw:o.torsoDraw?(x,w,h)=>o.torsoDraw(x,w,h):null,w:64,h:32});const sleeveT=fab(o.sleeve||o.coat,{seed:2});const pantT=fab(o.pants,{seed:3,noise:.2});const skinT=fab(skin,{seed:4,noise:.08});
  // torso (front at u=.5)
- const tg=new THREE.CylinderGeometry(.27,.21,.66,8);tg.rotateY(Math.PI);const torso=new THREE.Mesh(tg,new THREE.MeshLambertMaterial({map:coatT,flatShading:true}));torso.scale.set(1.15,1,.66);torso.position.y=1.18;g.add(torso);
- const hips=new THREE.Mesh(new THREE.CylinderGeometry(.21,.2,.2,8),new THREE.MeshLambertMaterial({map:pantT,flatShading:true}));hips.scale.set(1.15,1,.7);hips.position.y=.88;g.add(hips);
+ const tg=new THREE.CylinderGeometry(.27,.21,.66,14);tg.rotateY(Math.PI);const torso=new THREE.Mesh(tg,new THREE.MeshLambertMaterial({map:coatT,flatShading:true}));torso.scale.set(1.15,1,.66);torso.position.y=1.18;g.add(torso);
+ const hips=new THREE.Mesh(new THREE.CylinderGeometry(.21,.2,.2,12),new THREE.MeshLambertMaterial({map:pantT,flatShading:true}));hips.scale.set(1.15,1,.7);hips.position.y=.88;g.add(hips);
  if(o.belt){const b=new THREE.Mesh(new THREE.CylinderGeometry(.216,.216,.06,8),M(0x2a1a10));b.scale.set(1.15,1,.7);b.position.y=.93;g.add(b)}
  g.add(limb(.07,.09,.12,6,skinT,1.55));
  // legs
- P.legs=[-.12,.12].map(x=>{const p=new THREE.Group();p.position.set(x,.93,0);g.add(p);p.add(limb(.105,.085,.45,6,pantT,-.22));p.add(limb(.08,.058,.42,6,pantT,-.66));const sh=box(.13,.09,.3,M(0x1c1c20),0,-.9,.05,p);return p});
+ P.legs=[-.12,.12].map(x=>{const p=new THREE.Group();p.position.set(x,.93,0);g.add(p);p.add(limb(.105,.085,.45,9,pantT,-.22));p.add(limb(.08,.058,.42,9,pantT,-.66));const sh=new THREE.Mesh(new THREE.SphereGeometry(.1,9,7),M(0x1c1c20));sh.scale.set(1.0,.62,1.9);sh.position.set(0,-.93,.07);p.add(sh);return p});
  // arms
- P.arms=[-.34,.34].map(x=>{const p=new THREE.Group();p.position.set(x,1.47,0);g.add(p);const sl=o.shortSleeve?skinT:sleeveT;p.add(limb(.075,.065,.34,6,sleeveT,-.17));const f=limb(.06,.045,.32,6,o.shortSleeve?skinT:sleeveT,-.5);p.add(f);const hd=new THREE.Mesh(new THREE.IcosahedronGeometry(.055,0),new THREE.MeshLambertMaterial({map:skinT,flatShading:true}));hd.scale.set(1,1.3,.8);hd.position.y=-.7;p.add(hd);return p});
+ P.arms=[-.34,.34].map(x=>{const p=new THREE.Group();p.position.set(x,1.47,0);g.add(p);const sl=o.shortSleeve?skinT:sleeveT;p.add(limb(.075,.065,.34,9,sleeveT,-.17));const f=limb(.06,.045,.32,9,o.shortSleeve?skinT:sleeveT,-.5);p.add(f);const hd=new THREE.Mesh(new THREE.IcosahedronGeometry(.075,1),new THREE.MeshLambertMaterial({map:skinT,flatShading:true}));hd.scale.set(1.05,1.2,.9);hd.position.y=-.72;p.add(hd);return p});
  // head
- P.head=new THREE.Group();P.head.position.set(0,1.76,0);g.add(P.head);
+ P.head=new THREE.Group();P.head.position.set(0,1.79,0);g.add(P.head);
  P.fm=new THREE.MeshLambertMaterial({map:faceTex('neutral',skin,hair,o),flatShading:false});
- const hg=new THREE.SphereGeometry(.17,12,9);const hm=new THREE.Mesh(hg,P.fm);hm.scale.set(.92,1.12,1.0);P.head.add(hm);
+ const hg=new THREE.SphereGeometry(.2,16,12);const hm=new THREE.Mesh(hg,P.fm);hm.scale.set(.92,1.08,1.0);P.head.add(hm);
  if(o.hairCap){const hm2=new THREE.MeshLambertMaterial({map:fab(hair,{seed:9,noise:.32,w:32,h:32}),flatShading:true});const hc=new THREE.Mesh(new THREE.SphereGeometry(.186,10,7,0,Math.PI*2,0,1.0),hm2);hc.scale.set(.97,1.14,1.08);hc.position.set(0,.012,-.014);P.head.add(hc);const bk=new THREE.Mesh(new THREE.SphereGeometry(.176,10,7,0,Math.PI*2,0,1.9),hm2);bk.scale.set(.96,1.1,1.0);bk.position.set(0,.005,-.03);P.head.add(bk);const tf=box(.16,.07,.09,hm2,.02,.205,.11,P.head);tf.rotation.set(-.35,0,.15);const tf2=box(.12,.06,.08,hm2,-.07,.19,.13,P.head);tf2.rotation.set(-.3,0,-.2)}
- const nose=cone(.032,.07,4,new THREE.MeshLambertMaterial({map:skinT,flatShading:true}),0,-.015,.175,P.head);nose.rotation.x=Math.PI/2;nose.rotation.y=Math.PI/4;
+ const nose=cone(.04,.085,5,new THREE.MeshLambertMaterial({map:skinT,flatShading:true}),0,-.015,.175,P.head);nose.rotation.x=Math.PI/2;nose.rotation.y=Math.PI/4;
  for(const sx of[-1,1]){const e=new THREE.Mesh(new THREE.IcosahedronGeometry(.04,0),new THREE.MeshLambertMaterial({map:skinT,flatShading:true}));e.scale.set(.4,1,.7);e.position.set(sx*.16,-.01,-.01);P.head.add(e)}
  const h=o.hat;const dark=M(0x16161a);
  if(h==='straw'){cyl(.3,.3,.03,10,M(0xe8c860),0,.11,0,P.head);cyl(.17,.19,.17,10,M(0xe8c860),0,.2,0,P.head);cyl(.19,.19,.04,10,M(0x9a3020),0,.15,0,P.head)}

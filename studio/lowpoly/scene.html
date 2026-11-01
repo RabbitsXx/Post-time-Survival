@@ -168,7 +168,7 @@ const ANIMS=[];const dlgEl=document.getElementById('dlg'),dlgName=document.getEl
 function allPeople(){return [F,OFF,KAI,POLY,SC,CAPT,...US,...BR].concat(typeof POLYF!=='undefined'?[POLYF]:[],typeof GRIF!=='undefined'?[GRIF]:[],typeof POLYV!=='undefined'?[POLYV]:[])}
 window.TAGS={on:0};window.TAG=(a,b,c)=>{window.TAGS={on:1,a,b,c}};const tagEl=document.getElementById('tag');
 window.renderAt=f=>{const t=f/30;let sh=SPEC.shots.find(s=>t>=s.t0&&t<s.t1)||SPEC.shots[SPEC.shots.length-1];const u=t-sh.t0,d=sh.t1-sh.t0,k=u/d;
- window.TAGS={on:0};window.STAMP={on:0};allPeople().forEach(p=>p.head.position.y=1.76);hideAll();SHAKE=0;FLASH=0;smoke.forEach(m=>m.visible=false);
+ window.TAGS={on:0};window.STAMP={on:0};allPeople().forEach(p=>p.head.position.y=1.79);hideAll();SHAKE=0;FLASH=0;smoke.forEach(m=>m.visible=false);
  clouds.forEach(c=>{const a=c.userData.a+t*c.userData.sp;c.position.x=Math.cos(a)*c.userData.r;c.position.z=Math.sin(a)*c.userData.r});
  waterT.offset.x=t*.04;
  SHOTS[sh.id](u,d,k);ANIMS.forEach(fn=>fn(t));if(window.TAGS.on){tagEl.style.display='block';tagEl.children[0].textContent=window.TAGS.a;tagEl.children[1].textContent=window.TAGS.b;tagEl.children[1].style.color=window.TAGS.c||'#ffe21f'}else tagEl.style.display='none';
