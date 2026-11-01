@@ -410,5 +410,8 @@ for _s in _sh:
     if 'CUSTOMER 1 LEAVES' in _pl:_w=True;_s['cues']=list(_s.get('cues',[]))+[dict(t=0,type='dread',dur=32,level=.34)]
     if _w:_r+=1;_s['panic']=min(1.0,.3+.09*_r)
     elif 'WEIRD' in _pl or 'ORDER: 10' in _pl or 'CCTV' in _pl:_s['panic']=.12
+_X={'HOOK':[[.2,'whisper']],'CUSTOMER 2 · STARING':[[.3,'whisper']],'SOMETHING AT THE SHUTTER':[[1.0,'scratch']],'CAMERA CHECK':[[.3,'clock']]}
+for _s in EPS['ks1']['shots']:
+    if _s.get('place') in _X:_s['sfx']=list(_s.get('sfx',[]))+_X[_s['place']]
 EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
 for _s in EPS['ks1']['shots']:_s['typed']=True

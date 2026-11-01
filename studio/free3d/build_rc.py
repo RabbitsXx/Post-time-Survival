@@ -82,17 +82,44 @@ def render(spec,fd,w,h,workers=4):
     for p in ps:
         if p.wait():raise SystemExit('render failed')
     return n
+
+# ---- real recorded SFX (CC0, see sfx/SOURCES.txt); synthetic ones stay for sizzle/heart/etc ----
+def _load(fn,trim=None,gain=1.0):
+    raw=subprocess.run(['ffmpeg','-v','error','-i',R+'/sfx/'+fn,'-ac','1','-ar',str(SR),'-f','f32le','-'],capture_output=True).stdout
+    x=np.frombuffer(raw,dtype=np.float32).copy()
+    if trim:x=x[:int(trim*SR)];k=min(len(x),int(.2*SR));x[len(x)-k:]*=np.linspace(1,0,k)
+    pk=np.abs(x).max()+1e-6;return x/pk*.9*gain
+REAL={'knock':[_load(f'METLImpt_MetalHitSurface_OS_0{i}.ogg',.9,1.0) for i in range(1,6)],
+ 'foot':[_load(f'FEETHmn_ShoeConcreteWalk_OS_0{i}.ogg',None,.9) for i in range(1,6)],
+ 'rattle':[_load('DOORMetl_GarageDoorClose_OS_01.ogg',3.4,.85)],
+ 'whisper':[_load('VOXWhsp_WhispersCreepy_OS_01.ogg',4.2,.5)],
+ 'groan':[_load('VOXFem_GroanCreepy_OS_01.ogg',2.6,.8),_load('VOXMale_GroanCreepy_OS_01.ogg',2.6,.8)],
+ 'sting':[_load('DSGNImpt_ImpactCreepyReverb_OS_01.ogg',3.0,.9)],
+ 'scratch':[_load('METLFric_ScratchCreepy_OS_01.ogg',2.4,.7)],
+ 'clock':[_load('CLOCKTick_ClockCreepy_OS_01.ogg',3.2,.45)],
+ 'click':[_load(f,None,.75) for f in('MECHSwtch_SwitchSmallOn_OS_01.ogg','MECHSwtch_SwitchSmallOff_OS_01.ogg','MECHSwtch_SwitchSmallOn_OS_02.ogg','MECHSwtch_SwitchSmallOff_OS_02.ogg')],
+ 'chime':[_load('OBJCoin_CoinDrop_OS_01.ogg',None,.8)],
+ 'whoosh':[_load('WHSH_WhooshMedium_OS_01.ogg',None,.7),_load('WHSH_WhooshSmall_OS_01.ogg',None,.7)]}
+AMB=_load('AMBUrbn_CityAmerican_LOOP_01.ogg',None,1.0)
+ep_amb=True
 def mix_rc(spec,lines,sfx,cues,path):
     dur=spec['dur'];n=int(dur*SR)+SR;V=np.zeros(n,dtype=np.float32);M=np.zeros(n,dtype=np.float32)
     for L in lines:
         x,sr=rd(L['wav']);i=int(L['t0']*SR);k=max(0,min(len(x),n-i));V[i:i+k]+=x[:k]*(.85 if L['who']=='pa' else 1.0)
-    cache={}
+    cache={};occ={}
     for t,name in sfx:
+        if name in REAL and BLIP:
+            j=occ.get(name,0);occ[name]=j+1;x=REAL[name][j%len(REAL[name])]*(.85+.15*((j*7)%5)/4);i=int(t*SR);k=max(0,min(len(x),n-i));M[i:i+k]+=x[:k]*.75;continue
         if name not in SFXLIB:print('missing sfx',name);continue
         if name not in cache:cache[name]=SFXLIB[name]()
         x=cache[name];i=int(t*SR);k=max(0,min(len(x),n-i));M[i:i+k]+=x[:k]*.6
     sc=score.build([dict(c) for c in cues]+[dict(t=0,type='hum',level=.05,dur=dur)],dur+.5)
     S=np.zeros(n,dtype=np.float32);S[:len(sc)]=sc[:n]
+    if BLIP:
+        am=np.tile(AMB,int(n/len(AMB))+2)[int(3*SR):int(3*SR)+n];env=np.ones(n,dtype=np.float32)
+        for c in cues:
+            if c.get('type')=='gate':env[int(c['t']*SR):int((c['t']+c.get('dur',1))*SR)]=.04
+        env=np.convolve(env,np.ones(1500)/1500,'same');S+=am*env*.14
     envv=np.convolve(np.abs(V),np.ones(2205)/2205,'same');duck=1-np.clip(envv*6,0,.55)
     out=V+M+S*duck*.9
     pk=np.max(np.abs(out))+1e-6;out=out/pk*.92
