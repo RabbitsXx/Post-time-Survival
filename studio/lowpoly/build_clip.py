@@ -48,6 +48,11 @@ def S_rimshot():
 def S_wah():
     n=int(1.0*SR);t=np.arange(n)/SR;f=330-110*t-60*np.sin(2*np.pi*5*t)*t;ph=2*np.pi*np.cumsum(f)/SR;return (lp((2*((ph/(2*np.pi))%1)-1).astype(np.float32),1400)*.4*np.minimum(t/.05,1)*np.minimum((1-t)/.2,1)).astype(np.float32)
 SFXLIB.update(boing=S_boing,rimshot=S_rimshot,wah=S_wah)
+def S_boom():
+    n=int(1.2*SR);t=np.arange(n)/SR;return (lp(noise(n,31),900)*np.exp(-t/.35)*1.2+sine(55*np.exp(-t*3)+35,t)*np.exp(-t/.4)*1.0).astype(np.float32)
+def S_splat():
+    n=int(.35*SR);t=np.arange(n)/SR;return (lp(noise(n,41),2200)*np.exp(-t/.07)*.9+sine(160*np.exp(-t*12)+60,t)*np.exp(-t/.1)*.6).astype(np.float32)
+SFXLIB.update(boom=S_boom,splat=S_splat)
 def bed(dur):
     bpm=116;sp=60/bpm;n=int((dur+1)*SR);out=np.zeros(n,dtype=np.float32);ch=[(130.8,164.8,196),(98,123.5,146.8),(110,130.8,164.8),(87.3,110,130.8)]
     def put(y,t0):
