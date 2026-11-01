@@ -49,7 +49,7 @@ def blip_wav(text,who):
     y=np.concatenate(out) if out else np.zeros(int(.2*SR),dtype=np.float32);y=np.concatenate([y,np.zeros(int(.12*SR),dtype=np.float32)])
     w=wave.open(p,'wb');w.setnchannels(1);w.setsampwidth(2);w.setframerate(SR);w.writeframes((np.clip(y*.55,-1,1)*32767).astype(np.int16).tobytes());w.close();return p
 def voice(text,who):
-    if BLIP:return blip_wav(text,who)
+    if BLIP and who!='vendor':return blip_wav(text,who)
     p=tts(text,who)
     if who not in('pa','machine','watch'):return p
     q=p.replace('.wav','.pa.wav')
