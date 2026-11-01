@@ -1,29 +1,27 @@
-# MIDNIGHT SKEWERS · Night 1 — ข้อมูลสำหรับโพสต์ (ยังไม่ได้โพสต์/ตั้งเวลาอะไร)
+# MIDNIGHT SKEWERS · Night 1 — post metadata (international audience, English only)
+Nothing has been posted or scheduled.
 
-ไฟล์: ks1.mp4 (1080x1920, 30fps, ~56 วินาที) · cover_9x16.jpg (ไม่มีตัวหนังสือ) · captions_en.srt · captions_th.srt
+Files: ks1.mp4 (1080x1920, 30 fps, ~56 s) · cover_9x16.jpg (text-free) · captions_en.srt
 
-## ชื่อเรื่อง (เลือกได้)
-- EN: One of My Customers Isn't Human… Can You Spot Them? (Night 1)
-- EN: The Camera Shows What's Wrong | Midnight Skewers Night 1
-- TH: ลูกค้าคนหนึ่งไม่ใช่คน… คุณจับได้ไหม? (คืนที่ 1)
-- TH: กฎข้อเดียวของแผงไม้เสียบเที่ยงคืน: ดูที่กล้อง
+## Title options
+- One of My Customers Isn't Human… Can You Spot Them? (Night 1)
+- The Camera Shows What's Wrong | Midnight Skewers Night 1
+- Night Shift Horror: Spot the Anomaly Before I Do
 
-## คำอธิบาย (EN)
-Night shift at a roadside skewer stall. One rule: the camera shows what's wrong. Two customers tonight — can you spot the one who isn't human before I do?
-Night 2 soon. Comment who you think it'll be.
+## Description
+Night shift at a roadside skewer stall. One rule: the camera shows what's wrong.
+Two customers tonight. One of them isn't human — can you spot them before I do?
+Night 2 is coming. Comment who you think it will be.
 
-## คำอธิบาย (TH)
-กะดึกที่แผงไม้เสียบริมทาง กฎข้อเดียว: กล้องจะบอกสิ่งผิดปกติ คืนนี้มีลูกค้าสองคน คุณจับได้ก่อนผมไหมว่าใครไม่ใช่คน? คืนที่สองเร็ว ๆ นี้ คอมเมนต์ทายได้เลย
+## Tags / hashtags
+#shorts #horror #anomaly #nightshift #creepy #spottheanomaly #horrorgame #3danimation #scarystory #halloween
 
-## แท็ก / แฮชแท็ก
-#shorts #horror #anomaly #nightshift #creepy #spottheanomaly #horrorgame #3danimation #ฮาลโลวีน #เรื่องผี #สยองขวัญ #แอนิเมชัน
+## Playlist
+MIDNIGHT SKEWERS (new series) — Night 1 as episode 1
 
-## Playlist แนะนำ
-MIDNIGHT SKEWERS (ซีรีส์ใหม่) — ใส่ Night 1 เป็นตอนแรก
+## Cover
+First four frames of the video are the cover (an ordinary-looking woman, head tilted, no reveal). Use cover_9x16.jpg if the platform lets you pick a thumbnail.
 
-## เฟรมที่ฝังเป็นภาพปก
-สี่เฟรมแรกของวิดีโอคือภาพปก (หน้าผู้หญิงปกติเอียงคอ ไม่เฉลย) ถ้าแพลตฟอร์มให้เลือกปกเอง ใช้ cover_9x16.jpg
-
-## ทางเลือก hook (สำหรับทดสอบกับคนดูจริง — ทำเองไม่ได้ ต้องใช้ข้อมูลผู้ชม)
-A) ปัจจุบัน: ผู้หญิงเอียงคอจ้อง + "SPOT IT" (เร้าความสงสัย ไม่เฉลย)
-B) เริ่มด้วยจอ CCTV มุมจอ + เสียงเคาะซ้ำ ๆ 1.5 วินาที แล้วตัดเข้าเรื่อง (เสนอเป็นแผนสำรอง ยังไม่ได้ทำ)
+## Hook alternatives (needs real viewer data to choose; cannot be tested from here)
+A) Current: tilted stare + "SPOT IT".
+B) 1.5 s of the CCTV screen with repeating knocks, then cut into the story (not built).

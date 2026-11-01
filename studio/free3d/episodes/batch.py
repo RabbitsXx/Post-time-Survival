@@ -376,8 +376,8 @@ for _s in EPS['ks1']['shots']:_s['typed']=True
 _HK=dict(who='woman',pos=[KX-.1,KZ+2.6],expr='calm',tilt=[0,-.55],still=True,noShadow=True,nocam=True)
 _HKC=([KX-.1,1.66,KZ+1.0],[KX-.1,1.6,KZ+2.6],[KX-.1,1.66,KZ+.15],[KX-.1,1.6,KZ+2.6])
 ep('ks1','NIGHT 1',[
- SF(_HKC,[],'HOOK',2.8,[_HK],fov=40,panic=0,intro=dict(l1='ONE CUSTOMER IS NOT HUMAN',l2='SPOT IT',l3='',l4='ลูกค้าคนหนึ่งไม่ใช่คน ลองจับให้ได้',t0=.25,t1=2.7),sfx=[[.2,'whisper']],cues=[dict(t=0,type='riser',dur=2.8,level=.3)]),
- SF(HOLD(_HI),[L('vendor',"Rule: the camera shows what's wrong.")],'NIGHT 1 · 2:07 AM',3.2,[VEND],fov=55,intro=dict(l1='MIDNIGHT SKEWERS',l2='DAY 1',l3='NIGHT SHIFT · 2:07 AM',l4='วันแรกของกะดึก',t0=.1,t1=3.0),cues=[dict(t=0,type='bed',dur=30,level=.2)]),
+ SF(_HKC,[],'HOOK',2.8,[_HK],fov=40,panic=0,intro=dict(l1='ONE CUSTOMER IS NOT HUMAN',l2='SPOT IT',l3='',t0=.25,t1=2.7),sfx=[[.2,'whisper']],cues=[dict(t=0,type='riser',dur=2.8,level=.3)]),
+ SF(HOLD(_HI),[L('vendor',"Rule: the camera shows what's wrong.")],'NIGHT 1 · 2:07 AM',3.2,[VEND],fov=55,intro=dict(l1='MIDNIGHT SKEWERS',l2='DAY 1',l3='NIGHT SHIFT · 2:07 AM',t0=.1,t1=3.0),cues=[dict(t=0,type='bed',dur=30,level=.2)]),
  SF(HOLD(_F),[],'CUSTOMER 1',1.5,[dict(who='man',pos=[KX+4.0,KZ+2.6],to=[KX+.1,KZ+2.6],t0=0,t1=1.4,expr='smile')],sfx=[[.2,'foot'],[.7,'foot'],[1.1,'foot']]),
  SF(HOLD(_FC),[L('man',"Ten skewers. Cook them until they stop talking.")],'ORDER: 10 PORK SKEWERS',3.2,[MP('man',.1,'smile',tilt=[0,.4],lean=[0,.14])],fov=38,icons=[OB('skewer',1,'x10')]),
  SF(HOLD(_F),[L('vendor',"Weird. Check the camera.")],'CUSTOMER 1 · WEIRD',1.9,[MP('man',.1,'smile',tilt=.4,lean=.14)]),
@@ -415,7 +415,7 @@ for _s in EPS['ks1']['shots']:
     if _s.get('place') in _X:_s['sfx']=list(_s.get('sfx',[]))+_X[_s['place']]
 
 EPS['ks1']['safe']=True
-EPS['ks1']['th']={"Rule: the camera shows what's wrong.":"กฎข้อเดียว: กล้องจะบอกสิ่งผิดปกติ","Ten skewers. Cook them until they stop talking.":"ไม้เสียบสิบไม้ ย่างจนกว่าจะเลิกพูด","Weird. Check the camera.":"ประหลาดแฮะ เช็กกล้องหน่อย","Camera's clean. Cook.":"กล้องปกติ ย่างต่อ","Payment.":"จ่ายเงิน","...That's a leaf.":"...นั่นมันใบไม้","Very valuable.":"มีค่ามากนะ","Iced tea. Less sugar. Less... you.":"ชาเย็น หวานน้อย น้อย...คุณ","She's staring. Camera!":"เธอจ้องไม่วางตา ดูกล้อง!","...No. No no no.":"...ไม่ ไม่ ไม่นะ","Refuse! REFUSE!":"ปฏิเสธ! ปฏิเสธเดี๋ยวนี้!","Close it! Close it!":"ปิด! ปิดเร็ว!","Don't open it.":"อย่าเปิดนะ","Nothing. There's nothing there.":"ไม่มีอะไร ไม่มีอะไรเลย","...Gone.":"...ไปแล้ว","Night two. Can you spot them before I do?":"คืนที่สอง คุณจับได้ก่อนผมไหม"}
+EPS['ks1']['th']={}
 _INS=('CUSTOMER 1','ORDER: 10 PORK SKEWERS','CUSTOMER 1 · WEIRD','COOKING','HANDING OVER','ORDER: ICED TEA','CUSTOMER 2 · STARING','CUSTOMER 2 · REFUSED','SOMETHING AT THE SHUTTER','SILENCE')
 for _s in EPS['ks1']['shots']:
     _p=_s.get('place','')
