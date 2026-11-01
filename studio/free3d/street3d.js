@@ -57,14 +57,18 @@ function buildStreet(){
 
  // ---- stall counter dressing: sized for a ~1 m wide portrait view at the counter ----
  const cy=1.055,cz=KZ+.82;
- // steel tray of raw skewers (centre) with a price card
- bx(.46,.03,.36,MC(0xc8ccd0,.25,.85),KX+.05,cy+.015,cz);
- for(let k=0;k<10;k++){bx(.008,.008,.34,MC(0xd8b878,.7),KX-.17+k*.038,cy+.045,cz);for(let m=0;m<3;m++)bx(.03,.022,.03,MC(m%2?0xd9908a:0xe8a49c,.75),KX-.17+k*.038,cy+.06,cz-.1+m*.1)}
+ // steel tray of raw skewers: rimmed tray, sticks with marinated pork pieces, price card
+ bx(.46,.02,.34,MC(0xc8ccd0,.22,.9),KX+.05,cy+.01,cz);for(const [rx,rz,rw,rd] of[[0,-.17,.46,.015],[0,.17,.46,.015],[-.23,0,.015,.34],[.23,0,.015,.34]])bx(rw,.035,rd,MC(0xc8ccd0,.22,.9),KX+.05+rx,cy+.03,cz+rz);
+ for(let k=0;k<10;k++){cyl(.004,.38,MC(0xd8b878,.7),KX-.17+k*.038,cy+.034,cz,Math.PI/2,0,S,5);for(let m=0;m<4;m++){const c=cyl(.0165,.03,MC([0xd98a80,0xe8a49c,0xcf7a72,0xe09a90][(k+m)%4],.35),KX-.17+k*.038,cy+.046,cz-.12+m*.075,Math.PI/2,0,S,10);c.castShadow=false}}
  const pc=new THREE.Mesh(new THREE.PlaneGeometry(.2,.08),new THREE.MeshBasicMaterial({map:signTex('PORK 10','#f4ead0','#2a1810',256,100,30),fog:false}));pc.position.set(KX+.05,cy+.1,cz+.3);pc.rotation.set(0,Math.PI,0);S.add(pc);
- // sauce bottles with labels (left of tray)
- [['CHILI',0xc8201a],['SOY',0x2a1a10],['SWEET',0xe8a020]].forEach(([n,c],i)=>{const x=KX+.36+i*.06;cyl(.022,.13,MC(c,.4),x,cy+.065,cz+.12,0,0,S,8);cyl(.01,.03,MC(0xf0f0f0,.4),x,cy+.145,cz+.12,0,0,S,6)});
- // stainless tea dispenser with tap (far left, mostly out of frame)
- cyl(.16,.34,MC(0xd8e8f0,.2,.1),KX+1.1,1.22,KZ+.78,0,0,S,14);cyl(.165,.03,MC(0x2a6ab0,.5),KX+1.1,1.4,KZ+.78,0,0,S,14);bx(.04,.04,.08,MC(0xc8201a,.4),KX+1.1,1.1,KZ+.62);
+ // squeeze sauce bottles (lathe profile, cap, label)
+ [['CHILI',0xc8201a],['SOY',0x2a1a10],['SWEET',0xe8a020]].forEach(([n,c],i)=>{const x=KX+.36+i*.06,pts=[[0,0],[.021,0],[.024,.012],[.024,.095],[.016,.118],[.009,.135],[.009,.15],[0,.15]].map(p=>new THREE.Vector2(p[0],p[1]));const bt=new THREE.Mesh(new THREE.LatheGeometry(pts,14),MC(c,.3,.1));bt.position.set(x,cy,cz+.12);S.add(bt);cyl(.011,.025,MC(0xf0f0f0,.4),x,cy+.16,cz+.12,0,0,S,8);
+  const lb=new THREE.Mesh(new THREE.CylinderGeometry(.0252,.0252,.05,14,1,true),new THREE.MeshBasicMaterial({map:signTex(n,'#f4ead0','#8a1a10',128,64,20),fog:false,side:THREE.DoubleSide}));lb.position.set(x,cy+.06,cz+.12);lb.rotation.y=Math.PI;S.add(lb)});
+ // glass tea jar with amber tea, steel base and red tap
+ bx(.34,.05,.3,MC(0xb8bcc0,.25,.9),KX+1.1,1.045,KZ+.78);const jar=cyl(.155,.34,new THREE.MeshStandardMaterial({color:0xcfe8f0,transparent:true,opacity:.3,roughness:.1,metalness:.1}),KX+1.1,1.24,KZ+.78,0,0,S,24);
+ cyl(.148,.25,new THREE.MeshStandardMaterial({color:0xb4601a,transparent:true,opacity:.82,roughness:.25}),KX+1.1,1.185,KZ+.78,0,0,S,24);for(let i=0;i<7;i++)bx(.04,.04,.04,new THREE.MeshStandardMaterial({color:0xe8f4fa,transparent:true,opacity:.7}),KX+1.1+((i*37)%10-5)*.018,1.28+((i*13)%5)*.012,KZ+.78+((i*23)%10-5)*.018,i,false);
+ const lid=new THREE.Mesh(new THREE.SphereGeometry(.16,16,8,0,Math.PI*2,0,Math.PI/2),MC(0xd8dcdf,.3,.8));lid.position.set(KX+1.1,1.41,KZ+.78);lid.scale.y=.45;S.add(lid);
+ cyl(.022,.09,MC(0xa0a4a8,.3,.9),KX+1.1,1.1,KZ+.64,Math.PI/2,0,S,10);bx(.03,.05,.03,MC(0xc8201a,.4),KX+1.1,1.14,KZ+.6);
  // cash tin + bell near the customer edge
  bx(.2,.07,.14,MC(0x3a3e44,.4,.5),KX-.38,cy+.035,cz+.25);bx(.16,.01,.1,MC(0xe8e0c0,.8),KX-.38,cy+.075,cz+.25);cyl(.04,.025,MC(0xd8b030,.3,.8),KX-.2,cy+.013,cz+.3,0,0,S,10);
  // stall name board on the pillar, outside the portrait view; small hanging neon

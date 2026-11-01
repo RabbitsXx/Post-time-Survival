@@ -71,10 +71,14 @@ function buildKiosk(){
  // neon OPEN sign (hangs outside, glows red)
  const neon=new THREE.Mesh(new THREE.PlaneGeometry(.9,.36),new THREE.MeshBasicMaterial({map:signTex('OPEN','#2a0808','#ff4a3a',256,100,70),fog:false}));neon.position.set(KX+1.4,2.2,KZ+1.12);neon.rotation.y=Math.PI;S.add(neon);
  // grill with glowing coals (left inside) + skewers
- bx(1.1,.7,.7,DK,KX-1.4,.55,KZ+.2);const coals=new THREE.Mesh(new THREE.BoxGeometry(.95,.06,.5),new THREE.MeshBasicMaterial({color:0xff6a20,fog:false}));coals.position.set(KX-1.4,.92,KZ+.2);S.add(coals);
- for(let i=0;i<8;i++){bx(.03,.03,.7,MC(0x9a9a9a,.3,.6),KX-1.78+i*.1,1.0,KZ+.2);cyl(.05,.06,MC(0x7a3a1a,.7),KX-1.78+i*.1,1.0,KZ+.05,Math.PI/2,0,S,6);cyl(.05,.06,MC(0x8a4a22,.7),KX-1.78+i*.1,1.0,KZ+.2,Math.PI/2,0,S,6);cyl(.05,.06,MC(0x7a3a1a,.7),KX-1.78+i*.1,1.0,KZ+.35,Math.PI/2,0,S,6)}
+ // charcoal grill: steel hibachi on legs, glowing coal bed, grate bars, smoke
+ bx(1.1,.3,.62,MC(0x1c1c1e,.5,.7),KX-1.4,.78,KZ+.2);for(const [lx,lz] of[[-.5,-.26],[.5,-.26],[-.5,.26],[.5,.26]])bx(.05,.62,.05,MC(0x2a2a2e,.5,.6),KX-1.4+lx,.31,KZ+.2+lz);bx(1.14,.04,.66,MC(0x3a3a3e,.4,.7),KX-1.4,.935,KZ+.2);
+ for(let i=0;i<70;i++){const sz=.04+((i*37)%7)*.008,ox=((i*53)%100)/100*.98-.49,oz=((i*29)%100)/100*.5-.25,hot=(i%4)!==0;bx(sz,.03+((i*13)%3)*.01,sz,new THREE.MeshBasicMaterial({color:hot?[0xff5a10,0xff7a1a,0xffa030][i%3]:0x4a4040,fog:false}),KX-1.4+ox,.96,KZ+.2+oz,((i*17)%10)/10,false)}
+ for(let i=0;i<14;i++)bx(.014,.014,.62,MC(0x7a7a7e,.3,.9),KX-1.88+i*.075,1.0,KZ+.2);
+ const smk=new THREE.Mesh(new THREE.PlaneGeometry(.9,1.4),new THREE.MeshBasicMaterial({map:ctex(64,128,(x,w,h)=>{const g=x.createLinearGradient(0,h,0,0);g.addColorStop(0,'rgba(190,190,200,.28)');g.addColorStop(1,'rgba(190,190,200,0)');x.fillStyle=g;x.beginPath();x.moveTo(w*.3,h);x.quadraticCurveTo(w*.7,h*.6,w*.4,0);x.lineTo(w*.7,0);x.quadraticCurveTo(w*.95,h*.6,w*.7,h);x.fill()}),transparent:true,depthWrite:false,fog:false,side:THREE.DoubleSide}));smk.position.set(KX-1.4,1.7,KZ+.2);smk.rotation.y=Math.PI;S.add(smk);
+ for(let i=0;i<9;i++){cyl(.0055,.62,MC(0xd8b878,.6),KX-1.84+i*.085,1.015,KZ+.2,Math.PI/2,0,S,6);for(let m=0;m<4;m++){const ch=cyl(.021,.045,MC([0x6a2c14,0x8a3e1a,0x4a1e0e,0x7a3416][(i+m)%4],.5),KX-1.84+i*.085,1.015,KZ+.0+m*.12,Math.PI/2,0,S,10);ch.scale.x=1.05}}
  // sticky rice basket, tea jug, cash tin, bell on the counter
- cyl(.17,.16,MC(0xc8a850,.8),KX-.75,1.12,KZ+.75,0,0,S,10);cyl(.14,.42,MC(0xe0e0e0,.4,.3),KX+1.5,1.25,KZ+.65,0,0,S,10);bx(.35,.1,.25,MC(0x8a8a8a,.4,.5),KX-.3,1.1,KZ+.65);cyl(.07,.07,MC(0xd8b030,.3,.8),KX+.25,1.1,KZ+.75,0,0,S,10);
+ cyl(.17,.16,MC(0xc8a850,.8),KX-.75,1.12,KZ+.75,0,0,S,10);bx(.35,.1,.25,MC(0x8a8a8a,.4,.5),KX-.3,1.1,KZ+.65);cyl(.07,.07,MC(0xd8b030,.3,.8),KX+.25,1.1,KZ+.75,0,0,S,10);
  // street outside: wet road, kerb, lamp post, far buildings
  const road=new THREE.Mesh(new THREE.PlaneGeometry(60,40),MC(0x15181c,.25,.2));road.rotation.x=-Math.PI/2;road.position.set(KX,-.01,KZ+22);S.add(road);
  const walk=new THREE.Mesh(new THREE.PlaneGeometry(60,4.6),MC(0x4a4e52,.8));walk.rotation.x=-Math.PI/2;walk.position.set(KX,.0,KZ+3.2);S.add(walk);bx(60,.16,.25,MC(0x7a7e82,.8),KX,.08,KZ+5.6);

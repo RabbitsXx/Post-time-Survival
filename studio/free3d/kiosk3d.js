@@ -54,7 +54,11 @@ function makePerson(cfg){const g=new THREE.Group(),M=c=>new THREE.MeshLambertMat
 // first-person hands + items
 const HANDS={g:new THREE.Group(),arm:[],hand:[],items:{}};
 function buildHands(){const skin=new THREE.MeshLambertMaterial({color:'#c8946a'}),sleeve=new THREE.MeshLambertMaterial({color:'#2a9a5a'});
- for(let i=0;i<2;i++){const a=new THREE.Mesh(new THREE.BoxGeometry(.085,.085,1),sleeve),h=new THREE.Group();const palm=new THREE.Mesh(new THREE.BoxGeometry(.13,.05,.15),skin);h.add(palm);for(let f=0;f<4;f++){const fi=new THREE.Mesh(new THREE.BoxGeometry(.025,.03,.09),skin);fi.position.set(-.045+f*.03,0,-.1);h.add(fi)}const th=new THREE.Mesh(new THREE.BoxGeometry(.04,.03,.07),skin);th.position.set(.08*(i?-1:1),0,-.03);h.add(th);HANDS.g.add(a);HANDS.g.add(h);HANDS.arm.push(a);HANDS.hand.push(h)}
+ for(let i=0;i<2;i++){const a=new THREE.Mesh(new THREE.CylinderGeometry(.052,.042,1,14).rotateX(Math.PI/2),sleeve),h=new THREE.Group();
+  const palm=new THREE.Mesh(new THREE.SphereGeometry(.05,16,12),skin);palm.scale.set(1,.42,1.1);h.add(palm);
+  for(let f=0;f<4;f++){const len=[.075,.085,.08,.065][f],fi=new THREE.Mesh(new THREE.CapsuleGeometry(.0135,len,4,8),skin);fi.rotation.x=Math.PI/2+.25;fi.position.set(-.04+f*.027,-.005,-.095-len*.2);h.add(fi)}
+  const th=new THREE.Mesh(new THREE.CapsuleGeometry(.0165,.05,4,8),skin);th.rotation.set(Math.PI/2,0,(i?1:-1)*.9);th.position.set((i?-1:1)*.062,0,-.045);h.add(th);
+  HANDS.g.add(a);HANDS.g.add(h);HANDS.arm.push(a);HANDS.hand.push(h)}
  const M=c=>new THREE.MeshLambertMaterial({color:c});
  const sk=new THREE.Group();const st=new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.34,5),M('#c8a86a'));st.rotation.x=Math.PI/2;sk.add(st);for(let i=0;i<3;i++){const m=new THREE.Mesh(new THREE.BoxGeometry(.05,.04,.06),M(i%2?'#7a3a1a':'#8a4a22'));m.position.z=-.08+i*.075;sk.add(m)}sk.position.set(0,.02,-.12);sk.scale.setScalar(2.4);
  const cup=new THREE.Group();const cm=new THREE.Mesh(new THREE.CylinderGeometry(.045,.035,.13,8),new THREE.MeshLambertMaterial({color:'#d8801a',transparent:true,opacity:.9}));cup.add(cm);const sr=new THREE.Mesh(new THREE.CylinderGeometry(.005,.005,.12,4),M('#d8342a'));sr.position.set(.015,.1,0);sr.rotation.z=-.2;cup.add(sr);cup.position.set(0,.06,-.06);cup.scale.setScalar(1.5);
@@ -84,5 +88,6 @@ function update3D(sh,t,lt,dur,cam){for(const k in P3){P3[k].visible=false;P3[k].
   // hand-over: right arm reaches to the vendor
   const gv=c.give;if(gv&&lt>=gv.t0&&lt<gv.t1){const u=(lt-gv.t0)/(gv.t1-gv.t0),kk=Math.sin(Math.min(1,u)*Math.PI);pr.arms[1].rotation.x=-1.35*Math.min(1,kk*1.4)}
   const gs=c.gesture;if(gs&&lt>=gs.t0&&lt<gs.t1){const u=(lt-gs.t0)/(gs.t1-gs.t0);pr.arms[0].rotation.x=-2.4*Math.min(1,Math.sin(u*Math.PI)*1.5);pr.arms[0].rotation.z=.2}
+  if(pr.shins){for(let i=0;i<2;i++){pr.shins[i].rotation.x=Math.max(0,-pr.legs[i].rotation.x)*1.1+.02}}if(pr.fores){for(let i=0;i<2;i++)pr.fores[i].rotation.x=-(.12+Math.abs(pr.arms[i].rotation.x)*.45)}
   drawFace(pr.F,pr.cfg,c.expr||'calm');if(pr.hm)pr.hm.color.set(c.expr==='zomb'?'#76946c':pr.cfg.skin);const bl=g.userData.blob;bl.visible=!c.noShadow;bl.position.set(x,.02,z)}}
 function buildPeople3D(){for(const k in P3CFG)P3[k]=makePerson(P3CFG[k]);buildHands()}
