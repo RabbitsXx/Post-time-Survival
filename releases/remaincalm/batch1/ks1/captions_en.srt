@@ -1,63 +1,79 @@
 1
-00:00:00,250 --> 00:00:04,446
-Everyone visits once. Serve them. Refuse anyone who comes back.
+00:00:00,250 --> 00:00:05,392
+Everyone is a little strange. Serve the odd ones. Refuse whoever isn't on camera.
 
 2
-00:00:09,650 --> 00:00:12,505
-Ten pork skewers, please. Long shift tonight.
+00:00:07,750 --> 00:00:09,684
+Night one. Don't mess it up.
 
 3
-00:00:14,650 --> 00:00:15,500
-Coming up.
+00:00:14,349 --> 00:00:17,242
+Ten skewers. Cook them until they stop talking.
 
 4
-00:00:20,250 --> 00:00:22,015
-Smells wonderful. Thanks.
+00:00:19,350 --> 00:00:22,380
+...Okay. The customer is always right.
 
 5
-00:00:22,295 --> 00:00:22,925
-Serve.
-
-6
-00:00:28,649 --> 00:00:30,517
-Iced tea, less sugar, please.
-
-7
-00:00:33,049 --> 00:00:34,059
-One iced tea.
-
-8
-00:00:36,849 --> 00:00:38,268
-Perfect. Goodnight.
-
-9
-00:00:38,548 --> 00:00:39,178
-Serve.
-
-10
-00:00:45,249 --> 00:00:47,117
-Iced tea, less sugar, please.
-
-11
-00:00:48,849 --> 00:00:50,107
+00:00:22,930 --> 00:00:24,188
 Check the camera.
 
+6
+00:00:25,330 --> 00:00:27,009
+On camera. Just weird.
+
+7
+00:00:28,530 --> 00:00:30,085
+Don't ask. Just cook.
+
+8
+00:00:37,530 --> 00:00:38,242
+Payment.
+
+9
+00:00:38,522 --> 00:00:40,132
+...That's a leaf.
+
+10
+00:00:40,412 --> 00:00:41,733
+It is very valuable.
+
+11
+00:00:42,013 --> 00:00:43,126
+Fine. Serve.
+
 12
-00:00:53,049 --> 00:00:54,790
-Same dress. Same order.
+00:00:45,530 --> 00:00:46,098
+Next.
 
 13
-00:00:55,070 --> 00:00:56,576
-Everyone visits once.
+00:00:49,330 --> 00:00:52,067
+Iced tea. Less sugar. Less... you.
 
 14
-00:00:59,249 --> 00:00:59,941
-Refuse.
+00:00:54,330 --> 00:00:57,437
+Okay. Normal. She is... only staring.
 
 15
-00:01:03,249 --> 00:01:04,003
-Closing.
+00:00:57,987 --> 00:00:59,245
+Check the camera.
 
 16
-00:01:07,649 --> 00:01:09,956
-Next night. Which one isn't human?
+00:01:00,387 --> 00:01:02,024
+...Nobody there.
+
+17
+00:01:02,304 --> 00:01:03,756
+She is not on camera.
+
+18
+00:01:07,787 --> 00:01:09,693
+Refuse. Refuse. REFUSE.
+
+19
+00:01:13,987 --> 00:01:14,741
+Closing.
+
+20
+00:01:17,987 --> 00:01:19,949
+Next night. Who isn't human?
