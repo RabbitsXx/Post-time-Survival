@@ -6,7 +6,26 @@ const P3={},P3CFG={
  girl3:{skin:'#e8c4a0',shirt:'#e8c82a',pants:'#d8b81a',hair:'messy',hc:'#1a1a1a',w:.8,h:.82},
  zom3:{skin:'#8aa878',shirt:'#6a4a3a',pants:'#2a3a4a',hair:'spiky',hc:'#2a3a22',zombie:1,w:1.0,h:1.0}};
 function faceTex(cfg){const c=document.createElement('canvas');c.width=c.height=128;const t=new THREE.CanvasTexture(c);t.minFilter=t.magFilter=(CLEAN?THREE.LinearFilter:THREE.NearestFilter);return {c,t,cur:''}}
-function drawFace(F,cfg0,expr){if(F.cur===expr)return;F.cur=expr;const cfg=expr==='zomb'?Object.assign({},cfg0,{zombie:1,skin:'#8aa878'}):cfg0;const x=F.c.getContext('2d');x.fillStyle=cfg.skin;x.fillRect(0,0,128,128);x.lineWidth=5;x.strokeStyle='#1a1008';x.lineJoin=x.lineCap='round';
+function drawFaceHorror(F,cfg,expr){const x=F.c.getContext('2d');x.lineJoin=x.lineCap='round';const Z=expr==='zomb';
+ x.fillStyle=Z?'#76946c':'#e6c4a4';x.fillRect(0,0,128,128);
+ // dark hollow shading
+ let g=x.createRadialGradient(64,70,20,64,64,92);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,Z?'rgba(10,30,20,.55)':'rgba(40,20,20,.35)');x.fillStyle=g;x.fillRect(0,0,128,128);
+ if(Z){x.strokeStyle='rgba(40,70,60,.8)';x.lineWidth=2;for(let i=0;i<7;i++){x.beginPath();x.moveTo(8+i*17,6);x.quadraticCurveTo(20+i*14,40+i*6,30+i*12,70);x.stroke()}}
+ // eyes: hollow sockets
+ const sock=(cx,cy,rx,ry)=>{x.fillStyle=Z?'#0a0608':'#2a1618';x.beginPath();x.ellipse(cx,cy,rx,ry,0,0,7);x.fill()};
+ if(Z){sock(40,52,22,26);sock(88,50,22,28);x.fillStyle='#f4f8d0';x.beginPath();x.arc(42,56,5,0,7);x.arc(86,48,6,0,7);x.fill();x.fillStyle='#7a0a0a';x.fillRect(36,76,4,40);x.fillRect(48,78,3,28);x.fillRect(84,76,4,46);x.fillRect(96,72,3,30)}
+ else{sock(42,52,19,20);sock(86,52,19,20);x.fillStyle='#fff';x.beginPath();x.arc(42,52,15,0,7);x.arc(86,52,15,0,7);x.fill();x.fillStyle='#000';x.beginPath();x.arc(42,52,3,0,7);x.arc(86,52,3,0,7);x.fill();x.strokeStyle='#c04040';x.lineWidth=1.5;for(let i=0;i<5;i++){x.beginPath();x.moveTo(42+Math.cos(i*1.3)*15,52+Math.sin(i*1.3)*15);x.lineTo(42+Math.cos(i*1.3)*8,52+Math.sin(i*1.3)*8);x.moveTo(86+Math.cos(i*1.3+.5)*15,52+Math.sin(i*1.3+.5)*15);x.lineTo(86+Math.cos(i*1.3+.5)*8,52+Math.sin(i*1.3+.5)*8);x.stroke()}}
+ // brows
+ x.strokeStyle=Z?'#1a2a20':'#3a2418';x.lineWidth=5;x.beginPath();x.moveTo(18,26);x.lineTo(58,36);x.moveTo(72,36);x.lineTo(110,24);x.stroke();
+ // nose holes
+ x.fillStyle='#1a0e0e';x.beginPath();x.ellipse(58,74,3,4,0,0,7);x.ellipse(70,74,3,4,0,0,7);x.fill();
+ // enormous grin from cheek to cheek with teeth
+ x.fillStyle='#2a0508';x.beginPath();x.moveTo(8,86);x.quadraticCurveTo(64,Z?140:128,120,86);x.quadraticCurveTo(64,Z?96:98,8,86);x.fill();
+ x.fillStyle='#f0ecd8';const n=Z?13:11;for(let i=0;i<n;i++){const u=(i+.5)/n,px=10+u*108,py=86+Math.sin(u*Math.PI)*(Z?10:5);x.beginPath();x.moveTo(px-4,py);x.lineTo(px+4,py);x.lineTo(px,py+(Z?13:9)+((i%2)*(Z?5:2)));x.fill();if(Z){x.beginPath();x.moveTo(px-4,py+22);x.lineTo(px+4,py+22);x.lineTo(px,py+12);x.fill()}}
+ x.strokeStyle='#1a0808';x.lineWidth=2.5;x.beginPath();x.moveTo(8,86);x.quadraticCurveTo(64,Z?140:128,120,86);x.stroke();
+ if(Z){x.strokeStyle='#3a0a0a';x.lineWidth=2;for(let i=0;i<4;i++){x.beginPath();x.moveTo(12,80+i*3);x.lineTo(24,90+i*3);x.moveTo(116,80+i*3);x.lineTo(104,90+i*3);x.stroke()}}
+ F.t.needsUpdate=true}
+function drawFace(F,cfg0,expr){if(F.cur===expr)return;F.cur=expr;if(expr==='zomb'||expr==='creep'){drawFaceHorror(F,cfg0,expr);return}const cfg=expr==='zomb'?Object.assign({},cfg0,{zombie:1,skin:'#8aa878'}):cfg0;const x=F.c.getContext('2d');x.fillStyle=cfg.skin;x.fillRect(0,0,128,128);x.lineWidth=5;x.strokeStyle='#1a1008';x.lineJoin=x.lineCap='round';
  const eye=(cx,cy,r,p)=>{x.fillStyle=cfg.zombie?'#d8e8a8':'#fff';x.beginPath();x.arc(cx,cy,r,0,7);x.fill();x.stroke();x.fillStyle='#1a1008';x.beginPath();x.arc(cx+1,cy+1,p,0,7);x.fill()};
  const sc=expr==='shock'?1.25:1;if(cfg.zombie){x.fillStyle='rgba(30,10,30,.6)';x.beginPath();x.arc(42,52,22,0,7);x.arc(86,52,22,0,7);x.fill()}
  eye(42,52,15*sc,6*(expr==='shock'?.7:1));eye(86,52,15*sc,6*(expr==='shock'?.7:1));
@@ -65,5 +84,5 @@ function update3D(sh,t,lt,dur,cam){for(const k in P3){P3[k].visible=false;P3[k].
   // hand-over: right arm reaches to the vendor
   const gv=c.give;if(gv&&lt>=gv.t0&&lt<gv.t1){const u=(lt-gv.t0)/(gv.t1-gv.t0),kk=Math.sin(Math.min(1,u)*Math.PI);pr.arms[1].rotation.x=-1.35*Math.min(1,kk*1.4)}
   const gs=c.gesture;if(gs&&lt>=gs.t0&&lt<gs.t1){const u=(lt-gs.t0)/(gs.t1-gs.t0);pr.arms[0].rotation.x=-2.4*Math.min(1,Math.sin(u*Math.PI)*1.5);pr.arms[0].rotation.z=.2}
-  drawFace(pr.F,pr.cfg,c.expr||'calm');const bl=g.userData.blob;bl.visible=!c.noShadow;bl.position.set(x,.02,z)}}
+  drawFace(pr.F,pr.cfg,c.expr||'calm');if(pr.hm)pr.hm.color.set(c.expr==='zomb'?'#76946c':pr.cfg.skin);const bl=g.userData.blob;bl.visible=!c.noShadow;bl.position.set(x,.02,z)}}
 function buildPeople3D(){for(const k in P3CFG)P3[k]=makePerson(P3CFG[k]);buildHands()}

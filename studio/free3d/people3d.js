@@ -28,12 +28,12 @@ function makePerson(cfg){const g=new THREE.Group(),M=c=>new THREE.MeshLambertMat
   add(C(.065,.058,cfg.sleeve,7),sh,0,-cfg.sleeve/2,0,p);const fl=.62-cfg.sleeve-.1;add(C(.05,.042,fl,6),sk,0,-cfg.sleeve-fl/2,0,p);add(B(.07,.1,.045),sk,0,-cfg.sleeve-fl-.04,0,p);arms.push(p)}
  const head=new THREE.Group();head.position.set(0,1.5,0);body.add(head);const F=faceTex(cfg);const fm=new THREE.MeshLambertMaterial({map:F.t});
  const hm=M(cfg.zombie?cfg.skin:cfg.skin);const hb=add(B(.33,.37,.34),[hm,hm,hm,hm,fm,hm],0,.2,0,head);
- add(B(.05,.07,.05),sk,0,.17,.2,head);add(B(.03,.08,.06),sk,.18,.2,0,head);add(B(.03,.08,.06),sk,-.18,.2,0,head);
+ add(B(.05,.07,.05),hm,0,.17,.2,head);add(B(.03,.08,.06),hm,.18,.2,0,head);add(B(.03,.08,.06),hm,-.18,.2,0,head);
  const hc=M(cfg.hc);
  add(B(.36,.09,.38),hc,0,.41,0,head);add(B(.36,.07,.05),hc,0,.37,.18,head);
  if(cfg.hair==='long'){add(B(.38,.62,.1),hc,0,.12,-.18,head);add(B(.06,.46,.22),hc,.19,.1,-.04,head);add(B(.06,.46,.22),hc,-.19,.1,-.04,head)}
  else{add(B(.36,.3,.08),hc,0,.26,-.18,head);add(B(.04,.12,.2),hc,.18,.3,-.02,head);add(B(.04,.12,.2),hc,-.18,.3,-.02,head)}
  inkOutline(g,1.06);
- g.scale.setScalar(cfg.h);g.userData={dyn:1,parts:{body,torso,legs,arms,head,F,cfg}};
+ g.scale.setScalar(cfg.h);g.userData={dyn:1,parts:{body,torso,legs,arms,head,F,cfg,hm}};
  const bl=new THREE.Mesh(new THREE.CircleGeometry(.45*cfg.w,14),new THREE.MeshBasicMaterial({color:0,transparent:true,opacity:.45,depthWrite:false}));bl.rotation.x=-Math.PI/2;bl.position.y=.02;bl.userData.dyn=1;g.userData.blob=bl;
  drawFace(F,cfg,'smile');g.visible=false;bl.visible=false;S.add(g);S.add(bl);return g}

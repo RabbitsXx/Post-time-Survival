@@ -11,12 +11,22 @@ CV={'ks1':(5,'WHO IS NOT','HUMAN?','MIDNIGHT SKEWERS'),'nn1':(3,'NANA','PIM','TH
 NUM={k:i+1 for i,k in enumerate(['g1','g2','g3','i4','g5','g6','g8','i1','i2','i3','hm1','hm2','hm3'])}
 def one(k):
     ep=json.load(open(R+f'/out/{k}.spec.json'));frames=R+f'/out/{k}_frames';od=f'{REPO}/releases/remaincalm/batch1/{k}';os.makedirs(od,exist_ok=True)
-    si,l1,l2,pill=CV[k];sh=dict(ep['shots'][si-1]);t=(sh['t0']+sh['t1'])/2
-    sh.update(noUI=True,lines=[]);sp=dict(series=ep['series'],title='COVER',part=0,of=0,dur=2,shots=[dict(sh,t0=0,t1=2)])
-    # camera keyframes already relative; keep chars as authored (positions at shot start)
+    NOTEXT=(k=='ks1')
+    if NOTEXT:
+        sh=dict([x for x in ep['shots'] if 'REFUSED' in x.get('place','')][0]);KX,KZ=100,-60
+        sh.update(noUI=True,lines=[],icons=[],hands=[],panic=.9,typed=False,grade='dead',fov=36,cam=[[KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4],[KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4]],
+                  p3=[dict(who='woman',pos=[KX-.1,KZ+2.0],expr='zomb',lean=.1,tilt=.12,headYaw=0,still=True,noShadow=True,nocam=True,face=[KX-.1,KZ-5])],cues=[],sfx=[])
+        sp=dict(series=ep['series'],title='COVER',part=0,of=0,dur=2,shots=[dict(sh,t0=0,t1=2)]);t=1
+    else:
+        si,l1,l2,pill=CV[k];sh=dict(ep['shots'][si-1]);t=(sh['t0']+sh['t1'])/2
+        sh.update(noUI=True,lines=[]);sp=dict(series=ep['series'],title='COVER',part=0,of=0,dur=2,shots=[dict(sh,t0=0,t1=2)])
     p=R+f'/spec_{k}_cover.json';json.dump(sp,open(p,'w'));d=R+f'/out/{k}_cover';os.makedirs(d,exist_ok=True)
-    subprocess.check_call(['node',R+'/render_store3.js',p,d,'20','21','1080','1920','&2d'],cwd=R);base=R+f'/out/{k}_cover_base.jpg';os.replace(d+'/00020.jpg',base)
-    img=P.cover_ref(base,'',l1,l2,pill);img.save(f'{od}/cover_9x16.jpg',quality=92);P.preview(img,f'{od}/cover_preview.jpg')
+    subprocess.check_call(['node',R+'/render_store3.js',p,d,'20','21','1080','1920','&2d&clean&nocull' if NOTEXT else '&2d'],cwd=R);base=R+f'/out/{k}_cover_base.jpg';os.replace(d+'/00020.jpg',base)
+    if NOTEXT:
+        from PIL import Image
+        img=Image.open(base).convert('RGB').resize((1080,1920));img.save(f'{od}/cover_9x16.jpg',quality=93);img.resize((540,960)).save(f'{od}/cover_preview.jpg',quality=88)
+    else:
+        img=P.cover_ref(base,'',l1,l2,pill);img.save(f'{od}/cover_9x16.jpg',quality=92);P.preview(img,f'{od}/cover_preview.jpg')
     for i in range(4):img.save(f'{frames}/{i:05d}.jpg',quality=93)
     open(f'{od}/captions_en.srt','w').write(P.srt(ep))
     wav=R+f'/out/{k}.wav'

@@ -336,26 +336,26 @@ MAN=dict(tilt=.35,expr='smile')
 WM=dict(still=True,noShadow=True,nocam=True)
 ep('ks1','NIGHT 1',[
  CARD('NIGHT SHIFT RULES',['EVERYONE IS A LITTLE STRANGE','SERVE THE ODD ONES',"REFUSE WHOEVER ISN'T ON CAMERA"],L('vendor',"Everyone is a little strange. Serve the odd ones. Refuse whoever isn't on camera."),min=7.5,sfx=[[.3,'click'],[1.9,'click'],[3.5,'click']]),
- SF(HOLD(_HI),[L('vendor',"Night one. Don't mess it up.")],'NIGHT 1 · 2:07 AM',3.4,[VEND],fov=55),
+ SF(HOLD(_HI),[L('vendor',"Night one. Don't mess it up.")],'NIGHT 1 · 2:07 AM',4.4,[VEND],fov=55,intro=dict(l1='MIDNIGHT SKEWERS',l2='DAY 1',l3='NIGHT SHIFT · 2:07 AM',t0=.2,t1=4.1)),
  SF(HOLD(_F),[L('vendor',"Okay. Let's see who shows up.")],'MY STALL · POV',3.0,[]),
  SF(HOLD(_F),[],'CUSTOMER 1',1.6,[dict(who='man',pos=[KX+5.2,KZ+2.6],to=[KX+3.0,KZ+2.6],t0=0,t1=1.6,expr='smile')],sfx=[[.2,'foot'],[.8,'foot']]),
  SF(HOLD(_HI),[],'CUSTOMER 1',2.0,[VEND,dict(who='man',pos=[KX+3.0,KZ+2.6],to=[KX+.1,KZ+2.6],t0=0,t1=2.0,expr='smile')],fov=55,sfx=[[.2,'foot'],[.8,'foot'],[1.4,'foot']]),
  SF(HOLD(_FC),[L('man',"Ten skewers. Cook them until they stop talking.")],'ORDER: 10 PORK SKEWERS',5.0,[MP('man',.1,'smile',tilt=[0,.4],lean=[0,.14])],fov=38,icons=[OB('skewer',1,'x10')]),
- SF(HOLD(_F),[L('vendor',"...Okay. The customer is always right.")],'CUSTOMER 1 · STARING',3.2,[MP('man',.1,'smile',tilt=.4,lean=.14)]),
- SF(TURN(_F,_M),[L('vendor',"Check the camera.")],'LOOKING AT CCTV',2.4,[MP('man',.1,'smile',tilt=.4,lean=.14)],cctv=True,sfx=[[.4,'click']]),
- SF(HOLD(_M),[L('vendor',"On camera. Just weird.")],'CCTV: CUSTOMER 1 VISIBLE',3.2,[MP('man',.1,'smile',tilt=.4,lean=.14)],cctv=True),
- SF(TURN(_M,_G),[L('vendor',"Don't ask. Just cook.")],'TURNING TO THE GRILL',2.4,[MP('man',.1,'smile',tilt=.4,lean=.14)],cctv=True),
+ SF(HOLD(_F),[L('vendor',"...Okay. The customer is always right."),L('vendor',"Check the camera.")],'CUSTOMER 1 · STARING',3.2,[MP('man',.1,'smile',tilt=.4,lean=.14)]),
+ SF(TURN(_F,_M),[],'LOOKING AT CCTV',.7,[MP('man',.1,'smile',tilt=.4,lean=.14)],cctv=True,snap=True,sfx=[[.2,'click']]),
+ SF(HOLD(_M),[L('vendor',"On camera. Just weird."),L('vendor',"Don't ask. Just cook.")],'CCTV: CUSTOMER 1 VISIBLE',3.2,[MP('man',.1,'smile',tilt=.4,lean=.14)],cctv=True),
+ SF(TURN(_M,_G),[],'TURNING TO THE GRILL',.7,[MP('man',.1,'smile',tilt=.4,lean=.14)],cctv=True,snap=True),
  SF(HOLD(_G),[],'COOKING',4.8,[MP('man',.1,'smile',tilt=.4,lean=.14)],[dict(pose='grill',item='skewer',t0=.4,t1=4.4)],sfx=[[0,'whoosh'],[.4,'sizzle'],[2.8,'sizzle']],cues=[dict(t=0,type='motif',detune=.3,level=.14)]),
- SF(TURN(_G,_F),[],'BACK TO THE COUNTER',1.8,[MP('man',.1,'smile',tilt=.4,lean=.14)],[dict(pose='give',item='skewer',t0=.3,t1=1.8)]),
+ SF(TURN(_G,_F),[],'BACK TO THE COUNTER',.8,[MP('man',.1,'smile',tilt=.4,lean=.14)],[dict(pose='give',item='skewer',t0=.1,t1=.8)],snap=True),
  SF(HOLD(_F),[L('man',"Payment."),L('vendor',"...That's a leaf."),L('man',"It is very valuable."),L('vendor',"Fine. Serve.")],'HANDING OVER',8.0,[MP('man',.1,'smile',tilt=.4,lean=.14,give=dict(t0=.6,t1=1.8))],[dict(pose='give',item='skewer',t0=0,t1=1.4),dict(pose='take',item='leaf',t0=2.2,t1=4.4)],icons=[dict(k='stampS',t0=6.4,t1=9,x=.5,y=.5,s=1)],sfx=[[.6,'click'],[6.6,'chime']]),
  SF(HOLD(_HI),[L('vendor',"Next.")],'CUSTOMER 1 LEAVES · CUSTOMER 2 ARRIVES',3.8,[VEND,dict(who='man',pos=[KX+.1,KZ+2.6],to=[KX+4.9,KZ+2.6],t0=0,t1=3.0,expr='smile',tilt=.4,backwards=True,face=[KX+.1,KZ-6]),dict(who='woman',pos=[KX-4.6,KZ+2.6],to=[KX-.1,KZ+2.6],t0=.6,t1=3.6,expr='calm',glide=True,**WM)],fov=55,sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
  SF(HOLD(_FC2),[L('woman',"Iced tea. Less sugar. Less... you.")],'ORDER: ICED TEA',5.0,[MP('woman',-.1,'smile',tilt=[0,-.5],**WM)],fov=38,icons=[OB('tea')],cues=[dict(t=0,type='tick'),dict(t=1.8,type='tick')]),
- SF(HOLD(_F),[L('vendor',"Okay. Normal. She is... only staring.")],'CUSTOMER 2 · STARING',3.6,[MP('woman',-.1,'smile',tilt=-.5,**WM)]),
- SF(TURN(_F,_M),[L('vendor',"Check the camera.")],'LOOKING AT CCTV',2.4,[MP('woman',-.1,'smile',tilt=-.5,**WM)],cctv=True,sfx=[[.4,'click']]),
- SF(HOLD(_M),[L('vendor',"...Nobody there."),L('vendor',"She is not on camera.")],'CCTV: CUSTOMER 2 NOT VISIBLE',5.2,[MP('woman',-.1,'smile',tilt=-.5,**WM)],cctv=True,sfx=[[.3,'heart'],[1.8,'heart']],cues=[dict(t=0,type='gate',dur=5.0),dict(t=.2,type='riser',dur=5.0,level=.3)]),
- SF(TURN(_M,_F),[],'LOOKING BACK',2.2,[MP('woman',-.1,'smile',tilt=[-.5,0],headYaw=[0,3.14],**WM)],cctv=True),
+ SF(HOLD(_F),[L('vendor',"Okay. Normal. She is... only staring."),L('vendor',"Check the camera.")],'CUSTOMER 2 · STARING',3.6,[MP('woman',-.1,'creep',tilt=-.5,**WM)]),
+ SF(TURN(_F,_M),[],'LOOKING AT CCTV',.5,[MP('woman',-.1,'creep',tilt=-.5,**WM)],cctv=True,snap=True,sfx=[[.15,'click']]),
+ SF(HOLD(_M),[L('vendor',"...Nobody there."),L('vendor',"She is not on camera.")],'CCTV: CUSTOMER 2 NOT VISIBLE',5.2,[MP('woman',-.1,'creep',tilt=-.5,**WM)],cctv=True,sfx=[[.3,'heart'],[1.8,'heart']],cues=[dict(t=0,type='gate',dur=5.0),dict(t=.2,type='riser',dur=5.0,level=.3)]),
+ SF(TURN(_M,_F),[],'LOOKING BACK',.45,[MP('woman',-.1,'creep',tilt=[-.5,0],headYaw=[0,3.14],**WM)],cctv=True,snap=True),
  SF(HOLD(_F),[L('vendor',"Refuse. Refuse. REFUSE.")],'CUSTOMER 2 · REFUSED',4.4,[dict(who='woman',pos=[KX-.1,KZ+2.6],to=[KX-.1,KZ+1.7],t0=1.2,t1=2.2,expr='zomb',headYaw=[3.14,0],lean=[0,.3],glide=True,**WM)],[dict(pose='refuse',t0=.4,t1=3.6)],icons=[dict(k='stampR',t0=1.6,t1=9,x=.5,y=.86,s=.8)],sfx=[[1.0,'sting'],[1.2,'groan']],cues=[dict(t=1.0,type='stinger',level=.8)]),
- SF(TURN(_F,_B),[],'REACHING FOR THE BUTTON',1.8,[dict(who='woman',pos=[KX-.1,KZ+1.7],expr='zomb',lean=.3,**WM)],cctv=True),
+ SF(TURN(_F,_B),[],'REACHING FOR THE BUTTON',.6,[dict(who='woman',pos=[KX-.1,KZ+1.7],expr='zomb',lean=.3,**WM)],cctv=True,snap=True),
  SF(HOLD(_B),[L('vendor',"Closing.")],'CLOSING THE STALL',4.0,[dict(who='woman',pos=[KX-.1,KZ+1.7],expr='zomb',lean=.3,**WM)],[dict(pose='press',t0=1.0,t1=2.6)],cctv=True,sfx=[[1.6,'click'],[2.0,'whoosh'],[2.6,'groan']]),
  CARD('NEXT NIGHT',['2 CUSTOMERS','BOTH ARE STRANGE','ONE IS NOT HUMAN'],L('vendor',"Next night. Who isn't human?"),min=6.0,sfx=[[.3,'click'],[1.5,'click'],[2.7,'click']])])
 
@@ -369,5 +369,40 @@ for _s in _sh:
     if 'CUSTOMER 1 LEAVES' in _pl:_w=True;_s['cues']=list(_s.get('cues',[]))+[dict(t=0,type='dread',dur=46,level=.34)]
     if _w:_r+=1;_s['panic']=min(1.0,.25+.09*_r)
     elif 'STARING' in _pl or 'ORDER: 10' in _pl or 'CCTV' in _pl:_s['panic']=.12
+EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
+for _s in EPS['ks1']['shots']:_s['typed']=True
+
+# ---- ks1 v10: SHORT-FORM pacing. cold-open hook (the Anomaly's face) -> DAY 1 intro with the single rule -> fast beats, snap head-turns, ~45 s ----
+_HK=dict(who='woman',pos=[KX-.1,KZ+2.0],expr='zomb',lean=.1,tilt=.12,headYaw=0,still=True,noShadow=True,nocam=True,face=[KX-.1,KZ-5])
+_HKC=([KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4])
+ep('ks1','NIGHT 1',[
+ SF(HOLD(_HKC),[],'HOOK',2.6,[_HK],fov=36,panic=.9,intro=dict(l1='ONE CUSTOMER IS NOT HUMAN',l2='SPOT IT',l3='',t0=.25,t1=2.5),sfx=[[0,'sting'],[.1,'groan']],cues=[dict(t=0,type='stinger',level=.8)]),
+ SF(HOLD(_HI),[L('vendor',"Rule: not on camera? Refuse.")],'NIGHT 1 · 2:07 AM',3.2,[VEND],fov=55,intro=dict(l1='MIDNIGHT SKEWERS',l2='DAY 1',l3='NIGHT SHIFT · 2:07 AM',t0=.1,t1=3.0),cues=[dict(t=0,type='bed',dur=30,level=.2)]),
+ SF(HOLD(_F),[],'CUSTOMER 1',1.5,[dict(who='man',pos=[KX+4.0,KZ+2.6],to=[KX+.1,KZ+2.6],t0=0,t1=1.4,expr='smile')],sfx=[[.2,'foot'],[.7,'foot'],[1.1,'foot']]),
+ SF(HOLD(_FC),[L('man',"Ten skewers. Cook them until they stop talking.")],'ORDER: 10 PORK SKEWERS',3.2,[MP('man',.1,'smile',tilt=[0,.4],lean=[0,.14])],fov=38,icons=[OB('skewer',1,'x10')]),
+ SF(HOLD(_F),[L('vendor',"Weird. Check the camera.")],'CUSTOMER 1 · WEIRD',1.9,[MP('man',.1,'smile',tilt=.4,lean=.14)]),
+ SF(TURN(_F,_M),[],'LOOKING AT CCTV',.6,[MP('man',.1,'smile',tilt=.4,lean=.14)],cctv=True,snap=True,sfx=[[.15,'click']]),
+ SF(HOLD(_M),[L('vendor',"On camera. Fine. Cook.")],'CCTV: CUSTOMER 1 VISIBLE',2.0,[MP('man',.1,'smile',tilt=.4,lean=.14)],cctv=True),
+ SF(TURN(_M,_G),[],'TURNING TO THE GRILL',.6,[MP('man',.1,'smile',tilt=.4,lean=.14)],cctv=True,snap=True),
+ SF(HOLD(_G),[],'COOKING',2.2,[MP('man',.1,'smile',tilt=.4,lean=.14)],[dict(pose='grill',item='skewer',t0=.2,t1=2.0)],sfx=[[0,'whoosh'],[.2,'sizzle'],[1.4,'sizzle']]),
+ SF(TURN(_G,_F),[],'BACK TO THE COUNTER',.6,[MP('man',.1,'smile',tilt=.4,lean=.14)],[dict(pose='give',item='skewer',t0=.1,t1=.6)],snap=True),
+ SF(HOLD(_F),[L('man',"Payment."),L('vendor',"...That's a leaf."),L('man',"Very valuable.")],'HANDING OVER',4.2,[MP('man',.1,'smile',tilt=.4,lean=.14,give=dict(t0=.2,t1=1.0))],[dict(pose='give',item='skewer',t0=0,t1=.9),dict(pose='take',item='leaf',t0=1.2,t1=2.8)],icons=[dict(k='stampS',t0=3.1,t1=9,x=.5,y=.5,s=1)],sfx=[[.3,'click'],[3.2,'chime']]),
+ SF(HOLD(_HI),[],'CUSTOMER 1 LEAVES · CUSTOMER 2 ARRIVES',3.0,[VEND,dict(who='man',pos=[KX+.1,KZ+2.6],to=[KX+4.9,KZ+2.6],t0=0,t1=2.2,expr='smile',tilt=.4,backwards=True,face=[KX+.1,KZ-6]),dict(who='woman',pos=[KX-4.6,KZ+2.6],to=[KX-.1,KZ+2.6],t0=.4,t1=2.8,expr='calm',glide=True,**WM)],fov=55,sfx=[[.3,'foot'],[.9,'foot'],[1.5,'foot']]),
+ SF(HOLD(_FC2),[L('woman',"Iced tea. Less sugar. Less... you.")],'ORDER: ICED TEA',3.4,[MP('woman',-.1,'smile',tilt=[0,-.5],**WM)],fov=38,icons=[OB('tea')],cues=[dict(t=0,type='tick')]),
+ SF(HOLD(_F),[L('vendor',"She's staring. Camera!")],'CUSTOMER 2 · STARING',2.0,[MP('woman',-.1,'creep',tilt=-.5,**WM)]),
+ SF(TURN(_F,_M),[],'LOOKING AT CCTV',.5,[MP('woman',-.1,'creep',tilt=-.5,**WM)],cctv=True,snap=True,sfx=[[.15,'click']]),
+ SF(HOLD(_M),[L('vendor',"Nobody. She's not on camera.")],'CCTV: CUSTOMER 2 NOT VISIBLE',2.6,[MP('woman',-.1,'creep',tilt=-.5,**WM)],cctv=True,sfx=[[.2,'heart'],[1.2,'heart']],cues=[dict(t=0,type='gate',dur=2.4)]),
+ SF(TURN(_M,_F),[],'LOOKING BACK',.45,[MP('woman',-.1,'creep',tilt=[-.5,0],headYaw=[0,3.14],**WM)],cctv=True,snap=True),
+ SF(HOLD(_F),[L('vendor',"Refuse! REFUSE!")],'CUSTOMER 2 · REFUSED',3.0,[dict(who='woman',pos=[KX-.1,KZ+2.6],to=[KX-.1,KZ+1.7],t0=.5,t1=1.3,expr='zomb',headYaw=[3.14,0],lean=[0,.3],glide=True,**WM)],[dict(pose='refuse',t0=.2,t1=2.8)],icons=[dict(k='stampR',t0=.8,t1=9,x=.5,y=.86,s=.8)],sfx=[[.4,'sting'],[.5,'groan']],cues=[dict(t=.4,type='stinger',level=.8)]),
+ SF(TURN(_F,_B),[],'REACHING FOR THE BUTTON',.6,[dict(who='woman',pos=[KX-.1,KZ+1.7],expr='zomb',lean=.3,**WM)],cctv=True,snap=True),
+ SF(HOLD(_B),[L('vendor',"Closing!")],'CLOSING THE STALL',2.2,[dict(who='woman',pos=[KX-.1,KZ+1.7],expr='zomb',lean=.3,**WM)],[dict(pose='press',t0=.4,t1=1.4)],cctv=True,sfx=[[.9,'click'],[1.2,'whoosh'],[1.7,'groan']]),
+ CARD('NEXT NIGHT',['2 CUSTOMERS','BOTH ARE STRANGE','WHO IS NOT HUMAN?'],L('vendor',"Next night. Who isn't human?"),min=3.4,sfx=[[.3,'click'],[1.0,'click'],[1.7,'click']])])
+_sh=EPS['ks1']['shots'];_w=False;_r=0
+for _s in _sh:
+    _pl=_s.get('place','')
+    if _s.get('card') or 'panic' in _s:continue
+    if 'CUSTOMER 1 LEAVES' in _pl:_w=True;_s['cues']=list(_s.get('cues',[]))+[dict(t=0,type='dread',dur=24,level=.34)]
+    if _w:_r+=1;_s['panic']=min(1.0,.3+.09*_r)
+    elif 'WEIRD' in _pl or 'ORDER: 10' in _pl or 'CCTV' in _pl:_s['panic']=.12
 EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
 for _s in EPS['ks1']['shots']:_s['typed']=True
