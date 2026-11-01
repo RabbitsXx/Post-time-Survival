@@ -373,10 +373,10 @@ EPS['ks1']['series']='MIDNIGHT SKEWERS';EPS['ks1']['blip']=True
 for _s in EPS['ks1']['shots']:_s['typed']=True
 
 # ---- ks1 v10: SHORT-FORM pacing. cold-open hook (the Anomaly's face) -> DAY 1 intro with the single rule -> fast beats, snap head-turns, ~45 s ----
-_HK=dict(who='woman',pos=[KX-.1,KZ+2.0],expr='zomb',lean=.1,tilt=.12,headYaw=0,still=True,noShadow=True,nocam=True,face=[KX-.1,KZ-5])
-_HKC=([KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4])
+_HK=dict(who='woman',pos=[KX-.1,KZ+2.6],expr='calm',tilt=[0,-.55],still=True,noShadow=True,nocam=True)
+_HKC=([KX-.1,1.66,KZ+1.0],[KX-.1,1.6,KZ+2.6],[KX-.1,1.66,KZ+.15],[KX-.1,1.6,KZ+2.6])
 ep('ks1','NIGHT 1',[
- SF(HOLD(_HKC),[],'HOOK',2.6,[_HK],fov=36,panic=.9,intro=dict(l1='ONE CUSTOMER IS NOT HUMAN',l2='SPOT IT',l3='',t0=.25,t1=2.5),sfx=[[0,'sting'],[.1,'groan']],cues=[dict(t=0,type='stinger',level=.8)]),
+ SF(_HKC,[],'HOOK',2.8,[_HK],fov=40,panic=.85,intro=dict(l1='ONE CUSTOMER IS NOT HUMAN',l2='SPOT IT',l3='',t0=.25,t1=2.7),sfx=[[0,'heart'],[.7,'heart'],[1.3,'heart'],[1.8,'heart'],[2.2,'heart']],cues=[dict(t=0,type='riser',dur=2.8,level=.4),dict(t=0,type='dread',dur=2.8,level=.3)]),
  SF(HOLD(_HI),[L('vendor',"Rule: not on camera? Refuse.")],'NIGHT 1 · 2:07 AM',3.2,[VEND],fov=55,intro=dict(l1='MIDNIGHT SKEWERS',l2='DAY 1',l3='NIGHT SHIFT · 2:07 AM',t0=.1,t1=3.0),cues=[dict(t=0,type='bed',dur=30,level=.2)]),
  SF(HOLD(_F),[],'CUSTOMER 1',1.5,[dict(who='man',pos=[KX+4.0,KZ+2.6],to=[KX+.1,KZ+2.6],t0=0,t1=1.4,expr='smile')],sfx=[[.2,'foot'],[.7,'foot'],[1.1,'foot']]),
  SF(HOLD(_FC),[L('man',"Ten skewers. Cook them until they stop talking.")],'ORDER: 10 PORK SKEWERS',3.2,[MP('man',.1,'smile',tilt=[0,.4],lean=[0,.14])],fov=38,icons=[OB('skewer',1,'x10')]),
