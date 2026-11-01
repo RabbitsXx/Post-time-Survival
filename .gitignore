@@ -19,3 +19,8 @@ releases/remaincalm/batch1/*/*.mp4
 studio/lowpoly/out/
 studio/lowpoly/**/*.mp4
 studio/lowpoly/.secrets.env
+
+# secrets (never commit)
+studio/post.env
+studio/**/post.env
+.env

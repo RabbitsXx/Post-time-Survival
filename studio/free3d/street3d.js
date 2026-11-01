@@ -11,8 +11,8 @@ function facadeTex(i){const c=document.createElement('canvas');c.width=256;c.hei
  const names=['NOODLES','PHARMACY','GOLD','MOTEL','MINI MART','TAILOR'],cols=['#c8301a','#1a8a5a','#c8a020','#7a2a9a','#1a6ac8','#c85a1a'];
  x.fillStyle=cols[i%6];x.fillRect(10,326,236,40);x.fillStyle='#fff';x.font='900 30px "Roboto Condensed",Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(names[i%6],128,347);
  // one shop open with a warm doorway
- if(i%3===1){x.fillStyle='#ffcf80';x.fillRect(60,372,136,132);x.fillStyle='#5a3a20';x.fillRect(70,430,116,74);x.fillStyle='#fff';x.font='700 18px Arial';x.fillText('OPEN',128,395)}
- const t=new THREE.CanvasTexture(c);t.minFilter=t.magFilter=THREE.LinearFilter;t.generateMipmaps=false;return t}
+ if(i%3===1){x.fillStyle='#ffcf80';x.fillRect(60,372,136,132);x.fillStyle='#5a3a20';x.fillRect(70,430,116,74);x.fillStyle='#fff';x.font='900 18px "Roboto Condensed",Arial';x.fillText('OPEN',128,395)}
+ const t=new THREE.CanvasTexture(c);t.minFilter=t.magFilter=THREE.LinearFilter;t.generateMipmaps=false;if(!window.REDRAWING)(window.FACREG=window.FACREG||[]).push([i,t]);return t}
 function scooter(x,z,ry,col){const g=new THREE.Group();const M=c=>MC(c,.5,.3);
  const add=(m,px,py,pz)=>{m.position.set(px,py,pz);g.add(m);return m};
  add(new THREE.Mesh(new THREE.BoxGeometry(.42,.3,1.1),M(col)),0,.55,0);add(new THREE.Mesh(new THREE.BoxGeometry(.4,.1,.7),M(0x222222)),0,.76,-.2);add(new THREE.Mesh(new THREE.BoxGeometry(.5,.1,.1),M(0x222222)),0,1.05,.62);add(new THREE.Mesh(new THREE.BoxGeometry(.06,.5,.06),M(0x222222)),0,.8,.6);
@@ -46,6 +46,7 @@ function buildStreet(){
  const WD=MC(0x5a3e24,.9),DK=MC(0x2a2018,.9);
  bx(3.6,.08,.5,WD,KX,1.5,KZ-2.3);bx(3.6,.08,.5,WD,KX,2.1,KZ-2.3);
  for(let k=0;k<14;k++){const col=[0xc8a850,0x8a3a1a,0xe0e0d0,0x3a6a3a,0xb83020][k%5];cyl(.1,.22,MC(col,.6),KX-1.6+k*.25,1.65,KZ-2.3,0,0,S,8);cyl(.09,.2,MC(col,.6),KX-1.5+k*.25,2.25,KZ-2.3,0,0,S,8)}
+ {const hk=MC(0x1a1a1a,.5,.5);bx(.05,.1,.08,hk,KX+.75,1.9,KZ-2.0);bx(.05,.1,.08,hk,KX+1.5,1.9,KZ-2.0);const st=new THREE.Group();const wood=MC(0xc07a3a,.7);const sh=cyl(.034,1.0,wood,0,0,0,0,0,S,10);sh.rotation.z=Math.PI/2;S.remove(sh);st.add(sh);const kn=new THREE.Mesh(new THREE.SphereGeometry(.062,10,8),wood);kn.position.x=-.5;st.add(kn);st.position.set(KX+1.12,1.9,KZ-1.97);S.add(st);window.STICKG=st;st.userData={dyn:1};const sg2=new THREE.Mesh(new THREE.PlaneGeometry(.8,.2),new THREE.MeshBasicMaterial({map:signTex('THE STICK','#2a1810','#ffd070',384,96,48),fog:false}));sg2.position.set(KX+1.12,1.74,KZ-2.1);sg2.rotation.y=Math.PI;S.add(sg2)}
  bx(3.4,.04,.04,DK,KX,2.5,KZ-2.2);for(let k=0;k<6;k++){bx(.05,.4,.03,MC(0x9a9a9a,.3,.7),KX-1.4+k*.55,2.25,KZ-2.2)}
  cyl(.22,.7,MC(0xc0302a,.5,.4),KX+1.7,.35,KZ-1.8,0,0,S,12);bx(.9,.55,.55,MC(0x2a6ab0,.6),KX+.8,.28,KZ-1.8);bx(.92,.06,.57,MC(0xe8e8e8,.5),KX+.8,.58,KZ-1.8);
  for(const sx of[-.6,.3]){cyl(.16,.3,MC(0xd83a2a,.6),KX+sx,.15,KZ-1.1,0,0,S,10)}
@@ -58,8 +59,10 @@ function buildStreet(){
  // ---- stall counter dressing: sized for a ~1 m wide portrait view at the counter ----
  const cy=1.055,cz=KZ+.82;
  // steel tray of raw skewers: rimmed tray, sticks with marinated pork pieces, price card
+ const _tn0=S.children.length;
  bx(.46,.02,.34,MC(0xc8ccd0,.22,.9),KX+.05,cy+.01,cz);for(const [rx,rz,rw,rd] of[[0,-.17,.46,.015],[0,.17,.46,.015],[-.23,0,.015,.34],[.23,0,.015,.34]])bx(rw,.035,rd,MC(0xc8ccd0,.22,.9),KX+.05+rx,cy+.03,cz+rz);
  for(let k=0;k<10;k++){cyl(.004,.38,MC(0xd8b878,.7),KX-.17+k*.038,cy+.034,cz,Math.PI/2,0,S,5);for(let m=0;m<4;m++){const c=cyl(.0165,.03,MC([0xd98a80,0xe8a49c,0xcf7a72,0xe09a90][(k+m)%4],.35),KX-.17+k*.038,cy+.046,cz-.12+m*.075,Math.PI/2,0,S,10);c.castShadow=false}}
+ {const tg=new THREE.Group();tg.userData={dyn:1,tray:1};S.children.slice(_tn0).forEach(o=>{if(o.isMesh){o.userData.dyn=1;tg.add(o)}});S.add(tg);window.TRAYG=tg}
  const pc=new THREE.Mesh(new THREE.PlaneGeometry(.2,.08),new THREE.MeshBasicMaterial({map:signTex('PORK 10','#f4ead0','#2a1810',256,100,30),fog:false}));pc.position.set(KX+.05,cy+.1,cz+.3);pc.rotation.set(0,Math.PI,0);S.add(pc);
  // squeeze sauce bottles (lathe profile, cap, label)
  [['CHILI',0xc8201a],['SOY',0x2a1a10],['SWEET',0xe8a020]].forEach(([n,c],i)=>{const x=KX+.36+i*.06,pts=[[0,0],[.021,0],[.024,.012],[.024,.095],[.016,.118],[.009,.135],[.009,.15],[0,.15]].map(p=>new THREE.Vector2(p[0],p[1]));const bt=new THREE.Mesh(new THREE.LatheGeometry(pts,14),MC(c,.3,.1));bt.position.set(x,cy,cz+.12);S.add(bt);cyl(.011,.025,MC(0xf0f0f0,.4),x,cy+.16,cz+.12,0,0,S,8);

@@ -1,5 +1,5 @@
 // ===== FRESHWAY set dressing: real-looking shelves with facings & price tags, carts, baskets, checkout, freezers, ceiling clutter, wear, apocalypse dressing =====
-function ctex(w,h,draw,rep){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);t.magFilter=t.minFilter=(typeof CLEAN!=='undefined'&&CLEAN?THREE.LinearFilter:THREE.NearestFilter);t.generateMipmaps=false;t.anisotropy=1;return t}
+function ctex(w,h,draw,rep){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');draw(x,w,h);const t=new THREE.CanvasTexture(c);(window.TEXREG=window.TEXREG||[]).push([x,w,h,draw,t]);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rep)t.repeat.set(rep[0],rep[1]);t.magFilter=t.minFilter=(typeof CLEAN!=='undefined'&&CLEAN?THREE.LinearFilter:THREE.NearestFilter);t.generateMipmaps=false;t.anisotropy=1;return t}
 const PAL=['#d8342c','#f0b82a','#2a9a4a','#2a6ad0','#e86c24','#7a3aa8','#f2efe4','#e0508a','#2ab8a8','#8a5a32','#1a1a1e'];
 const CATS=[
  {name:'CEREAL · BREAKFAST',col:'#d8802a'},{name:'CANNED GOODS',col:'#b83a2a'},{name:'SNACKS · CHIPS',col:'#d8b020'},{name:'DRINKS · SODA',col:'#2a6ad0'},

@@ -45,10 +45,14 @@ def schedule(s,cid,dry=False,force_buffer_youtube=False):
     if dry:c.pop('due',None);return slots.iso(slot),posts
     c.update(status='scheduled',posts=posts,media_day=day,yt_mode='native' if native else 'buffer');ST.save(s)
     if native:
-        vid=Y.upload_video(vp,c['yt_title'],c['yt_desc'],[t.strip() for t in c['tags'].split(',') if t.strip()],c['due']);c['yt_video_id']=vid;c['done']={};ST.save(s)
-        for step,fn in(('thumb',lambda:Y.set_thumbnail(vid,os.path.join(REPO,c['thumb']))),('en',lambda:Y.add_caption(vid,'en','English',os.path.join(REPO,c['caps_en']))),('th',lambda:Y.add_caption(vid,'th','Thai (ไทย)',os.path.join(REPO,c['caps_th']))),('playlist',lambda:Y.add_to_playlist(Y.playlist_id(c['playlist']),vid))):
+        vid=Y.upload_video(vp,c['yt_title'],c['yt_desc'],[t.strip() for t in c['tags'].split(',') if t.strip()],c['due'],synthetic=AIFLAG);c['yt_video_id']=vid;c['done']={};ST.save(s)
+        for step,fn in(('thumb',lambda:Y.set_thumbnail(vid,os.path.join(REPO,c['thumb']))),('en',lambda:Y.add_caption(vid,'en','English',os.path.join(REPO,c['caps_en']))),('playlist',lambda:Y.add_to_playlist(Y.playlist_id(c['playlist']),vid))):
             try:fn();c['done'][step]=True
             except SystemExit as e:c['last_error']=f'{step}: {e}'
+        if c.get('caps_th'):    # Thai subtitles only when the clip has them (the Midnight Skewers rule: English-only on the video)
+            try:Y.add_caption(vid,'th','Thai (ไทย)',os.path.join(REPO,c['caps_th']));c['done']['th']=True
+            except SystemExit as e:c['last_error']=f'th: {e}'
+        else:c['done']['th']=True
         c['done']['tags']=True
         if all(c['done'].get(x) for x in('tags','thumb','en','th','playlist')):c['status']='finished'
         ST.save(s)
