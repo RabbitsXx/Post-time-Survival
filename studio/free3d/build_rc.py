@@ -2,7 +2,7 @@
 """REMAIN CALM builder (store3.html, 2D cast on 3D PS1 set).  python3 build_rc.py episodes/rc1.py [--w 1080 --h 1920] [--stills t1,t2] [--workers 4]"""
 import sys,os,json,subprocess,time,importlib.util,wave
 R=os.path.dirname(os.path.abspath(__file__));sys.path.insert(0,R+'/../free');sys.path.insert(0,R)
-QS='&2d'+('&clean&nocull' if '--clean' in sys.argv else '')
+QS='&2d'+('&clean&nocull' if '--clean' in sys.argv else '')+('&fast' if '--fast' in sys.argv else '')
 import numpy as np
 import build as B
 from build import tts,rd,FPS,SR,NAMES,NAMECOL,VOICES,SFXLIB
@@ -78,15 +78,28 @@ def build_spec(ep):
         for c in sh.get('cues',[]):cues.append(dict(c,t=t0+c['t']))
         o={k:v for k,v in sh.items() if k not in('lines','sfx','min','pad','cues','lead')};o.update(t0=t0,t1=t1,lines=[{k:v for k,v in L.items() if k!='wav'} for L in LN]);shots.append(o);lines_all+=LN;t=t1
     return dict(series=ep['series'],title=ep['title'],part=ep['part'],of=ep['of'],shots=shots,dur=t+.5,safe=bool(ep.get('safe'))),lines_all,sfx_all,cues
-def render(spec,fd,w,h,workers=4):
+def render(spec,fd,w,h,workers=4,frames=None,chunk=36):
+    """dynamic work queue: small contiguous chunks handed to whichever worker is free (balances heavy motion-blur shots)"""
     os.makedirs(fd,exist_ok=True);sp=R+'/spec_%s.json'%os.path.basename(fd);json.dump(spec,open(sp,'w'))
-    n=int(round(spec['dur']*FPS));k=(n+workers-1)//workers;ps=[]
-    for i in range(workers):
-        a,b=i*k,min(n,(i+1)*k)
-        if a<b:ps.append(subprocess.Popen(['node',R+'/render_store3.js',sp,fd,str(a),str(b),str(w),str(h),QS],cwd=R))
-    for p in ps:
-        if p.wait():raise SystemExit('render failed')
-    return n
+    n=int(round(spec['dur']*FPS));fr=sorted(set(frames)) if frames is not None else list(range(n))
+    runs=[];
+    for f in fr:
+        if runs and f==runs[-1][1]:runs[-1][1]=f+1
+        else:runs.append([f,f+1])
+    jobs=[]
+    for a,b2 in runs:
+        for s in range(a,b2,chunk):jobs.append((s,min(b2,s+chunk)))
+    jobs.sort(key=lambda j:-(j[1]-j[0]));running=[]
+    env=dict(os.environ)
+    while jobs or running:
+        while jobs and len(running)<workers:
+            a,b2=jobs.pop(0);running.append(subprocess.Popen(['node',R+'/render_store3.js',sp,fd,str(a),str(b2),str(w),str(h),QS],cwd=R,env=env))
+        time.sleep(.5)
+        for p in running[:]:
+            if p.poll() is not None:
+                if p.returncode:raise SystemExit('render failed')
+                running.remove(p)
+    return len(fr)
 
 # ---- synthetic SFX additions (no recorded samples) ----
 def _bp(x,lo,hi):
@@ -107,6 +120,20 @@ def S_clock():
         y[i:i+m]+=np.sin(2*np.pi*f*tt)*np.exp(-tt*55)*(.55 if k%2==0 else .4)+np.sin(2*np.pi*(f/4)*tt)*np.exp(-tt*35)*.3
     return y
 SFXLIB.update({'whisper':S_whisper,'scratch':S_scratch,'clock':S_clock})
+import hashlib
+CODE=['store3.html','overlay.js','people3d.js','kiosk3d.js','street3d.js','props.js','chars2d.js','render_store3.js']
+def code_hash():
+    h=hashlib.sha1()
+    for f in CODE:
+        p=R+'/'+f
+        if os.path.exists(p):h.update(open(p,'rb').read())
+    return h.hexdigest()
+def shot_hashes(spec,w,h):
+    ch=code_hash();out=[]
+    for sh_ in spec['shots']:
+        d={k:v for k,v in sh_.items() if k!='lines'};d['lines']=[{k:v for k,v in L.items() if k!='wav'} for L in sh_['lines']]
+        out.append(hashlib.sha1((json.dumps(d,sort_keys=True,default=str)+ch+f'{w}x{h}{QS}{spec["dur"]>0}').encode()).hexdigest())
+    return out
 def mix_rc(spec,lines,sfx,cues,path):
     dur=spec['dur'];n=int(dur*SR)+SR;V=np.zeros(n,dtype=np.float32);M=np.zeros(n,dtype=np.float32)
     for L in lines:
@@ -146,9 +173,21 @@ def main():
         [q.wait() for q in ps];print(f're-rendered shots {ids} in {time.time()-t0:.0f}s')
         mix_rc(spec,lines,sfx,cues,OUT+f'/{name}.wav')
         subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate',str(FPS),'-i',fd+'/%05d.jpg','-i',OUT+f'/{name}.wav','-c:v','libx264','-preset','medium','-crf','17','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-movflags','+faststart','-shortest',OUT+f'/{name}.mp4']);print('DONE',OUT+f'/{name}.mp4');return
-    if os.path.isdir(fd):
-        for f in os.listdir(fd):os.remove(fd+'/'+f)
-    t0=time.time();n=render(spec,fd,w,h,workers);print(f'rendered {n} frames in {time.time()-t0:.0f}s')
+    cp=OUT+f'/{name}_cache.json';cache=json.load(open(cp)) if os.path.exists(cp) else {};hs=shot_hashes(spec,w,h);n_all=int(round(spec['dur']*FPS))
+    if '--mark-clean' in a:json.dump(dict(hashes=hs,n=n_all),open(cp,'w'));print('cache marked clean');return
+    if '--no-cache' in a or not os.path.isdir(fd):cache={}
+    dirty=[];old=cache.get('hashes',[])
+    for i,sh_ in enumerate(spec['shots']):
+        f0,f1=int(round(sh_['t0']*FPS)),min(n_all,int(round(sh_['t1']*FPS))+1)
+        if i>=len(old) or old[i]!=hs[i] or any(not os.path.exists(fd+f'/{f:05d}.jpg') for f in (f0,f1-1)):dirty+=list(range(f0,f1))
+    t0=time.time()
+    if not os.path.isdir(fd) or not cache:
+        if os.path.isdir(fd):
+            for f in os.listdir(fd):os.remove(fd+'/'+f)
+        n=render(spec,fd,w,h,workers)
+    elif dirty:n=render(spec,fd,w,h,workers,frames=dirty)
+    else:n=0
+    json.dump(dict(hashes=hs,n=n_all),open(cp,'w'));print(f'rendered {n} of {n_all} frames in {time.time()-t0:.0f}s (shot-hash cache)')
     mix_rc(spec,lines,sfx,cues,OUT+f'/{name}.wav')
     subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate',str(FPS),'-i',fd+'/%05d.jpg','-i',OUT+f'/{name}.wav','-c:v','libx264','-preset','medium','-crf','17','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-af','loudnorm=I=-14:TP=-1.5:LRA=11','-movflags','+faststart','-shortest',OUT+f'/{name}.mp4'])
     print('DONE',OUT+f'/{name}.mp4')

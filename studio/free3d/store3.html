@@ -12,7 +12,7 @@
 // REMAIN CALM - FRESHWAY 24H supermarket 3D set. Deterministic: renderAt(f) -> jpeg
 const CLEAN=/clean/.test(location.search);const Q=new URLSearchParams(location.search),W=+(Q.get('w')||540),H=+(Q.get('h')||960);const SF=W/540;const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ctx=oc.getContext('2d',{willReadFrequently:true});
 const cv=document.getElementById('c');const R=new THREE.WebGLRenderer({canvas:cv,antialias:CLEAN,preserveDrawingBuffer:true});const RQ=+(Q.get('rq')||(CLEAN?1:.4));R.setSize(Math.round(W*RQ),Math.round(H*RQ),false);R.setPixelRatio(1);
-R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.25;
+R.shadowMap.enabled=!/[&?]fast/.test(location.search);R.shadowMap.type=THREE.PCFSoftShadowMap;R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.25;
 const S=new THREE.Scene();S.background=new THREE.Color(0x06100c);S.fog=new THREE.FogExp2(0x0a1a14,.034);
 const cam=new THREE.PerspectiveCamera(38,W/H,.1,420);
 
