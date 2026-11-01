@@ -1,10 +1,10 @@
 // ===== v5 people: proper human proportions, plaid shirt / dress textures, ink outline (channel line-art look) =====
 for(const k in P3CFG)delete P3CFG[k];
 Object.assign(P3CFG,{
- man:{skin:'#d6a27c',top:{t:'plaid',a:'#6a4a2a',b:'#2a1a10'},pants:'#cdbd96',shoes:'#e8e8e8',hair:'short',hc:'#2a1c14',w:1,h:1,sleeve:.34},
+ man:{skin:'#d6a27c',top:{t:'plaid',a:'#6a4a2a',b:'#2a1a10'},pants:'#8a7a58',shoes:'#e8e8e8',hair:'short',hc:'#2a1c14',w:1,h:1,sleeve:.34},
  woman:{skin:'#e2b896',top:{t:'dress',a:'#c4552a',b:'#8a3014'},pants:'#e8e8e8',shoes:'#3a2a20',hair:'long',hc:'#3a2418',w:.92,h:.95,dress:1,sleeve:.3},
  womanZ:{skin:'#8aa878',top:{t:'dress',a:'#c4552a',b:'#8a3014'},pants:'#e8e8e8',shoes:'#3a2a20',hair:'long',hc:'#1a2a18',w:.92,h:.95,dress:1,sleeve:.3,zombie:1},
- manB:{skin:'#c89468',top:{t:'plaid',a:'#4a6a4a',b:'#1a2a1a'},pants:'#8a8466',shoes:'#e8e8e8',hair:'short',hc:'#1a1410',w:1.04,h:1.02,sleeve:.34},
+ manB:{skin:'#c89468',top:{t:'plaid',a:'#4a6a4a',b:'#1a2a1a'},pants:'#5e5a44',shoes:'#e8e8e8',hair:'short',hc:'#1a1410',w:1.04,h:1.02,sleeve:.34},
  vendor3:{skin:'#d6a27c',top:{t:'solid',a:'#2a9a5a'},pants:'#2a2e38',shoes:'#1a1a1a',hair:'short',hc:'#1a1410',w:1,h:1,sleeve:.34},
  kid:{skin:'#e8c4a0',top:{t:'solid',a:'#e8c82a'},pants:'#3a5aa8',shoes:'#c82a2a',hair:'long',hc:'#1a1a1a',w:.8,h:.7,sleeve:.3}});
 
@@ -54,26 +54,29 @@ function makePerson(cfg){const g=new THREE.Group(),L=c=>new THREE.MeshLambertMat
  const add=(geo,m,x,y,z,par,rot,sc)=>{const o=new THREE.Mesh(geo,m);o.position.set(x,y,z);if(rot)o.rotation.set(rot[0],rot[1],rot[2]);if(sc)o.scale.set(sc[0],sc[1],sc[2]);(par||g).add(o);return o};
  const CAP=(r,l)=>new THREE.CapsuleGeometry(r,l,6,16),SPH=(r)=>new THREE.SphereGeometry(r,20,14),CYL=(a,b,h,s)=>new THREE.CylinderGeometry(a,b,h,s||18);
  const body=new THREE.Group();g.add(body);
- // torso + hips
- const torso=add(CAP(.15,.34),sh,0,1.15,0,body,null,[1.28*cfg.w,1,.78]);
- add(CAP(.145,.1),cfg.dress?sh:pa,0,.93,0,body,null,[1.22*cfg.w,1,.82]);
- add(CYL(.05,.062,.16,14),sk,0,1.46,0,body);add(new THREE.TorusGeometry(.07,.016,8,20),sh,0,1.44,.0,body,[Math.PI/2,0,0]);
- // legs with knees
- const legs=[],shins=[];for(const s of[-1,1]){const hip=new THREE.Group();hip.position.set(s*.085*cfg.w,.88,0);body.add(hip);
-  const thM=cfg.dress?sk:pa;add(CAP(.077,.34),thM,0,-.25,0,hip);
-  const knee=new THREE.Group();knee.position.set(0,-.47,0);hip.add(knee);
-  add(CAP(.056,.3),cfg.dress?sk:pa,0,-.2,0,knee);if(cfg.dress)add(CYL(.058,.052,.2,12),L('#f2f2ee'),0,-.28,0,knee);
-  add(CAP(.05,.12),L(cfg.shoes),0,-.43,.05,knee,[Math.PI/2,0,0],[1,1,1.0]);add(CYL(.052,.056,.03,12),L('#1a1a1a'),0,-.455,.04,knee,[Math.PI/2,0,0]);
+ // anatomy: lathe torso (hips-waist-ribs-chest-shoulders), tapered limbs with joint spheres, trapezius, foot shapes
+ const lathe=(pts,seg)=>new THREE.LatheGeometry(pts.map(q=>new THREE.Vector2(q[0],q[1])),seg||22);
+ const limb=(r0,r1,len,bulge)=>{const pts=[];for(let i=0;i<=6;i++){const a=i/6*Math.PI/2;pts.push([r1*Math.sin(a),-len-r1*Math.cos(a)])}for(let i=1;i<=8;i++){const u=1-i/8;pts.push([r0+(r1-r0)*u+(bulge||0)*Math.sin(u*Math.PI)*r0,-u*len])}for(let i=1;i<=6;i++){const a=i/6*Math.PI/2;pts.push([r0*Math.cos(a),r0*Math.sin(a)])}return lathe(pts,18)};
+ const W=cfg.w;
+ const upper=add(lathe([[.001,.9],[.158,.92],[.165,.97],[.152,1.06],[.138,1.12],[.14,1.2],[.158,1.28],[.172,1.34],[.17,1.4],[.12,1.45],[.05,1.47],[.001,1.475]],24),sh,0,0,0,body,null,[1.2*W,1,.74]);const torso=upper;
+ add(lathe([[.001,.84],[.14,.85],[.165,.9],[.168,.96],[.155,1.02],[.001,1.02]],24),cfg.dress?sh:L(cfg.pants),0,0,0,body,null,[1.2*W,1,.78]);
+ add(limb(.052,.034,.1),sk,0,1.5,0,body);add(SPH(.06),sh,.1,1.43,0,body,null,[1.5,.55,1.1]);add(SPH(.06),sh,-.1,1.43,0,body,null,[1.5,.55,1.1]);add(new THREE.TorusGeometry(.066,.014,8,20),sh,0,1.455,0,body,[Math.PI/2,0,0]);
+ // legs: thigh -> knee -> calf (bulge) -> ankle -> shoe
+ const legs=[],shins=[];for(const s of[-1,1]){const hip=new THREE.Group();hip.position.set(s*.09*W,.9,0);body.add(hip);
+  add(SPH(.085),cfg.dress?sk:L(cfg.pants),0,0,0,hip,null,[1,1.05,1]);
+  add(limb(.083,.057,.44,.04),cfg.dress?sk:L(cfg.pants),0,0,0,hip);
+  const knee=new THREE.Group();knee.position.set(0,-.46,0);hip.add(knee);add(SPH(.058),cfg.dress?sk:L(cfg.pants),0,0,0,knee);
+  add(limb(.056,.034,.38,.22),cfg.dress?sk:L(cfg.pants),0,0,0,knee);if(cfg.dress)add(limb(.047,.036,.16,.05),L('#f2f2ee'),0,-.22,0,knee);
+  add(SPH(.038),cfg.dress?sk:L(cfg.pants),0,-.395,0,knee);
+  add(SPH(.05),L(cfg.shoes),0,-.43,.055,knee,null,[.95,.55,2.0]);add(SPH(.042),L(cfg.shoes),0,-.415,-.03,knee,null,[1,.9,1]);add(CYL(.048,.052,.02,14),L('#151515'),0,-.455,.05,knee,[Math.PI/2,0,0],[1,1.9,1]);
   legs.push(hip);shins.push(knee)}
  if(cfg.dress){const sk2=add(CYL(.17,.34,.56,32),sh,0,.6,0,body,null,[cfg.w,1,.92]);const pos=sk2.geometry.attributes.position;for(let i=0;i<pos.count;i++){const y=pos.getY(i);if(y<0){const a=Math.atan2(pos.getZ(i),pos.getX(i)),f=1+.045*Math.sin(a*9)*(-y/.28);pos.setX(i,pos.getX(i)*f);pos.setZ(i,pos.getZ(i)*f)}}pos.needsUpdate=true;sk2.geometry.computeVertexNormals()}
- // arms with elbows + hands
- const arms=[],fores=[];for(const s of[-1,1]){const sho=new THREE.Group();sho.position.set(s*(.215*cfg.w+.045),1.4,0);body.add(sho);
-  add(SPH(.062),sh,0,0,0,sho);add(CAP(.052,.2),sh,0,-.15,0,sho);
-  const sl=cfg.sleeve;if(sl<.3)add(CYL(.056,.054,.1,12),sh,0,-.2,0,sho);
-  const el=new THREE.Group();el.position.set(0,-.29,0);sho.add(el);
-  add(CAP(.042,.2),sk,0,-.14,0,el);
-  const hand=new THREE.Group();hand.position.set(0,-.3,0);el.add(hand);add(SPH(.04),sk,0,-.03,0,hand,null,[1,1.25,.7]);
-  for(let f=0;f<4;f++)add(CAP(.0095,.04),sk,(f-1.5)*.017,-.095,0,hand,[0,0,0]);add(CAP(.011,.035),sk,s*.04,-.06,.012,hand,[0,0,s*.7]);
+ // arms: deltoid -> upper arm -> elbow -> forearm -> wrist -> hand
+ const arms=[],fores=[];for(const s of[-1,1]){const sho=new THREE.Group();sho.position.set(s*(.215*W+.05),1.385,0);body.add(sho);
+  add(SPH(.06),sh,0,0,0,sho,null,[1,1.1,1]);add(limb(.056,.044,.28,.05),sh,0,0,0,sho);
+  const el=new THREE.Group();el.position.set(0,-.29,0);sho.add(el);add(SPH(.043),sk,0,0,0,el);add(limb(.043,.03,.26,.1),sk,0,0,0,el);
+  const hand=new THREE.Group();hand.position.set(0,-.285,0);el.add(hand);add(SPH(.032),sk,0,0,0,hand,null,[1,.9,.9]);add(SPH(.04),sk,0,-.05,0,hand,null,[1,1.3,.62]);
+  for(let f=0;f<4;f++){const fl=[.045,.052,.048,.04][f];add(limb(.0105,.0075,fl),sk,(f-1.5)*.017,-.075,0,hand,[.12,0,0])}add(limb(.0125,.009,.04),sk,s*.036,-.04,.012,hand,[0,0,s*.8]);
   arms.push(sho);fores.push(el)}
  // head
  const head=new THREE.Group();head.position.set(0,1.5,0);body.add(head);const F=faceTex(cfg);
