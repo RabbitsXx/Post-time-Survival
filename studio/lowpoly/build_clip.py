@@ -38,6 +38,16 @@ def S_pop():
     n=int(.2*SR);t=np.arange(n)/SR;return (sine(500*np.exp(-t*30)+120,t)*np.exp(-t/.04)*.8+noise(n,3)*np.exp(-t/.004)*.4).astype(np.float32)
 SFXLIB.update(plop=S_plop,pop=S_pop)
 SFXLIB.update(gun=S_gun,squeal=S_squeal,oink=S_oink,plink=S_plink,munch=S_munch,fly=S_fly,tick=S_tick,stamp=S_stamp,bugle=S_bugle,slide=S_slide,riser=S_riser)
+def S_boing():
+    n=int(.6*SR);t=np.arange(n)/SR;f=260+380*np.exp(-t*6)*np.sin(2*np.pi*9*t+1.2)+120;ph=2*np.pi*np.cumsum(f)/SR;return (np.sin(ph)*.5*np.exp(-t/.28)).astype(np.float32)
+def S_rimshot():
+    n=int(.9*SR);y=np.zeros(n,dtype=np.float32)
+    for t0,fq in((0,180),(.14,150)):
+        i=int(t0*SR);m=int(.12*SR);tt=np.arange(m)/SR;y[i:i+m]+=(np.sin(2*np.pi*fq*tt)*np.exp(-tt/.05)*.9+noise(m,5)*np.exp(-tt/.02)*.3).astype(np.float32)
+    i=int(.36*SR);m=n-i;tt=np.arange(m)/SR;y[i:]+=(lp(noise(m,8),9000)*np.exp(-tt/.22)*.6).astype(np.float32);return y
+def S_wah():
+    n=int(1.0*SR);t=np.arange(n)/SR;f=330-110*t-60*np.sin(2*np.pi*5*t)*t;ph=2*np.pi*np.cumsum(f)/SR;return (lp((2*((ph/(2*np.pi))%1)-1).astype(np.float32),1400)*.4*np.minimum(t/.05,1)*np.minimum((1-t)/.2,1)).astype(np.float32)
+SFXLIB.update(boing=S_boing,rimshot=S_rimshot,wah=S_wah)
 def bed(dur):
     bpm=116;sp=60/bpm;n=int((dur+1)*SR);out=np.zeros(n,dtype=np.float32);ch=[(130.8,164.8,196),(98,123.5,146.8),(110,130.8,164.8),(87.3,110,130.8)]
     def put(y,t0):
