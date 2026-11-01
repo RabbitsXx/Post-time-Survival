@@ -1,83 +1,51 @@
 1
-00:00:00,250 --> 00:00:06,647
-Everyone is a little strange. Serve the odd ones. Refuse whoever isn't on camera.
+00:00:03,049 --> 00:00:05,754
+Rule: not on camera? Refuse.
 
 2
-00:00:07,750 --> 00:00:09,650
-Night one. Don't mess it up.
-
-3
-00:00:11,150 --> 00:00:13,272
-Okay. Let's see who shows up.
-
-4
-00:00:17,750 --> 00:00:20,642
+00:00:07,804 --> 00:00:10,697
 Ten skewers. Cook them until they stop talking.
 
+3
+00:00:11,247 --> 00:00:12,966
+Weird. Check the camera.
+
+4
+00:00:14,116 --> 00:00:16,966
+On camera. Fine. Cook.
+
 5
-00:00:22,750 --> 00:00:25,255
-...Okay. The customer is always right.
-
-6
-00:00:25,949 --> 00:00:26,742
-Check the camera.
-
-7
-00:00:28,349 --> 00:00:30,804
-On camera. Just weird.
-
-8
-00:00:31,549 --> 00:00:33,927
-Don't ask. Just cook.
-
-9
-00:00:41,077 --> 00:00:41,789
+00:00:20,916 --> 00:00:21,628
 Payment.
 
-10
-00:00:42,069 --> 00:00:42,623
+6
+00:00:21,908 --> 00:00:22,462
 ...That's a leaf.
 
-11
-00:00:42,903 --> 00:00:44,224
-It is very valuable.
+7
+00:00:22,742 --> 00:00:23,769
+Very valuable.
 
-12
-00:00:44,504 --> 00:00:45,854
-Fine. Serve.
-
-13
-00:00:49,077 --> 00:00:49,775
-Next.
-
-14
-00:00:52,877 --> 00:00:55,614
+8
+00:00:28,116 --> 00:00:30,852
 Iced tea. Less sugar. Less... you.
 
-15
-00:00:57,877 --> 00:01:01,583
-Okay. Normal. She is... only staring.
+9
+00:00:31,516 --> 00:00:33,631
+She's staring. Camera!
 
-16
-00:01:02,133 --> 00:01:02,925
-Check the camera.
+10
+00:00:34,681 --> 00:00:36,685
+Nobody. She's not on camera.
 
-17
-00:01:04,533 --> 00:01:05,581
-...Nobody there.
+11
+00:00:37,731 --> 00:00:39,908
+Refuse! REFUSE!
 
-18
-00:01:05,861 --> 00:01:07,405
-She is not on camera.
+12
+00:00:41,331 --> 00:00:41,833
+Closing!
 
-19
-00:01:11,933 --> 00:01:14,889
-Refuse. Refuse. REFUSE.
-
-20
-00:01:18,133 --> 00:01:18,754
-Closing.
-
-21
-00:01:22,133 --> 00:01:24,094
+13
+00:00:43,531 --> 00:00:45,492
 Next night. Who isn't human?
