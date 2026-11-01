@@ -143,7 +143,7 @@ window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(
  ctx.setTransform(1,0,0,1,0,0);return oc.toDataURL('image/jpeg',.93).slice(23)};
 const renderAt0=window.renderAt;const ACC=document.createElement('canvas');ACC.width=W;ACC.height=H;
 window.renderAt=f=>{const t=f/30,sp=SPEC;let sh=sp.shots[sp.shots.length-1];for(const x of sp.shots){if(t>=x.t0&&t<x.t1){sh=x;break}}
- if(!sh.snap||sh.card)return renderAt0(f);const a=ACC.getContext('2d'),lo=sh.t0*30+.01,hi=sh.t1*30-.02,offs=[-.3,-.15,0,.15,.3];a.setTransform(1,0,0,1,0,0);a.globalAlpha=1;a.clearRect(0,0,W,H);
+ if(!sh.snap||sh.card)return renderAt0(f);const a=ACC.getContext('2d'),lo=sh.t0*30+.01,hi=sh.t1*30-.02,offs=[-.28,-.187,-.093,0,.093,.187,.28];a.setTransform(1,0,0,1,0,0);a.globalAlpha=1;a.clearRect(0,0,W,H);
  offs.forEach((k,i)=>{renderAt0(Math.min(hi,Math.max(lo,f+k)));a.globalAlpha=1/(i+1);a.drawImage(oc,0,0)});a.globalAlpha=1;return ACC.toDataURL('image/jpeg',.93).slice(23)};
 window.fontsReady=Promise.all([document.fonts.load('900 38px "Roboto Condensed"'),window.USE_RIG?loadRig():0]).then(()=>{buildPeople();PEOPLE&&Object.values(BLOB).forEach(b=>ENVMATS.push(b.material));initCull()});
 </script>
