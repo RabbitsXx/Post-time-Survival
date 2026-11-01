@@ -11,5 +11,5 @@ EP=dict(id='jk',title="The War Named After A Sailor's Ear",
   dict(t="Today, it is still marked every May in Savannah, Georgia.",c=["Today, it is still marked","every May","in Savannah, Georgia."],v='narr',pad=.1,shots=[('j_sav',1)]),
   dict(t="A nine year war, named after one ear. Allegedly.",c=["A nine year war,","named after one ear.","Allegedly."],v='narr2',shots=[('j_final',1)],pad=.9),
  ],
- sfx=[('j_hook',.05,'whoosh'),('j_hook',.5,'whoosh'),('j_hook',.6,'boing'),('j_hook',1.1,'pop'),('j_ship',.2,'creak'),('j_parl',.2,'thump',4,.35),('j_parl','%0.6','chime'),('j_war',.3,'pop'),('j_war',.65,'pop'),('j_war',1.0,'pop'),('j_war',1.35,'pop'),('j_war','%0.55','boom'),('j_cart',.3,'boom'),('j_cart','%0.6','boom'),('j_cart','%0.8','wah'),('j_end',.2,'chime'),('j_sav',.2,'cheer'),('j_final','%0.4','chime'),('j_final','%0.8','rimshot')],
+ sfx=[('j_hook',.05,'whoosh'),('j_hook',.5,'whoosh'),('j_hook',.6,'boing'),('j_hook',1.1,'pop'),('j_ship',.2,'creak'),('j_parl',.2,'thump',4,.35),('j_parl','%0.6','chime'),('j_war',.3,'pop'),('j_war',.65,'pop'),('j_war',1.0,'pop'),('j_war',1.35,'pop'),('j_war','%0.55','boom'),('j_cart',.3,'boom'),('j_cart','%0.6','boom'),('j_cart','%0.8','wah'),('j_end',.2,'chime'),('j_sav',.2,'chime'),('j_sav',.5,'pop',4,.25),('j_final','%0.4','chime'),('j_final','%0.8','rimshot')],
 )

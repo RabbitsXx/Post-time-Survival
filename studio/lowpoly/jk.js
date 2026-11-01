@@ -5,7 +5,7 @@ function jkWig(){const g=new THREE.Group();g.scale.setScalar(1.4);g.position.y=.
 const JKJEN=person({coat:'#7a4a22',pants:'#e8e0d0',hair:'#5a3a22',skin:'#d9a27c',beard:'#5a3a22'});
 (()=>{const P=JKJEN;P.head.add(jkTricorn(0x2a2a2e,0xe8c040,0xc4202a));
  // bandage around the head over one ear + big knot
- const bd=cyl(.19,.19,.09,10,M(0xf4f0e4),0,.02,0,P.head);const knot=box(.1,.1,.08,M(0xf4f0e4),.19,.06,0,P.head);const pad=box(.07,.2,.14,M(0xf4f0e4),.19,-.03,.02,P.head);P.bandage=[bd,knot,pad];
+ const bd=cyl(.19,.19,.07,10,M(0xf4f0e4),0,.13,-.01,P.head);const knot=box(.1,.1,.08,M(0xf4f0e4),.2,.16,0,P.head);const pad=box(.06,.16,.12,M(0xf4f0e4),.19,-.03,.0,P.head);const chin=box(.04,.3,.05,M(0xf4f0e4),.18,.04,.02,P.head);P.bandage=[bd,knot,pad,chin];
  for(const sx of[-1,1])box(.34,.05,.14,JKGOLD,sx*.33,1.5,0,P.g);for(let i=0;i<4;i++)box(.03,.03,.02,JKGOLD,0,1.15+i*.12,.2,P.g)})();
 const JKSP=person({coat:'#e8e4d8',pants:'#e8e4d8',hair:'#2a1c14',skin:'#d0976e',stache:'#2a1c14'});
 (()=>{const P=JKSP;P.head.add(jkTricorn(0x16161a,0xe8e4d8,0xc4202a));box(.1,.7,.03,PARED,.0,1.18,.2,P.g).rotation.z=.6;
@@ -62,7 +62,7 @@ const JSH={
 j_hook:(u,d,k)=>{show(JKDECK,JKJEN,JKSP,JKEAR);jkSea();ground.visible=false;water.visible=false;S.background=new THREE.Color(0x7fc3e8);S.fog.color.set(0x7fc3e8);
  JKJEN.rest();JKJEN.at(-.45,0,.2,.35);JKSP.rest();JKSP.at(.55,0,.1,-1.25);JKJEN.bandage.forEach(m=>m.visible=false);JKJEN.face(u>.55?'shock':'bored');JKSP.face('angry');
  const sw=cl(u/.55);JKSP.arms[1].rotation.set(-2.2+sw*1.7,0,-.3-sw*.5);const f=cl((u-.45)/1.0);
- if(f>0){JKEAR.visible=true;JKEAR.position.set(lerp(-.25,.15,f),lerp(1.7,1.0,f)+Math.sin(f*Math.PI)*.9,lerp(.25,1.0,f));JKEAR.rotation.set(0,.25,f*11);JKEAR.scale.setScalar(.9+f*.7)}else JKEAR.visible=false;
+ if(f>0){JKEAR.visible=true;JKEAR.position.set(lerp(-.25,.05,f),lerp(1.75,1.15,f)+Math.sin(f*Math.PI)*.7,lerp(.2,.5,f));JKEAR.rotation.set(0,.2,f*9);JKEAR.scale.setScalar(.8+f*.35)}else JKEAR.visible=false;
  if(u>.55){JKJEN.arms[0].rotation.set(-.4,0,-1.2)}SHAKE=(u>.5&&u<.8)?.1:0;camTo([0,1.6,3.9],[0,1.55,3.6],[0,1.4,.1],[0,1.4,.1],k,42)},
 j_ship:(u,d,k)=>{paSea();show(PASHIP,JKSHIP);PASHIP.userData.flag.material.map=JKFLAGES;PASHIP.position.set(lerp(-4,-2.2,k),-.15+Math.sin(u*2)*.1,-11);PASHIP.rotation.set(0,.5,Math.sin(u*1.6)*.03);JKSHIP.userData.flag.material.map=UJ;JKSHIP.position.set(3,-.15+Math.sin(u*2+1)*.1,-12);JKSHIP.rotation.set(0,-.4,0);JKSHIP.scale.setScalar(.8);window.TAG('ATLANTIC','SPANISH COAST GUARD','#ffd83a');window.STAMP={on:1,u:u,text:'1731',c:'#c4202a',rot:-8};camTo([0,3.2,13],[0,3.2,13],[0,2.6,-12],[0,2.6,-12],0,44)},
 j_parl:(u,d,k)=>{show(JKHALL,JKJEN,...JKMP);tkOff();S.background=new THREE.Color(0x3a2a1a);S.fog.color.set(0x3a2a1a);HEMI.intensity=1.2;ground.visible=false;JKJEN.rest();JKJEN.at(0,0,.2,0);JKJEN.face('bored');JKJEN.arms[0].rotation.set(0,0,-.2);JKJEN.arms[1].rotation.set(-2.4,0,.2);
@@ -78,4 +78,4 @@ j_final:(u,d,k)=>{paSea();ground.visible=true;ground.material.map=grassT;ground.
 Object.assign(SHOTS,JSH);
 // cover: giant ear tumbling at the camera, shocked Jenkins behind, blurred deck
 Object.assign(SHOTS,{jkcover:(u,d,k)=>{show(JKDECK);jkSea();ground.visible=false;water.visible=false;S.background=new THREE.Color(0x7fc3e8);S.fog.color.set(0x7fc3e8);camTo([0,1.8,3.6],[0,1.8,3.6],[0,1.7,0],[0,1.7,0],0,40)},
- jkcoverc:(u,d,k)=>{tkOff();S.background=new THREE.Color(0x00ff00);S.fog.color.set(0x00ff00);HEMI.intensity=1.3;show(JKJEN,JKEAR);JKJEN.rest();JKJEN.at(0,0,0,.2);JKJEN.face('shock');JKJEN.arms[0].rotation.set(-.5,0,-1.2);JKJEN.arms[1].rotation.set(-.5,0,1.2);JKJEN.bandage.forEach(m=>m.visible=true);JKEAR.position.set(.35,1.55,1.0);JKEAR.rotation.set(0,.1,-.5);JKEAR.scale.setScalar(2.3);camTo([0,1.8,3.6],[0,1.8,3.6],[0,1.8,0],[0,1.8,0],0,40)}});
+ jkcoverc:(u,d,k)=>{tkOff();S.background=new THREE.Color(0x00ff00);S.fog.color.set(0x00ff00);HEMI.intensity=1.3;show(JKJEN,JKEAR);JKJEN.rest();JKJEN.at(0,0,0,.2);JKJEN.face('shock');JKJEN.arms[0].rotation.set(-.5,0,-1.2);JKJEN.arms[1].rotation.set(-.5,0,1.2);JKJEN.bandage.forEach(m=>m.visible=true);JKEAR.position.set(.42,2.15,.6);JKEAR.rotation.set(0,.1,-.3);JKEAR.scale.setScalar(.58);camTo([0,1.8,3.6],[0,1.8,3.6],[0,1.8,0],[0,1.8,0],0,40)}});
