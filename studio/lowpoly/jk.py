@@ -13,3 +13,5 @@ EP=dict(id='jk',title="The War Named After A Sailor's Ear",
  ],
  sfx=[('j_hook',.05,'whoosh'),('j_hook',.5,'whoosh'),('j_hook',.6,'boing'),('j_hook',1.1,'pop'),('j_ship',.2,'creak'),('j_parl',.2,'thump',4,.35),('j_parl','%0.6','chime'),('j_war',.3,'pop'),('j_war',.65,'pop'),('j_war',1.0,'pop'),('j_war',1.35,'pop'),('j_war','%0.55','boom'),('j_cart',.3,'boom'),('j_cart','%0.6','boom'),('j_cart','%0.8','wah'),('j_end',.2,'chime'),('j_sav',.2,'chime'),('j_sav',.5,'pop',4,.25),('j_final','%0.4','chime'),('j_final','%0.8','rimshot')],
 )
+
+PLACE_SHOTS=['j_ship','j_war','j_cart']   # shots that are about a place on purpose (frame gate F6)
