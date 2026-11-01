@@ -84,10 +84,11 @@ function update3D(sh,t,lt,dur,cam){for(const k in P3){P3[k].visible=false;P3[k].
   g.position.set(x,0,z);let yaw;if(mv&&c.to)yaw=Math.atan2(c.to[0]-c.pos[0],c.to[1]-c.pos[1]);else if(c.face)yaw=Math.atan2(c.face[0]-x,c.face[1]-z);else yaw=Math.atan2(cam.position.x-x,cam.position.z-z);if(mv&&c.to&&c.backwards&&c.face)yaw=Math.atan2(c.face[0]-x,c.face[1]-z);g.rotation.y=yaw;const e0=(()=>{const u=Math.min(1,Math.max(0,lt/Math.max(.01,dur)));return u*u*(3-2*u)})(),V=v=>Array.isArray(v)?v[0]+(v[1]-v[0])*e0:(v||0);
   const w=(mv&&!c.glide)?Math.sin(t*7.5):0,br=c.still?0:Math.sin(t*1.8+x)*.012;pr.legs[0].rotation.x=w*.6;pr.legs[1].rotation.x=-w*.6;pr.arms[0].rotation.x=-w*.5;pr.arms[1].rotation.x=w*.5;
   pr.body.position.y=mv?Math.abs(w)*.04:0;pr.torso.scale.y=1+br*1.5;pr.body.rotation.z=c.still?0:Math.sin(t*.9+x)*.01;
-  pr.head.rotation.x=0;pr.head.rotation.y=V(c.headYaw);pr.head.rotation.z=V(c.tilt);pr.body.rotation.x=V(c.lean);
+  pr.head.rotation.x=V(c.headX);pr.head.rotation.y=V(c.headYaw);pr.head.rotation.z=V(c.tilt);pr.body.rotation.x=V(c.lean);
   // hand-over: right arm reaches to the vendor
   const gv=c.give;if(gv&&lt>=gv.t0&&lt<gv.t1){const u=(lt-gv.t0)/(gv.t1-gv.t0),kk=Math.sin(Math.min(1,u)*Math.PI);pr.arms[1].rotation.x=-1.35*Math.min(1,kk*1.4)}
   const gs=c.gesture;if(gs&&lt>=gs.t0&&lt<gs.t1){const u=(lt-gs.t0)/(gs.t1-gs.t0);pr.arms[0].rotation.x=-2.4*Math.min(1,Math.sin(u*Math.PI)*1.5);pr.arms[0].rotation.z=.2}
+  if(c.reach){const r=V(c.reach);pr.arms[0].rotation.x=-1.5*r;pr.arms[1].rotation.x=-1.5*r;pr.arms[0].rotation.z=.12*r;pr.arms[1].rotation.z=-.12*r}
   if(pr.shins){for(let i=0;i<2;i++){pr.shins[i].rotation.x=Math.max(0,-pr.legs[i].rotation.x)*1.1+.02}}if(pr.fores){for(let i=0;i<2;i++)pr.fores[i].rotation.x=-(.12+Math.abs(pr.arms[i].rotation.x)*.45)}
   drawFace(pr.F,pr.cfg,c.expr||'calm');if(pr.hm)pr.hm.color.set(c.expr==='zomb'?'#76946c':pr.cfg.skin);const bl=g.userData.blob;bl.visible=!c.noShadow;bl.position.set(x,.02,z)}}
 function buildPeople3D(){for(const k in P3CFG)P3[k]=makePerson(P3CFG[k]);buildHands()}

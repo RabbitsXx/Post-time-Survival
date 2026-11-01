@@ -85,7 +85,11 @@ function buildStreet(){
 
  // roll-down shutter over the stall window (closed y=1.85, raised y=3.7)
  const shT=ctex(64,128,(x,w,h)=>{x.fillStyle='#8a8e92';x.fillRect(0,0,w,h);for(let y=0;y<h;y+=6){x.fillStyle='rgba(0,0,0,.35)';x.fillRect(0,y,w,2);x.fillStyle='rgba(255,255,255,.12)';x.fillRect(0,y+3,w,1)}for(let i=0;i<40;i++){x.fillStyle='rgba(60,30,10,.15)';x.fillRect(Math.random()*w,Math.random()*h,3,10)}});
- const sht=new THREE.Mesh(new THREE.PlaneGeometry(4.5,1.7),new THREE.MeshStandardMaterial({map:shT,roughness:.6,metalness:.5,side:THREE.DoubleSide}));sht.position.set(KX,3.7,KZ+1.1);sht.rotation.y=Math.PI;sht.visible=false;S.add(sht);window.SHUTTER=sht;
+ const shM=new THREE.MeshStandardMaterial({map:shT,roughness:.6,metalness:.5,side:THREE.DoubleSide});const sht=new THREE.Group();
+ const panel=(w,h,x,y)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),shM);m.position.set(x,y,0);sht.add(m)};
+ panel(4.5,.95,0,.375);panel(4.5,.49,0,-.605);panel(1.97,.26,-1.265,-.23);panel(1.97,.26,1.265,-.23);
+ const rim=MC(0x2a2a2e,.5,.6);for(const [w,h,x,y] of[[.58,.03,0,-.1],[.58,.03,0,-.36],[.03,.26,-.29,-.23],[.03,.26,.29,-.23]]){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,.05),rim);m.position.set(x,y,0);sht.add(m)}
+ sht.position.set(KX,3.7,KZ+1.1);sht.rotation.y=Math.PI;sht.visible=false;S.add(sht);window.SHUTTER=sht;
  // ---- control panel on the stall's side wall: CCTV monitor + big red CLOSE button (the player turns to use these) ----
  const px=KX+2.12,pz=KZ+.2;bx(.08,.72,.78,MC(0x2a2e34,.5,.4),px+.04,1.4,pz);
  // live CCTV: second camera on the awning corner renders the real stall front into this monitor
