@@ -59,6 +59,10 @@ function buildKiosk(){
  const awn=ctex(256,128,(x,w,h)=>{for(let i=0;i<10;i++){x.fillStyle=i%2?'#e8e0d0':'#c8342a';x.fillRect(i*w/10,0,w/10,h)}x.fillStyle='rgba(0,0,0,.25)';x.fillRect(0,h-10,w,10)});
  // floor + side walls + back
  bx(4.4,.1,3.6,MC(0x3a2c20,.9),KX,-.05,KZ-.8);bx(.12,2.7,3.6,WM,KX-2.2,1.35,KZ-.8);bx(.12,2.7,3.6,WM,KX+2.2,1.35,KZ-.8);bx(4.4,2.7,.12,WM,KX,1.35,KZ-2.55);
+ // staff door in the left (street-facing) side wall: frame, panel, handle, lock plate, sign
+ bx(.06,2.15,1.0,DK,KX-2.27,1.08,KZ-1.85);bx(.05,2.0,.86,MC(0x9a7048,.8),KX-2.31,1.02,KZ-1.85);bx(.04,1.9,.02,DK,KX-2.34,1.02,KZ-1.85);
+ cyl(.025,.14,MC(0xc8c8c8,.3,.9),KX-2.37,1.0,KZ-1.55,Math.PI/2,0,S,8);bx(.03,.12,.07,MC(0xb8b8b8,.3,.9),KX-2.35,1.0,KZ-1.55);bx(.02,.09,.05,MC(0x2a2a2a,.5,.5),KX-2.35,.88,KZ-1.55);
+ const dsg=new THREE.Mesh(new THREE.PlaneGeometry(.5,.16),new THREE.MeshBasicMaterial({map:signTex('STAFF ONLY','#1a1410','#ffd070',256,80,17),fog:true}));dsg.position.set(KX-2.345,1.55,KZ-1.85);dsg.rotation.y=-Math.PI/2;S.add(dsg);
  // counter: front board + top
  bx(4.4,1.0,.5,WM,KX,.5,KZ+.9);bx(4.6,.07,.8,MC(0x5a544c,.45,.25),KX,1.02,KZ+.95);
  // window frame posts and header
