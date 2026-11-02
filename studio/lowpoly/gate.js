@@ -9,5 +9,5 @@ await p.goto('http://localhost:'+port+'/lowpoly/scene.html?w=1080&h=1920',{waitU
 const res=[];
 S.shots.forEach((sh,si)=>{});
 for(let si=0;si<S.shots.length;si++){const sh=S.shots[si],d=sh.t1-sh.t0;const fr=si===0?[.03,.12,.25,.5,.9]:[.08,.5,.92];
- for(let k=0;k<fr.length;k++){const t=sh.t0+d*fr[k];const f=Math.round(t*30);const id=await p.evaluate(f=>window.renderAt(f),f);const info=await p.evaluate(()=>window.gateInfo());const file=`${String(si).padStart(2,'0')}_${id}_${k}.jpg`;await p.screenshot({path:out+'/'+file,type:'jpeg',quality:90});res.push({shot:si,id,k,t:+t.toFixed(2),file,info})}}
+ for(let k=0;k<fr.length;k++){const t=sh.t0+d*fr[k];const f=Math.round(t*30);const id=await p.evaluate(f=>window.renderAt(f),f);const info=await p.evaluate(()=>window.gateInfo());const file=`${String(si).padStart(2,'0')}_${id}_${k}.jpg`;for(let tr=0;tr<4;tr++){try{await p.screenshot({path:out+'/'+file,type:'jpeg',quality:90,timeout:90000});break}catch(e){if(tr==3)throw e;console.log('retry',file)}}res.push({shot:si,id,k,t:+t.toFixed(2),file,info})}}
 fs.writeFileSync(out+'/gate.json',JSON.stringify(res,null,1));await br.close();srv.close()});

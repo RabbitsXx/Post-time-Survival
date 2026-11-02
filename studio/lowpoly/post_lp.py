@@ -14,9 +14,12 @@ def host(files):
     w=tempfile.mkdtemp(prefix='lpmedia_')
     try:
         sh('git','init','-q',cwd=w);sh('git','remote','add','origin',REPO_URL,cwd=w);sh('git','config','user.email','lowpoly@posttimelowpoly.invalid',cwd=w);sh('git','config','user.name','posttimelowpoly',cwd=w)
-        sh('git','checkout','-q','--orphan','lowpoly-media',cwd=w);os.makedirs(w+'/media')
+        f=sh('git','fetch','-q','--depth','1','origin','lowpoly-media',cwd=w,ok=True)   # keep media of earlier SCHEDULED posts on the branch (Buffer may fetch the file at publish time)
+        if f.returncode==0:sh('git','checkout','-q','-B','lowpoly-media','FETCH_HEAD',cwd=w)
+        else:sh('git','checkout','-q','--orphan','lowpoly-media',cwd=w)
+        os.makedirs(w+'/media',exist_ok=True)
         for n,p in files.items():shutil.copy(p,f'{w}/media/{n}')
-        sh('git','add','media',cwd=w);sh('git','commit','-q','-m','lowpoly media: '+', '.join(files),cwd=w)
+        sh('git','add','media',cwd=w);sh('git','commit','-q','-m','lowpoly media: '+', '.join(files),'--allow-empty',cwd=w)
         for d in(0,2,4,8,16):
             time.sleep(d);p=sh('git','push','-q','-f','origin','HEAD:refs/heads/lowpoly-media',cwd=w,ok=True)
             if p.returncode==0:break
