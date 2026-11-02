@@ -8,6 +8,7 @@ const VPAGES=[...Array(10)].map((_,i)=>{const m=box(.4,.02,.3,M(0xf8f4e8),0,0,0)
 const VSIGNW=kitPost('W','#f4e8c0','#2a2a2a',.6,.6,34,1.0),VSIGNE=kitPost('E','#f4e8c0','#2a2a2a',.6,.6,34,1.0);
 const VSN=(a,b,bg,fg,w)=>{const s=kitSign2(a,b,bg||'#f4e8c0',fg||'#2a2a2a',w||1.7,.8,17);S.add(s);ACT.push(s);return s};
 const VCAL=VSN('DAY','243','#f4e8c0','#8a1a2a',1.2),VCLOUD=VSN('CLOUDS','BLOCK IT','#f4e8c0','#2a2a2a',1.6),VSUIT=VSN('CHECK-OUT','???','#f4e8c0','#2a2a6a',1.7);
+const VCMP1=VSN('ONE DAY','243 DAYS','#f4e8c0','#8a1a2a',1.8),VCMP2=VSN('ONE YEAR','225 DAYS','#f4e8c0','#2a4aa0',1.8);
 const VSUITCASE=(()=>{const g=new THREE.Group();box(.6,.45,.2,M(0x8a3a2a),0,.25,0,g);box(.2,.05,.05,M(0x222222),0,.52,0,g);S.add(g);ACT.push(g);return g})();
 const _vh=hideAll;hideAll=function(){_vh();VPLAN.scale.setScalar(1);VPLAN.rotation.set(0,0,0)};
 function vSpace(){kitEnv(0x05060e,1.1,0x05060e);show(KSTAR)}
@@ -20,7 +21,9 @@ v_spin:(u,d,k)=>{vSpace();show(VPLAN);VPLAN.position.set(0,1.4,0);VPLAN.scale.se
  const g=cl(u/(d*.9));window.STAMP={on:1,u:1,text:Math.round(243*g)+' DAYS',c:'#c4202a',rot:-4};window.TAG('ONE SPIN','TAKES 243 DAYS','#ff9a5a');camTo([0,1.7,6.2],[0,1.7,5.6],[0,1.4,0],[0,1.4,0],k,56)},
 v_orbit:(u,d,k)=>{vSpace();show(TSUN,VPLAN,VRING);TSUN.position.set(0,0,0);TSUN.scale.setScalar(.8);const g=ease(cl(u/(d*.85)));const ang=g*Math.PI*2;VPLAN.scale.setScalar(.55);VPLAN.position.set(Math.cos(ang)*2.6,0,Math.sin(ang)*2.6);VRING.position.set(0,0,0);
  VPLAN.rotation.y=-g*Math.PI*2*(224.7/243);window.STAMP={on:1,u:1,text:Math.round(225*g)+' DAYS',c:'#2a4aa0',rot:-4};window.TAG('ONE ORBIT','TAKES 225 DAYS','#7ad0ff');if(g>=1){const q=kitMark('?','#c4202a','#fff');kitMarkAt(q,2.6,1.2,0,.6)}camTo([0,5.8,5.6],[0,5.4,5.2],[0,0,0],[0,0,0],k,52)},
-v_west:(u,d,k)=>{vSurf();show(CAST,VSIGNW,VSIGNE,VCLOUD,TSUN);vA('happy');CAST.at(0,0,1.6,0);CAST.arms[1].rotation.set(-2.6+Math.sin(u*6)*.2,0,.3);VSIGNW.position.set(-1.7,0,.8);VSIGNE.position.set(1.7,0,.8);VSIGNW.scale.setScalar(.9);VSIGNE.scale.setScalar(.9);
+v_cmp:(u,d,k)=>{vSurf();show(CAST,VCMP1,VCMP2);vA('smug');CAST.at(0,0,1.7,0);CAST.arms[0].rotation.set(-1.5,0,.9);CAST.arms[1].rotation.set(-1.5,0,-.9);CAST.head.rotation.z=Math.sin(u*3)*.06;VCMP1.position.set(-.82,2.35,1.6);VCMP2.position.set(.82,2.35,1.6);VCMP1.scale.setScalar(.46*kitPop(u,.2,.12,8));VCMP2.scale.setScalar(.46*kitPop(u,.7,.12,8));
+ window.STAMP={on:1,u:u-d*.62,text:'LONGER!',c:'#c4202a',rot:-5};camTo([0,1.8,6.0],[0,1.8,5.5],[0,1.5,1.5],[0,1.5,1.5],k,58)},
+ v_west:(u,d,k)=>{vSurf();show(CAST,VSIGNW,VSIGNE,VCLOUD,TSUN);vA('happy');CAST.at(0,0,1.6,0);CAST.arms[1].rotation.set(-2.6+Math.sin(u*6)*.2,0,.3);VSIGNW.position.set(-1.7,0,.8);VSIGNE.position.set(1.7,0,.8);VSIGNW.scale.setScalar(.9);VSIGNE.scale.setScalar(.9);
  const g=ease(cl(u/(d*.7)));TSUN.position.set(-2.4,lerp(.2,2.2,g),-3.0);TSUN.scale.setScalar(.55);VCLOUD.position.set(.55,2.8,1.0);VCLOUD.scale.setScalar(.7*kitPop(u,.6,.12,8));window.TAG('THE SUN RISES','IN THE WEST','#ffd83a');camTo([0,1.8,6.4],[0,1.8,5.9],[0,1.5,0],[0,1.5,0],k,58)},
 v_117:(u,d,k)=>{vSurf();show(CAST,TSUN);vA('bored');CAST.at(0,0,1.6,0);CAST.arms[1].rotation.set(-1.4,0,-.3);CAST.head.rotation.x=.25;const g=cl(u/(d*.85));TSUN.position.set(lerp(-2.0,2.0,g),lerp(2.0,.5,g)+Math.sin(g*Math.PI)*1.5,-3.0);TSUN.scale.setScalar(.5);
  window.STAMP={on:1,u:1,text:Math.round(117*g)+' DAYS',c:'#2a6a3a',rot:-4};window.TAG('SUNRISE TO','SUNRISE','#ffd83a');camTo([0,1.8,6.2],[0,1.8,5.7],[0,1.5,1.0],[0,1.5,1.0],k,58)},

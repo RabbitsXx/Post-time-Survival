@@ -10,5 +10,5 @@
 | 7 | stink | The Smell That Made Parliament Want To Leave | 2026-11-02 23:53:52 | 06:53 | scheduled |
 | 8 | cleo | Cleopatra Lived Closer To The Moon Landing Than The Pyramids | 2026-11-03 01:23:52 | 08:23 | scheduled |
 | 9 | tardi | The Tiny Animal That Survived Outer Space | 2026-11-03 02:53:52 | 09:53 | scheduled |
-| 10 | venus | On Venus, A Day Is Longer Than A Year | 2026-11-03 04:23:52 | 11:23 | rendering |
+| 10 | venus | On Venus, A Day Is Longer Than A Year | 2026-11-03 04:23:52 | 11:23 | scheduled |
 Tags / pinned comments per clip: topics/<id>.meta.json. Buffer cannot set YouTube tags: paste them in YouTube Studio.
