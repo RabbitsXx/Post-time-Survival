@@ -26,7 +26,7 @@ function sEnv(sk,fog){kitEnv(sk||0xd8d8a0,1.2,fog==null?0xd8d8a0:fog);show(SRIVE
 function sP(P,face){P.rest();P.face(face)}
 function nose(P){P.arms[1].rotation.set(-2.5,0,-.35)}
 const STH={
-s_hook:(u,d,k)=>{sEnv();STOWER.position.set(3.4,0,-4.5);STOWER.scale.setScalar(.8);SMP.forEach((P,i)=>{show(P);sP(P,'shock');const x=lerp(1.0,-1.0,ease(cl(u/(d*.9))))+i*.7-.7;P.at(x-i*.35,0,1.2+i*.2,-Math.PI/2-.2);P.walk(u+i,11,.7);nose(P)});sCloud(1.7,1.1,.5,u,2.1,14);
+s_hook:(u,d,k)=>{sEnv();STOWER.position.set(3.4,0,-4.5);STOWER.scale.setScalar(.8);SMP.forEach((P,i)=>{show(P);sP(P,'shock');const x=lerp(1.1,-.15,ease(cl(u/(d*.9))))+i*.6-.3;P.at(x-i*.35,0,1.2+i*.2,-Math.PI/2-.2);P.walk(u+i,11,.7);nose(P)});sCloud(1.7,1.1,.5,u,2.1,14);
  window.TAG('LONDON 1858','THE GREAT STINK','#8aca4a');camTo([0,2.0,7.4],[0,2.0,6.8],[0,1.4,0],[0,1.4,0],k,58)},
 s_river:(u,d,k)=>{sEnv(0xe8d890,0xe8d890);show(SPIPE,SMP[0]);STOWER.position.set(-4.6,0,-5.5);STOWER.scale.setScalar(.8);SPIPE.position.set(-.6,.4,0);SPIPE.rotation.y=.5;const f=cl(u/(d*.5));SPIPE.userData.s.scale.set(1,1,Math.max(.01,f));SPIPE.userData.s.position.z=.6+f*1.3;
  sCloud(.9,.8,-1.0,u,2.0,10);sP(SMP[0],'sweat');SMP[0].at(1.15,0,1.4,-.7);nose(SMP[0]);SMP[0].head.rotation.z=Math.sin(u*3)*.1;const sun=kitMark('*','#ffd83a','#fff2a0');kitMarkAt(sun,-1.4,3.9,-1,.9);window.TAG('A HOT SUMMER','AND NO SEWAGE PLANT','#ff9a5a');camTo([0,1.9,6.6],[0,1.9,6.1],[0,1.0,0],[0,1.0,0],k,58)},
@@ -42,4 +42,4 @@ s_end:(u,d,k)=>{kitEnv(0xa8d8f0,1.3,0xc8e8f8);show(SRIVER,STOWER,SFLOW,SMP[0],SM
  SMP.forEach((P,i)=>{sP(P,'happy');P.at([-1.2,0,1.2][i],0,1.3+(i===1?.3:0),[.4,0,-.4][i]);P.arms[0].rotation.set(-.2,0,.1);P.arms[1].rotation.set(-2.7+Math.sin(u*8+i)*.3,0,.3);P.g.position.y=Math.abs(Math.sin(u*7+i))*.05});window.STAMP={on:1,u:u-.4,text:'STILL WORKS TODAY',c:'#2a6a3a',rot:-4};camTo([0,2.0,6.8],[0,2.0,6.3],[0,1.2,0],[0,1.2,0],k,58)}
 };
 Object.assign(SHOTS,STH);
-Object.assign(SHOTS,{scover:(u,d,k)=>{sEnv();show(SMP[0],SMP[1]);STOWER.position.set(2.8,0,-4.5);STOWER.scale.setScalar(.9);sP(SMP[0],'shock');SMP[0].at(-.7,0,1.8,.3);nose(SMP[0]);sP(SMP[1],'shock');SMP[1].at(.7,0,1.8,-.3);nose(SMP[1]);sCloud(.0,1.5,.8,1.2,2.4,14);camTo([0,2.0,6.4],[0,2.0,6.4],[0,1.7,0],[0,1.7,0],0,56)}});
+Object.assign(SHOTS,{scover:(u,d,k)=>{sEnv();show(SMP[0],SMP[1]);STOWER.position.set(2.8,0,-4.5);STOWER.scale.setScalar(.9);sP(SMP[0],'shock');SMP[0].at(-.7,0,1.8,.3);nose(SMP[0]);sP(SMP[1],'shock');SMP[1].at(.7,0,1.8,-.3);nose(SMP[1]);sCloud(0,2.6,-2.0,1.2,2.6,14);camTo([0,2.0,6.4],[0,2.0,6.4],[0,1.7,0],[0,1.7,0],0,56)}});

@@ -1,6 +1,6 @@
 # THE GREAT STINK (London 1858).  Facts: topics/stink.md (Wikipedia "Great Stink", raw text).
 # Hook plan: frame 0 = three MPs already fleeing a green cloud with their noses held; tag names the event.
-EP=dict(id='stink',title="The Smell That Almost Shut Down Parliament",
+EP=dict(id='stink',title="The Smell That Made Parliament Want To Leave",
  lines=[
   dict(t="In 1858, the Thames smelled so bad that Parliament talked about leaving London.",c=["In 1858,","the Thames smelled so bad","that Parliament talked","about leaving London."],v='narr',pad=.1,shots=[('s_hook',1)]),
   dict(t="Untreated sewage flowed straight into the river, and a hot summer cooked it.",c=["Untreated sewage flowed","straight into the river,","and a hot summer","cooked it."],v='narr',pad=.1,shots=[('s_river',1)]),

@@ -1,4 +1,4 @@
-# stink — The Smell That Almost Shut Down Parliament (source: Wikipedia "Great Stink", raw text fetched 2026-11-02)
+# stink — The Smell That Made Parliament Want To Leave (source: Wikipedia "Great Stink", raw text fetched 2026-11-02)
 | # | spoken line | status | source |
 |---|---|---|---|
 | 1 | In 1858, the Thames smelled so bad that Parliament talked about leaving London. | OK | "July and August 1858 ... smell of untreated human waste"; "discussions were held about possibly moving the business of government to Oxford or St Albans" |

@@ -1,13 +1,14 @@
-# Batch-10 schedule (UTC). T0 = 2026-11-02 13:43:01Z (emu posted live). Slots every 1h30.
-| # | id | title | slot (UTC) | status |
-|---|---|---|---|---|
-| 1 | emu | The Army That Lost A War To Birds | 13:43 (live) | posted |
-| 2 | buck | The War Named After A Bucket | 2026-11-02 15:13 | building |
-| 3 | hans | The War Fought With Whisky | 2026-11-02 16:43 | drafted |
-| 4 | berry | Strawberries Are Not Berries | 2026-11-02 18:13 | drafted |
-| 5 | nils | (penguin knighted general) | 2026-11-02 19:43 | todo |
-| 6 | lust | (man who sold the Eiffel Tower) | 2026-11-02 21:13 | todo |
-| 7 | stink | (Great Stink of London) | 2026-11-02 22:43 | todo |
-| 8 | tardi | (tardigrade in space) | 2026-11-03 00:13 | todo |
-| 9 | venus | (Venus day longer than year) | 2026-11-03 01:43 | todo |
-| 10 | cleo | (Cleopatra timeline) | 2026-11-03 03:13 | todo |
+# Batch-10 schedule (UTC). T0 = 2026-11-02 14:53:52Z (emu live; the first attempt at 13:43Z failed with a Buffer "lost authorization" error and was re-posted). Slots every 1h30 from T0.
+| # | id | title | publish time (UTC) | Thai time (UTC+7) | status |
+|---|---|---|---|---|---|
+| 1 | emu | The Army That Lost A War To Birds | 2026-11-02 14:53:52 | 21:53 | LIVE https://www.youtube.com/watch?v=rB-KVxit0FE |
+| 2 | buck | The War Named After A Bucket | 2026-11-02 16:23:52 | 23:23 | scheduled |
+| 3 | hans | The War Fought With Whisky | 2026-11-02 17:53:52 | 00:53 (3 Nov) | scheduled |
+| 4 | berry | Strawberries Are Not Berries | 2026-11-02 19:23:52 | 02:23 | scheduled |
+| 5 | nils | The Penguin Who Is A Major General | 2026-11-02 20:53:52 | 03:53 | scheduled |
+| 6 | lust | The Man Who Sold The Eiffel Tower | 2026-11-02 22:23:52 | 05:23 | scheduled |
+| 7 | stink | The Smell That Made Parliament Want To Leave | 2026-11-02 23:53:52 | 06:53 | scheduled |
+| 8 | cleo | Cleopatra Lived Closer To The Moon Landing Than The Pyramids | 2026-11-03 01:23:52 | 08:23 | scheduled |
+| 9 | tardi | The Tiny Animal That Survived Outer Space | 2026-11-03 02:53:52 | 09:53 | scheduled |
+| 10 | venus | On Venus, A Day Is Longer Than A Year | 2026-11-03 04:23:52 | 11:23 | rendering |
+Tags / pinned comments per clip: topics/<id>.meta.json. Buffer cannot set YouTube tags: paste them in YouTube Studio.

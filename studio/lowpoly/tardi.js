@@ -1,0 +1,49 @@
+// TARDIGRADE IN SPACE (FOTON-M3, 2007).  Models: tardigrade (segmented body, 8 stubby legs with claws, googly eyes), Earth, capsule with 30-tube rack, Sun with UV rays, dried "tun" ball, water drop, scientist, moss.
+const KSTAR=(()=>{const g=new THREE.Group();const geo=new THREE.BufferGeometry();const p=[];for(let i=0;i<500;i++){const a=rn(i)*6.28,b=rn(i+9)*3.14-1.57,r=60+rn(i+3)*30;p.push(Math.cos(a)*Math.cos(b)*r,Math.sin(b)*r*.8+10,Math.sin(a)*Math.cos(b)*r-30)}geo.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xffffff,size:.7,sizeAttenuation:true})));S.add(g);ACT.push(g);return g})();
+function tardiModel(){const g=new THREE.Group(),P={g};const tm=new THREE.MeshLambertMaterial({map:fab('#d8c0a0',{seed:21,noise:.2}),flatShading:true});P.body=new THREE.Group();g.add(P.body);P.body.position.y=.55;
+ [[.0,.42,.5],[-.28,.55,.42],[-.62,.58,.44],[-.95,.5,.4],[-1.22,.32,.28]].forEach(([z,r,h],i)=>{const m=new THREE.Mesh(new THREE.SphereGeometry(r,10,8),tm);m.scale.set(1,.85,1);m.position.set(0,0,z*1.6);P.body.add(m)});
+ const sn=cone(.18,.35,6,tm,0,-.05,.9,P.body);sn.rotation.x=Math.PI/2;
+ P.pup=[];for(const sx of[-1,1]){const e=new THREE.Mesh(new THREE.IcosahedronGeometry(.17,1),M(0xffffff));e.position.set(sx*.26,.22,.62);P.body.add(e);const q=new THREE.Mesh(new THREE.IcosahedronGeometry(.085,0),M(0x111111));q.position.set(sx*.26,.22,.77);P.body.add(q);P.pup.push(q)}
+ P.legs=[];for(let i=0;i<4;i++)for(const sx of[-1,1]){const l=new THREE.Group();l.position.set(sx*.42,-.18,.35-i*.55);P.body.add(l);const c=cyl(.12,.14,.4,6,tm,sx*.12,-.12,0,l);c.rotation.z=sx*.5;for(let j=-1;j<=1;j++){const cl=cone(.025,.14,4,M(0x3a3028),sx*.3+j*.0,-.34,j*.07,l);cl.rotation.z=sx*.3}P.legs.push(l)}
+ P.rest=()=>{P.legs.forEach(l=>l.rotation.set(0,0,0));P.body.position.y=.55;P.body.rotation.set(0,0,0);g.rotation.set(0,0,0);g.scale.setScalar(1);P.body.scale.set(1,1,1)};
+ P.walk=(t,sp)=>{sp=sp||8;P.legs.forEach((l,i)=>{l.rotation.x=Math.sin(t*sp+i*1.3)*.5});P.body.position.y=.55+Math.abs(Math.sin(t*sp*.5))*.04};
+ P.at=(x,y,z,ry)=>{g.position.set(x,y,z);g.rotation.y=ry};S.add(g);ACT.push(g);return P}
+const TARD=tardiModel();const TROW=[0,1,2,3].map(()=>tardiModel());
+const TXE=(()=>{const g=new THREE.Group();const t=NKEARTH.userData.m.material.map;const m=new THREE.Mesh(new THREE.SphereGeometry(1,20,14),new THREE.MeshLambertMaterial({map:t}));g.add(m);S.add(g);ACT.push(g);return g})();
+const TCAP=(()=>{const g=new THREE.Group();const m=new THREE.Mesh(new THREE.SphereGeometry(1.1,14,10),M(0xb8b8c0));g.add(m);cyl(1.12,1.12,.2,14,M(0x3a3a44),0,.2,0,g);const w=new THREE.Mesh(new THREE.CircleGeometry(.35,10),new THREE.MeshBasicMaterial({color:0x9ad0f0}));w.position.set(0,.55,1.02);g.add(w);
+ const s=paSign('FOTON-M3','#c4202a','#ffffff',1.2,.4,18);s.position.set(0,-.35,1.07);g.add(s);S.add(g);ACT.push(g);return g})();
+const TTUBE=kitCrowd(30,[0xd8c0a0],.14);(()=>{for(let i=0;i<30;i++)TTUBE.userData.place(i,(i%10-4.5)*.22,0,(Math.floor(i/10)-1)*.3);TTUBE.userData.done()})();
+const TSUN=(()=>{const g=new THREE.Group();g.add(new THREE.Mesh(new THREE.SphereGeometry(1,14,10),new THREE.MeshBasicMaterial({color:0xffd83a})));for(let i=0;i<12;i++){const c=cone(.2,.7,4,new THREE.MeshBasicMaterial({color:0xffb030}),Math.cos(i*.5236)*1.25,Math.sin(i*.5236)*1.25,0,g);c.rotation.z=i*.5236-Math.PI/2}S.add(g);ACT.push(g);return g})();
+const TRAYS=[...Array(7)].map((_,i)=>{const m=box(.12,1.4,.12,new THREE.MeshBasicMaterial({color:0xc060ff,transparent:true,opacity:.8}),0,0,0);m.visible=false;S.add(m);ACT.push(m);return m});
+const TXEYE=(()=>{const g=new THREE.Group();const a=box(.5,.1,.1,M(0x111111),0,0,0,g);a.rotation.z=.8;const b=box(.5,.1,.1,M(0x111111),0,0,0,g);b.rotation.z=-.8;g.visible=false;return g})();
+const TTUN=(()=>{const m=new THREE.Mesh(new THREE.IcosahedronGeometry(.5,1),new THREE.MeshLambertMaterial({color:0x8a6a4a,flatShading:true}));m.scale.set(1,.8,1);S.add(m);ACT.push(m);return m})();
+const TDROP=(()=>{const g=new THREE.Group();const m=new THREE.Mesh(new THREE.SphereGeometry(.18,8,6),new THREE.MeshBasicMaterial({color:0x4aa0ff,transparent:true,opacity:.85}));m.scale.y=1.4;g.add(m);S.add(g);ACT.push(g);return g})();
+const TSCI=person({coat:'#f4f4f8',pants:'#3a3a4a',hair:'#4a3020',skin:'#e8b894',boots:1,belt:1,stubble:1});(()=>{for(const sx of[-1,1]){const r=new THREE.Mesh(new THREE.TorusGeometry(.06,.012,4,8),M(0x222222));r.position.set(sx*.09,.03,.2);TSCI.head.add(r)}box(.2,.012,.012,M(0x222222),0,.03,.2,TSCI.head)})();
+const TMOSS=(()=>{const g=new THREE.Group();box(10,.1,6,M(0x5a4a3a),0,-.06,0,g);for(let i=0;i<30;i++){const b=new THREE.Mesh(new THREE.IcosahedronGeometry(.35+rn(i)*.4,0),M([0x4a9a3a,0x5aaa44,0x3a8a32][i%3]));b.position.set((rn(i+5)-.5)*8,.2,(rn(i+9)-.5)*4-1);b.scale.y=.6;g.add(b)}S.add(g);ACT.push(g);return g})();
+const TSIGN=(a,b,bg,fg,w)=>{const s=kitSign2(a,b,bg,fg,w||1.7,.8,17);S.add(s);ACT.push(s);return s};
+const TS1=TSIGN('MOSS PIGLET','WATER BEAR','#f4e8c0','#2a2a2a'),TS2=TSIGN('FOTON-M3','2007','#f4e8c0','#2a2a6a'),TS3=TSIGN('NO','SPACESUIT','#f4e8c0','#8a1a2a',1.4);
+const _th=hideAll;hideAll=function(){_th();TARD.rest();TROW.forEach(t=>t.rest());TTUBE.userData.setN(0);TXEYE.visible=false;TRAYS.forEach(r=>r.visible=false);TTUN.scale.set(1,.8,1)};
+function tEnv(space){if(space){kitEnv(0x05060e,1.0,0x05060e);show(KSTAR)}else{kitEnv(0xd8ecff,1.25,0xe8f2fa)}}
+function tFace(P,x){P.pup.forEach((p,i)=>{p.position.x=(i?1:-1)*.26+x*.05})}
+const TH={
+t_hook:(u,d,k)=>{tEnv(1);show(TARD,TXE,TS3);TXE.position.set(-.8,-2.3,-4);TXE.scale.setScalar(3.2);TXE.rotation.y=u*.4+1;const T=TARD;T.rest();const f=ease(cl(u/1.1));T.at(lerp(-2.4,.2,f),lerp(.8,1.3,f),lerp(-1,1.2,f),.4+Math.sin(u*3)*.3);T.g.scale.setScalar(1.15);T.g.rotation.z=Math.sin(u*2.2)*.4;T.g.rotation.x=Math.sin(u*1.7)*.2;T.walk(u*2,12);T.legs.forEach((l,i)=>l.rotation.z=Math.sin(u*9+i)*.5);tFace(T,Math.sin(u*3));
+ TS3.position.set(.1,3.05,.6);TS3.scale.setScalar(u>.9?.85*kitPop(u,.9,.15,8):.001);if(u>.9)SHAKE=.04*Math.exp(-(u-.9)*6);camTo([0,1.5,6.2],[0,1.5,5.6],[0,1.2,0],[0,1.2,0],k,58)},
+t_meet:(u,d,k)=>{tEnv(0);show(TMOSS,TARD,TSCI,TS1);const T=TARD;T.rest();T.at(.3,.05,1.8,-.3);T.g.scale.setScalar(.8);T.walk(u,7);tFace(T,Math.sin(u*2));TS1.position.set(.8,2.6,.4);TS1.scale.setScalar(.8*kitPop(u,.2,.12,8));
+ TSCI.rest();TSCI.face('happy');TSCI.at(-1.0,0,1.2,.6);TSCI.arms[1].rotation.set(-1.4,0,-.4);TSCI.head.rotation.x=.3;window.STAMP={on:1,u:u-.4,text:'8 LEGS',c:'#2a6a3a',rot:-5};camTo([0,1.7,6.0],[0,1.7,5.5],[0,.9,1.4],[0,.9,1.4],k,56)},
+t_launch:(u,d,k)=>{tEnv(1);show(TCAP,TXE,TTUBE);TXE.position.set(1.3,-2.8,-4.5);TXE.scale.setScalar(3.4);TXE.rotation.y=u*.3;TCAP.position.set(-.2,.6,0);TCAP.rotation.y=u*.3;TCAP.rotation.z=.15;const g=cl(u/(d*.6));TTUBE.userData.setN(30*g);TTUBE.position.set(-.2,2.25,.2);TTUBE.rotation.set(-.5,0,0);TTUBE.scale.setScalar(1.3);
+ window.TAG('30 TARDIGRADES','10 DAYS IN SPACE','#7ad0ff');camTo([0,1.8,6.6],[0,1.8,6.0],[0,1.2,0],[0,1.2,0],k,58)},
+t_uv:(u,d,k)=>{tEnv(1);show(TSUN);TSUN.position.set(1.7,3.2,-.6);TSUN.scale.setScalar(.7);TSUN.rotation.z=u*.3;const hit=ease(cl((u-d*.45)/.4));
+ [0,1,2,3].forEach(i=>{const T=TROW[i];show(T);T.rest();const x=-1.2+i*.8;T.at(x,0,1.0,.3);T.g.scale.setScalar(.5);T.walk(u+i,6);tFace(T,0)});
+ TRAYS.forEach((r,i)=>{r.visible=u>d*.4;const t=cl((u-d*.4-i*.05)*1.5);r.position.set(lerp(1.7,-1.3+i*.45,t),lerp(3.0,1.2,t),.8);r.rotation.z=.7;r.visible=u>d*.4&&t<1});
+ TXEYE.visible=false;[1,2,3].forEach(i=>{const T=TROW[i];if(u>d*.75){T.g.rotation.z=Math.PI;T.g.position.y=.55;T.legs.forEach((l,j)=>l.rotation.x=Math.sin(u*14+j)*.3)}});
+ window.TAG(u<d*.4?'VACUUM ALONE':'ADD SUN UV','NO PROBLEM','#7affc0');if(u>=d*.4)window.TAG('ADD THE SUN\'S','UV LIGHT','#ff9a5a');window.STAMP={on:u>d*.75?1:0,u:u-d*.75,text:'MANY DIED',c:'#c4202a',rot:-5};camTo([0,1.6,6.0],[0,1.6,5.5],[0,1.3,.6],[0,1.3,.6],k,58)},
+t_revive:(u,d,k)=>{tEnv(0);const fl=kitFloor(0xe8e0d0,30,30);show(fl,TTUN,TSCI,TDROP);const dr=cl((u-.2)/.8);TDROP.position.set(.2,lerp(3.0,.8,dr),1.8);TDROP.visible=dr<1;TTUN.position.set(.2,.45,1.8);const rv=ease(cl((u-1.1)/.8));TTUN.visible=rv<1;TTUN.scale.set(1-rv*.5,.8-rv*.4,1-rv*.5);
+ if(rv>0){show(TARD);const T=TARD;T.rest();T.at(.2,0,1.8,0);T.g.scale.setScalar(.8*rv);T.walk(u,9);tFace(T,0)}TSCI.rest();TSCI.face('happy');TSCI.at(-.95,0,1.2,.6);TSCI.arms[1].rotation.set(-2.3,0,-.4);TSCI.head.rotation.x=.2;
+ if(rv>.5){const q=kitMark('!','#c4202a','#fff');kitMarkAt(q,-.95,2.55,1.2,.55)}window.TAG('SOME CAME BACK','TO LIFE','#7affc0');camTo([0,1.7,6.0],[0,1.7,5.5],[0,.9,1.6],[0,.9,1.6],k,56)},
+t_years:(u,d,k)=>{tEnv(0);const fl=kitFloor(0xe8e0d0,30,30);show(fl,TTUN);TTUN.position.set(0,.5,1.8);TTUN.scale.set(1.2,1.0,1.2);TTUN.rotation.y=0;const yr=Math.min(5,1+Math.floor(u/(d/5)));const cal=kitSign2('YEAR '+yr,'STILL DRY','#f4e8c0','#2a2a2a',1.7,.8,18);S.add(cal);ACT.push(cal);cal.visible=true;cal.position.set(1.1,2.0,1.6);cal.scale.setScalar(.8);
+ const z=kitMark('Zz','#2a2a6a','#d8e8ff');kitMarkAt(z,-.5,1.6+Math.sin(u*3)*.1,1.8,.7);camTo([0,1.5,5.4],[0,1.5,5.0],[0,.8,1.8],[0,.8,1.8],k,56)},
+t_end:(u,d,k)=>{tEnv(0);show(TMOSS,TARD,TS1);const T=TARD;T.rest();T.at(0,.05,1.8,0);T.g.scale.setScalar(1.1);T.walk(u,6);tFace(T,Math.sin(u*2));TS1.position.set(0,2.5,1.6);TS1.scale.setScalar(kitPop(u,.2,.12,8));camTo([0,1.6,6.0],[0,1.6,5.5],[0,1.0,1.7],[0,1.0,1.7],k,56)}
+};
+Object.assign(SHOTS,TH);
+Object.assign(SHOTS,{tcover:(u,d,k)=>{TH.t_hook(1.05,3.5,.3);window.TAGS={on:0};TARD.g.scale.setScalar(1.5)}});
+Object.assign(SHOTS,{tcover2:(u,d,k)=>{tEnv(1);show(TARD,TXE);TXE.position.set(0,-2.6,-4.5);TXE.scale.setScalar(3.6);TXE.rotation.y=1.2;const T=TARD;T.rest();T.at(0,.2,0,0);T.g.scale.setScalar(1.25);T.g.rotation.x=.12;T.walk(.3,8);tFace(T,0);camTo([0,1.5,4.6],[0,1.5,4.6],[0,1.0,0],[0,1.0,0],0,52)}});
