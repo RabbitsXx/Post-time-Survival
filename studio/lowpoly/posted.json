@@ -53,5 +53,11 @@
   "dueAt": "2026-11-01T14:00:12.254Z",
   "at": "2026-11-01T14:00:17Z",
   "youtube": "https://www.youtube.com/watch?v=BzXeMcIG1Ec"
+ },
+ "emu": {
+  "id": "6ae893653911b6a45d52ff51",
+  "status": "sending",
+  "dueAt": "2026-11-02T13:43:01.255Z",
+  "at": "2026-11-02T13:43:11Z"
  }
 }

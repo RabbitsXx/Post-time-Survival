@@ -153,7 +153,7 @@ def main():
         if os.path.exists(O+'/cover.jpg'):
             for i in range(4):shutil.copy(O+'/cover.jpg',FR+'/%05d.jpg'%i)
         r=subprocess.run(['ffmpeg','-hide_banner','-nostats','-i',O+'/mix.wav','-af',LIM+',loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json','-f','null','-'],capture_output=True,text=True).stderr
-        J=json.loads(r[r.rindex('{'):r.rindex('}')+1]);LN=LIM+',loudnorm=I=-14:TP=-1.5:LRA=11:measured_I=%s:measured_TP=%s:measured_LRA=%s:measured_thresh=%s:offset=%s:linear=true'%(J['input_i'],J['input_tp'],J['input_lra'],J['input_thresh'],J['target_offset'])
+        J=json.loads(r[r.rindex('{'):r.rindex('}')+1]);LN=LIM+',loudnorm=I=-14:TP=-1.5:LRA=11:measured_I=%s:measured_TP=%s:measured_LRA=%s:measured_thresh=%s:offset=%s:linear=true'%(J['input_i'],J['input_tp'],J['input_lra'],J['input_thresh'],J['target_offset'])+',volume=-1.0dB'
         subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate','30','-i',FR+'/%05d.jpg','-i',O+'/mix.wav','-c:v','libx264','-preset','medium','-crf','18','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-af',LN,'-movflags','+faststart','-shortest',O+f'/{name}.mp4'])
         print('DONE',O+f'/{name}.mp4')
 main()

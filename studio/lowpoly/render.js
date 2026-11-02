@@ -8,5 +8,5 @@ const p=await br.newPage({viewport:{width:+(process.env.VW||1080),height:+(proce
 p.on('pageerror',e=>console.log('ERR',e.message));p.on('console',m=>{if(['error','warning'].includes(m.type())&&!/deprecated/.test(m.text()))console.log('CON',m.text().slice(0,200))});
 await p.goto('http://localhost:'+port+'/lowpoly/scene.html?w='+(process.env.VW||1080)+'&h='+(process.env.VH||1920),{waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>window.setSpec&&window.fontsReady,null,{timeout:180000});await p.evaluate(()=>window.fontsReady);await p.evaluate(s=>window.setSpec(s),JSON.parse(fs.readFileSync(spec)));
 let frames;if(b==='--t')frames=a.split(',').map(t=>Math.round(parseFloat(t)*30));else{frames=[];for(let f=+a;f<+b;f+=(+step||1))frames.push(f)}
-for(const f of frames){await p.evaluate(f=>window.renderAt(f),f);await p.screenshot({path:out+'/'+String(f).padStart(5,'0')+'.jpg',type:'jpeg',quality:92})}
+for(const f of frames){for(let tr=0;tr<4;tr++){try{await p.evaluate(f=>window.renderAt(f),f);await p.screenshot({path:out+'/'+String(f).padStart(5,'0')+'.jpg',type:'jpeg',quality:92,timeout:90000});break}catch(e){if(tr==3)throw e;console.log('retry frame',f,e.message.split('\n')[0])}}}
 await br.close();srv.close()});
