@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""package_batch.py [ids] : cover (reference proportions, no-UI render of the key shot) + embed as first 4 frames + EN srt + meta + loudnorm mux -> releases/remaincalm/batch1/<id>/ ; does NOT post"""
+import sys,os,json,subprocess
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+import package_rc as P
+from package_rc import R,REPO
+# id: (key shot 1-based, line1, line2, pill)
+CV={'ks1':(5,'WHO IS NOT','HUMAN?','MIDNIGHT SKEWERS'),'nn1':(3,'NANA','PIM','THE DEAD ARE SLOW CUSTOMERS'),'bo1':(1,'MOM, I\'M','OUTSIDE','A BUNCH OF GUYS'),'hm1':(5,'KEEP','EATING','THE PUDDING RULE'),'hm2':(1,'ONE STAR','REVIEW','STAFF WAS TOO CALM'),'hm3':(3,'ROUGH','NIGHT?','NOT AT ALL.'),'g1':(3,'UNEXPECTED','ITEM','IN THE BAGGING AREA'),'g2':(1,'ELEVEN','ITEMS','EXPRESS LANE'),'g3':(2,'TIME TO','BREATHE','HEART RATE 160'),'i4':(2,'DON\'T RUN','TO THE CAR','PARKING LOT RULES'),
+ 'g5':(3,'FIRE','DRILL','SINGLE FILE PLEASE'),'g6':(1,'ASK FOR','THE MANAGER','SIX YEARS OF SERVICE'),'g8':(2,'WE ARE','CLOSED','SORRY, SIR'),'i1':(2,"DON'T",'RUN','3 AM SUPERMARKET'),
+ 'i2':(2,'CRYING','BABY','BREATHE INSTEAD'),'i3':(1,"DON'T LOOK",'BACK','THE LINE BEHIND YOU')}
+NUM={k:i+1 for i,k in enumerate(['g1','g2','g3','i4','g5','g6','g8','i1','i2','i3','hm1','hm2','hm3'])}
+def one(k):
+    ep=json.load(open(R+f'/out/{k}.spec.json'));frames=R+f'/out/{k}_frames';od=f'{REPO}/releases/remaincalm/batch1/{k}';os.makedirs(od,exist_ok=True)
+    NOTEXT=(k=='ks1')
+    if NOTEXT:
+        sh=dict([x for x in ep['shots'] if 'REFUSED' in x.get('place','')][0]);KX,KZ=100,-60
+        sh.update(noUI=True,lines=[],icons=[],hands=[],panic=.55,typed=False,grade='dead',fov=36,cam=[[KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4],[KX-.1,1.62,KZ+.3],[KX-.1,1.6,KZ+2.4]],
+                  p3=[dict(who='woman',pos=[KX-.1,KZ+2.0],expr='calm',lean=.06,tilt=-.32,headYaw=0,still=True,noShadow=True,nocam=True,face=[KX-.1,KZ-5])],cues=[],sfx=[])
+        sp=dict(series=ep['series'],title='COVER',part=0,of=0,dur=2,shots=[dict(sh,t0=0,t1=2)]);t=1
+    else:
+        si,l1,l2,pill=CV[k];sh=dict(ep['shots'][si-1]);t=(sh['t0']+sh['t1'])/2
+        sh.update(noUI=True,lines=[]);sp=dict(series=ep['series'],title='COVER',part=0,of=0,dur=2,shots=[dict(sh,t0=0,t1=2)])
+    p=R+f'/spec_{k}_cover.json';json.dump(sp,open(p,'w'));d=R+f'/out/{k}_cover';os.makedirs(d,exist_ok=True)
+    subprocess.check_call(['node',R+'/render_store3.js',p,d,'20','21','1080','1920','&2d&clean&nocull' if NOTEXT else '&2d'],cwd=R);base=R+f'/out/{k}_cover_base.jpg';os.replace(d+'/00020.jpg',base)
+    if NOTEXT:
+        from PIL import Image
+        img=Image.open(base).convert('RGB').resize((1080,1920));img.save(f'{od}/cover_9x16.jpg',quality=93);img.resize((540,960)).save(f'{od}/cover_preview.jpg',quality=88)
+    else:
+        img=P.cover_ref(base,'',l1,l2,pill);img.save(f'{od}/cover_9x16.jpg',quality=92);P.preview(img,f'{od}/cover_preview.jpg')
+    for i in range(4):img.save(f'{frames}/{i:05d}.jpg',quality=93)
+    open(f'{od}/captions_en.srt','w').write(P.srt(ep))
+    thm={L['en']:L['th'] for sh_ in ep['shots'] for L in sh_['lines'] if L.get('th')}
+    if thm:open(f'{od}/captions_th.srt','w').write(P.srt(ep,th=thm))
+    wav=R+f'/out/{k}.wav'
+    m=subprocess.run(['ffmpeg','-hide_banner','-i',wav,'-af','loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json','-f','null','-'],capture_output=True,text=True).stderr
+    j=json.loads(m[m.rindex('{'):m.rindex('}')+1])
+    af=f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={j['input_i']}:measured_LRA={j['input_lra']}:measured_TP={j['input_tp']}:measured_thresh={j['input_thresh']}:offset={j['target_offset']}:linear=true"
+    subprocess.check_call(['ffmpeg','-y','-loglevel','error','-framerate','30','-i',frames+'/%05d.jpg','-i',wav,'-c:v','libx264','-preset','slow','-b:v','10M','-maxrate','13M','-bufsize','26M','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','192k','-af',af+',alimiter=limit=0.84:level=disabled','-movflags','+faststart','-shortest',f'{od}/{k}.mp4'])
+    print('packaged',k)
+if __name__=='__main__':
+    for k in (sys.argv[1:] or [x for x in CV if not x.startswith(('hm','nn','bo','ks'))]):one(k)
