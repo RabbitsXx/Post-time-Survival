@@ -12,3 +12,18 @@
 | 9 | tardi | The Tiny Animal That Survived Outer Space | 2026-11-03 02:53:52 | 09:53 | scheduled |
 | 10 | venus | On Venus, A Day Is Longer Than A Year | 2026-11-03 04:23:52 | 11:23 | scheduled |
 Tags / pinned comments per clip: topics/<id>.meta.json. Buffer cannot set YouTube tags: paste them in YouTube Studio.
+
+## Batch 2 (scheduled 2026-11-03 ~01:25Z, continues after venus 04:23:52Z)
+| id | publish (UTC) | Thai time |
+|---|---|---|
+| wojtek | 2026-11-03 05:53:52 | 12:53 |
+| mantis | 07:23:52 | 14:23 |
+| sealand | 08:53:52 | 15:53 |
+| stubbs | 10:23:52 | 17:23 |
+| oxford | 11:53:52 | 18:53 |
+| sloth | 13:23:52 | 20:23 |
+| saturn | 14:53:52 | 21:53 |
+| platypus | 16:23:52 | 23:23 |
+| moon | 17:53:52 | NOT YET (queue limit 10) |
+| jenkins | 19:23:52 | NOT YET (queue limit 10) |
+cleo went live 01:24Z https://www.youtube.com/watch?v=BDLZjxIuPxk
