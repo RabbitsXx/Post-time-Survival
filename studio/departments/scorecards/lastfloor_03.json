@@ -1,0 +1,192 @@
+{
+ "story": {
+  "dept": "story",
+  "score": 100,
+  "issues": [],
+  "metrics": {}
+ },
+ "art": {
+  "dept": "art-layout-animation",
+  "score": 94,
+  "issues": [
+   "ART: two locations have almost the same colour world (distance 4 < 14): give each place its own colour key"
+  ],
+  "metrics": {
+   "dead_black_bottom_beats": "0/12",
+   "dark_beats": 0,
+   "mean_saturation": 0.355,
+   "min_palette_distance": 3.6,
+   "static_beats": [],
+   "cut_by_edge": [],
+   "zoom_jumps": [],
+   "empty_beats": []
+  }
+ },
+ "sound": {
+  "dept": "sound",
+  "score": 86,
+  "issues": [
+   "voices ann and omar sound alike (f0 144 vs 142 Hz): recast or pitch-shift one",
+   "pip: during speech the bed (music+sfx) is -3.9 dB relative to the voice (must be <= -6): the voice is not on top"
+  ],
+  "metrics": {
+   "lufs": -14.0,
+   "true_peak": -2.1,
+   "speakers": {
+    "bell": {
+     "db": -20.9,
+     "f0": 119.0,
+     "wpm": 139,
+     "share": 0.27,
+     "bed_minus_voice_db": -12.4
+    },
+    "ann": {
+     "db": -20.4,
+     "f0": 144.0,
+     "wpm": 145,
+     "share": 0.25,
+     "bed_minus_voice_db": -14.5
+    },
+    "zara": {
+     "db": -20.0,
+     "f0": 236.0,
+     "wpm": 137,
+     "share": 0.23,
+     "bed_minus_voice_db": -9.8
+    },
+    "lin": {
+     "db": -20.7,
+     "f0": 188.0,
+     "wpm": 144,
+     "share": 0.11,
+     "bed_minus_voice_db": -8.1
+    },
+    "omar": {
+     "db": -19.9,
+     "f0": 142.0,
+     "wpm": 122,
+     "share": 0.09,
+     "bed_minus_voice_db": -9.8
+    },
+    "pip": {
+     "db": -20.4,
+     "f0": 282.0,
+     "wpm": 97,
+     "share": 0.06,
+     "bed_minus_voice_db": -3.9
+    }
+   },
+   "music_moods": {
+    "creep": {
+     "rms_db": -20.7,
+     "centroid": 2561
+    },
+    "idle": {
+     "rms_db": -30.4,
+     "centroid": 629
+    },
+    "comic": {
+     "rms_db": -25.9,
+     "centroid": 2460
+    },
+    "chase": {
+     "rms_db": -18.9,
+     "centroid": 2374
+    },
+    "warm": {
+     "rms_db": -22.4,
+     "centroid": 1328
+    },
+    "sad": {
+     "rms_db": -22.8,
+     "centroid": 1952
+    }
+   },
+   "foley": {
+    "events": 83,
+    "moving_beats": 3,
+    "without_steps": 0
+   },
+   "sfx": 83
+  }
+ },
+ "editorial": {
+  "dept": "editorial",
+  "score": 89,
+  "issues": [
+   "EDITORIAL: 1 caption chunk(s) stop on a dangling word, e.g. ['FLOOR. FOLLOW FOR']: break captions at phrase boundaries",
+   "EDITORIAL: 2 caption(s) read faster than 17 characters/s [('WHAT IF THE PILOT', 18.1), ('THEN WE BECOME', 18.2)]",
+   "EDITORIAL: scene beat 14 lasts 7.3 s (> 6.5 s)"
+  ],
+  "metrics": {
+   "chunks": 48,
+   "dangling": [
+    "FLOOR. FOLLOW FOR"
+   ],
+   "orphans": [],
+   "fast": [
+    [
+     "WHAT IF THE PILOT",
+     18.1
+    ],
+    [
+     "THEN WE BECOME",
+     18.2
+    ]
+   ],
+   "short": [],
+   "shot_len_std": 1.34,
+   "srt": [
+    20,
+    20
+   ]
+  }
+ },
+ "marketing": {
+  "dept": "marketing",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "title": "Three Flashes Saved Us On The Roof! A | The Last Floor Part 3 Finale",
+   "title_len": 68,
+   "tags": 17,
+   "hashtags": [
+    "#shorts",
+    "#zombie",
+    "#zombieapocalypse",
+    "#animation",
+    "#survival",
+    "#thelastfloor"
+   ],
+   "cover_9x16.png": {
+    "size": [
+     720,
+     1280
+    ],
+    "detail": 8.1,
+    "colourful": 58.8
+   },
+   "cover_16x9.png": {
+    "size": [
+     1280,
+     720
+    ],
+    "detail": 4.2,
+    "colourful": 37.2
+   }
+  }
+ },
+ "legal": {
+  "dept": "legal-brand",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "props": [
+    "door",
+    "floorsign",
+    "heli",
+    "ladder"
+   ]
+  }
+ }
+}

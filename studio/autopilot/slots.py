@@ -21,3 +21,24 @@ iso=lambda t:t.strftime('%Y-%m-%dT%H:%M:00.000Z')
 if __name__=='__main__':
     import sys;n=int(sys.argv[1]) if len(sys.argv)>1 else 10
     for s in next_slots(n):print(iso(s),'=',(s+dt.timedelta(hours=CFG['slot_tz_offset_hours'])).strftime('%a %d %b %H:%M'),'Thailand')
+
+# ---- stream schedule (owner 2026-10-30): one part per hour, a 3 hour break after a topic's last part, no daily limit ----
+def stream_slots(state,clips,now=None):
+    """slot (UTC datetime) for every clip in `clips` (ordered: topic by topic, part 1,2,3).  Starts after the latest slot already taken in the state (+ the gap that follows that clip), else now + lead."""
+    now=now or dt.datetime.now(dt.timezone.utc).replace(tzinfo=None);sc=CFG.get('schedule',{});gap=sc.get('part_gap_minutes',60);brk=sc.get('topic_break_minutes',180)
+    t=now+dt.timedelta(minutes=CFG['min_lead_minutes']);nb=CFG.get('not_before_utc')
+    if nb:t=max(t,dt.datetime.fromisoformat(nb.replace('Z','')))
+    taken=[c for c in state['clips'] if c.get('due') and c.get('status') in('scheduled','finished','partial')]
+    if taken:
+        last=max(taken,key=lambda c:c['due']);lt=dt.datetime.fromisoformat(last['due'].replace('Z',''))
+        t=max(t,lt+dt.timedelta(minutes=brk if last.get('part')==last.get('of') else gap))
+    out=[];ser=set(CFG.get('serial_series',[]))
+    anchors={c['series']:dt.datetime.fromisoformat(c['due'].replace('Z','')) for c in state['clips'] if c.get('part')==1 and c.get('due') and c['series'] in ser}
+    for i,c in enumerate(clips):
+        a=anchors.get(c.get('series')) if c.get('series') in ser else None
+        if a is not None and c.get('part',1)>1:      # serial: part n is always anchor + (n-1) gaps, whoever publishes it (parallel sessions must not collide)
+            out.append(max(a+dt.timedelta(minutes=gap*(c['part']-1)),now+dt.timedelta(minutes=CFG['min_lead_minutes'])));continue
+        out.append(t)
+        if c.get('series') in ser:anchors[c['series']]=t     # part 1 of a serial found in this batch anchors the rest
+        t=t+dt.timedelta(minutes=brk if c.get('part')==c.get('of') else gap)
+    return out

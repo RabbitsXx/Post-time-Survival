@@ -1,0 +1,9 @@
+# Why You Can't Tickle Yourself — source note
+Script claims -> sources (all checked 2026-10-31 via web search; primary paper not read in full, only abstract/summaries)
+- "If you tickle yourself, nothing happens. If someone else does it, you fall apart." — everyday framing of the finding that self-produced touch is rated less ticklish than the same touch applied externally. Blakemore, Wolpert & Frith (1998), "Central cancellation of self-produced tickle sensation", Nature Neuroscience 1(7):635-640, doi:10.1038/2870.
+- "A part called the cerebellum predicts it, and the feeling gets turned down." — authors' proposal: the cerebellum acts as a forward model that predicts the sensory consequences of one's own movement and is used to attenuate the response elsewhere (their Scientific American summary "Why can't a person tickle himself?"; Blakemore, Wolpert & Frith 1999 NeuroImage). Simplified; it is a model, not a settled fact.
+- "In 1998, scientists compared touch people made themselves with the same touch from a machine." — the 1998 fMRI study compared a touch the participant produced with the same touch delivered externally (robotic device).
+- "The machine's touch felt more ticklish. And the touch area of the brain was more active." — abstract: self-produced stimulus perceived as less ticklish; more somatosensory cortex activity for the externally produced stimulus.
+- "Your brain quietly filters out everything you do to yourself." — plain-language summary of the same attenuation idea (generalisation; keep it as a joke-level summary).
+- NOT used (could not verify): any exact delay threshold (e.g. 200 ms), schizophrenia claims, and "you can never tickle yourself" absolutes.
+- Visual gags: the tickle "ticklishness" bar chart is illustrative (not data); "Go on. Try it." is the comment prompt.

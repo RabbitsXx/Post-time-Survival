@@ -31,3 +31,8 @@ Spec check: every stage location, speaker and card/FX kind that really appears i
 2. Add the new drawings/characters/devices (like `farm9.js`, `farmcast9.js`, `farmlib.py`), write the clip and its `NEW` block.
 3. `python3 newness.py <clip id>` (or build_clip: it runs before and after the spec step); show the pilot to the owner.
 4. After approval: `python3 newness.py <clip id> --record` to log the world and part in the register.
+
+## Facing and turning (library, all cast with a pax head)
+* `person(who, view='front'|'side'|'back', flip=True)`: front, profile (side faces right, `flip=True` faces left), or seen from behind.
+* `headView='side'` (+ `headFlip=True`) on a body view lets a character glance over a shoulder (`view='back', headView='side'`) or look sideways while the body faces us.
+* `turn((0,'front'),(1.0,'back'))`: pass as `seq=turn(...)` to make a character turn during a beat; front<->back goes through a quick side step. Extra tuple items: head view, dict(flip=..., headFlip=...).

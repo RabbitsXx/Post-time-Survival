@@ -23,7 +23,7 @@ def base(n,out_dir):
     if CR.legacy(n):B=json.load(open(f'{R}/p9/covers/spec.json'))['beats'];b=B[int(n)-1];sn='covers/spec'
     else:B=json.load(open(f'{R}/p9/{n}/spec.json'))['beats'];b=B[bi];sn=f'{n}/spec'
     f=int(round((b['t'][0]+(b['t'][1]-b['t'][0])*fr)*30))
-    env=dict(os.environ,NODE_PATH=subprocess.check_output(['npm','root','-g'],text=True).strip(),CLEAN='1')
+    env=dict(os.environ,NODE_PATH=subprocess.check_output(['npm','root','-g'],text=True).strip(),CLEAN='1',SNAP_DSF=str(json.load(open(R+'/delivery.json'))['dsf']))
     subprocess.check_call(['node','snapbeats9.js',sn,out_dir]+[str(f)],cwd=R,env=env)
     os.replace(f'{out_dir}/{f}.png',f'{out_dir}/base_{n}.png');return f'{out_dir}/base_{n}.png'
 if __name__=='__main__':
@@ -34,6 +34,6 @@ if __name__=='__main__':
     for n in [int(x) if x.isdigit() else x for x in a]:
         bp=base(n,R+'/covers9/base');_,_,main,box,acc=CR.cover_cfg(n);si=CR.series(n)
         out9=f'{R}/'+CR.cover(n,'9x16');out169=f'{R}/'+CR.cover(n,'16x9')
-        cover.make(bp,out9,'916',f"PART {si['part']}",main,box,acc,tag=si['name'])
-        cover.make169_from916(bp,out169,f"PART {si['part']}",main,box,acc,tag=si['name'])
+        cover.make(bp,out9,'916',f"PART {si['part']}",main,box,acc,tag=si['name'],top=(not CR.legacy(n) and hasattr(CR.module(n),'WORLD')))
+        cover.make169_from916(bp,out169,f"PART {si['part']}",main,box,acc,tag=si['name'],top=(not CR.legacy(n) and hasattr(CR.module(n),'WORLD')))
         print('cover',n,out9)

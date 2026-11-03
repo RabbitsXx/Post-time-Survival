@@ -1,0 +1,5 @@
+<!doctype html><meta charset=utf-8><script src="node_modules/three/build/three.min.js"></script><script src="gltf_bundle.js"></script>
+<script>(async()=>{const g=await new GLTFLoader().loadAsync('models/Xbot.glb');const sc=g.scene;sc.updateMatrixWorld(true);
+sc.traverse(o=>{if(o.isMesh)console.log('MESH',o.name,o.isSkinnedMesh,o.geometry.attributes.position.count,'mat',o.material.type,o.material.color&&o.material.color.getHexString(),'map',!!o.material.map);
+ if(o.isBone){const v=new THREE.Vector3();o.getWorldPosition(v);console.log('BONE',o.name,v.x.toFixed(3),v.y.toFixed(3),v.z.toFixed(3))}});
+console.log('scale',sc.scale.toArray(),'children',sc.children.map(c=>c.name+':'+c.type).join(','));window.DONE=1})()</script>

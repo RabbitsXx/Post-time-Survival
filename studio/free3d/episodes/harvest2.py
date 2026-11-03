@@ -1,0 +1,18 @@
+import sys,os;sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from build3d import *
+sh=[];A=sh.append
+N=lambda en:say('narrator',en)
+A(SQW([ch('nell',-.6,2.4,'calm'),ch('timo',1.2,2.8,'worried')],[N("If you scare crows with noise, you scare up the dead.")],'DAY 13 · 6:30 AM · THE GARDEN',min=4.2))
+A(TITLE('THE|HARVEST','THE RATTLE',2,3,"The Harvest. Part two of three. The rattle."))
+A(SQW([ch('nell',-.7,2.3,'worried'),ch('timo',1.1,2.9,'worried'),ch('biscuit',2.4,3.4,'sad')],[say('nell',"Fresh holes. Hoof prints."),say('timo',"Biscuit is innocent. He was asleep.")],'DAY 13 · 6:40 AM · THE GARDEN',min=6.0))
+A(C(dict(type='rules',top='WHO DUG IT UP?',items=['A DOG? ASLEEP.','THE DEAD? NO HANDS.','A DEER? HOOF PRINTS.']),[N("Not a dog. Not the dead. A deer.")],min=4.6,sfx=[[0.3,'click'],[0.9,'click'],[1.5,'click']]))
+A(SQW([ch('timo',-.2,2.6,'smile'),ch('nell',1.4,2.4,'worried')],[say('timo',"I will build a scarecrow out of tin cans!"),say('nell',"Cans rattle. Rattle is noise.")],'DAY 13 · 9:00 AM · THE GARDEN',min=6.0))
+A(NGT([ch('timo',-.6,2.0,'scared')],[N("Deer run from noise. The dead walk toward it.")],'DAY 13 · 10:30 PM · THE GARDEN',min=4.4,sfx=[[0.3,'rattle'],[1.0,'rattle'],[1.8,'groan'],[2.4,'groan']]))
+A(NGT([ch('nell',-.4,2.0,'angry')],[say('nell',"Cut the string. Now.")],'DAY 13 · 10:32 PM · THE GARDEN',min=3.2,fx=[[1.2,'sticker','SNIP!',270,330]],sfx=[[0.4,'rattle'],[1.2,'click']]))
+A(C(dict(type='rules',top='SCARE DEER QUIETLY',items=['A TALL FENCE, 1.8 M','SHINY STRIPS, SILENT','RAISED BEDS']),[N("A tall fence. Shiny strips that stay silent. Raised beds.")],min=5.6,sfx=[[0.3,'click'],[0.9,'click'],[1.5,'click']]))
+A(SHP([ch('gran',.4,-2.8,'smug'),ch('timo',1.9,-2.5,'smile')],[say('gran',"Shiny and silent. Like a good bridesmaid.")],"DAY 14 · 8:00 AM · GRAN ODA'S KITCHEN",min=3.8))
+A(C(dict(type='stat',g='drop',c='#4a8a3a',label='SPROUTS',v0=0,v=120,unit='PLANTS',note=['DAY NINE.']),[N("By day nine, a hundred and twenty sprouts.")],min=4.4))
+A(SQW([ch('mayor',-1.0,2.2,'sad'),ch('gran',1.0,2.6,'smug'),ch('nell',2.6,3.0,'smile')],[say('mayor',"I ate one radish seed. Raw."),say('gran',"Plant the rest.")],'DAY 22 · 5:00 PM · THE GARDEN',min=5.2))
+A(NGT([ch('hale',.2,2.4,'worried',face=-1)],[N("But food that grows must be kept. And keeping it takes smoke.")],'DAY 22 · 11:00 PM · THE WALL',min=4.4,sfx=[[0.3,'sting']]))
+A(TITLE('THE|HARVEST','THE COLD SMOKEHOUSE',2,3,"Part two of three, The Harvest. Next: the cold smokehouse.",nxt=True))
+EP=dict(id='harvest_02',series='THE HARVEST',title='THE RATTLE',part=2,of=3,shots=sh,minscale=.9)

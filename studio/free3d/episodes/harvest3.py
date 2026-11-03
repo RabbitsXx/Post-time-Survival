@@ -1,0 +1,16 @@
+import sys,os;sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from build3d import *
+sh=[];A=sh.append
+N=lambda en:say('narrator',en)
+A(SQW([ch('gran',-1.2,2.4,'smug'),ch('nell',.8,2.4,'worried')],[N("If you smoke meat, the dead can smell your dinner.")],'DAY 40 · 6:00 AM · HOLLIS FORD',min=4.2))
+A(TITLE('THE|HARVEST','THE COLD SMOKEHOUSE',3,3,"The Harvest. Part three of three. The cold smokehouse."))
+A(SHP([ch('gran',.2,-2.8,'smile'),ch('nell',1.8,-2.4,'worried')],[say('gran',"Smoke keeps meat for months."),say('nell',"And calls the dead for miles.")],"DAY 40 · 6:20 AM · GRAN ODA'S KITCHEN",min=6.0))
+A(C(dict(type='info',top='KEEPING FOOD WITHOUT FIRE',bg='#16222e',items=[dict(g='drop',l='SALT|DRAWS WATER OUT',c='#6a6a7a'),dict(g='light',l='DRY|IN THE WIND',c='#c8902a'),dict(g='tower',l='COOL|AND DARK',c='#7a6a5a')],foot=['NO FIRE.','NO SMOKE.']),[N("Salt it. Dry it. Keep it cool and dark. No fire. No smoke.")],min=6.0))
+A(BRN([ch('doc',-.6,-3.8,'worried'),ch('mayor',1.2,-3.6,'smug')],[say('mayor',"I will taste-test everything."),say('doc',"If it smells wrong, it is wrong.")],"DAY 41 · 10:00 AM · THE STOREROOM",min=6.4))
+A(C(dict(type='rules',top='NEVER TASTE-TEST',items=['BULGING JAR: THROW IT OUT','BAD SMELL: THROW IT OUT','WHEN IN DOUBT, THROW IT OUT']),[N("A bulging jar, a bad smell, any doubt: throw it out.")],min=5.6,sfx=[[0.3,'click'],[0.9,'click'],[1.5,'click']]))
+A(SQW([ch('nell',-.8,2.2,'calm',prop='wrench'),ch('timo',1.0,2.6,'smile'),ch('hale',2.6,3.0,'calm',face=-1)],[N("A cellar a meter and a half down stays cool all winter.")],'DAY 45 · 2:00 PM · THE GARDEN',min=5.0,sfx=[[0.6,'thump'],[1.6,'thump']]))
+A(C(dict(type='stat',g='fuel',c='#4a8a3a',label='FOOD LEFT',v0=19,v=64,unit='DAYS',note=['NOW LASTS PAST THE FROST']),[N("Nineteen days became sixty-four.")],min=5.0))
+A(SQW([ch('mayor',-1.2,2.2,'smile'),ch('nell',.6,2.4,'calm'),ch('gran',2.2,2.8,'smug'),ch('timo',-2.8,2.8,'smile')],[say('mayor',"We will make it to spring."),say('gran',"If you stop eating the seeds.")],'DAY 60 · 6:30 PM · THE WELL',min=5.6))
+A(NGT([ch('nell',-.6,2.0,'worried')],[N("Winter arrives. And a radio crackles in the barn.")],'DAY 60 · 10:00 PM · THE WELL',min=4.4,sfx=[[0.3,'sting']]))
+A(TITLE('THE|HARVEST','THE END',3,3,"The Harvest. Part three of three. Follow for the next story.",end=False) if False else C(dict(type='title',bg='#0b1224',bg2='#05080f',fg='#ffd98a',top='THE END',big=['FOLLOW FOR','THE NEXT STORY'],sub='THE HARVEST · PART 3 OF 3',lamp=1),[N("The Harvest. Part three of three. Follow for the next story.")],min=4.4,sfx=[[0,'chime']]))
+EP=dict(id='harvest_03',series='THE HARVEST',title='THE COLD SMOKEHOUSE',part=3,of=3,shots=sh,minscale=.9)

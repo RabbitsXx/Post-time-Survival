@@ -4,7 +4,7 @@ Per-beat frame cache (like studio/render_part.py): key = beat spec + frame range
 --trust : reuse cached beats even if the engine code changed (use only when the edit cannot touch them).  --beats limits the render to those beats."""
 import sys,os,re,json,hashlib,subprocess,threading,queue,time,shutil
 R=os.path.dirname(os.path.abspath(__file__));FPS=30
-FILES=['engine9.html','kit.js','kit9.js','dog16.js','chars16.js','pax9.js','locs16.js','scenes16.js','scenes9.js','locs9.js','cards16.js','cards9.js','fx16.js','fx9.js','core9.js','grain.png','RobotoCondensed-Bold.ttf']
+FILES=['engine9.html','kit.js','kit9.js','dog16.js','chars16.js','pax9.js','locs16.js','scenes16.js','scenes9.js','locs9.js','cards16.js','cards9.js','world9.js','visual9.js','farm9.js','farm25.js','fx16.js','fx9.js','core9.js','grain.png','RobotoCondensed-Bold.ttf']
 def engine_hash():
     h=hashlib.sha1()
     for f in FILES:h.update(open(f'{R}/{f}','rb').read())
@@ -42,7 +42,7 @@ class Pool:
         for p in self.p:p.wait(timeout=30)
 def main():
     a=sys.argv[1:];g=lambda k,d:a[a.index(k)+1] if k in a else d
-    specf=g('--spec','p9/part1/spec.json');spec_name=specf[len('p9/'):-len('.json')];dsf=float(g('--dsf','1.6'));W=int(g('--workers',os.cpu_count() or 4))    # spec_name e.g. part1/spec -> engine9.html?spec=part1/spec
+    specf=g('--spec','p9/part1/spec.json');spec_name=specf[len('p9/'):-len('.json')];dsf=float(g('--dsf',str(json.load(open(R+'/delivery.json'))['dsf'])));W=int(g('--workers',os.cpu_count() or 4))    # spec_name e.g. part1/spec -> engine9.html?spec=part1/spec
     out=g('--out','frames9');trust='--trust' in a;force='--force' in a;redo=parse_beats(g('--redo',''),0) if '--redo' in a else set()
     sp=json.load(open(f'{R}/{specf}'));mouth=json.load(open(f'{R}/'+specf.replace('.json','.mouth.json')))
     B=sp['beats'];nfr=int(round(sp['duration']*FPS));eh=engine_hash();want=parse_beats(g('--beats',''),len(B))
@@ -56,7 +56,7 @@ def main():
     plan=[];keys=set()
     for i,(f0,f1) in sorted(rng.items()):
         m={k:v[f0:f1] for k,v in mouth.items()}
-        key=hashlib.sha1(json.dumps(dict(v=1,b=B[i],f=[f0,f1],d=dsf,m=m),sort_keys=True).encode()).hexdigest()[:20];keys.add(key)
+        key=hashlib.sha1(json.dumps(dict(v=1,b=B[i],f=[f0,f1],d=dsf,m=m,w=hashlib.sha1(json.dumps(sp.get('world'),sort_keys=True).encode()).hexdigest()[:10]),sort_keys=True).encode()).hexdigest()[:20];keys.add(key)
         d=f'{cache}/{key}';have=len([x for x in os.listdir(d) if x.endswith('.jpg')]) if os.path.isdir(d) else 0
         stale=os.path.isfile(f'{d}/engine.sha') and open(f'{d}/engine.sha').read()!=eh and not trust
         ok=have==f1-f0 and not stale and not force and i not in redo

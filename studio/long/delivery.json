@@ -1,0 +1,2 @@
+{"width":1080,"height":1920,"fps":30,"dsf":2.4,"crf":17,"preset":"medium","maxrate":"14M","bufsize":"28M","audio_kbps":256,"lufs":-14,"true_peak":-1.5,
+ "note":"Professional delivery spec for vertical shorts: 1080x1920 (YouTube Shorts / TikTok / Reels native), 30 fps, H.264 High, ~8-12 Mbps, AAC 256 kbps 48 kHz, -14 LUFS, true peak <= -1.5 dBTP. The engine window is 450x800, so dsf 2.4 = 1080x1920 exactly."}

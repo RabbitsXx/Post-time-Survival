@@ -1,0 +1,15 @@
+1
+00:00:00,250 --> 00:00:03,297
+This is a fire drill. Please remain calm.
+
+2
+00:00:04,450 --> 00:00:08,514
+Please proceed to the nearest exit in a single file.
+
+3
+00:00:09,650 --> 00:00:10,712
+Why are they in front?
+
+4
+00:00:10,992 --> 00:00:12,278
+They're very good at drills.

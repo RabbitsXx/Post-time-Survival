@@ -1,0 +1,638 @@
+{
+ "time": "day",
+ "moon": false,
+ "clouds": true,
+ "stars": false,
+ "pal": {
+  "sky": [
+   "#5a9cdc",
+   "#b0d4f0",
+   "#f8d4a0"
+  ],
+  "ground": "#8a8a84",
+  "wall": "#d8d4c4",
+  "floor": "#9a9486",
+  "hills": "#8fa3a0",
+  "ink": "#241a12",
+  "glow": "#ffe2a0",
+  "rim": "rgba(255,226,160,.55)",
+  "cloud": "#fff4e0",
+  "cloud2": "#f4cfae"
+ },
+ "sun": true,
+ "line": 0.62,
+ "shade": 1,
+ "id": "noise",
+ "series": "NOISE COMPLAINT",
+ "say": "Noise Complaint",
+ "accent": "#ff8a5c",
+ "ann": {
+  "name": "BUILDING 4 INTERCOM",
+  "voice": "en-US-Chirp3-HD-Achird",
+  "rate": 1.0,
+  "hello": "Attention residents.",
+  "c": "#a8541c",
+  "sub": "OKAFOR PROPERTIES",
+  "tag": "BUILDING 4 · QUIET HOURS: ALWAYS",
+  "th": "ลำโพงประกาศตึกสี่",
+  "f0": 96,
+  "bg": "#f1d9a8",
+  "screen": "#fff6e0",
+  "frame": "#a8541c",
+  "panel": "#e8c47c",
+  "fg": "#3a1a08",
+  "tagc": "#7a3c14"
+ },
+ "cast": {
+  "okafor": {
+   "name": "Okafor",
+   "th": "โอคาฟอร์",
+   "voice": "en-US-Chirp3-HD-Rasalgethi",
+   "rate": 0.86,
+   "scale": 0.72,
+   "cap": "#ffd27a",
+   "pal": {
+    "skin": "#8a5a3c",
+    "coat": "#6a4a8a",
+    "coatS": "#503a6a",
+    "pants": "#3a3a44",
+    "boot": "#2a2420"
+   },
+   "look": {
+    "hair": "bald",
+    "brow": "thick",
+    "beard": "#9a9a9a",
+    "glasses": "rect",
+    "hs": 0.84,
+    "mini": 1
+   },
+   "f0": 100
+  },
+  "bea": {
+   "name": "Bea",
+   "th": "บี",
+   "voice": "en-US-Chirp3-HD-Gacrux",
+   "rate": 0.95,
+   "scale": 0.62,
+   "cap": "#ffb0d0",
+   "pal": {
+    "skin": "#e0b898",
+    "coat": "#d8607a",
+    "coatS": "#a84860",
+    "pants": "#4a3a3a",
+    "boot": "#f2f0ea"
+   },
+   "look": {
+    "hair": "bun",
+    "hc": "#d8d8d8",
+    "glasses": "round",
+    "hs": 0.84,
+    "mini": 1
+   },
+   "f0": 190
+  },
+  "theo": {
+   "name": "Theo",
+   "th": "ธีโอ",
+   "voice": "en-US-Chirp3-HD-Puck",
+   "rate": 1.05,
+   "scale": 0.62,
+   "cap": "#8affc0",
+   "pal": {
+    "skin": "#c89870",
+    "coat": "#2a9a6a",
+    "coatS": "#1c7050",
+    "pants": "#2a2e44",
+    "boot": "#f2f0ea"
+   },
+   "look": {
+    "hair": "messy",
+    "hc": "#2a1a10",
+    "hs": 0.84,
+    "mini": 1
+   },
+   "f0": 170
+  },
+  "priya": {
+   "name": "Priya",
+   "th": "ปริยา",
+   "voice": "en-US-Chirp3-HD-Vindemiatrix",
+   "rate": 0.9,
+   "scale": 0.68,
+   "cap": "#a8d8ff",
+   "pal": {
+    "skin": "#b98060",
+    "coat": "#3a8ac8",
+    "coatS": "#2a6a9a",
+    "pants": "#2a2e44",
+    "boot": "#e8e8e8"
+   },
+   "look": {
+    "hair": "pony",
+    "hc": "#1a120c",
+    "hs": 0.84,
+    "mini": 1
+   },
+   "f0": 245
+  },
+  "dunn": {
+   "name": "Dunn",
+   "th": "ดันน์",
+   "voice": "en-US-Chirp3-HD-Orus",
+   "rate": 0.9,
+   "scale": 0.7,
+   "cap": "#ff9a6a",
+   "pal": {
+    "skin": "#d0a07c",
+    "coat": "#b8402a",
+    "coatS": "#8a2a1c",
+    "pants": "#2a2a30",
+    "boot": "#2a2420"
+   },
+   "look": {
+    "hair": "bandana",
+    "hc": "#c8a060",
+    "beard": "#a86a3a",
+    "hs": 0.84,
+    "mini": 1
+   },
+   "f0": 125
+  }
+ },
+ "zombies": {
+  "robe": {
+   "pal": {
+    "coat": "#c8b0d8",
+    "coatS": "#8a8478",
+    "pants": "#6a5a7a"
+   },
+   "look": {
+    "hair": "bald",
+    "brow": "thick",
+    "mini": 1,
+    "hs": 0.84
+   }
+  },
+  "pyjama": {
+   "pal": {
+    "coat": "#a8c8e8",
+    "coatS": "#8a8478",
+    "pants": "#5a7aa8"
+   },
+   "look": {
+    "hair": "messy",
+    "mini": 1,
+    "hs": 0.84
+   }
+  },
+  "postman": {
+   "pal": {
+    "coat": "#5a6a8a",
+    "coatS": "#8a8478",
+    "pants": "#3a3f4d"
+   },
+   "look": {
+    "hair": "cap",
+    "mini": 1,
+    "hs": 0.84
+   }
+  },
+  "jogger": {
+   "pal": {
+    "coat": "#e87a5a",
+    "coatS": "#8a8478",
+    "pants": "#3a3a3e"
+   },
+   "look": {
+    "hair": "pony",
+    "mini": 1,
+    "hs": 0.84
+   }
+  },
+  "suit": {
+   "pal": {
+    "coat": "#4a4a54",
+    "coatS": "#8a8478",
+    "pants": "#2a2a30"
+   },
+   "look": {
+    "hair": "slick",
+    "mini": 1,
+    "hs": 0.84
+   }
+  }
+ },
+ "locs": {
+  "lobby": {
+   "kind": "in",
+   "wall": "#d8b878",
+   "floor": "#8a6a48",
+   "items": [
+    {
+     "t": "glassdoor",
+     "x": 1050,
+     "y": 600,
+     "s": 1.5
+    },
+    {
+     "t": "sofa",
+     "x": 300,
+     "y": 620,
+     "s": 1.1
+    },
+    {
+     "t": "shelf",
+     "x": 620,
+     "y": 600,
+     "s": 1.0
+    },
+    {
+     "t": "poster",
+     "x": 820,
+     "y": 380,
+     "s": 0.8,
+     "label": "QUIET"
+    },
+    {
+     "t": "lamp",
+     "x": 520,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    }
+   ],
+   "tint": [
+    "#ffb860",
+    0.12
+   ],
+   "label": "building lobby"
+  },
+  "hallway": {
+   "kind": "in",
+   "wall": "#c8a888",
+   "floor": "#7a5a40",
+   "items": [
+    {
+     "t": "door",
+     "x": 220,
+     "y": 600,
+     "s": 1.64,
+     "c": "#8a5a3a"
+    },
+    {
+     "t": "door",
+     "x": 540,
+     "y": 600,
+     "s": 1.64,
+     "c": "#6a8a6a"
+    },
+    {
+     "t": "door",
+     "x": 860,
+     "y": 600,
+     "s": 1.64,
+     "c": "#6a7aa8"
+    },
+    {
+     "t": "lamp",
+     "x": 700,
+     "y": 600,
+     "h": 330,
+     "r": 180
+    },
+    {
+     "t": "poster",
+     "x": 1100,
+     "y": 380,
+     "s": 0.7,
+     "label": "RULES"
+    }
+   ],
+   "tint": [
+    "#ffa860",
+    0.1
+   ],
+   "label": "apartment hallway"
+  },
+  "kitchen": {
+   "kind": "in",
+   "wall": "#e8d0a0",
+   "floor": "#9a7a58",
+   "items": [
+    {
+     "t": "table",
+     "x": 560,
+     "y": 640,
+     "s": 1.2
+    },
+    {
+     "t": "shelf",
+     "x": 220,
+     "y": 600,
+     "s": 1.1
+    },
+    {
+     "t": "window",
+     "x": 900,
+     "y": 420,
+     "s": 1.5
+    },
+    {
+     "t": "tank",
+     "x": 1120,
+     "y": 610,
+     "s": 0.8
+    },
+    {
+     "t": "lamp",
+     "x": 420,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    }
+   ],
+   "tint": [
+    "#ffc070",
+    0.12
+   ],
+   "label": "Bea kitchen"
+  },
+  "basement": {
+   "kind": "in",
+   "wall": "#4a4a50",
+   "floor": "#2e2e34",
+   "items": [
+    {
+     "t": "generator",
+     "x": 300,
+     "y": 620,
+     "s": 1.2
+    },
+    {
+     "t": "pipe",
+     "x": 700,
+     "y": 540,
+     "s": 1.3
+    },
+    {
+     "t": "barrel",
+     "x": 1000,
+     "y": 630,
+     "s": 1.1
+    },
+    {
+     "t": "door",
+     "x": 1130,
+     "y": 600,
+     "s": 1.64,
+     "c": "#5a5a62"
+    },
+    {
+     "t": "lamp",
+     "x": 560,
+     "y": 600,
+     "h": 330,
+     "r": 160
+    }
+   ],
+   "tint": [
+    "#6a8aa8",
+    0.14
+   ],
+   "label": "boiler basement"
+  },
+  "roof": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#1e2230",
+   "items": [
+    {
+     "t": "tower",
+     "x": 640,
+     "y": 630,
+     "h": 520
+    },
+    {
+     "t": "rail",
+     "x": 640,
+     "y": 640,
+     "w": 500
+    },
+    {
+     "t": "lamp",
+     "x": 300,
+     "y": 600,
+     "h": 330,
+     "r": 200
+    },
+    {
+     "t": "tank",
+     "x": 1000,
+     "y": 610,
+     "s": 1.5
+    },
+    {
+     "t": "rock",
+     "x": 1150,
+     "y": 640,
+     "s": 1.2
+    }
+   ],
+   "label": "building roof"
+  },
+  "street": {
+   "kind": "out",
+   "gy": 590,
+   "ground": "#8a8a88",
+   "items": [
+    {
+     "t": "skyline",
+     "x": 420,
+     "y": 560,
+     "k": 0.55,
+     "c1": "#b8c6d8",
+     "c2": "#c4d0e0",
+     "lf": 0.12,
+     "sd": 7,
+     "nosmoke": 1,
+     "z": 0
+    },
+    {
+     "t": "glow",
+     "x": 640,
+     "y": 430,
+     "r": 520,
+     "a": 0.28,
+     "z": 0
+    },
+    {
+     "t": "skyline",
+     "x": 640,
+     "y": 600,
+     "z": 0
+    },
+    {
+     "t": "building",
+     "x": 140,
+     "y": 590,
+     "w": 240,
+     "h": 420,
+     "c": "#8a96a8",
+     "z": 0
+    },
+    {
+     "t": "building",
+     "x": 460,
+     "y": 590,
+     "w": 200,
+     "h": 330,
+     "c": "#a89a90",
+     "z": 0,
+     "lit": 0.2
+    },
+    {
+     "t": "building",
+     "x": 1090,
+     "y": 590,
+     "w": 260,
+     "h": 460,
+     "c": "#8a96a8",
+     "z": 0
+    },
+    {
+     "t": "car",
+     "x": 320,
+     "y": 640,
+     "s": 2.1,
+     "c": "#c0504a"
+    },
+    {
+     "t": "lamp",
+     "x": 640,
+     "y": 600,
+     "h": 520,
+     "r": 120
+    },
+    {
+     "t": "barricade",
+     "x": 960,
+     "y": 650,
+     "s": 1.1
+    },
+    {
+     "t": "rubble",
+     "x": 1200,
+     "y": 640,
+     "s": 1
+    },
+    {
+     "t": "glow",
+     "x": 900,
+     "y": 400,
+     "r": 380,
+     "a": 0.3,
+     "z": 0
+    },
+    {
+     "t": "barricade",
+     "x": 140,
+     "y": 730,
+     "s": 2.2,
+     "z": 2
+    },
+    {
+     "t": "rubble",
+     "x": 1180,
+     "y": 740,
+     "s": 2.0,
+     "z": 2
+    },
+    {
+     "t": "tree",
+     "x": 60,
+     "y": 600,
+     "s": 1.6,
+     "z": 0
+    },
+    {
+     "t": "tree",
+     "x": 1230,
+     "y": 600,
+     "s": 1.8,
+     "z": 0
+    },
+    {
+     "t": "bush",
+     "x": 300,
+     "y": 740,
+     "s": 2.4,
+     "z": 2
+    },
+    {
+     "t": "bush",
+     "x": 1100,
+     "y": 750,
+     "s": 2.6,
+     "z": 2
+    }
+   ],
+   "label": "city street"
+  }
+ },
+ "new": {
+  "setting": "a four-floor walk-up apartment building in the first week of an outbreak, where four neighbours who have feuded over noise for years must stay silent together",
+  "structure": "sitcom bottle episode: one building, one problem per episode (silence, a screaming fire alarm, a roof crossing), every neighbour has a different noisy flaw",
+  "announcer": "building-intercom",
+  "palette": "warm apartment mustard, brick rose, dusk blue",
+  "props": [
+   "frying-pan",
+   "landlord-keys",
+   "super-wrench",
+   "handheld-console",
+   "signal-mirror"
+  ],
+  "devices": [],
+  "gags": [
+   "bea-cannot-hear-herself",
+   "okafor-rule-sheets",
+   "theo-narrates-quests",
+   "priya-deadpan-triage"
+  ],
+  "tips": [
+   "stay-silent-together",
+   "cut-the-power-source",
+   "mirror-signal"
+  ],
+  "tied_to_topic": "Topic = noise discipline in a building: zombies follow sound, so four feuding neighbours must stay silent together; the tips are quiet, kill the noisy power source, signal with a mirror.",
+  "setting_tags": [
+   "building",
+   "hotel",
+   "indoor",
+   "kitchen",
+   "roof",
+   "street",
+   "urban",
+   "apartment",
+   "stair"
+  ],
+  "props_reused": [
+   "door",
+   "glassdoor",
+   "sofa",
+   "shelf",
+   "poster",
+   "lamp",
+   "table",
+   "window",
+   "tank",
+   "generator",
+   "pipe",
+   "barrel",
+   "tower",
+   "skyline",
+   "building",
+   "car",
+   "fence"
+  ]
+ }
+}

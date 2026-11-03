@@ -4,25 +4,36 @@ Steps: newness (declared new world/cast/structure vs register.json) -> spec (voi
 LONG_DIR=/path overrides the folder that holds the toolchain (default studio/long).  Needs GEMINI_API_KEY (voices) in the environment or in post.env next to studio/."""
 import sys,os,subprocess,time
 R=os.path.dirname(os.path.abspath(__file__));LONG=os.environ.get('LONG_DIR',os.path.abspath(R+'/../long'))
+sys.path.insert(0,os.path.abspath(os.path.dirname(os.path.abspath(__file__))+'/../long'))
 cid=sys.argv[1];frm=sys.argv[sys.argv.index('--from')+1] if '--from' in sys.argv else 'newness'
 env=dict(os.environ,CAP_MAXW='3',CAP_MAXC='17')
 try:env['NODE_PATH']=subprocess.check_output(['npm','root','-g'],text=True).strip()
 except Exception:pass
 py=sys.executable;arc=cid.rsplit('_',1)[0]
+SL=[py,'storylint.py',cid]
 NW=[py,'newness.py',cid]   # owner rule 2026-10-29: library reuse is fine, but the topic must bring new things (register.json)
-STEPS=[('newness',NW),('spec',[py,'build16.py',f'arcs/{arc}/{cid}',f'p9/{cid}']),('newness-spec',NW),('audio',[py,'audio9.py',f'p9/{cid}']),
+STEPS=[('newness',NW),('spec',[py,'build16.py',f'arcs/{arc}/{cid}',f'p9/{cid}']),('newness-spec',NW),('story',SL),('foley',[py,'foley.py',f'p9/{cid}']),('audio',[py,'audio9.py',f'p9/{cid}']),
  ('render',[py,'render9.py','--spec',f'p9/{cid}/spec.json','--out',f'frames9_{cid}']),('finish',[py,'finish9.py','--p',f'p9/{cid}','--frames',f'frames9_{cid}','--out',f'final9_{cid}.mp4']),
  ('cover',[py,'cover9.py',cid]),('embed',[py,'embed9.py',cid]),('kit',[py,'kit9.py',cid]),('qa',[py,'qa9.py',cid])]
 go=False
+if frm=='newness':
+    try:os.remove(f'{LONG}/p9/{cid}/spec.json')   # a stale spec from an earlier build must not be judged by the newness gate
+    except OSError:pass
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)));import notify
+notify.say(f'🔧 {cid}: เริ่ม build')
 for name,cmd in STEPS:
     if name==frm:go=True
     if not go:continue
+    if name=='story' and not hasattr(__import__('clipreg').module(cid),'WORLD'):continue   # story gate: data-driven worlds only
     t=time.time();p=subprocess.run(cmd,cwd=LONG,env=env,capture_output=True,text=True)
     tail=(p.stdout+p.stderr).strip().splitlines()[-4:]
     print(f'[{name}] {"ok" if p.returncode==0 else "FAILED"} {time.time()-t:.0f}s'+('' if p.returncode==0 and name!='qa' else '\n  '+'\n  '.join(tail)))
+    if name in('spec','render','finish','qa') or p.returncode:notify.say(f'{cid}: [{name}] {"ok" if p.returncode==0 else "FAILED"} {time.time()-t:.0f}s')
     if p.returncode:
         if name=='qa':print('\n'.join(l for l in (p.stdout).splitlines() if '[FAIL]' in l or '[WARN]' in l))
         sys.exit(1)
     if name=='qa':print('\n'.join(l for l in p.stdout.splitlines() if '[WARN]' in l))
+    if name in('story',) and p.returncode:print('\n'.join(l for l in p.stdout.splitlines() if '[FAIL]' in l))
     if name.startswith('newness') and p.returncode:print('\n'.join(l for l in p.stdout.splitlines() if '[FAIL]' in l))
+notify.say(f'✅ {cid}: พร้อมแล้ว (QA ผ่าน)')
 print('CLIP READY:',f'{LONG}/final9_{cid}.mp4')

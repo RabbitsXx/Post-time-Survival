@@ -1,0 +1,5 @@
+# Vampire bats share food — source note (Halloween 2026)
+- Common vampire bats (Desmodus rotundus) feed only on blood; a hungry roostmate is fed by regurgitation (blood meal sharing). Sources: Discover Wildlife "The vampire that regurgitates its bloody stomach contents to hungry roost-mates"; National Geographic (Nov 2015); Science News "Vampire bats share blood to make friends"; Wilkinson 1984 (Nature).
+- Sharing also goes to NON-relatives: Carter & Wilkinson 2013 (Communicative & Integrative Biology) and Carter & Wilkinson 2015 (Proc. R. Soc. B, via phys.org / Science News): bats that were more generous had more donors and were fed more when they needed it. Reciprocity as the explanation is "increasingly contested" (2013 paper) -> script states the observation only.
+- Starvation timing: sources say about 2-3 days without a meal; no source found for the "70 hours" figure -> script says "a few days".
+- Dialogue (Poly: "I'll share my candy.") is a joke; the costume is Poly's. Halloween (31 Oct 2026) timing.

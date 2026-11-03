@@ -1,0 +1,21 @@
+studio/long/cache9/
+studio/long/p9/
+studio/long/frames9_*/
+studio/long/final9_*.mp4
+node_modules/
+studio/free3d/frames/
+studio/free/out/
+studio/free/tts/
+studio/free3d/out/
+studio/free3d/spec_*.json
+studio/free3d/stills*/
+studio/free3d/frames/
+studio/free3d/models/
+
+# REMAIN CALM parts 2-3 videos (20 MB each; hosted on the media-* branches, not kept in main history)
+releases/remaincalm/rc2/rc2_part2.mp4
+releases/remaincalm/rc3/rc3_part3.mp4
+releases/remaincalm/batch1/*/*.mp4
+studio/lowpoly/out/
+studio/lowpoly/**/*.mp4
+studio/lowpoly/.secrets.env

@@ -98,7 +98,7 @@ function keeper(g,o){o=o||{};const P=palette(o.mood||'day',o.who),dark=!!o.dark,
   if(!dark){L(up,2,-258,2,-140,P.coatS,2.5);blob(up,'M-6,-196 h20 v22 h-20Z','none',P.coatS);blob(up,'M-24,-250 Q0,-266 24,-250 L22,-240 Q0,-252 -22,-240Z',P.coatS)}
   tube(up,[[3,-268],[5,-262]],16,dark?F:P.skin,ink);
   if(P.scarf&&!dark){blob(up,'M-22,-266 Q2,-282 26,-266 L24,-250 Q2,-264 -20,-250Z',P.scarf,ink);blob(up,'M-18,-256 l-9,50 l17,-5 l7,-42Z',P.scarf,ink)}
-  const hd=G(up,{transform:`translate(${5+(T.hx||0)} -298) rotate(${o.tilt||0})`});root._hd=khead(hd,P,Object.assign({},o,{view:'side'}));
+  const hd=G(up,{transform:`translate(${5+(T.hx||0)} -298) rotate(${o.tilt||0}) scale(${o.headFlip?-1:1} 1)`});root._hd=khead(hd,P,Object.assign({},o,{view:o.headView||'side'}));
   if(dark){/* silhouette: recolour head parts */hd.querySelectorAll('*').forEach(e=>{if(e.getAttribute('fill')&&e.getAttribute('fill')!=='none')e.setAttribute('fill',F);e.setAttribute('stroke','none')});}
   arm(G(up,{}),T.n.a);
   if(o.deco&&!dark)o.deco(up,T,P,'side');
@@ -112,7 +112,7 @@ function keeper(g,o){o=o||{};const P=palette(o.mood||'day',o.who),dark=!!o.dark,
   if(!dark){L(draw,0,-262,0,-134,P.coatS,2.5);blob(draw,'M-24,-258 Q0,-244 24,-258',"none",P.coatS)}
   tube(draw,[[0,-268],[0,-258]],16,dark?F:P.skin,ink);
   if(P.scarf&&!dark){blob(draw,'M-31,-266 Q0,-284 31,-266 L29,-248 Q0,-264 -29,-248Z',P.scarf,ink);blob(draw,'M10,-254 l5,52 l17,-6 l-9,-46Z',P.scarf,ink)}
-  const hd=G(draw,{transform:`translate(0 -298) rotate(${o.tilt||0})`});root._hd=khead(hd,P,Object.assign({},o,{view:view}));
+  const hd=G(draw,{transform:`translate(0 -298) rotate(${o.tilt||0}) scale(${o.headFlip?-1:1} 1)`});root._hd=khead(hd,P,Object.assign({},o,{view:o.headView||view}));
   if(dark){hd.querySelectorAll('*').forEach(e=>{if(e.getAttribute('fill')&&e.getAttribute('fill')!=='none')e.setAttribute('fill',F);e.setAttribute('stroke','none')})}
   arm(G(draw,{}),T.la);arm(G(draw,{}),T.ra);
   if(o.deco&&!dark)o.deco(draw,T,P,'front');

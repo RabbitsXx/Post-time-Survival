@@ -24,6 +24,8 @@ function camera(kind,u,bt){let dx=0,dy=0,s=1,rot=0,blur=0;const e=u;
   case 'tilt_up':dy=lerp(-10,10,e);s=1.02;break; case 'tilt_down':dy=lerp(10,-10,e);s=1.02;break;
   case 'drift':dx=Math.sin(e*Math.PI)*8;dy=Math.cos(e*2.2)*4;s=1.02+.015*e;break;
   case 'hand':dx=Math.sin(bt*1.7)*3.2+Math.sin(bt*4.1)*1.3;dy=Math.cos(bt*1.3)*2.6+Math.sin(bt*3.3)*1;rot=Math.sin(bt*.9)*.25;s=1.035+.02*e;break;   // handheld (real life)
+  case 'orbit_l':dx=lerp(-30,30,e);rot=lerp(-.5,.5,e);s=1.05;break; case 'orbit_r':dx=lerp(30,-30,e);rot=lerp(.5,-.5,e);s=1.05;break;
+  case 'travel':dx=lerp(-12,12,e);s=1+.2*e;break; case 'crane_up':dy=lerp(18,-18,e);s=1.04+.06*e;break;
   case 'whip':{const k=Math.max(0,1-bt/.3);dx=60*k*k;blur=4*k;s=1.02+.03*e;break}
   case 'punch':s=1+.03*Math.max(0,1-bt/.3);break;
  }return {dx,dy,s,rot,blur}}

@@ -1,0 +1,279 @@
+{
+ "story": {
+  "dept": "story",
+  "score": 97,
+  "issues": [
+   "STORY/storylint(warn): a 2.5D lane location is used"
+  ],
+  "metrics": {}
+ },
+ "art": {
+  "dept": "art-layout-animation",
+  "score": 85,
+  "issues": [
+   "LAYOUT: 9 person(s) cut by the frame edge, e.g. [(0, 'ren', 5), (5, 'z_dress', 493), (10, 'ren', 561), (10, 'gus', 874)]: reframe or move them inside x 40-410"
+  ],
+  "metrics": {
+   "dead_black_bottom_beats": "0/14",
+   "dark_beats": 0,
+   "mean_saturation": 0.221,
+   "min_palette_distance": 52.0,
+   "static_beats": [],
+   "cut_by_edge": [
+    [
+     0,
+     "ren",
+     5
+    ],
+    [
+     5,
+     "z_dress",
+     493
+    ],
+    [
+     10,
+     "ren",
+     561
+    ],
+    [
+     10,
+     "gus",
+     874
+    ],
+    [
+     11,
+     "ren",
+     561
+    ],
+    [
+     11,
+     "gus",
+     874
+    ],
+    [
+     13,
+     "ren",
+     -141
+    ],
+    [
+     15,
+     "gus",
+     874
+    ],
+    [
+     16,
+     "noor",
+     -150
+    ]
+   ],
+   "zoom_jumps": [],
+   "shimmer_beats": [],
+   "empty_beats": []
+  }
+ },
+ "sound": {
+  "dept": "sound",
+  "score": 82,
+  "issues": [
+   "voices ren and ann sound alike (f0 132 vs 124 Hz): recast or pitch-shift one",
+   "voices ren and gus sound alike (f0 132 vs 132 Hz): recast or pitch-shift one",
+   "voices ann and gus sound alike (f0 124 vs 132 Hz): recast or pitch-shift one"
+  ],
+  "metrics": {
+   "lufs": -14.0,
+   "true_peak": -2.1,
+   "speakers": {
+    "ren": {
+     "db": -20.7,
+     "f0": 132.0,
+     "wpm": 131,
+     "share": 0.49,
+     "bed_minus_voice_db": -8.3
+    },
+    "ann": {
+     "db": -21.7,
+     "f0": 124.0,
+     "wpm": 145,
+     "share": 0.18,
+     "bed_minus_voice_db": -17.6
+    },
+    "gus": {
+     "db": -20.1,
+     "f0": 132.0,
+     "wpm": 142,
+     "share": 0.24,
+     "bed_minus_voice_db": -10.3
+    },
+    "noor": {
+     "db": -20.3,
+     "f0": 285.0,
+     "wpm": 139,
+     "share": 0.08,
+     "bed_minus_voice_db": -7.9
+    }
+   },
+   "fight_sound": {
+    "fights": 3,
+    "missing": []
+   },
+   "music_moods": {
+    "creep": {
+     "rms_db": -21.0,
+     "centroid": 3127
+    },
+    "idle": {
+     "rms_db": -30.3,
+     "centroid": 638
+    },
+    "warm": {
+     "rms_db": -24.1,
+     "centroid": 1527
+    },
+    "chase": {
+     "rms_db": -21.0,
+     "centroid": 2058
+    }
+   },
+   "foley": {
+    "events": 52,
+    "moving_beats": 3,
+    "without_steps": 0
+   },
+   "sfx": 52
+  }
+ },
+ "editorial": {
+  "dept": "editorial",
+  "score": 90,
+  "issues": [
+   "EDITORIAL: 1 caption chunk(s) stop on a dangling word, e.g. ['FEVER IS NOT']: break captions at phrase boundaries",
+   "EDITORIAL: 2 caption(s) on screen < 0.6 s [('TWO.', 0.56), ('THREE.', 0.57)]",
+   "EDITORIAL: 1 caption(s) read faster than 17 characters/s [('ONE HUNDRED FORTY-EIGHT TO GO.', 17.9)]"
+  ],
+  "metrics": {
+   "chunks": 49,
+   "dangling": [
+    "FEVER IS NOT"
+   ],
+   "orphans": [],
+   "fast": [
+    [
+     "ONE HUNDRED FORTY-EIGHT TO GO.",
+     17.9
+    ]
+   ],
+   "short": [
+    [
+     "TWO.",
+     0.56
+    ],
+    [
+     "THREE.",
+     0.57
+    ]
+   ],
+   "shot_len_std": 1.33,
+   "srt": [
+    18,
+    18
+   ]
+  }
+ },
+ "marketing": {
+  "dept": "marketing",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "title": "Fever Is NOT A Bite: Check This | The Quiet Hand Part 5",
+   "title_len": 55,
+   "tags": 15,
+   "hashtags": [
+    "#zombie",
+    "#zombieapocalypse",
+    "#animation",
+    "#shorts",
+    "#survival",
+    "#thequiethand"
+   ],
+   "cover_9x16.png": {
+    "size": [
+     1080,
+     1920
+    ],
+    "detail": 9.2,
+    "colourful": 32.2
+   },
+   "cover_16x9.png": {
+    "size": [
+     1280,
+     720
+    ],
+    "detail": 5.1,
+    "colourful": 31.9
+   }
+  }
+ },
+ "legal": {
+  "dept": "legal-brand",
+  "score": 100,
+  "issues": [],
+  "metrics": {
+   "props": [
+    "hands",
+    "wrench"
+   ]
+  }
+ },
+ "direction": {
+  "dept": "direction",
+  "score": 88,
+  "issues": [
+   "DIRECTION: more than 3 shots of the same size in a row (beats [9, 14, 15]): vary wide / medium / close",
+   "DIRECTION: the same picture (place + size) holds for 11.8 s (> 6.5 s): cut, move the camera or change the subject"
+  ],
+  "metrics": {
+   "sizes": "wwmmwwwwmmmmmw",
+   "headroom": [],
+   "side_swaps": [],
+   "eyeline_flips": [],
+   "longest_same_picture_s": 11.8
+  }
+ },
+ "writing": {
+  "dept": "writing",
+  "score": 91,
+  "issues": [
+   "WRITING: ren talks 3 lines in a row: break it with a reaction or action",
+   "HOOK: no twist / reversal wording anywhere"
+  ],
+  "metrics": {
+   "mean_words": 5.9,
+   "word_length": {
+    "ren": 4.2,
+    "gus": 4.59
+   },
+   "reading_grade": 2.9
+  }
+ },
+ "qc": {
+  "dept": "qc",
+  "score": 92,
+  "issues": [
+   "QC: total bitrate 4.3 Mbps (3-14)"
+  ],
+  "metrics": {
+   "size": "1080x1920",
+   "fps": "30/1",
+   "mbps": 4.3,
+   "duration": 65.3,
+   "vcodec": "h264",
+   "profile": "High",
+   "acodec": "aac",
+   "arate": "48000",
+   "lufs": -14.0,
+   "true_peak": -2.1,
+   "black_segments": [],
+   "frozen_s": []
+  }
+ }
+}

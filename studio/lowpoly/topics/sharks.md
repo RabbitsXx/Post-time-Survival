@@ -1,0 +1,4 @@
+# Sharks Are Older Than Trees — source note
+- Trees: oldest known fossil trees = Gilboa (New York) ~385 million years (Givetian); first intact crown described in Nature 2007 (Stein et al., doi 10.1038/nature05705): trunk of Eospermatopteris + crown of Wattieza with frond-like branches instead of flat leaves. A Somerset (UK) site is ~390 Ma. Sources: Nature 2007; Science News "Forest Primeval"; Britannica (Eospermatopteris); Scientific American "Naked Trees Dominated Early Forests".
+- Sharks: shark-like scales ~450-455 Ma (Colorado, Harding Sandstone) are DISPUTED as true sharks; oldest generally accepted shark scales ~420 Ma (Silurian; Elegestolepis, Russia). Script therefore says "more than 400 million years" and "tens of millions of years" (gap 35-65 Myr depending on the dates). Sources: Discover Wildlife "Are sharks older than trees?"; Wikipedia Elegestolepis.
+- Joke line (final) is opinion, no claim.

@@ -1,0 +1,44 @@
+// WHAT IF A vs B: referee Poly + a seesaw scale. Models: Russia map slab (outline, simplified) with flag, Pluto (heart texture), seesaw with two pans, population pawns, VS slam sign, referee shirt + whistle.
+const RUPTS=[[0,2.2],[.6,3.2],[1.4,3.6],[2.2,3.4],[3.0,3.9],[4.2,4.2],[5.4,4.5],[6.6,4.7],[8.0,4.9],[9.4,4.7],[10,4.0],[9.6,3.0],[9.0,2.4],[8.4,1.6],[7.6,1.2],[6.6,1.4],[5.6,1.0],[4.6,1.0],[3.6,1.3],[2.6,1.2],[1.6,1.4],[.8,1.6]];
+const VSFLAGRU=ctex(96,64,(x,w,h)=>{x.fillStyle='#f4f4f4';x.fillRect(0,0,w,21);x.fillStyle='#2a4aa0';x.fillRect(0,21,w,22);x.fillStyle='#c4202a';x.fillRect(0,43,w,21)});
+const VSRUS=(()=>{const g=new THREE.Group();const sh=new THREE.Shape();RUPTS.forEach(([x,y],i)=>i?sh.lineTo(x,y):sh.moveTo(x,y));const geo=new THREE.ExtrudeGeometry(sh,{depth:.35,bevelEnabled:false});geo.rotateX(-Math.PI/2);geo.translate(-5,0,2.6);
+ const slab=new THREE.Mesh(geo,new THREE.MeshLambertMaterial({color:0xf2f2f4,flatShading:true}));g.add(slab);const rim=new THREE.Mesh(geo,new THREE.MeshLambertMaterial({color:0x2a4aa0,flatShading:true}));rim.scale.set(1.02,.55,1.02);rim.position.y=-.08;g.add(rim);
+ const pole=cyl(.04,.04,1.3,5,M(0xc9ced6),0,.95,0,g);const fl=flagMesh(VSFLAGRU,.9,.6);fl.position.set(.46,1.35,0);g.add(fl);g.userData.flag=fl;g.scale.setScalar(.34);S.add(g);ACT.push(g);return g})();
+const VSPLUTOT=ctex(256,128,(x,w,h)=>{x.fillStyle='#c9a98a';x.fillRect(0,0,w,h);for(let i=0;i<500;i++){x.fillStyle=['#b8977a','#d8bda0','#a98868'][i%3];x.fillRect(rn(i)*w,rn(i+7)*h,3+rn(i+3)*6,2+rn(i+9)*4)}x.fillStyle='#8a5a40';x.beginPath();x.ellipse(60,80,22,16,0,0,7);x.fill();
+ x.fillStyle='#f6f0e6';x.beginPath();x.moveTo(168,100);x.bezierCurveTo(130,70,138,40,162,44);x.bezierCurveTo(176,46,180,56,182,60);x.bezierCurveTo(186,52,196,44,208,46);x.bezierCurveTo(236,50,228,84,196,100);x.bezierCurveTo(186,108,176,106,168,100);x.fill()});
+const VSPLU=(()=>{const g=new THREE.Group();const m=new THREE.Mesh(new THREE.SphereGeometry(1,22,16),new THREE.MeshLambertMaterial({map:VSPLUTOT}));g.add(m);g.userData.m=m;S.add(g);ACT.push(g);return g})();
+// seesaw
+const VSSEE=(()=>{const g=new THREE.Group();const base=new THREE.Mesh(new THREE.ConeGeometry(.55,1.1,3),M(0x8a5a30));base.position.y=.55;base.rotation.y=Math.PI/2;g.add(base);const beam=new THREE.Group();beam.position.y=1.15;g.add(beam);box(5.4,.14,.5,M(0xb98a4a),0,0,0,beam);
+ const mkPan=(x)=>{const p=new THREE.Group();p.position.set(x,0,0);cyl(.02,.02,.7,4,M(0xc9ced6),-.55,.35,0,p);cyl(.02,.02,.7,4,M(0xc9ced6),.55,.35,0,p);cyl(.75,.75,.1,16,M(0xe8c040),0,.7,0,p);box(1.5,.04,.04,M(0xc9ced6),0,.74,0,p);beam.add(p);return p};
+ const pl=mkPan(-2.3),pr=mkPan(2.3);g.userData={beam,pl,pr};S.add(g);ACT.push(g);return g})();
+// pawns for the population pile (on the Russia pan)
+const VSPOP=(()=>{const body=new THREE.InstancedMesh(new THREE.ConeGeometry(.07,.16,6),new THREE.MeshLambertMaterial({color:0xffffff,flatShading:true}),300);const head=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(.045,0),new THREE.MeshLambertMaterial({color:0xffffff,flatShading:true}),300);const m4=new THREE.Matrix4(),col=new THREE.Color();const pal=[0xe8605a,0x4a90e8,0xf0c23a,0x6ac86a,0xc87ae8,0xff9a4a];
+ for(let i=0;i<300;i++){const a=rn(i)*6.28,r=Math.sqrt(rn(i+9))*.62,x=Math.cos(a)*r,z=Math.sin(a)*r,y=.04+Math.floor(i/110)*.18;m4.makeTranslation(x,y+.08,z);body.setMatrixAt(i,m4);m4.makeTranslation(x,y+.22,z);head.setMatrixAt(i,m4);col.set(pal[i%6]);body.setColorAt(i,col);head.setColorAt(i,new THREE.Color(0xf0c8a0))}
+ body.instanceMatrix.needsUpdate=true;head.instanceMatrix.needsUpdate=true;body.instanceColor.needsUpdate=true;head.instanceColor.needsUpdate=true;body.count=0;head.count=0;const g=new THREE.Group();g.add(body,head);g.userData={body,head};S.add(g);ACT.push(g);return g})();
+function vsPop(f){const n=Math.floor(300*cl(f));VSPOP.userData.body.count=n;VSPOP.userData.head.count=n}
+// referee Poly: black-white stripes shirt + whistle + cap
+const VSREF=person({coat:'#f4f4f4',pants:'#1a1a22',hair:'#4a3020',skin:'#e8b894',boots:1,torsoDraw:(x,w,h)=>{x.fillStyle='#1a1a22';for(let i=0;i<w;i+=8)x.fillRect(i,0,4,h)}});
+(()=>{const P=VSREF;const cap=new THREE.Group();cyl(.2,.22,.1,12,M(0x1a1a22),0,.16,0,cap);box(.36,.03,.2,M(0x1a1a22),0,.1,.2,cap);cap.position.y=-.02;P.head.add(cap);const wh=new THREE.Mesh(new THREE.IcosahedronGeometry(.045,1),M(0xc9ced6));wh.position.set(0,-.17,.21);P.head.add(wh);const cord=box(.01,.2,.01,M(0x1a1a22),0,1.45,.2,P.g)})();
+const VSSIGN=(()=>{const g=new THREE.Group();const b=paSign('VS','#c4202a','#ffffff',1.6,1.0,40);g.add(b);S.add(g);ACT.push(g);return g})();
+const VSSTAGE=(()=>{const g=new THREE.Group();box(40,.1,40,M(0x6ab0e0),0,-.06,0,g);S.add(g);ACT.push(g);return g})();
+const _vshide=hideAll;hideAll=function(){_vshide();VSPLU.scale.setScalar(1);VSREF.g.scale.setScalar(1);VSSEE.scale.setScalar(1);VSPOP.scale.setScalar(1);vsPop(0);vsTilt(0)};
+function vsEnv(){tkOff();ground.visible=false;S.background=new THREE.Color(0xa8d8f0);S.fog.color.set(0xa8d8f0);HEMI.intensity=1.25;show(VSSTAGE)}
+function vsTilt(a){const U=VSSEE.userData;U.beam.rotation.z=a;U.pl.rotation.z=-a;U.pr.rotation.z=-a}
+const VSSC=.56;function vsPan(side,a,h){const lx=side*2.3,ly=.7+(h||0);return [(lx*Math.cos(a)-ly*Math.sin(a))*VSSC,(1.15+lx*Math.sin(a)+ly*Math.cos(a))*VSSC]}
+function vsRef(P,face,arm){P.rest();P.face(face);if(arm)P.arms[1].rotation.set(arm[0],0,arm[1])}
+const VSH={
+v_hook:(u,d,k)=>{vsEnv();show(VSRUS,VSPLU,VSREF,VSSIGN);const f=ease(cl(u/.85));VSRUS.position.set(lerp(-3.8,-1.05,f),.35,1.5);VSRUS.scale.setScalar(.27);VSRUS.rotation.y=0;VSPLU.position.set(lerp(3.4,1.0,f),.7,1.5);VSPLU.scale.setScalar(.6);VSPLU.rotation.y=u*1.4;
+ VSREF.at(0,0,-.4,0);vsRef(VSREF,u>.85?'shock':'smug',[-2.4,.2]);VSSIGN.position.set(0,1.45,1.5);VSSIGN.scale.setScalar(u<.85?.001:.8+.25*Math.exp(-(u-.85)*8)*Math.cos((u-.85)*22));if(u>.85)SHAKE=.06;window.TAG('WHAT IF','RUSSIA VS PLUTO','#ffd83a');camTo([0,1.6,7.4],[0,1.5,6.4],[0,2.15,.2],[0,2.15,.2],k,42)},
+v_rus:(u,d,k)=>{vsEnv();show(VSRUS,VSREF);VSRUS.position.set(0,.35,-.4);VSRUS.scale.setScalar(.44);VSRUS.rotation.y=Math.sin(u*.9)*.12;VSREF.at(-.95,0,2.9,.35);vsRef(VSREF,'neutral',[-1.4,.3]);window.TAG('RUSSIA','17.1M KM²','#7ad0ff');window.STAMP={on:1,u:u-.1,text:'#1 LARGEST',c:'#2a4aa0',rot:-7};camTo([0,3.4,8.2],[0,3.2,7.8],[0,.9,-.3],[0,.9,-.3],k,44)},
+v_plu:(u,d,k)=>{vsEnv();show(VSPLU,VSREF);VSPLU.position.set(.55,1.35,-.4);VSPLU.scale.setScalar(1.1);VSPLU.rotation.y=2.6+u*.9;VSREF.at(-.95,0,2.9,.35);vsRef(VSREF,'shock',[-1.4,.3]);window.TAG('PLUTO','17.7M KM²','#ffb84a');window.STAMP={on:1,u:u-.1,text:'DWARF PLANET',c:'#8a5a40',rot:-7};camTo([0,2.4,8.2],[0,2.3,7.8],[0,1.4,-.3],[0,1.4,-.3],k,44)},
+v_r1:(u,d,k)=>{vsEnv();show(VSSEE,VSRUS,VSPLU,VSREF);const a=-.34*ease(cl((u-.3)/(d*.4)));vsTilt(a);VSSEE.position.set(0,0,-1.0);VSSEE.scale.setScalar(VSSC);
+ const pL=vsPan(-1,a,.05),pR=vsPan(1,a,.55);VSRUS.position.set(pL[0],pL[1],-1.0);VSRUS.scale.setScalar(.088);VSRUS.rotation.y=0;VSPLU.position.set(pR[0],pR[1],-1.0);VSPLU.scale.setScalar(.31);VSPLU.rotation.y=u*1.2;
+ VSREF.at(0,0,2.4,0);vsRef(VSREF,'smug',[-2.4,.2]);window.TAG('ROUND 1','AREA','#ffd83a');window.STAMP={on:1,u:u-.2,text:'PLUTO +4%',c:'#8a5a40',rot:-7};camTo([0,2.3,8.8],[0,2.2,8.4],[0,1.0,-1],[0,1.0,-1],0,44)},
+v_r2:(u,d,k)=>{vsEnv();show(VSSEE,VSPOP,VSPLU,VSREF);const f=cl(u/(d*.6));vsPop(f);const a=.34*ease(cl((u-.25)/(d*.5)));vsTilt(a);VSSEE.position.set(0,0,-1.0);VSSEE.scale.setScalar(VSSC);
+ const pL=vsPan(-1,a,.05),pR=vsPan(1,a,.55);VSPOP.position.set(pL[0],pL[1],-1.0);VSPOP.scale.setScalar(.56);VSPLU.visible=false;
+ VSREF.at(0,0,2.4,0);vsRef(VSREF,'shock',[-2.4,.2]);window.TAG('ROUND 2','POPULATION','#7ad0ff');window.STAMP={on:1,u:u-.2,text:'RUSSIA 146M',c:'#2a4aa0',rot:-7};camTo([0,2.3,8.8],[0,2.2,8.4],[0,1.0,-1],[0,1.0,-1],0,44)},
+v_end:(u,d,k)=>{vsEnv();show(VSSEE,VSRUS,VSPLU,VSREF);const a=Math.sin(u*5)*.06*Math.exp(-u*.7);vsTilt(a);VSSEE.position.set(0,0,-1.0);VSSEE.scale.setScalar(VSSC);const pL=vsPan(-1,a,.05),pR=vsPan(1,a,.55);VSRUS.position.set(pL[0],pL[1],-1.0);VSRUS.scale.setScalar(.088);VSPLU.position.set(pR[0],pR[1],-1.0);VSPLU.scale.setScalar(.31);VSPLU.rotation.y=u*1.2;
+ VSREF.at(0,0,2.4,0);vsRef(VSREF,'smug',[-2.8,.2]);VSREF.arms[0].rotation.set(-2.8,0,-.2);window.TAG('FINAL SCORE','1 - 1','#7affc0');window.STAMP={on:1,u:u-.1,text:'TIE',c:'#2a6a3a',rot:-7};camTo([0,2.3,8.8],[0,2.2,8.4],[0,1.0,-1],[0,1.0,-1],0,44)}
+};
+Object.assign(SHOTS,VSH);
+Object.assign(SHOTS,{vscover:(u,d,k)=>{vsEnv();show(VSRUS,VSPLU,VSREF);VSRUS.position.set(-1.25,.5,.6);VSRUS.scale.setScalar(.27);VSRUS.rotation.y=.3;VSPLU.position.set(1.15,.85,.6);VSPLU.scale.setScalar(.7);VSPLU.rotation.y=2.6;VSREF.at(0,0,0,0);vsRef(VSREF,'shock',[-2.4,.2]);camTo([0,1.7,6.6],[0,1.7,6.6],[0,1.8,.2],[0,1.8,.2],0,44)}});

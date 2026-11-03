@@ -2,6 +2,7 @@
  farm(v,...)  yard | field | porch | barn      person(who,...)  a standing character      cuf(who,...)  close-up      duo(a,b,...)  two-shot      FarmPart  one episode (the farm radio announces it)
  cast: ruth (the grandmother) eli (12, inventor) junie (7, talks to the corn) hank (the hired hand, huge, gentle)   announcer: radio (Hollow Creek Farm Radio)"""
 from zlib9 import *
+from zlib9 import hz as _hz
 import re
 NUMW=['zero','one','two','three','four','five','six','seven','eight','nine','ten']
 VOICES=dict(ruth=('en-US-Chirp3-HD-Sulafat',.9),eli=('en-US-Chirp3-HD-Orus',1.0),junie=('en-US-Chirp3-HD-Aoede',1.0),hank=('en-US-Chirp3-HD-Alnilam',.88),radio=('en-US-Chirp3-HD-Enceladus',1.06))
@@ -12,9 +13,31 @@ SPEAKERS=dict(ruth=_sp('RUTH','#ffb36b'),eli=_sp('ELI','#8fe0a8'),junie=_sp('JUN
 ALL_WORDS=True
 NAMES_EN=dict(ruth='Ruth',eli='Eli',junie='Junie',hank='Hank',radio='Radio');NAMES_TH=dict(ruth='รูธ',eli='เอลี',junie='จูนี่',hank='แฮงก์',radio='วิทยุ')
 SC=dict(ruth=.86,eli=.74,junie=.6,hank=.98)
+def hz(n,x0,x1,y=590,s=.9,**k):
+    k.setdefault('human',True);return _hz(n,x0,x1,y=y,s=s,**k)
+def lane(X,z):
+    """2.5D lane (farm v='lane'): lateral offset X (world px at z=1), depth z (1 near .. 15 far) -> dict(x,y,s) for person()/prop()/hz"""
+    return dict(x=640+X/z,y=398+(720-398)/z,s=1.0/z)
+def at(who,X,z,expr='calm',**k):
+    L=lane(X,z);return person(who,expr,L['x'],L['y'],SC[who]*1.0/z*1.5,**k)
+def crowd(n,X0,X1,z0,z1,seed=3,**k):
+    """n zombies spread in depth between z0 (near) and z1 (far) and laterally X0..X1"""
+    out=[]
+    for i in range(n):
+        t=i/max(1,n-1);z=z0+(z1-z0)*((i*0.618)%1);X=X0+(X1-X0)*t;L=lane(X,z);out.append(hz(1,L['x'],L['x'],y=L['y'],s=2.7/z,seed=seed+i*7,jit=0,yj=0,**k))
+    return sorted(out,key=lambda a:a['y'])
 FOOT=640
+def turn(*steps):
+    """facing changes during a beat: turn((0,'front'),(1.2,'back','side')) = (at seconds, body view, head view).  Views: front | side (faces right; flip=True faces left) | back.  Head view lets a character glance over a shoulder."""
+    out=[]
+    for st in steps:
+        d=dict(at=st[0],view=st[1])
+        if len(st)>2 and st[2]:d['headView']=st[2]
+        if len(st)>3:d.update(st[3])
+        out.append(d)
+    return out
 def person(who,expr='calm',x=640,y=FOOT,s=None,talk=False,pose='stand',**k):
-    a=dict(k=who,view='front',pose=pose,expr=expr,x=x,y=y,s=s or SC[who],talk=who if talk else False,bob=1.1,ph=x*.011)
+    a=dict(k=who,view='front',pose=pose,expr=expr,x=x,y=y,s=s or SC[who],talk=who if talk else False,bob=1.1,ph=x*.011,shadow=1,rim='rgba(255,190,120,.55)')
     if who=='hank':a['sx']=1.18
     a.update(k);return a
 def farm(v,acts=None,x=640,y=480,z=1.0,**p):

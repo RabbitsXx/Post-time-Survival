@@ -1,0 +1,20 @@
+# THE PIG WAR v2 (faster cutting, POV/top-down shots, Poly plays the farmer).  Source note: topics/pig_war.md
+EP=dict(id='pig_war2',title='The Pig War',
+ lines=[
+  dict(t="In 1859, an American farmer shot a pig.",c=["In 1859,","an American farmer","shot a pig."],v='narr',shots=[('pw_chew',.3),('pw_aim',.28),('pw_bang',.42)]),
+  dict(t="It was eating his garden. But it belonged to a British company.",c=["It was eating his garden.","But it belonged","to a British company."],v='narr',shots=[('pw_pov',.45),('pw_flag',.55)]),
+  dict(t="Britain threatened to arrest him.",c=["Britain threatened","to arrest him."],v='narr',shots=[('pw_officer',.35),('pw_slam',.35),('pw_gulp',.3)]),
+  dict(t="So America sent soldiers.",c=["So America","sent soldiers."],v='narr',shots=[('pw_boots',.5),('pw_marchwide',.5)]),
+  dict(t="So Britain sent warships.",c=["So Britain","sent warships."],v='narr',shots=[('pw_bow',.55),('pw_captain',.45)]),
+  dict(t="Soon, hundreds of soldiers and ships were glaring at each other, over one dead pig.",c=["Soon, hundreds","of soldiers and ships","were glaring","at each other,","over one dead pig."],v='narr',shots=[('pw_map',.3),('pw_standoff',.25),('pw_pigcu',.2),('pw_glare',.25)]),
+  dict(t="Thankfully, nobody else was hurt.",c=["Thankfully,","nobody else was hurt."],v='narr',shots=[('pw_peace',1)]),
+  dict(t="The only casualty was the pig.",c=["The only casualty","was the pig."],v='narr',shots=[('pw_grave',1)]),
+  dict(t="It took twelve years, and a German emperor, to settle who owned the island.",c=["It took twelve years,","and a German emperor,","to settle who","owned the island."],v='narr',shots=[('pw_years',.45),('pw_kaiser',.55)]),
+  dict(t="The pig was not consulted.",c=["The pig","was not consulted."],v='narr2',shots=[('pw_ghost',1)],pad=.9),
+ ],
+ sfx=[('pw_chew',.1,'munch',4,.25),('pw_chew',.2,'oink'),('pw_aim',.4,'click'),('pw_bang','%0.22','gun'),('pw_bang','%0.3','squeal'),('pw_bang','%0.75','thump'),
+  ('pw_pov',.15,'munch',4,.25),('pw_flag',.2,'oink'),('pw_officer',.0,'whoosh'),('pw_slam','%0.38','thump'),('pw_gulp',.15,'plink',3,.3),
+  ('pw_boots',.0,'foot',20,.22),('pw_marchwide',.0,'whoosh'),('pw_marchwide',.25,'chime'),('pw_bow',.0,'wave'),('pw_bow',.3,'creak'),('pw_captain',.2,'sting'),
+  ('pw_map',.0,'riser'),('pw_map',.0,'tick',12,'%0.07'),('pw_standoff',.0,'creak'),('pw_pigcu',.0,'fly'),('pw_glare',.1,'plink',3,.4),
+  ('pw_peace',.0,'chime'),('pw_peace',.4,'thump'),('pw_grave',.0,'bugle'),('pw_years',.0,'tick',13,'%0.07'),('pw_kaiser',.0,'whoosh'),('pw_kaiser','%0.8','stamp'),('pw_ghost',.0,'chime'),('pw_ghost','%0.55','slide')],
+)
