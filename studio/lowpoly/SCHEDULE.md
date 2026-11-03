@@ -27,3 +27,4 @@ Tags / pinned comments per clip: topics/<id>.meta.json. Buffer cannot set YouTub
 | moon | 17:53:52 | NOT YET (queue limit 10) |
 | jenkins | 19:23:52 | NOT YET (queue limit 10) |
 cleo went live 01:24Z https://www.youtube.com/watch?v=BDLZjxIuPxk
+moon scheduled 2026-11-03 17:53:52Z (00:53 Thai, 4 Nov), jenkins 19:23:52Z (02:23 Thai, 4 Nov) -- done 04:31Z.
